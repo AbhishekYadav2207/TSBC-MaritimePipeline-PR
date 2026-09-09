@@ -5,6 +5,7 @@ import math
 import random
 import time
 import re
+import hashlib
 import argparse
 from pathlib import Path
 from tqdm import tqdm
@@ -14,6 +15,14 @@ from transformers import AutoTokenizer, AutoModelForMaskedLM
 from pipeline_utils import setup_logging, load_config, get_project_root
 
 logger = setup_logging("14_mlm_evaluation")
+
+def stable_seed(*parts) -> int:
+    """
+    Computes a deterministic, platform-independent integer seed using SHA-256.
+    Avoids Python's randomized hash() across processes for reproducible benchmarking.
+    """
+    key = "||".join(str(p) for p in parts)
+    return int(hashlib.sha256(key.encode("utf-8")).hexdigest()[:8], 16) % 1_000_000
 
 # Default Representative Fallback Models (7 Distinct Tokenizer Archetypes)
 FALLBACK_TARGET_MODELS = [
@@ -44,18 +53,23 @@ RARE_MARITIME_TERMS = [
 def load_selected_models(stage13_path: Path, fallback_models: list) -> list:
     """
     Dynamically loads authoritative models selected by Stage 13.
-    Falls back to documented representative defaults if Stage 13 artifact is missing.
+    Validates that exactly 7 models are provided to guarantee experiment integrity.
+    Falls back to documented representative defaults if Stage 13 artifact is missing or invalid.
     """
     if stage13_path.exists():
         try:
             with open(stage13_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
             models = data.get("selected_models", [])
-            if isinstance(models, list) and len(models) >= 1:
-                logger.info(f"Successfully loaded {len(models)} authoritative models from Stage 13: {stage13_path}")
+            if isinstance(models, list) and len(models) == 7:
+                logger.info(f"Successfully loaded exactly {len(models)} authoritative models from Stage 13: {stage13_path}")
                 return models
             else:
-                logger.warning(f"Stage 13 artifact at {stage13_path} contained invalid 'selected_models'. Using fallback.")
+                found_cnt = len(models) if isinstance(models, list) else "invalid format"
+                logger.warning(
+                    f"Stage 13 artifact at {stage13_path} did not provide exactly 7 models (found {found_cnt}). "
+                    f"Falling back to default 7 representative models."
+                )
         except Exception as e:
             logger.warning(f"Failed to read Stage 13 artifact ({e}). Using fallback models.")
     else:
@@ -98,10 +112,12 @@ def build_vocabulary_token_sets(tokenizer, vocab_terms: list):
 
 def classify_token_positions(raw_text: str, input_ids: list, offsets: list, special_tokens_mask: list,
                               vocab_terms_set: set, rare_terms_set: set,
-                              maritime_token_ids: set, rare_token_ids: set):
+                              maritime_token_ids: set, rare_token_ids: set,
+                              category_token_ids: dict = None):
     """
     Classifies token positions into rare maritime, other maritime, and general.
     Uses tokenizer offset mappings for robust subword-span matching when available.
+    Also maps token positions to maritime categories.
     Falls back safely to vocabulary token IDs when offsets are unavailable.
     """
     seq_len = len(input_ids)
@@ -116,9 +132,10 @@ def classify_token_positions(raw_text: str, input_ids: list, offsets: list, spec
 
     rare_positions = set()
     maritime_positions = set()
+    category_positions = {cat: set() for cat in CATEGORIES}
 
     if offsets is not None and len(raw_text) > 0:
-        # Robust Span Matching using Offset Mapping
+        # Robust Span Matching using Offset Mapping (prevents subword false-positives)
         for term in rare_terms_set:
             for m in re.finditer(r"\b" + re.escape(term) + r"\b", raw_text, re.IGNORECASE):
                 c_start, c_end = m.span()
@@ -126,28 +143,35 @@ def classify_token_positions(raw_text: str, input_ids: list, offsets: list, spec
                     t_start, t_end = offsets[idx]
                     if t_start < c_end and t_end > c_start:
                         rare_positions.add(idx)
+                        category_positions["navigation"].add(idx)
 
         for term in vocab_terms_set:
+            cat = get_term_category(term)
             for m in re.finditer(r"\b" + re.escape(term) + r"\b", raw_text, re.IGNORECASE):
                 c_start, c_end = m.span()
                 for idx in eligible_positions:
-                    if idx in rare_positions:
-                        continue
                     t_start, t_end = offsets[idx]
                     if t_start < c_end and t_end > c_start:
-                        maritime_positions.add(idx)
+                        if idx not in rare_positions:
+                            maritime_positions.add(idx)
+                        category_positions[cat].add(idx)
     else:
         # Safe Fallback: Token ID membership
         for idx in eligible_positions:
             t_id = input_ids[idx]
             if t_id in rare_token_ids:
                 rare_positions.add(idx)
+                category_positions["navigation"].add(idx)
             elif t_id in maritime_token_ids:
                 maritime_positions.add(idx)
+                if category_token_ids:
+                    for cat, cat_ids in category_token_ids.items():
+                        if t_id in cat_ids:
+                            category_positions[cat].add(idx)
 
     general_positions = [p for p in eligible_positions if p not in rare_positions and p not in maritime_positions]
 
-    return eligible_positions, rare_positions, maritime_positions, general_positions
+    return eligible_positions, rare_positions, maritime_positions, general_positions, category_positions
 
 def create_random_mask(eligible_positions: list, rng: random.Random, mask_budget: int):
     """Conventional Random-15% masking baseline."""
@@ -161,11 +185,19 @@ def create_domain_aware_mask(eligible_positions: list, rare_positions: set, mari
                              general_positions: list, rng: random.Random, mask_budget: int):
     """
     Lightweight domain-aware selective masking policy.
-    Total budget is preserved at approximately 15% of eligible tokens.
+    Total budget is strictly maintained at approximately 15% of eligible tokens.
     Priority:
       1. Rare maritime tokens (highest)
       2. Domain maritime vocabulary tokens (next)
       3. General tokens (random fill to meet total budget)
+
+    Important Scientific Note:
+      Because priority is given to rare and maritime domain tokens, documents that are
+      densely packed with maritime terminology may fill the entire 15% budget with domain
+      tokens alone, leaving general_mask_fraction = 0.0. This is an expected and intentional
+      property of task-guided selective masking (Train No Evil principle). The masking
+      diagnostics record rare_maritime_mask_fraction, maritime_mask_fraction, and
+      general_mask_fraction so this selective distribution is fully auditable.
     """
     if not eligible_positions or mask_budget <= 0:
         return []
@@ -204,6 +236,7 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
     """
     Evaluates a pretrained MLM model on a collection of documents under either
     'random_15' (control baseline) or 'domain_aware_15' (focused experiment).
+    Uses position-level span classification for evaluation metrics to prevent subword false-positives.
     """
     if not docs:
         return {}
@@ -273,6 +306,9 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
             masked_indices = torch.zeros_like(input_ids, dtype=torch.bool, device=device)
 
             batch_size_actual = input_ids.shape[0]
+            batch_rare_pos = []
+            batch_mar_pos = []
+            batch_cat_pos = []
 
             for b in range(batch_size_actual):
                 seq_ids = input_ids[b].cpu().tolist()
@@ -280,11 +316,14 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
                 offsets = offsets_tensor[b].cpu().tolist() if offsets_tensor is not None else None
                 sp_mask = tokenizer.get_special_tokens_mask(seq_ids, already_has_special_tokens=True)
 
-                eligible_positions, rare_pos, mar_pos, gen_pos = classify_token_positions(
+                eligible_positions, rare_pos, mar_pos, gen_pos, cat_pos = classify_token_positions(
                     raw_text, seq_ids, offsets, sp_mask,
                     vocab_terms_set, rare_terms_set,
-                    maritime_token_ids, rare_token_ids
+                    maritime_token_ids, rare_token_ids, category_token_ids
                 )
+                batch_rare_pos.append(rare_pos)
+                batch_mar_pos.append(mar_pos)
+                batch_cat_pos.append(cat_pos)
 
                 n_eligible = len(eligible_positions)
                 diag_eligible += n_eligible
@@ -299,11 +338,11 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
                     masked_indices[b, pos] = True
                     masked_input_ids[b, pos] = mask_token_id
 
-                    # Record diagnostics
+                    # Record diagnostics based on position-level classification
                     diag_masked += 1
-                    if pos in rare_pos or seq_ids[pos] in rare_token_ids:
+                    if pos in rare_pos:
                         diag_rare_masked += 1
-                    elif pos in mar_pos or seq_ids[pos] in maritime_token_ids:
+                    elif pos in mar_pos:
                         diag_maritime_masked += 1
                     else:
                         diag_general_masked += 1
@@ -319,7 +358,12 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
 
             for b in range(batch_size_actual):
                 mask_positions = torch.where(masked_indices[b])[0]
-                for pos in mask_positions:
+                rare_pos_set = batch_rare_pos[b]
+                mar_pos_set = batch_mar_pos[b]
+                cat_pos_dict = batch_cat_pos[b]
+
+                for pos_tensor in mask_positions:
+                    pos = pos_tensor.item()
                     target_id = labels[b, pos].item()
                     token_logits = logits[b, pos]
 
@@ -330,8 +374,9 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
                     is_top5 = 1 if target_id in top_k_indices[:5] else 0
                     is_top10 = 1 if target_id in top_k_indices[:10] else 0
 
-                    is_rare = target_id in rare_token_ids
-                    is_maritime = target_id in maritime_token_ids
+                    # Position-level classification avoids subword false-positives
+                    is_rare = pos in rare_pos_set
+                    is_maritime = is_rare or (pos in mar_pos_set)
 
                     if is_rare:
                         rare_stats["loss"] += token_loss
@@ -347,8 +392,8 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
                         maritime_stats["top10"] += is_top10
                         maritime_stats["count"] += 1
 
-                        for cat, cat_ids in category_token_ids.items():
-                            if target_id in cat_ids:
+                        for cat, cat_pos_indices in cat_pos_dict.items():
+                            if pos in cat_pos_indices:
                                 cat_stats[cat]["loss"] += token_loss
                                 cat_stats[cat]["top1"] += is_top1
                                 cat_stats[cat]["top5"] += is_top5
@@ -434,12 +479,15 @@ def evaluate_sampled_pll(model, tokenizer, docs: list, vocab_terms: list, device
     Computes Sampled Pseudo-Log-Likelihood (Salazar et al., ACL 2020) over a bounded,
     deterministic sample of documents and target positions.
     Evaluates one-token-at-a-time MLM scoring to compute likelihood and pseudo-perplexity.
+    Uses position-level span classification to distinguish domain vs general tokens.
     """
     if not docs:
         return {}
 
     rng = random.Random(seed)
     maritime_token_ids, rare_token_ids, _ = build_vocabulary_token_sets(tokenizer, vocab_terms)
+    vocab_terms_set = set(vocab_terms)
+    rare_terms_set = set(RARE_MARITIME_TERMS)
 
     mask_token_id = tokenizer.mask_token_id
     if mask_token_id is None:
@@ -453,16 +501,38 @@ def evaluate_sampled_pll(model, tokenizer, docs: list, vocab_terms: list, device
     general_log_probs = []
     doc_pll_scores = []
 
+    supports_offsets = getattr(tokenizer, "is_fast", False)
+
     with torch.no_grad():
         for doc_text in eval_docs:
-            encoded = tokenizer.encode(doc_text, truncation=True, max_length=max_seq_len, return_tensors="pt")
-            seq = encoded[0]
+            encoding_kwargs = {
+                "truncation": True,
+                "max_length": max_seq_len,
+                "return_tensors": "pt"
+            }
+            if supports_offsets:
+                encoding_kwargs["return_offsets_mapping"] = True
+
+            try:
+                encoded = tokenizer(doc_text, **encoding_kwargs)
+            except Exception:
+                encoding_kwargs.pop("return_offsets_mapping", None)
+                encoded = tokenizer(doc_text, **encoding_kwargs)
+
+            offsets_tensor = encoded.pop("offset_mapping", None)
+            offsets_list = offsets_tensor[0].cpu().tolist() if offsets_tensor is not None else None
+
+            seq = encoded["input_ids"][0]
             seq_len = len(seq)
             if seq_len <= 2:
                 continue
 
             sp_mask = tokenizer.get_special_tokens_mask(seq.tolist(), already_has_special_tokens=True)
-            eligible = [p for p in range(seq_len) if not sp_mask[p]]
+            eligible, rare_pos, mar_pos, gen_pos, _ = classify_token_positions(
+                doc_text, seq.tolist(), offsets_list, sp_mask,
+                vocab_terms_set, rare_terms_set,
+                maritime_token_ids, rare_token_ids
+            )
 
             if not eligible:
                 continue
@@ -471,7 +541,6 @@ def evaluate_sampled_pll(model, tokenizer, docs: list, vocab_terms: list, device
             if len(eligible) <= max_positions_per_doc:
                 target_positions = list(eligible)
             else:
-                # Stride or seeded deterministic sample
                 target_positions = sorted(rng.sample(eligible, max_positions_per_doc))
 
             # Batch single-token masked sequences for computational efficiency
@@ -500,7 +569,9 @@ def evaluate_sampled_pll(model, tokenizer, docs: list, vocab_terms: list, device
                     doc_lps.append(lp)
                     all_token_log_probs.append(lp)
 
-                    if target_token in maritime_token_ids:
+                    # Position-level domain classification via span matching
+                    is_domain_token = (pos_in_seq in rare_pos) or (pos_in_seq in mar_pos)
+                    if is_domain_token:
                         maritime_log_probs.append(lp)
                     else:
                         general_log_probs.append(lp)
@@ -522,7 +593,7 @@ def evaluate_sampled_pll(model, tokenizer, docs: list, vocab_terms: list, device
     gen_mean = float(sum(general_log_probs) / gen_cnt) if gen_cnt > 0 else 0.0
 
     return {
-        "metric_name": "Sampled PLL",
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
         "document_pll": doc_pll_sum,
         "mean_token_pll": mean_token_pll,
         "pseudo_perplexity": pseudo_ppl,
@@ -678,19 +749,18 @@ def run_smoke_test(stage13_path: Path, output_dir: Path):
         with open(rep_path, "r", encoding="utf-8") as f:
             for line in f:
                 sample_docs.append(json.loads(line)["document"])
-                if len(sample_docs) >= 3:
+                if len(sample_docs) >= 2:
                     break
-    if not sample_docs:
-        sample_docs = [
-            "The cargo vessel experienced flooding in the engine room while navigating near the gyrocompass fairway buoy.",
-            "Radar and VHF radio communication were operational before collision in foggy weather."
-        ]
+    # Include a test sentence containing rare terms to verify span matching under smoke testing
+    sample_docs.append(
+        "The vessel used gyrocompass and fathometer navigation while EPIRB and freeboard were inspected by the coxswain at the windlass."
+    )
     logger.info(f"[OK] Loaded {len(sample_docs)} sample documents for smoke testing.")
 
     # 3. Test Random-15 evaluation
     eval_rand = evaluate_model_on_docs(
         model, tokenizer, sample_docs, vocab_terms, device,
-        masking_strategy="random_15", max_docs=2, max_length=64, batch_size=2
+        masking_strategy="random_15", max_docs=len(sample_docs), max_length=64, batch_size=2
     )
     assert "overall_summary" in eval_rand, "Random-15 summary missing"
     logger.info(f"[OK] Random-15 evaluation passed: Top1={eval_rand['overall_summary']['overall_top1_accuracy']:.4f}, Loss={eval_rand['overall_summary']['overall_mlm_loss']:.4f}")
@@ -698,7 +768,7 @@ def run_smoke_test(stage13_path: Path, output_dir: Path):
     # 4. Test Domain-Aware-15 evaluation
     eval_domain = evaluate_model_on_docs(
         model, tokenizer, sample_docs, vocab_terms, device,
-        masking_strategy="domain_aware_15", max_docs=2, max_length=64, batch_size=2
+        masking_strategy="domain_aware_15", max_docs=len(sample_docs), max_length=64, batch_size=2
     )
     assert "masking_diagnostics" in eval_domain, "Domain-Aware diagnostics missing"
     diag = eval_domain["masking_diagnostics"]
@@ -707,7 +777,7 @@ def run_smoke_test(stage13_path: Path, output_dir: Path):
     # 5. Test Sampled PLL
     eval_pll = evaluate_sampled_pll(
         model, tokenizer, sample_docs, vocab_terms, device,
-        max_docs=2, max_seq_len=64, max_positions_per_doc=8, seed=42
+        max_docs=len(sample_docs), max_seq_len=64, max_positions_per_doc=8, seed=42
     )
     assert eval_pll["number_of_scored_tokens"] > 0, "PLL scored 0 tokens"
     assert not math.isnan(eval_pll["mean_token_pll"]), "PLL returned NaN"
@@ -867,8 +937,8 @@ def main():
                     logger.warning(f"Representation '{rep}' has 0 matching documents for subset '{sub}'. Skipping.")
                     continue
 
-                # Deterministic seed per configuration
-                cell_seed = abs(hash(f"{model_name}_{rep}_{sub}_random_15")) % 1000000
+                # Deterministic reproducible seed per configuration
+                cell_seed = stable_seed(model_name, rep, sub, "random_15")
 
                 logger.info(f"[{run_count + 1}/{total_random_runs}] Evaluating {clean_model} | Rep: {rep} | Subset: {sub} | Docs: {len(target_docs)}")
 
@@ -987,7 +1057,7 @@ def main():
                     logger.warning(f"Failed to load model {model_name} for Domain-Aware evaluation: {e}")
                     continue
 
-                cell_seed = abs(hash(f"{model_name}_{rep}_{sub}_domain_aware_15")) % 1000000
+                cell_seed = stable_seed(model_name, rep, sub, "domain_aware_15")
                 domain_res = evaluate_model_on_docs(
                     model, tokenizer, target_docs, vocab_terms, device,
                     masking_strategy="domain_aware_15", seed=cell_seed, max_docs=200, max_length=256, batch_size=16
@@ -1066,7 +1136,7 @@ def main():
 
     with open(stage_dir / "masking_comparison.json", "w", encoding="utf-8") as f:
         json.dump({
-            "experiment_description": "Controlled comparison of Random-15 vs Domain-Aware-15 on screened high-priority configurations",
+            "experiment_description": "Controlled comparison of Random-15 vs Domain-Aware-15 on screened high-priority configurations. Note: Domain-Aware-15 prioritizes domain tokens within the 15% budget; in dense maritime text, general_mask_fraction may approach 0, concentrating evaluation on domain terminology.",
             "evaluated_configurations_count": len(masking_comparisons),
             "comparisons": masking_comparisons
         }, f, indent=2)
@@ -1119,7 +1189,7 @@ def main():
                     logger.warning(f"Failed to load model {model_name} for PLL evaluation: {e}")
                     continue
 
-                cell_seed = abs(hash(f"{model_name}_{rep}_{sub}_pll")) % 1000000
+                cell_seed = stable_seed(model_name, rep, sub, "pll")
                 pll_res = evaluate_sampled_pll(
                     model, tokenizer, target_docs, vocab_terms, device,
                     max_docs=10, max_seq_len=128, max_positions_per_doc=32, seed=cell_seed
@@ -1142,7 +1212,7 @@ def main():
 
     with open(stage_dir / "pll_results.json", "w", encoding="utf-8") as f:
         json.dump({
-            "experiment_description": "Sampled Pseudo-Log-Likelihood (Salazar et al., ACL 2020) across focused screened configurations",
+            "experiment_description": "Sampled Pseudo-Log-Likelihood (Sampled PLL) scoring (Salazar et al., ACL 2020) across focused screened configurations using exact single-token masking per sampled position",
             "evaluated_configurations_count": len(pll_results),
             "results": pll_results
         }, f, indent=2)
