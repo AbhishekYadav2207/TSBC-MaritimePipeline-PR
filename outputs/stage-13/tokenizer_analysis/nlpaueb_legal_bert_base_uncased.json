@@ -2,22 +2,23 @@
   "model_name": "nlpaueb/legal-bert-base-uncased",
   "clean_model_name": "nlpaueb_legal_bert_base_uncased",
   "vocab_size": 30522,
-  "sampled_documents": 1501,
-  "total_raw_words_analyzed": 60824,
-  "total_subword_tokens_analyzed": 90063,
-  "average_subwords_per_word": 1.480714849401552,
-  "maritime_fragmentation_rate": 0.37910447761194027,
-  "single_token_vocabulary_coverage": 0.6208955223880597,
+  "sampled_documents": 1500,
+  "total_raw_words_analyzed": 60750,
+  "total_subword_tokens_analyzed": 89949,
+  "average_subwords_per_word": 1.480641975308642,
+  "maritime_fragmentation_rate": 0.3791,
+  "single_token_vocabulary_coverage": 0.6209,
   "single_token_count": 208,
   "total_maritime_terms": 335,
-  "avg_pieces_per_term": 1.507462686567164,
+  "avg_pieces_per_term": 1.507,
   "median_pieces_per_term": 1.0,
   "p95_pieces_per_term": 3.0,
   "max_pieces_per_term": 5,
-  "oov_rate": 0.00029979014689717197,
-  "tokenizer_speed_tokens_per_sec": 308700.2863092105,
+  "oov_rate": 0.00030017009638795317,
+  "oov_status": "measured",
+  "tokenizer_speed_tokens_per_sec": 65780.26772099183,
   "sequence_length_distribution": {
-    "under_128": 1500,
+    "under_128": 1499,
     "under_256": 1,
     "under_512": 0,
     "over_512": 0
@@ -613,5 +614,937 @@
       ],
       "num_pieces": 2
     }
-  ]
+  ],
+  "vocabulary_categories": {
+    "maritime_terminology": {
+      "category": "maritime_terminology",
+      "total_terms": 335,
+      "single_token_count": 208,
+      "single_token_coverage": 0.6209,
+      "fragmentation_rate": 0.3791,
+      "avg_pieces_per_term": 1.507,
+      "median_pieces_per_term": 1.0,
+      "p95_pieces_per_term": 3.0,
+      "max_pieces_per_term": 5,
+      "worst_fragmented_terms": [
+        {
+          "term": "gyrocompass",
+          "tokens": [
+            "gy",
+            "##roc",
+            "##omp",
+            "##as",
+            "##s"
+          ],
+          "num_pieces": 5
+        },
+        {
+          "term": "vhf radio",
+          "tokens": [
+            "v",
+            "##h",
+            "##f",
+            "radio"
+          ],
+          "num_pieces": 4
+        },
+        {
+          "term": "echosounder",
+          "tokens": [
+            "echo",
+            "##s",
+            "##oun",
+            "##der"
+          ],
+          "num_pieces": 4
+        },
+        {
+          "term": "unberthing",
+          "tokens": [
+            "un",
+            "##bert",
+            "##hin",
+            "##g"
+          ],
+          "num_pieces": 4
+        },
+        {
+          "term": "lifesaving",
+          "tokens": [
+            "life",
+            "##s",
+            "##avi",
+            "##ng"
+          ],
+          "num_pieces": 4
+        },
+        {
+          "term": "lifejacket",
+          "tokens": [
+            "life",
+            "##jack",
+            "##e",
+            "##t"
+          ],
+          "num_pieces": 4
+        },
+        {
+          "term": "lifebuoy",
+          "tokens": [
+            "life",
+            "##bu",
+            "##o",
+            "##y"
+          ],
+          "num_pieces": 4
+        },
+        {
+          "term": "algoport",
+          "tokens": [
+            "alg",
+            "##opo",
+            "##r",
+            "##t"
+          ],
+          "num_pieces": 4
+        },
+        {
+          "term": "hovercraft",
+          "tokens": [
+            "hove",
+            "##rcra",
+            "##f",
+            "##t"
+          ],
+          "num_pieces": 4
+        },
+        {
+          "term": "gross tonnage",
+          "tokens": [
+            "gross",
+            "to",
+            "##nnage"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "gps receiver",
+          "tokens": [
+            "gp",
+            "##s",
+            "receiver"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "search and rescue",
+          "tokens": [
+            "search",
+            "and",
+            "rescue"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "steering failure",
+          "tokens": [
+            "steer",
+            "##ing",
+            "failure"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "propulsion failure",
+          "tokens": [
+            "propulsi",
+            "##on",
+            "failure"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "poor visibility",
+          "tokens": [
+            "poor",
+            "vis",
+            "##ibility"
+          ],
+          "num_pieces": 3
+        }
+      ]
+    },
+    "general_vocabulary": {
+      "category": "general_vocabulary",
+      "total_terms": 94,
+      "single_token_count": 78,
+      "single_token_coverage": 0.8298,
+      "fragmentation_rate": 0.1702,
+      "avg_pieces_per_term": 1.17,
+      "median_pieces_per_term": 1.0,
+      "p95_pieces_per_term": 2.0,
+      "max_pieces_per_term": 2,
+      "worst_fragmented_terms": [
+        {
+          "term": "announcements",
+          "tokens": [
+            "announcement",
+            "##s"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "cardiovascular",
+          "tokens": [
+            "cardio",
+            "##vascular"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "cities",
+          "tokens": [
+            "citi",
+            "##es"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "developers",
+          "tokens": [
+            "developer",
+            "##s"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "engineers",
+          "tokens": [
+            "engineer",
+            "##s"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "featured",
+          "tokens": [
+            "feature",
+            "##d"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "habitats",
+          "tokens": [
+            "habitat",
+            "##s"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "highlighting",
+          "tokens": [
+            "highlight",
+            "##ing"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "library",
+          "tokens": [
+            "librar",
+            "##y"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "mathematics",
+          "tokens": [
+            "mathematic",
+            "##s"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "migratory",
+          "tokens": [
+            "migrat",
+            "##ory"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "pottery",
+          "tokens": [
+            "potter",
+            "##y"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "researchers",
+          "tokens": [
+            "researcher",
+            "##s"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "scientists",
+          "tokens": [
+            "scientist",
+            "##s"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "trees",
+          "tokens": [
+            "tree",
+            "##s"
+          ],
+          "num_pieces": 2
+        }
+      ]
+    },
+    "rare_maritime_terminology": {
+      "category": "rare_maritime_terminology",
+      "total_terms": 20,
+      "single_token_count": 2,
+      "single_token_coverage": 0.1,
+      "fragmentation_rate": 0.9,
+      "avg_pieces_per_term": 2.55,
+      "median_pieces_per_term": 3.0,
+      "p95_pieces_per_term": 3.1,
+      "max_pieces_per_term": 5,
+      "worst_fragmented_terms": [
+        {
+          "term": "gyrocompass",
+          "tokens": [
+            "gy",
+            "##roc",
+            "##omp",
+            "##as",
+            "##s"
+          ],
+          "num_pieces": 5
+        },
+        {
+          "term": "bitts",
+          "tokens": [
+            "bit",
+            "##t",
+            "##s"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "bulwark",
+          "tokens": [
+            "bul",
+            "##war",
+            "##k"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "coxswain",
+          "tokens": [
+            "cox",
+            "##s",
+            "##wain"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "epirb",
+          "tokens": [
+            "epi",
+            "##r",
+            "##b"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "fairlead",
+          "tokens": [
+            "fair",
+            "##lea",
+            "##d"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "fathometer",
+          "tokens": [
+            "fat",
+            "##home",
+            "##ter"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "forepeak",
+          "tokens": [
+            "for",
+            "##epe",
+            "##ak"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "gunwale",
+          "tokens": [
+            "gun",
+            "##wal",
+            "##e"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "hawser",
+          "tokens": [
+            "haw",
+            "##s",
+            "##er"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "windlass",
+          "tokens": [
+            "wind",
+            "##las",
+            "##s"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "bollard",
+          "tokens": [
+            "boll",
+            "##ard"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "freeboard",
+          "tokens": [
+            "free",
+            "##board"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "leeward",
+          "tokens": [
+            "lee",
+            "##ward"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "sart",
+          "tokens": [
+            "sar",
+            "##t"
+          ],
+          "num_pieces": 2
+        }
+      ]
+    }
+  },
+  "informativeness_stratification": {
+    "Medium Knowledge": {
+      "tier": "Medium Knowledge",
+      "document_count": 673,
+      "total_raw_words": 25880,
+      "total_subword_tokens": 37904,
+      "mean_fertility": 1.4646,
+      "mean_sequence_length": 56.32,
+      "mean_document_fragmentation": 0.3058,
+      "mean_document_coverage": 0.6942,
+      "oov_rate": 0.00029,
+      "oov_status": "measured",
+      "sequence_length_distribution": {
+        "under_128": 673,
+        "under_256": 0,
+        "under_512": 0,
+        "over_512": 0
+      }
+    },
+    "High Knowledge": {
+      "tier": "High Knowledge",
+      "document_count": 422,
+      "total_raw_words": 25715,
+      "total_subword_tokens": 38896,
+      "mean_fertility": 1.5126,
+      "mean_sequence_length": 92.17,
+      "mean_document_fragmentation": 0.307,
+      "mean_document_coverage": 0.693,
+      "oov_rate": 0.000334,
+      "oov_status": "measured",
+      "sequence_length_distribution": {
+        "under_128": 421,
+        "under_256": 1,
+        "under_512": 0,
+        "over_512": 0
+      }
+    },
+    "Low Knowledge": {
+      "tier": "Low Knowledge",
+      "document_count": 199,
+      "total_raw_words": 2767,
+      "total_subword_tokens": 4024,
+      "mean_fertility": 1.4543,
+      "mean_sequence_length": 20.22,
+      "mean_document_fragmentation": 0.3026,
+      "mean_document_coverage": 0.6974,
+      "oov_rate": 0.000497,
+      "oov_status": "measured",
+      "sequence_length_distribution": {
+        "under_128": 199,
+        "under_256": 0,
+        "under_512": 0,
+        "over_512": 0
+      }
+    },
+    "Redundant": {
+      "tier": "Redundant",
+      "document_count": 206,
+      "total_raw_words": 6388,
+      "total_subword_tokens": 9125,
+      "mean_fertility": 1.4285,
+      "mean_sequence_length": 44.3,
+      "mean_document_fragmentation": 0.2943,
+      "mean_document_coverage": 0.7057,
+      "oov_rate": 0.00011,
+      "oov_status": "measured",
+      "sequence_length_distribution": {
+        "under_128": 206,
+        "under_256": 0,
+        "under_512": 0,
+        "over_512": 0
+      }
+    }
+  },
+  "document_correlations": {
+    "informativeness_vs_fertility": {
+      "rho": 0.2519,
+      "p_value": 0.0,
+      "sample_size": 1500,
+      "status": "computed"
+    },
+    "informativeness_vs_fragmentation": {
+      "rho": 0.0623,
+      "p_value": 0.015886,
+      "sample_size": 1500,
+      "status": "computed"
+    },
+    "informativeness_vs_coverage": {
+      "rho": -0.0623,
+      "p_value": 0.015886,
+      "sample_size": 1500,
+      "status": "computed"
+    },
+    "scientific_interpretation": "Scientific Note: This analysis measures empirical tokenizer properties and statistical associations (Spearman rank correlation) between document informativeness scores and subword tokenizer behaviors. Correlation does not imply causation; domain informativeness does not cause tokenizer behavior or downstream masked language modeling performance. Domain informativeness scores reflect algorithmic outputs from Stage 12 heuristic/hybrid scoring, not externally validated ground truth."
+  },
+  "deterministic_term_examples": {
+    "general_maritime_examples": [
+      {
+        "term": "above",
+        "tokens": [
+          "above"
+        ],
+        "num_pieces": 1
+      },
+      {
+        "term": "accident",
+        "tokens": [
+          "accident"
+        ],
+        "num_pieces": 1
+      },
+      {
+        "term": "aft",
+        "tokens": [
+          "aft"
+        ],
+        "num_pieces": 1
+      },
+      {
+        "term": "after",
+        "tokens": [
+          "after"
+        ],
+        "num_pieces": 1
+      },
+      {
+        "term": "ahead",
+        "tokens": [
+          "a",
+          "##head"
+        ],
+        "num_pieces": 2
+      },
+      {
+        "term": "aid",
+        "tokens": [
+          "aid"
+        ],
+        "num_pieces": 1
+      },
+      {
+        "term": "air",
+        "tokens": [
+          "air"
+        ],
+        "num_pieces": 1
+      },
+      {
+        "term": "aircraft",
+        "tokens": [
+          "aircraft"
+        ],
+        "num_pieces": 1
+      },
+      {
+        "term": "ais",
+        "tokens": [
+          "a",
+          "##is"
+        ],
+        "num_pieces": 2
+      },
+      {
+        "term": "algolake",
+        "tokens": [
+          "alg",
+          "##ola",
+          "##ke"
+        ],
+        "num_pieces": 3
+      },
+      {
+        "term": "algoport",
+        "tokens": [
+          "alg",
+          "##opo",
+          "##r",
+          "##t"
+        ],
+        "num_pieces": 4
+      },
+      {
+        "term": "anchor",
+        "tokens": [
+          "anchor"
+        ],
+        "num_pieces": 1
+      }
+    ],
+    "rare_maritime_examples": [
+      {
+        "term": "bilge",
+        "tokens": [
+          "bilge"
+        ],
+        "num_pieces": 1
+      },
+      {
+        "term": "bitts",
+        "tokens": [
+          "bit",
+          "##t",
+          "##s"
+        ],
+        "num_pieces": 3
+      },
+      {
+        "term": "bollard",
+        "tokens": [
+          "boll",
+          "##ard"
+        ],
+        "num_pieces": 2
+      },
+      {
+        "term": "bulwark",
+        "tokens": [
+          "bul",
+          "##war",
+          "##k"
+        ],
+        "num_pieces": 3
+      },
+      {
+        "term": "coxswain",
+        "tokens": [
+          "cox",
+          "##s",
+          "##wain"
+        ],
+        "num_pieces": 3
+      },
+      {
+        "term": "davit",
+        "tokens": [
+          "davit"
+        ],
+        "num_pieces": 1
+      },
+      {
+        "term": "epirb",
+        "tokens": [
+          "epi",
+          "##r",
+          "##b"
+        ],
+        "num_pieces": 3
+      },
+      {
+        "term": "fairlead",
+        "tokens": [
+          "fair",
+          "##lea",
+          "##d"
+        ],
+        "num_pieces": 3
+      },
+      {
+        "term": "fathometer",
+        "tokens": [
+          "fat",
+          "##home",
+          "##ter"
+        ],
+        "num_pieces": 3
+      },
+      {
+        "term": "forepeak",
+        "tokens": [
+          "for",
+          "##epe",
+          "##ak"
+        ],
+        "num_pieces": 3
+      },
+      {
+        "term": "freeboard",
+        "tokens": [
+          "free",
+          "##board"
+        ],
+        "num_pieces": 2
+      },
+      {
+        "term": "gunwale",
+        "tokens": [
+          "gun",
+          "##wal",
+          "##e"
+        ],
+        "num_pieces": 3
+      },
+      {
+        "term": "gyrocompass",
+        "tokens": [
+          "gy",
+          "##roc",
+          "##omp",
+          "##as",
+          "##s"
+        ],
+        "num_pieces": 5
+      },
+      {
+        "term": "hawser",
+        "tokens": [
+          "haw",
+          "##s",
+          "##er"
+        ],
+        "num_pieces": 3
+      },
+      {
+        "term": "leeward",
+        "tokens": [
+          "lee",
+          "##ward"
+        ],
+        "num_pieces": 2
+      },
+      {
+        "term": "sart",
+        "tokens": [
+          "sar",
+          "##t"
+        ],
+        "num_pieces": 2
+      },
+      {
+        "term": "stempost",
+        "tokens": [
+          "stem",
+          "##post"
+        ],
+        "num_pieces": 2
+      },
+      {
+        "term": "transom",
+        "tokens": [
+          "trans",
+          "##om"
+        ],
+        "num_pieces": 2
+      },
+      {
+        "term": "windlass",
+        "tokens": [
+          "wind",
+          "##las",
+          "##s"
+        ],
+        "num_pieces": 3
+      },
+      {
+        "term": "windward",
+        "tokens": [
+          "wind",
+          "##ward"
+        ],
+        "num_pieces": 2
+      }
+    ],
+    "general_vocabulary_examples": [
+      {
+        "term": "access",
+        "tokens": [
+          "access"
+        ],
+        "num_pieces": 1
+      },
+      {
+        "term": "across",
+        "tokens": [
+          "across"
+        ],
+        "num_pieces": 1
+      },
+      {
+        "term": "addressing",
+        "tokens": [
+          "addressing"
+        ],
+        "num_pieces": 1
+      },
+      {
+        "term": "analyzed",
+        "tokens": [
+          "analyzed"
+        ],
+        "num_pieces": 1
+      },
+      {
+        "term": "ancient",
+        "tokens": [
+          "ancient"
+        ],
+        "num_pieces": 1
+      },
+      {
+        "term": "and",
+        "tokens": [
+          "and"
+        ],
+        "num_pieces": 1
+      },
+      {
+        "term": "announcements",
+        "tokens": [
+          "announcement",
+          "##s"
+        ],
+        "num_pieces": 2
+      },
+      {
+        "term": "architectural",
+        "tokens": [
+          "architectural"
+        ],
+        "num_pieces": 1
+      },
+      {
+        "term": "authorities",
+        "tokens": [
+          "authorities"
+        ],
+        "num_pieces": 1
+      },
+      {
+        "term": "birds",
+        "tokens": [
+          "birds"
+        ],
+        "num_pieces": 1
+      },
+      {
+        "term": "books",
+        "tokens": [
+          "books"
+        ],
+        "num_pieces": 1
+      },
+      {
+        "term": "cardiovascular",
+        "tokens": [
+          "cardio",
+          "##vascular"
+        ],
+        "num_pieces": 2
+      }
+    ]
+  },
+  "compatibility_summary": {
+    "model": "nlpaueb/legal-bert-base-uncased",
+    "clean_model_name": "nlpaueb_legal_bert_base_uncased",
+    "domain_token_coverage": 0.6209,
+    "domain_fragmentation": 0.3791,
+    "domain_fertility": 1.4806,
+    "domain_unknown_rate": 0.0003,
+    "oov_status": "measured",
+    "mean_sequence_length": 59.97,
+    "tokenization_speed": 65780.27,
+    "stratified_by_informativeness_tier": {
+      "Medium Knowledge": {
+        "document_count": 673,
+        "mean_fertility": 1.4646,
+        "mean_sequence_length": 56.32,
+        "mean_document_fragmentation": 0.3058,
+        "mean_document_coverage": 0.6942
+      },
+      "High Knowledge": {
+        "document_count": 422,
+        "mean_fertility": 1.5126,
+        "mean_sequence_length": 92.17,
+        "mean_document_fragmentation": 0.307,
+        "mean_document_coverage": 0.693
+      },
+      "Low Knowledge": {
+        "document_count": 199,
+        "mean_fertility": 1.4543,
+        "mean_sequence_length": 20.22,
+        "mean_document_fragmentation": 0.3026,
+        "mean_document_coverage": 0.6974
+      },
+      "Redundant": {
+        "document_count": 206,
+        "mean_fertility": 1.4285,
+        "mean_sequence_length": 44.3,
+        "mean_document_fragmentation": 0.2943,
+        "mean_document_coverage": 0.7057
+      }
+    }
+  },
+  "scientific_disclaimer": "Scientific Note: This analysis measures empirical tokenizer properties and statistical associations (Spearman rank correlation) between document informativeness scores and subword tokenizer behaviors. Correlation does not imply causation; domain informativeness does not cause tokenizer behavior or downstream masked language modeling performance. Domain informativeness scores reflect algorithmic outputs from Stage 12 heuristic/hybrid scoring, not externally validated ground truth."
 }
