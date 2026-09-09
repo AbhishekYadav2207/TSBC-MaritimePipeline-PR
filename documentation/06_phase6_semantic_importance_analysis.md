@@ -14,7 +14,7 @@ Scripts involved in Phase 6:
 ```mermaid
 flowchart TD
     subgraph Inputs ["Input Artifacts"]
-        CleanDocs["outputs/clean_documents.jsonl"]
+        CleanDocs["outputs/stage-07/clean_documents.jsonl"]
     end
 
     subgraph Processing ["Phase 6 Execution Engine"]
@@ -34,11 +34,11 @@ flowchart TD
     end
 
     subgraph Outputs ["Generated Artifacts & Subsets"]
-        RepFolder["outputs/corpus_representations/*.jsonl"]
-        DocImpJSONL["outputs/document_importance.jsonl"]
-        ImpStatsJSON["outputs/importance_statistics.json"]
-        DistPNG["outputs/importance_distribution.png"]
-        SubsetsFolder["outputs/subsets/*.jsonl"]
+        RepFolder["outputs/stage-11/corpus_representations/*.jsonl"]
+        DocImpJSONL["outputs/stage-12/document_importance.jsonl"]
+        ImpStatsJSON["outputs/stage-12/importance_statistics.json"]
+        DistPNG["outputs/stage-12/importance_distribution.png"]
+        SubsetsFolder["outputs/stage-12/subsets/*.jsonl"]
     end
 
     CleanDocs --> S11
@@ -196,12 +196,12 @@ flowchart TD
 
 ---
 
-### 2.2 Output Representation Artifacts: `outputs/corpus_representations/`
+### 2.2 Output Representation Artifacts: `outputs/stage-11/corpus_representations/`
 
 - **Created By**: `scripts/11_corpus_representations.py`
 - **Consumed By**: `scripts/14_mlm_evaluation.py`
 - **Purpose**: Stores 5 distinct multi-format JSONL files used to evaluate language model representation robustness in Stage 14.
-- **Storage Location**: `outputs/corpus_representations/`
+- **Storage Location**: `outputs/stage-11/corpus_representations/`
 - **Files Generated**:
   1. `narrative.jsonl` (Sanitized natural language paragraphs)
   2. `key_value.jsonl` (Line-oriented key-value attributes)
@@ -286,11 +286,11 @@ $$S = \text{Clip}(\text{RawScore} \times 100.0, 0.0, 100.0)$$
 
 ### 3.3 Output Schema Specifications
 
-#### 1. `outputs/document_importance.jsonl`
+#### 1. `outputs/stage-12/document_importance.jsonl`
 - **Created By**: `scripts/12_semantic_importance.py`
 - **Consumed By**: Subset generation, research quality auditing.
 - **Purpose**: Stores per-document importance scores, knowledge tiers, density metrics, and extracted concepts.
-- **Storage Location**: `outputs/document_importance.jsonl`
+- **Storage Location**: `outputs/stage-12/document_importance.jsonl`
 - **Format**: JSON Lines UTF-8
 
 ##### Example Payload Snippet
@@ -309,7 +309,7 @@ $$S = \text{Clip}(\text{RawScore} \times 100.0, 0.0, 100.0)$$
 
 ---
 
-#### 2. Evaluation Subsets Directory: `outputs/subsets/`
+#### 2. Evaluation Subsets Directory: `outputs/stage-12/subsets/`
 - **Created By**: `scripts/12_semantic_importance.py`
 - **Consumed By**: `scripts/14_mlm_evaluation.py`
 - **Purpose**: Provides 6 standardized 1,000-document evaluation subsets representing different knowledge tiers and baselines:

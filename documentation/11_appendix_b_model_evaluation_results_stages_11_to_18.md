@@ -7,7 +7,7 @@ Appendix B presents the empirical findings from Stages 11 through 18 of the pipe
 
 ## 1. Stage 11: Multi-Format Representation Volume
 
-### Table 1.1: Multi-Format Corpus Representation Artifacts (`outputs/corpus_representations/`)
+### Table 1.1: Multi-Format Corpus Representation Artifacts (`outputs/stage-11/corpus_representations/`)
 | Representation Identifier | Format Description | File Size | Document Count | Average Doc Length (words) |
 | :--- | :--- | :--- | :--- | :--- |
 | `narrative.jsonl` | Sanitized natural language paragraphs | 41.8 MB | 42,150 | 152.36 |
@@ -20,7 +20,7 @@ Appendix B presents the empirical findings from Stages 11 through 18 of the pipe
 
 ## 2. Stage 12: Semantic Importance Distribution & Knowledge Tiers
 
-### Table 2.1: Semantic Importance Score Summary (`outputs/importance_statistics.json`)
+### Table 2.1: Semantic Importance Score Summary (`outputs/stage-12/importance_statistics.json`)
 | Metric Name | Value | Description |
 | :--- | :--- | :--- |
 | **Total Documents Scored** | 42,150 | 100% of clean corpus documents |
@@ -45,7 +45,7 @@ Appendix B presents the empirical findings from Stages 11 through 18 of the pipe
 
 ## 3. Stage 13: 14-Tokenizer Profiling & Subword Fragmentation
 
-### Table 3.1: Comparative Tokenizer Benchmark (`outputs/tokenizer_analysis/tokenizer_comparison.csv`)
+### Table 3.1: Comparative Tokenizer Benchmark (`outputs/stage-13/tokenizer_analysis/tokenizer_comparison.csv`)
 | Model Identifier | Vocab Size | Fertility (subwords/word) | Single-Token Coverage (%) | Fragmentation Rate (%) | OOV Rate (%) | Tokenizer Speed (tok/s) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `answerdotai/ModernBERT-base` | 50,280 | **1.1420** | **78.42%** | **21.58%** | **0.0000%** | 452,100 |
@@ -85,7 +85,7 @@ Appendix B presents the empirical findings from Stages 11 through 18 of the pipe
 
 ## 5. Stage 15: MUI Leaderboard & Visualizations
 
-### Table 5.1: Final Maritime Understanding Index (MUI) Leaderboard (`outputs/leaderboard.csv`)
+### Table 5.1: Final Maritime Understanding Index (MUI) Leaderboard (`outputs/stage-15/leaderboard.csv`)
 | Rank | Model Name | MUI Score | Maritime Top-1 (%) ± 95% CI | Rare Acc (%) | MLM Loss | Domain Shift Gap (%) | Params (M) | Latency (ms) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **1** | `answerdotai/ModernBERT-base` | **88.42** | **82.42% ± 0.85%** | **74.15%** | **1.1420** | **4.21%** | 149M | 5.20ms |
@@ -107,7 +107,7 @@ Appendix B presents the empirical findings from Stages 11 through 18 of the pipe
 
 ## 6. Stage 16: Statistical Significance & Feature Ablation Study
 
-### Table 6.1: Pairwise Statistical Significance Tests (`outputs/statistical_significance.json`)
+### Table 6.1: Pairwise Statistical Significance Tests (`outputs/stage-16/statistical_significance.json`)
 | Model Pair (Model 1 vs. Model 2) | Mean Top-1 Diff | Paired $t$-stat | $p$-value ($t$-test) | Wilcoxon $p$-val | Cohen's $d$ | Cliff's $\Delta$ | Significance ($p < 0.05$) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `ModernBERT` vs. `BERT-base` | +8.42% | 6.842 | **0.000014** | 0.000028 | **1.2482** | **0.7842** | **Significant** (Large) |
@@ -118,7 +118,7 @@ Appendix B presents the empirical findings from Stages 11 through 18 of the pipe
 
 ---
 
-### Table 6.2: Scoring Engine Feature Ablation Study (`outputs/ablation_study.json`)
+### Table 6.2: Scoring Engine Feature Ablation Study (`outputs/stage-16/ablation_study.json`)
 | Ablated Feature Removed | Remaining Relevance Score | Performance Drop (%) | Justification / Impact |
 | :--- | :--- | :--- | :--- |
 | **None (Baseline Engine)** | **91.50** | **0.00%** | Full 10-feature scoring engine |
@@ -132,7 +132,7 @@ Appendix B presents the empirical findings from Stages 11 through 18 of the pipe
 
 ## 7. Stage 17: Decision Engine & Sensitivity Matrix
 
-### Table 7.1: Programmatic Decision Engine Recommendation (`outputs/decision_summary.json`)
+### Table 7.1: Programmatic Decision Engine Recommendation (`outputs/stage-17/decision_summary.json`)
 | Decision Attribute | Programmatic Engine Output |
 | :--- | :--- |
 | **Top-Ranked Encoder** | `answerdotai/ModernBERT-base` |
@@ -157,7 +157,7 @@ Appendix B presents the empirical findings from Stages 11 through 18 of the pipe
 
 ## 8. Stage 18: Automated Corpus Quality Linting Results
 
-### Table 8.1: Quality Lint Rule Violations (`outputs/corpus_lint_report.json`)
+### Table 8.1: Quality Lint Rule Violations (`outputs/stage-18/corpus_lint_report.json`)
 | Lint Rule Name | Checked Pattern | Violation Count | Violation Rate (%) | Status |
 | :--- | :--- | :--- | :--- | :--- |
 | `repeated_adjacent_words` | `r'\b([a-zA-Z]{3,})\s+\1\b'` | 4 | 0.009% | **PASS** |

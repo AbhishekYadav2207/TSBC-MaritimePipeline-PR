@@ -13,7 +13,7 @@ Scripts involved in Phase 3:
 ```mermaid
 flowchart TD
     subgraph Inputs ["Input Artifacts"]
-        MergedJSONL["outputs/merged_records.jsonl"]
+        MergedJSONL["outputs/stage-05/merged_records.jsonl"]
     end
 
     subgraph Processing ["Phase 3 Core Execution Engine"]
@@ -25,7 +25,7 @@ flowchart TD
     end
 
     subgraph Outputs ["Generated Artifacts"]
-        RawDocs["outputs/raw_documents.jsonl"]
+        RawDocs["outputs/stage-06/raw_documents.jsonl"]
     end
 
     MergedJSONL --> S06
@@ -334,12 +334,12 @@ family_idx = abs(hash(f"{oid}_{v.get('VesselID')}")) % 5
 
 ---
 
-### 2.3 Output Schema Specification: `outputs/raw_documents.jsonl`
+### 2.3 Output Schema Specification: `outputs/stage-06/raw_documents.jsonl`
 
 - **Created By**: `scripts/06_generate_documents.py`
 - **Consumed By**: `scripts/07_clean_documents.py`
 - **Purpose**: Stores initial synthesized operational narrative documents and raw TSB summaries paired with span provenance and structured source records.
-- **Storage Location**: `outputs/raw_documents.jsonl`
+- **Storage Location**: `outputs/stage-06/raw_documents.jsonl`
 - **Format**: JSON Lines UTF-8
 
 #### JSON Schema

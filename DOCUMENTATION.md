@@ -134,14 +134,14 @@ Provides string sanitization, administrative noise removal, and natural language
   3. `map_display_columns()` pairs numeric ID/Enum/IND columns with corresponding human-readable `DisplayEng` columns (e.g. `WeatherConditionEnum` $\rightarrow$ `WeatherConditionDisplayEng`). Handles custom stem matching and exceptions.
   4. `categorize_column()` assigns columns to functional categories (`admin`, `temporal`, `spatial`, `environmental`, `vessel_spec`, `casualty`, `equipment`, `narrative`).
 - **Input File**: Raw dictionary CSV in `data/`
-- **Output Artifact**: [`outputs/dictionary_metadata.json`](file:///c:/--Files--/Programming/pipeline/outputs/dictionary_metadata.json)
+- **Output Artifact**: [`outputs/stage-01/dictionary_metadata.json`](file:///c:/--Files--/Programming/pipeline/outputs/stage-01/dictionary_metadata.json)
 
 ### Stage 02: Profile Datasets
 - **Script**: [`scripts/02_profile_dataset.py`](file:///c:/--Files--/Programming/pipeline/scripts/02_profile_dataset.py)
 - **Execution Command**: `python run_pipeline.py --stage 02`
 - **Core Logic**: Scans all 6 raw relational table CSVs using `read_csv_safe()`. Computes total row count, column count, missing value ratio per column, data type distribution, unique value cardinality, top frequent categories, and infers candidate primary/foreign key columns.
 - **Input Files**: 6 relational table CSVs in `data/`
-- **Output Artifact**: [`outputs/profiling_report.json`](file:///c:/--Files--/Programming/pipeline/outputs/profiling_report.json)
+- **Output Artifact**: [`outputs/stage-02/profiling_report.json`](file:///c:/--Files--/Programming/pipeline/outputs/stage-02/profiling_report.json)
 
 ### Stage 03: Discover Schema Relationships
 - **Script**: [`scripts/03_discover_relationships.py`](file:///c:/--Files--/Programming/pipeline/scripts/03_discover_relationships.py)
@@ -149,32 +149,32 @@ Provides string sanitization, administrative noise removal, and natural language
 - **Core Logic**: Analyzes schema foreign keys across parent and child tables. Quantifies join match rates and cardinalities:
   - Parent `VW_OCCURRENCE` (`OccID`) $\rightarrow$ Child `VW_OCCURRENCE_VESSEL` (`OccID`): **1-to-Many** join.
   - Child `VW_OCCURRENCE_VESSEL` (`VesselID`, `OccID`) $\rightarrow$ Children (`VW_INJURIES`, LSA, NAV, REC): **1-to-Many** join.
-- **Output Artifact**: [`outputs/relationships.json`](file:///c:/--Files--/Programming/pipeline/outputs/relationships.json)
+- **Output Artifact**: [`outputs/stage-03/relationships.json`](file:///c:/--Files--/Programming/pipeline/outputs/stage-03/relationships.json)
 
 ### Stage 04: Select Semantic Columns
 - **Script**: [`scripts/04_select_semantic_columns.py`](file:///c:/--Files--/Programming/pipeline/scripts/04_select_semantic_columns.py)
 - **Execution Command**: `python run_pipeline.py --stage 04`
 - **Core Logic**: Evaluates all columns against descriptive information criteria. Filters out low-value administrative metadata (GUIDs, entry dates, audit columns, French duplicates) and retains high-information semantic attributes (weather, location, vessel specs, activity, equipment, injuries).
-- **Output Artifact**: [`outputs/selected_semantic_columns.json`](file:///c:/--Files--/Programming/pipeline/outputs/selected_semantic_columns.json)
+- **Output Artifact**: [`outputs/stage-04/selected_semantic_columns.json`](file:///c:/--Files--/Programming/pipeline/outputs/stage-04/selected_semantic_columns.json)
 
 ### Stage 05: Merge Datasets
 - **Script**: [`scripts/05_merge_tables.py`](file:///c:/--Files--/Programming/pipeline/scripts/05_merge_tables.py)
 - **Execution Command**: `python run_pipeline.py --stage 05`
 - **Core Logic**: Performs a multi-table relational join grouped by `OccID`. Merges parent occurrence details with nested arrays of child vessels, injuries, LSA equipment, navigation aids, and voyage recorders. Aggregates orphaned child records under synthetic placeholder vessels.
-- **Input Files**: Raw relational CSVs and [`outputs/selected_semantic_columns.json`](file:///c:/--Files--/Programming/pipeline/outputs/selected_semantic_columns.json)
-- **Output Artifact**: [`outputs/merged_records.jsonl`](file:///c:/--Files--/Programming/pipeline/outputs/merged_records.jsonl) (346 MB, 96,714 merged occurrence records)
+- **Input Files**: Raw relational CSVs and [`outputs/stage-04/selected_semantic_columns.json`](file:///c:/--Files--/Programming/pipeline/outputs/stage-04/selected_semantic_columns.json)
+- **Output Artifact**: [`outputs/stage-05/merged_records.jsonl`](file:///c:/--Files--/Programming/pipeline/outputs/stage-05/merged_records.jsonl) (346 MB, 96,714 merged occurrence records)
 
 ### Stage 05a: Validate Records
 - **Script**: [`scripts/05a_validate_records.py`](file:///c:/--Files--/Programming/pipeline/scripts/05a_validate_records.py)
 - **Execution Command**: `python run_pipeline.py --stage 05a`
 - **Core Logic**: Assesses data integrity across `merged_records.jsonl`. Verifies `OccID` completeness, key presence, data types, impossible dates, and implausible numeric values (e.g., vessel speed > 100 knots, gross tonnage > 300,000 GT).
-- **Output Artifact**: [`outputs/validation_report.json`](file:///c:/--Files--/Programming/pipeline/outputs/validation_report.json)
+- **Output Artifact**: [`outputs/stage-05a/validation_report.json`](file:///c:/--Files--/Programming/pipeline/outputs/stage-05a/validation_report.json)
 
 ### Stage 06: Generate Natural Language Documents
 - **Script**: [`scripts/06_generate_documents.py`](file:///c:/--Files--/Programming/pipeline/scripts/06_generate_documents.py)
 - **Execution Command**: `python run_pipeline.py --stage 06`
 - **Core Logic**: Ingests nested records from `merged_records.jsonl` and applies template narrative rules (`templates/*.json`) to generate structured, grammatically sound prose documents covering profiles, weather, voyage activity, equipment status, and casualties.
-- **Output Artifact**: [`outputs/raw_documents.jsonl`](file:///c:/--Files--/Programming/pipeline/outputs/raw_documents.jsonl) (891 MB, 96,714 records)
+- **Output Artifact**: [`outputs/stage-06/raw_documents.jsonl`](file:///c:/--Files--/Programming/pipeline/outputs/stage-06/raw_documents.jsonl) (891 MB, 96,714 records)
 
 ### Stage 07: Clean and Normalize Documents
 - **Script**: [`scripts/07_clean_documents.py`](file:///c:/--Files--/Programming/pipeline/scripts/07_clean_documents.py)
@@ -184,36 +184,36 @@ Provides string sanitization, administrative noise removal, and natural language
   - Normalizes punctuation, hyphens, and quotes.
   - Removes non-ASCII noise.
   - Filters out documents below `min_doc_length` (50 chars).
-- **Output Artifact**: [`outputs/clean_documents.jsonl`](file:///c:/--Files--/Programming/pipeline/outputs/clean_documents.jsonl) (807 MB, 96,714 records)
+- **Output Artifact**: [`outputs/stage-07/clean_documents.jsonl`](file:///c:/--Files--/Programming/pipeline/outputs/stage-07/clean_documents.jsonl) (807 MB, 96,714 records)
 
 ### Stage 08: Export Maritime Corpus & Manifest
 - **Script**: [`scripts/08_export_corpus.py`](file:///c:/--Files--/Programming/pipeline/scripts/08_export_corpus.py)
 - **Execution Command**: `python run_pipeline.py --stage 08`
 - **Core Logic**: Exports the corpus into distribution formats: plain text line export (`maritime_corpus.txt`), schema-preserving JSONL export (`maritime_corpus.jsonl`), and computes SHA-256 hashes and file sizes for `manifest.json`.
 - **Output Artifacts**:
-  - [`outputs/maritime_corpus.txt`](file:///c:/--Files--/Programming/pipeline/outputs/maritime_corpus.txt) (21 MB plain text export)
-  - [`outputs/maritime_corpus.jsonl`](file:///c:/--Files--/Programming/pipeline/outputs/maritime_corpus.jsonl) (796 MB)
-  - [`outputs/manifest.json`](file:///c:/--Files--/Programming/pipeline/outputs/manifest.json)
+  - [`outputs/stage-08/maritime_corpus.txt`](file:///c:/--Files--/Programming/pipeline/outputs/stage-08/maritime_corpus.txt) (21 MB plain text export)
+  - [`outputs/stage-08/maritime_corpus.jsonl`](file:///c:/--Files--/Programming/pipeline/outputs/stage-08/maritime_corpus.jsonl) (796 MB)
+  - [`outputs/stage-08/manifest.json`](file:///c:/--Files--/Programming/pipeline/outputs/stage-08/manifest.json)
 
 ### Stage 09: Calculate Corpus Statistics & Report
 - **Script**: [`scripts/09_statistics.py`](file:///c:/--Files--/Programming/pipeline/scripts/09_statistics.py)
 - **Execution Command**: `python run_pipeline.py --stage 09`
-- **Core Logic**: Computes corpus-wide statistical metrics: total tokens, unique vocabulary size, Shannon entropy, Type-Token Ratio (TTR), sentence length distributions, document character/word lengths, and writes [`outputs/corpus_quality_report.md`](file:///c:/--Files--/Programming/pipeline/outputs/corpus_quality_report.md).
+- **Core Logic**: Computes corpus-wide statistical metrics: total tokens, unique vocabulary size, Shannon entropy, Type-Token Ratio (TTR), sentence length distributions, document character/word lengths, and writes [`outputs/stage-09/corpus_quality_report.md`](file:///c:/--Files--/Programming/pipeline/outputs/stage-09/corpus_quality_report.md).
 - **Output Artifacts**:
-  - [`outputs/statistics.json`](file:///c:/--Files--/Programming/pipeline/outputs/statistics.json)
-  - [`outputs/corpus_quality_report.md`](file:///c:/--Files--/Programming/pipeline/outputs/corpus_quality_report.md)
+  - [`outputs/stage-09/statistics.json`](file:///c:/--Files--/Programming/pipeline/outputs/stage-09/statistics.json)
+  - [`outputs/stage-09/corpus_quality_report.md`](file:///c:/--Files--/Programming/pipeline/outputs/stage-09/corpus_quality_report.md)
 
 ### Stage 10: Extract Maritime Vocabulary
 - **Script**: [`scripts/10_extract_vocabulary.py`](file:///c:/--Files--/Programming/pipeline/scripts/10_extract_vocabulary.py)
 - **Execution Command**: `python run_pipeline.py --stage 10`
 - **Core Logic**: Applies Term Frequency-Inverse Document Frequency (TF-IDF) scoring and frequency analysis over `clean_documents.jsonl`. Filters out general English stopwords to isolate domain-specific maritime terms (vessels, navigation aids, weather phenomena, incident types).
-- **Output Artifact**: [`outputs/maritime_vocabulary.txt`](file:///c:/--Files--/Programming/pipeline/outputs/maritime_vocabulary.txt) (334 domain terms)
+- **Output Artifact**: [`outputs/stage-10/maritime_vocabulary.txt`](file:///c:/--Files--/Programming/pipeline/outputs/stage-10/maritime_vocabulary.txt) (334 domain terms)
 
 ### Stage 11: Multi-Format Corpus Representation Generation
 - **Script**: [`scripts/11_corpus_representations.py`](file:///c:/--Files--/Programming/pipeline/scripts/11_corpus_representations.py)
 - **Execution Command**: `python run_pipeline.py --stage 11`
 - **Core Logic**: Renders each occurrence record into **5 distinct multi-format representations**: Narrative prose, Key-Value pairs, Template sentence slots, JSON strings, and Mixed hybrid prose/key-value metadata.
-- **Output Directory**: [`outputs/corpus_representations/*.jsonl`](file:///c:/--Files--/Programming/pipeline/outputs/corpus_representations)
+- **Output Directory**: [`outputs/stage-11/corpus_representations/*.jsonl`](file:///c:/--Files--/Programming/pipeline/outputs/stage-11/corpus_representations)
 
 ### Stage 12: Semantic Importance Assessment & Knowledge Classification
 - **Script**: [`scripts/12_semantic_importance.py`](file:///c:/--Files--/Programming/pipeline/scripts/12_semantic_importance.py)
@@ -222,56 +222,56 @@ Provides string sanitization, administrative noise removal, and natural language
   $$\text{Score} = \text{Clip}\left( 100 \times \sum_{i=1}^9 w_i f_i - 0.10 \times \text{RedundancyPenalty}, \; 0, \; 100 \right)$$
   Classifies documents into knowledge tiers and extracts 6 quantile evaluation subsets (`high_knowledge`, `medium_knowledge`, `low_knowledge`, `balanced_knowledge`, `random_baseline`, `general_english_baseline`).
 - **Output Artifacts**:
-  - [`outputs/document_importance.jsonl`](file:///c:/--Files--/Programming/pipeline/outputs/document_importance.jsonl)
-  - [`outputs/importance_statistics.json`](file:///c:/--Files--/Programming/pipeline/outputs/importance_statistics.json)
-  - [`outputs/importance_distribution.png`](file:///c:/--Files--/Programming/pipeline/outputs/importance_distribution.png)
-  - Subsets in [`outputs/subsets/*.jsonl`](file:///c:/--Files--/Programming/pipeline/outputs/subsets)
+  - [`outputs/stage-12/document_importance.jsonl`](file:///c:/--Files--/Programming/pipeline/outputs/stage-12/document_importance.jsonl)
+  - [`outputs/stage-12/importance_statistics.json`](file:///c:/--Files--/Programming/pipeline/outputs/stage-12/importance_statistics.json)
+  - [`outputs/stage-12/importance_distribution.png`](file:///c:/--Files--/Programming/pipeline/outputs/stage-12/importance_distribution.png)
+  - Subsets in [`outputs/stage-12/subsets/*.jsonl`](file:///c:/--Files--/Programming/pipeline/outputs/stage-12/subsets)
 
 ### Stage 13: Multi-Model Tokenizer Benchmark Analysis
 - **Script**: [`scripts/13_tokenizer_analysis.py`](file:///c:/--Files--/Programming/pipeline/scripts/13_tokenizer_analysis.py)
 - **Execution Command**: `python run_pipeline.py --stage 13`
 - **Core Logic**: Evaluates 14 Hugging Face tokenizers across single-token vocabulary coverage, subword fragmentation rate, subwords-per-word fertility ratio, OOV rate, and throughput (tokens/sec).
 - **Output Artifacts**:
-  - [`outputs/tokenizer_analysis/tokenizer_comparison.csv`](file:///c:/--Files--/Programming/pipeline/outputs/tokenizer_analysis/tokenizer_comparison.csv)
-  - JSON reports in [`outputs/tokenizer_analysis/*.json`](file:///c:/--Files--/Programming/pipeline/outputs/tokenizer_analysis)
+  - [`outputs/stage-13/tokenizer_analysis/tokenizer_comparison.csv`](file:///c:/--Files--/Programming/pipeline/outputs/stage-13/tokenizer_analysis/tokenizer_comparison.csv)
+  - JSON reports in [`outputs/stage-13/tokenizer_analysis/*.json`](file:///c:/--Files--/Programming/pipeline/outputs/stage-13/tokenizer_analysis)
 
 ### Stage 14: Multi-Model Masked Language Model Benchmark Matrix
 - **Script**: [`scripts/14_mlm_evaluation.py`](file:///c:/--Files--/Programming/pipeline/scripts/14_mlm_evaluation.py)
 - **Execution Command**: `python run_pipeline.py --stage 14`
 - **Core Logic**: Executes a **175-run evaluation grid** (7 Representative Tokenizer Family Models $\times$ 5 Representations $\times$ 5 Knowledge Subsets). Masks tokens at 15% rate and computes Top-1, Top-5, Top-10 recall, MLM loss, rare term accuracy, and category recall across 6 subdomains. Caches individual evaluation runs to disk.
-- **Output Artifacts**: Cached JSONs in [`outputs/evaluations/cache/*.json`](file:///c:/--Files--/Programming/pipeline/outputs/evaluations/cache)
+- **Output Artifacts**: Cached JSONs in [`outputs/stage-14/evaluations/cache/*.json`](file:///c:/--Files--/Programming/pipeline/outputs/stage-14/evaluations/cache)
 
 ### Stage 15: Cross-Model Benchmarking & Computational Resource Profiling
 - **Script**: [`scripts/15_cross_model_benchmarking.py`](file:///c:/--Files--/Programming/pipeline/scripts/15_cross_model_benchmarking.py)
 - **Execution Command**: `python run_pipeline.py --stage 15`
 - **Core Logic**: Aggregates the 175 MLM evaluation runs, computes the composite **Maritime Understanding Index (MUI)** score, builds a ranked model leaderboard, and generates 4 publication-grade plots (`mlm_loss_comparison.png`, `model_leaderboard_ranks.png`, `maritime_accuracy_radar.png`, `tokenizer_fragmentation_heatmap.png`).
 - **Output Artifacts**:
-  - [`outputs/comparison.csv`](file:///c:/--Files--/Programming/pipeline/outputs/comparison.csv)
-  - [`outputs/leaderboard.csv`](file:///c:/--Files--/Programming/pipeline/outputs/leaderboard.csv)
-  - Visualization plots in [`outputs/visualizations/*.png`](file:///c:/--Files--/Programming/pipeline/outputs/visualizations)
+  - [`outputs/stage-15/comparison.csv`](file:///c:/--Files--/Programming/pipeline/outputs/stage-15/comparison.csv)
+  - [`outputs/stage-15/leaderboard.csv`](file:///c:/--Files--/Programming/pipeline/outputs/stage-15/leaderboard.csv)
+  - Visualization plots in [`outputs/stage-15/visualizations/*.png`](file:///c:/--Files--/Programming/pipeline/outputs/stage-15/visualizations)
 
 ### Stage 16: Statistical Significance Testing & Scoring Feature Ablation
 - **Script**: [`scripts/16_statistical_analysis.py`](file:///c:/--Files--/Programming/pipeline/scripts/16_statistical_analysis.py)
 - **Execution Command**: `python run_pipeline.py --stage 16`
 - **Core Logic**: Computes Bootstrap 95% Confidence Intervals (1,000 resamples), Paired $t$-tests, Wilcoxon signed-rank tests, parametric Cohen's $d$, and non-parametric Cliff's $\delta$ effect sizes. Executes feature ablation on the semantic scoring engine.
 - **Output Artifacts**:
-  - [`outputs/statistical_significance.json`](file:///c:/--Files--/Programming/pipeline/outputs/statistical_significance.json)
-  - [`outputs/ablation_study.json`](file:///c:/--Files--/Programming/pipeline/outputs/ablation_study.json)
+  - [`outputs/stage-16/statistical_significance.json`](file:///c:/--Files--/Programming/pipeline/outputs/stage-16/statistical_significance.json)
+  - [`outputs/stage-16/ablation_study.json`](file:///c:/--Files--/Programming/pipeline/outputs/stage-16/ablation_study.json)
 
 ### Stage 17: Objective Threshold Decision Engine & Research Report
 - **Script**: [`scripts/17_decision_engine.py`](file:///c:/--Files--/Programming/pipeline/scripts/17_decision_engine.py)
 - **Execution Command**: `python run_pipeline.py --stage 17`
 - **Core Logic**: Evaluates model benchmark metrics against decision threshold rules (`dapt_top1_threshold`, `gap_threshold`, `frag_threshold`, etc.). Recommends pretraining adaptation strategies (**Strategy A: DAPT**, **Strategy B: Scratch Training**, **Strategy C: Vocab-Extended DAPT**), performs threshold sensitivity analysis, and writes a 10-section research report.
 - **Output Artifacts**:
-  - [`outputs/experiment_metadata.json`](file:///c:/--Files--/Programming/pipeline/outputs/experiment_metadata.json)
-  - [`outputs/decision_summary.json`](file:///c:/--Files--/Programming/pipeline/outputs/decision_summary.json)
-  - [`outputs/benchmark_report.md`](file:///c:/--Files--/Programming/pipeline/outputs/benchmark_report.md)
+  - [`outputs/stage-17/experiment_metadata.json`](file:///c:/--Files--/Programming/pipeline/outputs/stage-17/experiment_metadata.json)
+  - [`outputs/stage-17/decision_summary.json`](file:///c:/--Files--/Programming/pipeline/outputs/stage-17/decision_summary.json)
+  - [`outputs/stage-17/benchmark_report.md`](file:///c:/--Files--/Programming/pipeline/outputs/stage-17/benchmark_report.md)
 
 ### Stage 18: Automated Corpus Quality Linting
 - **Script**: [`scripts/18_lint_corpus.py`](file:///c:/--Files--/Programming/pipeline/scripts/18_lint_corpus.py)
 - **Execution Command**: `python run_pipeline.py --stage 18`
 - **Core Logic**: Executes regex quality linting across all 96,714 clean documents. Checks for repeated adjacent words, malformed singular/plural phrasing, administrative leakage, awkward phrasing, and duplicated list items. Emits a PASS/WARN status.
-- **Output Artifact**: [`outputs/corpus_lint_report.json`](file:///c:/--Files--/Programming/pipeline/outputs/corpus_lint_report.json) (`Status: PASS`)
+- **Output Artifact**: [`outputs/stage-18/corpus_lint_report.json`](file:///c:/--Files--/Programming/pipeline/outputs/stage-18/corpus_lint_report.json) (`Status: PASS`)
 
 ---
 
@@ -415,37 +415,37 @@ else:
 
 | Output File Path | Description | Format | Downstream Usage |
 | :--- | :--- | :--- | :--- |
-| `outputs/dictionary_metadata.json` | Data dictionary column specs & enum translations | JSON Dict | Stage 04 attribute selection |
-| `outputs/profiling_report.json` | Raw CSV table statistics & missingness profiling | JSON Object | Stage 03 schema discovery |
-| `outputs/relationships.json` | Foreign key schema relationship graph | JSON Object | Stage 04 & Stage 05 merging |
-| `outputs/selected_semantic_columns.json` | Descriptive column selection metadata | JSON Dict | Stage 05 table merging |
-| `outputs/merged_records.jsonl` | Nested relational occurrence JSONL (346 MB) | JSONL | Stage 05a, 06, 11 |
-| `outputs/validation_report.json` | Data integrity validation report | JSON Object | Stage 09 corpus reporting |
-| `outputs/raw_documents.jsonl` | Template-generated text documents (891 MB) | JSONL | Stage 07 cleaning |
-| `outputs/clean_documents.jsonl` | Cleaned & normalized text documents (807 MB) | JSONL | Stage 08, 09, 10, 12, 13, 18 |
-| `outputs/maritime_corpus.txt` | Plain text line-by-line corpus (21 MB) | Text | Model pretraining |
-| `outputs/maritime_corpus.jsonl` | Final corpus export in JSONL (796 MB) | JSONL | Corpus distribution |
-| `outputs/manifest.json` | Checksums & manifest for distribution | JSON Object | Publication verification |
-| `outputs/statistics.json` | Token, vocabulary, & sentence statistics | JSON Object | Quality report generation |
-| `outputs/corpus_quality_report.md` | Executive Markdown summary of corpus stats | Markdown | Documentation report |
-| `outputs/maritime_vocabulary.txt` | Top domain-specific maritime terms (TF-IDF) | Text List | Stage 12 and Stage 13 |
-| `outputs/corpus_representations/*.jsonl` | 5 multi-format corpus representations | JSONL | Stage 14 MLM evaluation grid |
-| `outputs/document_importance.jsonl` | 9-feature semantic importance scores (43 MB) | JSONL | Stage 12 subset extraction |
-| `outputs/importance_statistics.json` | Score distribution quartiles & tier counts | JSON Object | Scoring engine analytics |
-| `outputs/importance_distribution.png` | Histogram plot of document importance scores | PNG Plot | Benchmark report figures |
-| `outputs/subsets/*.jsonl` | 6 knowledge-classified evaluation subsets | JSONL | Stage 14 MLM evaluation grid |
-| `outputs/tokenizer_analysis/tokenizer_comparison.csv` | Benchmarked tokenizer metrics across models | CSV Table | Stage 15 cross-model benchmarking |
-| `outputs/tokenizer_analysis/*.json` | Detailed per-model tokenizer analysis reports | JSON Object | Tokenizer research reports |
-| `outputs/evaluations/cache/*.json` | 175-run MLM matrix evaluation cached outputs | JSON Objects | Stage 15 cross-model benchmarking |
-| `outputs/comparison.csv` | Full 175-run MLM evaluation matrix results | CSV Table | Stage 15 & 16 statistical analysis |
-| `outputs/leaderboard.csv` | Ranked model leaderboard by MUI Score | CSV Table | Stage 17 Decision Engine |
-| `outputs/visualizations/*.png` | 4 publication-grade benchmark plots | PNG Plots | Benchmark report figures |
-| `outputs/statistical_significance.json` | Bootstrap CIs, t-test, Wilcoxon, Cohen's d, Cliff's delta | JSON Object | Stage 17 Decision Engine |
-| `outputs/ablation_study.json` | Scoring engine feature ablation impact | JSON Object | Stage 17 Benchmark Report |
-| `outputs/experiment_metadata.json` | System, hardware, PyTorch/Transformers params | JSON Object | Reproducibility metadata |
-| `outputs/decision_summary.json` | Objective decision engine strategy selection | JSON Object | Strategy output |
-| `outputs/benchmark_report.md` | 10-Section publication-grade benchmark report | Markdown | Master research report |
-| `outputs/corpus_lint_report.json` | Quality regex linting results (`PASS`/`WARN`) | JSON Object | Quality assurance report |
+| `outputs/stage-01/dictionary_metadata.json` | Data dictionary column specs & enum translations | JSON Dict | Stage 04 attribute selection |
+| `outputs/stage-02/profiling_report.json` | Raw CSV table statistics & missingness profiling | JSON Object | Stage 03 schema discovery |
+| `outputs/stage-03/relationships.json` | Foreign key schema relationship graph | JSON Object | Stage 04 & Stage 05 merging |
+| `outputs/stage-04/selected_semantic_columns.json` | Descriptive column selection metadata | JSON Dict | Stage 05 table merging |
+| `outputs/stage-05/merged_records.jsonl` | Nested relational occurrence JSONL (346 MB) | JSONL | Stage 05a, 06, 11 |
+| `outputs/stage-05a/validation_report.json` | Data integrity validation report | JSON Object | Stage 09 corpus reporting |
+| `outputs/stage-06/raw_documents.jsonl` | Template-generated text documents (891 MB) | JSONL | Stage 07 cleaning |
+| `outputs/stage-07/clean_documents.jsonl` | Cleaned & normalized text documents (807 MB) | JSONL | Stage 08, 09, 10, 12, 13, 18 |
+| `outputs/stage-08/maritime_corpus.txt` | Plain text line-by-line corpus (21 MB) | Text | Model pretraining |
+| `outputs/stage-08/maritime_corpus.jsonl` | Final corpus export in JSONL (796 MB) | JSONL | Corpus distribution |
+| `outputs/stage-08/manifest.json` | Checksums & manifest for distribution | JSON Object | Publication verification |
+| `outputs/stage-09/statistics.json` | Token, vocabulary, & sentence statistics | JSON Object | Quality report generation |
+| `outputs/stage-09/corpus_quality_report.md` | Executive Markdown summary of corpus stats | Markdown | Documentation report |
+| `outputs/stage-10/maritime_vocabulary.txt` | Top domain-specific maritime terms (TF-IDF) | Text List | Stage 12 and Stage 13 |
+| `outputs/stage-11/corpus_representations/*.jsonl` | 5 multi-format corpus representations | JSONL | Stage 14 MLM evaluation grid |
+| `outputs/stage-12/document_importance.jsonl` | 9-feature semantic importance scores (43 MB) | JSONL | Stage 12 subset extraction |
+| `outputs/stage-12/importance_statistics.json` | Score distribution quartiles & tier counts | JSON Object | Scoring engine analytics |
+| `outputs/stage-12/importance_distribution.png` | Histogram plot of document importance scores | PNG Plot | Benchmark report figures |
+| `outputs/stage-12/subsets/*.jsonl` | 6 knowledge-classified evaluation subsets | JSONL | Stage 14 MLM evaluation grid |
+| `outputs/stage-13/tokenizer_analysis/tokenizer_comparison.csv` | Benchmarked tokenizer metrics across models | CSV Table | Stage 15 cross-model benchmarking |
+| `outputs/stage-13/tokenizer_analysis/*.json` | Detailed per-model tokenizer analysis reports | JSON Object | Tokenizer research reports |
+| `outputs/stage-14/evaluations/cache/*.json` | 175-run MLM matrix evaluation cached outputs | JSON Objects | Stage 15 cross-model benchmarking |
+| `outputs/stage-15/comparison.csv` | Full 175-run MLM evaluation matrix results | CSV Table | Stage 15 & 16 statistical analysis |
+| `outputs/stage-15/leaderboard.csv` | Ranked model leaderboard by MUI Score | CSV Table | Stage 17 Decision Engine |
+| `outputs/stage-15/visualizations/*.png` | 4 publication-grade benchmark plots | PNG Plots | Benchmark report figures |
+| `outputs/stage-16/statistical_significance.json` | Bootstrap CIs, t-test, Wilcoxon, Cohen's d, Cliff's delta | JSON Object | Stage 17 Decision Engine |
+| `outputs/stage-16/ablation_study.json` | Scoring engine feature ablation impact | JSON Object | Stage 17 Benchmark Report |
+| `outputs/stage-17/experiment_metadata.json` | System, hardware, PyTorch/Transformers params | JSON Object | Reproducibility metadata |
+| `outputs/stage-17/decision_summary.json` | Objective decision engine strategy selection | JSON Object | Strategy output |
+| `outputs/stage-17/benchmark_report.md` | 10-Section publication-grade benchmark report | Markdown | Master research report |
+| `outputs/stage-18/corpus_lint_report.json` | Quality regex linting results (`PASS`/`WARN`) | JSON Object | Quality assurance report |
 
 ---
 
@@ -485,4 +485,4 @@ else:
    python run_pipeline.py --stage 07
    python run_pipeline.py --stage 09
    ```
-2. **Caching & Acceleration**: Stage 14 MLM matrix evaluations are cached under `outputs/evaluations/cache/`. To force a fresh evaluation run across models, delete the cache directory before executing Stage 14.
+2. **Caching & Acceleration**: Stage 14 MLM matrix evaluations are cached under `outputs/stage-14/evaluations/cache/`. To force a fresh evaluation run across models, delete the cache directory before executing Stage 14.

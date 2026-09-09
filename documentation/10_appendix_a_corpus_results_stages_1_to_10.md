@@ -68,7 +68,7 @@ graph TD
 
 ## 5. Stage 05 & 05a: Merge Reconciliation & Validation Integrity
 
-### Table 5.1: Merge Reconciliation Summary (`outputs/merge_reconciliation_report.json`)
+### Table 5.1: Merge Reconciliation Summary (`outputs/stage-05/merge_reconciliation_report.json`)
 | Metric Category | Metric Name | Value |
 | :--- | :--- | :--- |
 | **Raw Source Rows** | `MDOTW_VW_OCCURRENCE_PUBLIC` | 42,150 |
@@ -89,7 +89,7 @@ graph TD
 
 ---
 
-### Table 5.2: Validation Integrity Summary (`outputs/validation_report.json`)
+### Table 5.2: Validation Integrity Summary (`outputs/stage-05a/validation_report.json`)
 | Metric Name | Value | Status |
 | :--- | :--- | :--- |
 | **Validation Status** | `PASS` | ✅ No fatal integrity errors |
@@ -124,7 +124,7 @@ graph TD
 
 ## 7. Stage 08 & 09: Final Corpus Metrics & Statistical Analysis
 
-### Table 7.1: Final Corpus Volume & Information Density (`outputs/statistics.json`)
+### Table 7.1: Final Corpus Volume & Information Density (`outputs/stage-09/statistics.json`)
 | Metric Name | Value | Description / Benchmark |
 | :--- | :--- | :--- |
 | **Total Documents** | **42,150** | Unique sanitized narrative documents |

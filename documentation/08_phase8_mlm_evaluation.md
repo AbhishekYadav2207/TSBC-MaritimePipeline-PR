@@ -13,9 +13,9 @@ Script involved in Phase 8:
 ```mermaid
 flowchart TD
     subgraph Inputs ["Input Reps, Subsets & Models"]
-        RepsDir["outputs/corpus_representations/*.jsonl (5 Reps)"]
-        SubsetsDir["outputs/subsets/*.jsonl (5 Subsets)"]
-        VocabTXT["outputs/maritime_vocabulary.txt"]
+        RepsDir["outputs/stage-11/corpus_representations/*.jsonl (5 Reps)"]
+        SubsetsDir["outputs/stage-12/subsets/*.jsonl (5 Subsets)"]
+        VocabTXT["outputs/stage-10/maritime_vocabulary.txt"]
         HFModels["7 Representative HF Models (BERT, Bio, Legal, Sci, PubMed, RoBERTa, ModernBERT)"]
     end
 
@@ -28,9 +28,9 @@ flowchart TD
     end
 
     subgraph Outputs ["Evaluation Cache & Reports"]
-        CacheFolder["outputs/evaluations/cache/*.json (350 Cache Files)"]
-        ModelSummaries["outputs/evaluations/*.json"]
-        BertLegacy["outputs/bert_mlm_evaluation.json"]
+        CacheFolder["outputs/stage-14/evaluations/cache/*.json (350 Cache Files)"]
+        ModelSummaries["outputs/stage-14/evaluations/*.json"]
+        BertLegacy["outputs/stage-14/bert_mlm_evaluation.json"]
     end
 
     RepsDir & SubsetsDir & VocabTXT & HFModels --> S14
@@ -156,12 +156,12 @@ if cache_path.exists():
 
 ---
 
-### 3.3 Output Schema Specification: `outputs/evaluations/cache/<clean_model>__<rep>__<sub>.json`
+### 3.3 Output Schema Specification: `outputs/stage-14/evaluations/cache/<clean_model>__<rep>__<sub>.json`
 
 - **Created By**: `scripts/14_mlm_evaluation.py`
 - **Consumed By**: `scripts/15_cross_model_benchmarking.py`
 - **Purpose**: Stores complete evaluation metrics for 1 specific matrix run ($M_{\text{model}}, R_{\text{rep}}, S_{\text{subset}}$).
-- **Storage Location**: `outputs/evaluations/cache/`
+- **Storage Location**: `outputs/stage-14/evaluations/cache/`
 - **Format**: JSON UTF-8
 
 #### JSON Schema
@@ -231,7 +231,7 @@ if cache_path.exists():
    - `get_term_category` (adding new category mapping logic).
 
 4. **Tightly Coupled Functions**:
-   - `14_mlm_evaluation.py` expects representation files under `outputs/corpus_representations/` and subset files under `outputs/subsets/`.
+   - `14_mlm_evaluation.py` expects representation files under `outputs/stage-11/corpus_representations/` and subset files under `outputs/stage-12/subsets/`.
 
 5. **Recommended Extension Strategy**:
    - To add a new evaluation metric (e.g., Perplexity), calculate $\exp(\mathcal{L})$ inside `evaluate_model_on_docs` and append it to `general_tokens_summary` before exporting cache JSON files.

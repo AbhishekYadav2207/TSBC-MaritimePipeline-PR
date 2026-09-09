@@ -32,10 +32,10 @@ flowchart TD
     end
 
     subgraph Outputs ["Generated Artifacts"]
-        DictMeta["outputs/dictionary_metadata.json"]
-        ProfRep["outputs/profiling_report.json"]
-        RelJSON["outputs/relationships.json"]
-        SelCols["outputs/selected_semantic_columns.json"]
+        DictMeta["outputs/stage-01/dictionary_metadata.json"]
+        ProfRep["outputs/stage-02/profiling_report.json"]
+        RelJSON["outputs/stage-03/relationships.json"]
+        SelCols["outputs/stage-04/selected_semantic_columns.json"]
     end
 
     DictCSV --> S01
@@ -334,12 +334,12 @@ except Exception:
 
 ---
 
-### 3.2 Output Schema Specification: `outputs/dictionary_metadata.json`
+### 3.2 Output Schema Specification: `outputs/stage-01/dictionary_metadata.json`
 
 - **Created By**: `scripts/01_parse_dictionary.py`
 - **Consumed By**: `scripts/04_select_semantic_columns.py`, `scripts/10_extract_vocabulary.py`
 - **Purpose**: Stores centralized field definitions, categories, boolean flags, and bidirectional ID-to-Display column mappings for all tables.
-- **Storage Location**: `outputs/dictionary_metadata.json`
+- **Storage Location**: `outputs/stage-01/dictionary_metadata.json`
 - **Format**: JSON UTF-8
 
 #### JSON Schema
@@ -475,12 +475,12 @@ except Exception:
 
 ---
 
-### 4.2 Output Schema Specification: `outputs/profiling_report.json`
+### 4.2 Output Schema Specification: `outputs/stage-02/profiling_report.json`
 
 - **Created By**: `scripts/02_profile_dataset.py`
 - **Consumed By**: `scripts/03_discover_relationships.py`
 - **Purpose**: Stores statistical data profiling metrics, primary key candidates, and inferred foreign keys for all tables.
-- **Storage Location**: `outputs/profiling_report.json`
+- **Storage Location**: `outputs/stage-02/profiling_report.json`
 - **Format**: JSON UTF-8
 
 #### JSON Schema
@@ -580,12 +580,12 @@ key_parents[key] = {
 
 ---
 
-### 5.3 Output Schema Specification: `outputs/relationships.json`
+### 5.3 Output Schema Specification: `outputs/stage-03/relationships.json`
 
 - **Created By**: `scripts/03_discover_relationships.py`
 - **Consumed By**: Data pipeline documentation and validation checks.
 - **Purpose**: Defines table hierarchy, join keys, and directed graph structure for database merging.
-- **Storage Location**: `outputs/relationships.json`
+- **Storage Location**: `outputs/stage-03/relationships.json`
 - **Format**: JSON UTF-8
 
 #### JSON Schema
@@ -669,12 +669,12 @@ key_parents[key] = {
 
 ---
 
-### 6.2 Output Schema Specification: `outputs/selected_semantic_columns.json`
+### 6.2 Output Schema Specification: `outputs/stage-04/selected_semantic_columns.json`
 
 - **Created By**: `scripts/04_select_semantic_columns.py`
 - **Consumed By**: `scripts/05_merge_tables.py`
 - **Purpose**: Specifies exact column subsets to read from raw CSV files during table merging.
-- **Storage Location**: `outputs/selected_semantic_columns.json`
+- **Storage Location**: `outputs/stage-04/selected_semantic_columns.json`
 - **Format**: JSON UTF-8
 
 #### JSON Schema

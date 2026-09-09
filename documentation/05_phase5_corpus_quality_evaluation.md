@@ -14,10 +14,10 @@ Scripts involved in Phase 5:
 ```mermaid
 flowchart TD
     subgraph Inputs ["Input Artifacts"]
-        CleanDocs["outputs/clean_documents.jsonl"]
-        DictMeta["outputs/dictionary_metadata.json"]
-        ValJSON["outputs/validation_report.json"]
-        ReconJSON["outputs/merge_reconciliation_report.json"]
+        CleanDocs["outputs/stage-07/clean_documents.jsonl"]
+        DictMeta["outputs/stage-01/dictionary_metadata.json"]
+        ValJSON["outputs/stage-05a/validation_report.json"]
+        ReconJSON["outputs/stage-05/merge_reconciliation_report.json"]
     end
 
     subgraph Processing ["Phase 5 Processing Engine"]
@@ -30,9 +30,9 @@ flowchart TD
     end
 
     subgraph Outputs ["Generated Quality Artifacts"]
-        StatsJSON["outputs/statistics.json"]
-        QualityMD["outputs/corpus_quality_report.md"]
-        VocabTXT["outputs/maritime_vocabulary.txt"]
+        StatsJSON["outputs/stage-09/statistics.json"]
+        QualityMD["outputs/stage-09/corpus_quality_report.md"]
+        VocabTXT["outputs/stage-10/maritime_vocabulary.txt"]
     end
 
     CleanDocs & ValJSON & ReconJSON --> S09
@@ -246,11 +246,11 @@ for idx_list in buckets_lsh.values():
 
 ### 2.3 Output Schema Specifications
 
-#### 1. `outputs/statistics.json`
+#### 1. `outputs/stage-09/statistics.json`
 - **Created By**: `scripts/09_statistics.py`
 - **Consumed By**: Data quality dashboards, `09_phase9_benchmarking_decision_engine_and_final_reports.md`.
 - **Purpose**: Stores structured numerical metrics for corpus volume, MID, length percentiles, vocabulary size, entropy, duplication ratios, and top domain N-grams.
-- **Storage Location**: `outputs/statistics.json`
+- **Storage Location**: `outputs/stage-09/statistics.json`
 - **Format**: JSON UTF-8
 
 ##### JSON Schema
@@ -285,11 +285,11 @@ for idx_list in buckets_lsh.values():
 
 ---
 
-#### 2. `outputs/corpus_quality_report.md`
+#### 2. `outputs/stage-09/corpus_quality_report.md`
 - **Created By**: `scripts/09_statistics.py`
 - **Consumed By**: Publication reports, research documentation.
 - **Purpose**: Provides a 10-section human-readable quality report evaluating the corpus across scale, MID, linguistic diversity, near-duplicates, BERT compatibility, and pretraining readiness.
-- **Storage Location**: `outputs/corpus_quality_report.md`
+- **Storage Location**: `outputs/stage-09/corpus_quality_report.md`
 - **Format**: Markdown UTF-8
 
 ---
@@ -302,8 +302,8 @@ for idx_list in buckets_lsh.values():
 - **Purpose**: Extracts single-word maritime terms and multi-word domain phrases from clean documents using regex collocations and data dictionary cross-referencing.
 - **Why this function exists**: To build a domain vocabulary file (`maritime_vocabulary.txt`) used by Stage 13 (Tokenizer Analysis) and Stage 14 (MLM Evaluation) to measure tokenizer subword fragmentation and masked language model domain recall.
 - **Where it is called**: Standalone script execution.
-- **Inputs**: `outputs/clean_documents.jsonl`, `outputs/dictionary_metadata.json`.
-- **Outputs**: Vocabulary file `outputs/maritime_vocabulary.txt`.
+- **Inputs**: `outputs/stage-07/clean_documents.jsonl`, `outputs/stage-01/dictionary_metadata.json`.
+- **Outputs**: Vocabulary file `outputs/stage-10/maritime_vocabulary.txt`.
 - **Parameters**: None.
 - **Return values**: None.
 - **Internal algorithm**:
@@ -317,7 +317,7 @@ for idx_list in buckets_lsh.values():
   8. Filter single words: retain word if it matches a maritime stem or exists in `dict_terms` with frequency $\ge 5$.
   9. Sort multi-word phrases by frequency descending (top 50).
   10. Sort single maritime terms by frequency descending (top 300).
-  11. Export combined vocabulary to `outputs/maritime_vocabulary.txt`.
+  11. Export combined vocabulary to `outputs/stage-10/maritime_vocabulary.txt`.
 - **Step-by-step execution**:
   ```python
   for pat in MULTIWORD_PATTERNS:
@@ -339,12 +339,12 @@ for idx_list in buckets_lsh.values():
 
 ---
 
-### 3.2 Output Schema Specification: `outputs/maritime_vocabulary.txt`
+### 3.2 Output Schema Specification: `outputs/stage-10/maritime_vocabulary.txt`
 
 - **Created By**: `scripts/10_extract_vocabulary.py`
 - **Consumed By**: `scripts/13_tokenizer_analysis.py`, `scripts/14_mlm_evaluation.py`
 - **Purpose**: Stores top single-word and multi-word maritime domain terms for subword fragmentation and MLM evaluation benchmarks.
-- **Storage Location**: `outputs/maritime_vocabulary.txt`
+- **Storage Location**: `outputs/stage-10/maritime_vocabulary.txt`
 - **Format**: Plain Text UTF-8 (one term per line)
 
 ##### Example File Snippet

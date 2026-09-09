@@ -21,8 +21,8 @@ Validate the domain-adaptive pretrained `MaritimeBERT-v1` against general-domain
 
 ## 4. Validation Artifacts
 - `dapt/outputs/data/val.txt`: Held-out validation corpus split.
-- `outputs/clean_documents.jsonl`: Clean corpus documents for tokenizer sequence length distribution profiling.
-- `outputs/maritime_vocabulary.txt`: Maritime technical vocabulary terms for subword fragmentation profiling.
+- `outputs/stage-07/clean_documents.jsonl`: Clean corpus documents for tokenizer sequence length distribution profiling.
+- `outputs/stage-10/maritime_vocabulary.txt`: Maritime technical vocabulary terms for subword fragmentation profiling.
 
 ## 5. Experimental Configuration
 - Random Seed: `42`

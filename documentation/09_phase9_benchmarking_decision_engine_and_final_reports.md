@@ -16,9 +16,9 @@ Scripts involved in Phase 9:
 ```mermaid
 flowchart TD
     subgraph Inputs ["Input Artifacts"]
-        CacheFolder["outputs/evaluations/cache/*.json (350 Runs)"]
-        TokFolder["outputs/tokenizer_analysis/*.json"]
-        CleanDocs["outputs/clean_documents.jsonl"]
+        CacheFolder["outputs/stage-14/evaluations/cache/*.json (350 Runs)"]
+        TokFolder["outputs/stage-13/tokenizer_analysis/*.json"]
+        CleanDocs["outputs/stage-07/clean_documents.jsonl"]
     end
 
     subgraph Processing ["Phase 9 Execution Engine"]
@@ -39,15 +39,15 @@ flowchart TD
     end
 
     subgraph Outputs ["Final Benchmark & Decision Artifacts"]
-        CompCSV["outputs/comparison.csv"]
-        LeaderboardCSV["outputs/leaderboard.csv"]
-        Plots["outputs/visualizations/*.png"]
-        StatJSON["outputs/statistical_significance.json"]
-        AblationJSON["outputs/ablation_study.json"]
-        ReproJSON["outputs/experiment_metadata.json"]
-        DecisionJSON["outputs/decision_summary.json"]
-        BenchmarkMD["outputs/benchmark_report.md"]
-        LintJSON["outputs/corpus_lint_report.json"]
+        CompCSV["outputs/stage-15/comparison.csv"]
+        LeaderboardCSV["outputs/stage-15/leaderboard.csv"]
+        Plots["outputs/stage-15/visualizations/*.png"]
+        StatJSON["outputs/stage-16/statistical_significance.json"]
+        AblationJSON["outputs/stage-16/ablation_study.json"]
+        ReproJSON["outputs/stage-17/experiment_metadata.json"]
+        DecisionJSON["outputs/stage-17/decision_summary.json"]
+        BenchmarkMD["outputs/stage-17/benchmark_report.md"]
+        LintJSON["outputs/stage-18/corpus_lint_report.json"]
     end
 
     CacheFolder & TokFolder --> S15
@@ -80,13 +80,13 @@ flowchart TD
 - **Purpose**: Loads all 350 matrix run cache files, aggregates model-level metrics, computes the **Maritime Understanding Index (MUI)** composite score, calculates 95% Confidence Intervals, exports `comparison.csv` and `leaderboard.csv`, and generates 4 publication-grade PNG visualization figures.
 - **Why this function exists**: Synthesizes multi-dimensional evaluation results into an objective, single-metric ranking score and publication plots.
 - **Where it is called**: Standalone script execution.
-- **Inputs**: `outputs/evaluations/cache/*.json`, `outputs/tokenizer_analysis/*.json`.
-- **Outputs**: `outputs/comparison.csv`, `outputs/leaderboard.csv`, and 4 PNG plots in `outputs/visualizations/`.
+- **Inputs**: `outputs/stage-14/evaluations/cache/*.json`, `outputs/stage-13/tokenizer_analysis/*.json`.
+- **Outputs**: `outputs/stage-15/comparison.csv`, `outputs/stage-15/leaderboard.csv`, and 4 PNG plots in `outputs/stage-15/visualizations/`.
 - **Parameters**: None.
 - **Return values**: None.
 - **Internal Algorithm & Mathematical Formulations**:
   1. Load all 350 matrix evaluation JSON cache files into a pandas DataFrame (`df_mlm`).
-  2. Export raw matrix data to `outputs/comparison.csv`.
+  2. Export raw matrix data to `outputs/stage-15/comparison.csv`.
   3. Group data by `model_name`.
   4. **Maritime Understanding Index (MUI)** composite score formulation:
      $$\hat{\mathcal{L}} = \frac{\bar{\mathcal{L}}}{\mathcal{L}_{\text{max}}}, \quad \text{Balance} = 1.0 - \sigma(\text{Category Recalls})$$
@@ -95,7 +95,7 @@ flowchart TD
      $$\text{SE} = \frac{\sigma_{\text{top1}}}{\sqrt{N_{\text{runs}}}}, \quad \text{CI}_{95\%} = \text{SE} \times 1.96$$
   6. Compute computational metrics:
      $$\text{Latency (ms)} = \left(\frac{t_{\text{eval}}}{200}\right) \times 1000, \quad \text{Throughput} = \frac{1000}{\text{Latency}}$$
-  7. Sort models by MUI score descending and export `outputs/leaderboard.csv`.
+  7. Sort models by MUI score descending and export `outputs/stage-15/leaderboard.csv`.
   8. **Generate 4 Publication Figures**:
      - `mlm_loss_comparison.png`: Horizontal bar chart of MLM loss.
      - `model_leaderboard_ranks.png`: Bar chart of Top-1 accuracy with 95% CI error bars.
@@ -107,7 +107,7 @@ flowchart TD
   # Compute MUI score, CIs, latency, throughput...
   df_lb = pd.DataFrame(leaderboard_rows)
   df_lb.sort_values(by="mui_score", ascending=False, inplace=True)
-  df_lb.to_csv(output_dir / "leaderboard.csv", index=False)
+  df_lb.to_csv(stage_dir / "leaderboard.csv", index=False)
   # Generate Matplotlib / Seaborn visualization plots...
   ```
 - **Edge cases**: Missing tokenizer JSON entries fall back to default profile estimates.
@@ -123,11 +123,11 @@ flowchart TD
 
 ### 2.2 Output Schema Specifications
 
-#### 1. `outputs/leaderboard.csv`
+#### 1. `outputs/stage-15/leaderboard.csv`
 - **Created By**: `scripts/15_cross_model_benchmarking.py`
 - **Consumed By**: `scripts/17_decision_engine.py`, `09_phase9_benchmarking_decision_engine_and_final_reports.md`.
 - **Purpose**: Ranked leaderboard of all 14 models ordered by MUI composite score descending.
-- **Storage Location**: `outputs/leaderboard.csv`
+- **Storage Location**: `outputs/stage-15/leaderboard.csv`
 - **Format**: CSV UTF-8
 
 ##### Schema Columns
@@ -232,11 +232,11 @@ flowchart TD
 
 ### 3.2 Output Schema Specifications
 
-#### 1. `outputs/statistical_significance.json`
+#### 1. `outputs/stage-16/statistical_significance.json`
 - **Created By**: `scripts/16_statistical_analysis.py`
 - **Consumed By**: `11_appendix_b_model_evaluation_results_stages_11_to_18.md`, research papers.
 - **Purpose**: Stores Bootstrap 95% CIs and pairwise statistical test metrics (t-statistic, Wilcoxon $p$-value, Cohen's $d$, Cliff's Delta) for all model comparisons.
-- **Storage Location**: `outputs/statistical_significance.json`
+- **Storage Location**: `outputs/stage-16/statistical_significance.json`
 - **Format**: JSON UTF-8
 
 ##### Example Payload Snippet
@@ -261,11 +261,11 @@ flowchart TD
 
 ---
 
-#### 2. `outputs/ablation_study.json`
+#### 2. `outputs/stage-16/ablation_study.json`
 - **Created By**: `scripts/16_statistical_analysis.py`
 - **Consumed By**: `11_appendix_b_model_evaluation_results_stages_11_to_18.md`.
 - **Purpose**: Reports the quantitative impact of removing individual scoring features from the Stage 12 Semantic Importance Engine.
-- **Storage Location**: `outputs/ablation_study.json`
+- **Storage Location**: `outputs/stage-16/ablation_study.json`
 - **Format**: JSON UTF-8
 
 ---
@@ -318,29 +318,29 @@ graph TD
 
 ### 4.2 Output Schema Specifications
 
-#### 1. `outputs/experiment_metadata.json`
+#### 1. `outputs/stage-17/experiment_metadata.json`
 - **Created By**: `scripts/17_decision_engine.py`
 - **Consumed By**: Reproducibility audits, research report appendices.
 - **Purpose**: Captures execution timestamp, Python version, OS platform, PyTorch/Transformers versions, CUDA availability, GPU device name, and random seed.
-- **Storage Location**: `outputs/experiment_metadata.json`
+- **Storage Location**: `outputs/stage-17/experiment_metadata.json`
 - **Format**: JSON UTF-8
 
 ---
 
-#### 2. `outputs/decision_summary.json`
+#### 2. `outputs/stage-17/decision_summary.json`
 - **Created By**: `scripts/17_decision_engine.py`
 - **Consumed By**: `11_appendix_b_model_evaluation_results_stages_11_to_18.md`, executive summaries.
 - **Purpose**: Reports the top model recommendation, rationale, active thresholds, and sensitivity matrix (-10% to +10% threshold shifts).
-- **Storage Location**: `outputs/decision_summary.json`
+- **Storage Location**: `outputs/stage-17/decision_summary.json`
 - **Format**: JSON UTF-8
 
 ---
 
-#### 3. `outputs/benchmark_report.md`
+#### 3. `outputs/stage-17/benchmark_report.md`
 - **Created By**: `scripts/17_decision_engine.py`
 - **Consumed By**: Publication benchmark reports, executive summaries.
 - **Purpose**: Generates a 10-section publication-grade Markdown benchmark report summarizing all findings, leaderboards, statistical tests, decision rationales, and future work.
-- **Storage Location**: `outputs/benchmark_report.md`
+- **Storage Location**: `outputs/stage-17/benchmark_report.md`
 - **Format**: Markdown UTF-8
 
 ---
@@ -353,8 +353,8 @@ graph TD
 - **Purpose**: Runs an automated regex quality linter across `clean_documents.jsonl`, detecting repeated adjacent words, malformed singular/plural agreement, administrative noise leakage, awkward phrasing, and duplicated list items.
 - **Why this function exists**: To enforce zero-defect quality assurance on the final corpus before deployment to language model pretraining.
 - **Where it is called**: Standalone script execution.
-- **Inputs**: `outputs/clean_documents.jsonl`.
-- **Outputs**: Lint report file `outputs/corpus_lint_report.json`.
+- **Inputs**: `outputs/stage-07/clean_documents.jsonl`.
+- **Outputs**: Lint report file `outputs/stage-18/corpus_lint_report.json`.
 - **Parameters**: None.
 - **Return values**: None.
 - **Internal Algorithm & Rules**:
@@ -369,7 +369,7 @@ graph TD
   4. Store issue counts and up to 5 sample violation snippets per rule.
   5. Compute overall violation rate: $\text{Rate} = \frac{\text{Total Violations}}{\text{Total Docs}}$.
   6. Assign quality status: `"PASS"` if $\text{Rate} < 0.005$ (0.5%), else `"WARN"`.
-  7. Export `outputs/corpus_lint_report.json`.
+  7. Export `outputs/stage-18/corpus_lint_report.json`.
 - **Step-by-step execution**:
   ```python
   for rule_name, pattern in compiled_rules.items():
@@ -390,12 +390,12 @@ graph TD
 
 ---
 
-### 5.2 Output Schema Specification: `outputs/corpus_lint_report.json`
+### 5.2 Output Schema Specification: `outputs/stage-18/corpus_lint_report.json`
 
 - **Created By**: `scripts/18_lint_corpus.py`
 - **Consumed By**: Data quality auditing, continuous integration pipelines.
 - **Purpose**: Reports total violations, rule-by-rule issue counts, violation rate percentage, and quality pass/fail status (`PASS` or `WARN`).
-- **Storage Location**: `outputs/corpus_lint_report.json`
+- **Storage Location**: `outputs/stage-18/corpus_lint_report.json`
 - **Format**: JSON UTF-8
 
 ##### Example Payload Snippet
@@ -437,7 +437,7 @@ graph TD
    - `LINT_RULES` in `18_lint_corpus.py` (adding new quality assurance regexes).
 
 4. **Tightly Coupled Functions**:
-   - `15_cross_model_benchmarking.py` expects cache files adhering to Stage 14 JSON schema under `outputs/evaluations/cache/`.
+   - `15_cross_model_benchmarking.py` expects cache files adhering to Stage 14 JSON schema under `outputs/stage-14/evaluations/cache/`.
 
 5. **Recommended Extension Strategy**:
    - When deploying to continuous integration (CI) environments, incorporate `18_lint_corpus.py` as an automated pull-request quality gate.

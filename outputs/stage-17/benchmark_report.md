@@ -89,4 +89,4 @@ Using configurable decision criteria, the decision engine evaluated the empirica
 ## 10. Final Recommendation & Future Work
 1. **Proceed with Strategy**: Implement **Strategy B: Train Domain-Specific MaritimeBERT Model From Scratch**.
 2. **Subdomain Focus**: Prioritize navigation equipment and machinery failure subdomains during domain-adaptive pretraining.
-3. **Reproducibility**: Environment parameters and model seeds recorded in `outputs/experiment_metadata.json`.
+3. **Reproducibility**: Environment parameters and model seeds recorded in `outputs/stage-17/experiment_metadata.json`.

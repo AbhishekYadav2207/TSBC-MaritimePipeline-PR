@@ -15,7 +15,7 @@ Scripts involved in Phase 2:
 ```mermaid
 flowchart TD
     subgraph Inputs ["Input Artifacts & CSVs"]
-        SelCols["outputs/selected_semantic_columns.json"]
+        SelCols["outputs/stage-04/selected_semantic_columns.json"]
         OccCSV["data/MDOTW_VW_OCCURRENCE_PUBLIC.csv"]
         VesselCSV["data/MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC.csv"]
         InjCSV["data/MDOTW_VW_INJURIES_PUBLIC.csv"]
@@ -31,9 +31,9 @@ flowchart TD
     end
 
     subgraph Outputs ["Phase 2 Output Artifacts"]
-        MergedJSONL["outputs/merged_records.jsonl"]
-        ReconJSON["outputs/merge_reconciliation_report.json"]
-        ValJSON["outputs/validation_report.json"]
+        MergedJSONL["outputs/stage-05/merged_records.jsonl"]
+        ReconJSON["outputs/stage-05/merge_reconciliation_report.json"]
+        ValJSON["outputs/stage-05a/validation_report.json"]
     end
 
     SelCols & OccCSV & VesselCSV & InjCSV & LsaCSV & NavCSV & RecCSV --> S05
@@ -358,11 +358,11 @@ for _, row in df_inj.iterrows():
 
 ### 3.3 Output Schema Specifications
 
-#### 1. `outputs/merged_records.jsonl`
+#### 1. `outputs/stage-05/merged_records.jsonl`
 - **Created By**: `scripts/05_merge_tables.py`
 - **Consumed By**: `scripts/05a_validate_records.py`, `scripts/06_generate_documents.py`
 - **Purpose**: Stores fully merged, hierarchy-preserved JSONL objects for all occurrences.
-- **Storage Location**: `outputs/merged_records.jsonl`
+- **Storage Location**: `outputs/stage-05/merged_records.jsonl`
 - **Format**: JSON Lines UTF-8
 
 ##### Example Payload Snippet
@@ -401,11 +401,11 @@ for _, row in df_inj.iterrows():
 
 ---
 
-#### 2. `outputs/merge_reconciliation_report.json`
+#### 2. `outputs/stage-05/merge_reconciliation_report.json`
 - **Created By**: `scripts/05_merge_tables.py`
 - **Consumed By**: `scripts/09_statistics.py`, data auditing reports.
 - **Purpose**: Reports raw source row counts, retained merged unit counts, matched vs. orphan child records, Cartesian join verification, and placeholder synthesis metrics.
-- **Storage Location**: `outputs/merge_reconciliation_report.json`
+- **Storage Location**: `outputs/stage-05/merge_reconciliation_report.json`
 - **Format**: JSON UTF-8
 
 ##### JSON Schema
@@ -518,12 +518,12 @@ for _, row in df_inj.iterrows():
 
 ---
 
-### 4.2 Output Schema Specification: `outputs/validation_report.json`
+### 4.2 Output Schema Specification: `outputs/stage-05a/validation_report.json`
 
 - **Created By**: `scripts/05a_validate_records.py`
 - **Consumed By**: `scripts/09_statistics.py`, quality auditing reports.
 - **Purpose**: Reports missing primary keys, orphan counts, duplicate IDs, value plausibility warnings, and overall validation status (`PASS` or `WARNING`).
-- **Storage Location**: `outputs/validation_report.json`
+- **Storage Location**: `outputs/stage-05a/validation_report.json`
 - **Format**: JSON UTF-8
 
 #### JSON Schema

@@ -2,7 +2,7 @@
 
 ## Executive Overview
 
-Phase 14 presents the complete design, implementation, execution, and empirical evaluation of the **Domain-Adaptive Pre-Training (DAPT)** subsystem for adapting modern transformer foundation models—specifically `answerdotai/ModernBERT-base`—to specialized maritime occurrence narratives. This subsystem operates under a strict **Frozen Upstream Corpus Contract**, treating `outputs/maritime_corpus.txt` as an immutable, hash-locked input artifact.
+Phase 14 presents the complete design, implementation, execution, and empirical evaluation of the **Domain-Adaptive Pre-Training (DAPT)** subsystem for adapting modern transformer foundation models—specifically `answerdotai/ModernBERT-base`—to specialized maritime occurrence narratives. This subsystem operates under a strict **Frozen Upstream Corpus Contract**, treating `outputs/stage-08/maritime_corpus.txt` as an immutable, hash-locked input artifact.
 
 Across 855 training steps (3 epochs over 87,043 training documents packed into sequences of length 512), DAPT achieved a **61.3% reduction in MLM Cross-Entropy Loss** ($1.5271 \rightarrow 0.5912$) and a **60.8% reduction in Perplexity** ($4.6050 \rightarrow 1.8062$) compared to the untouched ModernBERT baseline control.
 
@@ -12,7 +12,7 @@ Across 855 training steps (3 epochs over 87,043 training documents packed into s
 
 - **Subsystem Identifier**: `MaritimeBERT-v1` DAPT Pipeline
 - **Base Architecture**: `answerdotai/ModernBERT-base` (149M parameters, 50,280 vocabulary size)
-- **Input Corpus**: `outputs/maritime_corpus.txt` (96,715 documents, 3,372,882 words, SHA-256: `b4968819f8b41baa3ee2e2b0e22d103b5d86f5935275a377db51d09ecde3b302`)
+- **Input Corpus**: `outputs/stage-08/maritime_corpus.txt` (96,715 documents, 3,372,882 words, SHA-256: `b4968819f8b41baa3ee2e2b0e22d103b5d86f5935275a377db51d09ecde3b302`)
 - **Dataset Partitioning**: Deterministic 90/5/5 split (87,043 train / 4,835 validation / 4,837 test documents)
 - **Pre-Training Objective**: 15% Bernoulli Masked Language Modeling (MLM) with tokenizer-aware sequence packing ($L_{\max} = 512$)
 - **Key Empirical Results**:
@@ -42,7 +42,7 @@ The DAPT subsystem is organized as a modular, self-contained Python package resi
 ```mermaid
 flowchart TD
     subgraph Inputs ["Frozen Upstream Input"]
-        CorpusFile["outputs/maritime_corpus.txt (Read-Only)"]
+        CorpusFile["outputs/stage-08/maritime_corpus.txt (Read-Only)"]
     end
 
     subgraph HashLock ["1. Ingestion & Cryptographic Verification"]
@@ -104,21 +104,21 @@ To prevent data contamination, pipeline coupling, or non-deterministic behavior,
 - **Self-Contained Configuration**: All hyperparameters, data paths, model choices, and execution settings are governed strictly by `dapt/configs/dapt.yaml`.
 
 ### Corpus Immutability Rule
-- **Read-Only Ingestion**: The input text file (`outputs/maritime_corpus.txt`) is accessed strictly in read mode.
-- **No Corpus Surgery**: DAPT does **not** alter, re-clean, deduplicate, re-order, mask, paraphrase, or perform custom vocabulary expansion on `outputs/maritime_corpus.txt`.
+- **Read-Only Ingestion**: The input text file (`outputs/stage-08/maritime_corpus.txt`) is accessed strictly in read mode.
+- **No Corpus Surgery**: DAPT does **not** alter, re-clean, deduplicate, re-order, mask, paraphrase, or perform custom vocabulary expansion on `outputs/stage-08/maritime_corpus.txt`.
 
 ---
 
 ## 5. Frozen Corpus Specification
 
-The frozen input text `outputs/maritime_corpus.txt` comprises raw maritime occurrence descriptions compiled from historic safety databases.
+The frozen input text `outputs/stage-08/maritime_corpus.txt` comprises raw maritime occurrence descriptions compiled from historic safety databases.
 
 ### Prominent Subsection: The Frozen-Corpus Contract
 
 ```text
 Frozen Upstream Artifact
           │
-  outputs/maritime_corpus.txt
+  outputs/stage-08/maritime_corpus.txt
           │
   SHA-256 Verification (b4968819f8b41baa3ee2e2b0e22d103b5d86f5935275a377db51d09ecde3b302)
           │
@@ -147,7 +147,7 @@ Corpus analysis is executed by [inspect_corpus.py](file:///d:/CAIR/TSBC-Pipeline
 
 | Metric Property | Value |
 | :--- | :--- |
-| **Source File Path** | `outputs/maritime_corpus.txt` |
+| **Source File Path** | `outputs/stage-08/maritime_corpus.txt` |
 | **File Size** | 21,064,178 bytes (~21.06 MB) |
 | **Cryptographic SHA-256 Hash** | `b4968819f8b41baa3ee2e2b0e22d103b5d86f5935275a377db51d09ecde3b302` |
 | **Total Document Count** | 96,715 documents |
@@ -425,7 +425,7 @@ $$\Delta \text{PPL} = 4.6050 - 1.8062 = 2.7988 \quad (60.8\% \text{ perplexity r
 
 The `dapt/scripts/` directory contains 7 executable Python entrypoints:
 
-1. [inspect_corpus.py](file:///d:/CAIR/TSBC-Pipeline/dapt/scripts/inspect_corpus.py): Inspects `outputs/maritime_corpus.txt`, computes cryptographic SHA-256 hash, line/word/char counts, vocabulary size, length distribution, and exports `corpus_manifest.json`.
+1. [inspect_corpus.py](file:///d:/CAIR/TSBC-Pipeline/dapt/scripts/inspect_corpus.py): Inspects `outputs/stage-08/maritime_corpus.txt`, computes cryptographic SHA-256 hash, line/word/char counts, vocabulary size, length distribution, and exports `corpus_manifest.json`.
 2. [prepare_dataset.py](file:///d:/CAIR/TSBC-Pipeline/dapt/scripts/prepare_dataset.py): Splits corpus into 90/5/5 train/val/test partitions using seed 42, runs exact and 3-shingle leakage checks, and exports `split_manifest.json`.
 3. [tokenize_corpus.py](file:///d:/CAIR/TSBC-Pipeline/dapt/scripts/tokenize_corpus.py): Resolves ModernBERT boundary token IDs (`50282`), computes subword fertility rate (1.6287), checks truncation, and exports `tokenizer_report.json`.
 4. [validate_dataset.py](file:///d:/CAIR/TSBC-Pipeline/dapt/scripts/validate_dataset.py): Validates split file integrity, line counts, and sequence packing efficiency.
@@ -515,7 +515,7 @@ Exported Release Artifact Location: `dapt/outputs/experiments/MaritimeBERT-v1/`
 ## 26. Reproducibility & Hash Verification
 
 - **Seed**: `42` across Python, NumPy, PyTorch CPU, and PyTorch CUDA.
-- **Corpus Hash Lock**: Verification passes if `sha256(outputs/maritime_corpus.txt) == "b4968819f8b41baa3ee2e2b0e22d103b5d86f5935275a377db51d09ecde3b302"`.
+- **Corpus Hash Lock**: Verification passes if `sha256(outputs/stage-08/maritime_corpus.txt) == "b4968819f8b41baa3ee2e2b0e22d103b5d86f5935275a377db51d09ecde3b302"`.
 
 ---
 
