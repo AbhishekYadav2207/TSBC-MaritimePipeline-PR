@@ -16,7 +16,7 @@
   "max_pieces_per_term": 4,
   "oov_rate": null,
   "oov_status": "not_applicable",
-  "tokenizer_speed_tokens_per_sec": 72266.36593775256,
+  "tokenizer_speed_tokens_per_sec": 69638.96440935881,
   "sequence_length_distribution": {
     "under_128": 1496,
     "under_256": 4,
@@ -1173,7 +1173,7 @@
       "sample_size": 1500,
       "status": "computed"
     },
-    "scientific_interpretation": "Scientific Note: This analysis measures empirical tokenizer properties and statistical associations (Spearman rank correlation) between document informativeness scores and subword tokenizer behaviors. Correlation does not imply causation; domain informativeness does not cause tokenizer behavior or downstream masked language modeling performance. Domain informativeness scores reflect algorithmic outputs from Stage 12 heuristic/hybrid scoring, not externally validated ground truth."
+    "scientific_interpretation": "Scientific Note: This analysis measures empirical tokenizer properties and statistical associations (Spearman rank correlation) between document informativeness scores and subword tokenizer behaviors. Correlation does not imply causation; domain informativeness does not cause tokenizer behavior or downstream masked language modeling performance. Domain informativeness scores reflect algorithmic outputs from Stage 12 heuristic/hybrid scoring, not externally validated ground truth. Pairwise similarity identifies redundancy in the tokenizer diagnostic space only, and does not claim that the underlying pretrained language models are universally redundant."
   },
   "deterministic_term_examples": {
     "general_maritime_examples": [
@@ -1541,13 +1541,18 @@
   "compatibility_summary": {
     "model": "roberta-base",
     "clean_model_name": "roberta_base",
+    "vocab_size": 50265,
     "domain_token_coverage": 0.3493,
     "domain_fragmentation": 0.6507,
     "domain_fertility": 1.5609,
     "domain_unknown_rate": null,
     "oov_status": "not_applicable",
     "mean_sequence_length": 63.22,
-    "tokenization_speed": 72266.37,
+    "tokenization_speed": 69638.96,
+    "mean_document_fragmentation": 0.5372,
+    "mean_document_coverage": 0.4628,
+    "general_vocab_coverage": 0.4255,
+    "rare_maritime_coverage": 0.0,
     "stratified_by_informativeness_tier": {
       "Medium Knowledge": {
         "document_count": 673,
@@ -1579,5 +1584,5 @@
       }
     }
   },
-  "scientific_disclaimer": "Scientific Note: This analysis measures empirical tokenizer properties and statistical associations (Spearman rank correlation) between document informativeness scores and subword tokenizer behaviors. Correlation does not imply causation; domain informativeness does not cause tokenizer behavior or downstream masked language modeling performance. Domain informativeness scores reflect algorithmic outputs from Stage 12 heuristic/hybrid scoring, not externally validated ground truth."
+  "scientific_disclaimer": "Scientific Note: This analysis measures empirical tokenizer properties and statistical associations (Spearman rank correlation) between document informativeness scores and subword tokenizer behaviors. Correlation does not imply causation; domain informativeness does not cause tokenizer behavior or downstream masked language modeling performance. Domain informativeness scores reflect algorithmic outputs from Stage 12 heuristic/hybrid scoring, not externally validated ground truth. Pairwise similarity identifies redundancy in the tokenizer diagnostic space only, and does not claim that the underlying pretrained language models are universally redundant."
 }

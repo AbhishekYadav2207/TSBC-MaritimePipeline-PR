@@ -1,0 +1,87 @@
+{
+  "selected_models": [
+    "bert-base-uncased",
+    "dmis-lab/biobert-base-cased-v1.2",
+    "nlpaueb/legal-bert-base-uncased",
+    "allenai/scibert_scivocab_uncased",
+    "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+    "roberta-base",
+    "answerdotai/ModernBERT-base"
+  ],
+  "selected_model_count": 7,
+  "candidate_model_count": 14,
+  "evaluated_model_count": 12,
+  "candidate_models": [
+    "bert-base-uncased",
+    "bert-large-uncased",
+    "roberta-base",
+    "microsoft/deberta-v3-base",
+    "answerdotai/ModernBERT-base",
+    "allenai/scibert_scivocab_uncased",
+    "dmis-lab/biobert-base-cased-v1.2",
+    "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+    "emilyalsentzer/Bio_ClinicalBERT",
+    "nlpaueb/legal-bert-base-uncased",
+    "ProsusAI/finbert",
+    "anferico/bert-for-patents",
+    "google/electra-base-discriminator",
+    "distilbert-base-uncased"
+  ],
+  "evaluated_models": [
+    "bert-base-uncased",
+    "bert-large-uncased",
+    "roberta-base",
+    "answerdotai/ModernBERT-base",
+    "allenai/scibert_scivocab_uncased",
+    "dmis-lab/biobert-base-cased-v1.2",
+    "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+    "emilyalsentzer/Bio_ClinicalBERT",
+    "nlpaueb/legal-bert-base-uncased",
+    "ProsusAI/finbert",
+    "google/electra-base-discriminator",
+    "distilbert-base-uncased"
+  ],
+  "excluded_models": {
+    "bert-large-uncased": {
+      "reason": "tokenizer_diagnostic_redundancy",
+      "represented_by": "bert-base-uncased",
+      "similarity_score": 1.0,
+      "explanation": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits)."
+    },
+    "ProsusAI/finbert": {
+      "reason": "tokenizer_diagnostic_redundancy",
+      "represented_by": "bert-base-uncased",
+      "similarity_score": 1.0,
+      "explanation": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits)."
+    },
+    "google/electra-base-discriminator": {
+      "reason": "tokenizer_diagnostic_redundancy",
+      "represented_by": "bert-base-uncased",
+      "similarity_score": 1.0,
+      "explanation": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits)."
+    },
+    "distilbert-base-uncased": {
+      "reason": "tokenizer_diagnostic_redundancy",
+      "represented_by": "bert-base-uncased",
+      "similarity_score": 1.0,
+      "explanation": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits)."
+    },
+    "emilyalsentzer/Bio_ClinicalBERT": {
+      "reason": "tokenizer_diagnostic_redundancy",
+      "represented_by": "dmis-lab/biobert-base-cased-v1.2",
+      "similarity_score": 1.0,
+      "explanation": "Excluded due to identical tokenizer diagnostic profile with dmis-lab/biobert-base-cased-v1.2 (cosine similarity 1.00000, identical vocabulary piece splits)."
+    },
+    "microsoft/deberta-v3-base": {
+      "reason": "loading_dependency_failure",
+      "explanation": "Tokenizer failed to instantiate from pretrained repository in current environment (e.g. missing SentencePiece library or fast tokenizer backend)."
+    },
+    "anferico/bert-for-patents": {
+      "reason": "loading_dependency_failure",
+      "explanation": "Tokenizer failed to instantiate from pretrained repository in current environment (e.g. missing SentencePiece library or fast tokenizer backend)."
+    }
+  },
+  "selection_timestamp": "2026-09-10 01:23:42",
+  "selection_rationale": "Subword Term-Piece Diagnostic Redundancy Clustering & Canonical Archetype Selection",
+  "target_stage": "Stage 14 (14_mlm_evaluation.py)"
+}

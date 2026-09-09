@@ -1,9 +1,349 @@
 {
+  "candidate_model_count": 14,
+  "evaluated_model_count": 12,
+  "selected_model_count": 7,
+  "candidate_models": [
+    "bert-base-uncased",
+    "bert-large-uncased",
+    "roberta-base",
+    "microsoft/deberta-v3-base",
+    "answerdotai/ModernBERT-base",
+    "allenai/scibert_scivocab_uncased",
+    "dmis-lab/biobert-base-cased-v1.2",
+    "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+    "emilyalsentzer/Bio_ClinicalBERT",
+    "nlpaueb/legal-bert-base-uncased",
+    "ProsusAI/finbert",
+    "anferico/bert-for-patents",
+    "google/electra-base-discriminator",
+    "distilbert-base-uncased"
+  ],
+  "evaluated_models": [
+    "bert-base-uncased",
+    "bert-large-uncased",
+    "roberta-base",
+    "answerdotai/ModernBERT-base",
+    "allenai/scibert_scivocab_uncased",
+    "dmis-lab/biobert-base-cased-v1.2",
+    "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+    "emilyalsentzer/Bio_ClinicalBERT",
+    "nlpaueb/legal-bert-base-uncased",
+    "ProsusAI/finbert",
+    "google/electra-base-discriminator",
+    "distilbert-base-uncased"
+  ],
+  "selected_models": [
+    "bert-base-uncased",
+    "dmis-lab/biobert-base-cased-v1.2",
+    "nlpaueb/legal-bert-base-uncased",
+    "allenai/scibert_scivocab_uncased",
+    "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+    "roberta-base",
+    "answerdotai/ModernBERT-base"
+  ],
+  "excluded_models": {
+    "bert-large-uncased": {
+      "reason": "tokenizer_diagnostic_redundancy",
+      "represented_by": "bert-base-uncased",
+      "similarity_score": 1.0,
+      "explanation": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits)."
+    },
+    "ProsusAI/finbert": {
+      "reason": "tokenizer_diagnostic_redundancy",
+      "represented_by": "bert-base-uncased",
+      "similarity_score": 1.0,
+      "explanation": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits)."
+    },
+    "google/electra-base-discriminator": {
+      "reason": "tokenizer_diagnostic_redundancy",
+      "represented_by": "bert-base-uncased",
+      "similarity_score": 1.0,
+      "explanation": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits)."
+    },
+    "distilbert-base-uncased": {
+      "reason": "tokenizer_diagnostic_redundancy",
+      "represented_by": "bert-base-uncased",
+      "similarity_score": 1.0,
+      "explanation": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits)."
+    },
+    "emilyalsentzer/Bio_ClinicalBERT": {
+      "reason": "tokenizer_diagnostic_redundancy",
+      "represented_by": "dmis-lab/biobert-base-cased-v1.2",
+      "similarity_score": 1.0,
+      "explanation": "Excluded due to identical tokenizer diagnostic profile with dmis-lab/biobert-base-cased-v1.2 (cosine similarity 1.00000, identical vocabulary piece splits)."
+    },
+    "microsoft/deberta-v3-base": {
+      "reason": "loading_dependency_failure",
+      "explanation": "Tokenizer failed to instantiate from pretrained repository in current environment (e.g. missing SentencePiece library or fast tokenizer backend)."
+    },
+    "anferico/bert-for-patents": {
+      "reason": "loading_dependency_failure",
+      "explanation": "Tokenizer failed to instantiate from pretrained repository in current environment (e.g. missing SentencePiece library or fast tokenizer backend)."
+    }
+  },
+  "redundancy_analysis": {
+    "pairwise_similarity_matrix": {
+      "bert-base-uncased": {
+        "bert-base-uncased": 1.0,
+        "bert-large-uncased": 1.0,
+        "roberta-base": 0.93182,
+        "answerdotai/ModernBERT-base": 0.92953,
+        "allenai/scibert_scivocab_uncased": 0.9506,
+        "dmis-lab/biobert-base-cased-v1.2": 0.96353,
+        "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.94868,
+        "emilyalsentzer/Bio_ClinicalBERT": 0.96353,
+        "nlpaueb/legal-bert-base-uncased": 0.95682,
+        "ProsusAI/finbert": 1.0,
+        "google/electra-base-discriminator": 1.0,
+        "distilbert-base-uncased": 1.0
+      },
+      "bert-large-uncased": {
+        "bert-base-uncased": 1.0,
+        "bert-large-uncased": 1.0,
+        "roberta-base": 0.93182,
+        "answerdotai/ModernBERT-base": 0.92953,
+        "allenai/scibert_scivocab_uncased": 0.9506,
+        "dmis-lab/biobert-base-cased-v1.2": 0.96353,
+        "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.94868,
+        "emilyalsentzer/Bio_ClinicalBERT": 0.96353,
+        "nlpaueb/legal-bert-base-uncased": 0.95682,
+        "ProsusAI/finbert": 1.0,
+        "google/electra-base-discriminator": 1.0,
+        "distilbert-base-uncased": 1.0
+      },
+      "roberta-base": {
+        "bert-base-uncased": 0.93182,
+        "bert-large-uncased": 0.93182,
+        "roberta-base": 1.0,
+        "answerdotai/ModernBERT-base": 0.97888,
+        "allenai/scibert_scivocab_uncased": 0.93523,
+        "dmis-lab/biobert-base-cased-v1.2": 0.92882,
+        "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.92483,
+        "emilyalsentzer/Bio_ClinicalBERT": 0.92882,
+        "nlpaueb/legal-bert-base-uncased": 0.93143,
+        "ProsusAI/finbert": 0.93182,
+        "google/electra-base-discriminator": 0.93182,
+        "distilbert-base-uncased": 0.93182
+      },
+      "answerdotai/ModernBERT-base": {
+        "bert-base-uncased": 0.92953,
+        "bert-large-uncased": 0.92953,
+        "roberta-base": 0.97888,
+        "answerdotai/ModernBERT-base": 1.0,
+        "allenai/scibert_scivocab_uncased": 0.9413,
+        "dmis-lab/biobert-base-cased-v1.2": 0.92935,
+        "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.93429,
+        "emilyalsentzer/Bio_ClinicalBERT": 0.92935,
+        "nlpaueb/legal-bert-base-uncased": 0.92326,
+        "ProsusAI/finbert": 0.92953,
+        "google/electra-base-discriminator": 0.92953,
+        "distilbert-base-uncased": 0.92953
+      },
+      "allenai/scibert_scivocab_uncased": {
+        "bert-base-uncased": 0.9506,
+        "bert-large-uncased": 0.9506,
+        "roberta-base": 0.93523,
+        "answerdotai/ModernBERT-base": 0.9413,
+        "allenai/scibert_scivocab_uncased": 1.0,
+        "dmis-lab/biobert-base-cased-v1.2": 0.94312,
+        "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.98047,
+        "emilyalsentzer/Bio_ClinicalBERT": 0.94312,
+        "nlpaueb/legal-bert-base-uncased": 0.93662,
+        "ProsusAI/finbert": 0.9506,
+        "google/electra-base-discriminator": 0.9506,
+        "distilbert-base-uncased": 0.9506
+      },
+      "dmis-lab/biobert-base-cased-v1.2": {
+        "bert-base-uncased": 0.96353,
+        "bert-large-uncased": 0.96353,
+        "roberta-base": 0.92882,
+        "answerdotai/ModernBERT-base": 0.92935,
+        "allenai/scibert_scivocab_uncased": 0.94312,
+        "dmis-lab/biobert-base-cased-v1.2": 1.0,
+        "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.93213,
+        "emilyalsentzer/Bio_ClinicalBERT": 1.0,
+        "nlpaueb/legal-bert-base-uncased": 0.94246,
+        "ProsusAI/finbert": 0.96353,
+        "google/electra-base-discriminator": 0.96353,
+        "distilbert-base-uncased": 0.96353
+      },
+      "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": {
+        "bert-base-uncased": 0.94868,
+        "bert-large-uncased": 0.94868,
+        "roberta-base": 0.92483,
+        "answerdotai/ModernBERT-base": 0.93429,
+        "allenai/scibert_scivocab_uncased": 0.98047,
+        "dmis-lab/biobert-base-cased-v1.2": 0.93213,
+        "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 1.0,
+        "emilyalsentzer/Bio_ClinicalBERT": 0.93213,
+        "nlpaueb/legal-bert-base-uncased": 0.93227,
+        "ProsusAI/finbert": 0.94868,
+        "google/electra-base-discriminator": 0.94868,
+        "distilbert-base-uncased": 0.94868
+      },
+      "emilyalsentzer/Bio_ClinicalBERT": {
+        "bert-base-uncased": 0.96353,
+        "bert-large-uncased": 0.96353,
+        "roberta-base": 0.92882,
+        "answerdotai/ModernBERT-base": 0.92935,
+        "allenai/scibert_scivocab_uncased": 0.94312,
+        "dmis-lab/biobert-base-cased-v1.2": 1.0,
+        "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.93213,
+        "emilyalsentzer/Bio_ClinicalBERT": 1.0,
+        "nlpaueb/legal-bert-base-uncased": 0.94246,
+        "ProsusAI/finbert": 0.96353,
+        "google/electra-base-discriminator": 0.96353,
+        "distilbert-base-uncased": 0.96353
+      },
+      "nlpaueb/legal-bert-base-uncased": {
+        "bert-base-uncased": 0.95682,
+        "bert-large-uncased": 0.95682,
+        "roberta-base": 0.93143,
+        "answerdotai/ModernBERT-base": 0.92326,
+        "allenai/scibert_scivocab_uncased": 0.93662,
+        "dmis-lab/biobert-base-cased-v1.2": 0.94246,
+        "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.93227,
+        "emilyalsentzer/Bio_ClinicalBERT": 0.94246,
+        "nlpaueb/legal-bert-base-uncased": 1.0,
+        "ProsusAI/finbert": 0.95682,
+        "google/electra-base-discriminator": 0.95682,
+        "distilbert-base-uncased": 0.95682
+      },
+      "ProsusAI/finbert": {
+        "bert-base-uncased": 1.0,
+        "bert-large-uncased": 1.0,
+        "roberta-base": 0.93182,
+        "answerdotai/ModernBERT-base": 0.92953,
+        "allenai/scibert_scivocab_uncased": 0.9506,
+        "dmis-lab/biobert-base-cased-v1.2": 0.96353,
+        "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.94868,
+        "emilyalsentzer/Bio_ClinicalBERT": 0.96353,
+        "nlpaueb/legal-bert-base-uncased": 0.95682,
+        "ProsusAI/finbert": 1.0,
+        "google/electra-base-discriminator": 1.0,
+        "distilbert-base-uncased": 1.0
+      },
+      "google/electra-base-discriminator": {
+        "bert-base-uncased": 1.0,
+        "bert-large-uncased": 1.0,
+        "roberta-base": 0.93182,
+        "answerdotai/ModernBERT-base": 0.92953,
+        "allenai/scibert_scivocab_uncased": 0.9506,
+        "dmis-lab/biobert-base-cased-v1.2": 0.96353,
+        "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.94868,
+        "emilyalsentzer/Bio_ClinicalBERT": 0.96353,
+        "nlpaueb/legal-bert-base-uncased": 0.95682,
+        "ProsusAI/finbert": 1.0,
+        "google/electra-base-discriminator": 1.0,
+        "distilbert-base-uncased": 1.0
+      },
+      "distilbert-base-uncased": {
+        "bert-base-uncased": 1.0,
+        "bert-large-uncased": 1.0,
+        "roberta-base": 0.93182,
+        "answerdotai/ModernBERT-base": 0.92953,
+        "allenai/scibert_scivocab_uncased": 0.9506,
+        "dmis-lab/biobert-base-cased-v1.2": 0.96353,
+        "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.94868,
+        "emilyalsentzer/Bio_ClinicalBERT": 0.96353,
+        "nlpaueb/legal-bert-base-uncased": 0.95682,
+        "ProsusAI/finbert": 1.0,
+        "google/electra-base-discriminator": 1.0,
+        "distilbert-base-uncased": 1.0
+      }
+    },
+    "clusters": [
+      [
+        "bert-base-uncased",
+        "bert-large-uncased",
+        "ProsusAI/finbert",
+        "google/electra-base-discriminator",
+        "distilbert-base-uncased"
+      ],
+      [
+        "roberta-base"
+      ],
+      [
+        "answerdotai/ModernBERT-base"
+      ],
+      [
+        "allenai/scibert_scivocab_uncased"
+      ],
+      [
+        "dmis-lab/biobert-base-cased-v1.2",
+        "emilyalsentzer/Bio_ClinicalBERT"
+      ],
+      [
+        "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext"
+      ],
+      [
+        "nlpaueb/legal-bert-base-uncased"
+      ]
+    ]
+  },
+  "selection_rationale": {
+    "methodology": "Subword Term-Piece Diagnostic Redundancy Clustering & Canonical Archetype Selection",
+    "distance_metric": "Cosine Similarity across 335-Dimensional Maritime Vocabulary Term-Piece Profiling Vectors",
+    "redundancy_threshold": 0.999,
+    "candidate_model_count": 14,
+    "evaluated_model_count": 12,
+    "selected_model_count": 7,
+    "cluster_count": 7,
+    "clusters": {
+      "Cluster_1": {
+        "selected_representative": "bert-base-uncased",
+        "all_cluster_members": [
+          "bert-base-uncased",
+          "bert-large-uncased",
+          "ProsusAI/finbert",
+          "google/electra-base-discriminator",
+          "distilbert-base-uncased"
+        ]
+      },
+      "Cluster_2": {
+        "selected_representative": "roberta-base",
+        "all_cluster_members": [
+          "roberta-base"
+        ]
+      },
+      "Cluster_3": {
+        "selected_representative": "answerdotai/ModernBERT-base",
+        "all_cluster_members": [
+          "answerdotai/ModernBERT-base"
+        ]
+      },
+      "Cluster_4": {
+        "selected_representative": "allenai/scibert_scivocab_uncased",
+        "all_cluster_members": [
+          "allenai/scibert_scivocab_uncased"
+        ]
+      },
+      "Cluster_5": {
+        "selected_representative": "dmis-lab/biobert-base-cased-v1.2",
+        "all_cluster_members": [
+          "dmis-lab/biobert-base-cased-v1.2",
+          "emilyalsentzer/Bio_ClinicalBERT"
+        ]
+      },
+      "Cluster_6": {
+        "selected_representative": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+        "all_cluster_members": [
+          "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext"
+        ]
+      },
+      "Cluster_7": {
+        "selected_representative": "nlpaueb/legal-bert-base-uncased",
+        "all_cluster_members": [
+          "nlpaueb/legal-bert-base-uncased"
+        ]
+      }
+    },
+    "description": "The complete 14-candidate pool was evaluated across general vocabulary, domain maritime vocabulary, rare terminology, fertility, fragmentation, and sequence length distributions. Pairwise similarity on 335 domain terms identified complete diagnostic redundancy (similarity = 1.00000) among standard WordPiece models (bert-base, bert-large, distilbert, electra, finbert) and biomedical cased WordPiece models (biobert, bio_clinicalbert). Selecting one representative per distinct cluster eliminates redundant computations while maximizing architectural and domain diversity across WordPiece (General, Bio, Legal, SciVocab, PubMed) and Byte-Level BPE (Standard RoBERTa, ModernBERT) for Stage 14 MLM evaluation."
+  },
   "metadata": {
-    "title": "Stage 12 Domain Informativeness \u2194 Stage 13 Tokenizer Compatibility Analysis",
+    "title": "Stage 12 Domain Informativeness \u2194 Stage 13 Tokenizer Compatibility & Selection Analysis",
     "source_stage_12_file": "outputs/stage-12/document_importance.jsonl",
     "data_source_description": "Authoritative Stage 12 source of document informativeness scores, ranks, and tiers. Scores reflect Stage 12 heuristic/hybrid methodology outputs.",
-    "evaluated_models_count": 7,
     "total_available_documents": 96848,
     "sampled_documents_count": 1500,
     "observed_knowledge_tier_distribution": {
@@ -17,51 +357,34 @@
       "general_vocabulary",
       "rare_maritime_terminology"
     ],
-    "timestamp": "2026-09-10 01:15:14"
+    "timestamp": "2026-09-10 01:23:42"
   },
   "scientific_interpretation": {
-    "core_question": "How compatible is each pretrained tokenizer with specialized maritime vocabulary, and does tokenizer behavior vary across documents with different levels of domain informativeness?",
-    "disclaimer": "Scientific Note: This analysis measures empirical tokenizer properties and statistical associations (Spearman rank correlation) between document informativeness scores and subword tokenizer behaviors. Correlation does not imply causation; domain informativeness does not cause tokenizer behavior or downstream masked language modeling performance. Domain informativeness scores reflect algorithmic outputs from Stage 12 heuristic/hybrid scoring, not externally validated ground truth."
+    "core_question": "How compatible is each candidate tokenizer with specialized maritime vocabulary, and how does tokenizer-diagnostic redundancy inform the deterministic selection of representative models for Stage 14 MLM evaluation?",
+    "pipeline_role": "Complete candidate pool (14 models) \u2192 tokenizer/domain diagnostics \u2192 tokenizer diagnostic redundancy \u2192 representative 7-model selection \u2192 Stage 14 MLM validation",
+    "disclaimer": "Scientific Note: This analysis measures empirical tokenizer properties and statistical associations (Spearman rank correlation) between document informativeness scores and subword tokenizer behaviors. Correlation does not imply causation; domain informativeness does not cause tokenizer behavior or downstream masked language modeling performance. Domain informativeness scores reflect algorithmic outputs from Stage 12 heuristic/hybrid scoring, not externally validated ground truth. Pairwise similarity identifies redundancy in the tokenizer diagnostic space only, and does not claim that the underlying pretrained language models are universally redundant."
   },
   "vocabulary_categories_summary": {
     "maritime_terminology": [
       {
         "model": "bert-base-uncased",
+        "selected_for_stage14": true,
         "single_token_coverage": 0.7343,
         "fragmentation_rate": 0.2657,
         "avg_pieces_per_term": 1.349,
         "max_pieces_per_term": 5
       },
       {
-        "model": "dmis-lab/biobert-base-cased-v1.2",
-        "single_token_coverage": 0.6448,
-        "fragmentation_rate": 0.3552,
-        "avg_pieces_per_term": 1.484,
-        "max_pieces_per_term": 5
-      },
-      {
-        "model": "nlpaueb/legal-bert-base-uncased",
-        "single_token_coverage": 0.6209,
-        "fragmentation_rate": 0.3791,
-        "avg_pieces_per_term": 1.507,
-        "max_pieces_per_term": 5
-      },
-      {
-        "model": "allenai/scibert_scivocab_uncased",
-        "single_token_coverage": 0.5791,
-        "fragmentation_rate": 0.4209,
-        "avg_pieces_per_term": 1.534,
-        "max_pieces_per_term": 4
-      },
-      {
-        "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
-        "single_token_coverage": 0.5731,
-        "fragmentation_rate": 0.4269,
-        "avg_pieces_per_term": 1.588,
+        "model": "bert-large-uncased",
+        "selected_for_stage14": false,
+        "single_token_coverage": 0.7343,
+        "fragmentation_rate": 0.2657,
+        "avg_pieces_per_term": 1.349,
         "max_pieces_per_term": 5
       },
       {
         "model": "roberta-base",
+        "selected_for_stage14": true,
         "single_token_coverage": 0.3493,
         "fragmentation_rate": 0.6507,
         "avg_pieces_per_term": 1.86,
@@ -69,50 +392,97 @@
       },
       {
         "model": "answerdotai/ModernBERT-base",
+        "selected_for_stage14": true,
         "single_token_coverage": 0.3672,
         "fragmentation_rate": 0.6328,
         "avg_pieces_per_term": 1.839,
+        "max_pieces_per_term": 5
+      },
+      {
+        "model": "allenai/scibert_scivocab_uncased",
+        "selected_for_stage14": true,
+        "single_token_coverage": 0.5791,
+        "fragmentation_rate": 0.4209,
+        "avg_pieces_per_term": 1.534,
+        "max_pieces_per_term": 4
+      },
+      {
+        "model": "dmis-lab/biobert-base-cased-v1.2",
+        "selected_for_stage14": true,
+        "single_token_coverage": 0.6448,
+        "fragmentation_rate": 0.3552,
+        "avg_pieces_per_term": 1.484,
+        "max_pieces_per_term": 5
+      },
+      {
+        "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+        "selected_for_stage14": true,
+        "single_token_coverage": 0.5731,
+        "fragmentation_rate": 0.4269,
+        "avg_pieces_per_term": 1.588,
+        "max_pieces_per_term": 5
+      },
+      {
+        "model": "emilyalsentzer/Bio_ClinicalBERT",
+        "selected_for_stage14": false,
+        "single_token_coverage": 0.6448,
+        "fragmentation_rate": 0.3552,
+        "avg_pieces_per_term": 1.484,
+        "max_pieces_per_term": 5
+      },
+      {
+        "model": "nlpaueb/legal-bert-base-uncased",
+        "selected_for_stage14": true,
+        "single_token_coverage": 0.6209,
+        "fragmentation_rate": 0.3791,
+        "avg_pieces_per_term": 1.507,
+        "max_pieces_per_term": 5
+      },
+      {
+        "model": "ProsusAI/finbert",
+        "selected_for_stage14": false,
+        "single_token_coverage": 0.7343,
+        "fragmentation_rate": 0.2657,
+        "avg_pieces_per_term": 1.349,
+        "max_pieces_per_term": 5
+      },
+      {
+        "model": "google/electra-base-discriminator",
+        "selected_for_stage14": false,
+        "single_token_coverage": 0.7343,
+        "fragmentation_rate": 0.2657,
+        "avg_pieces_per_term": 1.349,
+        "max_pieces_per_term": 5
+      },
+      {
+        "model": "distilbert-base-uncased",
+        "selected_for_stage14": false,
+        "single_token_coverage": 0.7343,
+        "fragmentation_rate": 0.2657,
+        "avg_pieces_per_term": 1.349,
         "max_pieces_per_term": 5
       }
     ],
     "general_vocabulary": [
       {
         "model": "bert-base-uncased",
+        "selected_for_stage14": true,
         "single_token_coverage": 0.9787,
         "fragmentation_rate": 0.0213,
         "avg_pieces_per_term": 1.053,
         "max_pieces_per_term": 4
       },
       {
-        "model": "dmis-lab/biobert-base-cased-v1.2",
-        "single_token_coverage": 0.9468,
-        "fragmentation_rate": 0.0532,
-        "avg_pieces_per_term": 1.096,
-        "max_pieces_per_term": 5
-      },
-      {
-        "model": "nlpaueb/legal-bert-base-uncased",
-        "single_token_coverage": 0.8298,
-        "fragmentation_rate": 0.1702,
-        "avg_pieces_per_term": 1.17,
-        "max_pieces_per_term": 2
-      },
-      {
-        "model": "allenai/scibert_scivocab_uncased",
-        "single_token_coverage": 0.9681,
-        "fragmentation_rate": 0.0319,
-        "avg_pieces_per_term": 1.032,
-        "max_pieces_per_term": 2
-      },
-      {
-        "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
-        "single_token_coverage": 0.9362,
-        "fragmentation_rate": 0.0638,
-        "avg_pieces_per_term": 1.085,
-        "max_pieces_per_term": 3
+        "model": "bert-large-uncased",
+        "selected_for_stage14": false,
+        "single_token_coverage": 0.9787,
+        "fragmentation_rate": 0.0213,
+        "avg_pieces_per_term": 1.053,
+        "max_pieces_per_term": 4
       },
       {
         "model": "roberta-base",
+        "selected_for_stage14": true,
         "single_token_coverage": 0.4255,
         "fragmentation_rate": 0.5745,
         "avg_pieces_per_term": 1.702,
@@ -120,50 +490,97 @@
       },
       {
         "model": "answerdotai/ModernBERT-base",
+        "selected_for_stage14": true,
         "single_token_coverage": 0.4681,
         "fragmentation_rate": 0.5319,
         "avg_pieces_per_term": 1.638,
+        "max_pieces_per_term": 4
+      },
+      {
+        "model": "allenai/scibert_scivocab_uncased",
+        "selected_for_stage14": true,
+        "single_token_coverage": 0.9681,
+        "fragmentation_rate": 0.0319,
+        "avg_pieces_per_term": 1.032,
+        "max_pieces_per_term": 2
+      },
+      {
+        "model": "dmis-lab/biobert-base-cased-v1.2",
+        "selected_for_stage14": true,
+        "single_token_coverage": 0.9468,
+        "fragmentation_rate": 0.0532,
+        "avg_pieces_per_term": 1.096,
+        "max_pieces_per_term": 5
+      },
+      {
+        "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+        "selected_for_stage14": true,
+        "single_token_coverage": 0.9362,
+        "fragmentation_rate": 0.0638,
+        "avg_pieces_per_term": 1.085,
+        "max_pieces_per_term": 3
+      },
+      {
+        "model": "emilyalsentzer/Bio_ClinicalBERT",
+        "selected_for_stage14": false,
+        "single_token_coverage": 0.9468,
+        "fragmentation_rate": 0.0532,
+        "avg_pieces_per_term": 1.096,
+        "max_pieces_per_term": 5
+      },
+      {
+        "model": "nlpaueb/legal-bert-base-uncased",
+        "selected_for_stage14": true,
+        "single_token_coverage": 0.8298,
+        "fragmentation_rate": 0.1702,
+        "avg_pieces_per_term": 1.17,
+        "max_pieces_per_term": 2
+      },
+      {
+        "model": "ProsusAI/finbert",
+        "selected_for_stage14": false,
+        "single_token_coverage": 0.9787,
+        "fragmentation_rate": 0.0213,
+        "avg_pieces_per_term": 1.053,
+        "max_pieces_per_term": 4
+      },
+      {
+        "model": "google/electra-base-discriminator",
+        "selected_for_stage14": false,
+        "single_token_coverage": 0.9787,
+        "fragmentation_rate": 0.0213,
+        "avg_pieces_per_term": 1.053,
+        "max_pieces_per_term": 4
+      },
+      {
+        "model": "distilbert-base-uncased",
+        "selected_for_stage14": false,
+        "single_token_coverage": 0.9787,
+        "fragmentation_rate": 0.0213,
+        "avg_pieces_per_term": 1.053,
         "max_pieces_per_term": 4
       }
     ],
     "rare_maritime_terminology": [
       {
         "model": "bert-base-uncased",
+        "selected_for_stage14": true,
         "single_token_coverage": 0.0,
         "fragmentation_rate": 1.0,
         "avg_pieces_per_term": 2.65,
         "max_pieces_per_term": 5
       },
       {
-        "model": "dmis-lab/biobert-base-cased-v1.2",
+        "model": "bert-large-uncased",
+        "selected_for_stage14": false,
         "single_token_coverage": 0.0,
         "fragmentation_rate": 1.0,
-        "avg_pieces_per_term": 2.75,
+        "avg_pieces_per_term": 2.65,
         "max_pieces_per_term": 5
-      },
-      {
-        "model": "nlpaueb/legal-bert-base-uncased",
-        "single_token_coverage": 0.1,
-        "fragmentation_rate": 0.9,
-        "avg_pieces_per_term": 2.55,
-        "max_pieces_per_term": 5
-      },
-      {
-        "model": "allenai/scibert_scivocab_uncased",
-        "single_token_coverage": 0.0,
-        "fragmentation_rate": 1.0,
-        "avg_pieces_per_term": 2.3,
-        "max_pieces_per_term": 3
-      },
-      {
-        "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
-        "single_token_coverage": 0.0,
-        "fragmentation_rate": 1.0,
-        "avg_pieces_per_term": 2.4,
-        "max_pieces_per_term": 3
       },
       {
         "model": "roberta-base",
+        "selected_for_stage14": true,
         "single_token_coverage": 0.0,
         "fragmentation_rate": 1.0,
         "avg_pieces_per_term": 2.5,
@@ -171,10 +588,75 @@
       },
       {
         "model": "answerdotai/ModernBERT-base",
+        "selected_for_stage14": true,
         "single_token_coverage": 0.0,
         "fragmentation_rate": 1.0,
         "avg_pieces_per_term": 2.45,
         "max_pieces_per_term": 3
+      },
+      {
+        "model": "allenai/scibert_scivocab_uncased",
+        "selected_for_stage14": true,
+        "single_token_coverage": 0.0,
+        "fragmentation_rate": 1.0,
+        "avg_pieces_per_term": 2.3,
+        "max_pieces_per_term": 3
+      },
+      {
+        "model": "dmis-lab/biobert-base-cased-v1.2",
+        "selected_for_stage14": true,
+        "single_token_coverage": 0.0,
+        "fragmentation_rate": 1.0,
+        "avg_pieces_per_term": 2.75,
+        "max_pieces_per_term": 5
+      },
+      {
+        "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+        "selected_for_stage14": true,
+        "single_token_coverage": 0.0,
+        "fragmentation_rate": 1.0,
+        "avg_pieces_per_term": 2.4,
+        "max_pieces_per_term": 3
+      },
+      {
+        "model": "emilyalsentzer/Bio_ClinicalBERT",
+        "selected_for_stage14": false,
+        "single_token_coverage": 0.0,
+        "fragmentation_rate": 1.0,
+        "avg_pieces_per_term": 2.75,
+        "max_pieces_per_term": 5
+      },
+      {
+        "model": "nlpaueb/legal-bert-base-uncased",
+        "selected_for_stage14": true,
+        "single_token_coverage": 0.1,
+        "fragmentation_rate": 0.9,
+        "avg_pieces_per_term": 2.55,
+        "max_pieces_per_term": 5
+      },
+      {
+        "model": "ProsusAI/finbert",
+        "selected_for_stage14": false,
+        "single_token_coverage": 0.0,
+        "fragmentation_rate": 1.0,
+        "avg_pieces_per_term": 2.65,
+        "max_pieces_per_term": 5
+      },
+      {
+        "model": "google/electra-base-discriminator",
+        "selected_for_stage14": false,
+        "single_token_coverage": 0.0,
+        "fragmentation_rate": 1.0,
+        "avg_pieces_per_term": 2.65,
+        "max_pieces_per_term": 5
+      },
+      {
+        "model": "distilbert-base-uncased",
+        "selected_for_stage14": false,
+        "single_token_coverage": 0.0,
+        "fragmentation_rate": 1.0,
+        "avg_pieces_per_term": 2.65,
+        "max_pieces_per_term": 5
       }
     ]
   },
@@ -182,6 +664,7 @@
     "High Knowledge": [
       {
         "model": "bert-base-uncased",
+        "selected_for_stage14": true,
         "document_count": 422,
         "mean_fertility": 1.4346,
         "mean_sequence_length": 87.42,
@@ -191,47 +674,19 @@
         "oov_status": "measured"
       },
       {
-        "model": "dmis-lab/biobert-base-cased-v1.2",
+        "model": "bert-large-uncased",
+        "selected_for_stage14": false,
         "document_count": 422,
-        "mean_fertility": 1.5062,
-        "mean_sequence_length": 91.78,
-        "mean_document_fragmentation": 0.2819,
-        "mean_document_coverage": 0.7181,
-        "oov_rate": 0.0,
-        "oov_status": "measured"
-      },
-      {
-        "model": "nlpaueb/legal-bert-base-uncased",
-        "document_count": 422,
-        "mean_fertility": 1.5126,
-        "mean_sequence_length": 92.17,
-        "mean_document_fragmentation": 0.307,
-        "mean_document_coverage": 0.693,
-        "oov_rate": 0.000334,
-        "oov_status": "measured"
-      },
-      {
-        "model": "allenai/scibert_scivocab_uncased",
-        "document_count": 422,
-        "mean_fertility": 1.4713,
-        "mean_sequence_length": 89.65,
-        "mean_document_fragmentation": 0.3031,
-        "mean_document_coverage": 0.6969,
-        "oov_rate": 0.0,
-        "oov_status": "measured"
-      },
-      {
-        "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
-        "document_count": 422,
-        "mean_fertility": 1.4756,
-        "mean_sequence_length": 89.92,
-        "mean_document_fragmentation": 0.2942,
-        "mean_document_coverage": 0.7058,
+        "mean_fertility": 1.4346,
+        "mean_sequence_length": 87.42,
+        "mean_document_fragmentation": 0.273,
+        "mean_document_coverage": 0.727,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "roberta-base",
+        "selected_for_stage14": true,
         "document_count": 422,
         "mean_fertility": 1.5399,
         "mean_sequence_length": 93.84,
@@ -242,6 +697,7 @@
       },
       {
         "model": "answerdotai/ModernBERT-base",
+        "selected_for_stage14": true,
         "document_count": 422,
         "mean_fertility": 1.487,
         "mean_sequence_length": 90.61,
@@ -249,11 +705,100 @@
         "mean_document_coverage": 0.506,
         "oov_rate": null,
         "oov_status": "not_applicable"
+      },
+      {
+        "model": "allenai/scibert_scivocab_uncased",
+        "selected_for_stage14": true,
+        "document_count": 422,
+        "mean_fertility": 1.4713,
+        "mean_sequence_length": 89.65,
+        "mean_document_fragmentation": 0.3031,
+        "mean_document_coverage": 0.6969,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "dmis-lab/biobert-base-cased-v1.2",
+        "selected_for_stage14": true,
+        "document_count": 422,
+        "mean_fertility": 1.5062,
+        "mean_sequence_length": 91.78,
+        "mean_document_fragmentation": 0.2819,
+        "mean_document_coverage": 0.7181,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+        "selected_for_stage14": true,
+        "document_count": 422,
+        "mean_fertility": 1.4756,
+        "mean_sequence_length": 89.92,
+        "mean_document_fragmentation": 0.2942,
+        "mean_document_coverage": 0.7058,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "emilyalsentzer/Bio_ClinicalBERT",
+        "selected_for_stage14": false,
+        "document_count": 422,
+        "mean_fertility": 1.5062,
+        "mean_sequence_length": 91.78,
+        "mean_document_fragmentation": 0.2819,
+        "mean_document_coverage": 0.7181,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "nlpaueb/legal-bert-base-uncased",
+        "selected_for_stage14": true,
+        "document_count": 422,
+        "mean_fertility": 1.5126,
+        "mean_sequence_length": 92.17,
+        "mean_document_fragmentation": 0.307,
+        "mean_document_coverage": 0.693,
+        "oov_rate": 0.000334,
+        "oov_status": "measured"
+      },
+      {
+        "model": "ProsusAI/finbert",
+        "selected_for_stage14": false,
+        "document_count": 422,
+        "mean_fertility": 1.4346,
+        "mean_sequence_length": 87.42,
+        "mean_document_fragmentation": 0.273,
+        "mean_document_coverage": 0.727,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "google/electra-base-discriminator",
+        "selected_for_stage14": false,
+        "document_count": 422,
+        "mean_fertility": 1.4346,
+        "mean_sequence_length": 87.42,
+        "mean_document_fragmentation": 0.273,
+        "mean_document_coverage": 0.727,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "distilbert-base-uncased",
+        "selected_for_stage14": false,
+        "document_count": 422,
+        "mean_fertility": 1.4346,
+        "mean_sequence_length": 87.42,
+        "mean_document_fragmentation": 0.273,
+        "mean_document_coverage": 0.727,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
       }
     ],
     "Low Knowledge": [
       {
         "model": "bert-base-uncased",
+        "selected_for_stage14": true,
         "document_count": 199,
         "mean_fertility": 1.3368,
         "mean_sequence_length": 18.59,
@@ -263,47 +808,19 @@
         "oov_status": "measured"
       },
       {
-        "model": "dmis-lab/biobert-base-cased-v1.2",
+        "model": "bert-large-uncased",
+        "selected_for_stage14": false,
         "document_count": 199,
-        "mean_fertility": 1.4431,
-        "mean_sequence_length": 20.07,
-        "mean_document_fragmentation": 0.2568,
-        "mean_document_coverage": 0.7432,
-        "oov_rate": 0.0,
-        "oov_status": "measured"
-      },
-      {
-        "model": "nlpaueb/legal-bert-base-uncased",
-        "document_count": 199,
-        "mean_fertility": 1.4543,
-        "mean_sequence_length": 20.22,
-        "mean_document_fragmentation": 0.3026,
-        "mean_document_coverage": 0.6974,
-        "oov_rate": 0.000497,
-        "oov_status": "measured"
-      },
-      {
-        "model": "allenai/scibert_scivocab_uncased",
-        "document_count": 199,
-        "mean_fertility": 1.4611,
-        "mean_sequence_length": 20.32,
-        "mean_document_fragmentation": 0.318,
-        "mean_document_coverage": 0.682,
-        "oov_rate": 0.0,
-        "oov_status": "measured"
-      },
-      {
-        "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
-        "document_count": 199,
-        "mean_fertility": 1.4651,
-        "mean_sequence_length": 20.37,
-        "mean_document_fragmentation": 0.3166,
-        "mean_document_coverage": 0.6834,
+        "mean_fertility": 1.3368,
+        "mean_sequence_length": 18.59,
+        "mean_document_fragmentation": 0.2249,
+        "mean_document_coverage": 0.7751,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "roberta-base",
+        "selected_for_stage14": true,
         "document_count": 199,
         "mean_fertility": 1.9678,
         "mean_sequence_length": 27.36,
@@ -314,6 +831,7 @@
       },
       {
         "model": "answerdotai/ModernBERT-base",
+        "selected_for_stage14": true,
         "document_count": 199,
         "mean_fertility": 1.9606,
         "mean_sequence_length": 27.26,
@@ -321,11 +839,100 @@
         "mean_document_coverage": 0.3285,
         "oov_rate": null,
         "oov_status": "not_applicable"
+      },
+      {
+        "model": "allenai/scibert_scivocab_uncased",
+        "selected_for_stage14": true,
+        "document_count": 199,
+        "mean_fertility": 1.4611,
+        "mean_sequence_length": 20.32,
+        "mean_document_fragmentation": 0.318,
+        "mean_document_coverage": 0.682,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "dmis-lab/biobert-base-cased-v1.2",
+        "selected_for_stage14": true,
+        "document_count": 199,
+        "mean_fertility": 1.4431,
+        "mean_sequence_length": 20.07,
+        "mean_document_fragmentation": 0.2568,
+        "mean_document_coverage": 0.7432,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+        "selected_for_stage14": true,
+        "document_count": 199,
+        "mean_fertility": 1.4651,
+        "mean_sequence_length": 20.37,
+        "mean_document_fragmentation": 0.3166,
+        "mean_document_coverage": 0.6834,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "emilyalsentzer/Bio_ClinicalBERT",
+        "selected_for_stage14": false,
+        "document_count": 199,
+        "mean_fertility": 1.4431,
+        "mean_sequence_length": 20.07,
+        "mean_document_fragmentation": 0.2568,
+        "mean_document_coverage": 0.7432,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "nlpaueb/legal-bert-base-uncased",
+        "selected_for_stage14": true,
+        "document_count": 199,
+        "mean_fertility": 1.4543,
+        "mean_sequence_length": 20.22,
+        "mean_document_fragmentation": 0.3026,
+        "mean_document_coverage": 0.6974,
+        "oov_rate": 0.000497,
+        "oov_status": "measured"
+      },
+      {
+        "model": "ProsusAI/finbert",
+        "selected_for_stage14": false,
+        "document_count": 199,
+        "mean_fertility": 1.3368,
+        "mean_sequence_length": 18.59,
+        "mean_document_fragmentation": 0.2249,
+        "mean_document_coverage": 0.7751,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "google/electra-base-discriminator",
+        "selected_for_stage14": false,
+        "document_count": 199,
+        "mean_fertility": 1.3368,
+        "mean_sequence_length": 18.59,
+        "mean_document_fragmentation": 0.2249,
+        "mean_document_coverage": 0.7751,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "distilbert-base-uncased",
+        "selected_for_stage14": false,
+        "document_count": 199,
+        "mean_fertility": 1.3368,
+        "mean_sequence_length": 18.59,
+        "mean_document_fragmentation": 0.2249,
+        "mean_document_coverage": 0.7751,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
       }
     ],
     "Medium Knowledge": [
       {
         "model": "bert-base-uncased",
+        "selected_for_stage14": true,
         "document_count": 673,
         "mean_fertility": 1.3787,
         "mean_sequence_length": 53.02,
@@ -335,47 +942,19 @@
         "oov_status": "measured"
       },
       {
-        "model": "dmis-lab/biobert-base-cased-v1.2",
+        "model": "bert-large-uncased",
+        "selected_for_stage14": false,
         "document_count": 673,
-        "mean_fertility": 1.4614,
-        "mean_sequence_length": 56.2,
-        "mean_document_fragmentation": 0.2722,
-        "mean_document_coverage": 0.7278,
-        "oov_rate": 0.0,
-        "oov_status": "measured"
-      },
-      {
-        "model": "nlpaueb/legal-bert-base-uncased",
-        "document_count": 673,
-        "mean_fertility": 1.4646,
-        "mean_sequence_length": 56.32,
-        "mean_document_fragmentation": 0.3058,
-        "mean_document_coverage": 0.6942,
-        "oov_rate": 0.00029,
-        "oov_status": "measured"
-      },
-      {
-        "model": "allenai/scibert_scivocab_uncased",
-        "document_count": 673,
-        "mean_fertility": 1.4382,
-        "mean_sequence_length": 55.3,
-        "mean_document_fragmentation": 0.303,
-        "mean_document_coverage": 0.697,
-        "oov_rate": 0.0,
-        "oov_status": "measured"
-      },
-      {
-        "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
-        "document_count": 673,
-        "mean_fertility": 1.4401,
-        "mean_sequence_length": 55.38,
-        "mean_document_fragmentation": 0.2979,
-        "mean_document_coverage": 0.7021,
+        "mean_fertility": 1.3787,
+        "mean_sequence_length": 53.02,
+        "mean_document_fragmentation": 0.2574,
+        "mean_document_coverage": 0.7426,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "roberta-base",
+        "selected_for_stage14": true,
         "document_count": 673,
         "mean_fertility": 1.5524,
         "mean_sequence_length": 59.7,
@@ -386,6 +965,7 @@
       },
       {
         "model": "answerdotai/ModernBERT-base",
+        "selected_for_stage14": true,
         "document_count": 673,
         "mean_fertility": 1.5213,
         "mean_sequence_length": 58.5,
@@ -393,11 +973,100 @@
         "mean_document_coverage": 0.4489,
         "oov_rate": null,
         "oov_status": "not_applicable"
+      },
+      {
+        "model": "allenai/scibert_scivocab_uncased",
+        "selected_for_stage14": true,
+        "document_count": 673,
+        "mean_fertility": 1.4382,
+        "mean_sequence_length": 55.3,
+        "mean_document_fragmentation": 0.303,
+        "mean_document_coverage": 0.697,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "dmis-lab/biobert-base-cased-v1.2",
+        "selected_for_stage14": true,
+        "document_count": 673,
+        "mean_fertility": 1.4614,
+        "mean_sequence_length": 56.2,
+        "mean_document_fragmentation": 0.2722,
+        "mean_document_coverage": 0.7278,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+        "selected_for_stage14": true,
+        "document_count": 673,
+        "mean_fertility": 1.4401,
+        "mean_sequence_length": 55.38,
+        "mean_document_fragmentation": 0.2979,
+        "mean_document_coverage": 0.7021,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "emilyalsentzer/Bio_ClinicalBERT",
+        "selected_for_stage14": false,
+        "document_count": 673,
+        "mean_fertility": 1.4614,
+        "mean_sequence_length": 56.2,
+        "mean_document_fragmentation": 0.2722,
+        "mean_document_coverage": 0.7278,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "nlpaueb/legal-bert-base-uncased",
+        "selected_for_stage14": true,
+        "document_count": 673,
+        "mean_fertility": 1.4646,
+        "mean_sequence_length": 56.32,
+        "mean_document_fragmentation": 0.3058,
+        "mean_document_coverage": 0.6942,
+        "oov_rate": 0.00029,
+        "oov_status": "measured"
+      },
+      {
+        "model": "ProsusAI/finbert",
+        "selected_for_stage14": false,
+        "document_count": 673,
+        "mean_fertility": 1.3787,
+        "mean_sequence_length": 53.02,
+        "mean_document_fragmentation": 0.2574,
+        "mean_document_coverage": 0.7426,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "google/electra-base-discriminator",
+        "selected_for_stage14": false,
+        "document_count": 673,
+        "mean_fertility": 1.3787,
+        "mean_sequence_length": 53.02,
+        "mean_document_fragmentation": 0.2574,
+        "mean_document_coverage": 0.7426,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "distilbert-base-uncased",
+        "selected_for_stage14": false,
+        "document_count": 673,
+        "mean_fertility": 1.3787,
+        "mean_sequence_length": 53.02,
+        "mean_document_fragmentation": 0.2574,
+        "mean_document_coverage": 0.7426,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
       }
     ],
     "Redundant": [
       {
         "model": "bert-base-uncased",
+        "selected_for_stage14": true,
         "document_count": 206,
         "mean_fertility": 1.3588,
         "mean_sequence_length": 42.14,
@@ -407,47 +1076,19 @@
         "oov_status": "measured"
       },
       {
-        "model": "dmis-lab/biobert-base-cased-v1.2",
+        "model": "bert-large-uncased",
+        "selected_for_stage14": false,
         "document_count": 206,
-        "mean_fertility": 1.4557,
-        "mean_sequence_length": 45.14,
-        "mean_document_fragmentation": 0.2756,
-        "mean_document_coverage": 0.7244,
-        "oov_rate": 0.0,
-        "oov_status": "measured"
-      },
-      {
-        "model": "nlpaueb/legal-bert-base-uncased",
-        "document_count": 206,
-        "mean_fertility": 1.4285,
-        "mean_sequence_length": 44.3,
-        "mean_document_fragmentation": 0.2943,
-        "mean_document_coverage": 0.7057,
-        "oov_rate": 0.00011,
-        "oov_status": "measured"
-      },
-      {
-        "model": "allenai/scibert_scivocab_uncased",
-        "document_count": 206,
-        "mean_fertility": 1.4235,
-        "mean_sequence_length": 44.14,
-        "mean_document_fragmentation": 0.2949,
-        "mean_document_coverage": 0.7051,
-        "oov_rate": 0.0,
-        "oov_status": "measured"
-      },
-      {
-        "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
-        "document_count": 206,
-        "mean_fertility": 1.4211,
-        "mean_sequence_length": 44.07,
-        "mean_document_fragmentation": 0.2917,
-        "mean_document_coverage": 0.7083,
+        "mean_fertility": 1.3588,
+        "mean_sequence_length": 42.14,
+        "mean_document_fragmentation": 0.2727,
+        "mean_document_coverage": 0.7273,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "roberta-base",
+        "selected_for_stage14": true,
         "document_count": 206,
         "mean_fertility": 1.5039,
         "mean_sequence_length": 46.64,
@@ -458,6 +1099,7 @@
       },
       {
         "model": "answerdotai/ModernBERT-base",
+        "selected_for_stage14": true,
         "document_count": 206,
         "mean_fertility": 1.4917,
         "mean_sequence_length": 46.26,
@@ -465,12 +1107,101 @@
         "mean_document_coverage": 0.4728,
         "oov_rate": null,
         "oov_status": "not_applicable"
+      },
+      {
+        "model": "allenai/scibert_scivocab_uncased",
+        "selected_for_stage14": true,
+        "document_count": 206,
+        "mean_fertility": 1.4235,
+        "mean_sequence_length": 44.14,
+        "mean_document_fragmentation": 0.2949,
+        "mean_document_coverage": 0.7051,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "dmis-lab/biobert-base-cased-v1.2",
+        "selected_for_stage14": true,
+        "document_count": 206,
+        "mean_fertility": 1.4557,
+        "mean_sequence_length": 45.14,
+        "mean_document_fragmentation": 0.2756,
+        "mean_document_coverage": 0.7244,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+        "selected_for_stage14": true,
+        "document_count": 206,
+        "mean_fertility": 1.4211,
+        "mean_sequence_length": 44.07,
+        "mean_document_fragmentation": 0.2917,
+        "mean_document_coverage": 0.7083,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "emilyalsentzer/Bio_ClinicalBERT",
+        "selected_for_stage14": false,
+        "document_count": 206,
+        "mean_fertility": 1.4557,
+        "mean_sequence_length": 45.14,
+        "mean_document_fragmentation": 0.2756,
+        "mean_document_coverage": 0.7244,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "nlpaueb/legal-bert-base-uncased",
+        "selected_for_stage14": true,
+        "document_count": 206,
+        "mean_fertility": 1.4285,
+        "mean_sequence_length": 44.3,
+        "mean_document_fragmentation": 0.2943,
+        "mean_document_coverage": 0.7057,
+        "oov_rate": 0.00011,
+        "oov_status": "measured"
+      },
+      {
+        "model": "ProsusAI/finbert",
+        "selected_for_stage14": false,
+        "document_count": 206,
+        "mean_fertility": 1.3588,
+        "mean_sequence_length": 42.14,
+        "mean_document_fragmentation": 0.2727,
+        "mean_document_coverage": 0.7273,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "google/electra-base-discriminator",
+        "selected_for_stage14": false,
+        "document_count": 206,
+        "mean_fertility": 1.3588,
+        "mean_sequence_length": 42.14,
+        "mean_document_fragmentation": 0.2727,
+        "mean_document_coverage": 0.7273,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
+      },
+      {
+        "model": "distilbert-base-uncased",
+        "selected_for_stage14": false,
+        "document_count": 206,
+        "mean_fertility": 1.3588,
+        "mean_sequence_length": 42.14,
+        "mean_document_fragmentation": 0.2727,
+        "mean_document_coverage": 0.7273,
+        "oov_rate": 0.0,
+        "oov_status": "measured"
       }
     ]
   },
   "document_level_correlations": [
     {
       "model": "bert-base-uncased",
+      "selected_for_stage14": true,
       "fertility_correlation": {
         "rho": 0.3126,
         "p_value": 0.0,
@@ -491,91 +1222,30 @@
       }
     },
     {
-      "model": "dmis-lab/biobert-base-cased-v1.2",
+      "model": "bert-large-uncased",
+      "selected_for_stage14": false,
       "fertility_correlation": {
-        "rho": 0.1984,
+        "rho": 0.3126,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
       },
       "fragmentation_correlation": {
-        "rho": 0.1179,
-        "p_value": 5e-06,
-        "sample_size": 1500,
-        "status": "computed"
-      },
-      "coverage_correlation": {
-        "rho": -0.1179,
-        "p_value": 5e-06,
-        "sample_size": 1500,
-        "status": "computed"
-      }
-    },
-    {
-      "model": "nlpaueb/legal-bert-base-uncased",
-      "fertility_correlation": {
-        "rho": 0.2519,
+        "rho": 0.1528,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
       },
-      "fragmentation_correlation": {
-        "rho": 0.0623,
-        "p_value": 0.015886,
-        "sample_size": 1500,
-        "status": "computed"
-      },
       "coverage_correlation": {
-        "rho": -0.0623,
-        "p_value": 0.015886,
-        "sample_size": 1500,
-        "status": "computed"
-      }
-    },
-    {
-      "model": "allenai/scibert_scivocab_uncased",
-      "fertility_correlation": {
-        "rho": 0.1182,
-        "p_value": 4e-06,
-        "sample_size": 1500,
-        "status": "computed"
-      },
-      "fragmentation_correlation": {
-        "rho": 0.0329,
-        "p_value": 0.203198,
-        "sample_size": 1500,
-        "status": "computed"
-      },
-      "coverage_correlation": {
-        "rho": -0.0329,
-        "p_value": 0.203198,
-        "sample_size": 1500,
-        "status": "computed"
-      }
-    },
-    {
-      "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
-      "fertility_correlation": {
-        "rho": 0.1219,
-        "p_value": 2e-06,
-        "sample_size": 1500,
-        "status": "computed"
-      },
-      "fragmentation_correlation": {
-        "rho": 0.0049,
-        "p_value": 0.850106,
-        "sample_size": 1500,
-        "status": "computed"
-      },
-      "coverage_correlation": {
-        "rho": -0.0049,
-        "p_value": 0.850106,
+        "rho": -0.1528,
+        "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
       }
     },
     {
       "model": "roberta-base",
+      "selected_for_stage14": true,
       "fertility_correlation": {
         "rho": -0.2618,
         "p_value": 0.0,
@@ -597,6 +1267,7 @@
     },
     {
       "model": "answerdotai/ModernBERT-base",
+      "selected_for_stage14": true,
       "fertility_correlation": {
         "rho": -0.335,
         "p_value": 0.0,
@@ -611,6 +1282,182 @@
       },
       "coverage_correlation": {
         "rho": 0.3947,
+        "p_value": 0.0,
+        "sample_size": 1500,
+        "status": "computed"
+      }
+    },
+    {
+      "model": "allenai/scibert_scivocab_uncased",
+      "selected_for_stage14": true,
+      "fertility_correlation": {
+        "rho": 0.1182,
+        "p_value": 4e-06,
+        "sample_size": 1500,
+        "status": "computed"
+      },
+      "fragmentation_correlation": {
+        "rho": 0.0329,
+        "p_value": 0.203198,
+        "sample_size": 1500,
+        "status": "computed"
+      },
+      "coverage_correlation": {
+        "rho": -0.0329,
+        "p_value": 0.203198,
+        "sample_size": 1500,
+        "status": "computed"
+      }
+    },
+    {
+      "model": "dmis-lab/biobert-base-cased-v1.2",
+      "selected_for_stage14": true,
+      "fertility_correlation": {
+        "rho": 0.1984,
+        "p_value": 0.0,
+        "sample_size": 1500,
+        "status": "computed"
+      },
+      "fragmentation_correlation": {
+        "rho": 0.1179,
+        "p_value": 5e-06,
+        "sample_size": 1500,
+        "status": "computed"
+      },
+      "coverage_correlation": {
+        "rho": -0.1179,
+        "p_value": 5e-06,
+        "sample_size": 1500,
+        "status": "computed"
+      }
+    },
+    {
+      "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "selected_for_stage14": true,
+      "fertility_correlation": {
+        "rho": 0.1219,
+        "p_value": 2e-06,
+        "sample_size": 1500,
+        "status": "computed"
+      },
+      "fragmentation_correlation": {
+        "rho": 0.0049,
+        "p_value": 0.850106,
+        "sample_size": 1500,
+        "status": "computed"
+      },
+      "coverage_correlation": {
+        "rho": -0.0049,
+        "p_value": 0.850106,
+        "sample_size": 1500,
+        "status": "computed"
+      }
+    },
+    {
+      "model": "emilyalsentzer/Bio_ClinicalBERT",
+      "selected_for_stage14": false,
+      "fertility_correlation": {
+        "rho": 0.1984,
+        "p_value": 0.0,
+        "sample_size": 1500,
+        "status": "computed"
+      },
+      "fragmentation_correlation": {
+        "rho": 0.1179,
+        "p_value": 5e-06,
+        "sample_size": 1500,
+        "status": "computed"
+      },
+      "coverage_correlation": {
+        "rho": -0.1179,
+        "p_value": 5e-06,
+        "sample_size": 1500,
+        "status": "computed"
+      }
+    },
+    {
+      "model": "nlpaueb/legal-bert-base-uncased",
+      "selected_for_stage14": true,
+      "fertility_correlation": {
+        "rho": 0.2519,
+        "p_value": 0.0,
+        "sample_size": 1500,
+        "status": "computed"
+      },
+      "fragmentation_correlation": {
+        "rho": 0.0623,
+        "p_value": 0.015886,
+        "sample_size": 1500,
+        "status": "computed"
+      },
+      "coverage_correlation": {
+        "rho": -0.0623,
+        "p_value": 0.015886,
+        "sample_size": 1500,
+        "status": "computed"
+      }
+    },
+    {
+      "model": "ProsusAI/finbert",
+      "selected_for_stage14": false,
+      "fertility_correlation": {
+        "rho": 0.3126,
+        "p_value": 0.0,
+        "sample_size": 1500,
+        "status": "computed"
+      },
+      "fragmentation_correlation": {
+        "rho": 0.1528,
+        "p_value": 0.0,
+        "sample_size": 1500,
+        "status": "computed"
+      },
+      "coverage_correlation": {
+        "rho": -0.1528,
+        "p_value": 0.0,
+        "sample_size": 1500,
+        "status": "computed"
+      }
+    },
+    {
+      "model": "google/electra-base-discriminator",
+      "selected_for_stage14": false,
+      "fertility_correlation": {
+        "rho": 0.3126,
+        "p_value": 0.0,
+        "sample_size": 1500,
+        "status": "computed"
+      },
+      "fragmentation_correlation": {
+        "rho": 0.1528,
+        "p_value": 0.0,
+        "sample_size": 1500,
+        "status": "computed"
+      },
+      "coverage_correlation": {
+        "rho": -0.1528,
+        "p_value": 0.0,
+        "sample_size": 1500,
+        "status": "computed"
+      }
+    },
+    {
+      "model": "distilbert-base-uncased",
+      "selected_for_stage14": false,
+      "fertility_correlation": {
+        "rho": 0.3126,
+        "p_value": 0.0,
+        "sample_size": 1500,
+        "status": "computed"
+      },
+      "fragmentation_correlation": {
+        "rho": 0.1528,
+        "p_value": 0.0,
+        "sample_size": 1500,
+        "status": "computed"
+      },
+      "coverage_correlation": {
+        "rho": -0.1528,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
@@ -972,7 +1819,7 @@
         }
       ]
     },
-    "dmis_lab_biobert_base_cased_v1.2": {
+    "bert_large_uncased": {
       "general_maritime_examples": [
         {
           "term": "above",
@@ -1033,8 +1880,8 @@
         {
           "term": "ais",
           "tokens": [
-            "a",
-            "##is"
+            "ai",
+            "##s"
           ],
           "num_pieces": 2
         },
@@ -1084,17 +1931,17 @@
         {
           "term": "bollard",
           "tokens": [
-            "b",
-            "##oll",
-            "##ard"
+            "bo",
+            "##llar",
+            "##d"
           ],
           "num_pieces": 3
         },
         {
           "term": "bulwark",
           "tokens": [
-            "b",
-            "##ul",
+            "bu",
+            "##l",
             "##wark"
           ],
           "num_pieces": 3
@@ -1102,12 +1949,11 @@
         {
           "term": "coxswain",
           "tokens": [
-            "co",
-            "##x",
-            "##s",
-            "##wain"
+            "cox",
+            "##sw",
+            "##ain"
           ],
-          "num_pieces": 4
+          "num_pieces": 3
         },
         {
           "term": "davit",
@@ -1121,9 +1967,9 @@
         {
           "term": "epirb",
           "tokens": [
-            "e",
-            "##pi",
-            "##rb"
+            "ep",
+            "##ir",
+            "##b"
           ],
           "num_pieces": 3
         },
@@ -1176,9 +2022,9 @@
           "tokens": [
             "g",
             "##yr",
-            "##oc",
-            "##om",
-            "##pass"
+            "##oco",
+            "##mp",
+            "##ass"
           ],
           "num_pieces": 5
         },
@@ -1194,712 +2040,6 @@
         {
           "term": "leeward",
           "tokens": [
-            "le",
-            "##ew",
-            "##ard"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "sart",
-          "tokens": [
-            "sa",
-            "##rt"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "stempost",
-          "tokens": [
-            "stem",
-            "##post"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "transom",
-          "tokens": [
-            "trans",
-            "##om"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "windlass",
-          "tokens": [
-            "wind",
-            "##lass"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "windward",
-          "tokens": [
-            "wind",
-            "##ward"
-          ],
-          "num_pieces": 2
-        }
-      ],
-      "general_vocabulary_examples": [
-        {
-          "term": "access",
-          "tokens": [
-            "access"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "across",
-          "tokens": [
-            "across"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "addressing",
-          "tokens": [
-            "addressing"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "analyzed",
-          "tokens": [
-            "analyzed"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "ancient",
-          "tokens": [
-            "ancient"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "and",
-          "tokens": [
-            "and"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "announcements",
-          "tokens": [
-            "announcement",
-            "##s"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "architectural",
-          "tokens": [
-            "architectural"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "authorities",
-          "tokens": [
-            "authorities"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "birds",
-          "tokens": [
-            "birds"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "books",
-          "tokens": [
-            "books"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "cardiovascular",
-          "tokens": [
-            "card",
-            "##iovascular"
-          ],
-          "num_pieces": 2
-        }
-      ]
-    },
-    "nlpaueb_legal_bert_base_uncased": {
-      "general_maritime_examples": [
-        {
-          "term": "above",
-          "tokens": [
-            "above"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "accident",
-          "tokens": [
-            "accident"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "aft",
-          "tokens": [
-            "aft"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "after",
-          "tokens": [
-            "after"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "ahead",
-          "tokens": [
-            "a",
-            "##head"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "aid",
-          "tokens": [
-            "aid"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "air",
-          "tokens": [
-            "air"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "aircraft",
-          "tokens": [
-            "aircraft"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "ais",
-          "tokens": [
-            "a",
-            "##is"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "algolake",
-          "tokens": [
-            "alg",
-            "##ola",
-            "##ke"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "algoport",
-          "tokens": [
-            "alg",
-            "##opo",
-            "##r",
-            "##t"
-          ],
-          "num_pieces": 4
-        },
-        {
-          "term": "anchor",
-          "tokens": [
-            "anchor"
-          ],
-          "num_pieces": 1
-        }
-      ],
-      "rare_maritime_examples": [
-        {
-          "term": "bilge",
-          "tokens": [
-            "bilge"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "bitts",
-          "tokens": [
-            "bit",
-            "##t",
-            "##s"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "bollard",
-          "tokens": [
-            "boll",
-            "##ard"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "bulwark",
-          "tokens": [
-            "bul",
-            "##war",
-            "##k"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "coxswain",
-          "tokens": [
-            "cox",
-            "##s",
-            "##wain"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "davit",
-          "tokens": [
-            "davit"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "epirb",
-          "tokens": [
-            "epi",
-            "##r",
-            "##b"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "fairlead",
-          "tokens": [
-            "fair",
-            "##lea",
-            "##d"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "fathometer",
-          "tokens": [
-            "fat",
-            "##home",
-            "##ter"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "forepeak",
-          "tokens": [
-            "for",
-            "##epe",
-            "##ak"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "freeboard",
-          "tokens": [
-            "free",
-            "##board"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "gunwale",
-          "tokens": [
-            "gun",
-            "##wal",
-            "##e"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "gyrocompass",
-          "tokens": [
-            "gy",
-            "##roc",
-            "##omp",
-            "##as",
-            "##s"
-          ],
-          "num_pieces": 5
-        },
-        {
-          "term": "hawser",
-          "tokens": [
-            "haw",
-            "##s",
-            "##er"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "leeward",
-          "tokens": [
-            "lee",
-            "##ward"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "sart",
-          "tokens": [
-            "sar",
-            "##t"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "stempost",
-          "tokens": [
-            "stem",
-            "##post"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "transom",
-          "tokens": [
-            "trans",
-            "##om"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "windlass",
-          "tokens": [
-            "wind",
-            "##las",
-            "##s"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "windward",
-          "tokens": [
-            "wind",
-            "##ward"
-          ],
-          "num_pieces": 2
-        }
-      ],
-      "general_vocabulary_examples": [
-        {
-          "term": "access",
-          "tokens": [
-            "access"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "across",
-          "tokens": [
-            "across"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "addressing",
-          "tokens": [
-            "addressing"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "analyzed",
-          "tokens": [
-            "analyzed"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "ancient",
-          "tokens": [
-            "ancient"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "and",
-          "tokens": [
-            "and"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "announcements",
-          "tokens": [
-            "announcement",
-            "##s"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "architectural",
-          "tokens": [
-            "architectural"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "authorities",
-          "tokens": [
-            "authorities"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "birds",
-          "tokens": [
-            "birds"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "books",
-          "tokens": [
-            "books"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "cardiovascular",
-          "tokens": [
-            "cardio",
-            "##vascular"
-          ],
-          "num_pieces": 2
-        }
-      ]
-    },
-    "allenai_scibert_scivocab_uncased": {
-      "general_maritime_examples": [
-        {
-          "term": "above",
-          "tokens": [
-            "above"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "accident",
-          "tokens": [
-            "accident"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "aft",
-          "tokens": [
-            "af",
-            "##t"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "after",
-          "tokens": [
-            "after"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "ahead",
-          "tokens": [
-            "ahead"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "aid",
-          "tokens": [
-            "aid"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "air",
-          "tokens": [
-            "air"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "aircraft",
-          "tokens": [
-            "aircraft"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "ais",
-          "tokens": [
-            "ais"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "algolake",
-          "tokens": [
-            "alg",
-            "##ola",
-            "##ke"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "algoport",
-          "tokens": [
-            "alg",
-            "##opor",
-            "##t"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "anchor",
-          "tokens": [
-            "anchor"
-          ],
-          "num_pieces": 1
-        }
-      ],
-      "rare_maritime_examples": [
-        {
-          "term": "bilge",
-          "tokens": [
-            "bil",
-            "##ge"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "bitts",
-          "tokens": [
-            "bit",
-            "##ts"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "bollard",
-          "tokens": [
-            "bol",
-            "##lar",
-            "##d"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "bulwark",
-          "tokens": [
-            "bul",
-            "##war",
-            "##k"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "coxswain",
-          "tokens": [
-            "cox",
-            "##sw",
-            "##ain"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "davit",
-          "tokens": [
-            "dav",
-            "##it"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "epirb",
-          "tokens": [
-            "epi",
-            "##rb"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "fairlead",
-          "tokens": [
-            "fair",
-            "##lead"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "fathometer",
-          "tokens": [
-            "fat",
-            "##home",
-            "##ter"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "forepeak",
-          "tokens": [
-            "fore",
-            "##peak"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "freeboard",
-          "tokens": [
-            "free",
-            "##board"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "gunwale",
-          "tokens": [
-            "gun",
-            "##wal",
-            "##e"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "gyrocompass",
-          "tokens": [
-            "gyr",
-            "##ocom",
-            "##pass"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "hawser",
-          "tokens": [
-            "haw",
-            "##ser"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "leeward",
-          "tokens": [
             "lee",
             "##ward"
           ],
@@ -1992,363 +2132,9 @@
         {
           "term": "announcements",
           "tokens": [
-            "announcement",
-            "##s"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "architectural",
-          "tokens": [
-            "architectural"
+            "announcements"
           ],
           "num_pieces": 1
-        },
-        {
-          "term": "authorities",
-          "tokens": [
-            "authorities"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "birds",
-          "tokens": [
-            "birds"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "books",
-          "tokens": [
-            "books"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "cardiovascular",
-          "tokens": [
-            "cardiovascular"
-          ],
-          "num_pieces": 1
-        }
-      ]
-    },
-    "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext": {
-      "general_maritime_examples": [
-        {
-          "term": "above",
-          "tokens": [
-            "above"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "accident",
-          "tokens": [
-            "accident"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "aft",
-          "tokens": [
-            "af",
-            "##t"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "after",
-          "tokens": [
-            "after"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "ahead",
-          "tokens": [
-            "ahead"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "aid",
-          "tokens": [
-            "aid"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "air",
-          "tokens": [
-            "air"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "aircraft",
-          "tokens": [
-            "air",
-            "##cr",
-            "##aft"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "ais",
-          "tokens": [
-            "ais"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "algolake",
-          "tokens": [
-            "alg",
-            "##ola",
-            "##ke"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "algoport",
-          "tokens": [
-            "alg",
-            "##opo",
-            "##rt"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "anchor",
-          "tokens": [
-            "anchor"
-          ],
-          "num_pieces": 1
-        }
-      ],
-      "rare_maritime_examples": [
-        {
-          "term": "bilge",
-          "tokens": [
-            "bil",
-            "##ge"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "bitts",
-          "tokens": [
-            "bit",
-            "##ts"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "bollard",
-          "tokens": [
-            "bol",
-            "##la",
-            "##rd"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "bulwark",
-          "tokens": [
-            "bul",
-            "##war",
-            "##k"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "coxswain",
-          "tokens": [
-            "cox",
-            "##sw",
-            "##ain"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "davit",
-          "tokens": [
-            "dav",
-            "##it"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "epirb",
-          "tokens": [
-            "epi",
-            "##rb"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "fairlead",
-          "tokens": [
-            "fair",
-            "##le",
-            "##ad"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "fathometer",
-          "tokens": [
-            "fat",
-            "##hom",
-            "##eter"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "forepeak",
-          "tokens": [
-            "fore",
-            "##peak"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "freeboard",
-          "tokens": [
-            "free",
-            "##board"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "gunwale",
-          "tokens": [
-            "gun",
-            "##wal",
-            "##e"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "gyrocompass",
-          "tokens": [
-            "gyr",
-            "##ocomp",
-            "##ass"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "hawser",
-          "tokens": [
-            "haw",
-            "##ser"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "leeward",
-          "tokens": [
-            "lee",
-            "##ward"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "sart",
-          "tokens": [
-            "sar",
-            "##t"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "stempost",
-          "tokens": [
-            "stem",
-            "##pos",
-            "##t"
-          ],
-          "num_pieces": 3
-        },
-        {
-          "term": "transom",
-          "tokens": [
-            "trans",
-            "##om"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "windlass",
-          "tokens": [
-            "wind",
-            "##lass"
-          ],
-          "num_pieces": 2
-        },
-        {
-          "term": "windward",
-          "tokens": [
-            "wind",
-            "##ward"
-          ],
-          "num_pieces": 2
-        }
-      ],
-      "general_vocabulary_examples": [
-        {
-          "term": "access",
-          "tokens": [
-            "access"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "across",
-          "tokens": [
-            "across"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "addressing",
-          "tokens": [
-            "addressing"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "analyzed",
-          "tokens": [
-            "analyzed"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "ancient",
-          "tokens": [
-            "ancient"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "and",
-          "tokens": [
-            "and"
-          ],
-          "num_pieces": 1
-        },
-        {
-          "term": "announcements",
-          "tokens": [
-            "ann",
-            "##ounce",
-            "##ments"
-          ],
-          "num_pieces": 3
         },
         {
           "term": "architectural",
@@ -3110,19 +2896,2859 @@
           "num_pieces": 2
         }
       ]
+    },
+    "allenai_scibert_scivocab_uncased": {
+      "general_maritime_examples": [
+        {
+          "term": "above",
+          "tokens": [
+            "above"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "accident",
+          "tokens": [
+            "accident"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aft",
+          "tokens": [
+            "af",
+            "##t"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "after",
+          "tokens": [
+            "after"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ahead",
+          "tokens": [
+            "ahead"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aid",
+          "tokens": [
+            "aid"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "air",
+          "tokens": [
+            "air"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aircraft",
+          "tokens": [
+            "aircraft"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ais",
+          "tokens": [
+            "ais"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "algolake",
+          "tokens": [
+            "alg",
+            "##ola",
+            "##ke"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "algoport",
+          "tokens": [
+            "alg",
+            "##opor",
+            "##t"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "anchor",
+          "tokens": [
+            "anchor"
+          ],
+          "num_pieces": 1
+        }
+      ],
+      "rare_maritime_examples": [
+        {
+          "term": "bilge",
+          "tokens": [
+            "bil",
+            "##ge"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "bitts",
+          "tokens": [
+            "bit",
+            "##ts"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "bollard",
+          "tokens": [
+            "bol",
+            "##lar",
+            "##d"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "bulwark",
+          "tokens": [
+            "bul",
+            "##war",
+            "##k"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "coxswain",
+          "tokens": [
+            "cox",
+            "##sw",
+            "##ain"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "davit",
+          "tokens": [
+            "dav",
+            "##it"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "epirb",
+          "tokens": [
+            "epi",
+            "##rb"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "fairlead",
+          "tokens": [
+            "fair",
+            "##lead"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "fathometer",
+          "tokens": [
+            "fat",
+            "##home",
+            "##ter"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "forepeak",
+          "tokens": [
+            "fore",
+            "##peak"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "freeboard",
+          "tokens": [
+            "free",
+            "##board"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "gunwale",
+          "tokens": [
+            "gun",
+            "##wal",
+            "##e"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "gyrocompass",
+          "tokens": [
+            "gyr",
+            "##ocom",
+            "##pass"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "hawser",
+          "tokens": [
+            "haw",
+            "##ser"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "leeward",
+          "tokens": [
+            "lee",
+            "##ward"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "sart",
+          "tokens": [
+            "sar",
+            "##t"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "stempost",
+          "tokens": [
+            "stem",
+            "##post"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "transom",
+          "tokens": [
+            "trans",
+            "##om"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "windlass",
+          "tokens": [
+            "wind",
+            "##lass"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "windward",
+          "tokens": [
+            "wind",
+            "##ward"
+          ],
+          "num_pieces": 2
+        }
+      ],
+      "general_vocabulary_examples": [
+        {
+          "term": "access",
+          "tokens": [
+            "access"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "across",
+          "tokens": [
+            "across"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "addressing",
+          "tokens": [
+            "addressing"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "analyzed",
+          "tokens": [
+            "analyzed"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ancient",
+          "tokens": [
+            "ancient"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "and",
+          "tokens": [
+            "and"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "announcements",
+          "tokens": [
+            "announcement",
+            "##s"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "architectural",
+          "tokens": [
+            "architectural"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "authorities",
+          "tokens": [
+            "authorities"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "birds",
+          "tokens": [
+            "birds"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "books",
+          "tokens": [
+            "books"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "cardiovascular",
+          "tokens": [
+            "cardiovascular"
+          ],
+          "num_pieces": 1
+        }
+      ]
+    },
+    "dmis_lab_biobert_base_cased_v1.2": {
+      "general_maritime_examples": [
+        {
+          "term": "above",
+          "tokens": [
+            "above"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "accident",
+          "tokens": [
+            "accident"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aft",
+          "tokens": [
+            "aft"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "after",
+          "tokens": [
+            "after"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ahead",
+          "tokens": [
+            "ahead"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aid",
+          "tokens": [
+            "aid"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "air",
+          "tokens": [
+            "air"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aircraft",
+          "tokens": [
+            "aircraft"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ais",
+          "tokens": [
+            "a",
+            "##is"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "algolake",
+          "tokens": [
+            "al",
+            "##gol",
+            "##ake"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "algoport",
+          "tokens": [
+            "al",
+            "##go",
+            "##port"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "anchor",
+          "tokens": [
+            "anchor"
+          ],
+          "num_pieces": 1
+        }
+      ],
+      "rare_maritime_examples": [
+        {
+          "term": "bilge",
+          "tokens": [
+            "bi",
+            "##lge"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "bitts",
+          "tokens": [
+            "bit",
+            "##ts"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "bollard",
+          "tokens": [
+            "b",
+            "##oll",
+            "##ard"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "bulwark",
+          "tokens": [
+            "b",
+            "##ul",
+            "##wark"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "coxswain",
+          "tokens": [
+            "co",
+            "##x",
+            "##s",
+            "##wain"
+          ],
+          "num_pieces": 4
+        },
+        {
+          "term": "davit",
+          "tokens": [
+            "da",
+            "##vi",
+            "##t"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "epirb",
+          "tokens": [
+            "e",
+            "##pi",
+            "##rb"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "fairlead",
+          "tokens": [
+            "fair",
+            "##lea",
+            "##d"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "fathometer",
+          "tokens": [
+            "fat",
+            "##hom",
+            "##eter"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "forepeak",
+          "tokens": [
+            "fore",
+            "##pe",
+            "##ak"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "freeboard",
+          "tokens": [
+            "free",
+            "##board"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "gunwale",
+          "tokens": [
+            "gun",
+            "##wal",
+            "##e"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "gyrocompass",
+          "tokens": [
+            "g",
+            "##yr",
+            "##oc",
+            "##om",
+            "##pass"
+          ],
+          "num_pieces": 5
+        },
+        {
+          "term": "hawser",
+          "tokens": [
+            "ha",
+            "##ws",
+            "##er"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "leeward",
+          "tokens": [
+            "le",
+            "##ew",
+            "##ard"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "sart",
+          "tokens": [
+            "sa",
+            "##rt"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "stempost",
+          "tokens": [
+            "stem",
+            "##post"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "transom",
+          "tokens": [
+            "trans",
+            "##om"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "windlass",
+          "tokens": [
+            "wind",
+            "##lass"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "windward",
+          "tokens": [
+            "wind",
+            "##ward"
+          ],
+          "num_pieces": 2
+        }
+      ],
+      "general_vocabulary_examples": [
+        {
+          "term": "access",
+          "tokens": [
+            "access"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "across",
+          "tokens": [
+            "across"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "addressing",
+          "tokens": [
+            "addressing"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "analyzed",
+          "tokens": [
+            "analyzed"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ancient",
+          "tokens": [
+            "ancient"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "and",
+          "tokens": [
+            "and"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "announcements",
+          "tokens": [
+            "announcement",
+            "##s"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "architectural",
+          "tokens": [
+            "architectural"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "authorities",
+          "tokens": [
+            "authorities"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "birds",
+          "tokens": [
+            "birds"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "books",
+          "tokens": [
+            "books"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "cardiovascular",
+          "tokens": [
+            "card",
+            "##iovascular"
+          ],
+          "num_pieces": 2
+        }
+      ]
+    },
+    "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext": {
+      "general_maritime_examples": [
+        {
+          "term": "above",
+          "tokens": [
+            "above"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "accident",
+          "tokens": [
+            "accident"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aft",
+          "tokens": [
+            "af",
+            "##t"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "after",
+          "tokens": [
+            "after"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ahead",
+          "tokens": [
+            "ahead"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aid",
+          "tokens": [
+            "aid"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "air",
+          "tokens": [
+            "air"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aircraft",
+          "tokens": [
+            "air",
+            "##cr",
+            "##aft"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "ais",
+          "tokens": [
+            "ais"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "algolake",
+          "tokens": [
+            "alg",
+            "##ola",
+            "##ke"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "algoport",
+          "tokens": [
+            "alg",
+            "##opo",
+            "##rt"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "anchor",
+          "tokens": [
+            "anchor"
+          ],
+          "num_pieces": 1
+        }
+      ],
+      "rare_maritime_examples": [
+        {
+          "term": "bilge",
+          "tokens": [
+            "bil",
+            "##ge"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "bitts",
+          "tokens": [
+            "bit",
+            "##ts"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "bollard",
+          "tokens": [
+            "bol",
+            "##la",
+            "##rd"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "bulwark",
+          "tokens": [
+            "bul",
+            "##war",
+            "##k"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "coxswain",
+          "tokens": [
+            "cox",
+            "##sw",
+            "##ain"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "davit",
+          "tokens": [
+            "dav",
+            "##it"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "epirb",
+          "tokens": [
+            "epi",
+            "##rb"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "fairlead",
+          "tokens": [
+            "fair",
+            "##le",
+            "##ad"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "fathometer",
+          "tokens": [
+            "fat",
+            "##hom",
+            "##eter"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "forepeak",
+          "tokens": [
+            "fore",
+            "##peak"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "freeboard",
+          "tokens": [
+            "free",
+            "##board"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "gunwale",
+          "tokens": [
+            "gun",
+            "##wal",
+            "##e"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "gyrocompass",
+          "tokens": [
+            "gyr",
+            "##ocomp",
+            "##ass"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "hawser",
+          "tokens": [
+            "haw",
+            "##ser"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "leeward",
+          "tokens": [
+            "lee",
+            "##ward"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "sart",
+          "tokens": [
+            "sar",
+            "##t"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "stempost",
+          "tokens": [
+            "stem",
+            "##pos",
+            "##t"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "transom",
+          "tokens": [
+            "trans",
+            "##om"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "windlass",
+          "tokens": [
+            "wind",
+            "##lass"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "windward",
+          "tokens": [
+            "wind",
+            "##ward"
+          ],
+          "num_pieces": 2
+        }
+      ],
+      "general_vocabulary_examples": [
+        {
+          "term": "access",
+          "tokens": [
+            "access"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "across",
+          "tokens": [
+            "across"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "addressing",
+          "tokens": [
+            "addressing"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "analyzed",
+          "tokens": [
+            "analyzed"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ancient",
+          "tokens": [
+            "ancient"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "and",
+          "tokens": [
+            "and"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "announcements",
+          "tokens": [
+            "ann",
+            "##ounce",
+            "##ments"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "architectural",
+          "tokens": [
+            "architectural"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "authorities",
+          "tokens": [
+            "authorities"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "birds",
+          "tokens": [
+            "birds"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "books",
+          "tokens": [
+            "books"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "cardiovascular",
+          "tokens": [
+            "cardiovascular"
+          ],
+          "num_pieces": 1
+        }
+      ]
+    },
+    "emilyalsentzer_Bio_ClinicalBERT": {
+      "general_maritime_examples": [
+        {
+          "term": "above",
+          "tokens": [
+            "above"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "accident",
+          "tokens": [
+            "accident"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aft",
+          "tokens": [
+            "aft"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "after",
+          "tokens": [
+            "after"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ahead",
+          "tokens": [
+            "ahead"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aid",
+          "tokens": [
+            "aid"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "air",
+          "tokens": [
+            "air"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aircraft",
+          "tokens": [
+            "aircraft"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ais",
+          "tokens": [
+            "a",
+            "##is"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "algolake",
+          "tokens": [
+            "al",
+            "##gol",
+            "##ake"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "algoport",
+          "tokens": [
+            "al",
+            "##go",
+            "##port"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "anchor",
+          "tokens": [
+            "anchor"
+          ],
+          "num_pieces": 1
+        }
+      ],
+      "rare_maritime_examples": [
+        {
+          "term": "bilge",
+          "tokens": [
+            "bi",
+            "##lge"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "bitts",
+          "tokens": [
+            "bit",
+            "##ts"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "bollard",
+          "tokens": [
+            "b",
+            "##oll",
+            "##ard"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "bulwark",
+          "tokens": [
+            "b",
+            "##ul",
+            "##wark"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "coxswain",
+          "tokens": [
+            "co",
+            "##x",
+            "##s",
+            "##wain"
+          ],
+          "num_pieces": 4
+        },
+        {
+          "term": "davit",
+          "tokens": [
+            "da",
+            "##vi",
+            "##t"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "epirb",
+          "tokens": [
+            "e",
+            "##pi",
+            "##rb"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "fairlead",
+          "tokens": [
+            "fair",
+            "##lea",
+            "##d"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "fathometer",
+          "tokens": [
+            "fat",
+            "##hom",
+            "##eter"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "forepeak",
+          "tokens": [
+            "fore",
+            "##pe",
+            "##ak"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "freeboard",
+          "tokens": [
+            "free",
+            "##board"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "gunwale",
+          "tokens": [
+            "gun",
+            "##wal",
+            "##e"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "gyrocompass",
+          "tokens": [
+            "g",
+            "##yr",
+            "##oc",
+            "##om",
+            "##pass"
+          ],
+          "num_pieces": 5
+        },
+        {
+          "term": "hawser",
+          "tokens": [
+            "ha",
+            "##ws",
+            "##er"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "leeward",
+          "tokens": [
+            "le",
+            "##ew",
+            "##ard"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "sart",
+          "tokens": [
+            "sa",
+            "##rt"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "stempost",
+          "tokens": [
+            "stem",
+            "##post"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "transom",
+          "tokens": [
+            "trans",
+            "##om"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "windlass",
+          "tokens": [
+            "wind",
+            "##lass"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "windward",
+          "tokens": [
+            "wind",
+            "##ward"
+          ],
+          "num_pieces": 2
+        }
+      ],
+      "general_vocabulary_examples": [
+        {
+          "term": "access",
+          "tokens": [
+            "access"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "across",
+          "tokens": [
+            "across"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "addressing",
+          "tokens": [
+            "addressing"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "analyzed",
+          "tokens": [
+            "analyzed"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ancient",
+          "tokens": [
+            "ancient"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "and",
+          "tokens": [
+            "and"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "announcements",
+          "tokens": [
+            "announcement",
+            "##s"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "architectural",
+          "tokens": [
+            "architectural"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "authorities",
+          "tokens": [
+            "authorities"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "birds",
+          "tokens": [
+            "birds"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "books",
+          "tokens": [
+            "books"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "cardiovascular",
+          "tokens": [
+            "card",
+            "##iovascular"
+          ],
+          "num_pieces": 2
+        }
+      ]
+    },
+    "nlpaueb_legal_bert_base_uncased": {
+      "general_maritime_examples": [
+        {
+          "term": "above",
+          "tokens": [
+            "above"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "accident",
+          "tokens": [
+            "accident"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aft",
+          "tokens": [
+            "aft"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "after",
+          "tokens": [
+            "after"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ahead",
+          "tokens": [
+            "a",
+            "##head"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "aid",
+          "tokens": [
+            "aid"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "air",
+          "tokens": [
+            "air"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aircraft",
+          "tokens": [
+            "aircraft"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ais",
+          "tokens": [
+            "a",
+            "##is"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "algolake",
+          "tokens": [
+            "alg",
+            "##ola",
+            "##ke"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "algoport",
+          "tokens": [
+            "alg",
+            "##opo",
+            "##r",
+            "##t"
+          ],
+          "num_pieces": 4
+        },
+        {
+          "term": "anchor",
+          "tokens": [
+            "anchor"
+          ],
+          "num_pieces": 1
+        }
+      ],
+      "rare_maritime_examples": [
+        {
+          "term": "bilge",
+          "tokens": [
+            "bilge"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "bitts",
+          "tokens": [
+            "bit",
+            "##t",
+            "##s"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "bollard",
+          "tokens": [
+            "boll",
+            "##ard"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "bulwark",
+          "tokens": [
+            "bul",
+            "##war",
+            "##k"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "coxswain",
+          "tokens": [
+            "cox",
+            "##s",
+            "##wain"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "davit",
+          "tokens": [
+            "davit"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "epirb",
+          "tokens": [
+            "epi",
+            "##r",
+            "##b"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "fairlead",
+          "tokens": [
+            "fair",
+            "##lea",
+            "##d"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "fathometer",
+          "tokens": [
+            "fat",
+            "##home",
+            "##ter"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "forepeak",
+          "tokens": [
+            "for",
+            "##epe",
+            "##ak"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "freeboard",
+          "tokens": [
+            "free",
+            "##board"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "gunwale",
+          "tokens": [
+            "gun",
+            "##wal",
+            "##e"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "gyrocompass",
+          "tokens": [
+            "gy",
+            "##roc",
+            "##omp",
+            "##as",
+            "##s"
+          ],
+          "num_pieces": 5
+        },
+        {
+          "term": "hawser",
+          "tokens": [
+            "haw",
+            "##s",
+            "##er"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "leeward",
+          "tokens": [
+            "lee",
+            "##ward"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "sart",
+          "tokens": [
+            "sar",
+            "##t"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "stempost",
+          "tokens": [
+            "stem",
+            "##post"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "transom",
+          "tokens": [
+            "trans",
+            "##om"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "windlass",
+          "tokens": [
+            "wind",
+            "##las",
+            "##s"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "windward",
+          "tokens": [
+            "wind",
+            "##ward"
+          ],
+          "num_pieces": 2
+        }
+      ],
+      "general_vocabulary_examples": [
+        {
+          "term": "access",
+          "tokens": [
+            "access"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "across",
+          "tokens": [
+            "across"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "addressing",
+          "tokens": [
+            "addressing"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "analyzed",
+          "tokens": [
+            "analyzed"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ancient",
+          "tokens": [
+            "ancient"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "and",
+          "tokens": [
+            "and"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "announcements",
+          "tokens": [
+            "announcement",
+            "##s"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "architectural",
+          "tokens": [
+            "architectural"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "authorities",
+          "tokens": [
+            "authorities"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "birds",
+          "tokens": [
+            "birds"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "books",
+          "tokens": [
+            "books"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "cardiovascular",
+          "tokens": [
+            "cardio",
+            "##vascular"
+          ],
+          "num_pieces": 2
+        }
+      ]
+    },
+    "ProsusAI_finbert": {
+      "general_maritime_examples": [
+        {
+          "term": "above",
+          "tokens": [
+            "above"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "accident",
+          "tokens": [
+            "accident"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aft",
+          "tokens": [
+            "aft"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "after",
+          "tokens": [
+            "after"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ahead",
+          "tokens": [
+            "ahead"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aid",
+          "tokens": [
+            "aid"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "air",
+          "tokens": [
+            "air"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aircraft",
+          "tokens": [
+            "aircraft"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ais",
+          "tokens": [
+            "ai",
+            "##s"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "algolake",
+          "tokens": [
+            "al",
+            "##gol",
+            "##ake"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "algoport",
+          "tokens": [
+            "al",
+            "##go",
+            "##port"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "anchor",
+          "tokens": [
+            "anchor"
+          ],
+          "num_pieces": 1
+        }
+      ],
+      "rare_maritime_examples": [
+        {
+          "term": "bilge",
+          "tokens": [
+            "bi",
+            "##lge"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "bitts",
+          "tokens": [
+            "bit",
+            "##ts"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "bollard",
+          "tokens": [
+            "bo",
+            "##llar",
+            "##d"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "bulwark",
+          "tokens": [
+            "bu",
+            "##l",
+            "##wark"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "coxswain",
+          "tokens": [
+            "cox",
+            "##sw",
+            "##ain"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "davit",
+          "tokens": [
+            "da",
+            "##vi",
+            "##t"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "epirb",
+          "tokens": [
+            "ep",
+            "##ir",
+            "##b"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "fairlead",
+          "tokens": [
+            "fair",
+            "##lea",
+            "##d"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "fathometer",
+          "tokens": [
+            "fat",
+            "##hom",
+            "##eter"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "forepeak",
+          "tokens": [
+            "fore",
+            "##pe",
+            "##ak"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "freeboard",
+          "tokens": [
+            "free",
+            "##board"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "gunwale",
+          "tokens": [
+            "gun",
+            "##wal",
+            "##e"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "gyrocompass",
+          "tokens": [
+            "g",
+            "##yr",
+            "##oco",
+            "##mp",
+            "##ass"
+          ],
+          "num_pieces": 5
+        },
+        {
+          "term": "hawser",
+          "tokens": [
+            "ha",
+            "##ws",
+            "##er"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "leeward",
+          "tokens": [
+            "lee",
+            "##ward"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "sart",
+          "tokens": [
+            "sar",
+            "##t"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "stempost",
+          "tokens": [
+            "stem",
+            "##post"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "transom",
+          "tokens": [
+            "trans",
+            "##om"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "windlass",
+          "tokens": [
+            "wind",
+            "##lass"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "windward",
+          "tokens": [
+            "wind",
+            "##ward"
+          ],
+          "num_pieces": 2
+        }
+      ],
+      "general_vocabulary_examples": [
+        {
+          "term": "access",
+          "tokens": [
+            "access"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "across",
+          "tokens": [
+            "across"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "addressing",
+          "tokens": [
+            "addressing"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "analyzed",
+          "tokens": [
+            "analyzed"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ancient",
+          "tokens": [
+            "ancient"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "and",
+          "tokens": [
+            "and"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "announcements",
+          "tokens": [
+            "announcements"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "architectural",
+          "tokens": [
+            "architectural"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "authorities",
+          "tokens": [
+            "authorities"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "birds",
+          "tokens": [
+            "birds"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "books",
+          "tokens": [
+            "books"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "cardiovascular",
+          "tokens": [
+            "cardiovascular"
+          ],
+          "num_pieces": 1
+        }
+      ]
+    },
+    "google_electra_base_discriminator": {
+      "general_maritime_examples": [
+        {
+          "term": "above",
+          "tokens": [
+            "above"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "accident",
+          "tokens": [
+            "accident"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aft",
+          "tokens": [
+            "aft"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "after",
+          "tokens": [
+            "after"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ahead",
+          "tokens": [
+            "ahead"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aid",
+          "tokens": [
+            "aid"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "air",
+          "tokens": [
+            "air"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aircraft",
+          "tokens": [
+            "aircraft"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ais",
+          "tokens": [
+            "ai",
+            "##s"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "algolake",
+          "tokens": [
+            "al",
+            "##gol",
+            "##ake"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "algoport",
+          "tokens": [
+            "al",
+            "##go",
+            "##port"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "anchor",
+          "tokens": [
+            "anchor"
+          ],
+          "num_pieces": 1
+        }
+      ],
+      "rare_maritime_examples": [
+        {
+          "term": "bilge",
+          "tokens": [
+            "bi",
+            "##lge"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "bitts",
+          "tokens": [
+            "bit",
+            "##ts"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "bollard",
+          "tokens": [
+            "bo",
+            "##llar",
+            "##d"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "bulwark",
+          "tokens": [
+            "bu",
+            "##l",
+            "##wark"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "coxswain",
+          "tokens": [
+            "cox",
+            "##sw",
+            "##ain"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "davit",
+          "tokens": [
+            "da",
+            "##vi",
+            "##t"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "epirb",
+          "tokens": [
+            "ep",
+            "##ir",
+            "##b"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "fairlead",
+          "tokens": [
+            "fair",
+            "##lea",
+            "##d"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "fathometer",
+          "tokens": [
+            "fat",
+            "##hom",
+            "##eter"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "forepeak",
+          "tokens": [
+            "fore",
+            "##pe",
+            "##ak"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "freeboard",
+          "tokens": [
+            "free",
+            "##board"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "gunwale",
+          "tokens": [
+            "gun",
+            "##wal",
+            "##e"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "gyrocompass",
+          "tokens": [
+            "g",
+            "##yr",
+            "##oco",
+            "##mp",
+            "##ass"
+          ],
+          "num_pieces": 5
+        },
+        {
+          "term": "hawser",
+          "tokens": [
+            "ha",
+            "##ws",
+            "##er"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "leeward",
+          "tokens": [
+            "lee",
+            "##ward"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "sart",
+          "tokens": [
+            "sar",
+            "##t"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "stempost",
+          "tokens": [
+            "stem",
+            "##post"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "transom",
+          "tokens": [
+            "trans",
+            "##om"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "windlass",
+          "tokens": [
+            "wind",
+            "##lass"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "windward",
+          "tokens": [
+            "wind",
+            "##ward"
+          ],
+          "num_pieces": 2
+        }
+      ],
+      "general_vocabulary_examples": [
+        {
+          "term": "access",
+          "tokens": [
+            "access"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "across",
+          "tokens": [
+            "across"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "addressing",
+          "tokens": [
+            "addressing"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "analyzed",
+          "tokens": [
+            "analyzed"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ancient",
+          "tokens": [
+            "ancient"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "and",
+          "tokens": [
+            "and"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "announcements",
+          "tokens": [
+            "announcements"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "architectural",
+          "tokens": [
+            "architectural"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "authorities",
+          "tokens": [
+            "authorities"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "birds",
+          "tokens": [
+            "birds"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "books",
+          "tokens": [
+            "books"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "cardiovascular",
+          "tokens": [
+            "cardiovascular"
+          ],
+          "num_pieces": 1
+        }
+      ]
+    },
+    "distilbert_base_uncased": {
+      "general_maritime_examples": [
+        {
+          "term": "above",
+          "tokens": [
+            "above"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "accident",
+          "tokens": [
+            "accident"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aft",
+          "tokens": [
+            "aft"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "after",
+          "tokens": [
+            "after"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ahead",
+          "tokens": [
+            "ahead"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aid",
+          "tokens": [
+            "aid"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "air",
+          "tokens": [
+            "air"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "aircraft",
+          "tokens": [
+            "aircraft"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ais",
+          "tokens": [
+            "ai",
+            "##s"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "algolake",
+          "tokens": [
+            "al",
+            "##gol",
+            "##ake"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "algoport",
+          "tokens": [
+            "al",
+            "##go",
+            "##port"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "anchor",
+          "tokens": [
+            "anchor"
+          ],
+          "num_pieces": 1
+        }
+      ],
+      "rare_maritime_examples": [
+        {
+          "term": "bilge",
+          "tokens": [
+            "bi",
+            "##lge"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "bitts",
+          "tokens": [
+            "bit",
+            "##ts"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "bollard",
+          "tokens": [
+            "bo",
+            "##llar",
+            "##d"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "bulwark",
+          "tokens": [
+            "bu",
+            "##l",
+            "##wark"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "coxswain",
+          "tokens": [
+            "cox",
+            "##sw",
+            "##ain"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "davit",
+          "tokens": [
+            "da",
+            "##vi",
+            "##t"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "epirb",
+          "tokens": [
+            "ep",
+            "##ir",
+            "##b"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "fairlead",
+          "tokens": [
+            "fair",
+            "##lea",
+            "##d"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "fathometer",
+          "tokens": [
+            "fat",
+            "##hom",
+            "##eter"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "forepeak",
+          "tokens": [
+            "fore",
+            "##pe",
+            "##ak"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "freeboard",
+          "tokens": [
+            "free",
+            "##board"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "gunwale",
+          "tokens": [
+            "gun",
+            "##wal",
+            "##e"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "gyrocompass",
+          "tokens": [
+            "g",
+            "##yr",
+            "##oco",
+            "##mp",
+            "##ass"
+          ],
+          "num_pieces": 5
+        },
+        {
+          "term": "hawser",
+          "tokens": [
+            "ha",
+            "##ws",
+            "##er"
+          ],
+          "num_pieces": 3
+        },
+        {
+          "term": "leeward",
+          "tokens": [
+            "lee",
+            "##ward"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "sart",
+          "tokens": [
+            "sar",
+            "##t"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "stempost",
+          "tokens": [
+            "stem",
+            "##post"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "transom",
+          "tokens": [
+            "trans",
+            "##om"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "windlass",
+          "tokens": [
+            "wind",
+            "##lass"
+          ],
+          "num_pieces": 2
+        },
+        {
+          "term": "windward",
+          "tokens": [
+            "wind",
+            "##ward"
+          ],
+          "num_pieces": 2
+        }
+      ],
+      "general_vocabulary_examples": [
+        {
+          "term": "access",
+          "tokens": [
+            "access"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "across",
+          "tokens": [
+            "across"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "addressing",
+          "tokens": [
+            "addressing"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "analyzed",
+          "tokens": [
+            "analyzed"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "ancient",
+          "tokens": [
+            "ancient"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "and",
+          "tokens": [
+            "and"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "announcements",
+          "tokens": [
+            "announcements"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "architectural",
+          "tokens": [
+            "architectural"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "authorities",
+          "tokens": [
+            "authorities"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "birds",
+          "tokens": [
+            "birds"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "books",
+          "tokens": [
+            "books"
+          ],
+          "num_pieces": 1
+        },
+        {
+          "term": "cardiovascular",
+          "tokens": [
+            "cardiovascular"
+          ],
+          "num_pieces": 1
+        }
+      ]
     }
   },
   "model_compatibility_summaries": [
     {
       "model": "bert-base-uncased",
       "clean_model_name": "bert_base_uncased",
+      "vocab_size": 30522,
       "domain_token_coverage": 0.7343,
       "domain_fragmentation": 0.2657,
       "domain_fertility": 1.3984,
       "domain_unknown_rate": 0.0,
       "oov_status": "measured",
       "mean_sequence_length": 56.63,
-      "tokenization_speed": 59122.6,
+      "tokenization_speed": 61089.25,
+      "mean_document_fragmentation": 0.2596,
+      "mean_document_coverage": 0.7404,
+      "general_vocab_coverage": 0.9787,
+      "rare_maritime_coverage": 0.0,
       "stratified_by_informativeness_tier": {
         "Medium Knowledge": {
           "document_count": 673,
@@ -3155,179 +5781,66 @@
       }
     },
     {
-      "model": "dmis-lab/biobert-base-cased-v1.2",
-      "clean_model_name": "dmis_lab_biobert_base_cased_v1.2",
-      "domain_token_coverage": 0.6448,
-      "domain_fragmentation": 0.3552,
-      "domain_fertility": 1.4789,
+      "model": "bert-large-uncased",
+      "clean_model_name": "bert_large_uncased",
+      "vocab_size": 30522,
+      "domain_token_coverage": 0.7343,
+      "domain_fragmentation": 0.2657,
+      "domain_fertility": 1.3984,
       "domain_unknown_rate": 0.0,
       "oov_status": "measured",
-      "mean_sequence_length": 59.9,
-      "tokenization_speed": 61783.59,
+      "mean_sequence_length": 56.63,
+      "tokenization_speed": 61925.92,
+      "mean_document_fragmentation": 0.2596,
+      "mean_document_coverage": 0.7404,
+      "general_vocab_coverage": 0.9787,
+      "rare_maritime_coverage": 0.0,
       "stratified_by_informativeness_tier": {
         "Medium Knowledge": {
           "document_count": 673,
-          "mean_fertility": 1.4614,
-          "mean_sequence_length": 56.2,
-          "mean_document_fragmentation": 0.2722,
-          "mean_document_coverage": 0.7278
+          "mean_fertility": 1.3787,
+          "mean_sequence_length": 53.02,
+          "mean_document_fragmentation": 0.2574,
+          "mean_document_coverage": 0.7426
         },
         "High Knowledge": {
           "document_count": 422,
-          "mean_fertility": 1.5062,
-          "mean_sequence_length": 91.78,
-          "mean_document_fragmentation": 0.2819,
-          "mean_document_coverage": 0.7181
+          "mean_fertility": 1.4346,
+          "mean_sequence_length": 87.42,
+          "mean_document_fragmentation": 0.273,
+          "mean_document_coverage": 0.727
         },
         "Low Knowledge": {
           "document_count": 199,
-          "mean_fertility": 1.4431,
-          "mean_sequence_length": 20.07,
-          "mean_document_fragmentation": 0.2568,
-          "mean_document_coverage": 0.7432
+          "mean_fertility": 1.3368,
+          "mean_sequence_length": 18.59,
+          "mean_document_fragmentation": 0.2249,
+          "mean_document_coverage": 0.7751
         },
         "Redundant": {
           "document_count": 206,
-          "mean_fertility": 1.4557,
-          "mean_sequence_length": 45.14,
-          "mean_document_fragmentation": 0.2756,
-          "mean_document_coverage": 0.7244
-        }
-      }
-    },
-    {
-      "model": "nlpaueb/legal-bert-base-uncased",
-      "clean_model_name": "nlpaueb_legal_bert_base_uncased",
-      "domain_token_coverage": 0.6209,
-      "domain_fragmentation": 0.3791,
-      "domain_fertility": 1.4806,
-      "domain_unknown_rate": 0.0003,
-      "oov_status": "measured",
-      "mean_sequence_length": 59.97,
-      "tokenization_speed": 65780.27,
-      "stratified_by_informativeness_tier": {
-        "Medium Knowledge": {
-          "document_count": 673,
-          "mean_fertility": 1.4646,
-          "mean_sequence_length": 56.32,
-          "mean_document_fragmentation": 0.3058,
-          "mean_document_coverage": 0.6942
-        },
-        "High Knowledge": {
-          "document_count": 422,
-          "mean_fertility": 1.5126,
-          "mean_sequence_length": 92.17,
-          "mean_document_fragmentation": 0.307,
-          "mean_document_coverage": 0.693
-        },
-        "Low Knowledge": {
-          "document_count": 199,
-          "mean_fertility": 1.4543,
-          "mean_sequence_length": 20.22,
-          "mean_document_fragmentation": 0.3026,
-          "mean_document_coverage": 0.6974
-        },
-        "Redundant": {
-          "document_count": 206,
-          "mean_fertility": 1.4285,
-          "mean_sequence_length": 44.3,
-          "mean_document_fragmentation": 0.2943,
-          "mean_document_coverage": 0.7057
-        }
-      }
-    },
-    {
-      "model": "allenai/scibert_scivocab_uncased",
-      "clean_model_name": "allenai_scibert_scivocab_uncased",
-      "domain_token_coverage": 0.5791,
-      "domain_fragmentation": 0.4209,
-      "domain_fertility": 1.4517,
-      "domain_unknown_rate": 0.0,
-      "oov_status": "measured",
-      "mean_sequence_length": 58.79,
-      "tokenization_speed": 58892.13,
-      "stratified_by_informativeness_tier": {
-        "Medium Knowledge": {
-          "document_count": 673,
-          "mean_fertility": 1.4382,
-          "mean_sequence_length": 55.3,
-          "mean_document_fragmentation": 0.303,
-          "mean_document_coverage": 0.697
-        },
-        "High Knowledge": {
-          "document_count": 422,
-          "mean_fertility": 1.4713,
-          "mean_sequence_length": 89.65,
-          "mean_document_fragmentation": 0.3031,
-          "mean_document_coverage": 0.6969
-        },
-        "Low Knowledge": {
-          "document_count": 199,
-          "mean_fertility": 1.4611,
-          "mean_sequence_length": 20.32,
-          "mean_document_fragmentation": 0.318,
-          "mean_document_coverage": 0.682
-        },
-        "Redundant": {
-          "document_count": 206,
-          "mean_fertility": 1.4235,
-          "mean_sequence_length": 44.14,
-          "mean_document_fragmentation": 0.2949,
-          "mean_document_coverage": 0.7051
-        }
-      }
-    },
-    {
-      "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
-      "clean_model_name": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext",
-      "domain_token_coverage": 0.5731,
-      "domain_fragmentation": 0.4269,
-      "domain_fertility": 1.4543,
-      "domain_unknown_rate": 0.0,
-      "oov_status": "measured",
-      "mean_sequence_length": 58.9,
-      "tokenization_speed": 56908.98,
-      "stratified_by_informativeness_tier": {
-        "Medium Knowledge": {
-          "document_count": 673,
-          "mean_fertility": 1.4401,
-          "mean_sequence_length": 55.38,
-          "mean_document_fragmentation": 0.2979,
-          "mean_document_coverage": 0.7021
-        },
-        "High Knowledge": {
-          "document_count": 422,
-          "mean_fertility": 1.4756,
-          "mean_sequence_length": 89.92,
-          "mean_document_fragmentation": 0.2942,
-          "mean_document_coverage": 0.7058
-        },
-        "Low Knowledge": {
-          "document_count": 199,
-          "mean_fertility": 1.4651,
-          "mean_sequence_length": 20.37,
-          "mean_document_fragmentation": 0.3166,
-          "mean_document_coverage": 0.6834
-        },
-        "Redundant": {
-          "document_count": 206,
-          "mean_fertility": 1.4211,
-          "mean_sequence_length": 44.07,
-          "mean_document_fragmentation": 0.2917,
-          "mean_document_coverage": 0.7083
+          "mean_fertility": 1.3588,
+          "mean_sequence_length": 42.14,
+          "mean_document_fragmentation": 0.2727,
+          "mean_document_coverage": 0.7273
         }
       }
     },
     {
       "model": "roberta-base",
       "clean_model_name": "roberta_base",
+      "vocab_size": 50265,
       "domain_token_coverage": 0.3493,
       "domain_fragmentation": 0.6507,
       "domain_fertility": 1.5609,
       "domain_unknown_rate": null,
       "oov_status": "not_applicable",
       "mean_sequence_length": 63.22,
-      "tokenization_speed": 72266.37,
+      "tokenization_speed": 69638.96,
+      "mean_document_fragmentation": 0.5372,
+      "mean_document_coverage": 0.4628,
+      "general_vocab_coverage": 0.4255,
+      "rare_maritime_coverage": 0.0,
       "stratified_by_informativeness_tier": {
         "Medium Knowledge": {
           "document_count": 673,
@@ -3362,13 +5875,18 @@
     {
       "model": "answerdotai/ModernBERT-base",
       "clean_model_name": "answerdotai_ModernBERT_base",
+      "vocab_size": 50280,
       "domain_token_coverage": 0.3672,
       "domain_fragmentation": 0.6328,
       "domain_fertility": 1.5236,
       "domain_unknown_rate": null,
       "oov_status": "not_applicable",
       "mean_sequence_length": 61.71,
-      "tokenization_speed": 73277.24,
+      "tokenization_speed": 73966.62,
+      "mean_document_fragmentation": 0.5477,
+      "mean_document_coverage": 0.4523,
+      "general_vocab_coverage": 0.4681,
+      "rare_maritime_coverage": 0.0,
       "stratified_by_informativeness_tier": {
         "Medium Knowledge": {
           "document_count": 673,
@@ -3397,6 +5915,374 @@
           "mean_sequence_length": 46.26,
           "mean_document_fragmentation": 0.5272,
           "mean_document_coverage": 0.4728
+        }
+      }
+    },
+    {
+      "model": "allenai/scibert_scivocab_uncased",
+      "clean_model_name": "allenai_scibert_scivocab_uncased",
+      "vocab_size": 31090,
+      "domain_token_coverage": 0.5791,
+      "domain_fragmentation": 0.4209,
+      "domain_fertility": 1.4517,
+      "domain_unknown_rate": 0.0,
+      "oov_status": "measured",
+      "mean_sequence_length": 58.79,
+      "tokenization_speed": 61480.72,
+      "mean_document_fragmentation": 0.3039,
+      "mean_document_coverage": 0.6961,
+      "general_vocab_coverage": 0.9681,
+      "rare_maritime_coverage": 0.0,
+      "stratified_by_informativeness_tier": {
+        "Medium Knowledge": {
+          "document_count": 673,
+          "mean_fertility": 1.4382,
+          "mean_sequence_length": 55.3,
+          "mean_document_fragmentation": 0.303,
+          "mean_document_coverage": 0.697
+        },
+        "High Knowledge": {
+          "document_count": 422,
+          "mean_fertility": 1.4713,
+          "mean_sequence_length": 89.65,
+          "mean_document_fragmentation": 0.3031,
+          "mean_document_coverage": 0.6969
+        },
+        "Low Knowledge": {
+          "document_count": 199,
+          "mean_fertility": 1.4611,
+          "mean_sequence_length": 20.32,
+          "mean_document_fragmentation": 0.318,
+          "mean_document_coverage": 0.682
+        },
+        "Redundant": {
+          "document_count": 206,
+          "mean_fertility": 1.4235,
+          "mean_sequence_length": 44.14,
+          "mean_document_fragmentation": 0.2949,
+          "mean_document_coverage": 0.7051
+        }
+      }
+    },
+    {
+      "model": "dmis-lab/biobert-base-cased-v1.2",
+      "clean_model_name": "dmis_lab_biobert_base_cased_v1.2",
+      "vocab_size": 28996,
+      "domain_token_coverage": 0.6448,
+      "domain_fragmentation": 0.3552,
+      "domain_fertility": 1.4789,
+      "domain_unknown_rate": 0.0,
+      "oov_status": "measured",
+      "mean_sequence_length": 59.9,
+      "tokenization_speed": 64952.52,
+      "mean_document_fragmentation": 0.2733,
+      "mean_document_coverage": 0.7267,
+      "general_vocab_coverage": 0.9468,
+      "rare_maritime_coverage": 0.0,
+      "stratified_by_informativeness_tier": {
+        "Medium Knowledge": {
+          "document_count": 673,
+          "mean_fertility": 1.4614,
+          "mean_sequence_length": 56.2,
+          "mean_document_fragmentation": 0.2722,
+          "mean_document_coverage": 0.7278
+        },
+        "High Knowledge": {
+          "document_count": 422,
+          "mean_fertility": 1.5062,
+          "mean_sequence_length": 91.78,
+          "mean_document_fragmentation": 0.2819,
+          "mean_document_coverage": 0.7181
+        },
+        "Low Knowledge": {
+          "document_count": 199,
+          "mean_fertility": 1.4431,
+          "mean_sequence_length": 20.07,
+          "mean_document_fragmentation": 0.2568,
+          "mean_document_coverage": 0.7432
+        },
+        "Redundant": {
+          "document_count": 206,
+          "mean_fertility": 1.4557,
+          "mean_sequence_length": 45.14,
+          "mean_document_fragmentation": 0.2756,
+          "mean_document_coverage": 0.7244
+        }
+      }
+    },
+    {
+      "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "clean_model_name": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext",
+      "vocab_size": 30522,
+      "domain_token_coverage": 0.5731,
+      "domain_fragmentation": 0.4269,
+      "domain_fertility": 1.4543,
+      "domain_unknown_rate": 0.0,
+      "oov_status": "measured",
+      "mean_sequence_length": 58.9,
+      "tokenization_speed": 63962.96,
+      "mean_document_fragmentation": 0.2985,
+      "mean_document_coverage": 0.7015,
+      "general_vocab_coverage": 0.9362,
+      "rare_maritime_coverage": 0.0,
+      "stratified_by_informativeness_tier": {
+        "Medium Knowledge": {
+          "document_count": 673,
+          "mean_fertility": 1.4401,
+          "mean_sequence_length": 55.38,
+          "mean_document_fragmentation": 0.2979,
+          "mean_document_coverage": 0.7021
+        },
+        "High Knowledge": {
+          "document_count": 422,
+          "mean_fertility": 1.4756,
+          "mean_sequence_length": 89.92,
+          "mean_document_fragmentation": 0.2942,
+          "mean_document_coverage": 0.7058
+        },
+        "Low Knowledge": {
+          "document_count": 199,
+          "mean_fertility": 1.4651,
+          "mean_sequence_length": 20.37,
+          "mean_document_fragmentation": 0.3166,
+          "mean_document_coverage": 0.6834
+        },
+        "Redundant": {
+          "document_count": 206,
+          "mean_fertility": 1.4211,
+          "mean_sequence_length": 44.07,
+          "mean_document_fragmentation": 0.2917,
+          "mean_document_coverage": 0.7083
+        }
+      }
+    },
+    {
+      "model": "emilyalsentzer/Bio_ClinicalBERT",
+      "clean_model_name": "emilyalsentzer_Bio_ClinicalBERT",
+      "vocab_size": 28996,
+      "domain_token_coverage": 0.6448,
+      "domain_fragmentation": 0.3552,
+      "domain_fertility": 1.4789,
+      "domain_unknown_rate": 0.0,
+      "oov_status": "measured",
+      "mean_sequence_length": 59.9,
+      "tokenization_speed": 59272.76,
+      "mean_document_fragmentation": 0.2733,
+      "mean_document_coverage": 0.7267,
+      "general_vocab_coverage": 0.9468,
+      "rare_maritime_coverage": 0.0,
+      "stratified_by_informativeness_tier": {
+        "Medium Knowledge": {
+          "document_count": 673,
+          "mean_fertility": 1.4614,
+          "mean_sequence_length": 56.2,
+          "mean_document_fragmentation": 0.2722,
+          "mean_document_coverage": 0.7278
+        },
+        "High Knowledge": {
+          "document_count": 422,
+          "mean_fertility": 1.5062,
+          "mean_sequence_length": 91.78,
+          "mean_document_fragmentation": 0.2819,
+          "mean_document_coverage": 0.7181
+        },
+        "Low Knowledge": {
+          "document_count": 199,
+          "mean_fertility": 1.4431,
+          "mean_sequence_length": 20.07,
+          "mean_document_fragmentation": 0.2568,
+          "mean_document_coverage": 0.7432
+        },
+        "Redundant": {
+          "document_count": 206,
+          "mean_fertility": 1.4557,
+          "mean_sequence_length": 45.14,
+          "mean_document_fragmentation": 0.2756,
+          "mean_document_coverage": 0.7244
+        }
+      }
+    },
+    {
+      "model": "nlpaueb/legal-bert-base-uncased",
+      "clean_model_name": "nlpaueb_legal_bert_base_uncased",
+      "vocab_size": 30522,
+      "domain_token_coverage": 0.6209,
+      "domain_fragmentation": 0.3791,
+      "domain_fertility": 1.4806,
+      "domain_unknown_rate": 0.0003,
+      "oov_status": "measured",
+      "mean_sequence_length": 59.97,
+      "tokenization_speed": 62212.77,
+      "mean_document_fragmentation": 0.3041,
+      "mean_document_coverage": 0.6959,
+      "general_vocab_coverage": 0.8298,
+      "rare_maritime_coverage": 0.1,
+      "stratified_by_informativeness_tier": {
+        "Medium Knowledge": {
+          "document_count": 673,
+          "mean_fertility": 1.4646,
+          "mean_sequence_length": 56.32,
+          "mean_document_fragmentation": 0.3058,
+          "mean_document_coverage": 0.6942
+        },
+        "High Knowledge": {
+          "document_count": 422,
+          "mean_fertility": 1.5126,
+          "mean_sequence_length": 92.17,
+          "mean_document_fragmentation": 0.307,
+          "mean_document_coverage": 0.693
+        },
+        "Low Knowledge": {
+          "document_count": 199,
+          "mean_fertility": 1.4543,
+          "mean_sequence_length": 20.22,
+          "mean_document_fragmentation": 0.3026,
+          "mean_document_coverage": 0.6974
+        },
+        "Redundant": {
+          "document_count": 206,
+          "mean_fertility": 1.4285,
+          "mean_sequence_length": 44.3,
+          "mean_document_fragmentation": 0.2943,
+          "mean_document_coverage": 0.7057
+        }
+      }
+    },
+    {
+      "model": "ProsusAI/finbert",
+      "clean_model_name": "ProsusAI_finbert",
+      "vocab_size": 30522,
+      "domain_token_coverage": 0.7343,
+      "domain_fragmentation": 0.2657,
+      "domain_fertility": 1.3984,
+      "domain_unknown_rate": 0.0,
+      "oov_status": "measured",
+      "mean_sequence_length": 56.63,
+      "tokenization_speed": 53346.98,
+      "mean_document_fragmentation": 0.2596,
+      "mean_document_coverage": 0.7404,
+      "general_vocab_coverage": 0.9787,
+      "rare_maritime_coverage": 0.0,
+      "stratified_by_informativeness_tier": {
+        "Medium Knowledge": {
+          "document_count": 673,
+          "mean_fertility": 1.3787,
+          "mean_sequence_length": 53.02,
+          "mean_document_fragmentation": 0.2574,
+          "mean_document_coverage": 0.7426
+        },
+        "High Knowledge": {
+          "document_count": 422,
+          "mean_fertility": 1.4346,
+          "mean_sequence_length": 87.42,
+          "mean_document_fragmentation": 0.273,
+          "mean_document_coverage": 0.727
+        },
+        "Low Knowledge": {
+          "document_count": 199,
+          "mean_fertility": 1.3368,
+          "mean_sequence_length": 18.59,
+          "mean_document_fragmentation": 0.2249,
+          "mean_document_coverage": 0.7751
+        },
+        "Redundant": {
+          "document_count": 206,
+          "mean_fertility": 1.3588,
+          "mean_sequence_length": 42.14,
+          "mean_document_fragmentation": 0.2727,
+          "mean_document_coverage": 0.7273
+        }
+      }
+    },
+    {
+      "model": "google/electra-base-discriminator",
+      "clean_model_name": "google_electra_base_discriminator",
+      "vocab_size": 30522,
+      "domain_token_coverage": 0.7343,
+      "domain_fragmentation": 0.2657,
+      "domain_fertility": 1.3984,
+      "domain_unknown_rate": 0.0,
+      "oov_status": "measured",
+      "mean_sequence_length": 56.63,
+      "tokenization_speed": 61445.01,
+      "mean_document_fragmentation": 0.2596,
+      "mean_document_coverage": 0.7404,
+      "general_vocab_coverage": 0.9787,
+      "rare_maritime_coverage": 0.0,
+      "stratified_by_informativeness_tier": {
+        "Medium Knowledge": {
+          "document_count": 673,
+          "mean_fertility": 1.3787,
+          "mean_sequence_length": 53.02,
+          "mean_document_fragmentation": 0.2574,
+          "mean_document_coverage": 0.7426
+        },
+        "High Knowledge": {
+          "document_count": 422,
+          "mean_fertility": 1.4346,
+          "mean_sequence_length": 87.42,
+          "mean_document_fragmentation": 0.273,
+          "mean_document_coverage": 0.727
+        },
+        "Low Knowledge": {
+          "document_count": 199,
+          "mean_fertility": 1.3368,
+          "mean_sequence_length": 18.59,
+          "mean_document_fragmentation": 0.2249,
+          "mean_document_coverage": 0.7751
+        },
+        "Redundant": {
+          "document_count": 206,
+          "mean_fertility": 1.3588,
+          "mean_sequence_length": 42.14,
+          "mean_document_fragmentation": 0.2727,
+          "mean_document_coverage": 0.7273
+        }
+      }
+    },
+    {
+      "model": "distilbert-base-uncased",
+      "clean_model_name": "distilbert_base_uncased",
+      "vocab_size": 30522,
+      "domain_token_coverage": 0.7343,
+      "domain_fragmentation": 0.2657,
+      "domain_fertility": 1.3984,
+      "domain_unknown_rate": 0.0,
+      "oov_status": "measured",
+      "mean_sequence_length": 56.63,
+      "tokenization_speed": 57713.57,
+      "mean_document_fragmentation": 0.2596,
+      "mean_document_coverage": 0.7404,
+      "general_vocab_coverage": 0.9787,
+      "rare_maritime_coverage": 0.0,
+      "stratified_by_informativeness_tier": {
+        "Medium Knowledge": {
+          "document_count": 673,
+          "mean_fertility": 1.3787,
+          "mean_sequence_length": 53.02,
+          "mean_document_fragmentation": 0.2574,
+          "mean_document_coverage": 0.7426
+        },
+        "High Knowledge": {
+          "document_count": 422,
+          "mean_fertility": 1.4346,
+          "mean_sequence_length": 87.42,
+          "mean_document_fragmentation": 0.273,
+          "mean_document_coverage": 0.727
+        },
+        "Low Knowledge": {
+          "document_count": 199,
+          "mean_fertility": 1.3368,
+          "mean_sequence_length": 18.59,
+          "mean_document_fragmentation": 0.2249,
+          "mean_document_coverage": 0.7751
+        },
+        "Redundant": {
+          "document_count": 206,
+          "mean_fertility": 1.3588,
+          "mean_sequence_length": 42.14,
+          "mean_document_fragmentation": 0.2727,
+          "mean_document_coverage": 0.7273
         }
       }
     }
