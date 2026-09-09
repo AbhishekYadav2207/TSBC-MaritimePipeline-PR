@@ -97,7 +97,8 @@ def main():
     root = get_project_root()
     config = load_config()
     
-    report_path = root / config.get("output_dir", "outputs") / "profiling_report.json"
+    output_dir = root / config.get("output_dir", "outputs")
+    report_path = output_dir / "stage-02" / "profiling_report.json"
     if not report_path.exists():
         logger.error(f"Profiling report not found at {report_path}! Run Step 2 first.")
         return
@@ -108,7 +109,9 @@ def main():
     logger.info("Discovering table relationships...")
     graph_data = build_relationship_graph(profiling_report)
     
-    out_path = root / config.get("output_dir", "outputs") / "relationships.json"
+    stage_dir = output_dir / "stage-03"
+    stage_dir.mkdir(parents=True, exist_ok=True)
+    out_path = stage_dir / "relationships.json"
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(graph_data, f, indent=2)
         

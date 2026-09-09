@@ -139,9 +139,10 @@ def main():
     # Write output
     config = load_config()
     output_dir = root / config.get("output_dir", "outputs")
-    output_dir.mkdir(parents=True, exist_ok=True)
+    stage_dir = output_dir / "stage-02"
+    stage_dir.mkdir(parents=True, exist_ok=True)
     
-    out_path = output_dir / "profiling_report.json"
+    out_path = stage_dir / "profiling_report.json"
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2)
         

@@ -22,7 +22,10 @@ def main():
     config = load_config()
     output_dir = root / config.get("output_dir", "outputs")
 
-    clean_path = output_dir / "clean_documents.jsonl"
+    stage_dir = output_dir / "stage-18"
+    stage_dir.mkdir(parents=True, exist_ok=True)
+
+    clean_path = output_dir / "stage-07" / "clean_documents.jsonl"
     if not clean_path.exists():
         logger.error(f"Clean documents not found at {clean_path}!")
         return
@@ -78,7 +81,7 @@ def main():
         }
     }
 
-    out_path = output_dir / "corpus_lint_report.json"
+    out_path = stage_dir / "corpus_lint_report.json"
     with open(out_path, "w", encoding="utf-8") as fout:
         json.dump(report, fout, indent=2)
 

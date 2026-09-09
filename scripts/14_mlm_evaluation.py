@@ -196,15 +196,18 @@ def main():
     config = load_config()
     output_dir = root / config.get("output_dir", "outputs")
 
-    vocab_path = output_dir / "maritime_vocabulary.txt"
+    stage_dir = output_dir / "stage-14"
+    stage_dir.mkdir(parents=True, exist_ok=True)
+
+    vocab_path = output_dir / "stage-10" / "maritime_vocabulary.txt"
     vocab_terms = []
     if vocab_path.exists():
         with open(vocab_path, "r", encoding="utf-8") as fv:
             vocab_terms = [line.strip() for line in fv if line.strip()]
 
     # Representations & Subsets
-    reps_dir = output_dir / "corpus_representations"
-    subsets_dir = output_dir / "subsets"
+    reps_dir = output_dir / "stage-11" / "corpus_representations"
+    subsets_dir = output_dir / "stage-12" / "subsets"
 
     representations = ["narrative", "key_value", "template", "json", "mixed"]
     subsets = ["high_knowledge", "medium_knowledge", "low_knowledge", "balanced_knowledge", "random_baseline"]
@@ -216,7 +219,7 @@ def main():
         with open(gen_eng_path, "r", encoding="utf-8") as f:
             gen_eng_docs = [json.loads(l)["document"] for l in f]
 
-    eval_out_dir = output_dir / "evaluations"
+    eval_out_dir = stage_dir / "evaluations"
     cache_dir = eval_out_dir / "cache"
     cache_dir.mkdir(parents=True, exist_ok=True)
 
@@ -314,11 +317,11 @@ def main():
             with open(eval_out_dir / f"{clean_model}.json", "w", encoding="utf-8") as f:
                 json.dump(eval_record, f, indent=2)
 
-    # Copy BERT baseline to outputs/bert_mlm_evaluation.json for backwards compatibility
+    # Copy BERT baseline to outputs/stage-14/bert_mlm_evaluation.json for backwards compatibility
     bert_clean = clean_model_filename("bert-base-uncased")
     bert_cache = list(cache_dir.glob(f"{bert_clean}__*.json"))
     if bert_cache:
-        with open(bert_cache[0], "r", encoding="utf-8") as f_in, open(output_dir / "bert_mlm_evaluation.json", "w", encoding="utf-8") as f_out:
+        with open(bert_cache[0], "r", encoding="utf-8") as f_in, open(stage_dir / "bert_mlm_evaluation.json", "w", encoding="utf-8") as f_out:
             json.dump(json.load(f_in), f_out, indent=2)
 
     logger.info(f"Stage 14 completed. Evaluated {run_count} matrix runs. Saved cache files to {cache_dir}")

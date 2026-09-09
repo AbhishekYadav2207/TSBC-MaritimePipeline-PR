@@ -178,7 +178,7 @@ def main():
     config = load_config()
     output_dir = root / config.get("output_dir", "outputs")
     
-    merged_path = output_dir / "merged_records.jsonl"
+    merged_path = output_dir / "stage-05" / "merged_records.jsonl"
     if not merged_path.exists():
         logger.error(f"Merged records not found at {merged_path}! Run Step 5 first.")
         return
@@ -200,7 +200,9 @@ def main():
         "value_warnings_sample": merged_results["impossible_values_warnings"]
     }
     
-    out_path = output_dir / "validation_report.json"
+    stage_dir = output_dir / "stage-05a"
+    stage_dir.mkdir(parents=True, exist_ok=True)
+    out_path = stage_dir / "validation_report.json"
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2)
         

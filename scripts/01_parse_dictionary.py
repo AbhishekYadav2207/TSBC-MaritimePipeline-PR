@@ -190,7 +190,8 @@ def main():
         
     # Create outputs folder
     output_dir = root / load_config().get("output_dir", "outputs")
-    output_dir.mkdir(parents=True, exist_ok=True)
+    stage_dir = output_dir / "stage-01"
+    stage_dir.mkdir(parents=True, exist_ok=True)
     
     metadata_out = {
         "registry": registry,
@@ -198,7 +199,7 @@ def main():
         "display_to_id": display_to_id
     }
     
-    out_path = output_dir / "dictionary_metadata.json"
+    out_path = stage_dir / "dictionary_metadata.json"
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(metadata_out, f, indent=2)
         

@@ -96,12 +96,13 @@ def main():
     config = load_config()
     output_dir = root / config.get("output_dir", "outputs")
     
-    clean_path = output_dir / "clean_documents.jsonl"
+    clean_path = output_dir / "stage-07" / "clean_documents.jsonl"
     if not clean_path.exists():
         logger.error(f"Clean documents file missing at {clean_path}! Run Step 7 first.")
         return
         
-    reps_dir = output_dir / "corpus_representations"
+    stage_dir = output_dir / "stage-11"
+    reps_dir = stage_dir / "corpus_representations"
     reps_dir.mkdir(parents=True, exist_ok=True)
     
     rep_files = {

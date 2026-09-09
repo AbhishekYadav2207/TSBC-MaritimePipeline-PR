@@ -124,13 +124,16 @@ def main():
     config = load_config()
     output_dir = root / config.get("output_dir", "outputs")
 
-    vocab_path = output_dir / "maritime_vocabulary.txt"
+    stage_dir = output_dir / "stage-13"
+    stage_dir.mkdir(parents=True, exist_ok=True)
+
+    vocab_path = output_dir / "stage-10" / "maritime_vocabulary.txt"
     vocab_terms = []
     if vocab_path.exists():
         with open(vocab_path, "r", encoding="utf-8") as fv:
             vocab_terms = [line.strip() for line in fv if line.strip()]
 
-    corpus_path = output_dir / "clean_documents.jsonl"
+    corpus_path = output_dir / "stage-07" / "clean_documents.jsonl"
     corpus_docs = []
     if corpus_path.exists():
         with open(corpus_path, "r", encoding="utf-8") as fc:
@@ -139,7 +142,7 @@ def main():
                 if idx >= 1500:
                     break
 
-    tok_dir = output_dir / "tokenizer_analysis"
+    tok_dir = stage_dir / "tokenizer_analysis"
     tok_dir.mkdir(parents=True, exist_ok=True)
 
     summary_reports = []
@@ -152,9 +155,9 @@ def main():
             with open(tok_dir / f"{clean_name}.json", "w", encoding="utf-8") as f:
                 json.dump(report, f, indent=2)
 
-    # Copy BERT baseline to outputs/tokenizer_analysis.json for backwards compatibility
+    # Copy BERT baseline to outputs/stage-13/tokenizer_analysis.json for backwards compatibility
     bert_report = next((r for r in summary_reports if r["model_name"] == "bert-base-uncased"), summary_reports[0] if summary_reports else {})
-    with open(output_dir / "tokenizer_analysis.json", "w", encoding="utf-8") as f:
+    with open(stage_dir / "tokenizer_analysis.json", "w", encoding="utf-8") as f:
         json.dump(bert_report, f, indent=2)
 
     # Generate Tokenizer Comparison CSV

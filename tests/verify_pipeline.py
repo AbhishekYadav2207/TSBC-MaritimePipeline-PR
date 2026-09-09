@@ -23,31 +23,32 @@ def test_pipeline_outputs():
     print("\n==================================================")
     # List of required pipeline outputs
     required_files = [
-        "dictionary_metadata.json",
-        "profiling_report.json",
-        "relationships.json",
-        "selected_semantic_columns.json",
-        "merged_records.jsonl",
-        "validation_report.json",
-        "raw_documents.jsonl",
-        "clean_documents.jsonl",
-        "maritime_corpus.txt",
-        "maritime_corpus.jsonl",
-        "maritime_vocabulary.txt",
-        "statistics.json",
-        "tokenizer_analysis.json",
-        "manifest.json",
-        "corpus_quality_report.md",
-        "document_importance.jsonl",
-        "importance_statistics.json",
-        "importance_distribution.png",
-        "comparison.csv",
-        "leaderboard.csv",
-        "benchmark_report.md",
-        "statistical_significance.json",
-        "ablation_study.json",
-        "experiment_metadata.json",
-        "decision_summary.json"
+        "stage-01/dictionary_metadata.json",
+        "stage-02/profiling_report.json",
+        "stage-03/relationships.json",
+        "stage-04/selected_semantic_columns.json",
+        "stage-05/merged_records.jsonl",
+        "stage-05a/validation_report.json",
+        "stage-06/raw_documents.jsonl",
+        "stage-07/clean_documents.jsonl",
+        "stage-08/maritime_corpus.txt",
+        "stage-08/maritime_corpus.jsonl",
+        "stage-08/manifest.json",
+        "stage-09/statistics.json",
+        "stage-09/corpus_quality_report.md",
+        "stage-10/maritime_vocabulary.txt",
+        "stage-12/document_importance.jsonl",
+        "stage-12/importance_statistics.json",
+        "stage-12/importance_distribution.png",
+        "stage-13/tokenizer_analysis.json",
+        "stage-15/comparison.csv",
+        "stage-15/leaderboard.csv",
+        "stage-16/statistical_significance.json",
+        "stage-16/ablation_study.json",
+        "stage-17/experiment_metadata.json",
+        "stage-17/decision_summary.json",
+        "stage-17/benchmark_report.md",
+        "stage-18/corpus_lint_report.json"
     ]
     
     all_exist = True
@@ -65,7 +66,7 @@ def test_pipeline_outputs():
     
     # 1. Validate manifest.json
     try:
-        with open(output_dir / "manifest.json", "r", encoding="utf-8") as f:
+        with open(output_dir / "stage-08" / "manifest.json", "r", encoding="utf-8") as f:
             manifest = json.load(f)
         required_manifest_keys = {"version", "created", "documents", "source", "language", "pipeline_version", "git_commit"}
         assert required_manifest_keys.issubset(manifest.keys()), "Manifest keys missing"
@@ -77,7 +78,7 @@ def test_pipeline_outputs():
     # 2. Validate clean_documents.jsonl matches manifest documents count
     try:
         clean_count = 0
-        with open(output_dir / "clean_documents.jsonl", "r", encoding="utf-8") as f:
+        with open(output_dir / "stage-07" / "clean_documents.jsonl", "r", encoding="utf-8") as f:
             for line in f:
                 clean_count += 1
                 record = json.loads(line)
@@ -92,7 +93,7 @@ def test_pipeline_outputs():
         
     # 3. Validate plain text corpus format (Document separator should be blank line)
     try:
-        with open(output_dir / "maritime_corpus.txt", "r", encoding="utf-8") as f:
+        with open(output_dir / "stage-08" / "maritime_corpus.txt", "r", encoding="utf-8") as f:
             content = f.read()
         # Splits should be double newlines
         docs = [d for d in content.split("\n\n") if d.strip()]
@@ -104,7 +105,7 @@ def test_pipeline_outputs():
         
     # 4. Validate statistics.json
     try:
-        with open(output_dir / "statistics.json", "r", encoding="utf-8") as f:
+        with open(output_dir / "stage-09" / "statistics.json", "r", encoding="utf-8") as f:
             stats = json.load(f)
         assert stats["total_documents"] == clean_count, "Stats total documents mismatch"
         assert "vocabulary_size" in stats
@@ -117,7 +118,7 @@ def test_pipeline_outputs():
         
     # 5. Validate vocabulary file
     try:
-        with open(output_dir / "maritime_vocabulary.txt", "r", encoding="utf-8") as f:
+        with open(output_dir / "stage-10" / "maritime_vocabulary.txt", "r", encoding="utf-8") as f:
             vocab = [line.strip() for line in f if line.strip()]
         assert len(vocab) > 0, "Vocabulary file is empty"
         print(f"[OK] maritime_vocabulary.txt loaded successfully with {len(vocab)} words.")

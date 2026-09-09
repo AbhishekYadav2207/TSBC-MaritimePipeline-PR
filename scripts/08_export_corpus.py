@@ -24,13 +24,16 @@ def main():
     config = load_config()
     output_dir = root / config.get("output_dir", "outputs")
     
-    clean_path = output_dir / "clean_documents.jsonl"
+    clean_path = output_dir / "stage-07" / "clean_documents.jsonl"
     if not clean_path.exists():
         logger.error(f"Clean documents not found at {clean_path}! Run Step 7 first.")
         return
         
-    corpus_txt_path = output_dir / "maritime_corpus.txt"
-    corpus_jsonl_path = output_dir / "maritime_corpus.jsonl"
+    stage_dir = output_dir / "stage-08"
+    stage_dir.mkdir(parents=True, exist_ok=True)
+    
+    corpus_txt_path = stage_dir / "maritime_corpus.txt"
+    corpus_jsonl_path = stage_dir / "maritime_corpus.jsonl"
     
     logger.info("Exporting clean documents to final corpus files...")
     
@@ -75,7 +78,7 @@ def main():
         "git_commit": get_git_commit()
     }
     
-    manifest_path = output_dir / "manifest.json"
+    manifest_path = stage_dir / "manifest.json"
     with open(manifest_path, "w", encoding="utf-8") as fm:
         json.dump(manifest, fm, indent=2)
         

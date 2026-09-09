@@ -46,8 +46,11 @@ def main():
     config = load_config()
     output_dir = root / config.get("output_dir", "outputs")
     
+    stage_dir = output_dir / "stage-05"
+    stage_dir.mkdir(parents=True, exist_ok=True)
+    
     # 1. Load selected columns and detected datasets
-    sel_cols_path = output_dir / "selected_semantic_columns.json"
+    sel_cols_path = output_dir / "stage-04" / "selected_semantic_columns.json"
     if not sel_cols_path.exists():
         logger.error(f"Selected columns file not found at {sel_cols_path}! Run Step 4 first.")
         return
@@ -224,7 +227,7 @@ def main():
     
     occ_by_id = {int(row["OccID"]): clean_dict(row.to_dict()) for _, row in df_occ_agg.iterrows()}
     
-    out_file = output_dir / "merged_records.jsonl"
+    out_file = stage_dir / "merged_records.jsonl"
     placeholder_vessels_count = 0
     placeholder_occurrences_count = 0
     
@@ -301,7 +304,7 @@ def main():
         }
     }
     
-    recon_path = output_dir / "merge_reconciliation_report.json"
+    recon_path = stage_dir / "merge_reconciliation_report.json"
     with open(recon_path, "w", encoding="utf-8") as fr:
         json.dump(reconciliation_report, fr, indent=2)
         

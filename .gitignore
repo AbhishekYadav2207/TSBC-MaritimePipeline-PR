@@ -28,6 +28,10 @@ outputs/*.jsonl
 outputs/corpus_representations/
 outputs/subsets/
 outputs/evaluations/
+outputs/stage-*/*.jsonl
+outputs/stage-*/corpus_representations/
+outputs/stage-*/subsets/
+outputs/stage-*/evaluations/
 
 outputs_baseline_v1/
 outputs_baseline_v2/
@@ -37,3 +41,4 @@ outputs/logs/
 runner.ipynb
 dapt/
 outputs_/
+outputs.zip

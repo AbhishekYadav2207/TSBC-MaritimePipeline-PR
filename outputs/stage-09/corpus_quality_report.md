@@ -61,14 +61,14 @@ This report evaluates the scale, document length, structural diversity, scaffold
 
 ## 7. BERT Tokenizer Compatibility
 * **BERT Model**: `bert-base-uncased`
-* **Tokenizer Fertility (Subwords/Word)**: 0.0000
-* **Maritime Fragmentation Rate**: 0.00%
+* **Tokenizer Fertility (Subwords/Word)**: 1.3985
+* **Maritime Fragmentation Rate**: 26.57%
 * **OOV / [UNK] Rate**: 0.0000%
 
 ---
 
 ## 8. BERT MLM Baseline Diagnostic
-* **MLM Evaluation Model**: `N/A`
+* **MLM Evaluation Model**: `bert-base-uncased`
 * **General Tokens Top-1 Accuracy**: 0.00%
 * **Maritime Tokens Top-1 Accuracy**: 0.00%
 * **Performance Gap**: 0.00%

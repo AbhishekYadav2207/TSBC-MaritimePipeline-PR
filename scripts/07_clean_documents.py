@@ -98,14 +98,16 @@ def main():
     config = load_config()
     output_dir = root / config.get("output_dir", "outputs")
     
-    raw_path = output_dir / "raw_documents.jsonl"
+    raw_path = output_dir / "stage-06" / "raw_documents.jsonl"
     if not raw_path.exists():
         logger.error(f"Raw documents not found at {raw_path}! Run Step 6 first.")
         return
         
     min_len = config.get("text_cleaning", {}).get("min_doc_length", 50)
     
-    clean_path = output_dir / "clean_documents.jsonl"
+    stage_dir = output_dir / "stage-07"
+    stage_dir.mkdir(parents=True, exist_ok=True)
+    clean_path = stage_dir / "clean_documents.jsonl"
     logger.info(f"Cleaning documents and exporting to {clean_path}...")
     
     seen_document_hashes = set()

@@ -33,7 +33,10 @@ def main():
     config = load_config()
     output_dir = root / config.get("output_dir", "outputs")
 
-    comp_path = output_dir / "comparison.csv"
+    stage_dir = output_dir / "stage-16"
+    stage_dir.mkdir(parents=True, exist_ok=True)
+
+    comp_path = output_dir / "stage-15" / "comparison.csv"
     if not comp_path.exists():
         logger.error(f"Comparison CSV not found at {comp_path}! Run Stage 15 first.")
         return
@@ -90,7 +93,7 @@ def main():
         "pairwise_statistical_tests": pairwise_results
     }
 
-    stat_out_path = output_dir / "statistical_significance.json"
+    stat_out_path = stage_dir / "statistical_significance.json"
     with open(stat_out_path, "w", encoding="utf-8") as f:
         json.dump(stat_summary, f, indent=2)
 
@@ -118,7 +121,7 @@ def main():
             "justification": f"Removing {feat} degrades domain semantic selection precision by {drop}%."
         }
 
-    ablation_out_path = output_dir / "ablation_study.json"
+    ablation_out_path = stage_dir / "ablation_study.json"
     with open(ablation_out_path, "w", encoding="utf-8") as f:
         json.dump(ablation_results, f, indent=2)
 

@@ -81,7 +81,8 @@ def main():
     root = get_project_root()
     config = load_config()
     
-    meta_path = root / config.get("output_dir", "outputs") / "dictionary_metadata.json"
+    output_dir = root / config.get("output_dir", "outputs")
+    meta_path = output_dir / "stage-01" / "dictionary_metadata.json"
     if not meta_path.exists():
         logger.error(f"Metadata file not found at {meta_path}! Run Step 1 first.")
         return
@@ -92,7 +93,9 @@ def main():
     logger.info("Selecting semantic NLP columns...")
     selected_cols = select_columns(metadata)
     
-    out_path = root / config.get("output_dir", "outputs") / "selected_semantic_columns.json"
+    stage_dir = output_dir / "stage-04"
+    stage_dir.mkdir(parents=True, exist_ok=True)
+    out_path = stage_dir / "selected_semantic_columns.json"
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(selected_cols, f, indent=2)
         

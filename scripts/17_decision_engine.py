@@ -47,6 +47,9 @@ def main():
     config = load_config()
     output_dir = root / config.get("output_dir", "outputs")
 
+    stage_dir = output_dir / "stage-17"
+    stage_dir.mkdir(parents=True, exist_ok=True)
+
     # 1. Export Reproducibility Metadata
     repro_data = {
         "timestamp": datetime.now().isoformat(),
@@ -60,12 +63,12 @@ def main():
         "random_seed": 42
     }
 
-    repro_path = output_dir / "experiment_metadata.json"
+    repro_path = stage_dir / "experiment_metadata.json"
     with open(repro_path, "w", encoding="utf-8") as f:
         json.dump(repro_data, f, indent=2)
 
     # 2. Load Leaderboard data
-    lb_path = output_dir / "leaderboard.csv"
+    lb_path = output_dir / "stage-15" / "leaderboard.csv"
     if not lb_path.exists():
         logger.error(f"Leaderboard CSV missing at {lb_path}! Run Stage 15 first.")
         return
@@ -110,7 +113,7 @@ def main():
         "sensitivity_analysis": sensitivity_runs
     }
 
-    dec_out_path = output_dir / "decision_summary.json"
+    dec_out_path = stage_dir / "decision_summary.json"
     with open(dec_out_path, "w", encoding="utf-8") as f:
         json.dump(dec_summary, f, indent=2)
 
@@ -199,14 +202,14 @@ Using configurable decision criteria, the decision engine evaluated the empirica
 ## 10. Final Recommendation & Future Work
 1. **Proceed with Strategy**: Implement **{main_decision['strategy']}**.
 2. **Subdomain Focus**: Prioritize navigation equipment and machinery failure subdomains during domain-adaptive pretraining.
-3. **Reproducibility**: Environment parameters and model seeds recorded in `outputs/experiment_metadata.json`.
+3. **Reproducibility**: Environment parameters and model seeds recorded in `outputs/stage-17/experiment_metadata.json`.
 """
 
-    report_path = output_dir / "benchmark_report.md"
+    report_path = stage_dir / "benchmark_report.md"
     with open(report_path, "w", encoding="utf-8") as f:
         f.write(report_md)
 
-    logger.info(f"Stage 17 completed. Written experiment_metadata.json, decision_summary.json, and benchmark_report.md to {output_dir}")
+    logger.info(f"Stage 17 completed. Written experiment_metadata.json, decision_summary.json, and benchmark_report.md to {stage_dir}")
 
 if __name__ == "__main__":
     main()

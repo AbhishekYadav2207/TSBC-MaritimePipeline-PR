@@ -36,8 +36,11 @@ def main():
     config = load_config()
     output_dir = root / config.get("output_dir", "outputs")
 
-    tok_dir = output_dir / "tokenizer_analysis"
-    cache_dir = output_dir / "evaluations" / "cache"
+    stage_dir = output_dir / "stage-15"
+    stage_dir.mkdir(parents=True, exist_ok=True)
+
+    tok_dir = output_dir / "stage-13" / "tokenizer_analysis"
+    cache_dir = output_dir / "stage-14" / "evaluations" / "cache"
 
     # 1. Load Tokenizer Benchmark Data
     tok_data = {}
@@ -91,7 +94,7 @@ def main():
         return
 
     # Export full comparison.csv
-    df_mlm.to_csv(output_dir / "comparison.csv", index=False)
+    df_mlm.to_csv(stage_dir / "comparison.csv", index=False)
 
     # 3. Aggregate Model-Level Metrics & Compute Mathematical MUI Score
     model_groups = df_mlm.groupby("model_name")
@@ -157,10 +160,10 @@ def main():
 
     df_lb = pd.DataFrame(leaderboard_rows)
     df_lb.sort_values(by="mui_score", ascending=False, inplace=True)
-    df_lb.to_csv(output_dir / "leaderboard.csv", index=False)
+    df_lb.to_csv(stage_dir / "leaderboard.csv", index=False)
 
     # 4. Generate Visualizations with Error Bars & 95% CIs
-    viz_dir = output_dir / "visualizations"
+    viz_dir = stage_dir / "visualizations"
     viz_dir.mkdir(parents=True, exist_ok=True)
 
     # Visualization 1: MLM Loss Comparison with Error Bars

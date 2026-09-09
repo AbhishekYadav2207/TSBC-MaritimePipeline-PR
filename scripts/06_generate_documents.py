@@ -441,12 +441,14 @@ def main():
     config = load_config()
     output_dir = root / config.get("output_dir", "outputs")
     
-    merged_path = output_dir / "merged_records.jsonl"
+    merged_path = output_dir / "stage-05" / "merged_records.jsonl"
     if not merged_path.exists():
         logger.error(f"Merged records not found at {merged_path}! Run Step 5 first.")
         return
         
-    raw_docs_file = output_dir / "raw_documents.jsonl"
+    stage_dir = output_dir / "stage-06"
+    stage_dir.mkdir(parents=True, exist_ok=True)
+    raw_docs_file = stage_dir / "raw_documents.jsonl"
     logger.info("Generating documents via Knowledge Unit Graph & Concept Gain Calculator...")
     
     total_occurrences = 0

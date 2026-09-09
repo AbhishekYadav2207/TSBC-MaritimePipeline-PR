@@ -61,13 +61,16 @@ def main():
     config = load_config()
     output_dir = root / config.get("output_dir", "outputs")
     
-    clean_path = output_dir / "clean_documents.jsonl"
+    stage_dir = output_dir / "stage-09"
+    stage_dir.mkdir(parents=True, exist_ok=True)
+    
+    clean_path = output_dir / "stage-07" / "clean_documents.jsonl"
     if not clean_path.exists():
         logger.error(f"Clean documents not found at {clean_path}! Run Step 7 first.")
         return
         
-    val_path = output_dir / "validation_report.json"
-    recon_path = output_dir / "merge_reconciliation_report.json"
+    val_path = output_dir / "stage-05a" / "validation_report.json"
+    recon_path = output_dir / "stage-05" / "merge_reconciliation_report.json"
     
     validation_data = json.load(open(val_path)) if val_path.exists() else {}
     recon_data = json.load(open(recon_path)) if recon_path.exists() else {}
@@ -274,15 +277,15 @@ def main():
         "top_domain_4grams": domain_4grams.most_common(10)
     }
     
-    stats_path = output_dir / "statistics.json"
+    stats_path = stage_dir / "statistics.json"
     with open(stats_path, "w", encoding="utf-8") as f:
         json.dump(stats_output, f, indent=2)
         
     # Read tokenizer and MLM analysis if available
-    tok_path = output_dir / "tokenizer_analysis.json"
+    tok_path = output_dir / "stage-13" / "tokenizer_analysis.json"
     tok_data = json.load(open(tok_path)) if tok_path.exists() else {}
     
-    mlm_path = output_dir / "bert_mlm_evaluation.json"
+    mlm_path = output_dir / "stage-14" / "bert_mlm_evaluation.json"
     mlm_data = json.load(open(mlm_path)) if mlm_path.exists() else {}
 
     # Multi-Dimensional Pretraining Readiness Assessment Rules
@@ -447,7 +450,7 @@ This report evaluates the scale, document length, structural diversity, scaffold
         except Exception as e:
             logger.warning(f"Could not compute ablation comparison: {e}")
 
-    report_path = output_dir / "corpus_quality_report.md"
+    report_path = stage_dir / "corpus_quality_report.md"
     with open(report_path, "w", encoding="utf-8") as fr:
         fr.write(report_md)
         

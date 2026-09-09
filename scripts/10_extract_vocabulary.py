@@ -32,12 +32,15 @@ def main():
     config = load_config()
     output_dir = root / config.get("output_dir", "outputs")
     
-    clean_path = output_dir / "clean_documents.jsonl"
+    stage_dir = output_dir / "stage-10"
+    stage_dir.mkdir(parents=True, exist_ok=True)
+    
+    clean_path = output_dir / "stage-07" / "clean_documents.jsonl"
     if not clean_path.exists():
         logger.error(f"Clean documents not found at {clean_path}! Run Step 7 first.")
         return
         
-    meta_path = output_dir / "dictionary_metadata.json"
+    meta_path = output_dir / "stage-01" / "dictionary_metadata.json"
     dict_terms = set()
     if meta_path.exists():
         with open(meta_path, "r", encoding="utf-8") as fm:
@@ -105,7 +108,7 @@ def main():
     sorted_single = sorted(list(maritime_single), key=lambda x: x[1], reverse=True)
     sorted_multi = sorted(list(multiword_counter.items()), key=lambda x: x[1], reverse=True)
     
-    vocab_txt_path = output_dir / "maritime_vocabulary.txt"
+    vocab_txt_path = stage_dir / "maritime_vocabulary.txt"
     logger.info(f"Exporting top single and multiword maritime terms to {vocab_txt_path}...")
     
     # Export top multiword phrases first, then top single terms

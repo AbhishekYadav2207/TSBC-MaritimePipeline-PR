@@ -248,7 +248,10 @@ def main():
     pipeline_cfg = load_config()
     output_dir = root / pipeline_cfg.get("output_dir", "outputs")
 
-    clean_path = output_dir / "clean_documents.jsonl"
+    stage_dir = output_dir / "stage-12"
+    stage_dir.mkdir(parents=True, exist_ok=True)
+
+    clean_path = output_dir / "stage-07" / "clean_documents.jsonl"
     if not clean_path.exists():
         logger.error(f"Clean documents not found at {clean_path}! Run Step 7 first.")
         return
@@ -318,7 +321,7 @@ def main():
     for cat, stems in CATEGORIES.items():
         domain_query_terms.extend(stems)
     # Check if maritime_vocabulary.txt exists for enhanced query reference
-    vocab_path = output_dir / "maritime_vocabulary.txt"
+    vocab_path = output_dir / "stage-10" / "maritime_vocabulary.txt"
     if vocab_path.exists():
         try:
             with open(vocab_path, "r", encoding="utf-8") as fv:
@@ -481,7 +484,7 @@ def main():
     # -------------------------------------------------------------------------
     # EXPORT DOCUMENT IMPORTANCE JSONL (FULL BACKWARD COMPATIBILITY + EXTENSIONS)
     # -------------------------------------------------------------------------
-    imp_path = output_dir / "document_importance.jsonl"
+    imp_path = stage_dir / "document_importance.jsonl"
     logger.info(f"Writing extended document informativeness records to {imp_path}...")
     with open(imp_path, "w", encoding="utf-8") as fout:
         for r in scored_records:
@@ -544,7 +547,7 @@ def main():
             "quartiles": [round(float(q), 4) for q in np.percentile(arr, [25, 50, 75])]
         }
 
-    ablation_path = output_dir / "informativeness_ablation.json"
+    ablation_path = stage_dir / "informativeness_ablation.json"
     with open(ablation_path, "w", encoding="utf-8") as fabl:
         json.dump({
             "scoring_version": config["scoring_version"],
@@ -578,7 +581,7 @@ def main():
             sp_r, _ = stats.spearmanr(a1, a2)
             method_comparison[m1]["correlations"][m2] = round(float(sp_r), 4)
 
-    comp_path = output_dir / "informativeness_method_comparison.json"
+    comp_path = stage_dir / "informativeness_method_comparison.json"
     with open(comp_path, "w", encoding="utf-8") as fcomp:
         json.dump({
             "scoring_version": config["scoring_version"],
@@ -643,7 +646,7 @@ def main():
                 "std": round(float(np.std(vals)), 4)
             }
 
-    stab_path = output_dir / "ranking_stability.json"
+    stab_path = stage_dir / "ranking_stability.json"
     with open(stab_path, "w", encoding="utf-8") as fstab:
         json.dump({
             "scoring_version": config["scoring_version"],
@@ -669,7 +672,7 @@ def main():
         "knowledge_tier_breakdown": dict(legacy_tier_counts)
     }
 
-    stat_path = output_dir / "importance_statistics.json"
+    stat_path = stage_dir / "importance_statistics.json"
     with open(stat_path, "w", encoding="utf-8") as fstat:
         json.dump(legacy_stats, fstat, indent=2)
 
@@ -756,7 +759,7 @@ def main():
         }
     }
 
-    dom_stat_path = output_dir / "domain_informativeness_statistics.json"
+    dom_stat_path = stage_dir / "domain_informativeness_statistics.json"
     with open(dom_stat_path, "w", encoding="utf-8") as fdom:
         json.dump(domain_inf_stats, fdom, indent=2)
 
@@ -775,14 +778,14 @@ def main():
     plt.legend()
     plt.grid(True, linestyle="--", alpha=0.5)
 
-    plot_path = output_dir / "importance_distribution.png"
+    plot_path = stage_dir / "importance_distribution.png"
     plt.savefig(plot_path, dpi=300, bbox_inches="tight")
     plt.close()
 
     # -------------------------------------------------------------------------
     # SUBSET GENERATION: PERCENTAGE SUBSETS + LEGACY COMPATIBILITY
     # -------------------------------------------------------------------------
-    subsets_dir = output_dir / "subsets"
+    subsets_dir = stage_dir / "subsets"
     subsets_dir.mkdir(parents=True, exist_ok=True)
     logger.info(f"Generating evaluation subsets in {subsets_dir}...")
 
