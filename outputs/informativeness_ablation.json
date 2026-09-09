@@ -1,0 +1,76 @@
+{
+  "scoring_version": "stage12-domain-informativeness-v2",
+  "description": "Leave-one-dimension-out ablation evaluating the marginal impact of each informativeness signal.",
+  "ablation_results": {
+    "full_hybrid": {
+      "spearman_rank_correlation_with_full": 1.0,
+      "kendall_tau_correlation_with_full": 1.0,
+      "mean_score": 0.2487,
+      "median_score": 0.2406,
+      "std_score": 0.0753,
+      "min_score": 0.0298,
+      "max_score": 0.5441,
+      "quartiles": [
+        0.2005,
+        0.2406,
+        0.295
+      ]
+    },
+    "minus_domain_relevance": {
+      "spearman_rank_correlation_with_full": 0.9753,
+      "kendall_tau_correlation_with_full": 0.8567,
+      "mean_score": 0.3074,
+      "median_score": 0.3051,
+      "std_score": 0.0851,
+      "min_score": 0.0369,
+      "max_score": 0.5294,
+      "quartiles": [
+        0.2563,
+        0.3051,
+        0.3552
+      ]
+    },
+    "minus_information_content": {
+      "spearman_rank_correlation_with_full": 0.9052,
+      "kendall_tau_correlation_with_full": 0.8168,
+      "mean_score": 0.0545,
+      "median_score": 0.0282,
+      "std_score": 0.068,
+      "min_score": 0.0,
+      "max_score": 0.4159,
+      "quartiles": [
+        0.0,
+        0.0282,
+        0.0907
+      ]
+    },
+    "minus_tfidf_representativeness": {
+      "spearman_rank_correlation_with_full": 0.7956,
+      "kendall_tau_correlation_with_full": 0.7032,
+      "mean_score": 0.2519,
+      "median_score": 0.2528,
+      "std_score": 0.0742,
+      "min_score": 0.025,
+      "max_score": 0.5637,
+      "quartiles": [
+        0.1971,
+        0.2528,
+        0.3074
+      ]
+    },
+    "minus_redundancy_noise": {
+      "spearman_rank_correlation_with_full": 0.7894,
+      "kendall_tau_correlation_with_full": 0.6819,
+      "mean_score": 0.3976,
+      "median_score": 0.4022,
+      "std_score": 0.0925,
+      "min_score": 0.1544,
+      "max_score": 0.7255,
+      "quartiles": [
+        0.3185,
+        0.4022,
+        0.4689
+      ]
+    }
+  }
+}

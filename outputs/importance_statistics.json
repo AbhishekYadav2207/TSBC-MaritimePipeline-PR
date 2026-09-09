@@ -11,10 +11,9 @@
     45.43
   ],
   "knowledge_tier_breakdown": {
-    "Low Knowledge": 32064,
-    "Medium Knowledge": 28803,
-    "High Knowledge": 33359,
-    "Noisy / Boilerplate": 2513,
-    "Redundant": 109
+    "Medium Knowledge": 51737,
+    "High Knowledge": 19376,
+    "Low Knowledge": 13517,
+    "Redundant": 12218
   }
 }
