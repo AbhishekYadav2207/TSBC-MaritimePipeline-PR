@@ -888,6 +888,13 @@ def main():
                     "evaluated_doc_count": len(target_docs),
                     "general_english_baseline_top1": float(gen_eng_top1),
                     "domain_shift_gap": domain_shift_gap,
+                    "experiment_metadata": {
+                        "masking_strategy": "random_15",
+                        "mask_rate": 0.15,
+                        "max_length": 256,
+                        "evaluation_documents": len(target_docs),
+                        "seed": cell_seed
+                    },
                     "evaluation_metrics": eval_res
                 }
 
@@ -993,6 +1000,18 @@ def main():
                     "subset": sub,
                     "evaluated_doc_count": len(target_docs),
                     "masking_condition": "domain_aware_15",
+                    "experiment_metadata": {
+                        "masking_strategy": "domain_aware_15",
+                        "mask_rate": 0.15,
+                        "priority": [
+                            "rare_maritime",
+                            "maritime_vocabulary",
+                            "random_general_fill"
+                        ],
+                        "max_length": 256,
+                        "evaluation_documents": len(target_docs),
+                        "seed": cell_seed
+                    },
                     "evaluation_metrics": domain_res
                 }
 
