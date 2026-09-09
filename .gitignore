@@ -1,0 +1,39 @@
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDE configurations
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Project-specific large datasets and logs
+data/
+
+# Large generated output data files (>50 MB)
+outputs/*.jsonl
+outputs/corpus_representations/
+outputs/subsets/
+outputs/evaluations/
+
+outputs_baseline_v1/
+outputs_baseline_v2/
+
+outputs/logs/
+
+runner.ipynb
+dapt/
+outputs_/

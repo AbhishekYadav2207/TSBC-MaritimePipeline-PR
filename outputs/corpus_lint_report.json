@@ -1,0 +1,101 @@
+{
+  "status": "PASS",
+  "total_documents_linted": 96848,
+  "total_violations": 191,
+  "violation_rate": "0.197%",
+  "rule_summary": {
+    "repeated_adjacent_words": {
+      "count": 159,
+      "percentage": "0.164%",
+      "samples": [
+        {
+          "occurrence_id": 660,
+          "match": "LUMBA",
+          "snippet": "BEGAN AKING WATER,OBTAINED PUMP FROM SAR VESSEL LUMBA LUMBA"
+        },
+        {
+          "occurrence_id": 759,
+          "match": "BELLA",
+          "snippet": "VESSEL PROCEEDED TO BELLA BELLA B C TO BE INSPECTED"
+        },
+        {
+          "occurrence_id": 893,
+          "match": "BELLA",
+          "snippet": "TWO CREWMEN BURNED,EVACUATED TO BELLA BELLA HOSPITAL"
+        },
+        {
+          "occurrence_id": 1439,
+          "match": "BELLA",
+          "snippet": "GROUNDED-DAMAGE & CAUSE UNKNOWN-TOWED TO BELLA BELLA BY CCG READY."
+        },
+        {
+          "occurrence_id": 2416,
+          "match": "BELLA",
+          "snippet": "FIRE AND EXPLOSION-TWO BOYS ON BOARD-PICKED UP-TAKEN TO BELLA BELLA."
+        }
+      ]
+    },
+    "malformed_singular_plural": {
+      "count": 0,
+      "percentage": "0.000%",
+      "samples": []
+    },
+    "administrative_leakage": {
+      "count": 0,
+      "percentage": "0.000%",
+      "samples": []
+    },
+    "awkward_phrasing": {
+      "count": 3,
+      "percentage": "0.003%",
+      "samples": [
+        {
+          "occurrence_id": 25257,
+          "match": "sustained damaged",
+          "snippet": "Fishing vessel \"EGMONT\" was tied up at Matane Wharf during a storm and sustained damaged to the hull. About 50 frames damaged."
+        },
+        {
+          "occurrence_id": 37473,
+          "match": "sustained damaged",
+          "snippet": "On 2 October 2011, the moored vessel \"KITTY' at section 20 was struck by an unregistered barge. The barge had broken mooring and drifted from Trois Ri"
+        },
+        {
+          "occurrence_id": 53775,
+          "match": "sustained damaged",
+          "snippet": "On 07 December 2025, the fishing vessel \"PATRICK & THE GIRLS\", with 4 people on board, ran aground on Black Reef in Sambro Harbour, NS. The vessel fre"
+        }
+      ]
+    },
+    "duplicated_list_items": {
+      "count": 29,
+      "percentage": "0.030%",
+      "samples": [
+        {
+          "occurrence_id": 16097,
+          "match": "ANCHOR",
+          "snippet": "VSL LOST HER PROPELLER, DROPPED HER ANCHOR, ANCHOR DRAGGED, DRIFTED"
+        },
+        {
+          "occurrence_id": 24195,
+          "match": "FIRE",
+          "snippet": "CHARTER CRAFT SUSTAINED SMALL ELECTRICAL FIRE, FIRE EXTINGUISHED AND VESSEL ASSISTED BY ANOTHER COMPANY VESSEL IN THE SAME AREA."
+        },
+        {
+          "occurrence_id": 24510,
+          "match": "na other",
+          "snippet": "During maritime operations, the FISHING 'ESPADON DES MERS' (registered in Canada, constructed of wood) in clear weather, calm (glassy) - 0 meters seas"
+        },
+        {
+          "occurrence_id": 25123,
+          "match": "arson",
+          "snippet": "A fire occurred in the engine room of the vessel while underway. Vessel reached port, burned and sank alongside wharf. Skipper charged with conspiracy"
+        },
+        {
+          "occurrence_id": 27038,
+          "match": "na other",
+          "snippet": "During maritime operations, the FISHING 'NO FUTURE' (with a gross tonnage of 13 GT, registered in Canada, constructed of reinforced plastic) in fog we"
+        }
+      ]
+    }
+  }
+}

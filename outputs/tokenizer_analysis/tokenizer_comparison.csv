@@ -1,0 +1,13 @@
+model_name,vocab_size,subwords_per_word_fertility,single_token_coverage_pct,fragmentation_rate_pct,oov_rate_pct,avg_pieces_per_term,median_pieces,p95_pieces,max_pieces,tokenizer_speed_tok_sec
+bert-base-uncased,30522,1.3985,73.43,26.57,0.0,1.35,1.0,3.0,5,129778.89
+bert-large-uncased,30522,1.3985,73.43,26.57,0.0,1.35,1.0,3.0,5,131332.84
+distilbert-base-uncased,30522,1.3985,73.43,26.57,0.0,1.35,1.0,3.0,5,130967.35
+google/electra-base-discriminator,30522,1.3985,73.43,26.57,0.0,1.35,1.0,3.0,5,134038.01
+ProsusAI/finbert,30522,1.3985,73.43,26.57,0.0,1.35,1.0,3.0,5,299550.88
+dmis-lab/biobert-base-cased-v1.2,28996,1.479,64.48,35.52,0.0,1.48,1.0,3.0,5,139997.71
+emilyalsentzer/Bio_ClinicalBERT,28996,1.479,64.48,35.52,0.0,1.48,1.0,3.0,5,313771.98
+nlpaueb/legal-bert-base-uncased,30522,1.4807,62.09,37.91,0.03,1.51,1.0,3.0,5,308700.29
+allenai/scibert_scivocab_uncased,31090,1.4517,57.91,42.09,0.0,1.53,1.0,3.0,4,125092.37
+microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext,30522,1.4543,57.31,42.69,0.0,1.59,1.0,3.0,5,296672.92
+answerdotai/ModernBERT-base,50280,1.5236,36.72,63.28,0.0,1.84,2.0,3.0,5,143945.7
+roberta-base,50265,1.561,34.93,65.07,0.0,1.86,2.0,3.0,4,147732.16

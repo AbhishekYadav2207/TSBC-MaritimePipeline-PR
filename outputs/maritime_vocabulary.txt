@@ -1,0 +1,335 @@
+gross tonnage
+vhf radio
+fishing vessel
+gps receiver
+bulk carrier
+engine room
+engine failure
+cargo vessel
+machinery failure
+container ship
+cargo hold
+port side
+search and rescue
+steering failure
+hull damage
+starboard side
+propulsion failure
+poor visibility
+engine breakdown
+bow damage
+reduced visibility
+restricted visibility
+good visibility
+steering loss
+navigational aid
+navigational aids
+deck damage
+machinery breakdown
+keel damage
+steering breakdown
+stern damage
+machinery loss
+engine loss
+cargo tanker
+propulsion loss
+marine
+occurrence
+registered
+tonnage
+gross
+canada
+phase
+under
+weather
+equipment
+included
+vessel
+fishing
+navigation
+seas
+damage
+cargo
+radio
+when
+radar
+involved
+light
+conditions
+ahead
+compass
+echosounder
+vhf
+minor
+operations
+resulting
+maritime
+pilot
+gyrocompass
+towed
+tug
+gps
+ship
+board
+off
+barge
+its
+direction
+people
+crew
+total
+berthed
+water
+docked
+port
+being
+engaged
+service
+passenger
+harbour
+injuries
+pollution
+bay
+boat
+carrier
+major
+ice
+bow
+river
+out
+may
+propeller
+berthing
+nautical
+miles
+anchored
+sea
+docking
+dock
+etc
+rudder
+unberthing
+lifesaving
+ships
+bilge
+oil
+tow
+after
+ocean
+keel
+voyage
+hull
+recording
+seaspan
+craft
+towing
+november
+anchor
+wharf
+injured
+atlantic
+channel
+over
+gear
+propulsion
+fuel
+anchorage
+deck
+strait
+made
+collision
+west
+person
+starboard
+liferaft
+north
+damaged
+chart
+pacific
+tanker
+lake
+materials
+tank
+vessels
+members
+berth
+stern
+buoy
+rescue
+research
+line
+south
+lifeboat
+east
+ais
+between
+missing
+capsized
+gulf
+known
+machinery
+vdr
+ingress
+passengers
+tugs
+canal
+northern
+reportedly
+mooring
+crewmember
+crewman
+transported
+wind
+log
+astern
+free
+westport
+workboat
+ballast
+object
+area
+where
+master
+mariner
+seaman
+persons
+pierre
+evacuated
+before
+breakwaters
+air
+approximately
+pier
+sinking
+search
+navigational
+lifejacket
+speed
+leak
+seaway
+western
+serious
+deckhand
+indicator
+incident
+grounding
+towards
+departure
+straits
+barges
+net
+shippegan
+above
+waterline
+eastern
+captain
+listed
+result
+english
+decks
+forward
+sailboat
+navigator
+marina
+seal
+pushing
+engineer
+hours
+propellor
+position
+lines
+used
+repair
+moorings
+course
+anchors
+waters
+capt
+released
+aft
+observed
+reports
+ports
+visibility
+minutes
+charter
+carriers
+city
+rivtow
+towline
+buoys
+navigating
+life
+underwater
+lifebuoy
+seriously
+tanks
+transport
+extracted
+data
+spaces
+product
+quay
+masts
+swell
+sent
+portable
+portugal
+legacy
+yacht
+who
+safety
+shearwater
+departed
+breakwater
+cruise
+dead
+list
+located
+victim
+toward
+within
+make
+crewmembers
+leaking
+dive
+flooding
+received
+algoport
+opportunity
+telephone
+algolake
+hovercraft
+float
+oceanex
+epirb
+entered
+southern
+boarding
+poile
+boats
+source
+french
+closed
+boiler
+plaisance
+aircraft
+mast
+days
+deployed
+report
+wedgeport
+mate
+aid
+oiler
+shipyard
+transporter
+fisheries
+shippagan
+accident
+anchoring
+nearest
+died
+wearing
+part
+cruiser

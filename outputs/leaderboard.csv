@@ -1,0 +1,8 @@
+model_name,mui_score,maritime_top1_acc,top1_ci_error,rare_maritime_acc,mlm_loss,domain_shift_gap_pct,performance_gap_pct,single_token_coverage_pct,fragmentation_rate_pct,oov_rate_pct,params_millions,disk_size_mb,inference_latency_ms,throughput_docs_sec,tokenizer_speed_tok_sec
+answerdotai/ModernBERT-base,71.39,72.98,5.22,71.29,1.4727,-32.98,-17.31,36.72,63.28,0.0,149,590,465.41,2.15,143945.7
+roberta-base,64.03,60.99,7.89,62.47,2.086,-10.99,-11.7,34.93,65.07,0.0,125,500,374.2,2.67,147732.16
+bert-base-uncased,50.85,27.95,4.19,45.73,4.8014,10.15,19.11,73.43,26.57,0.0,110,440,198.96,5.03,129778.89
+allenai/scibert_scivocab_uncased,50.37,30.31,4.47,47.83,4.3908,-3.64,18.3,57.91,42.09,0.0,110,440,121.56,8.23,125092.37
+nlpaueb/legal-bert-base-uncased,49.54,31.21,2.97,36.99,4.2204,-2.24,13.53,62.09,37.91,0.03,110,440,181.53,5.51,308700.29
+dmis-lab/biobert-base-cased-v1.2,44.02,23.76,4.11,27.03,4.9759,22.91,16.83,64.48,35.52,0.0,110,440,228.02,4.39,139997.71
+microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext,38.05,18.42,4.07,20.58,5.9526,19.67,26.65,57.31,42.69,0.0,110,440,130.74,7.65,296672.92
