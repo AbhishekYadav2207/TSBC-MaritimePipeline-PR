@@ -1,0 +1,3474 @@
+[
+  {
+    "model_name": "bert-base-uncased",
+    "clean_model_name": "bert_base_uncased",
+    "representation": "json",
+    "subset": "medium_knowledge",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 972405
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 46.17894911766052,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 7600,
+        "overall_top1_accuracy": 0.5151315789473684,
+        "overall_mlm_loss": 3.8540084986199945
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 5740,
+        "mlm_loss": 2.390588974958211,
+        "mlm_loss_derived_exponential": 10.919923610951843,
+        "top1_accuracy": 0.6606271777003484,
+        "top5_accuracy": 0.7493031358885017,
+        "top10_accuracy": 0.782404181184669
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 1860,
+        "mlm_loss": 8.370152620027863,
+        "mlm_loss_derived_exponential": 4316.294765457889,
+        "top1_accuracy": 0.06612903225806452,
+        "top5_accuracy": 0.1338709677419355,
+        "top10_accuracy": 0.16021505376344086
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 4,
+        "mlm_loss": 13.083555698394775,
+        "mlm_loss_derived_exponential": 480967.84589138214,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.0
+      },
+      "category_recall": {
+        "vessel_terminology": 0.0687,
+        "navigation": 0.0,
+        "machinery_propulsion": 0.0,
+        "casualty_incident": 0.098,
+        "weather_environment": 0.0086,
+        "safety_lifesaving": 0.0
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 1557,
+          "mlm_loss": 8.371370334730901,
+          "mlm_loss_derived_exponential": 4321.55398251953,
+          "top1_accuracy": 0.06872190109184328,
+          "top5_accuracy": 0.14065510597302505,
+          "top10_accuracy": 0.1682723185613359
+        },
+        "navigation": {
+          "masked_sample_count": 11,
+          "mlm_loss": 10.670342532071201,
+          "mlm_loss_derived_exponential": 43059.688296369786,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 23,
+          "mlm_loss": 10.099243122598399,
+          "mlm_loss_derived_exponential": 24324.59172153886,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        },
+        "casualty_incident": {
+          "masked_sample_count": 153,
+          "mlm_loss": 7.3833782066365865,
+          "mlm_loss_derived_exponential": 1609.0161860489359,
+          "top1_accuracy": 0.09803921568627451,
+          "top5_accuracy": 0.17647058823529413,
+          "top10_accuracy": 0.20915032679738563
+        },
+        "weather_environment": {
+          "masked_sample_count": 116,
+          "mlm_loss": 9.183952151059076,
+          "mlm_loss_derived_exponential": 9739.569057608822,
+          "top1_accuracy": 0.008620689655172414,
+          "top5_accuracy": 0.02586206896551724,
+          "top10_accuracy": 0.034482758620689655
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 4,
+          "mlm_loss": 10.485702514648438,
+          "mlm_loss_derived_exponential": 35799.976452903065,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        }
+      },
+      "performance_gap_top1": 0.5944981454422839,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 50800,
+        "total_masked_tokens": 7600,
+        "actual_mask_rate": 0.1496,
+        "rare_maritime_tokens_masked": 4,
+        "maritime_tokens_masked": 1856,
+        "general_tokens_masked": 5740,
+        "rare_maritime_mask_fraction": 0.0005,
+        "maritime_mask_fraction": 0.2442,
+        "general_mask_fraction": 0.7553
+      }
+    }
+  },
+  {
+    "model_name": "dmis-lab/biobert-base-cased-v1.2",
+    "clean_model_name": "dmis_lab_biobert_base_cased_v1.2",
+    "representation": "json",
+    "subset": "medium_knowledge",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 254612
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 40.91278672218323,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 7600,
+        "overall_top1_accuracy": 0.5036842105263157,
+        "overall_mlm_loss": 3.7579753676497365
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 5630,
+        "mlm_loss": 2.290623860419714,
+        "mlm_loss_derived_exponential": 9.881100186011167,
+        "top1_accuracy": 0.6635879218472469,
+        "top5_accuracy": 0.741918294849023,
+        "top10_accuracy": 0.7737122557726466
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 1970,
+        "mlm_loss": 7.951472314708124,
+        "mlm_loss_derived_exponential": 2839.7528840418904,
+        "top1_accuracy": 0.046700507614213196,
+        "top5_accuracy": 0.10456852791878173,
+        "top10_accuracy": 0.15532994923857868
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 4,
+        "mlm_loss": 10.557510614395142,
+        "mlm_loss_derived_exponential": 38465.253812220915,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.0
+      },
+      "category_recall": {
+        "vessel_terminology": 0.0504,
+        "navigation": 0.0,
+        "machinery_propulsion": 0.0,
+        "casualty_incident": 0.0523,
+        "weather_environment": 0.0,
+        "safety_lifesaving": 0.0
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 1666,
+          "mlm_loss": 7.8238752876080815,
+          "mlm_loss_derived_exponential": 2499.5732283104344,
+          "top1_accuracy": 0.05042016806722689,
+          "top5_accuracy": 0.11044417767106843,
+          "top10_accuracy": 0.1644657863145258
+        },
+        "navigation": {
+          "masked_sample_count": 11,
+          "mlm_loss": 9.837207360701127,
+          "mlm_loss_derived_exponential": 18717.372096203006,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 23,
+          "mlm_loss": 10.333862180295197,
+          "mlm_loss_derived_exponential": 30756.670615537052,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.043478260869565216
+        },
+        "casualty_incident": {
+          "masked_sample_count": 153,
+          "mlm_loss": 7.831280737336165,
+          "mlm_loss_derived_exponential": 2518.1524008506667,
+          "top1_accuracy": 0.05228758169934641,
+          "top5_accuracy": 0.13725490196078433,
+          "top10_accuracy": 0.17647058823529413
+        },
+        "weather_environment": {
+          "masked_sample_count": 116,
+          "mlm_loss": 9.386639068866598,
+          "mlm_loss_derived_exponential": 11927.942893906602,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.008620689655172414,
+          "top10_accuracy": 0.034482758620689655
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 5,
+          "mlm_loss": 7.826015472412109,
+          "mlm_loss_derived_exponential": 2504.9285055475966,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        }
+      },
+      "performance_gap_top1": 0.6168874142330337,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 50800,
+        "total_masked_tokens": 7600,
+        "actual_mask_rate": 0.1496,
+        "rare_maritime_tokens_masked": 4,
+        "maritime_tokens_masked": 1966,
+        "general_tokens_masked": 5630,
+        "rare_maritime_mask_fraction": 0.0005,
+        "maritime_mask_fraction": 0.2587,
+        "general_mask_fraction": 0.7408
+      }
+    }
+  },
+  {
+    "model_name": "nlpaueb/legal-bert-base-uncased",
+    "clean_model_name": "nlpaueb_legal_bert_base_uncased",
+    "representation": "json",
+    "subset": "medium_knowledge",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 110824
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 41.48655104637146,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 7600,
+        "overall_top1_accuracy": 0.5263157894736842,
+        "overall_mlm_loss": 3.566142716001047
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 5569,
+        "mlm_loss": 2.2196409398362613,
+        "mlm_loss_derived_exponential": 9.204025473606809,
+        "top1_accuracy": 0.6737295744298797,
+        "top5_accuracy": 0.7538157658466511,
+        "top10_accuracy": 0.7820075417489675
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 2031,
+        "mlm_loss": 7.258249260295331,
+        "mlm_loss_derived_exponential": 1419.7687146116198,
+        "top1_accuracy": 0.12210733628754308,
+        "top5_accuracy": 0.2171344165435746,
+        "top10_accuracy": 0.2604628261939931
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 2,
+        "mlm_loss": 8.423737525939941,
+        "mlm_loss_derived_exponential": 4553.891977287423,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.0
+      },
+      "category_recall": {
+        "vessel_terminology": 0.1348,
+        "navigation": 0.0,
+        "machinery_propulsion": 0.0,
+        "casualty_incident": 0.1229,
+        "weather_environment": 0.0,
+        "safety_lifesaving": 0.0
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 1676,
+          "mlm_loss": 7.377129642925223,
+          "mlm_loss_derived_exponential": 1598.9934922291823,
+          "top1_accuracy": 0.13484486873508353,
+          "top5_accuracy": 0.2309069212410501,
+          "top10_accuracy": 0.2690930787589499
+        },
+        "navigation": {
+          "masked_sample_count": 9,
+          "mlm_loss": 8.143551720513237,
+          "mlm_loss_derived_exponential": 3441.11807896283,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 25,
+          "mlm_loss": 8.585987377166749,
+          "mlm_loss_derived_exponential": 5356.078575001413,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        },
+        "casualty_incident": {
+          "masked_sample_count": 179,
+          "mlm_loss": 6.471156262985155,
+          "mlm_loss_derived_exponential": 646.2305075602512,
+          "top1_accuracy": 0.12290502793296089,
+          "top5_accuracy": 0.22346368715083798,
+          "top10_accuracy": 0.2569832402234637
+        },
+        "weather_environment": {
+          "masked_sample_count": 141,
+          "mlm_loss": 6.513402335187222,
+          "mlm_loss_derived_exponential": 674.1160891576914,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.09929078014184398,
+          "top10_accuracy": 0.22695035460992907
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 3,
+          "mlm_loss": 9.871363639831543,
+          "mlm_loss_derived_exponential": 19367.731584885903,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        }
+      },
+      "performance_gap_top1": 0.5516222381423366,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 50800,
+        "total_masked_tokens": 7600,
+        "actual_mask_rate": 0.1496,
+        "rare_maritime_tokens_masked": 2,
+        "maritime_tokens_masked": 2029,
+        "general_tokens_masked": 5569,
+        "rare_maritime_mask_fraction": 0.0003,
+        "maritime_mask_fraction": 0.267,
+        "general_mask_fraction": 0.7328
+      }
+    }
+  },
+  {
+    "model_name": "allenai/scibert_scivocab_uncased",
+    "clean_model_name": "allenai_scibert_scivocab_uncased",
+    "representation": "json",
+    "subset": "medium_knowledge",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 599070
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 41.967233657836914,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 7600,
+        "overall_top1_accuracy": 0.5168421052631579,
+        "overall_mlm_loss": 3.7524333713769766
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 5492,
+        "mlm_loss": 2.0054010517962304,
+        "mlm_loss_derived_exponential": 7.429072742349856,
+        "top1_accuracy": 0.6997450837581938,
+        "top5_accuracy": 0.7800436999271668,
+        "top10_accuracy": 0.8049890750182083
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 2108,
+        "mlm_loss": 8.303999547438389,
+        "mlm_loss_derived_exponential": 4039.998288992463,
+        "top1_accuracy": 0.04032258064516129,
+        "top5_accuracy": 0.0967741935483871,
+        "top10_accuracy": 0.1413662239089184
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 4,
+        "mlm_loss": 9.033361434936523,
+        "mlm_loss_derived_exponential": 8377.974308312107,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.0
+      },
+      "category_recall": {
+        "vessel_terminology": 0.0426,
+        "navigation": 0.0,
+        "machinery_propulsion": 0.0,
+        "casualty_incident": 0.0542,
+        "weather_environment": 0.0,
+        "safety_lifesaving": 0.0
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 1786,
+          "mlm_loss": 8.302464442100263,
+          "mlm_loss_derived_exponential": 4033.8012238438782,
+          "top1_accuracy": 0.0425531914893617,
+          "top5_accuracy": 0.09854423292273236,
+          "top10_accuracy": 0.14669652855543114
+        },
+        "navigation": {
+          "masked_sample_count": 11,
+          "mlm_loss": 8.013623454354025,
+          "mlm_loss_derived_exponential": 3021.846823299671,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 25,
+          "mlm_loss": 9.88808141708374,
+          "mlm_loss_derived_exponential": 19694.238639079216,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        },
+        "casualty_incident": {
+          "masked_sample_count": 166,
+          "mlm_loss": 7.6112637637429925,
+          "mlm_loss_derived_exponential": 2020.8303367738938,
+          "top1_accuracy": 0.05421686746987952,
+          "top5_accuracy": 0.1566265060240964,
+          "top10_accuracy": 0.19879518072289157
+        },
+        "weather_environment": {
+          "masked_sample_count": 121,
+          "mlm_loss": 8.929793637646132,
+          "mlm_loss_derived_exponential": 7553.706414764376,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.01652892561983471,
+          "top10_accuracy": 0.024793388429752067
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 3,
+          "mlm_loss": 11.145429929097494,
+          "mlm_loss_derived_exponential": 69246.6418059961,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        }
+      },
+      "performance_gap_top1": 0.6594225031130325,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 50800,
+        "total_masked_tokens": 7600,
+        "actual_mask_rate": 0.1496,
+        "rare_maritime_tokens_masked": 4,
+        "maritime_tokens_masked": 2104,
+        "general_tokens_masked": 5492,
+        "rare_maritime_mask_fraction": 0.0005,
+        "maritime_mask_fraction": 0.2768,
+        "general_mask_fraction": 0.7226
+      }
+    }
+  },
+  {
+    "model_name": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+    "clean_model_name": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext",
+    "representation": "json",
+    "subset": "medium_knowledge",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 755253
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 41.101816177368164,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 7600,
+        "overall_top1_accuracy": 0.49236842105263157,
+        "overall_mlm_loss": 4.077992581337121
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 5603,
+        "mlm_loss": 2.6004546204355057,
+        "mlm_loss_derived_exponential": 13.469860317002507,
+        "top1_accuracy": 0.6505443512404069,
+        "top5_accuracy": 0.7190790647867213,
+        "top10_accuracy": 0.7379975013385687
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 1997,
+        "mlm_loss": 8.22353349016624,
+        "mlm_loss_derived_exponential": 3727.650756296721,
+        "top1_accuracy": 0.0485728592889334,
+        "top5_accuracy": 0.0871306960440661,
+        "top10_accuracy": 0.1186780170255383
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 4,
+        "mlm_loss": 8.000023603439331,
+        "mlm_loss_derived_exponential": 2981.0283487331094,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.0
+      },
+      "category_recall": {
+        "vessel_terminology": 0.0509,
+        "navigation": 0.0,
+        "machinery_propulsion": 0.0,
+        "casualty_incident": 0.0723,
+        "weather_environment": 0.0,
+        "safety_lifesaving": 0.0
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 1671,
+          "mlm_loss": 8.26571337219923,
+          "mlm_loss_derived_exponential": 3888.245755100875,
+          "top1_accuracy": 0.050867743865948535,
+          "top5_accuracy": 0.08258527827648116,
+          "top10_accuracy": 0.11131059245960502
+        },
+        "navigation": {
+          "masked_sample_count": 14,
+          "mlm_loss": 7.450308356966291,
+          "mlm_loss_derived_exponential": 1720.3935589320208,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.07142857142857142
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 25,
+          "mlm_loss": 10.908116493225098,
+          "mlm_loss_derived_exponential": 54617.875224871146,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        },
+        "casualty_incident": {
+          "masked_sample_count": 166,
+          "mlm_loss": 7.183216510048831,
+          "mlm_loss_derived_exponential": 1317.138039772141,
+          "top1_accuracy": 0.07228915662650602,
+          "top5_accuracy": 0.20481927710843373,
+          "top10_accuracy": 0.2710843373493976
+        },
+        "weather_environment": {
+          "masked_sample_count": 121,
+          "mlm_loss": 8.549078681252219,
+          "mlm_loss_derived_exponential": 5161.996391627292,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.01652892561983471,
+          "top10_accuracy": 0.04132231404958678
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 4,
+          "mlm_loss": 9.632434725761414,
+          "mlm_loss_derived_exponential": 15251.524217986045,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        }
+      },
+      "performance_gap_top1": 0.6019714919514735,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 50800,
+        "total_masked_tokens": 7600,
+        "actual_mask_rate": 0.1496,
+        "rare_maritime_tokens_masked": 4,
+        "maritime_tokens_masked": 1993,
+        "general_tokens_masked": 5603,
+        "rare_maritime_mask_fraction": 0.0005,
+        "maritime_mask_fraction": 0.2622,
+        "general_mask_fraction": 0.7372
+      }
+    }
+  },
+  {
+    "model_name": "roberta-base",
+    "clean_model_name": "roberta_base",
+    "representation": "json",
+    "subset": "medium_knowledge",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 56559
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 109.87541770935059,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 7600,
+        "overall_top1_accuracy": 0.358421052631579,
+        "overall_mlm_loss": 4.533506422138922
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 3925,
+        "mlm_loss": 2.1066437445818287,
+        "mlm_loss_derived_exponential": 8.220604484148197,
+        "top1_accuracy": 0.6440764331210191,
+        "top5_accuracy": 0.7610191082802548,
+        "top10_accuracy": 0.8007643312101911
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 3675,
+        "mlm_loss": 7.12546179884956,
+        "mlm_loss_derived_exponential": 1243.2221530717904,
+        "top1_accuracy": 0.05333333333333334,
+        "top5_accuracy": 0.13551020408163264,
+        "top10_accuracy": 0.16625850340136056
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 6,
+        "mlm_loss": 5.1530126730601,
+        "mlm_loss_derived_exponential": 172.95175332011092,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.16666666666666666
+      },
+      "category_recall": {
+        "vessel_terminology": 0.0599,
+        "navigation": 0.0,
+        "machinery_propulsion": 0.0,
+        "casualty_incident": 0.0258,
+        "weather_environment": 0.0,
+        "safety_lifesaving": 0.0
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 3140,
+          "mlm_loss": 6.993382938918034,
+          "mlm_loss_derived_exponential": 1089.4006252814202,
+          "top1_accuracy": 0.05987261146496815,
+          "top5_accuracy": 0.15286624203821655,
+          "top10_accuracy": 0.1859872611464968
+        },
+        "navigation": {
+          "masked_sample_count": 20,
+          "mlm_loss": 7.462423062324524,
+          "mlm_loss_derived_exponential": 1741.3623790789004,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.05
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 65,
+          "mlm_loss": 6.886541942449717,
+          "mlm_loss_derived_exponential": 979.0100836728334,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.03076923076923077,
+          "top10_accuracy": 0.06153846153846154
+        },
+        "casualty_incident": {
+          "masked_sample_count": 310,
+          "mlm_loss": 7.850465992958315,
+          "mlm_loss_derived_exponential": 2566.9302095765106,
+          "top1_accuracy": 0.025806451612903226,
+          "top5_accuracy": 0.05161290322580645,
+          "top10_accuracy": 0.07419354838709677
+        },
+        "weather_environment": {
+          "masked_sample_count": 138,
+          "mlm_loss": 8.47638381736866,
+          "mlm_loss_derived_exponential": 4800.060578651118,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 8,
+          "mlm_loss": 7.188580811023712,
+          "mlm_loss_derived_exponential": 1324.222549375345,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        }
+      },
+      "performance_gap_top1": 0.5907430997876858,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 50800,
+        "total_masked_tokens": 7600,
+        "actual_mask_rate": 0.1496,
+        "rare_maritime_tokens_masked": 6,
+        "maritime_tokens_masked": 3669,
+        "general_tokens_masked": 3925,
+        "rare_maritime_mask_fraction": 0.0008,
+        "maritime_mask_fraction": 0.4828,
+        "general_mask_fraction": 0.5164
+      }
+    }
+  },
+  {
+    "model_name": "answerdotai/ModernBERT-base",
+    "clean_model_name": "answerdotai_ModernBERT_base",
+    "representation": "json",
+    "subset": "medium_knowledge",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 265221
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 165.86864066123962,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 7600,
+        "overall_top1_accuracy": 0.45552631578947367,
+        "overall_mlm_loss": 3.7190525085687938
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 3898,
+        "mlm_loss": 1.5584112265898167,
+        "mlm_loss_derived_exponential": 4.751266559410795,
+        "top1_accuracy": 0.7360184710107748,
+        "top5_accuracy": 0.8183683940482298,
+        "top10_accuracy": 0.8545407901487942
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 3702,
+        "mlm_loss": 5.994087548318673,
+        "mlm_loss_derived_exponential": 401.05057771524275,
+        "top1_accuracy": 0.16018368449486764,
+        "top5_accuracy": 0.24149108589951376,
+        "top10_accuracy": 0.2976769313884387
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 6,
+        "mlm_loss": 4.784739096959432,
+        "mlm_loss_derived_exponential": 119.67013670797547,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.5,
+        "top10_accuracy": 0.6666666666666666
+      },
+      "category_recall": {
+        "vessel_terminology": 0.1815,
+        "navigation": 0.0,
+        "machinery_propulsion": 0.0,
+        "casualty_incident": 0.0781,
+        "weather_environment": 0.0,
+        "safety_lifesaving": 0.0
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 3152,
+          "mlm_loss": 5.859393389498446,
+          "mlm_loss_derived_exponential": 350.51145558704286,
+          "top1_accuracy": 0.1814720812182741,
+          "top5_accuracy": 0.26903553299492383,
+          "top10_accuracy": 0.32138324873096447
+        },
+        "navigation": {
+          "masked_sample_count": 18,
+          "mlm_loss": 6.740136914783054,
+          "mlm_loss_derived_exponential": 845.6765135414026,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.16666666666666666,
+          "top10_accuracy": 0.2222222222222222
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 63,
+          "mlm_loss": 6.696710272440835,
+          "mlm_loss_derived_exponential": 809.737622571412,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.031746031746031744,
+          "top10_accuracy": 0.07936507936507936
+        },
+        "casualty_incident": {
+          "masked_sample_count": 269,
+          "mlm_loss": 7.030325054997737,
+          "mlm_loss_derived_exponential": 1130.3979919902188,
+          "top1_accuracy": 0.07806691449814127,
+          "top5_accuracy": 0.13011152416356878,
+          "top10_accuracy": 0.1412639405204461
+        },
+        "weather_environment": {
+          "masked_sample_count": 196,
+          "mlm_loss": 6.366697962186774,
+          "mlm_loss_derived_exponential": 582.1324284771309,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.04591836734693878,
+          "top10_accuracy": 0.23469387755102042
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 10,
+          "mlm_loss": 6.776712274551391,
+          "mlm_loss_derived_exponential": 877.1800509511592,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        }
+      },
+      "performance_gap_top1": 0.5758347865159071,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 50800,
+        "total_masked_tokens": 7600,
+        "actual_mask_rate": 0.1496,
+        "rare_maritime_tokens_masked": 6,
+        "maritime_tokens_masked": 3696,
+        "general_tokens_masked": 3898,
+        "rare_maritime_mask_fraction": 0.0008,
+        "maritime_mask_fraction": 0.4863,
+        "general_mask_fraction": 0.5129
+      }
+    }
+  },
+  {
+    "model_name": "bert-base-uncased",
+    "clean_model_name": "bert_base_uncased",
+    "representation": "mixed",
+    "subset": "high_knowledge",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 232889
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 90.10366916656494,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 6499,
+        "overall_top1_accuracy": 0.1923372826588706,
+        "overall_mlm_loss": 6.175334210731399
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 1,
+        "mlm_loss": 7.175638198852539,
+        "mlm_loss_derived_exponential": 1307.1940846024022,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.0
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 6498,
+        "mlm_loss": 6.175180270443907,
+        "mlm_loss_derived_exponential": 480.66966664509215,
+        "top1_accuracy": 0.19236688211757463,
+        "top5_accuracy": 0.30809479839950754,
+        "top10_accuracy": 0.37365343182517696
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 619,
+        "mlm_loss": 11.578127145382044,
+        "mlm_loss_derived_exponential": 106737.42711605033,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.0
+      },
+      "category_recall": {
+        "vessel_terminology": 0.1825,
+        "navigation": 0.1872,
+        "machinery_propulsion": 0.5,
+        "casualty_incident": 0.4309,
+        "weather_environment": 0.0926,
+        "safety_lifesaving": 0.2273
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 3994,
+          "mlm_loss": 5.986945962962789,
+          "mlm_loss_derived_exponential": 398.1966437188229,
+          "top1_accuracy": 0.18252378567851776,
+          "top5_accuracy": 0.28893340010015023,
+          "top10_accuracy": 0.34827240861291936
+        },
+        "navigation": {
+          "masked_sample_count": 1880,
+          "mlm_loss": 7.262738251929099,
+          "mlm_loss_derived_exponential": 1426.1563708345757,
+          "top1_accuracy": 0.18723404255319148,
+          "top5_accuracy": 0.29840425531914894,
+          "top10_accuracy": 0.35319148936170214
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 16,
+          "mlm_loss": 2.576452344452264,
+          "mlm_loss_derived_exponential": 13.150402209795574,
+          "top1_accuracy": 0.5,
+          "top5_accuracy": 0.625,
+          "top10_accuracy": 0.8125
+        },
+        "casualty_incident": {
+          "masked_sample_count": 304,
+          "mlm_loss": 4.125374460279617,
+          "mlm_loss_derived_exponential": 61.89098062562814,
+          "top1_accuracy": 0.4309210526315789,
+          "top5_accuracy": 0.4934210526315789,
+          "top10_accuracy": 0.5164473684210527
+        },
+        "weather_environment": {
+          "masked_sample_count": 432,
+          "mlm_loss": 5.388733602882389,
+          "mlm_loss_derived_exponential": 218.92596271913422,
+          "top1_accuracy": 0.09259259259259259,
+          "top5_accuracy": 0.3333333333333333,
+          "top10_accuracy": 0.5138888888888888
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 22,
+          "mlm_loss": 8.364043988923102,
+          "mlm_loss_derived_exponential": 4290.008481342843,
+          "top1_accuracy": 0.22727272727272727,
+          "top5_accuracy": 0.2727272727272727,
+          "top10_accuracy": 0.3181818181818182
+        }
+      },
+      "performance_gap_top1": -0.19236688211757463,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 43346,
+        "total_masked_tokens": 6499,
+        "actual_mask_rate": 0.1499,
+        "rare_maritime_tokens_masked": 619,
+        "maritime_tokens_masked": 5879,
+        "general_tokens_masked": 1,
+        "rare_maritime_mask_fraction": 0.0952,
+        "maritime_mask_fraction": 0.9046,
+        "general_mask_fraction": 0.0002
+      }
+    }
+  },
+  {
+    "model_name": "dmis-lab/biobert-base-cased-v1.2",
+    "clean_model_name": "dmis_lab_biobert_base_cased_v1.2",
+    "representation": "mixed",
+    "subset": "high_knowledge",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 294259
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 90.65982460975647,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 6761,
+        "overall_top1_accuracy": 0.17674900162697826,
+        "overall_mlm_loss": 6.160787257283832
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 0,
+        "mlm_loss": 0.0,
+        "mlm_loss_derived_exponential": 1.0,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.0
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 6761,
+        "mlm_loss": 6.160787257283832,
+        "mlm_loss_derived_exponential": 473.80093128283886,
+        "top1_accuracy": 0.17674900162697826,
+        "top5_accuracy": 0.25247744416506435,
+        "top10_accuracy": 0.3057240053246561
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 511,
+        "mlm_loss": 8.030409085850456,
+        "mlm_loss_derived_exponential": 3072.9985363918213,
+        "top1_accuracy": 0.11350293542074363,
+        "top5_accuracy": 0.14090019569471623,
+        "top10_accuracy": 0.17221135029354206
+      },
+      "category_recall": {
+        "vessel_terminology": 0.159,
+        "navigation": 0.2215,
+        "machinery_propulsion": 0.2857,
+        "casualty_incident": 0.1935,
+        "weather_environment": 0.0776,
+        "safety_lifesaving": 0.129
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 4131,
+          "mlm_loss": 6.625728081109013,
+          "mlm_loss_derived_exponential": 754.2531701720912,
+          "top1_accuracy": 0.15904139433551198,
+          "top5_accuracy": 0.21520213023480997,
+          "top10_accuracy": 0.25780682643427744
+        },
+        "navigation": {
+          "masked_sample_count": 1955,
+          "mlm_loss": 5.753983550182948,
+          "mlm_loss_derived_exponential": 315.44475075572103,
+          "top1_accuracy": 0.22148337595907927,
+          "top5_accuracy": 0.30383631713554987,
+          "top10_accuracy": 0.36010230179028135
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 21,
+          "mlm_loss": 5.849745266582994,
+          "mlm_loss_derived_exponential": 347.14593954340245,
+          "top1_accuracy": 0.2857142857142857,
+          "top5_accuracy": 0.2857142857142857,
+          "top10_accuracy": 0.2857142857142857
+        },
+        "casualty_incident": {
+          "masked_sample_count": 310,
+          "mlm_loss": 5.02618305574682,
+          "mlm_loss_derived_exponential": 152.35038854100125,
+          "top1_accuracy": 0.1935483870967742,
+          "top5_accuracy": 0.3193548387096774,
+          "top10_accuracy": 0.4483870967741935
+        },
+        "weather_environment": {
+          "masked_sample_count": 451,
+          "mlm_loss": 5.723883884513912,
+          "mlm_loss_derived_exponential": 306.0914411236548,
+          "top1_accuracy": 0.07760532150776053,
+          "top5_accuracy": 0.24833702882483372,
+          "top10_accuracy": 0.3259423503325942
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 31,
+          "mlm_loss": 6.440470325809363,
+          "mlm_loss_derived_exponential": 626.70148439005,
+          "top1_accuracy": 0.12903225806451613,
+          "top5_accuracy": 0.22580645161290322,
+          "top10_accuracy": 0.25806451612903225
+        }
+      },
+      "performance_gap_top1": -0.17674900162697826,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 45111,
+        "total_masked_tokens": 6761,
+        "actual_mask_rate": 0.1499,
+        "rare_maritime_tokens_masked": 511,
+        "maritime_tokens_masked": 6250,
+        "general_tokens_masked": 0,
+        "rare_maritime_mask_fraction": 0.0756,
+        "maritime_mask_fraction": 0.9244,
+        "general_mask_fraction": 0.0
+      }
+    }
+  },
+  {
+    "model_name": "nlpaueb/legal-bert-base-uncased",
+    "clean_model_name": "nlpaueb_legal_bert_base_uncased",
+    "representation": "mixed",
+    "subset": "high_knowledge",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 377462
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 91.61360669136047,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 6716,
+        "overall_top1_accuracy": 0.28379988088147706,
+        "overall_mlm_loss": 4.554551699356486
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 0,
+        "mlm_loss": 0.0,
+        "mlm_loss_derived_exponential": 1.0,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.0
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 6716,
+        "mlm_loss": 4.554551699356486,
+        "mlm_loss_derived_exponential": 95.06412837154251,
+        "top1_accuracy": 0.28379988088147706,
+        "top5_accuracy": 0.43046456223942825,
+        "top10_accuracy": 0.5022334723049434
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 479,
+        "mlm_loss": 6.322283735638776,
+        "mlm_loss_derived_exponential": 556.8432241788695,
+        "top1_accuracy": 0.13569937369519833,
+        "top5_accuracy": 0.27348643006263046,
+        "top10_accuracy": 0.2985386221294363
+      },
+      "category_recall": {
+        "vessel_terminology": 0.2604,
+        "navigation": 0.3509,
+        "machinery_propulsion": 0.4118,
+        "casualty_incident": 0.2526,
+        "weather_environment": 0.1469,
+        "safety_lifesaving": 0.0769
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 3937,
+          "mlm_loss": 4.787329661733473,
+          "mlm_loss_derived_exponential": 119.98055185030208,
+          "top1_accuracy": 0.2603505207010414,
+          "top5_accuracy": 0.39395478790957583,
+          "top10_accuracy": 0.47269494538989076
+        },
+        "navigation": {
+          "masked_sample_count": 2086,
+          "mlm_loss": 4.089073843638651,
+          "mlm_loss_derived_exponential": 59.68458883692134,
+          "top1_accuracy": 0.35091083413231067,
+          "top5_accuracy": 0.49760306807286675,
+          "top10_accuracy": 0.5532118887823586
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 17,
+          "mlm_loss": 4.519311773991349,
+          "mlm_loss_derived_exponential": 91.7724160753165,
+          "top1_accuracy": 0.4117647058823529,
+          "top5_accuracy": 0.4117647058823529,
+          "top10_accuracy": 0.5294117647058824
+        },
+        "casualty_incident": {
+          "masked_sample_count": 293,
+          "mlm_loss": 4.381476054807216,
+          "mlm_loss_derived_exponential": 79.95596573396926,
+          "top1_accuracy": 0.2525597269624573,
+          "top5_accuracy": 0.4300341296928328,
+          "top10_accuracy": 0.49829351535836175
+        },
+        "weather_environment": {
+          "masked_sample_count": 456,
+          "mlm_loss": 5.1819992684048515,
+          "mlm_loss_derived_exponential": 178.0384019659233,
+          "top1_accuracy": 0.14692982456140352,
+          "top5_accuracy": 0.36622807017543857,
+          "top10_accuracy": 0.43859649122807015
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 13,
+          "mlm_loss": 6.541131688998296,
+          "mlm_loss_derived_exponential": 693.0704746204307,
+          "top1_accuracy": 0.07692307692307693,
+          "top5_accuracy": 0.23076923076923078,
+          "top10_accuracy": 0.3076923076923077
+        }
+      },
+      "performance_gap_top1": -0.28379988088147706,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 44832,
+        "total_masked_tokens": 6716,
+        "actual_mask_rate": 0.1498,
+        "rare_maritime_tokens_masked": 479,
+        "maritime_tokens_masked": 6237,
+        "general_tokens_masked": 0,
+        "rare_maritime_mask_fraction": 0.0713,
+        "maritime_mask_fraction": 0.9287,
+        "general_mask_fraction": 0.0
+      }
+    }
+  },
+  {
+    "model_name": "allenai/scibert_scivocab_uncased",
+    "clean_model_name": "allenai_scibert_scivocab_uncased",
+    "representation": "mixed",
+    "subset": "high_knowledge",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 121297
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 75.9938793182373,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 6643,
+        "overall_top1_accuracy": 0.29263886798133376,
+        "overall_mlm_loss": 5.017285591300416
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 0,
+        "mlm_loss": 0.0,
+        "mlm_loss_derived_exponential": 1.0,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.0
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 6643,
+        "mlm_loss": 5.017285591300416,
+        "mlm_loss_derived_exponential": 151.00086892980934,
+        "top1_accuracy": 0.29263886798133376,
+        "top5_accuracy": 0.39876561794370013,
+        "top10_accuracy": 0.4598825831702544
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 409,
+        "mlm_loss": 8.670074211923101,
+        "mlm_loss_derived_exponential": 5825.931687076584,
+        "top1_accuracy": 0.10757946210268948,
+        "top5_accuracy": 0.15403422982885084,
+        "top10_accuracy": 0.1687041564792176
+      },
+      "category_recall": {
+        "vessel_terminology": 0.2469,
+        "navigation": 0.4016,
+        "machinery_propulsion": 0.55,
+        "casualty_incident": 0.2778,
+        "weather_environment": 0.1034,
+        "safety_lifesaving": 0.0
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 4066,
+          "mlm_loss": 5.296897717851581,
+          "mlm_loss_derived_exponential": 199.71627170561277,
+          "top1_accuracy": 0.2469257255287752,
+          "top5_accuracy": 0.34923757993113624,
+          "top10_accuracy": 0.4131824889326119
+        },
+        "navigation": {
+          "masked_sample_count": 2027,
+          "mlm_loss": 4.685801162224654,
+          "mlm_loss_derived_exponential": 108.39708117624875,
+          "top1_accuracy": 0.4015786877158362,
+          "top5_accuracy": 0.47755303404045385,
+          "top10_accuracy": 0.5180069067587568
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 20,
+          "mlm_loss": 3.1869272594820357,
+          "mlm_loss_derived_exponential": 24.213909953059172,
+          "top1_accuracy": 0.55,
+          "top5_accuracy": 0.55,
+          "top10_accuracy": 0.55
+        },
+        "casualty_incident": {
+          "masked_sample_count": 270,
+          "mlm_loss": 4.2199196498177045,
+          "mlm_loss_derived_exponential": 68.02801800616619,
+          "top1_accuracy": 0.2777777777777778,
+          "top5_accuracy": 0.45185185185185184,
+          "top10_accuracy": 0.5407407407407407
+        },
+        "weather_environment": {
+          "masked_sample_count": 406,
+          "mlm_loss": 5.635843833978833,
+          "mlm_loss_derived_exponential": 280.2953402777399,
+          "top1_accuracy": 0.10344827586206896,
+          "top5_accuracy": 0.34236453201970446,
+          "top10_accuracy": 0.45320197044334976
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 12,
+          "mlm_loss": 9.39101646343867,
+          "mlm_loss_derived_exponential": 11980.27065245261,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.08333333333333333,
+          "top10_accuracy": 0.08333333333333333
+        }
+      },
+      "performance_gap_top1": -0.29263886798133376,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 44325,
+        "total_masked_tokens": 6643,
+        "actual_mask_rate": 0.1499,
+        "rare_maritime_tokens_masked": 409,
+        "maritime_tokens_masked": 6234,
+        "general_tokens_masked": 0,
+        "rare_maritime_mask_fraction": 0.0616,
+        "maritime_mask_fraction": 0.9384,
+        "general_mask_fraction": 0.0
+      }
+    }
+  },
+  {
+    "model_name": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+    "clean_model_name": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext",
+    "representation": "mixed",
+    "subset": "high_knowledge",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 923480
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 39.73339104652405,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 6632,
+        "overall_top1_accuracy": 0.24728588661037396,
+        "overall_mlm_loss": 5.622191566535955
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 0,
+        "mlm_loss": 0.0,
+        "mlm_loss_derived_exponential": 1.0,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.0
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 6632,
+        "mlm_loss": 5.622191566535955,
+        "mlm_loss_derived_exponential": 276.49467620234435,
+        "top1_accuracy": 0.24728588661037396,
+        "top5_accuracy": 0.3336851628468034,
+        "top10_accuracy": 0.37680940892641734
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 411,
+        "mlm_loss": 8.226177367286013,
+        "mlm_loss_derived_exponential": 3737.5192466312346,
+        "top1_accuracy": 0.15328467153284672,
+        "top5_accuracy": 0.17518248175182483,
+        "top10_accuracy": 0.17518248175182483
+      },
+      "category_recall": {
+        "vessel_terminology": 0.2203,
+        "navigation": 0.3324,
+        "machinery_propulsion": 0.4167,
+        "casualty_incident": 0.2085,
+        "weather_environment": 0.0909,
+        "safety_lifesaving": 0.1053
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 4149,
+          "mlm_loss": 5.905627612015067,
+          "mlm_loss_derived_exponential": 367.09754833534413,
+          "top1_accuracy": 0.220294046758255,
+          "top5_accuracy": 0.2993492407809111,
+          "top10_accuracy": 0.3420101229211858
+        },
+        "navigation": {
+          "masked_sample_count": 1850,
+          "mlm_loss": 4.954478244018046,
+          "mlm_loss_derived_exponential": 141.8085975832914,
+          "top1_accuracy": 0.3324324324324324,
+          "top5_accuracy": 0.4259459459459459,
+          "top10_accuracy": 0.45675675675675675
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 24,
+          "mlm_loss": 4.372976166194955,
+          "mlm_loss_derived_exponential": 79.27922909876115,
+          "top1_accuracy": 0.4166666666666667,
+          "top5_accuracy": 0.5,
+          "top10_accuracy": 0.5
+        },
+        "casualty_incident": {
+          "masked_sample_count": 283,
+          "mlm_loss": 5.234821508376523,
+          "mlm_loss_derived_exponential": 187.69560126151097,
+          "top1_accuracy": 0.20848056537102475,
+          "top5_accuracy": 0.3321554770318021,
+          "top10_accuracy": 0.4098939929328622
+        },
+        "weather_environment": {
+          "masked_sample_count": 451,
+          "mlm_loss": 7.009188231668752,
+          "mlm_loss_derived_exponential": 1106.755710907267,
+          "top1_accuracy": 0.09090909090909091,
+          "top5_accuracy": 0.1574279379157428,
+          "top10_accuracy": 0.22394678492239467
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 19,
+          "mlm_loss": 6.157504534342718,
+          "mlm_loss_derived_exponential": 472.24812420835434,
+          "top1_accuracy": 0.10526315789473684,
+          "top5_accuracy": 0.3684210526315789,
+          "top10_accuracy": 0.3684210526315789
+        }
+      },
+      "performance_gap_top1": -0.24728588661037396,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 44255,
+        "total_masked_tokens": 6632,
+        "actual_mask_rate": 0.1499,
+        "rare_maritime_tokens_masked": 411,
+        "maritime_tokens_masked": 6221,
+        "general_tokens_masked": 0,
+        "rare_maritime_mask_fraction": 0.062,
+        "maritime_mask_fraction": 0.938,
+        "general_mask_fraction": 0.0
+      }
+    }
+  },
+  {
+    "model_name": "roberta-base",
+    "clean_model_name": "roberta_base",
+    "representation": "mixed",
+    "subset": "high_knowledge",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 117096
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 44.23763632774353,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 7349,
+        "overall_top1_accuracy": 0.2623486188597088,
+        "overall_mlm_loss": 4.710933874276865
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 3,
+        "mlm_loss": 4.8089797099373754,
+        "mlm_loss_derived_exponential": 122.60645952712666,
+        "top1_accuracy": 0.3333333333333333,
+        "top5_accuracy": 0.6666666666666666,
+        "top10_accuracy": 0.6666666666666666
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 7346,
+        "mlm_loss": 4.710893833777684,
+        "mlm_loss_derived_exponential": 111.15146645246891,
+        "top1_accuracy": 0.2623196297304656,
+        "top5_accuracy": 0.3919139667846447,
+        "top10_accuracy": 0.46079499047100464
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 118,
+        "mlm_loss": 7.623494100393885,
+        "mlm_loss_derived_exponential": 2045.6975292033308,
+        "top1_accuracy": 0.03389830508474576,
+        "top5_accuracy": 0.07627118644067797,
+        "top10_accuracy": 0.11016949152542373
+      },
+      "category_recall": {
+        "vessel_terminology": 0.2714,
+        "navigation": 0.2498,
+        "machinery_propulsion": 0.5152,
+        "casualty_incident": 0.3038,
+        "weather_environment": 0.1236,
+        "safety_lifesaving": 0.0
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 5045,
+          "mlm_loss": 4.729349228836414,
+          "mlm_loss_derived_exponential": 113.22185684902917,
+          "top1_accuracy": 0.2713577799801784,
+          "top5_accuracy": 0.3902874132804757,
+          "top10_accuracy": 0.4487611496531219
+        },
+        "navigation": {
+          "masked_sample_count": 1401,
+          "mlm_loss": 4.947901321340879,
+          "mlm_loss_derived_exponential": 140.87899371929842,
+          "top1_accuracy": 0.24982155603140613,
+          "top5_accuracy": 0.3683083511777302,
+          "top10_accuracy": 0.4475374732334047
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 33,
+          "mlm_loss": 2.4380376426001793,
+          "mlm_loss_derived_exponential": 11.450548612411824,
+          "top1_accuracy": 0.5151515151515151,
+          "top5_accuracy": 0.6363636363636364,
+          "top10_accuracy": 0.7272727272727273
+        },
+        "casualty_incident": {
+          "masked_sample_count": 451,
+          "mlm_loss": 4.018592419524735,
+          "mlm_loss_derived_exponential": 55.62275719172354,
+          "top1_accuracy": 0.30376940133037694,
+          "top5_accuracy": 0.5033259423503326,
+          "top10_accuracy": 0.5676274944567627
+        },
+        "weather_environment": {
+          "masked_sample_count": 437,
+          "mlm_loss": 4.595384890578516,
+          "mlm_loss_derived_exponential": 99.02624248145453,
+          "top1_accuracy": 0.12356979405034325,
+          "top5_accuracy": 0.3340961098398169,
+          "top10_accuracy": 0.4897025171624714
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 25,
+          "mlm_loss": 9.263509216308593,
+          "mlm_loss_derived_exponential": 10546.076946197614,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        }
+      },
+      "performance_gap_top1": 0.07101370360286774,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 49092,
+        "total_masked_tokens": 7349,
+        "actual_mask_rate": 0.1497,
+        "rare_maritime_tokens_masked": 118,
+        "maritime_tokens_masked": 7228,
+        "general_tokens_masked": 3,
+        "rare_maritime_mask_fraction": 0.0161,
+        "maritime_mask_fraction": 0.9835,
+        "general_mask_fraction": 0.0004
+      }
+    }
+  },
+  {
+    "model_name": "answerdotai/ModernBERT-base",
+    "clean_model_name": "answerdotai_ModernBERT_base",
+    "representation": "mixed",
+    "subset": "high_knowledge",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 585238
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 56.474510192871094,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 7341,
+        "overall_top1_accuracy": 0.43481814466693913,
+        "overall_mlm_loss": 3.308308545859233
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 0,
+        "mlm_loss": 0.0,
+        "mlm_loss_derived_exponential": 1.0,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.0
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 7341,
+        "mlm_loss": 3.308308545859233,
+        "mlm_loss_derived_exponential": 27.338843940606576,
+        "top1_accuracy": 0.43481814466693913,
+        "top5_accuracy": 0.5815284021250511,
+        "top10_accuracy": 0.6477319166326113
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 109,
+        "mlm_loss": 6.1056779059795065,
+        "mlm_loss_derived_exponential": 448.39650912161403,
+        "top1_accuracy": 0.1651376146788991,
+        "top5_accuracy": 0.2018348623853211,
+        "top10_accuracy": 0.21100917431192662
+      },
+      "category_recall": {
+        "vessel_terminology": 0.4838,
+        "navigation": 0.291,
+        "machinery_propulsion": 0.4706,
+        "casualty_incident": 0.3452,
+        "weather_environment": 0.2749,
+        "safety_lifesaving": 0.037
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 5343,
+          "mlm_loss": 2.905242349756819,
+          "mlm_loss_derived_exponential": 18.26967076599984,
+          "top1_accuracy": 0.4838105932996444,
+          "top5_accuracy": 0.6215609208309938,
+          "top10_accuracy": 0.682201010668164
+        },
+        "navigation": {
+          "masked_sample_count": 1110,
+          "mlm_loss": 5.0430527560109555,
+          "mlm_loss_derived_exponential": 154.94229480346132,
+          "top1_accuracy": 0.290990990990991,
+          "top5_accuracy": 0.4027027027027027,
+          "top10_accuracy": 0.45765765765765765
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 34,
+          "mlm_loss": 2.6655309811313224,
+          "mlm_loss_derived_exponential": 14.375580681916764,
+          "top1_accuracy": 0.47058823529411764,
+          "top5_accuracy": 0.5588235294117647,
+          "top10_accuracy": 0.6764705882352942
+        },
+        "casualty_incident": {
+          "masked_sample_count": 420,
+          "mlm_loss": 4.168201047515834,
+          "mlm_loss_derived_exponential": 64.59913673835014,
+          "top1_accuracy": 0.34523809523809523,
+          "top5_accuracy": 0.5142857142857142,
+          "top10_accuracy": 0.5571428571428572
+        },
+        "weather_environment": {
+          "masked_sample_count": 451,
+          "mlm_loss": 3.105379820466011,
+          "mlm_loss_derived_exponential": 22.31769408263108,
+          "top1_accuracy": 0.2749445676274945,
+          "top5_accuracy": 0.5920177383592018,
+          "top10_accuracy": 0.7671840354767184
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 27,
+          "mlm_loss": 8.557047812475098,
+          "mlm_loss_derived_exponential": 5203.297366111816,
+          "top1_accuracy": 0.037037037037037035,
+          "top5_accuracy": 0.037037037037037035,
+          "top10_accuracy": 0.037037037037037035
+        }
+      },
+      "performance_gap_top1": -0.43481814466693913,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 49052,
+        "total_masked_tokens": 7341,
+        "actual_mask_rate": 0.1497,
+        "rare_maritime_tokens_masked": 109,
+        "maritime_tokens_masked": 7232,
+        "general_tokens_masked": 0,
+        "rare_maritime_mask_fraction": 0.0148,
+        "maritime_mask_fraction": 0.9852,
+        "general_mask_fraction": 0.0
+      }
+    }
+  },
+  {
+    "model_name": "bert-base-uncased",
+    "clean_model_name": "bert_base_uncased",
+    "representation": "key_value",
+    "subset": "random_baseline",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 135034
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 26.20190405845642,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 3920,
+        "overall_top1_accuracy": 0.15178571428571427,
+        "overall_mlm_loss": 6.4378657391005465
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 5,
+        "mlm_loss": 4.103519549965858,
+        "mlm_loss_derived_exponential": 60.55303241791819,
+        "top1_accuracy": 0.2,
+        "top5_accuracy": 0.6,
+        "top10_accuracy": 0.6
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 3915,
+        "mlm_loss": 6.440847024144142,
+        "mlm_loss_derived_exponential": 626.9376062661896,
+        "top1_accuracy": 0.15172413793103448,
+        "top5_accuracy": 0.2641123882503193,
+        "top10_accuracy": 0.32005108556832695
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 19,
+        "mlm_loss": 11.004246611344186,
+        "mlm_loss_derived_exponential": 60128.94456604756,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.0
+      },
+      "category_recall": {
+        "vessel_terminology": 0.1407,
+        "navigation": 0.1693,
+        "machinery_propulsion": 0.0769,
+        "casualty_incident": 0.2562,
+        "weather_environment": 0.1584,
+        "safety_lifesaving": 0.2222
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 2821,
+          "mlm_loss": 6.665276271067648,
+          "mlm_loss_derived_exponential": 784.6802194800981,
+          "top1_accuracy": 0.14073023750443106,
+          "top5_accuracy": 0.23750443105281815,
+          "top10_accuracy": 0.2772066643034385
+        },
+        "navigation": {
+          "masked_sample_count": 567,
+          "mlm_loss": 6.082680091457686,
+          "mlm_loss_derived_exponential": 438.2020438994139,
+          "top1_accuracy": 0.1693121693121693,
+          "top5_accuracy": 0.3298059964726631,
+          "top10_accuracy": 0.41975308641975306
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 13,
+          "mlm_loss": 6.2120446516917305,
+          "mlm_loss_derived_exponential": 498.71991804669744,
+          "top1_accuracy": 0.07692307692307693,
+          "top5_accuracy": 0.07692307692307693,
+          "top10_accuracy": 0.15384615384615385
+        },
+        "casualty_incident": {
+          "masked_sample_count": 160,
+          "mlm_loss": 4.963726399792359,
+          "mlm_loss_derived_exponential": 143.12614865198591,
+          "top1_accuracy": 0.25625,
+          "top5_accuracy": 0.3875,
+          "top10_accuracy": 0.45625
+        },
+        "weather_environment": {
+          "masked_sample_count": 322,
+          "mlm_loss": 5.808802140691543,
+          "mlm_loss_derived_exponential": 333.21973615338294,
+          "top1_accuracy": 0.15838509316770186,
+          "top5_accuracy": 0.32298136645962733,
+          "top10_accuracy": 0.45652173913043476
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 36,
+          "mlm_loss": 7.282622208579495,
+          "mlm_loss_derived_exponential": 1454.797811206545,
+          "top1_accuracy": 0.2222222222222222,
+          "top5_accuracy": 0.2777777777777778,
+          "top10_accuracy": 0.3055555555555556
+        }
+      },
+      "performance_gap_top1": 0.04827586206896553,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 26115,
+        "total_masked_tokens": 3920,
+        "actual_mask_rate": 0.1501,
+        "rare_maritime_tokens_masked": 19,
+        "maritime_tokens_masked": 3896,
+        "general_tokens_masked": 5,
+        "rare_maritime_mask_fraction": 0.0048,
+        "maritime_mask_fraction": 0.9939,
+        "general_mask_fraction": 0.0013
+      }
+    }
+  },
+  {
+    "model_name": "dmis-lab/biobert-base-cased-v1.2",
+    "clean_model_name": "dmis_lab_biobert_base_cased_v1.2",
+    "representation": "key_value",
+    "subset": "random_baseline",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 438963
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 26.068873643875122,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 4228,
+        "overall_top1_accuracy": 0.09578997161778618,
+        "overall_mlm_loss": 7.0190542277553725
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 5,
+        "mlm_loss": 4.1751763939857485,
+        "mlm_loss_derived_exponential": 65.05131330947876,
+        "top1_accuracy": 0.4,
+        "top5_accuracy": 0.6,
+        "top10_accuracy": 0.6
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 4223,
+        "mlm_loss": 7.022421357560925,
+        "mlm_loss_derived_exponential": 1121.4988825386995,
+        "top1_accuracy": 0.0954297892493488,
+        "top5_accuracy": 0.17120530428605257,
+        "top10_accuracy": 0.20743547241297655
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 19,
+        "mlm_loss": 9.692321024442974,
+        "mlm_loss_derived_exponential": 16192.784559551541,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.0
+      },
+      "category_recall": {
+        "vessel_terminology": 0.0898,
+        "navigation": 0.1493,
+        "machinery_propulsion": 0.0,
+        "casualty_incident": 0.0881,
+        "weather_environment": 0.0359,
+        "safety_lifesaving": 0.1395
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 2997,
+          "mlm_loss": 7.399621575710943,
+          "mlm_loss_derived_exponential": 1635.3654508768498,
+          "top1_accuracy": 0.08975642308975643,
+          "top5_accuracy": 0.1504838171504838,
+          "top10_accuracy": 0.17951284617951285
+        },
+        "navigation": {
+          "masked_sample_count": 683,
+          "mlm_loss": 5.8189533360627665,
+          "mlm_loss_derived_exponential": 336.619541646653,
+          "top1_accuracy": 0.1493411420204978,
+          "top5_accuracy": 0.2547584187408492,
+          "top10_accuracy": 0.30453879941434847
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 11,
+          "mlm_loss": 6.988677198236639,
+          "mlm_loss_derived_exponential": 1084.2862313841629,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        },
+        "casualty_incident": {
+          "masked_sample_count": 159,
+          "mlm_loss": 6.0534407590170325,
+          "mlm_loss_derived_exponential": 425.5748141584168,
+          "top1_accuracy": 0.0880503144654088,
+          "top5_accuracy": 0.16981132075471697,
+          "top10_accuracy": 0.23270440251572327
+        },
+        "weather_environment": {
+          "masked_sample_count": 334,
+          "mlm_loss": 6.5164460607185335,
+          "mlm_loss_derived_exponential": 676.1710392749304,
+          "top1_accuracy": 0.03592814371257485,
+          "top5_accuracy": 0.19161676646706588,
+          "top10_accuracy": 0.25449101796407186
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 43,
+          "mlm_loss": 7.615615898786589,
+          "mlm_loss_derived_exponential": 2029.6444294481687,
+          "top1_accuracy": 0.13953488372093023,
+          "top5_accuracy": 0.16279069767441862,
+          "top10_accuracy": 0.18604651162790697
+        }
+      },
+      "performance_gap_top1": 0.3045702107506512,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 28140,
+        "total_masked_tokens": 4228,
+        "actual_mask_rate": 0.1502,
+        "rare_maritime_tokens_masked": 19,
+        "maritime_tokens_masked": 4204,
+        "general_tokens_masked": 5,
+        "rare_maritime_mask_fraction": 0.0045,
+        "maritime_mask_fraction": 0.9943,
+        "general_mask_fraction": 0.0012
+      }
+    }
+  },
+  {
+    "model_name": "nlpaueb/legal-bert-base-uncased",
+    "clean_model_name": "nlpaueb_legal_bert_base_uncased",
+    "representation": "key_value",
+    "subset": "random_baseline",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 369466
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 26.243566513061523,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 4142,
+        "overall_top1_accuracy": 0.19217769193626266,
+        "overall_mlm_loss": 5.51163063704767
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 6,
+        "mlm_loss": 5.648558124899864,
+        "mlm_loss_derived_exponential": 283.88184841770385,
+        "top1_accuracy": 0.16666666666666666,
+        "top5_accuracy": 0.3333333333333333,
+        "top10_accuracy": 0.6666666666666666
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 4136,
+        "mlm_loss": 5.511431999492759,
+        "mlm_loss_derived_exponential": 247.505300884059,
+        "top1_accuracy": 0.1922147001934236,
+        "top5_accuracy": 0.32736943907156674,
+        "top10_accuracy": 0.3960348162475822
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 17,
+        "mlm_loss": 8.174092152539421,
+        "mlm_loss_derived_exponential": 3547.8325706727064,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.11764705882352941
+      },
+      "category_recall": {
+        "vessel_terminology": 0.1805,
+        "navigation": 0.3045,
+        "machinery_propulsion": 0.2857,
+        "casualty_incident": 0.1609,
+        "weather_environment": 0.0769,
+        "safety_lifesaving": 0.0556
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 2831,
+          "mlm_loss": 5.819086209085586,
+          "mlm_loss_derived_exponential": 336.66427227437265,
+          "top1_accuracy": 0.18050158954433063,
+          "top5_accuracy": 0.2974214058636524,
+          "top10_accuracy": 0.3659484281172731
+        },
+        "navigation": {
+          "masked_sample_count": 739,
+          "mlm_loss": 4.239063067107812,
+          "mlm_loss_derived_exponential": 69.3428517944861,
+          "top1_accuracy": 0.3044654939106901,
+          "top5_accuracy": 0.45331529093369416,
+          "top10_accuracy": 0.5250338294993234
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 7,
+          "mlm_loss": 5.106152244976589,
+          "mlm_loss_derived_exponential": 165.03412075501242,
+          "top1_accuracy": 0.2857142857142857,
+          "top5_accuracy": 0.2857142857142857,
+          "top10_accuracy": 0.2857142857142857
+        },
+        "casualty_incident": {
+          "masked_sample_count": 174,
+          "mlm_loss": 5.298884156620366,
+          "mlm_loss_derived_exponential": 200.11339014563467,
+          "top1_accuracy": 0.16091954022988506,
+          "top5_accuracy": 0.367816091954023,
+          "top10_accuracy": 0.41954022988505746
+        },
+        "weather_environment": {
+          "masked_sample_count": 351,
+          "mlm_loss": 5.5524820282904725,
+          "mlm_loss_derived_exponential": 257.8768198042653,
+          "top1_accuracy": 0.07692307692307693,
+          "top5_accuracy": 0.2962962962962963,
+          "top10_accuracy": 0.37606837606837606
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 36,
+          "mlm_loss": 8.144017080465952,
+          "mlm_loss_derived_exponential": 3442.7198101712165,
+          "top1_accuracy": 0.05555555555555555,
+          "top5_accuracy": 0.19444444444444445,
+          "top10_accuracy": 0.19444444444444445
+        }
+      },
+      "performance_gap_top1": -0.02554803352675694,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 27610,
+        "total_masked_tokens": 4142,
+        "actual_mask_rate": 0.15,
+        "rare_maritime_tokens_masked": 17,
+        "maritime_tokens_masked": 4119,
+        "general_tokens_masked": 6,
+        "rare_maritime_mask_fraction": 0.0041,
+        "maritime_mask_fraction": 0.9944,
+        "general_mask_fraction": 0.0014
+      }
+    }
+  },
+  {
+    "model_name": "allenai/scibert_scivocab_uncased",
+    "clean_model_name": "allenai_scibert_scivocab_uncased",
+    "representation": "key_value",
+    "subset": "random_baseline",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 547797
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 25.73335337638855,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 4063,
+        "overall_top1_accuracy": 0.1860694068422348,
+        "overall_mlm_loss": 5.895208891744894
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 5,
+        "mlm_loss": 2.2846369493752716,
+        "mlm_loss_derived_exponential": 9.822119649957997,
+        "top1_accuracy": 0.6,
+        "top5_accuracy": 0.8,
+        "top10_accuracy": 0.8
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 4058,
+        "mlm_loss": 5.899657600397395,
+        "mlm_loss_derived_exponential": 364.9125005769917,
+        "top1_accuracy": 0.18555938886150813,
+        "top5_accuracy": 0.29349433218334153,
+        "top10_accuracy": 0.35288319369147364
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 17,
+        "mlm_loss": 11.111510893877815,
+        "mlm_loss_derived_exponential": 66937.2501018751,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.0
+      },
+      "category_recall": {
+        "vessel_terminology": 0.1546,
+        "navigation": 0.3857,
+        "machinery_propulsion": 0.0833,
+        "casualty_incident": 0.1494,
+        "weather_environment": 0.0648,
+        "safety_lifesaving": 0.1
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 2904,
+          "mlm_loss": 6.252799722856923,
+          "mlm_loss_derived_exponential": 519.46514911806,
+          "top1_accuracy": 0.15461432506887052,
+          "top5_accuracy": 0.2510330578512397,
+          "top10_accuracy": 0.3040633608815427
+        },
+        "navigation": {
+          "masked_sample_count": 669,
+          "mlm_loss": 4.4129210597623905,
+          "mlm_loss_derived_exponential": 82.5101288515235,
+          "top1_accuracy": 0.38565022421524664,
+          "top5_accuracy": 0.4678624813153961,
+          "top10_accuracy": 0.5171898355754858
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 12,
+          "mlm_loss": 7.66474333157142,
+          "mlm_loss_derived_exponential": 2131.845534276955,
+          "top1_accuracy": 0.08333333333333333,
+          "top5_accuracy": 0.08333333333333333,
+          "top10_accuracy": 0.08333333333333333
+        },
+        "casualty_incident": {
+          "masked_sample_count": 154,
+          "mlm_loss": 5.543206913904711,
+          "mlm_loss_derived_exponential": 255.49604086934804,
+          "top1_accuracy": 0.14935064935064934,
+          "top5_accuracy": 0.3181818181818182,
+          "top10_accuracy": 0.42857142857142855
+        },
+        "weather_environment": {
+          "masked_sample_count": 293,
+          "mlm_loss": 5.490817974210294,
+          "mlm_loss_derived_exponential": 242.4554480724688,
+          "top1_accuracy": 0.06484641638225255,
+          "top5_accuracy": 0.32764505119453924,
+          "top10_accuracy": 0.4539249146757679
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 30,
+          "mlm_loss": 10.533672359585761,
+          "mlm_loss_derived_exponential": 37559.15214002911,
+          "top1_accuracy": 0.1,
+          "top5_accuracy": 0.1,
+          "top10_accuracy": 0.1
+        }
+      },
+      "performance_gap_top1": 0.41444061113849184,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 27084,
+        "total_masked_tokens": 4063,
+        "actual_mask_rate": 0.15,
+        "rare_maritime_tokens_masked": 17,
+        "maritime_tokens_masked": 4041,
+        "general_tokens_masked": 5,
+        "rare_maritime_mask_fraction": 0.0042,
+        "maritime_mask_fraction": 0.9946,
+        "general_mask_fraction": 0.0012
+      }
+    }
+  },
+  {
+    "model_name": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+    "clean_model_name": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext",
+    "representation": "key_value",
+    "subset": "random_baseline",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 553818
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 26.82726788520813,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 4066,
+        "overall_top1_accuracy": 0.1249385145105755,
+        "overall_mlm_loss": 6.691963275376665
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 2,
+        "mlm_loss": 2.3902111053466797,
+        "mlm_loss_derived_exponential": 10.9157980831639,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 1.0,
+        "top10_accuracy": 1.0
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 4064,
+        "mlm_loss": 6.694080279397348,
+        "mlm_loss_derived_exponential": 807.6108162258491,
+        "top1_accuracy": 0.125,
+        "top5_accuracy": 0.19438976377952755,
+        "top10_accuracy": 0.23400590551181102
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 19,
+        "mlm_loss": 8.998380987267746,
+        "mlm_loss_derived_exponential": 8089.975545707996,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.0
+      },
+      "category_recall": {
+        "vessel_terminology": 0.1154,
+        "navigation": 0.2082,
+        "machinery_propulsion": 0.0833,
+        "casualty_incident": 0.106,
+        "weather_environment": 0.043,
+        "safety_lifesaving": 0.1026
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 2929,
+          "mlm_loss": 6.916573755485018,
+          "mlm_loss_derived_exponential": 1008.8574738148003,
+          "top1_accuracy": 0.11539774667121884,
+          "top5_accuracy": 0.18470467736428817,
+          "top10_accuracy": 0.22533287811539773
+        },
+        "navigation": {
+          "masked_sample_count": 658,
+          "mlm_loss": 5.203415461238804,
+          "mlm_loss_derived_exponential": 181.89242870008502,
+          "top1_accuracy": 0.20820668693009117,
+          "top5_accuracy": 0.3009118541033435,
+          "top10_accuracy": 0.33586626139817627
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 12,
+          "mlm_loss": 7.939861198266347,
+          "mlm_loss_derived_exponential": 2806.970868836995,
+          "top1_accuracy": 0.08333333333333333,
+          "top5_accuracy": 0.08333333333333333,
+          "top10_accuracy": 0.08333333333333333
+        },
+        "casualty_incident": {
+          "masked_sample_count": 151,
+          "mlm_loss": 6.424265427502576,
+          "mlm_loss_derived_exponential": 616.627693392233,
+          "top1_accuracy": 0.10596026490066225,
+          "top5_accuracy": 0.17880794701986755,
+          "top10_accuracy": 0.24503311258278146
+        },
+        "weather_environment": {
+          "masked_sample_count": 279,
+          "mlm_loss": 7.858040948872418,
+          "mlm_loss_derived_exponential": 2586.4484242269427,
+          "top1_accuracy": 0.043010752688172046,
+          "top5_accuracy": 0.06451612903225806,
+          "top10_accuracy": 0.0967741935483871
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 39,
+          "mlm_loss": 7.7543308184697075,
+          "mlm_loss_derived_exponential": 2331.648526459718,
+          "top1_accuracy": 0.10256410256410256,
+          "top5_accuracy": 0.1282051282051282,
+          "top10_accuracy": 0.1282051282051282
+        }
+      },
+      "performance_gap_top1": -0.125,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 27148,
+        "total_masked_tokens": 4066,
+        "actual_mask_rate": 0.1498,
+        "rare_maritime_tokens_masked": 19,
+        "maritime_tokens_masked": 4045,
+        "general_tokens_masked": 2,
+        "rare_maritime_mask_fraction": 0.0047,
+        "maritime_mask_fraction": 0.9948,
+        "general_mask_fraction": 0.0005
+      }
+    }
+  },
+  {
+    "model_name": "roberta-base",
+    "clean_model_name": "roberta_base",
+    "representation": "key_value",
+    "subset": "random_baseline",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 533934
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 38.3305299282074,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 5331,
+        "overall_top1_accuracy": 0.24291877696492215,
+        "overall_mlm_loss": 4.842280969939033
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 4,
+        "mlm_loss": 2.9278250113129616,
+        "mlm_loss_derived_exponential": 18.68694237634817,
+        "top1_accuracy": 0.25,
+        "top5_accuracy": 0.75,
+        "top10_accuracy": 0.75
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 5327,
+        "mlm_loss": 4.843718518997509,
+        "mlm_loss_derived_exponential": 126.9405058720373,
+        "top1_accuracy": 0.24291345973343345,
+        "top5_accuracy": 0.37413178149052,
+        "top10_accuracy": 0.4445278768537638
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 26,
+        "mlm_loss": 7.126742197917058,
+        "mlm_loss_derived_exponential": 1244.8149930750922,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.0
+      },
+      "category_recall": {
+        "vessel_terminology": 0.258,
+        "navigation": 0.2745,
+        "machinery_propulsion": 0.2273,
+        "casualty_incident": 0.2143,
+        "weather_environment": 0.0236,
+        "safety_lifesaving": 0.0222
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 3961,
+          "mlm_loss": 4.795050678729096,
+          "mlm_loss_derived_exponential": 120.91050921872923,
+          "top1_accuracy": 0.25801565261297654,
+          "top5_accuracy": 0.38879070941681393,
+          "top10_accuracy": 0.4496339308255491
+        },
+        "navigation": {
+          "masked_sample_count": 714,
+          "mlm_loss": 4.66686826275801,
+          "mlm_loss_derived_exponential": 106.36411582694949,
+          "top1_accuracy": 0.27450980392156865,
+          "top5_accuracy": 0.38935574229691877,
+          "top10_accuracy": 0.46638655462184875
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 22,
+          "mlm_loss": 4.592245247045701,
+          "mlm_loss_derived_exponential": 98.7158229380178,
+          "top1_accuracy": 0.22727272727272727,
+          "top5_accuracy": 0.36363636363636365,
+          "top10_accuracy": 0.45454545454545453
+        },
+        "casualty_incident": {
+          "masked_sample_count": 294,
+          "mlm_loss": 4.534937104979765,
+          "mlm_loss_derived_exponential": 93.21765219392454,
+          "top1_accuracy": 0.21428571428571427,
+          "top5_accuracy": 0.41496598639455784,
+          "top10_accuracy": 0.5136054421768708
+        },
+        "weather_environment": {
+          "masked_sample_count": 297,
+          "mlm_loss": 5.591557403424322,
+          "mlm_loss_derived_exponential": 268.1529169503286,
+          "top1_accuracy": 0.02356902356902357,
+          "top5_accuracy": 0.13804713804713806,
+          "top10_accuracy": 0.29292929292929293
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 45,
+          "mlm_loss": 9.442309171623654,
+          "mlm_loss_derived_exponential": 12610.803820620285,
+          "top1_accuracy": 0.022222222222222223,
+          "top5_accuracy": 0.08888888888888889,
+          "top10_accuracy": 0.13333333333333333
+        }
+      },
+      "performance_gap_top1": 0.007086540266566549,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 35592,
+        "total_masked_tokens": 5331,
+        "actual_mask_rate": 0.1498,
+        "rare_maritime_tokens_masked": 26,
+        "maritime_tokens_masked": 5301,
+        "general_tokens_masked": 4,
+        "rare_maritime_mask_fraction": 0.0049,
+        "maritime_mask_fraction": 0.9944,
+        "general_mask_fraction": 0.0008
+      }
+    }
+  },
+  {
+    "model_name": "answerdotai/ModernBERT-base",
+    "clean_model_name": "answerdotai_ModernBERT_base",
+    "representation": "key_value",
+    "subset": "random_baseline",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 524401
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 49.72116303443909,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 5315,
+        "overall_top1_accuracy": 0.42784571966133583,
+        "overall_mlm_loss": 3.2639109250690126
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 0,
+        "mlm_loss": 0.0,
+        "mlm_loss_derived_exponential": 1.0,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.0
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 5315,
+        "mlm_loss": 3.2639109250690126,
+        "mlm_loss_derived_exponential": 26.151614408525695,
+        "top1_accuracy": 0.42784571966133583,
+        "top5_accuracy": 0.5776105362182502,
+        "top10_accuracy": 0.639134524929445
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 26,
+        "mlm_loss": 6.2978569727677565,
+        "mlm_loss_derived_exponential": 543.4061272909565,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.038461538461538464
+      },
+      "category_recall": {
+        "vessel_terminology": 0.4837,
+        "navigation": 0.2676,
+        "machinery_propulsion": 0.2143,
+        "casualty_incident": 0.3045,
+        "weather_environment": 0.0984,
+        "safety_lifesaving": 0.1111
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 4172,
+          "mlm_loss": 2.8606187917501282,
+          "mlm_loss_derived_exponential": 17.472335329120174,
+          "top1_accuracy": 0.48370086289549374,
+          "top5_accuracy": 0.6255992329817833,
+          "top10_accuracy": 0.6812080536912751
+        },
+        "navigation": {
+          "masked_sample_count": 527,
+          "mlm_loss": 5.226987311267708,
+          "mlm_loss_derived_exponential": 186.23090178823654,
+          "top1_accuracy": 0.2675521821631879,
+          "top5_accuracy": 0.35294117647058826,
+          "top10_accuracy": 0.40417457305502846
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 28,
+          "mlm_loss": 4.260089737359002,
+          "mlm_loss_derived_exponential": 70.81633804030035,
+          "top1_accuracy": 0.21428571428571427,
+          "top5_accuracy": 0.35714285714285715,
+          "top10_accuracy": 0.5357142857142857
+        },
+        "casualty_incident": {
+          "masked_sample_count": 243,
+          "mlm_loss": 4.07510137907156,
+          "mlm_loss_derived_exponential": 58.85644709786479,
+          "top1_accuracy": 0.3045267489711934,
+          "top5_accuracy": 0.522633744855967,
+          "top10_accuracy": 0.5679012345679012
+        },
+        "weather_environment": {
+          "masked_sample_count": 315,
+          "mlm_loss": 4.234147225627823,
+          "mlm_loss_derived_exponential": 69.00280980831766,
+          "top1_accuracy": 0.09841269841269841,
+          "top5_accuracy": 0.4095238095238095,
+          "top10_accuracy": 0.5777777777777777
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 36,
+          "mlm_loss": 6.7638688050727875,
+          "mlm_loss_derived_exponential": 865.9860544902511,
+          "top1_accuracy": 0.1111111111111111,
+          "top5_accuracy": 0.2222222222222222,
+          "top10_accuracy": 0.2222222222222222
+        }
+      },
+      "performance_gap_top1": -0.42784571966133583,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 35457,
+        "total_masked_tokens": 5315,
+        "actual_mask_rate": 0.1499,
+        "rare_maritime_tokens_masked": 26,
+        "maritime_tokens_masked": 5289,
+        "general_tokens_masked": 0,
+        "rare_maritime_mask_fraction": 0.0049,
+        "maritime_mask_fraction": 0.9951,
+        "general_mask_fraction": 0.0
+      }
+    }
+  },
+  {
+    "model_name": "bert-base-uncased",
+    "clean_model_name": "bert_base_uncased",
+    "representation": "narrative",
+    "subset": "balanced_knowledge",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 85691
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 19.786866188049316,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 1778,
+        "overall_top1_accuracy": 0.18841394825646793,
+        "overall_mlm_loss": 6.764809390518925
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 59,
+        "mlm_loss": 5.348217062511525,
+        "mlm_loss_derived_exponential": 210.2331309859558,
+        "top1_accuracy": 0.2542372881355932,
+        "top5_accuracy": 0.4406779661016949,
+        "top10_accuracy": 0.5254237288135594
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 1719,
+        "mlm_loss": 6.813430069607021,
+        "mlm_loss_derived_exponential": 909.9867778835322,
+        "top1_accuracy": 0.18615474112856312,
+        "top5_accuracy": 0.32111692844677137,
+        "top10_accuracy": 0.3717277486910995
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 547,
+        "mlm_loss": 11.400237648317104,
+        "mlm_loss_derived_exponential": 89342.95304054198,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.0
+      },
+      "category_recall": {
+        "vessel_terminology": 0.2484,
+        "navigation": 0.1001,
+        "machinery_propulsion": 0.0,
+        "casualty_incident": 0.75,
+        "weather_environment": 0.0385,
+        "safety_lifesaving": 0.0
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 914,
+          "mlm_loss": 5.279321230260974,
+          "mlm_loss_derived_exponential": 196.23663064910514,
+          "top1_accuracy": 0.24835886214442013,
+          "top5_accuracy": 0.4048140043763676,
+          "top10_accuracy": 0.46061269146608314
+        },
+        "navigation": {
+          "masked_sample_count": 799,
+          "mlm_loss": 9.029579507366513,
+          "mlm_loss_derived_exponential": 8346.349255817984,
+          "top1_accuracy": 0.10012515644555695,
+          "top5_accuracy": 0.19774718397997496,
+          "top10_accuracy": 0.2202753441802253
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 4,
+          "mlm_loss": 6.198228478431702,
+          "mlm_loss_derived_exponential": 491.8768982771922,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        },
+        "casualty_incident": {
+          "masked_sample_count": 44,
+          "mlm_loss": 2.5003494366749446,
+          "mlm_loss_derived_exponential": 12.186751714750018,
+          "top1_accuracy": 0.75,
+          "top5_accuracy": 0.7727272727272727,
+          "top10_accuracy": 0.7954545454545454
+        },
+        "weather_environment": {
+          "masked_sample_count": 78,
+          "mlm_loss": 5.443299835309004,
+          "mlm_loss_derived_exponential": 231.20386072792678,
+          "top1_accuracy": 0.038461538461538464,
+          "top5_accuracy": 0.24358974358974358,
+          "top10_accuracy": 0.46153846153846156
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 0,
+          "mlm_loss": 0.0,
+          "mlm_loss_derived_exponential": 1.0,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        }
+      },
+      "performance_gap_top1": 0.06808254700703009,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 11856,
+        "total_masked_tokens": 1778,
+        "actual_mask_rate": 0.15,
+        "rare_maritime_tokens_masked": 547,
+        "maritime_tokens_masked": 1172,
+        "general_tokens_masked": 59,
+        "rare_maritime_mask_fraction": 0.3076,
+        "maritime_mask_fraction": 0.6592,
+        "general_mask_fraction": 0.0332
+      }
+    }
+  },
+  {
+    "model_name": "dmis-lab/biobert-base-cased-v1.2",
+    "clean_model_name": "dmis_lab_biobert_base_cased_v1.2",
+    "representation": "narrative",
+    "subset": "balanced_knowledge",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 827005
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 18.979586839675903,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 1887,
+        "overall_top1_accuracy": 0.08479067302596714,
+        "overall_mlm_loss": 6.6763367345058136
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 69,
+        "mlm_loss": 6.051118267781061,
+        "mlm_loss_derived_exponential": 424.58756726218047,
+        "top1_accuracy": 0.15942028985507245,
+        "top5_accuracy": 0.2898550724637681,
+        "top10_accuracy": 0.4057971014492754
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 1818,
+        "mlm_loss": 6.700066148259393,
+        "mlm_loss_derived_exponential": 812.4595661762161,
+        "top1_accuracy": 0.08195819581958196,
+        "top5_accuracy": 0.16666666666666666,
+        "top10_accuracy": 0.23377337733773376
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 548,
+        "mlm_loss": 8.824557492767807,
+        "mlm_loss_derived_exponential": 6799.181340188197,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0018248175182481751,
+        "top10_accuracy": 0.009124087591240875
+      },
+      "category_recall": {
+        "vessel_terminology": 0.1127,
+        "navigation": 0.0354,
+        "machinery_propulsion": 0.0,
+        "casualty_incident": 0.3158,
+        "weather_environment": 0.0149,
+        "safety_lifesaving": 0.0
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 1003,
+          "mlm_loss": 6.399681611021875,
+          "mlm_loss_derived_exponential": 601.6534475472267,
+          "top1_accuracy": 0.11266201395812563,
+          "top5_accuracy": 0.18843469591226322,
+          "top10_accuracy": 0.27018943170488535
+        },
+        "navigation": {
+          "masked_sample_count": 819,
+          "mlm_loss": 7.574321430972499,
+          "mlm_loss_derived_exponential": 1947.538275036855,
+          "top1_accuracy": 0.03540903540903541,
+          "top5_accuracy": 0.11965811965811966,
+          "top10_accuracy": 0.1562881562881563
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 4,
+          "mlm_loss": 7.7322551012039185,
+          "mlm_loss_derived_exponential": 2280.7397046683236,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        },
+        "casualty_incident": {
+          "masked_sample_count": 38,
+          "mlm_loss": 4.9176389508341485,
+          "mlm_loss_derived_exponential": 136.67952484470493,
+          "top1_accuracy": 0.3157894736842105,
+          "top5_accuracy": 0.47368421052631576,
+          "top10_accuracy": 0.5263157894736842
+        },
+        "weather_environment": {
+          "masked_sample_count": 67,
+          "mlm_loss": 6.427324165159197,
+          "mlm_loss_derived_exponential": 618.5166832275359,
+          "top1_accuracy": 0.014925373134328358,
+          "top5_accuracy": 0.07462686567164178,
+          "top10_accuracy": 0.19402985074626866
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 0,
+          "mlm_loss": 0.0,
+          "mlm_loss_derived_exponential": 1.0,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        }
+      },
+      "performance_gap_top1": 0.0774620940354905,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 12549,
+        "total_masked_tokens": 1887,
+        "actual_mask_rate": 0.1504,
+        "rare_maritime_tokens_masked": 548,
+        "maritime_tokens_masked": 1270,
+        "general_tokens_masked": 69,
+        "rare_maritime_mask_fraction": 0.2904,
+        "maritime_mask_fraction": 0.673,
+        "general_mask_fraction": 0.0366
+      }
+    }
+  },
+  {
+    "model_name": "nlpaueb/legal-bert-base-uncased",
+    "clean_model_name": "nlpaueb_legal_bert_base_uncased",
+    "representation": "narrative",
+    "subset": "balanced_knowledge",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 56065
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 19.155867338180542,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 1880,
+        "overall_top1_accuracy": 0.23297872340425532,
+        "overall_mlm_loss": 4.853307352158601
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 66,
+        "mlm_loss": 6.619071735915813,
+        "mlm_loss_derived_exponential": 749.2492730173435,
+        "top1_accuracy": 0.18181818181818182,
+        "top5_accuracy": 0.2878787878787879,
+        "top10_accuracy": 0.3333333333333333
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 1814,
+        "mlm_loss": 4.789062341503708,
+        "mlm_loss_derived_exponential": 120.18861993093702,
+        "top1_accuracy": 0.2348401323042999,
+        "top5_accuracy": 0.39305402425578834,
+        "top10_accuracy": 0.45148842337375966
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 503,
+        "mlm_loss": 5.664635134501675,
+        "mlm_loss_derived_exponential": 288.4827045261403,
+        "top1_accuracy": 0.17892644135188868,
+        "top5_accuracy": 0.2882703777335984,
+        "top10_accuracy": 0.3121272365805169
+      },
+      "category_recall": {
+        "vessel_terminology": 0.2378,
+        "navigation": 0.2132,
+        "machinery_propulsion": 0.0,
+        "casualty_incident": 0.5625,
+        "weather_environment": 0.0513,
+        "safety_lifesaving": 0.0
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 942,
+          "mlm_loss": 4.617700150375936,
+          "mlm_loss_derived_exponential": 101.2608793288663,
+          "top1_accuracy": 0.23779193205944799,
+          "top5_accuracy": 0.39171974522292996,
+          "top10_accuracy": 0.4554140127388535
+        },
+        "navigation": {
+          "masked_sample_count": 802,
+          "mlm_loss": 5.009375876430051,
+          "mlm_loss_derived_exponential": 149.8112062601092,
+          "top1_accuracy": 0.21321695760598502,
+          "top5_accuracy": 0.3690773067331671,
+          "top10_accuracy": 0.41271820448877805
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 2,
+          "mlm_loss": 4.604821264743805,
+          "mlm_loss_derived_exponential": 99.96511396216516,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.5,
+          "top10_accuracy": 0.5
+        },
+        "casualty_incident": {
+          "masked_sample_count": 48,
+          "mlm_loss": 2.9110683052179716,
+          "mlm_loss_derived_exponential": 18.37641970953069,
+          "top1_accuracy": 0.5625,
+          "top5_accuracy": 0.7083333333333334,
+          "top10_accuracy": 0.75
+        },
+        "weather_environment": {
+          "masked_sample_count": 78,
+          "mlm_loss": 6.2809213277621145,
+          "mlm_loss_derived_exponential": 534.2806847621158,
+          "top1_accuracy": 0.05128205128205128,
+          "top5_accuracy": 0.23076923076923078,
+          "top10_accuracy": 0.358974358974359
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 1,
+          "mlm_loss": 10.848299026489258,
+          "mlm_loss_derived_exponential": 51446.5676394282,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        }
+      },
+      "performance_gap_top1": -0.053021950486118075,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 12533,
+        "total_masked_tokens": 1880,
+        "actual_mask_rate": 0.15,
+        "rare_maritime_tokens_masked": 503,
+        "maritime_tokens_masked": 1311,
+        "general_tokens_masked": 66,
+        "rare_maritime_mask_fraction": 0.2676,
+        "maritime_mask_fraction": 0.6973,
+        "general_mask_fraction": 0.0351
+      }
+    }
+  },
+  {
+    "model_name": "allenai/scibert_scivocab_uncased",
+    "clean_model_name": "allenai_scibert_scivocab_uncased",
+    "representation": "narrative",
+    "subset": "balanced_knowledge",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 834498
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 18.86888098716736,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 1831,
+        "overall_top1_accuracy": 0.19606772255598034,
+        "overall_mlm_loss": 5.669402210469235
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 60,
+        "mlm_loss": 4.813842036000763,
+        "mlm_loss_derived_exponential": 123.20406380686735,
+        "top1_accuracy": 0.2833333333333333,
+        "top5_accuracy": 0.4,
+        "top10_accuracy": 0.45
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 1771,
+        "mlm_loss": 5.698387874200521,
+        "mlm_loss_derived_exponential": 298.3859772813765,
+        "top1_accuracy": 0.19311123658949747,
+        "top5_accuracy": 0.3274985883681536,
+        "top10_accuracy": 0.38509316770186336
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 380,
+        "mlm_loss": 8.843433410242984,
+        "mlm_loss_derived_exponential": 6928.74105851604,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.002631578947368421,
+        "top10_accuracy": 0.010526315789473684
+      },
+      "category_recall": {
+        "vessel_terminology": 0.1989,
+        "navigation": 0.1612,
+        "machinery_propulsion": 1.0,
+        "casualty_incident": 0.48,
+        "weather_environment": 0.0,
+        "safety_lifesaving": 0.0
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 1076,
+          "mlm_loss": 5.302499821152518,
+          "mlm_loss_derived_exponential": 200.83824265487922,
+          "top1_accuracy": 0.19888475836431227,
+          "top5_accuracy": 0.35687732342007433,
+          "top10_accuracy": 0.42193308550185876
+        },
+        "navigation": {
+          "masked_sample_count": 676,
+          "mlm_loss": 6.536479750328774,
+          "mlm_loss_derived_exponential": 689.853840871106,
+          "top1_accuracy": 0.16124260355029585,
+          "top5_accuracy": 0.26331360946745563,
+          "top10_accuracy": 0.2958579881656805
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 1,
+          "mlm_loss": 2.7342584133148193,
+          "mlm_loss_derived_exponential": 15.398320011628392,
+          "top1_accuracy": 1.0,
+          "top5_accuracy": 1.0,
+          "top10_accuracy": 1.0
+        },
+        "casualty_incident": {
+          "masked_sample_count": 50,
+          "mlm_loss": 4.4279184523224835,
+          "mlm_loss_derived_exponential": 83.75689136896212,
+          "top1_accuracy": 0.48,
+          "top5_accuracy": 0.56,
+          "top10_accuracy": 0.58
+        },
+        "weather_environment": {
+          "masked_sample_count": 83,
+          "mlm_loss": 7.395014455519527,
+          "mlm_loss_derived_exponential": 1627.848454835921,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.07228915662650602,
+          "top10_accuracy": 0.1927710843373494
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 0,
+          "mlm_loss": 0.0,
+          "mlm_loss_derived_exponential": 1.0,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        }
+      },
+      "performance_gap_top1": 0.09022209674383586,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 12218,
+        "total_masked_tokens": 1831,
+        "actual_mask_rate": 0.1499,
+        "rare_maritime_tokens_masked": 380,
+        "maritime_tokens_masked": 1391,
+        "general_tokens_masked": 60,
+        "rare_maritime_mask_fraction": 0.2075,
+        "maritime_mask_fraction": 0.7597,
+        "general_mask_fraction": 0.0328
+      }
+    }
+  },
+  {
+    "model_name": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+    "clean_model_name": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext",
+    "representation": "narrative",
+    "subset": "balanced_knowledge",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 929754
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 19.150886297225952,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 1847,
+        "overall_top1_accuracy": 0.13427179209528967,
+        "overall_mlm_loss": 6.397473753307672
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 60,
+        "mlm_loss": 6.020996316157592,
+        "mlm_loss_derived_exponential": 411.9888624754651,
+        "top1_accuracy": 0.18333333333333332,
+        "top5_accuracy": 0.35,
+        "top10_accuracy": 0.4166666666666667
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 1787,
+        "mlm_loss": 6.410114294006612,
+        "mlm_loss_derived_exponential": 607.9631636365219,
+        "top1_accuracy": 0.13262451035254616,
+        "top5_accuracy": 0.21824286513710128,
+        "top10_accuracy": 0.28539451594851706
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 380,
+        "mlm_loss": 8.549374910404808,
+        "mlm_loss_derived_exponential": 5163.525751953424,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.007894736842105263,
+        "top10_accuracy": 0.04736842105263158
+      },
+      "category_recall": {
+        "vessel_terminology": 0.1155,
+        "navigation": 0.1453,
+        "machinery_propulsion": 0.0,
+        "casualty_incident": 0.2778,
+        "weather_environment": 0.0,
+        "safety_lifesaving": 0.0
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 1065,
+          "mlm_loss": 6.492219804521178,
+          "mlm_loss_derived_exponential": 659.9867800028685,
+          "top1_accuracy": 0.11549295774647887,
+          "top5_accuracy": 0.18215962441314554,
+          "top10_accuracy": 0.24882629107981222
+        },
+        "navigation": {
+          "masked_sample_count": 709,
+          "mlm_loss": 6.705812038467575,
+          "mlm_loss_derived_exponential": 817.1413071461178,
+          "top1_accuracy": 0.14527503526093088,
+          "top5_accuracy": 0.23554301833568406,
+          "top10_accuracy": 0.2863187588152327
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 5,
+          "mlm_loss": 9.17846622467041,
+          "mlm_loss_derived_exponential": 9686.284789122912,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.2,
+          "top10_accuracy": 0.2
+        },
+        "casualty_incident": {
+          "masked_sample_count": 54,
+          "mlm_loss": 4.656980864427708,
+          "mlm_loss_derived_exponential": 105.31763346508215,
+          "top1_accuracy": 0.2777777777777778,
+          "top5_accuracy": 0.5185185185185185,
+          "top10_accuracy": 0.6296296296296297
+        },
+        "weather_environment": {
+          "masked_sample_count": 68,
+          "mlm_loss": 6.173044716610628,
+          "mlm_loss_derived_exponential": 479.644265984805,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.08823529411764706,
+          "top10_accuracy": 0.20588235294117646
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 1,
+          "mlm_loss": 9.751688003540039,
+          "mlm_loss_derived_exponential": 17183.209661256667,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        }
+      },
+      "performance_gap_top1": 0.05070882298078716,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 12294,
+        "total_masked_tokens": 1847,
+        "actual_mask_rate": 0.1502,
+        "rare_maritime_tokens_masked": 380,
+        "maritime_tokens_masked": 1407,
+        "general_tokens_masked": 60,
+        "rare_maritime_mask_fraction": 0.2057,
+        "maritime_mask_fraction": 0.7618,
+        "general_mask_fraction": 0.0325
+      }
+    }
+  },
+  {
+    "model_name": "roberta-base",
+    "clean_model_name": "roberta_base",
+    "representation": "narrative",
+    "subset": "balanced_knowledge",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 409904
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 22.581050157546997,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 2009,
+        "overall_top1_accuracy": 0.24888003982080636,
+        "overall_mlm_loss": 4.723031045467363
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 71,
+        "mlm_loss": 4.566116957466157,
+        "mlm_loss_derived_exponential": 96.16995179400779,
+        "top1_accuracy": 0.19718309859154928,
+        "top5_accuracy": 0.4507042253521127,
+        "top10_accuracy": 0.5352112676056338
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 1938,
+        "mlm_loss": 4.728779704006107,
+        "mlm_loss_derived_exponential": 113.15739254897244,
+        "top1_accuracy": 0.25077399380804954,
+        "top5_accuracy": 0.40144478844169246,
+        "top10_accuracy": 0.4613003095975232
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 455,
+        "mlm_loss": 7.804640417832594,
+        "mlm_loss_derived_exponential": 2451.9537085809334,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.002197802197802198,
+        "top10_accuracy": 0.015384615384615385
+      },
+      "category_recall": {
+        "vessel_terminology": 0.2792,
+        "navigation": 0.15,
+        "machinery_propulsion": 0.6,
+        "casualty_incident": 0.5556,
+        "weather_environment": 0.2468,
+        "safety_lifesaving": 1.0
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 1146,
+          "mlm_loss": 4.1519152569376,
+          "mlm_loss_derived_exponential": 63.55560912617594,
+          "top1_accuracy": 0.2792321116928447,
+          "top5_accuracy": 0.44589877835951136,
+          "top10_accuracy": 0.5174520069808028
+        },
+        "navigation": {
+          "masked_sample_count": 760,
+          "mlm_loss": 6.01191237393926,
+          "mlm_loss_derived_exponential": 408.2633263502045,
+          "top1_accuracy": 0.15,
+          "top5_accuracy": 0.25526315789473686,
+          "top10_accuracy": 0.2868421052631579
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 5,
+          "mlm_loss": 3.453625182900578,
+          "mlm_loss_derived_exponential": 31.61479423096453,
+          "top1_accuracy": 0.6,
+          "top5_accuracy": 0.6,
+          "top10_accuracy": 0.6
+        },
+        "casualty_incident": {
+          "masked_sample_count": 63,
+          "mlm_loss": 2.6638558421788425,
+          "mlm_loss_derived_exponential": 14.35151974508466,
+          "top1_accuracy": 0.5555555555555556,
+          "top5_accuracy": 0.6349206349206349,
+          "top10_accuracy": 0.6666666666666666
+        },
+        "weather_environment": {
+          "masked_sample_count": 77,
+          "mlm_loss": 3.4739330944336055,
+          "mlm_loss_derived_exponential": 32.26338817913398,
+          "top1_accuracy": 0.24675324675324675,
+          "top5_accuracy": 0.5454545454545454,
+          "top10_accuracy": 0.7012987012987013
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 2,
+          "mlm_loss": 0.3191033899784088,
+          "mlm_loss_derived_exponential": 1.3758935711591092,
+          "top1_accuracy": 1.0,
+          "top5_accuracy": 1.0,
+          "top10_accuracy": 1.0
+        }
+      },
+      "performance_gap_top1": -0.05359089521650026,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 13413,
+        "total_masked_tokens": 2009,
+        "actual_mask_rate": 0.1498,
+        "rare_maritime_tokens_masked": 455,
+        "maritime_tokens_masked": 1483,
+        "general_tokens_masked": 71,
+        "rare_maritime_mask_fraction": 0.2265,
+        "maritime_mask_fraction": 0.7382,
+        "general_mask_fraction": 0.0353
+      }
+    }
+  },
+  {
+    "model_name": "answerdotai/ModernBERT-base",
+    "clean_model_name": "answerdotai_ModernBERT_base",
+    "representation": "narrative",
+    "subset": "balanced_knowledge",
+    "evaluated_doc_count": 200,
+    "masking_condition": "domain_aware_15",
+    "experiment_metadata": {
+      "masking_strategy": "domain_aware_15",
+      "mask_rate": 0.15,
+      "priority": [
+        "rare_maritime",
+        "maritime_vocabulary",
+        "random_general_fill"
+      ],
+      "max_length": 256,
+      "evaluation_documents": 200,
+      "seed": 81064
+    },
+    "evaluation_metrics": {
+      "evaluated_documents": 200,
+      "evaluation_time_sec": 29.068427085876465,
+      "masking_strategy": "domain_aware_15",
+      "overall_summary": {
+        "total_masked_tokens": 1938,
+        "overall_top1_accuracy": 0.2889576883384933,
+        "overall_mlm_loss": 4.129521535079305
+      },
+      "general_tokens_summary": {
+        "masked_sample_count": 71,
+        "mlm_loss": 3.684097617448137,
+        "mlm_loss_derived_exponential": 39.80918312453462,
+        "top1_accuracy": 0.23943661971830985,
+        "top5_accuracy": 0.5211267605633803,
+        "top10_accuracy": 0.6619718309859155
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 1867,
+        "mlm_loss": 4.146460527126338,
+        "mlm_loss_derived_exponential": 63.20987425281418,
+        "top1_accuracy": 0.29084092126405997,
+        "top5_accuracy": 0.42903053026245314,
+        "top10_accuracy": 0.499196572040707
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 387,
+        "mlm_loss": 6.145692336158851,
+        "mlm_loss_derived_exponential": 466.70265235841504,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.00516795865633075,
+        "top10_accuracy": 0.041343669250646
+      },
+      "category_recall": {
+        "vessel_terminology": 0.3259,
+        "navigation": 0.1844,
+        "machinery_propulsion": 0.3333,
+        "casualty_incident": 0.62,
+        "weather_environment": 0.1341,
+        "safety_lifesaving": 1.0
+      },
+      "category_breakdown": {
+        "vessel_terminology": {
+          "masked_sample_count": 1169,
+          "mlm_loss": 3.956773577282185,
+          "mlm_loss_derived_exponential": 52.288349182764435,
+          "top1_accuracy": 0.32591958939264326,
+          "top5_accuracy": 0.4593669803250642,
+          "top10_accuracy": 0.5346449957228401
+        },
+        "navigation": {
+          "masked_sample_count": 667,
+          "mlm_loss": 4.874139438585742,
+          "mlm_loss_derived_exponential": 130.86149039189056,
+          "top1_accuracy": 0.18440779610194902,
+          "top5_accuracy": 0.30134932533733133,
+          "top10_accuracy": 0.3373313343328336
+        },
+        "machinery_propulsion": {
+          "masked_sample_count": 6,
+          "mlm_loss": 2.414501408735911,
+          "mlm_loss_derived_exponential": 11.184192626424823,
+          "top1_accuracy": 0.3333333333333333,
+          "top5_accuracy": 0.6666666666666666,
+          "top10_accuracy": 0.8333333333333334
+        },
+        "casualty_incident": {
+          "masked_sample_count": 50,
+          "mlm_loss": 2.624894397035241,
+          "mlm_loss_derived_exponential": 13.80311645907731,
+          "top1_accuracy": 0.62,
+          "top5_accuracy": 0.72,
+          "top10_accuracy": 0.78
+        },
+        "weather_environment": {
+          "masked_sample_count": 82,
+          "mlm_loss": 4.016614046765537,
+          "mlm_loss_derived_exponential": 55.512823424945054,
+          "top1_accuracy": 0.13414634146341464,
+          "top5_accuracy": 0.4024390243902439,
+          "top10_accuracy": 0.5853658536585366
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 1,
+          "mlm_loss": 0.020486893132328987,
+          "mlm_loss_derived_exponential": 1.0206981899994119,
+          "top1_accuracy": 1.0,
+          "top5_accuracy": 1.0,
+          "top10_accuracy": 1.0
+        }
+      },
+      "performance_gap_top1": -0.051404301545750125,
+      "masking_diagnostics": {
+        "total_eligible_tokens": 12991,
+        "total_masked_tokens": 1938,
+        "actual_mask_rate": 0.1492,
+        "rare_maritime_tokens_masked": 387,
+        "maritime_tokens_masked": 1480,
+        "general_tokens_masked": 71,
+        "rare_maritime_mask_fraction": 0.1997,
+        "maritime_mask_fraction": 0.7637,
+        "general_mask_fraction": 0.0366
+      }
+    }
+  }
+]

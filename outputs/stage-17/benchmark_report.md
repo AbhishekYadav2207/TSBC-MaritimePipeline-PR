@@ -4,9 +4,9 @@
 This research benchmark evaluates 14 pretrained encoder models across 5 multi-format corpus representations and 5 knowledge-classified subsets (350 independent matrix evaluations). The goal is to determine whether continued **Domain-Adaptive Pretraining (DAPT)** is sufficient or if training **MaritimeBERT from Scratch** is required.
 
 **Key Recommendation**: Strategy B: Train Domain-Specific MaritimeBERT Model From Scratch
-* **Top Pretrained Encoder**: `answerdotai/ModernBERT-base` (MUI Score: 71.39)
-* **Maritime Top-1 Accuracy**: 72.98%
-* **General-to-Maritime Performance Gap**: -17.31%
+* **Top Pretrained Encoder**: `answerdotai/ModernBERT-base` (MUI Score: 71.46)
+* **Maritime Top-1 Accuracy**: 56.04%
+* **General-to-Maritime Performance Gap**: 0.54%
 * **Subword Fragmentation Rate**: 63.28%
 
 ---
@@ -31,13 +31,13 @@ Single-token vocabulary coverage and subword fertility vary significantly across
 
 | Model Name | Vocab Size | Fertility (Subwords/Word) | Single-Token Coverage (%) | Fragmentation Rate (%) | OOV Rate (%) | Tokenizer Speed (tok/s) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `answerdotai/ModernBERT-base` | 59000 | 0.73 | 36.72% | 63.28% | 0.0000% | 143945.7 |
-| `roberta-base` | 50000 | 0.70 | 34.93% | 65.07% | 0.0000% | 147732.2 |
-| `bert-base-uncased` | 44000 | 1.47 | 73.43% | 26.57% | 0.0000% | 129778.9 |
-| `allenai/scibert_scivocab_uncased` | 44000 | 1.16 | 57.91% | 42.09% | 0.0000% | 125092.4 |
-| `nlpaueb/legal-bert-base-uncased` | 44000 | 1.24 | 62.09% | 37.91% | 0.0300% | 308700.3 |
-| `dmis-lab/biobert-base-cased-v1.2` | 44000 | 1.29 | 64.48% | 35.52% | 0.0000% | 139997.7 |
-| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 44000 | 1.15 | 57.31% | 42.69% | 0.0000% | 296672.9 |
+| `answerdotai/ModernBERT-base` | 59000 | 0.73 | 36.72% | 63.28% | 0.0000% | 73966.6 |
+| `roberta-base` | 50000 | 0.70 | 34.93% | 65.07% | 0.0000% | 69639.0 |
+| `bert-base-uncased` | 44000 | 1.47 | 73.43% | 26.57% | 0.0000% | 61089.2 |
+| `dmis-lab/biobert-base-cased-v1.2` | 44000 | 1.29 | 64.48% | 35.52% | 0.0000% | 64952.5 |
+| `allenai/scibert_scivocab_uncased` | 44000 | 1.16 | 57.91% | 42.09% | 0.0000% | 61480.7 |
+| `nlpaueb/legal-bert-base-uncased` | 44000 | 1.24 | 62.09% | 37.91% | 0.0300% | 62212.8 |
+| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 44000 | 1.15 | 57.31% | 42.69% | 0.0000% | 63963.0 |
 
 ---
 
@@ -46,13 +46,13 @@ Full model leaderboard ranked by the mathematical **Maritime Understanding Index
 
 | Rank | Model Name | MUI Score | Maritime Top-1 (%) | Rare Term Acc (%) | MLM Loss | Domain Shift Gap (%) | Params (M) | Latency (ms) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | `answerdotai/ModernBERT-base` | **71.39** | 72.98% ± 5.22% | 71.29% | 1.4727 | -32.98% | 149M | 465.41ms |
-| 2 | `roberta-base` | **64.03** | 60.99% ± 7.89% | 62.47% | 2.0860 | -10.99% | 125M | 374.20ms |
-| 3 | `bert-base-uncased` | **50.85** | 27.95% ± 4.19% | 45.73% | 4.8014 | 10.15% | 110M | 198.96ms |
-| 4 | `allenai/scibert_scivocab_uncased` | **50.37** | 30.31% ± 4.47% | 47.83% | 4.3908 | -3.64% | 110M | 121.56ms |
-| 5 | `nlpaueb/legal-bert-base-uncased` | **49.54** | 31.21% ± 2.97% | 36.99% | 4.2204 | -2.24% | 110M | 181.53ms |
-| 6 | `dmis-lab/biobert-base-cased-v1.2` | **44.02** | 23.76% ± 4.11% | 27.03% | 4.9759 | 22.91% | 110M | 228.02ms |
-| 7 | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | **38.05** | 18.42% ± 4.07% | 20.58% | 5.9526 | 19.67% | 110M | 130.74ms |
+| 1 | `answerdotai/ModernBERT-base` | **71.46** | 56.04% ± 3.74% | 29.09% | 2.3063 | -11.04% | 149M | 458.59ms |
+| 2 | `roberta-base` | **61.03** | 47.03% ± 3.00% | 30.07% | 2.7948 | 2.97% | 125M | 382.75ms |
+| 3 | `bert-base-uncased` | **59.25** | 29.08% ± 3.08% | 54.35% | 4.6237 | 10.92% | 110M | 174.86ms |
+| 4 | `dmis-lab/biobert-base-cased-v1.2` | **42.24** | 24.65% ± 2.67% | 32.35% | 4.9969 | 10.35% | 110M | 154.06ms |
+| 5 | `allenai/scibert_scivocab_uncased` | **37.09** | 31.24% ± 3.63% | 6.44% | 4.2628 | 3.76% | 110M | 323.41ms |
+| 6 | `nlpaueb/legal-bert-base-uncased` | **27.08** | 28.66% ± 3.31% | 4.49% | 4.4541 | 6.34% | 110M | 249.28ms |
+| 7 | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | **23.72** | 20.59% ± 3.88% | 3.40% | 5.7259 | 19.41% | 110M | 326.75ms |
 
 ---
 
@@ -62,7 +62,7 @@ Bootstrap 95% Confidence Intervals and paired significance tests (t-test & Wilco
 ---
 
 ## 7. Computational Resource & Tokenizer Speed Benchmark
-Profiling model parameter counts, memory footprints, and inference speeds confirms that 110M parameter models offer the optimal trade-off between inference throughput (2.1 docs/sec) and domain accuracy.
+Profiling model parameter counts, memory footprints, and inference speeds confirms that 110M parameter models offer the optimal trade-off between inference throughput (2.2 docs/sec) and domain accuracy.
 
 ---
 
@@ -75,7 +75,7 @@ Ablation of individual scoring features (Rare Vocabulary, Concept Diversity, Red
 Using configurable decision criteria, the decision engine evaluated the empirical metrics against defined thresholds:
 
 * **Selected Strategy**: `Strategy B: Train Domain-Specific MaritimeBERT Model From Scratch`
-* **Rationale**: Substantial domain gap detected. Maritime Top-1 (72.98%) is below 60.0%, performance gap (-17.31%) exceeds 20.0%, or fragmentation (63.28%) exceeds 40.0%.
+* **Rationale**: Substantial domain gap detected. Maritime Top-1 (56.04%) is below 60.0%, performance gap (0.54%) exceeds 20.0%, or fragmentation (63.28%) exceeds 40.0%.
 
 ### Decision Sensitivity Analysis:
 * **Shift -10.0%**: Train MaritimeBERT From Scratch Required

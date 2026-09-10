@@ -1,0 +1,986 @@
+{
+  "experiment_description": "Controlled comparison of Random-15 vs Domain-Aware-15 on screened high-priority configurations. Note: Domain-Aware-15 prioritizes domain tokens within the 15% budget; in dense maritime text, general_mask_fraction may approach 0, concentrating evaluation on domain terminology.",
+  "evaluated_configurations_count": 28,
+  "comparisons": [
+    {
+      "model_name": "bert-base-uncased",
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "random_15": {
+        "mlm_loss": 5.588350651703609,
+        "top1": 0.2054263565891473,
+        "top5": 0.35658914728682173,
+        "top10": 0.4069767441860465,
+        "rare_top1": 1.0
+      },
+      "domain_aware_15": {
+        "mlm_loss": 8.370152620027863,
+        "top1": 0.06612903225806452,
+        "top5": 0.1338709677419355,
+        "top10": 0.16021505376344086,
+        "rare_top1": 0.0,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 50800,
+          "total_masked_tokens": 7600,
+          "actual_mask_rate": 0.1496,
+          "rare_maritime_tokens_masked": 4,
+          "maritime_tokens_masked": 1856,
+          "general_tokens_masked": 5740,
+          "rare_maritime_mask_fraction": 0.0005,
+          "maritime_mask_fraction": 0.2442,
+          "general_mask_fraction": 0.7553
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.1393,
+        "rare_top1_delta": -1.0,
+        "loss_delta": 2.7818
+      }
+    },
+    {
+      "model_name": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "random_15": {
+        "mlm_loss": 5.693017180875867,
+        "top1": 0.19322033898305085,
+        "top5": 0.3288135593220339,
+        "top10": 0.4067796610169492,
+        "rare_top1": 0.0
+      },
+      "domain_aware_15": {
+        "mlm_loss": 7.951472314708124,
+        "top1": 0.046700507614213196,
+        "top5": 0.10456852791878173,
+        "top10": 0.15532994923857868,
+        "rare_top1": 0.0,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 50800,
+          "total_masked_tokens": 7600,
+          "actual_mask_rate": 0.1496,
+          "rare_maritime_tokens_masked": 4,
+          "maritime_tokens_masked": 1966,
+          "general_tokens_masked": 5630,
+          "rare_maritime_mask_fraction": 0.0005,
+          "maritime_mask_fraction": 0.2587,
+          "general_mask_fraction": 0.7408
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.1465,
+        "rare_top1_delta": 0.0,
+        "loss_delta": 2.2585
+      }
+    },
+    {
+      "model_name": "nlpaueb/legal-bert-base-uncased",
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "random_15": {
+        "mlm_loss": 4.654943259467996,
+        "top1": 0.3047945205479452,
+        "top5": 0.4691780821917808,
+        "top10": 0.5342465753424658,
+        "rare_top1": 0.0
+      },
+      "domain_aware_15": {
+        "mlm_loss": 7.258249260295331,
+        "top1": 0.12210733628754308,
+        "top5": 0.2171344165435746,
+        "top10": 0.2604628261939931,
+        "rare_top1": 0.0,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 50800,
+          "total_masked_tokens": 7600,
+          "actual_mask_rate": 0.1496,
+          "rare_maritime_tokens_masked": 2,
+          "maritime_tokens_masked": 2029,
+          "general_tokens_masked": 5569,
+          "rare_maritime_mask_fraction": 0.0003,
+          "maritime_mask_fraction": 0.267,
+          "general_mask_fraction": 0.7328
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.1827,
+        "rare_top1_delta": 0.0,
+        "loss_delta": 2.6033
+      }
+    },
+    {
+      "model_name": "allenai/scibert_scivocab_uncased",
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "random_15": {
+        "mlm_loss": 5.419938124626254,
+        "top1": 0.18666666666666668,
+        "top5": 0.32,
+        "top10": 0.41,
+        "rare_top1": 0.0
+      },
+      "domain_aware_15": {
+        "mlm_loss": 8.303999547438389,
+        "top1": 0.04032258064516129,
+        "top5": 0.0967741935483871,
+        "top10": 0.1413662239089184,
+        "rare_top1": 0.0,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 50800,
+          "total_masked_tokens": 7600,
+          "actual_mask_rate": 0.1496,
+          "rare_maritime_tokens_masked": 4,
+          "maritime_tokens_masked": 2104,
+          "general_tokens_masked": 5492,
+          "rare_maritime_mask_fraction": 0.0005,
+          "maritime_mask_fraction": 0.2768,
+          "general_mask_fraction": 0.7226
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.1463,
+        "rare_top1_delta": 0.0,
+        "loss_delta": 2.8841
+      }
+    },
+    {
+      "model_name": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "random_15": {
+        "mlm_loss": 7.1036640676056315,
+        "top1": 0.10921501706484642,
+        "top5": 0.18430034129692832,
+        "top10": 0.21843003412969283,
+        "rare_top1": 0.0
+      },
+      "domain_aware_15": {
+        "mlm_loss": 8.22353349016624,
+        "top1": 0.0485728592889334,
+        "top5": 0.0871306960440661,
+        "top10": 0.1186780170255383,
+        "rare_top1": 0.0,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 50800,
+          "total_masked_tokens": 7600,
+          "actual_mask_rate": 0.1496,
+          "rare_maritime_tokens_masked": 4,
+          "maritime_tokens_masked": 1993,
+          "general_tokens_masked": 5603,
+          "rare_maritime_mask_fraction": 0.0005,
+          "maritime_mask_fraction": 0.2622,
+          "general_mask_fraction": 0.7372
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.0606,
+        "rare_top1_delta": 0.0,
+        "loss_delta": 1.1199
+      }
+    },
+    {
+      "model_name": "roberta-base",
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "random_15": {
+        "mlm_loss": 3.013011882541199,
+        "top1": 0.4162062615101289,
+        "top5": 0.6335174953959485,
+        "top10": 0.7274401473296501,
+        "rare_top1": 0.0
+      },
+      "domain_aware_15": {
+        "mlm_loss": 7.12546179884956,
+        "top1": 0.05333333333333334,
+        "top5": 0.13551020408163264,
+        "top10": 0.16625850340136056,
+        "rare_top1": 0.0,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 50800,
+          "total_masked_tokens": 7600,
+          "actual_mask_rate": 0.1496,
+          "rare_maritime_tokens_masked": 6,
+          "maritime_tokens_masked": 3669,
+          "general_tokens_masked": 3925,
+          "rare_maritime_mask_fraction": 0.0008,
+          "maritime_mask_fraction": 0.4828,
+          "general_mask_fraction": 0.5164
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.3629,
+        "rare_top1_delta": 0.0,
+        "loss_delta": 4.1124
+      }
+    },
+    {
+      "model_name": "answerdotai/ModernBERT-base",
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "random_15": {
+        "mlm_loss": 2.346285502679781,
+        "top1": 0.5612431444241316,
+        "top5": 0.7148080438756855,
+        "top10": 0.7696526508226691,
+        "rare_top1": 0.0
+      },
+      "domain_aware_15": {
+        "mlm_loss": 5.994087548318673,
+        "top1": 0.16018368449486764,
+        "top5": 0.24149108589951376,
+        "top10": 0.2976769313884387,
+        "rare_top1": 0.0,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 50800,
+          "total_masked_tokens": 7600,
+          "actual_mask_rate": 0.1496,
+          "rare_maritime_tokens_masked": 6,
+          "maritime_tokens_masked": 3696,
+          "general_tokens_masked": 3898,
+          "rare_maritime_mask_fraction": 0.0008,
+          "maritime_mask_fraction": 0.4863,
+          "general_mask_fraction": 0.5129
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.4011,
+        "rare_top1_delta": 0.0,
+        "loss_delta": 3.6478
+      }
+    },
+    {
+      "model_name": "bert-base-uncased",
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "random_15": {
+        "mlm_loss": 3.9053416094120967,
+        "top1": 0.39543726235741444,
+        "top5": 0.5494296577946768,
+        "top10": 0.6185044359949303,
+        "rare_top1": 0.7422680412371134
+      },
+      "domain_aware_15": {
+        "mlm_loss": 6.175180270443907,
+        "top1": 0.19236688211757463,
+        "top5": 0.30809479839950754,
+        "top10": 0.37365343182517696,
+        "rare_top1": 0.0,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 43346,
+          "total_masked_tokens": 6499,
+          "actual_mask_rate": 0.1499,
+          "rare_maritime_tokens_masked": 619,
+          "maritime_tokens_masked": 5879,
+          "general_tokens_masked": 1,
+          "rare_maritime_mask_fraction": 0.0952,
+          "maritime_mask_fraction": 0.9046,
+          "general_mask_fraction": 0.0002
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.2031,
+        "rare_top1_delta": -0.7423,
+        "loss_delta": 2.2698
+      }
+    },
+    {
+      "model_name": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "random_15": {
+        "mlm_loss": 4.130322043872218,
+        "top1": 0.3871932974266906,
+        "top5": 0.471573907839617,
+        "top10": 0.5266307600239377,
+        "rare_top1": 0.5142857142857142
+      },
+      "domain_aware_15": {
+        "mlm_loss": 6.160787257283832,
+        "top1": 0.17674900162697826,
+        "top5": 0.25247744416506435,
+        "top10": 0.3057240053246561,
+        "rare_top1": 0.11350293542074363,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 45111,
+          "total_masked_tokens": 6761,
+          "actual_mask_rate": 0.1499,
+          "rare_maritime_tokens_masked": 511,
+          "maritime_tokens_masked": 6250,
+          "general_tokens_masked": 0,
+          "rare_maritime_mask_fraction": 0.0756,
+          "maritime_mask_fraction": 0.9244,
+          "general_mask_fraction": 0.0
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.2104,
+        "rare_top1_delta": -0.4008,
+        "loss_delta": 2.0305
+      }
+    },
+    {
+      "model_name": "nlpaueb/legal-bert-base-uncased",
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "random_15": {
+        "mlm_loss": 3.4234226748423104,
+        "top1": 0.44656716417910447,
+        "top5": 0.5552238805970149,
+        "top10": 0.6298507462686567,
+        "rare_top1": 0.1791044776119403
+      },
+      "domain_aware_15": {
+        "mlm_loss": 4.554551699356486,
+        "top1": 0.28379988088147706,
+        "top5": 0.43046456223942825,
+        "top10": 0.5022334723049434,
+        "rare_top1": 0.13569937369519833,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 44832,
+          "total_masked_tokens": 6716,
+          "actual_mask_rate": 0.1498,
+          "rare_maritime_tokens_masked": 479,
+          "maritime_tokens_masked": 6237,
+          "general_tokens_masked": 0,
+          "rare_maritime_mask_fraction": 0.0713,
+          "maritime_mask_fraction": 0.9287,
+          "general_mask_fraction": 0.0
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.1628,
+        "rare_top1_delta": -0.0434,
+        "loss_delta": 1.1311
+      }
+    },
+    {
+      "model_name": "allenai/scibert_scivocab_uncased",
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "random_15": {
+        "mlm_loss": 3.143570948934206,
+        "top1": 0.476,
+        "top5": 0.6057142857142858,
+        "top10": 0.6725714285714286,
+        "rare_top1": 0.21875
+      },
+      "domain_aware_15": {
+        "mlm_loss": 5.017285591300416,
+        "top1": 0.29263886798133376,
+        "top5": 0.39876561794370013,
+        "top10": 0.4598825831702544,
+        "rare_top1": 0.10757946210268948,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 44325,
+          "total_masked_tokens": 6643,
+          "actual_mask_rate": 0.1499,
+          "rare_maritime_tokens_masked": 409,
+          "maritime_tokens_masked": 6234,
+          "general_tokens_masked": 0,
+          "rare_maritime_mask_fraction": 0.0616,
+          "maritime_mask_fraction": 0.9384,
+          "general_mask_fraction": 0.0
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.1834,
+        "rare_top1_delta": -0.1112,
+        "loss_delta": 1.8737
+      }
+    },
+    {
+      "model_name": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "random_15": {
+        "mlm_loss": 4.298379443310675,
+        "top1": 0.4001178550383029,
+        "top5": 0.47672362993517975,
+        "top10": 0.5209192692987625,
+        "rare_top1": 0.15625
+      },
+      "domain_aware_15": {
+        "mlm_loss": 5.622191566535955,
+        "top1": 0.24728588661037396,
+        "top5": 0.3336851628468034,
+        "top10": 0.37680940892641734,
+        "rare_top1": 0.15328467153284672,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 44255,
+          "total_masked_tokens": 6632,
+          "actual_mask_rate": 0.1499,
+          "rare_maritime_tokens_masked": 411,
+          "maritime_tokens_masked": 6221,
+          "general_tokens_masked": 0,
+          "rare_maritime_mask_fraction": 0.062,
+          "maritime_mask_fraction": 0.938,
+          "general_mask_fraction": 0.0
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.1528,
+        "rare_top1_delta": -0.003,
+        "loss_delta": 1.3238
+      }
+    },
+    {
+      "model_name": "roberta-base",
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "random_15": {
+        "mlm_loss": 2.2845575683158525,
+        "top1": 0.565864833906071,
+        "top5": 0.7353951890034365,
+        "top10": 0.788659793814433,
+        "rare_top1": 0.42105263157894735
+      },
+      "domain_aware_15": {
+        "mlm_loss": 4.710893833777684,
+        "top1": 0.2623196297304656,
+        "top5": 0.3919139667846447,
+        "top10": 0.46079499047100464,
+        "rare_top1": 0.03389830508474576,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 49092,
+          "total_masked_tokens": 7349,
+          "actual_mask_rate": 0.1497,
+          "rare_maritime_tokens_masked": 118,
+          "maritime_tokens_masked": 7228,
+          "general_tokens_masked": 3,
+          "rare_maritime_mask_fraction": 0.0161,
+          "maritime_mask_fraction": 0.9835,
+          "general_mask_fraction": 0.0004
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.3035,
+        "rare_top1_delta": -0.3872,
+        "loss_delta": 2.4263
+      }
+    },
+    {
+      "model_name": "answerdotai/ModernBERT-base",
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "random_15": {
+        "mlm_loss": 1.5902437077932854,
+        "top1": 0.6834254143646409,
+        "top5": 0.8270718232044199,
+        "top10": 0.8767955801104972,
+        "rare_top1": 0.75
+      },
+      "domain_aware_15": {
+        "mlm_loss": 3.308308545859233,
+        "top1": 0.43481814466693913,
+        "top5": 0.5815284021250511,
+        "top10": 0.6477319166326113,
+        "rare_top1": 0.1651376146788991,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 49052,
+          "total_masked_tokens": 7341,
+          "actual_mask_rate": 0.1497,
+          "rare_maritime_tokens_masked": 109,
+          "maritime_tokens_masked": 7232,
+          "general_tokens_masked": 0,
+          "rare_maritime_mask_fraction": 0.0148,
+          "maritime_mask_fraction": 0.9852,
+          "general_mask_fraction": 0.0
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.2486,
+        "rare_top1_delta": -0.5849,
+        "loss_delta": 1.7181
+      }
+    },
+    {
+      "model_name": "bert-base-uncased",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "random_15": {
+        "mlm_loss": 4.506354655858481,
+        "top1": 0.3082614056720099,
+        "top5": 0.4722564734895191,
+        "top10": 0.5351418002466092,
+        "rare_top1": 1.0
+      },
+      "domain_aware_15": {
+        "mlm_loss": 6.440847024144142,
+        "top1": 0.15172413793103448,
+        "top5": 0.2641123882503193,
+        "top10": 0.32005108556832695,
+        "rare_top1": 0.0,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 26115,
+          "total_masked_tokens": 3920,
+          "actual_mask_rate": 0.1501,
+          "rare_maritime_tokens_masked": 19,
+          "maritime_tokens_masked": 3896,
+          "general_tokens_masked": 5,
+          "rare_maritime_mask_fraction": 0.0048,
+          "maritime_mask_fraction": 0.9939,
+          "general_mask_fraction": 0.0013
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.1565,
+        "rare_top1_delta": -1.0,
+        "loss_delta": 1.9345
+      }
+    },
+    {
+      "model_name": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "random_15": {
+        "mlm_loss": 4.98905642630706,
+        "top1": 0.2547568710359408,
+        "top5": 0.36363636363636365,
+        "top10": 0.41120507399577166,
+        "rare_top1": 1.0
+      },
+      "domain_aware_15": {
+        "mlm_loss": 7.022421357560925,
+        "top1": 0.0954297892493488,
+        "top5": 0.17120530428605257,
+        "top10": 0.20743547241297655,
+        "rare_top1": 0.0,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 28140,
+          "total_masked_tokens": 4228,
+          "actual_mask_rate": 0.1502,
+          "rare_maritime_tokens_masked": 19,
+          "maritime_tokens_masked": 4204,
+          "general_tokens_masked": 5,
+          "rare_maritime_mask_fraction": 0.0045,
+          "maritime_mask_fraction": 0.9943,
+          "general_mask_fraction": 0.0012
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.1593,
+        "rare_top1_delta": -1.0,
+        "loss_delta": 2.0334
+      }
+    },
+    {
+      "model_name": "nlpaueb/legal-bert-base-uncased",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "random_15": {
+        "mlm_loss": 4.349294262090312,
+        "top1": 0.31851851851851853,
+        "top5": 0.4486772486772487,
+        "top10": 0.5079365079365079,
+        "rare_top1": 0.0
+      },
+      "domain_aware_15": {
+        "mlm_loss": 5.511431999492759,
+        "top1": 0.1922147001934236,
+        "top5": 0.32736943907156674,
+        "top10": 0.3960348162475822,
+        "rare_top1": 0.0,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 27610,
+          "total_masked_tokens": 4142,
+          "actual_mask_rate": 0.15,
+          "rare_maritime_tokens_masked": 17,
+          "maritime_tokens_masked": 4119,
+          "general_tokens_masked": 6,
+          "rare_maritime_mask_fraction": 0.0041,
+          "maritime_mask_fraction": 0.9944,
+          "general_mask_fraction": 0.0014
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.1263,
+        "rare_top1_delta": 0.0,
+        "loss_delta": 1.1621
+      }
+    },
+    {
+      "model_name": "allenai/scibert_scivocab_uncased",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "random_15": {
+        "mlm_loss": 3.9993437467220807,
+        "top1": 0.3358208955223881,
+        "top5": 0.48507462686567165,
+        "top10": 0.5597014925373134,
+        "rare_top1": 0.0
+      },
+      "domain_aware_15": {
+        "mlm_loss": 5.899657600397395,
+        "top1": 0.18555938886150813,
+        "top5": 0.29349433218334153,
+        "top10": 0.35288319369147364,
+        "rare_top1": 0.0,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 27084,
+          "total_masked_tokens": 4063,
+          "actual_mask_rate": 0.15,
+          "rare_maritime_tokens_masked": 17,
+          "maritime_tokens_masked": 4041,
+          "general_tokens_masked": 5,
+          "rare_maritime_mask_fraction": 0.0042,
+          "maritime_mask_fraction": 0.9946,
+          "general_mask_fraction": 0.0012
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.1503,
+        "rare_top1_delta": 0.0,
+        "loss_delta": 1.9003
+      }
+    },
+    {
+      "model_name": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "random_15": {
+        "mlm_loss": 5.571527729480385,
+        "top1": 0.22234273318872017,
+        "top5": 0.3036876355748373,
+        "top10": 0.3492407809110629,
+        "rare_top1": 0.0
+      },
+      "domain_aware_15": {
+        "mlm_loss": 6.694080279397348,
+        "top1": 0.125,
+        "top5": 0.19438976377952755,
+        "top10": 0.23400590551181102,
+        "rare_top1": 0.0,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 27148,
+          "total_masked_tokens": 4066,
+          "actual_mask_rate": 0.1498,
+          "rare_maritime_tokens_masked": 19,
+          "maritime_tokens_masked": 4045,
+          "general_tokens_masked": 2,
+          "rare_maritime_mask_fraction": 0.0047,
+          "maritime_mask_fraction": 0.9948,
+          "general_mask_fraction": 0.0005
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.0973,
+        "rare_top1_delta": 0.0,
+        "loss_delta": 1.1226
+      }
+    },
+    {
+      "model_name": "roberta-base",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "random_15": {
+        "mlm_loss": 2.55500002138949,
+        "top1": 0.5373475609756098,
+        "top5": 0.680640243902439,
+        "top10": 0.743140243902439,
+        "rare_top1": 0.0
+      },
+      "domain_aware_15": {
+        "mlm_loss": 4.843718518997509,
+        "top1": 0.24291345973343345,
+        "top5": 0.37413178149052,
+        "top10": 0.4445278768537638,
+        "rare_top1": 0.0,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 35592,
+          "total_masked_tokens": 5331,
+          "actual_mask_rate": 0.1498,
+          "rare_maritime_tokens_masked": 26,
+          "maritime_tokens_masked": 5301,
+          "general_tokens_masked": 4,
+          "rare_maritime_mask_fraction": 0.0049,
+          "maritime_mask_fraction": 0.9944,
+          "general_mask_fraction": 0.0008
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.2944,
+        "rare_top1_delta": 0.0,
+        "loss_delta": 2.2887
+      }
+    },
+    {
+      "model_name": "answerdotai/ModernBERT-base",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "random_15": {
+        "mlm_loss": 1.7896264449869306,
+        "top1": 0.6527196652719666,
+        "top5": 0.7887029288702929,
+        "top10": 0.8396094839609484,
+        "rare_top1": 0.0
+      },
+      "domain_aware_15": {
+        "mlm_loss": 3.2639109250690126,
+        "top1": 0.42784571966133583,
+        "top5": 0.5776105362182502,
+        "top10": 0.639134524929445,
+        "rare_top1": 0.0,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 35457,
+          "total_masked_tokens": 5315,
+          "actual_mask_rate": 0.1499,
+          "rare_maritime_tokens_masked": 26,
+          "maritime_tokens_masked": 5289,
+          "general_tokens_masked": 0,
+          "rare_maritime_mask_fraction": 0.0049,
+          "maritime_mask_fraction": 0.9951,
+          "general_mask_fraction": 0.0
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.2249,
+        "rare_top1_delta": 0.0,
+        "loss_delta": 1.4743
+      }
+    },
+    {
+      "model_name": "bert-base-uncased",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "random_15": {
+        "mlm_loss": 3.935951608050697,
+        "top1": 0.38321167883211676,
+        "top5": 0.5675182481751825,
+        "top10": 0.6313868613138686,
+        "rare_top1": 0.75
+      },
+      "domain_aware_15": {
+        "mlm_loss": 6.813430069607021,
+        "top1": 0.18615474112856312,
+        "top5": 0.32111692844677137,
+        "top10": 0.3717277486910995,
+        "rare_top1": 0.0,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 11856,
+          "total_masked_tokens": 1778,
+          "actual_mask_rate": 0.15,
+          "rare_maritime_tokens_masked": 547,
+          "maritime_tokens_masked": 1172,
+          "general_tokens_masked": 59,
+          "rare_maritime_mask_fraction": 0.3076,
+          "maritime_mask_fraction": 0.6592,
+          "general_mask_fraction": 0.0332
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.1971,
+        "rare_top1_delta": -0.75,
+        "loss_delta": 2.8775
+      }
+    },
+    {
+      "model_name": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "random_15": {
+        "mlm_loss": 4.868512303946524,
+        "top1": 0.22564102564102564,
+        "top5": 0.3333333333333333,
+        "top10": 0.4393162393162393,
+        "rare_top1": 0.4155844155844156
+      },
+      "domain_aware_15": {
+        "mlm_loss": 6.700066148259393,
+        "top1": 0.08195819581958196,
+        "top5": 0.16666666666666666,
+        "top10": 0.23377337733773376,
+        "rare_top1": 0.0,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 12549,
+          "total_masked_tokens": 1887,
+          "actual_mask_rate": 0.1504,
+          "rare_maritime_tokens_masked": 548,
+          "maritime_tokens_masked": 1270,
+          "general_tokens_masked": 69,
+          "rare_maritime_mask_fraction": 0.2904,
+          "maritime_mask_fraction": 0.673,
+          "general_mask_fraction": 0.0366
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.1437,
+        "rare_top1_delta": -0.4156,
+        "loss_delta": 1.8316
+      }
+    },
+    {
+      "model_name": "nlpaueb/legal-bert-base-uncased",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "random_15": {
+        "mlm_loss": 4.60642084577538,
+        "top1": 0.24333333333333335,
+        "top5": 0.42,
+        "top10": 0.5116666666666667,
+        "rare_top1": 0.08139534883720931
+      },
+      "domain_aware_15": {
+        "mlm_loss": 4.789062341503708,
+        "top1": 0.2348401323042999,
+        "top5": 0.39305402425578834,
+        "top10": 0.45148842337375966,
+        "rare_top1": 0.17892644135188868,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 12533,
+          "total_masked_tokens": 1880,
+          "actual_mask_rate": 0.15,
+          "rare_maritime_tokens_masked": 503,
+          "maritime_tokens_masked": 1311,
+          "general_tokens_masked": 66,
+          "rare_maritime_mask_fraction": 0.2676,
+          "maritime_mask_fraction": 0.6973,
+          "general_mask_fraction": 0.0351
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.0085,
+        "rare_top1_delta": 0.0975,
+        "loss_delta": 0.1826
+      }
+    },
+    {
+      "model_name": "allenai/scibert_scivocab_uncased",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "random_15": {
+        "mlm_loss": 4.065966330845953,
+        "top1": 0.2977624784853701,
+        "top5": 0.5232358003442341,
+        "top10": 0.6006884681583476,
+        "rare_top1": 0.01818181818181818
+      },
+      "domain_aware_15": {
+        "mlm_loss": 5.698387874200521,
+        "top1": 0.19311123658949747,
+        "top5": 0.3274985883681536,
+        "top10": 0.38509316770186336,
+        "rare_top1": 0.0,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 12218,
+          "total_masked_tokens": 1831,
+          "actual_mask_rate": 0.1499,
+          "rare_maritime_tokens_masked": 380,
+          "maritime_tokens_masked": 1391,
+          "general_tokens_masked": 60,
+          "rare_maritime_mask_fraction": 0.2075,
+          "maritime_mask_fraction": 0.7597,
+          "general_mask_fraction": 0.0328
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.1047,
+        "rare_top1_delta": -0.0182,
+        "loss_delta": 1.6324
+      }
+    },
+    {
+      "model_name": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "random_15": {
+        "mlm_loss": 6.072856484109364,
+        "top1": 0.16638655462184873,
+        "top5": 0.253781512605042,
+        "top10": 0.31092436974789917,
+        "rare_top1": 0.0
+      },
+      "domain_aware_15": {
+        "mlm_loss": 6.410114294006612,
+        "top1": 0.13262451035254616,
+        "top5": 0.21824286513710128,
+        "top10": 0.28539451594851706,
+        "rare_top1": 0.0,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 12294,
+          "total_masked_tokens": 1847,
+          "actual_mask_rate": 0.1502,
+          "rare_maritime_tokens_masked": 380,
+          "maritime_tokens_masked": 1407,
+          "general_tokens_masked": 60,
+          "rare_maritime_mask_fraction": 0.2057,
+          "maritime_mask_fraction": 0.7618,
+          "general_mask_fraction": 0.0325
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.0338,
+        "rare_top1_delta": 0.0,
+        "loss_delta": 0.3373
+      }
+    },
+    {
+      "model_name": "roberta-base",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "random_15": {
+        "mlm_loss": 2.994423719101917,
+        "top1": 0.45076923076923076,
+        "top5": 0.6323076923076923,
+        "top10": 0.6861538461538461,
+        "rare_top1": 0.7536231884057971
+      },
+      "domain_aware_15": {
+        "mlm_loss": 4.728779704006107,
+        "top1": 0.25077399380804954,
+        "top5": 0.40144478844169246,
+        "top10": 0.4613003095975232,
+        "rare_top1": 0.0,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 13413,
+          "total_masked_tokens": 2009,
+          "actual_mask_rate": 0.1498,
+          "rare_maritime_tokens_masked": 455,
+          "maritime_tokens_masked": 1483,
+          "general_tokens_masked": 71,
+          "rare_maritime_mask_fraction": 0.2265,
+          "maritime_mask_fraction": 0.7382,
+          "general_mask_fraction": 0.0353
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.2,
+        "rare_top1_delta": -0.7536,
+        "loss_delta": 1.7344
+      }
+    },
+    {
+      "model_name": "answerdotai/ModernBERT-base",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "random_15": {
+        "mlm_loss": 2.869496301716825,
+        "top1": 0.4581196581196581,
+        "top5": 0.6615384615384615,
+        "top10": 0.7333333333333333,
+        "rare_top1": 0.7307692307692307
+      },
+      "domain_aware_15": {
+        "mlm_loss": 4.146460527126338,
+        "top1": 0.29084092126405997,
+        "top5": 0.42903053026245314,
+        "top10": 0.499196572040707,
+        "rare_top1": 0.0,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 12991,
+          "total_masked_tokens": 1938,
+          "actual_mask_rate": 0.1492,
+          "rare_maritime_tokens_masked": 387,
+          "maritime_tokens_masked": 1480,
+          "general_tokens_masked": 71,
+          "rare_maritime_mask_fraction": 0.1997,
+          "maritime_mask_fraction": 0.7637,
+          "general_mask_fraction": 0.0366
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.1673,
+        "rare_top1_delta": -0.7308,
+        "loss_delta": 1.277
+      }
+    }
+  ]
+}

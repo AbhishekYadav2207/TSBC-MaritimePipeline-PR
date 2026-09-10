@@ -1,0 +1,279 @@
+{
+  "selection_method": "Multi-attribute diversity optimization (v2.1): Primary ranking by mean Top-1 (descending) & mean MLM loss (ascending)",
+  "screening_basis": "Stage 14 Random-15 MLM benchmark results aggregated across all 7 models",
+  "total_cells_evaluated": 25,
+  "selected_cell_count": 4,
+  "selected_configurations": [
+    {
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "mean_top1": 0.6612,
+      "mean_mlm_loss": 2.2348,
+      "mean_maritime_top1": 0.2824,
+      "mean_rare_maritime_accuracy": 0.1429,
+      "rank": 1,
+      "selection_rationale": "Rank 1 overall in Random-15 screening. Demonstrates top MLM performance with distinct representation 'json' and distinct subset 'medium_knowledge'.",
+      "selection_method": "Deterministic multi-attribute diversity optimization (v2.1)"
+    },
+    {
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "mean_top1": 0.544,
+      "mean_mlm_loss": 2.9139,
+      "mean_maritime_top1": 0.4792,
+      "mean_rare_maritime_accuracy": 0.426,
+      "rank": 6,
+      "selection_rationale": "Rank 6 overall in Random-15 screening. Demonstrates top MLM performance with distinct representation 'mixed' and distinct subset 'high_knowledge'.",
+      "selection_method": "Deterministic multi-attribute diversity optimization (v2.1)"
+    },
+    {
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "mean_top1": 0.4315,
+      "mean_mlm_loss": 3.6548,
+      "mean_maritime_top1": 0.3757,
+      "mean_rare_maritime_accuracy": 0.2857,
+      "rank": 13,
+      "selection_rationale": "Rank 13 overall in Random-15 screening. Demonstrates top MLM performance with distinct representation 'key_value' and distinct subset 'random_baseline'.",
+      "selection_method": "Deterministic multi-attribute diversity optimization (v2.1)"
+    },
+    {
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "mean_top1": 0.3722,
+      "mean_mlm_loss": 3.8763,
+      "mean_maritime_top1": 0.3179,
+      "mean_rare_maritime_accuracy": 0.3928,
+      "rank": 16,
+      "selection_rationale": "Rank 16 overall in Random-15 screening. Demonstrates top MLM performance with distinct representation 'narrative' and distinct subset 'balanced_knowledge'.",
+      "selection_method": "Deterministic multi-attribute diversity optimization (v2.1)"
+    }
+  ],
+  "all_ranked_cells": [
+    {
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "mean_top1": 0.6612,
+      "mean_mlm_loss": 2.2348,
+      "mean_maritime_top1": 0.2824,
+      "mean_rare_maritime_accuracy": 0.1429,
+      "rank": 1
+    },
+    {
+      "representation": "json",
+      "subset": "high_knowledge",
+      "mean_top1": 0.6595,
+      "mean_mlm_loss": 2.286,
+      "mean_maritime_top1": 0.2467,
+      "mean_rare_maritime_accuracy": 0.1476,
+      "rank": 2
+    },
+    {
+      "representation": "json",
+      "subset": "balanced_knowledge",
+      "mean_top1": 0.6576,
+      "mean_mlm_loss": 2.2828,
+      "mean_maritime_top1": 0.2274,
+      "mean_rare_maritime_accuracy": 0.2,
+      "rank": 3
+    },
+    {
+      "representation": "json",
+      "subset": "random_baseline",
+      "mean_top1": 0.6573,
+      "mean_mlm_loss": 2.2796,
+      "mean_maritime_top1": 0.2498,
+      "mean_rare_maritime_accuracy": 0.0476,
+      "rank": 4
+    },
+    {
+      "representation": "json",
+      "subset": "low_knowledge",
+      "mean_top1": 0.6542,
+      "mean_mlm_loss": 2.2962,
+      "mean_maritime_top1": 0.2706,
+      "mean_rare_maritime_accuracy": 0.0,
+      "rank": 5
+    },
+    {
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "mean_top1": 0.544,
+      "mean_mlm_loss": 2.9139,
+      "mean_maritime_top1": 0.4792,
+      "mean_rare_maritime_accuracy": 0.426,
+      "rank": 6
+    },
+    {
+      "representation": "mixed",
+      "subset": "random_baseline",
+      "mean_top1": 0.5329,
+      "mean_mlm_loss": 2.9986,
+      "mean_maritime_top1": 0.4754,
+      "mean_rare_maritime_accuracy": 0.5631,
+      "rank": 7
+    },
+    {
+      "representation": "mixed",
+      "subset": "medium_knowledge",
+      "mean_top1": 0.5249,
+      "mean_mlm_loss": 3.0487,
+      "mean_maritime_top1": 0.4736,
+      "mean_rare_maritime_accuracy": 0.4611,
+      "rank": 8
+    },
+    {
+      "representation": "mixed",
+      "subset": "balanced_knowledge",
+      "mean_top1": 0.5212,
+      "mean_mlm_loss": 3.0584,
+      "mean_maritime_top1": 0.457,
+      "mean_rare_maritime_accuracy": 0.3988,
+      "rank": 9
+    },
+    {
+      "representation": "mixed",
+      "subset": "low_knowledge",
+      "mean_top1": 0.506,
+      "mean_mlm_loss": 3.2153,
+      "mean_maritime_top1": 0.3994,
+      "mean_rare_maritime_accuracy": 0.5136,
+      "rank": 10
+    },
+    {
+      "representation": "key_value",
+      "subset": "high_knowledge",
+      "mean_top1": 0.4416,
+      "mean_mlm_loss": 3.606,
+      "mean_maritime_top1": 0.376,
+      "mean_rare_maritime_accuracy": 0.0286,
+      "rank": 11
+    },
+    {
+      "representation": "key_value",
+      "subset": "medium_knowledge",
+      "mean_top1": 0.4356,
+      "mean_mlm_loss": 3.6337,
+      "mean_maritime_top1": 0.3975,
+      "mean_rare_maritime_accuracy": 0.0,
+      "rank": 12
+    },
+    {
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "mean_top1": 0.4315,
+      "mean_mlm_loss": 3.6548,
+      "mean_maritime_top1": 0.3757,
+      "mean_rare_maritime_accuracy": 0.2857,
+      "rank": 13
+    },
+    {
+      "representation": "key_value",
+      "subset": "balanced_knowledge",
+      "mean_top1": 0.4031,
+      "mean_mlm_loss": 3.8727,
+      "mean_maritime_top1": 0.3248,
+      "mean_rare_maritime_accuracy": 0.2109,
+      "rank": 14
+    },
+    {
+      "representation": "narrative",
+      "subset": "high_knowledge",
+      "mean_top1": 0.375,
+      "mean_mlm_loss": 3.8609,
+      "mean_maritime_top1": 0.3203,
+      "mean_rare_maritime_accuracy": 0.3834,
+      "rank": 15
+    },
+    {
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "mean_top1": 0.3722,
+      "mean_mlm_loss": 3.8763,
+      "mean_maritime_top1": 0.3179,
+      "mean_rare_maritime_accuracy": 0.3928,
+      "rank": 16
+    },
+    {
+      "representation": "template",
+      "subset": "medium_knowledge",
+      "mean_top1": 0.3708,
+      "mean_mlm_loss": 3.9758,
+      "mean_maritime_top1": 0.3504,
+      "mean_rare_maritime_accuracy": 0.0,
+      "rank": 17
+    },
+    {
+      "representation": "key_value",
+      "subset": "low_knowledge",
+      "mean_top1": 0.3676,
+      "mean_mlm_loss": 4.0823,
+      "mean_maritime_top1": 0.2907,
+      "mean_rare_maritime_accuracy": 0.0,
+      "rank": 18
+    },
+    {
+      "representation": "template",
+      "subset": "high_knowledge",
+      "mean_top1": 0.3635,
+      "mean_mlm_loss": 3.9866,
+      "mean_maritime_top1": 0.3304,
+      "mean_rare_maritime_accuracy": 0.0952,
+      "rank": 19
+    },
+    {
+      "representation": "narrative",
+      "subset": "random_baseline",
+      "mean_top1": 0.3634,
+      "mean_mlm_loss": 3.8877,
+      "mean_maritime_top1": 0.3056,
+      "mean_rare_maritime_accuracy": 0.42,
+      "rank": 20
+    },
+    {
+      "representation": "template",
+      "subset": "random_baseline",
+      "mean_top1": 0.3596,
+      "mean_mlm_loss": 4.0564,
+      "mean_maritime_top1": 0.3321,
+      "mean_rare_maritime_accuracy": 0.1429,
+      "rank": 21
+    },
+    {
+      "representation": "narrative",
+      "subset": "medium_knowledge",
+      "mean_top1": 0.3571,
+      "mean_mlm_loss": 3.9833,
+      "mean_maritime_top1": 0.2791,
+      "mean_rare_maritime_accuracy": 0.3292,
+      "rank": 22
+    },
+    {
+      "representation": "narrative",
+      "subset": "low_knowledge",
+      "mean_top1": 0.3371,
+      "mean_mlm_loss": 4.1752,
+      "mean_maritime_top1": 0.285,
+      "mean_rare_maritime_accuracy": 0.3852,
+      "rank": 23
+    },
+    {
+      "representation": "template",
+      "subset": "balanced_knowledge",
+      "mean_top1": 0.3351,
+      "mean_mlm_loss": 4.233,
+      "mean_maritime_top1": 0.2997,
+      "mean_rare_maritime_accuracy": 0.1464,
+      "rank": 24
+    },
+    {
+      "representation": "template",
+      "subset": "low_knowledge",
+      "mean_top1": 0.332,
+      "mean_mlm_loss": 4.2995,
+      "mean_maritime_top1": 0.3285,
+      "mean_rare_maritime_accuracy": 0.0,
+      "rank": 25
+    }
+  ]
+}

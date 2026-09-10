@@ -1,0 +1,818 @@
+{
+  "experiment_description": "Sampled Pseudo-Log-Likelihood (Sampled PLL) scoring (Salazar et al., ACL 2020) across focused screened configurations using exact single-token masking per sampled position",
+  "evaluated_configurations_count": 28,
+  "results": [
+    {
+      "model_name": "bert-base-uncased",
+      "clean_model_name": "bert_base_uncased",
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -745.5975681375112,
+        "mean_token_pll": -2.3299924004297226,
+        "pseudo_perplexity": 10.277863425401252,
+        "domain_token_pll": {
+          "sum": -87.79140168428421,
+          "mean": -4.620600088646538,
+          "count": 19
+        },
+        "general_token_pll": {
+          "sum": -657.806166453227,
+          "mean": -2.1854025463562357,
+          "count": 301
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 320,
+        "sampling_seed": 963954,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 26.22898244857788
+      }
+    },
+    {
+      "model_name": "dmis-lab/biobert-base-cased-v1.2",
+      "clean_model_name": "dmis_lab_biobert_base_cased_v1.2",
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -760.7251484855842,
+        "mean_token_pll": -2.377266089017451,
+        "pseudo_perplexity": 10.775403563930112,
+        "domain_token_pll": {
+          "sum": -90.05507107451558,
+          "mean": -5.003059504139754,
+          "count": 18
+        },
+        "general_token_pll": {
+          "sum": -670.6700774110686,
+          "mean": -2.2207618457320155,
+          "count": 302
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 320,
+        "sampling_seed": 959362,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 24.90199303627014
+      }
+    },
+    {
+      "model_name": "nlpaueb/legal-bert-base-uncased",
+      "clean_model_name": "nlpaueb_legal_bert_base_uncased",
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -729.5466396538977,
+        "mean_token_pll": -2.2798332489184303,
+        "pseudo_perplexity": 9.775050273413713,
+        "domain_token_pll": {
+          "sum": -95.14229600131512,
+          "mean": -3.9642623333881297,
+          "count": 24
+        },
+        "general_token_pll": {
+          "sum": -634.4043436525826,
+          "mean": -2.1432579177452116,
+          "count": 296
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 320,
+        "sampling_seed": 611106,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 26.132174253463745
+      }
+    },
+    {
+      "model_name": "allenai/scibert_scivocab_uncased",
+      "clean_model_name": "allenai_scibert_scivocab_uncased",
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -650.4753347672467,
+        "mean_token_pll": -2.0327354211476463,
+        "pseudo_perplexity": 7.634942603928019,
+        "domain_token_pll": {
+          "sum": -166.55842746049166,
+          "mean": -5.372852498725537,
+          "count": 31
+        },
+        "general_token_pll": {
+          "sum": -483.9169073067551,
+          "mean": -1.6744529664593601,
+          "count": 289
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 320,
+        "sampling_seed": 307839,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 24.847559213638306
+      }
+    },
+    {
+      "model_name": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "clean_model_name": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext",
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -878.5975252037792,
+        "mean_token_pll": -2.74561726626181,
+        "pseudo_perplexity": 15.574224409049426,
+        "domain_token_pll": {
+          "sum": -152.68587350845337,
+          "mean": -9.542867094278336,
+          "count": 16
+        },
+        "general_token_pll": {
+          "sum": -725.9116516953259,
+          "mean": -2.387867275313572,
+          "count": 304
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 320,
+        "sampling_seed": 182790,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 25.77616310119629
+      }
+    },
+    {
+      "model_name": "roberta-base",
+      "clean_model_name": "roberta_base",
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -600.6784602091793,
+        "mean_token_pll": -1.8771201881536854,
+        "pseudo_perplexity": 6.534659150330716,
+        "domain_token_pll": {
+          "sum": -109.83427849459986,
+          "mean": -2.1536133038156833,
+          "count": 51
+        },
+        "general_token_pll": {
+          "sum": -490.84418171457946,
+          "mean": -1.8246995602772471,
+          "count": 269
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 320,
+        "sampling_seed": 723019,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 30.047135829925537
+      }
+    },
+    {
+      "model_name": "answerdotai/ModernBERT-base",
+      "clean_model_name": "answerdotai_ModernBERT_base",
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -684.4745051132159,
+        "mean_token_pll": -2.1389828284787997,
+        "pseudo_perplexity": 8.490796638413538,
+        "domain_token_pll": {
+          "sum": -88.85865142173134,
+          "mean": -2.0195148050393485,
+          "count": 44
+        },
+        "general_token_pll": {
+          "sum": -595.6158536914845,
+          "mean": -2.1580284554039295,
+          "count": 276
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 320,
+        "sampling_seed": 211608,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 39.033401012420654
+      }
+    },
+    {
+      "model_name": "bert-base-uncased",
+      "clean_model_name": "bert_base_uncased",
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -905.6918665684861,
+        "mean_token_pll": -2.830287083026519,
+        "pseudo_perplexity": 16.95032627708129,
+        "domain_token_pll": {
+          "sum": -262.1848120548093,
+          "mean": -3.7997798848523088,
+          "count": 69
+        },
+        "general_token_pll": {
+          "sum": -643.5070545136768,
+          "mean": -2.5637731255524976,
+          "count": 251
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 320,
+        "sampling_seed": 197511,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 28.79267954826355
+      }
+    },
+    {
+      "model_name": "dmis-lab/biobert-base-cased-v1.2",
+      "clean_model_name": "dmis_lab_biobert_base_cased_v1.2",
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -1564.4278908694687,
+        "mean_token_pll": -4.88883715896709,
+        "pseudo_perplexity": 132.79906003493423,
+        "domain_token_pll": {
+          "sum": -440.1334134042263,
+          "mean": -5.433745844496621,
+          "count": 81
+        },
+        "general_token_pll": {
+          "sum": -1124.2944774652424,
+          "mean": -4.70416099357842,
+          "count": 239
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 320,
+        "sampling_seed": 853811,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 24.730926036834717
+      }
+    },
+    {
+      "model_name": "nlpaueb/legal-bert-base-uncased",
+      "clean_model_name": "nlpaueb_legal_bert_base_uncased",
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -1233.701096707955,
+        "mean_token_pll": -3.8553159272123594,
+        "pseudo_perplexity": 47.243540103761006,
+        "domain_token_pll": {
+          "sum": -287.7702246569097,
+          "mean": -4.295077979953876,
+          "count": 67
+        },
+        "general_token_pll": {
+          "sum": -945.9308720510453,
+          "mean": -3.7388572017827877,
+          "count": 253
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 320,
+        "sampling_seed": 769177,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 25.157387256622314
+      }
+    },
+    {
+      "model_name": "allenai/scibert_scivocab_uncased",
+      "clean_model_name": "allenai_scibert_scivocab_uncased",
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -1100.4434807066718,
+        "mean_token_pll": -3.4388858772083495,
+        "pseudo_perplexity": 31.152231415937152,
+        "domain_token_pll": {
+          "sum": -218.03910956262553,
+          "mean": -3.114844422323222,
+          "count": 70
+        },
+        "general_token_pll": {
+          "sum": -882.4043711440463,
+          "mean": -3.5296174845761854,
+          "count": 250
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 320,
+        "sampling_seed": 756817,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 23.81521701812744
+      }
+    },
+    {
+      "model_name": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "clean_model_name": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext",
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -1364.5744634153234,
+        "mean_token_pll": -4.264295198172886,
+        "pseudo_perplexity": 71.11478047905045,
+        "domain_token_pll": {
+          "sum": -474.5474966112524,
+          "mean": -5.5179941466424705,
+          "count": 86
+        },
+        "general_token_pll": {
+          "sum": -890.026966804071,
+          "mean": -3.8035340461712437,
+          "count": 234
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 320,
+        "sampling_seed": 996240,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 23.754493236541748
+      }
+    },
+    {
+      "model_name": "roberta-base",
+      "clean_model_name": "roberta_base",
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -1004.5779141701641,
+        "mean_token_pll": -3.139305981781763,
+        "pseudo_perplexity": 23.087837917042652,
+        "domain_token_pll": {
+          "sum": -202.2200643813121,
+          "mean": -2.3790595809566133,
+          "count": 85
+        },
+        "general_token_pll": {
+          "sum": -802.357849788852,
+          "mean": -3.4142887225057534,
+          "count": 235
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 320,
+        "sampling_seed": 93019,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 28.395938396453857
+      }
+    },
+    {
+      "model_name": "answerdotai/ModernBERT-base",
+      "clean_model_name": "answerdotai_ModernBERT_base",
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -694.4350040158661,
+        "mean_token_pll": -2.1701093875495814,
+        "pseudo_perplexity": 8.759242140371718,
+        "domain_token_pll": {
+          "sum": -247.227298681717,
+          "mean": -2.4477950364526437,
+          "count": 101
+        },
+        "general_token_pll": {
+          "sum": -447.20770533414907,
+          "mean": -2.042044316594288,
+          "count": 219
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 320,
+        "sampling_seed": 564659,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 37.30532193183899
+      }
+    },
+    {
+      "model_name": "bert-base-uncased",
+      "clean_model_name": "bert_base_uncased",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -1211.6941644928447,
+        "mean_token_pll": -3.7865442640401397,
+        "pseudo_perplexity": 44.10372579538,
+        "domain_token_pll": {
+          "sum": -281.16203819085786,
+          "mean": -4.765458274421319,
+          "count": 59
+        },
+        "general_token_pll": {
+          "sum": -930.5321263019869,
+          "mean": -3.5652571888965015,
+          "count": 261
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 320,
+        "sampling_seed": 593097,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 22.226041793823242
+      }
+    },
+    {
+      "model_name": "dmis-lab/biobert-base-cased-v1.2",
+      "clean_model_name": "dmis_lab_biobert_base_cased_v1.2",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -1637.2218449332286,
+        "mean_token_pll": -5.116318265416339,
+        "pseudo_perplexity": 166.7204179427788,
+        "domain_token_pll": {
+          "sum": -469.0037574339658,
+          "mean": -6.253383432452877,
+          "count": 75
+        },
+        "general_token_pll": {
+          "sum": -1168.2180874992628,
+          "mean": -4.768237091833726,
+          "count": 245
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 320,
+        "sampling_seed": 150997,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 21.62003207206726
+      }
+    },
+    {
+      "model_name": "nlpaueb/legal-bert-base-uncased",
+      "clean_model_name": "nlpaueb_legal_bert_base_uncased",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -1367.3677738986444,
+        "mean_token_pll": -4.273024293433264,
+        "pseudo_perplexity": 71.73826544312132,
+        "domain_token_pll": {
+          "sum": -338.5144011732191,
+          "mean": -5.289287518331548,
+          "count": 64
+        },
+        "general_token_pll": {
+          "sum": -1028.8533727254253,
+          "mean": -4.0189584872086925,
+          "count": 256
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 320,
+        "sampling_seed": 683123,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 21.569546937942505
+      }
+    },
+    {
+      "model_name": "allenai/scibert_scivocab_uncased",
+      "clean_model_name": "allenai_scibert_scivocab_uncased",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -1308.3752918670652,
+        "mean_token_pll": -4.088672787084579,
+        "pseudo_perplexity": 59.66065674077396,
+        "domain_token_pll": {
+          "sum": -318.3274064377765,
+          "mean": -4.4834845977151625,
+          "count": 71
+        },
+        "general_token_pll": {
+          "sum": -990.0478854292887,
+          "mean": -3.9760959254188304,
+          "count": 249
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 320,
+        "sampling_seed": 735044,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 20.799936532974243
+      }
+    },
+    {
+      "model_name": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "clean_model_name": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -1656.019877951796,
+        "mean_token_pll": -5.175062118599362,
+        "pseudo_perplexity": 176.80759697559455,
+        "domain_token_pll": {
+          "sum": -540.6591908931732,
+          "mean": -6.931528088374016,
+          "count": 78
+        },
+        "general_token_pll": {
+          "sum": -1115.3606870586227,
+          "mean": -4.608928458919928,
+          "count": 242
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 320,
+        "sampling_seed": 649776,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 21.029309511184692
+      }
+    },
+    {
+      "model_name": "roberta-base",
+      "clean_model_name": "roberta_base",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -937.4626812318165,
+        "mean_token_pll": -2.9295708788494266,
+        "pseudo_perplexity": 18.719595798379455,
+        "domain_token_pll": {
+          "sum": -214.59168091465835,
+          "mean": -2.189711029741412,
+          "count": 98
+        },
+        "general_token_pll": {
+          "sum": -722.8710003171582,
+          "mean": -3.256175677104316,
+          "count": 222
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 320,
+        "sampling_seed": 517534,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 28.379992723464966
+      }
+    },
+    {
+      "model_name": "answerdotai/ModernBERT-base",
+      "clean_model_name": "answerdotai_ModernBERT_base",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -840.2492289401434,
+        "mean_token_pll": -2.625778840437948,
+        "pseudo_perplexity": 13.815329934634123,
+        "domain_token_pll": {
+          "sum": -230.66866388181552,
+          "mean": -2.7137489868448883,
+          "count": 85
+        },
+        "general_token_pll": {
+          "sum": -609.5805650583279,
+          "mean": -2.5939598513120337,
+          "count": 235
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 320,
+        "sampling_seed": 505802,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 37.39987850189209
+      }
+    },
+    {
+      "model_name": "bert-base-uncased",
+      "clean_model_name": "bert_base_uncased",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -769.940106811322,
+        "mean_token_pll": -2.9387026977531376,
+        "pseudo_perplexity": 18.891322653071356,
+        "domain_token_pll": {
+          "sum": -189.16706610642723,
+          "mean": -2.591329672690784,
+          "count": 73
+        },
+        "general_token_pll": {
+          "sum": -580.7730407048948,
+          "mean": -3.0728732312428297,
+          "count": 189
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 262,
+        "sampling_seed": 10730,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 15.383172273635864
+      }
+    },
+    {
+      "model_name": "dmis-lab/biobert-base-cased-v1.2",
+      "clean_model_name": "dmis_lab_biobert_base_cased_v1.2",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -1173.7173617391381,
+        "mean_token_pll": -4.429122119770333,
+        "pseudo_perplexity": 83.85776751112104,
+        "domain_token_pll": {
+          "sum": -410.57483661640435,
+          "mean": -4.414783189423702,
+          "count": 93
+        },
+        "general_token_pll": {
+          "sum": -763.1425251227338,
+          "mean": -4.436875146062405,
+          "count": 172
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 265,
+        "sampling_seed": 772169,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 15.452189207077026
+      }
+    },
+    {
+      "model_name": "nlpaueb/legal-bert-base-uncased",
+      "clean_model_name": "nlpaueb_legal_bert_base_uncased",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -1050.376027495542,
+        "mean_token_pll": -3.9193135354311273,
+        "pseudo_perplexity": 50.36585853094471,
+        "domain_token_pll": {
+          "sum": -319.03085121134063,
+          "mean": -3.8906201367236664,
+          "count": 82
+        },
+        "general_token_pll": {
+          "sum": -731.3451762842014,
+          "mean": -3.9319633133559218,
+          "count": 186
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 268,
+        "sampling_seed": 749863,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 15.342129707336426
+      }
+    },
+    {
+      "model_name": "allenai/scibert_scivocab_uncased",
+      "clean_model_name": "allenai_scibert_scivocab_uncased",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -1009.8009718030225,
+        "mean_token_pll": -3.7539069583755484,
+        "pseudo_perplexity": 42.687535048353176,
+        "domain_token_pll": {
+          "sum": -319.16881636646576,
+          "mean": -3.6686070846720202,
+          "count": 87
+        },
+        "general_token_pll": {
+          "sum": -690.6321554365568,
+          "mean": -3.794682172728334,
+          "count": 182
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 269,
+        "sampling_seed": 781345,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 15.192524194717407
+      }
+    },
+    {
+      "model_name": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "clean_model_name": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -1350.9325883155689,
+        "mean_token_pll": -5.02205423165639,
+        "pseudo_perplexity": 151.7226573741428,
+        "domain_token_pll": {
+          "sum": -578.4376985505223,
+          "mean": -5.902425495413493,
+          "count": 98
+        },
+        "general_token_pll": {
+          "sum": -772.4948897650465,
+          "mean": -4.51751397523419,
+          "count": 171
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 269,
+        "sampling_seed": 737,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 15.35506272315979
+      }
+    },
+    {
+      "model_name": "roberta-base",
+      "clean_model_name": "roberta_base",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -808.5581161228765,
+        "mean_token_pll": -2.77855022722638,
+        "pseudo_perplexity": 16.09566896194668,
+        "domain_token_pll": {
+          "sum": -198.4958069169952,
+          "mean": -2.0050081506767192,
+          "count": 99
+        },
+        "general_token_pll": {
+          "sum": -610.0623092058813,
+          "mean": -3.1774078604472984,
+          "count": 192
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 291,
+        "sampling_seed": 948924,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 19.610586404800415
+      }
+    },
+    {
+      "model_name": "answerdotai/ModernBERT-base",
+      "clean_model_name": "answerdotai_ModernBERT_base",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "evaluated_doc_count": 10,
+      "pll_metrics": {
+        "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
+        "document_pll": -911.1345461138626,
+        "mean_token_pll": -3.120323788061173,
+        "pseudo_perplexity": 22.65371345776938,
+        "domain_token_pll": {
+          "sum": -196.83003918473696,
+          "mean": -2.3714462552377946,
+          "count": 83
+        },
+        "general_token_pll": {
+          "sum": -714.3045069291256,
+          "mean": -3.417724913536486,
+          "count": 209
+        },
+        "number_of_documents": 10,
+        "number_of_scored_tokens": 292,
+        "sampling_seed": 671271,
+        "max_length": 128,
+        "max_positions_per_document": 32,
+        "evaluation_time_sec": 42.19971799850464
+      }
+    }
+  ]
+}
