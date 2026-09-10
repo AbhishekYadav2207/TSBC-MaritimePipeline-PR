@@ -132,6 +132,10 @@ def classify_token_positions(
 
     No character-offset or span matching is used.
     """
+    if category_token_ids is None or not isinstance(category_token_ids, dict):
+        raise TypeError(
+            f"category_token_ids must be a non-null dictionary mapping category names to token ID sets, got {type(category_token_ids).__name__}"
+        )
 
     eligible_positions = []
 
@@ -504,7 +508,7 @@ def evaluate_sampled_pll(model, tokenizer, docs: list, vocab_terms: list, device
         return {}
 
     rng = random.Random(seed)
-    maritime_token_ids, rare_token_ids, _ = build_vocabulary_token_sets(tokenizer, vocab_terms)
+    maritime_token_ids, rare_token_ids, category_token_ids = build_vocabulary_token_sets(tokenizer, vocab_terms)
     vocab_terms_set = set(vocab_terms)
     rare_terms_set = set(RARE_MARITIME_TERMS)
 
@@ -550,7 +554,8 @@ def evaluate_sampled_pll(model, tokenizer, docs: list, vocab_terms: list, device
             eligible, rare_pos, mar_pos, gen_pos, _ = classify_token_positions(
                 doc_text, seq.tolist(), offsets_list, sp_mask,
                 vocab_terms_set, rare_terms_set,
-                maritime_token_ids, rare_token_ids
+                maritime_token_ids, rare_token_ids,
+                category_token_ids
             )
 
             if not eligible:
