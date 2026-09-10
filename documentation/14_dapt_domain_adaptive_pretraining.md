@@ -141,7 +141,7 @@ Frozen Upstream Artifact
 
 ## 6. Corpus Inspection
 
-Corpus analysis is executed by [inspect_corpus.py](file:///d:/CAIR/TSBC-Pipeline/dapt/scripts/inspect_corpus.py), calling functions in [corpus.py](file:///d:/CAIR/TSBC-Pipeline/dapt/src/corpus.py).
+Corpus analysis is executed by [inspect_corpus.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/scripts/inspect_corpus.py), calling functions in [corpus.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/corpus.py).
 
 ### Canonical Corpus Metrics (Derived from `corpus_manifest.json`)
 
@@ -176,7 +176,7 @@ Corpus analysis is executed by [inspect_corpus.py](file:///d:/CAIR/TSBC-Pipeline
 
 ## 7. Dataset Preparation
 
-Dataset preparation is managed by [prepare_dataset.py](file:///d:/CAIR/TSBC-Pipeline/dapt/scripts/prepare_dataset.py) using [dataset.py](file:///d:/CAIR/TSBC-Pipeline/dapt/src/dataset.py).
+Dataset preparation is managed by [prepare_dataset.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/scripts/prepare_dataset.py) using [dataset.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/dataset.py).
 
 ### Split Parameters
 - **Random Seed**: `42`
@@ -195,7 +195,7 @@ Dataset preparation is managed by [prepare_dataset.py](file:///d:/CAIR/TSBC-Pipe
 
 ## 8. Leakage-Free Splitting
 
-To ensure strict evaluation integrity, [dataset.py](file:///d:/CAIR/TSBC-Pipeline/dapt/src/dataset.py) executes exact line matching and 3-shingle overlap diagnostics between splits.
+To ensure strict evaluation integrity, [dataset.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/dataset.py) executes exact line matching and 3-shingle overlap diagnostics between splits.
 
 ### Leakage Diagnostic Results
 
@@ -224,7 +224,7 @@ To ensure strict evaluation integrity, [dataset.py](file:///d:/CAIR/TSBC-Pipelin
 
 ## 9. Tokenization
 
-Tokenization diagnostics are executed by [tokenize_corpus.py](file:///d:/CAIR/TSBC-Pipeline/dapt/scripts/tokenize_corpus.py) using [tokenizer.py](file:///d:/CAIR/TSBC-Pipeline/dapt/src/tokenizer.py).
+Tokenization diagnostics are executed by [tokenize_corpus.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/scripts/tokenize_corpus.py) using [tokenizer.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/tokenizer.py).
 
 ### Tokenizer Properties (Derived from `tokenizer_report.json`)
 
@@ -251,7 +251,7 @@ Tokenization diagnostics are executed by [tokenize_corpus.py](file:///d:/CAIR/TS
 
 Because the median document length is only $51.0$ tokens, feeding individual documents directly into ModernBERT's maximum context length ($L_{\max} = 512$) would result in over $90\%$ padding efficiency loss.
 
-To resolve this, [packing.py](file:///d:/CAIR/TSBC-Pipeline/dapt/src/packing.py) implements **Tokenizer-Aware Document Packing**:
+To resolve this, [packing.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/packing.py) implements **Tokenizer-Aware Document Packing**:
 
 $$\text{Stream} = \text{Doc}_1 + [\text{SEP}] + \text{Doc}_2 + [\text{SEP}] + \dots + \text{Doc}_N + [\text{SEP}]$$
 
@@ -265,7 +265,7 @@ $$\text{Stream} = \text{Doc}_1 + [\text{SEP}] + \text{Doc}_2 + [\text{SEP}] + \d
 
 ## 11. MLM Masking
 
-During training, packed token sequences are passed to [ModernBERTMaskDataCollator](file:///d:/CAIR/TSBC-Pipeline/dapt/src/masking.py), which implements 15% Bernoulli Masked Language Modeling:
+During training, packed token sequences are passed to [ModernBERTMaskDataCollator](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/masking.py), which implements 15% Bernoulli Masked Language Modeling:
 
 $$P(\text{mask}_{i}) = 0.15 \quad \forall i \in \{1, \dots, L\}$$
 
@@ -289,7 +289,7 @@ $$P(\text{mask}_{i}) = 0.15 \quad \forall i \in \{1, \dots, L\}$$
 
 ## 13. Training Procedure
 
-Training is executed by [train_dapt.py](file:///d:/CAIR/TSBC-Pipeline/dapt/scripts/train_dapt.py) via [DAPTTrainer](file:///d:/CAIR/TSBC-Pipeline/dapt/src/training.py).
+Training is executed by [train_dapt.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/scripts/train_dapt.py) via [DAPTTrainer](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/training.py).
 
 ### Hardware & Runtime Configuration
 - **Hardware Platform**: NVIDIA GPU (T4 / V100 / A100 runtime environment)
@@ -324,7 +324,7 @@ To maintain stable gradient variance without memory overflow on standard GPU VRA
 
 ## 16. Checkpointing & Resumption
 
-Checkpoint management is controlled by [CheckpointManager](file:///d:/CAIR/TSBC-Pipeline/dapt/src/checkpointing.py).
+Checkpoint management is controlled by [CheckpointManager](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/checkpointing.py).
 
 ### Save & Rotation Protocol
 - **Save Frequency**: Every 100 steps (`save_steps = 100`) and at final step completion.
@@ -335,7 +335,7 @@ Checkpoint management is controlled by [CheckpointManager](file:///d:/CAIR/TSBC-
 
 ## 17. Validation & Evaluation
 
-Validation is executed by [MLMEvaluator](file:///d:/CAIR/TSBC-Pipeline/dapt/src/evaluation.py) every 50 steps (`eval_steps = 50`) on the held-out validation set (`val.txt`).
+Validation is executed by [MLMEvaluator](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/evaluation.py) every 50 steps (`eval_steps = 50`) on the held-out validation set (`val.txt`).
 
 ### Mathematical Formulations
 
@@ -350,7 +350,7 @@ $$\text{PPL} = \exp(\mathcal{L}_{\text{MLM}})$$
 
 ## 18. Baseline Control
 
-To establish a strict empirical reference point, [evaluate_dapt.py](file:///d:/CAIR/TSBC-Pipeline/dapt/scripts/evaluate_dapt.py) evaluated the **untouched ModernBERT base model** (`answerdotai/ModernBERT-base`) on the exact same held-out validation split (`val.txt`) prior to DAPT.
+To establish a strict empirical reference point, [evaluate_dapt.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/scripts/evaluate_dapt.py) evaluated the **untouched ModernBERT base model** (`answerdotai/ModernBERT-base`) on the exact same held-out validation split (`val.txt`) prior to DAPT.
 
 ### Baseline Benchmark Results (Derived from `baseline-modernbert/evaluation_metrics.json`)
 
@@ -425,13 +425,13 @@ $$\Delta \text{PPL} = 4.6050 - 1.8062 = 2.7988 \quad (60.8\% \text{ perplexity r
 
 The `dapt/scripts/` directory contains 7 executable Python entrypoints:
 
-1. [inspect_corpus.py](file:///d:/CAIR/TSBC-Pipeline/dapt/scripts/inspect_corpus.py): Inspects `outputs/stage-08/maritime_corpus.txt`, computes cryptographic SHA-256 hash, line/word/char counts, vocabulary size, length distribution, and exports `corpus_manifest.json`.
-2. [prepare_dataset.py](file:///d:/CAIR/TSBC-Pipeline/dapt/scripts/prepare_dataset.py): Splits corpus into 90/5/5 train/val/test partitions using seed 42, runs exact and 3-shingle leakage checks, and exports `split_manifest.json`.
-3. [tokenize_corpus.py](file:///d:/CAIR/TSBC-Pipeline/dapt/scripts/tokenize_corpus.py): Resolves ModernBERT boundary token IDs (`50282`), computes subword fertility rate (1.6287), checks truncation, and exports `tokenizer_report.json`.
-4. [validate_dataset.py](file:///d:/CAIR/TSBC-Pipeline/dapt/scripts/validate_dataset.py): Validates split file integrity, line counts, and sequence packing efficiency.
-5. [train_dapt.py](file:///d:/CAIR/TSBC-Pipeline/dapt/scripts/train_dapt.py): Runs full DAPT training loop over 855 steps, performs periodic validation, manages checkpoint rotation, and exports `MaritimeBERT-v1`.
-6. [evaluate_dapt.py](file:///d:/CAIR/TSBC-Pipeline/dapt/scripts/evaluate_dapt.py): Evaluates baseline model or specified checkpoint on validation/test split, computing MLM loss and perplexity.
-7. [compare_runs.py](file:///d:/CAIR/TSBC-Pipeline/dapt/scripts/compare_runs.py): Reads baseline and DAPT evaluation JSONs, computes absolute and percentage deltas, and exports `comparison_report.json`.
+1. [inspect_corpus.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/scripts/inspect_corpus.py): Inspects `outputs/stage-08/maritime_corpus.txt`, computes cryptographic SHA-256 hash, line/word/char counts, vocabulary size, length distribution, and exports `corpus_manifest.json`.
+2. [prepare_dataset.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/scripts/prepare_dataset.py): Splits corpus into 90/5/5 train/val/test partitions using seed 42, runs exact and 3-shingle leakage checks, and exports `split_manifest.json`.
+3. [tokenize_corpus.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/scripts/tokenize_corpus.py): Resolves ModernBERT boundary token IDs (`50282`), computes subword fertility rate (1.6287), checks truncation, and exports `tokenizer_report.json`.
+4. [validate_dataset.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/scripts/validate_dataset.py): Validates split file integrity, line counts, and sequence packing efficiency.
+5. [train_dapt.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/scripts/train_dapt.py): Runs full DAPT training loop over 855 steps, performs periodic validation, manages checkpoint rotation, and exports `MaritimeBERT-v1`.
+6. [evaluate_dapt.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/scripts/evaluate_dapt.py): Evaluates baseline model or specified checkpoint on validation/test split, computing MLM loss and perplexity.
+7. [compare_runs.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/scripts/compare_runs.py): Reads baseline and DAPT evaluation JSONs, computes absolute and percentage deltas, and exports `comparison_report.json`.
 
 ---
 
@@ -439,19 +439,19 @@ The `dapt/scripts/` directory contains 7 executable Python entrypoints:
 
 The `dapt/src/` package contains 13 core modules:
 
-- [config.py](file:///d:/CAIR/TSBC-Pipeline/dapt/src/config.py): Dataclass definitions (`ModelConfig`, `DataConfig`, `TrainingConfig`, `MLMConfig`, `EvaluationConfig`, `SystemConfig`, `DAPTConfig`) and YAML loader.
-- [corpus.py](file:///d:/CAIR/TSBC-Pipeline/dapt/src/corpus.py): SHA-256 calculator, corpus statistics generator, and quality caveat detector.
-- [dataset.py](file:///d:/CAIR/TSBC-Pipeline/dapt/src/dataset.py): Deterministic split generator and shingle-based leakage diagnostic engine.
-- [tokenizer.py](file:///d:/CAIR/TSBC-Pipeline/dapt/src/tokenizer.py): Dynamic boundary token resolver and fertility/truncation analyzer.
-- [packing.py](file:///d:/CAIR/TSBC-Pipeline/dapt/src/packing.py): Continuous subword token stream packer.
-- [masking.py](file:///d:/CAIR/TSBC-Pipeline/dapt/src/masking.py): `ModernBERTMaskDataCollator` implementing 15% Bernoulli MLM masking.
-- [model.py](file:///d:/CAIR/TSBC-Pipeline/dapt/src/model.py): ModernBERT AutoModelForMaskedLM initializer.
-- [training.py](file:///d:/CAIR/TSBC-Pipeline/dapt/src/training.py): `DAPTTrainer` execution loop with micro-batching, optimizer stepping, and logging.
-- [evaluation.py](file:///d:/CAIR/TSBC-Pipeline/dapt/src/evaluation.py): `MLMEvaluator` for held-out validation and test scoring.
-- [metrics.py](file:///d:/CAIR/TSBC-Pipeline/dapt/src/metrics.py): Experiment manifest builder and metric comparison engine.
-- [checkpointing.py](file:///d:/CAIR/TSBC-Pipeline/dapt/src/checkpointing.py): `CheckpointManager` handling step saves, best model linking, and rotation limits.
-- [reproducibility.py](file:///d:/CAIR/TSBC-Pipeline/dapt/src/reproducibility.py): PyTorch, NumPy, and CUDA seed initializer.
-- [utils.py](file:///d:/CAIR/TSBC-Pipeline/dapt/src/utils.py): Path resolution helpers, logging setup, and JSON IO utilities.
+- [config.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/config.py): Dataclass definitions (`ModelConfig`, `DataConfig`, `TrainingConfig`, `MLMConfig`, `EvaluationConfig`, `SystemConfig`, `DAPTConfig`) and YAML loader.
+- [corpus.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/corpus.py): SHA-256 calculator, corpus statistics generator, and quality caveat detector.
+- [dataset.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/dataset.py): Deterministic split generator and shingle-based leakage diagnostic engine.
+- [tokenizer.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/tokenizer.py): Dynamic boundary token resolver and fertility/truncation analyzer.
+- [packing.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/packing.py): Continuous subword token stream packer.
+- [masking.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/masking.py): `ModernBERTMaskDataCollator` implementing 15% Bernoulli MLM masking.
+- [model.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/model.py): ModernBERT AutoModelForMaskedLM initializer.
+- [training.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/training.py): `DAPTTrainer` execution loop with micro-batching, optimizer stepping, and logging.
+- [evaluation.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/evaluation.py): `MLMEvaluator` for held-out validation and test scoring.
+- [metrics.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/metrics.py): Experiment manifest builder and metric comparison engine.
+- [checkpointing.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/checkpointing.py): `CheckpointManager` handling step saves, best model linking, and rotation limits.
+- [reproducibility.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/reproducibility.py): PyTorch, NumPy, and CUDA seed initializer.
+- [utils.py](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/src/utils.py): Path resolution helpers, logging setup, and JSON IO utilities.
 
 ---
 

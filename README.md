@@ -10,7 +10,7 @@ A production-grade, publication-ready research and data engineering pipeline des
 - **Corpus Generation**: Produces **96,714 cleaned natural language documents** (807 MB) and **5 multi-format representations** (Narrative, Key-Value, Template, JSON, Mixed).
 - **Semantic Scoring Engine**: Evaluates documents using a **9-feature weighted scoring formula** and exports 6 quantile-classified knowledge subsets (`high`, `medium`, `low`, `balanced`, `random`, `general_english`).
 - **Benchmarking Matrix**: Executes a **175-run Masked Language Model (MLM) evaluation grid** (7 representative model families $\times$ 5 representations $\times$ 5 knowledge subsets).
-- **Core Decision**: The objective decision engine selected **Strategy B: Train Domain-Specific MaritimeBERT Model From Scratch** due to high subword fragmentation (**63.47%**) and a significant domain adaptation performance gap on existing pre-trained general models.
+- **Core Decision**: The objective multi-criteria evidence hierarchy prescribes **Strategy A: Pretrained Encoder Initialization (answerdotai/ModernBERT-base) + Domain-Adaptive Pretraining (DAPT)** with **High Confidence** (100% bootstrap rank-1 frequency across 2,000 resamples, 0 pairwise defeats, non-dominated Pareto status), maintaining **bert-base-uncased** as the resource-constrained deployment alternative (2.6x faster latency, 26.6% fragmentation).
 
 ---
 
@@ -84,18 +84,18 @@ pipeline/
 │   ├── 08_export_corpus.py          # Plain text, JSONL corpus exports, SHA-256 manifest
 │   ├── 09_statistics.py             # Vocabulary entropy, TTR, sentence length profiling
 │   ├── 10_extract_vocabulary.py     # TF-IDF domain maritime term extraction
-│   ├── 11_corpus_representations.py# 5 Multi-format corpus representations generator
-│   ├── 12_semantic_importance.py    # 9-feature semantic importance scoring engine
+│   ├── 11_corpus_representations.py # 5 Multi-format corpus representations generator
+│   ├── 12_semantic_importance.py    # Domain informativeness scoring engine
 │   ├── 13_tokenizer_analysis.py     # Tokenizer fertility, coverage, and speed benchmarking
 │   ├── 14_mlm_evaluation.py         # 175-run MLM evaluation matrix grid
-│   ├── 15_cross_model_benchmarking.py # MUI composite scoring, leaderboard, & visualizations
-│   ├── 16_statistical_analysis.py   # Bootstrap CIs, paired t-tests, Cohen's d, feature ablation
-│   ├── 17_decision_engine.py       # Objective threshold decision engine & research report
+│   ├── 15_cross_model_benchmarking.py # MUI composite scoring, sensitivity, Pareto & leaderboard
+│   ├── 16_statistical_analysis.py   # Bootstrap CIs, paired t-tests, Wilcoxon, Cohen's d, feature ablation
+│   ├── 17_decision_engine.py        # Multi-criteria evidence decision engine & research report
 │   └── 18_lint_corpus.py            # Corpus regex quality linting engine
 ├── outputs/                         # Exported JSON, JSONL, CSV, PNG, and MD artifacts
-├── documentation/                   # 11 Detailed modular section guides
+├── documentation/                   # 15 Detailed modular section guides & appendices
 ├── run_pipeline.py                  # Master CLI orchestrator script
-├── DOCUMENTATION.md                 # Single-file master technical manual
+├── DOCUMENTATION.md                 # Single-file master technical manual & appendices
 └── README.md                        # Quick start & high-level architecture overview
 ```
 
@@ -118,7 +118,7 @@ pip install -r requirements.txt
 
 ## Pipeline Execution Guide
 
-The master CLI orchestrator [`run_pipeline.py`](file:///c:/--Files--/Programming/pipeline/run_pipeline.py) manages execution across all 18 stages.
+The master CLI orchestrator [`run_pipeline.py`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/run_pipeline.py) manages execution across all 18 stages.
 
 ### Run the Full Pipeline Sequentially
 ```bash
@@ -127,10 +127,13 @@ python run_pipeline.py
 
 ### Run an Individual Stage
 ```bash
-# Calculate MUI score and build model leaderboard
+# Calculate MUI score, sensitivity, Pareto frontier and leaderboard
 python run_pipeline.py --stage 15
 
-# Execute objective decision engine
+# Execute statistical significance tests and component ablation
+python run_pipeline.py --stage 16
+
+# Execute objective multi-criteria decision engine
 python run_pipeline.py --stage 17
 
 # Run automated corpus quality linting
@@ -141,18 +144,23 @@ python run_pipeline.py --stage 18
 
 ## Detailed Documentation Section Guides
 
-For exhaustive, in-depth technical documentation on specific components, refer to the dedicated section guides in [`documentation/`](file:///c:/--Files--/Programming/pipeline/documentation/):
+For exhaustive, in-depth technical documentation on specific components, refer to the dedicated section guides in [`documentation/`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/):
 
-1. **[00_overview_and_architecture.md](file:///c:/--Files--/Programming/pipeline/documentation/00_overview_and_architecture.md)**: System design, directory structure, master orchestrator setup.
-2. **[01_data_ingestion_and_preprocessing.md](file:///c:/--Files--/Programming/pipeline/documentation/01_data_ingestion_and_preprocessing.md)**: Stages 01–05a: Dictionary parsing, profiling, schema discovery, table merging, validation.
-3. **[02_corpus_generation_and_text_processing.md](file:///c:/--Files--/Programming/pipeline/documentation/02_corpus_generation_and_text_processing.md)**: Stages 06–10: Document synthesis, cleaning, plain text export, corpus stats, TF-IDF vocabulary.
-4. **[03_representations_and_semantic_importance.md](file:///c:/--Files--/Programming/pipeline/documentation/03_representations_and_semantic_importance.md)**: Stages 11–12: 5 multi-format representations, 9-feature scoring equation, 6 knowledge subsets.
-5. **[04_tokenizer_benchmarking.md](file:///c:/--Files--/Programming/pipeline/documentation/04_tokenizer_benchmarking.md)**: Stage 13: Multi-architecture tokenizer evaluation across 14 Hugging Face models.
-6. **[05_mlm_evaluation_matrix.md](file:///c:/--Files--/Programming/pipeline/documentation/05_mlm_evaluation_matrix.md)**: Stage 14: 175-run MLM evaluation matrix grid, 15% masking protocol, subfield category recall.
-7. **[06_cross_model_benchmarking_and_leaderboard.md](file:///c:/--Files--/Programming/pipeline/documentation/06_cross_model_benchmarking_and_leaderboard.md)**: Stage 15: Mathematical MUI Score formula, ranked model leaderboard, high-res visualization plots.
-8. **[07_statistical_analysis_and_ablation.md](file:///c:/--Files--/Programming/pipeline/documentation/07_statistical_analysis_and_ablation.md)**: Stage 16: Bootstrap CIs, paired t-tests, Wilcoxon, Cohen's d, Cliff's delta, feature ablation.
-9. **[08_decision_engine_and_research_report.md](file:///c:/--Files--/Programming/pipeline/documentation/08_decision_engine_and_research_report.md)**: Stage 17–18: Pretraining strategy decision engine (Strategy A, B, C), research report, regex linting.
-10. **[09_output_artifacts_and_files_registry.md](file:///c:/--Files--/Programming/pipeline/documentation/09_output_artifacts_and_files_registry.md)**: Comprehensive registry of all 30 output files in `outputs/` with schemas and sample records.
-11. **[10_research_achievements_and_mlm_benchmark_report.md](file:///c:/--Files--/Programming/pipeline/documentation/10_research_achievements_and_mlm_benchmark_report.md)**: In-depth research synthesis of achievements, tokenizer selection/pruning rationale, 175-run MLM outputs, MUI leaderboard, and pretraining roadmap.
+1. **[00_master_index.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/00_master_index.md)**: Master architecture, orchestrator sequence, configuration reference, and global API index.
+2. **[01_phase1_data_identification_and_mapping.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/01_phase1_data_identification_and_mapping.md)**: Stages 01–04: Dictionary parsing, dataset profiling, relationship discovery, semantic column selection.
+3. **[02_phase2_raw_data_preparation.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/02_phase2_raw_data_preparation.md)**: Stages 05–05a: Hierarchical left outer table merging, placeholder synthesis, record validation.
+4. **[03_phase3_document_generation.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/03_phase3_document_generation.md)**: Stage 06: Deterministic multi-template narrative generation, vessel, casualty, equipment clause builders.
+5. **[04_phase4_corpus_cleaning_and_export.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/04_phase4_corpus_cleaning_and_export.md)**: Stages 07–08: Administrative noise scrubbing, sentence deduplication, corpus export, SHA-256 manifest.
+6. **[05_phase5_corpus_quality_evaluation.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/05_phase5_corpus_quality_evaluation.md)**: Stages 09–10: Vocabulary entropy, shingle MinHash, domain vocabulary extraction via TF-IDF.
+7. **[06_phase6_semantic_importance_analysis.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/06_phase6_semantic_importance_analysis.md)**: Stages 11–12: 5 multi-format representations, 4-signal domain informativeness formula, 6 knowledge subsets.
+8. **[07_phase7_tokenizer_analysis.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/07_phase7_tokenizer_analysis.md)**: Stage 13: 14-tokenizer evaluation, subword fertility, fragmentation rate, redundancy clustering.
+9. **[08_phase8_mlm_evaluation.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/08_phase8_mlm_evaluation.md)**: Stage 14: 175-run Cartesian MLM evaluation matrix grid, random vs domain-aware masking, PLL pseudo-perplexity.
+10. **[09_phase9_benchmarking_decision_engine_and_final_reports.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/09_phase9_benchmarking_decision_engine_and_final_reports.md)**: Stages 15–18: Cross-model benchmarking, MUI sensitivity, Pareto dominance, statistical significance, objective decision engine, and corpus linting.
+11. **[10_appendix_a_corpus_results_stages_1_to_10.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/10_appendix_a_corpus_results_stages_1_to_10.md)**: Appendix A: Complete empirical schema metrics, merge reconciliation stats, and corpus distributions.
+12. **[11_appendix_b_model_evaluation_results_stages_11_to_18.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/11_appendix_b_model_evaluation_results_stages_11_to_18.md)**: Appendix B: Complete empirical benchmarks, 175-cell matrix tables, statistical tests, decision profiles, and lint gate results.
+13. **[12_glossary.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/12_glossary.md)**: Authoritative definitions of all maritime, NLP, and statistical domain concepts.
+14. **[13_research_traceability_matrix.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/13_research_traceability_matrix.md)**: Full bidirectional traceability between raw database columns, scripts, and evaluation metrics.
+15. **[14_dapt_domain_adaptive_pretraining.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/14_dapt_domain_adaptive_pretraining.md)**: Execution specifications and training configurations for the subsequent DAPT pretraining phase.
+
 #   T S B C - M a r i t i m e P i p e l i n e - P R  
  

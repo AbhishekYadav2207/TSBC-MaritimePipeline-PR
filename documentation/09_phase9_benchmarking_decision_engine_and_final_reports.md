@@ -259,73 +259,246 @@ Pareto analysis identifies models where no other model achieves superior capabil
   * *Advantages*: Maximum deployment throughput (**6.5 docs/sec**), lowest inference latency (**154.1ms**).
   * *Disadvantages*: Poor general maritime domain recovery (**24.65%** Top-1; high pseudo-perplexity $98.54$).
 
----
+## 3. Statistical Validation & Component Sensitivity Analysis (`scripts/16_statistical_analysis.py`)
 
-## 3. Statistical Significance & Feature Ablation (`scripts/16_statistical_analysis.py`)
+Stage 16 rigorously validates whether cross-model performance differences identified in Stage 15 are statistically reliable, quantifies their practical magnitude across matched benchmark configurations (5 representations $\times$ 5 knowledge subsets = 25 matched conditions), computes bootstrap confidence intervals and empirical rank distributions, evaluates structural condition robustness, and tests the sensitivity of Stage 12 document scoring to individual components.
 
-### 3.1 Parametric & Non-Parametric Hypothesis Testing
-To confirm that performance advantages observed in Stage 15 are statistically significant, Stage 16 computes:
-1. **Paired Student's t-test**:
-   $$t = \frac{\bar{d}}{s_d / \sqrt{n}}, \quad \bar{d} = \frac{1}{n} \sum_{i=1}^n (x_{1, i} - x_{2, i})$$
-2. **Wilcoxon Signed-Rank Test** (Non-parametric rank sum):
-   $$W = \min(W^+, W^-), \quad W^+ = \sum_{d_i > 0} \operatorname{rank}(|d_i|)$$
-3. **Effect Size Quantification**:
-   * **Cohen's $d$** (Parametric pooled standard deviation ratio):
-     $$d = \frac{\bar{X}_1 - \bar{X}_2}{s_{\text{pooled}}}, \quad s_{\text{pooled}} = \sqrt{\frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}}$$
-   * **Cliff's Delta ($\delta$)** (Non-parametric dominance probability):
-     $$\delta = \frac{\sum_{i=1}^{n_1} \sum_{j=1}^{n_2} \operatorname{sign}(x_{1, i} - x_{2, j})}{n_1 \cdot n_2}$$
-4. **Bootstrap 95% Confidence Intervals**:
-   * 1,000 non-parametric resamples with replacement computing empirical $2.5\%$ and $97.5\%$ percentiles.
-
-*Artifact Generated*: `outputs/stage-16/statistical_significance.json`
+### 3.1 Experimental Design & Matched Pairing
+Models are evaluated across 25 matched representation-by-subset benchmark conditions:
+* **Matched Benchmark Conditions ($N = 25$)**: Cartesian product of 5 representations (`json`, `key_value`, `mixed`, `narrative`, `template`) and 5 knowledge subsets (`balanced_knowledge`, `high_knowledge`, `low_knowledge`, `medium_knowledge`, `random_baseline`).
+* **Design Philosophy**: Evaluated configurations are treated as **paired benchmark evaluation configurations**, NOT independent datasets or replications. This avoids artificial degrees of freedom inflation.
+* **Primary Metric**: Top-1 Accuracy (`top1_acc`). Secondary validation: MLM Loss.
 
 ---
 
-## 4. Programmatic Decision Engine (`scripts/17_decision_engine.py`)
+### 3.2 Standardized Function Documentation
 
-Stage 17 ingests the Stage 15 leaderboard and evaluates empirical metrics against configurable decision thresholds:
-* **Threshold Rules**:
-  * Strategy A (DAPT Sufficient): Top-1 $\ge 85.0\%$ AND Gap $\le 5.0\%$ AND Frag $\le 20.0\%$.
-  * Strategy B (Train from Scratch Required): Top-1 $< 60.0\%$ OR Gap $> 20.0\%$ OR Frag $> 40.0\%$.
-  * Strategy C (Vocabulary-Extended DAPT): Intermediate domain gap with elevated fragmentation.
-* **Sensitivity Sweeps**: Executes $\pm 5.0\%$ and $\pm 10.0\%$ threshold perturbations to assess decision stability.
-* **Output Report**: Exports the final comprehensive markdown report (`outputs/stage-17/benchmark_report.md`).
+#### Function 1: `load_matched_benchmark_matrix`
+* **Purpose**: Ingests `outputs/stage-15/comparison.csv`, cleans non-finite records, and builds a pivot table indexed by matched condition `(representation, subset)` with candidate models as columns.
+* **Signature**: `(comparison_path: Path, primary_metric: str = "top1_acc") -> Tuple[pd.DataFrame, pd.DataFrame, List[str], List[Tuple[str, str]]]`
+* **Validation**: Drops incomplete conditions to ensure an identical, balanced evaluation across all 7 canonical models.
+
+#### Function 2: `run_friedman_global_test`
+* **Purpose**: Performs the non-parametric omnibus Friedman test across all matched benchmark configurations.
+* **Mathematical Formulation**:
+  $$\chi^2_F = \frac{12 N}{k(k+1)} \left[ \sum_{j=1}^k R_j^2 \right] - 3N(k+1)$$
+  where $N = 25$ matched conditions, $k = 7$ models, and $R_j = \frac{1}{N} \sum_{i=1}^N r_i^j$ is the average rank of model $j$.
+* **Outputs**: Returns global test dictionary and ranking summary dataframe.
+
+#### Function 3: `run_pairwise_comparisons`
+* **Purpose**: Executes matched pairwise Wilcoxon signed-rank tests and paired Student's $t$-tests across all 21 model combinations $\binom{7}{2}$.
+* **Multiple Testing Correction**: Controls Family-Wise Error Rate (FWER) using the step-down **Holm-Bonferroni** procedure:
+  $$p_{(i)} \le \frac{\alpha}{m - i + 1}, \quad \text{for } i = 1, \dots, m$$
+  where $m = 21$ comparisons and $\alpha = 0.05$. Also exports Benjamini-Hochberg False Discovery Rate (FDR).
+* **Formulations**:
+  $$W = \min\left(\sum_{d_i > 0} \operatorname{rank}(|d_i|), \;\; \sum_{d_i < 0} \operatorname{rank}(|d_i|)\right), \qquad t = \frac{\bar{d}}{s_d / \sqrt{n}}$$
+
+#### Function 4: `cliffs_delta` & `cohens_d_paired`
+* **Purpose**: Quantifies non-parametric dominance probability and parametric paired standardized mean difference.
+* **Formulations**:
+  $$\delta = \frac{\sum_{i=1}^n \sum_{j=1}^n \operatorname{sign}(x_{1, i} - x_{2, j})}{n^2}, \qquad d_z = \frac{\bar{d}}{s_d} = \frac{\frac{1}{n} \sum_{i=1}^n (x_{1, i} - x_{2, i})}{\sqrt{\frac{1}{n-1} \sum_{i=1}^n (d_i - \bar{d})^2}}$$
+* **Categorization Rules**:
+  * Cohen's $d_z$: Negligible ($< 0.2$), Small ($0.2 \le d < 0.5$), Medium ($0.5 \le d < 0.8$), Large ($\ge 0.8$).
+  * Cliff's $\delta$: Negligible ($< 0.147$), Small ($0.147 \le \delta < 0.33$), Medium ($0.33 \le \delta < 0.474$), Large ($\ge 0.474$).
+
+#### Function 5: `run_bootstrap_uncertainty_and_rank_stability`
+* **Purpose**: Resamples matched benchmark conditions with replacement ($B = 2,000$ iterations, seed = 42) to derive non-parametric 95% confidence intervals and empirical rank probability distributions ($P(\text{rank}=1), P(\text{rank}=2), \dots$).
+* **Outputs**: Returns bootstrap intervals dataframe, empirical rank distributions, and rank stability summary.
+
+#### Function 6: `run_condition_robustness`
+* **Purpose**: Slices the benchmark matrix across individual representations (5 slices) and subsets (5 slices), computing rank correlations (Spearman $\rho$, Kendall $\tau$) relative to the global benchmark hierarchy.
+
+#### Function 7: `run_stage12_ablation_sensitivity`
+* **Purpose**: Conducts leave-one-dimension-out sensitivity analysis on the Stage 12 Domain Informativeness Engine (`domain_relevance`, `information_content`, `tfidf_representativeness`, `redundancy_noise`).
+* **Metrics**: Calculates score shift ($\Delta_{\text{score}}$), rank correlations ($\rho, \tau$), top-20% selection overlap (Jaccard Index), and stratum transition retention across High, Medium, and Low knowledge tiers.
 
 ---
 
-## 5. Automated Corpus Quality Linter (`scripts/18_lint_corpus.py`)
+### 3.3 Empirical Statistical Results
 
-Stage 18 enforces an automated quality gate evaluating all clean documents against 5 compiled regex rules:
-1. `repeated_adjacent_words`: Catches unintentional word doubling (`the the`).
-2. `malformed_singular_plural`: Flags grammatical disagreement (`1 persons`).
-3. `administrative_leakage`: Detects lingering internal database codes (`formerly OccNo`).
-4. `awkward_phrasing`: Catches template syntax collisions (`sustained damaged`).
-5. `duplicated_list_items`: Flags redundant comma-separated items (`Radar, Radar`).
+#### Global Omnibus Hypothesis Test
+* **Statistical Test**: Friedman Chi-Square ($\chi^2$)
+* **Degrees of Freedom ($df$)**: 6
+* **Chi-Square Statistic ($\chi^2$)**: **127.9714**
+* **$p$-value**: **$3.4361 \times 10^{-25}$** ($p < 0.001$)
+* **Conclusion**: Null hypothesis rejected; model performance differences are statistically distinguishable across shared benchmark configurations.
 
-*Quality Gate Status*: Enforces `PASS` status when the corpus defect rate $< 0.50\%$.
-*Artifact Generated*: `outputs/stage-18/corpus_lint_report.json`
+#### Pairwise Comparison & Effect Size Findings
+Across 21 paired model comparisons:
+* **19 of 21 pairs (90.5%)** exhibit statistically significant differences after family-wise Holm-Bonferroni correction ($p_{\text{Holm}} < 0.05$).
+* **`answerdotai/ModernBERT-base` vs Competitors**:
+  * Outperforms all 6 evaluated competitors with statistical significance ($p_{\text{Holm}} \le 0.0295$).
+  * Demonstrates large effect sizes ($d_z > 3.70$, Cliff's $\delta = +1.00$) against `bert-base-uncased`, `scibert`, `legal-bert`, `biobert`, and `pubmedbert`.
+  * Demonstrates medium effect size ($d_z = +0.60$, Cliff's $\delta = +0.23$, $p_{\text{Holm}} = 0.0295$) against `roberta-base`.
+* **Insignificant Pairs**:
+  * `allenai/scibert_scivocab_uncased` vs `nlpaueb/legal-bert-base-uncased`: $p_{\text{Holm}} = 0.7915$, $d_z = -0.06$ (indistinguishable performance).
+  * `bert-base-uncased` vs `nlpaueb/legal-bert-base-uncased`: $p_{\text{Holm}} = 0.1806$, $d_z = -0.40$ (overlapping confidence intervals).
+
+#### Bootstrap Rank Stability Summary ($B = 2,000$ Resamples)
+* `answerdotai/ModernBERT-base`: **Mean Rank 1.00 ± 0.00**, **$P(\text{Rank}=1) = 100.0\%$**, 95% CI: `[0.6819, 0.7782]`. Decisive leader.
+* `roberta-base`: **Mean Rank 2.00 ± 0.00**, **$P(\text{Rank}=2) = 100.0\%$**, 95% CI: `[0.5501, 0.7033]`. Decisive runner-up.
+* `nlpaueb/legal-bert-base-uncased`: **Mean Rank 3.41 ± 0.53**, 95% CI: `[0.3023, 0.3619]`.
+* `allenai/scibert_scivocab_uncased`: **Mean Rank 3.62 ± 0.50**, 95% CI: `[0.2807, 0.3689]`.
+* `bert-base-uncased`: **Mean Rank 4.97 ± 0.19**, 95% CI: `[0.2536, 0.3373]`.
+* `dmis-lab/biobert-base-cased-v1.2`: **Mean Rank 6.00 ± 0.00**, 95% CI: `[0.2128, 0.3006]`.
+* `microsoft/BiomedNLP-PubMedBERT...`: **Mean Rank 7.00 ± 0.00**, 95% CI: `[0.1644, 0.2579]`.
+
+#### Stage 12 Component Sensitivity Summary
+* `redundancy_noise` ablation causes the greatest top-document selection disruption (Jaccard overlap drops to **0.5049**, only 67.1% high-tier retention), confirming the critical role of boilerplate filtering.
+* `information_content` ablation causes a uniform upward score shift (+0.1943) while preserving **88.75%** of top-tier selections.
+* `domain_relevance` and `tfidf_representativeness` maintain high rank correlations ($\rho \ge 0.8582$) with moderate borderline selection adjustments (Jaccard 0.6051–0.6684).
 
 ---
 
-## 6. Output Artifacts & Verification Commands
+## 4. Programmatic Decision Engine & Pretrained Model Selection (`scripts/17_decision_engine.py`)
 
-| Artifact Path | Format | Size | Description |
-| :--- | :--- | :---: | :--- |
-| `outputs/stage-15/comparison.csv` | CSV | 44.1 KB | Full 175-cell matrix evaluation records |
-| `outputs/stage-15/leaderboard.csv` | CSV | 1.1 KB | Ranked multi-criteria leaderboard |
-| `outputs/stage-15/stage15_model_profiles.csv` | CSV | 4.3 KB | Aggregated capability, fit, and operational metrics |
-| `outputs/stage-15/stage15_rankings.csv` | CSV | 1.6 KB | Representation and subset rank consistency breakdown |
-| `outputs/stage-15/stage15_mui_sensitivity.csv` | CSV | 666 B | 4-scenario sensitivity scores and win frequencies |
-| `outputs/stage-15/stage15_pareto.csv` | CSV | 1.9 KB | Non-dominated Pareto frontier classification table |
-| `outputs/stage-15/stage15_selection_decision.json` | JSON | 4.1 KB | Final model selection decision and trade-off summary |
-| `outputs/stage-15/stage15_report.md` | Markdown | 9.2 KB | Standalone Stage 15 research report |
-| `outputs/stage-15/visualizations/*.png` | PNG | ~1.5 MB | 6 publication figures (loss, ranks, radar, heatmap, pareto, sensitivity) |
+Stage 17 synthesizes empirical evidence from Stage 15 (MUI, Pareto optimality, sensitivity) and Stage 16 (statistical significance, effect sizes, bootstrap stability) into an objective, defensible model selection decision.
 
-### Verification Commands
+### 4.1 8-Layer Evidence Priority Hierarchy
+Rather than relying on arbitrary composite scores or rigid hard thresholds, Stage 17 applies an 8-layer transparent evidence priority hierarchy:
+1. **Primary Benchmark Capability**: Masked Language Modeling loss (lower is better) and Top-1 accuracy (higher is better).
+2. **Domain-Specific Capability**: Specialized nautical vocabulary recovery and domain shift performance gap.
+3. **Statistical Significance**: Holm-Bonferroni adjusted pairwise Wilcoxon test results and paired effect sizes.
+4. **Bootstrap Rank Stability**: Empirical rank-1 frequency ($P(\text{rank}=1)$), bootstrap mean rank, and rank variance across 2,000 resamples.
+5. **Representation Invariance**: Rank standard deviation ($\sigma$) across all 5 corpus representations.
+6. **Subset Consistency**: Rank standard deviation ($\sigma$) across all 5 domain knowledge tiers.
+7. **Pareto Dominance Status**: Non-dominated Pareto optimality versus dominated classification.
+8. **Operational Resource Trade-offs**: Inference latency, parameter count, disk footprint, and subword fragmentation rate.
+
+---
+
+### 4.2 Standardized Function Documentation
+
+#### Function 1: `build_evidence_profiles`
+* **Purpose**: Assembles unified multi-source profiles for all candidate models by joining Stage 15 and Stage 16 artifacts without fabrication.
+* **Inputs**: DataFrames from `leaderboard.csv`, `stage15_model_profiles.csv`, `stage15_rankings.csv`, `stage15_mui_sensitivity.csv`, `stage15_pareto.csv`, `stage16_rank_stability.csv`, `stage16_bootstrap.csv`, `stage16_pairwise_tests.csv`, `stage16_effect_sizes.csv`.
+* **Outputs**: Dictionary mapping model names to structured evidence profiles.
+
+#### Function 2: `classify_candidate_status`
+* **Purpose**: Categorizes candidate models into three defensible tiers:
+  * **Strong Candidate**: Non-dominated Pareto status AND Top-1 $\ge 50\%$ AND bootstrap mean rank $\le 2.5$.
+  * **Competitive Candidate**: Non-dominated Pareto status AND Top-1 $\ge 30\%$ AND bootstrap mean rank $\le 4.5$.
+  * **Weak Candidate**: Dominated Pareto status OR low accuracy / high rank.
+
+#### Function 3: `evaluate_selection_baselines`
+* **Purpose**: Simulates what candidate model would be selected under simple single-objective strategies to verify decision robustness.
+* **Evaluated Baselines**: Canonical reference, pure Top-1 accuracy, pure MLM loss, pure rare accuracy, pure tokenizer fragmentation, and baseline MUI.
+
+#### Function 4: `run_evidence_decision_hierarchy`
+* **Purpose**: Executes deterministic evidence-based ranking using sort key `(status_rank, pareto_penalty, bootstrap_mean_rank, mlm_loss, -top1_acc)` and assigns qualitative decision confidence.
+* **Confidence Criteria**: High confidence requires bootstrap $P(\text{rank}=1) \ge 80\%$, mean rank $\le 1.5$, zero pairwise defeats, and confirmed Pareto optimality.
+
+#### Function 5: `generate_selection_csv` & `generate_decision_report_md`
+* **Purpose**: Generates tabular summaries (`outputs/stage-17/stage17_model_selection.csv`), structured JSON (`outputs/stage-17/stage17_selection_rationale.json`), and exports the 10-section master decision report (`outputs/stage-17/stage17_decision_report.md`).
+* **Backward Compatibility**: Simultaneously writes `outputs/stage-17/decision_summary.json` and `outputs/stage-17/benchmark_report.md` to preserve existing downstream contracts.
+
+---
+
+### 4.3 Candidate Classification & Strategic Decision
+
+#### Candidate Status Classification Table
+| Model Identifier | Candidate Tier | Top-1 Accuracy | Intrinsic Loss | Bootstrap Mean Rank | $P(\text{Rank}=1)$ | Pareto Frontier | Assigned Role |
+| :--- | :--- | :---: | :---: | :---: | :---: | :--- | :--- |
+| `answerdotai/ModernBERT-base` | **Strong Candidate** | **73.05%** | **1.4386** | **1.00** | **100.0%** | **Pareto-Optimal** | **Primary DAPT Candidate** |
+| `roberta-base` | **Strong Candidate** | 63.32% | 1.9490 | 2.00 | 0.0% | **Pareto-Optimal** | Capability Runner-Up |
+| `nlpaueb/legal-bert-base-uncased` | **Competitive Candidate**| 33.05% | 4.0853 | 3.41 | 0.0% | **Pareto-Optimal** | Evaluated Competitor |
+| `allenai/scibert_scivocab_uncased` | **Competitive Candidate**| 32.62% | 4.2064 | 3.62 | 0.0% | **Pareto-Optimal** | Evaluated Competitor |
+| `bert-base-uncased` | **Weak Candidate** | 29.73% | 4.6164 | 4.97 | 0.0% | **Pareto-Optimal** | **Resource-Constrained Alternative** |
+| `dmis-lab/biobert-base-cased-v1.2` | **Weak Candidate** | 25.78% | 4.7867 | 6.00 | 0.0% | Dominated | Evaluated Competitor |
+| `microsoft/BiomedNLP-PubMedBERT...`| **Weak Candidate** | 21.20% | 5.7246 | 7.00 | 0.0% | Dominated | Evaluated Competitor |
+
+#### Executive Pretraining Prescription
+1. **Primary Strategy Recommendation**:
+   * **`Strategy A: Pretrained Encoder Initialization (answerdotai/ModernBERT-base) + Domain-Adaptive Pretraining (DAPT)`**
+   * **Decision Confidence**: **High**
+   * **Defensible Rationale**: Converging multi-source empirical evidence confirms ModernBERT achieves highest contextual language representation (73.05% Top-1, 1.4386 Loss), 100% bootstrap rank-1 frequency across 2,000 resamples, statistically significant pairwise superiority over all 6 competitors with zero pairwise defeats, and non-dominated Pareto optimality.
+2. **Resource-Constrained Deployment Alternative**:
+   * **`bert-base-uncased`**
+   * **Operational Trade-offs**: Incurs lower parameter count (110M vs 149M), faster inference latency (21.4ms vs 35.0ms), and substantially lower subword tokenizer fragmentation (26.57% vs 62.99%). Recommended for edge deployment budgets where latency overrides representation depth.
+
+---
+
+## 5. Automated Corpus Quality Linting (`scripts/18_lint_corpus.py`)
+
+Stage 18 implements an automated quality verification gate ensuring that all synthesized documents meet grammatical, syntactic, and administrative standards prior to pretraining distribution.
+
+### 5.1 Quality Lint Rules & Whitelist Mechanics
+The linter parses all 96,869 clean documents in `outputs/stage-07/clean_documents.jsonl` against 5 compiled regular expressions:
+1. `repeated_adjacent_words` (`\b([a-zA-Z]{3,})\s+\1\b`):
+   * Detects unintentional duplicate tokens (e.g. `the the`, `vessel vessel`).
+   * *Whitelist Exception*: Legitimate repetitive English words (`that`, `had`, `was`, `york`, `long`, `far`) are explicitly exempted to prevent false positives.
+2. `malformed_singular_plural` (`\b1\s+(?:persons|injuries|fatalities|deaths|missing persons)\b`):
+   * Catches numerical-noun agreement errors arising from template variable interpolation (e.g. `1 persons` instead of `1 person`).
+3. `administrative_leakage` (`(?i)(?:formerly\s*occno|extraction\s+status\s+pending|record\s+id\s*:?\s*\d+)`):
+   * Ensures internal MARSIS tracking tags and data warehouse codes do not leak into training text.
+4. `awkward_phrasing` (`(?i)(?:carried\s+featured|sustained\s+damaged|damaged\s+damage)`):
+   * Catches syntactic collisions between narrative field concatenations.
+5. `duplicated_list_items` (`\b([a-zA-Z\s]+),\s+\1\b`):
+   * Flags duplicate items in comma-separated lists (e.g. `Radar, Radar`).
+
+### 5.2 Quality Gate Thresholds & Verification Status
+* **Quality Gate Threshold**: Violation rate $< 0.500\%$ of total corpus records ($0.005$).
+* **Empirical Results**:
+  * Total documents linted: **96,869**
+  * Total violations detected: **193**
+  * Corpus violation rate: **0.199%**
+  * Quality Gate Status: **`PASS`**
+* **Violation Breakdown**:
+  * `repeated_adjacent_words`: 161 (0.166%) — Inspection reveals $> 85\%$ are legitimate geographic place names (e.g., *Bella Bella, BC*) or vessel proper names (*SAR Vessel Lumba Lumba*).
+  * `malformed_singular_plural`: **0 (0.000%)** — Perfect numerical grammatical agreement across the corpus.
+  * `administrative_leakage`: **0 (0.000%)** — Complete sanitization of database tracking metadata.
+  * `awkward_phrasing`: 3 (0.003%) — Minor free-text entry collisions (e.g., *sustained damaged*).
+  * `duplicated_list_items`: 29 (0.030%) — Consecutive action clauses in narrative free text.
+
+---
+
+## 6. Complete Output Artifacts Registry & Verification Commands
+
+### Complete Registry of Phase 9 Artifacts
+
+| Output Artifact Path | Category | Format | Size | Description & Strategic Downstream Usage |
+| :--- | :--- | :---: | :---: | :--- |
+| `outputs/stage-15/comparison.csv` | Benchmarking | CSV | 44.1 KB | Complete 175-cell matrix evaluation records across 7 models |
+| `outputs/stage-15/leaderboard.csv` | Benchmarking | CSV | 1.1 KB | Direction-normalized MUI leaderboard and ranked metrics |
+| `outputs/stage-15/stage15_model_profiles.csv` | Profiles | CSV | 4.3 KB | Aggregated capability, domain fit, and operational metrics |
+| `outputs/stage-15/stage15_rankings.csv` | Robustness | CSV | 1.6 KB | Representation and subset rank consistency breakdowns |
+| `outputs/stage-15/stage15_mui_sensitivity.csv` | Sensitivity | CSV | 666 B | 4-scenario weighting sensitivity scores and win frequencies |
+| `outputs/stage-15/stage15_pareto.csv` | Pareto | CSV | 1.9 KB | Non-dominated Pareto frontier classification table |
+| `outputs/stage-15/stage15_selection_decision.json` | Decision | JSON | 4.1 KB | Stage 15 multi-criteria model selection decision |
+| `outputs/stage-15/stage15_report.md` | Documentation | Markdown | 9.2 KB | Standalone Stage 15 publication research report |
+| `outputs/stage-15/visualizations/*.png` | Visualizations | PNG | ~1.5 MB | 6 publication-grade high-res benchmark plots |
+| `outputs/stage-16/stage16_global_tests.csv` | Statistical | CSV | 238 B | Omnibus Friedman Chi-Square test statistics and p-value |
+| `outputs/stage-16/stage16_pairwise_tests.csv` | Statistical | CSV | 3.7 KB | 21-pair Wilcoxon and paired t-test results with Holm correction |
+| `outputs/stage-16/stage16_effect_sizes.csv` | Statistical | CSV | 3.4 KB | Parametric Cohen's $d_z$ and non-parametric Cliff's $\delta$ |
+| `outputs/stage-16/stage16_bootstrap.csv` | Uncertainty | CSV | 3.0 KB | Bootstrap mean 95% confidence intervals (2,000 resamples) |
+| `outputs/stage-16/stage16_rank_stability.csv` | Stability | CSV | 507 B | Empirical rank distributions and $P(\text{rank}=1)$ probabilities |
+| `outputs/stage-16/stage16_condition_robustness.csv` | Robustness | CSV | 1.1 KB | Representation and subset ranking concordance ($\rho, \tau$) |
+| `outputs/stage-16/stage16_ablation.csv` | Ablation | CSV | 798 B | Stage 12 scoring signal sensitivity and top-20% Jaccard overlap |
+| `outputs/stage-16/stage16_ablation_stability.csv` | Ablation | CSV | 377 B | Stage 12 tier retention and stratum transition percentages |
+| `outputs/stage-16/stage16_final_report.md` | Documentation | Markdown | 18.5 KB | Master Stage 16 statistical validation research report |
+| `outputs/stage-16/statistical_significance.json` | Integration | JSON | 11.6 KB | Structured statistical metrics consumed by Stage 17 |
+| `outputs/stage-16/ablation_study.json` | Integration | JSON | 2.6 KB | Structured scoring ablation data consumed by Stage 17 |
+| `outputs/stage-17/stage17_model_selection.csv` | Decision | CSV | 2.5 KB | Candidate model status, capability, bootstrap, and roles |
+| `outputs/stage-17/stage17_selection_rationale.json` | Decision | JSON | 5.6 KB | Structured selection rationale, baseline comparisons, and trade-offs |
+| `outputs/stage-17/stage17_decision_report.md` | Documentation | Markdown | 11.2 KB | Publication-grade 10-section evidence synthesis report |
+| `outputs/stage-17/decision_summary.json` | Backward Compat| JSON | 2.4 KB | Canonical strategy decision summary contract |
+| `outputs/stage-17/benchmark_report.md` | Backward Compat| Markdown | 11.2 KB | Canonical master benchmark report contract |
+| `outputs/stage-17/experiment_metadata.json` | Metadata | JSON | 345 B | Reproducibility metadata and execution timestamps |
+| `outputs/stage-18/corpus_lint_report.json` | Quality Gate | JSON | 3.5 KB | 5-rule regex violation counts, defect rates, samples, PASS status |
+
+---
+
+### Verification CLI Commands
+Verify Phase 9 outcomes programmatically using the following commands:
+
 ```bash
-# Verify ModernBERT won baseline MUI and sensitivity
-python -c "import json; d = json.load(open('outputs/stage-15/stage15_selection_decision.json')); print('Recommended Model:', d['recommended_model']); print('Baseline MUI:', d['selection_metrics']['baseline_mui'])"
+# 1. Verify Omnibus Friedman significance and top bootstrap leader
+python -c "import pandas as pd; df_g = pd.read_csv('outputs/stage-16/stage16_global_tests.csv'); df_b = pd.read_csv('outputs/stage-16/stage16_rank_stability.csv'); print('Friedman p-value:', df_g['p_value'].values[0]); print('Rank 1 Model:', df_b.loc[df_b['p_rank_1'] > 0.9, 'model_name'].values[0])"
 
-# Display Pareto frontier summary
-python -c "import pandas as pd; df = pd.read_csv('outputs/stage-15/stage15_pareto.csv'); print(df[['model_name', 'pareto_status', 'dominates_count', 'dominated_by_count']])"
+# 2. Verify Stage 17 Pretraining Strategy Prescription & Confidence
+python -c "import json; d = json.load(open('outputs/stage-17/decision_summary.json')); print('Strategy:', d['strategy']); print('Selected Model:', d['selected_model']); print('Confidence:', d['decision_confidence'])"
+
+# 3. Verify Stage 18 Automated Corpus Quality Gate Status
+python -c "import json; d = json.load(open('outputs/stage-18/corpus_lint_report.json')); print('Lint Status:', d['status']); print('Violation Rate:', d['violation_rate']); print('Total Violations:', d['total_violations'])"
 ```
+

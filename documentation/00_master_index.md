@@ -210,69 +210,79 @@ Below is the master API index mapping every script, function, signature, return 
 
 | Script | Function / Symbol | Signature | Returns | Exceptions | Dependencies |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `pipeline_utils.py` | [get_project_root](file:///c:/--Files--/Programming/pipeline/scripts/pipeline_utils.py#L8) | `() -> Path` | `Path` | None | `pathlib.Path` |
-| `pipeline_utils.py` | [load_config](file:///c:/--Files--/Programming/pipeline/scripts/pipeline_utils.py#L13) | `() -> dict` | `dict` | `FileNotFoundError`, `json.JSONDecodeError` | `json`, `pathlib` |
-| `pipeline_utils.py` | [setup_logging](file:///c:/--Files--/Programming/pipeline/scripts/pipeline_utils.py#L23) | `(stage_name: str) -> logging.Logger` | `Logger` | `OSError` | `logging`, `sys` |
-| `pipeline_utils.py` | [read_csv_safe](file:///c:/--Files--/Programming/pipeline/scripts/pipeline_utils.py#L60) | `(file_path: Path, **kwargs) -> pd.DataFrame` | `DataFrame` | `IOError` | `pandas` |
-| `pipeline_utils.py` | [detect_datasets](file:///c:/--Files--/Programming/pipeline/scripts/pipeline_utils.py#L113) | `() -> dict` | `dict` | `FileNotFoundError` | `pathlib` |
-| `text_sanitizer.py` | [strip_administrative_noise](file:///c:/--Files--/Programming/pipeline/scripts/text_sanitizer.py#L14) | `(text: str) -> str` | `str` | None | `re` |
-| `text_sanitizer.py` | [join_words_grammatical](file:///c:/--Files--/Programming/pipeline/scripts/text_sanitizer.py#L30) | `(words: list, conjunction: str="and") -> str` | `str` | None | None |
-| `text_sanitizer.py` | [format_cargo_description](file:///c:/--Files--/Programming/pipeline/scripts/text_sanitizer.py#L43) | `(cargo_prod: str, cargo_qty=None) -> str` | `str` | None | None |
-| `text_sanitizer.py` | [format_damage_description](file:///c:/--Files--/Programming/pipeline/scripts/text_sanitizer.py#L59) | `(degree: str, location: str=None) -> str` | `str` | None | None |
-| `text_sanitizer.py` | [format_casualty_count](file:///c:/--Files--/Programming/pipeline/scripts/text_sanitizer.py#L80) | `(count: int, singular: str, plural: str) -> str` | `str` | None | None |
-| `01_parse_dictionary.py` | [map_display_columns](file:///c:/--Files--/Programming/pipeline/scripts/01_parse_dictionary.py#L9) | `(df_dict: pd.DataFrame) -> tuple` | `(dict, dict)` | None | `pandas` |
-| `01_parse_dictionary.py` | [categorize_column](file:///c:/--Files--/Programming/pipeline/scripts/01_parse_dictionary.py#L80) | `(col_name: str, desc: str, table_name: str) -> str` | `str` | None | None |
-| `02_profile_dataset.py` | [profile_table](file:///c:/--Files--/Programming/pipeline/scripts/02_profile_dataset.py#L11) | `(file_path: Path) -> dict` | `dict` | Exception caught | `pandas` |
-| `02_profile_dataset.py` | [infer_foreign_keys](file:///c:/--Files--/Programming/pipeline/scripts/02_profile_dataset.py#L65) | `(profile_report: dict) -> dict` | `dict` | None | None |
-| `03_discover_relationships.py` | [build_relationship_graph](file:///c:/--Files--/Programming/pipeline/scripts/03_discover_relationships.py#L9) | `(profiling_report: dict) -> dict` | `dict` | None | `networkx` |
-| `04_select_semantic_columns.py` | [select_columns](file:///c:/--Files--/Programming/pipeline/scripts/04_select_semantic_columns.py#L8) | `(metadata: dict) -> dict` | `dict` | None | None |
-| `05_merge_tables.py` | [aggregate_dataframe](file:///c:/--Files--/Programming/pipeline/scripts/05_merge_tables.py#L11) | `(df: pd.DataFrame, key_col, cols_meta: dict) -> pd.DataFrame` | `DataFrame` | None | `pandas`, `numpy` |
-| `05_merge_tables.py` | [normalize_label](file:///c:/--Files--/Programming/pipeline/scripts/05_merge_tables.py#L194) | `(val: str) -> str` | `str` | None | `re` |
-| `05_merge_tables.py` | [deduplicate_child_records](file:///c:/--Files--/Programming/pipeline/scripts/05_merge_tables.py#L221) | `(records_list: list, table_type: str) -> list` | `list` | None | None |
-| `05a_validate_records.py` | [validate_raw_ids](file:///c:/--Files--/Programming/pipeline/scripts/05a_validate_records.py#L10) | `(datasets: dict) -> dict` | `dict` | None | `pandas` |
-| `05a_validate_records.py` | [validate_merged_records](file:///c:/--Files--/Programming/pipeline/scripts/05a_validate_records.py#L87) | `(merged_path: Path, config: dict) -> dict` | `dict` | Exception caught | `json`, `pandas` |
-| `06_generate_documents.py` | [extract_concepts](file:///c:/--Files--/Programming/pipeline/scripts/06_generate_documents.py#L53) | `(text: str) -> set` | `set` | None | `re` |
-| `06_generate_documents.py` | [calculate_unique_concept_gain](file:///c:/--Files--/Programming/pipeline/scripts/06_generate_documents.py#L63) | `(existing: set, candidate: set) -> int` | `int` | None | None |
-| `06_generate_documents.py` | [render_template](file:///c:/--Files--/Programming/pipeline/scripts/06_generate_documents.py#L79) | `(template_str: str, var_mapping: dict, pattern_id: str, perspective: str) -> dict` | `dict` | None | `re` |
-| `06_generate_documents.py` | [generate_vessel_operational_narrative](file:///c:/--Files--/Programming/pipeline/scripts/06_generate_documents.py#L133) | `(oid: int, occ: dict, v: dict) -> dict` | `dict` | None | `text_sanitizer` |
-| `06_generate_documents.py` | [generate_equipment_clause](file:///c:/--Files--/Programming/pipeline/scripts/06_generate_documents.py#L276) | `(v: dict) -> tuple` | `(str, set)` | None | `text_sanitizer` |
-| `06_generate_documents.py` | [generate_casualty_clause](file:///c:/--Files--/Programming/pipeline/scripts/06_generate_documents.py#L333) | `(v: dict) -> tuple` | `(str, set)` | None | `text_sanitizer` |
-| `06_generate_documents.py` | [build_consolidated_documents_for_vessel](file:///c:/--Files--/Programming/pipeline/scripts/06_generate_documents.py#L390) | `(oid: int, occ: dict, v: dict) -> list` | `list` | None | Internal functions |
-| `07_clean_documents.py` | [split_sentences](file:///c:/--Files--/Programming/pipeline/scripts/07_clean_documents.py#L11) | `(text: str) -> list` | `list` | None | `re` |
-| `07_clean_documents.py` | [clean_text](file:///c:/--Files--/Programming/pipeline/scripts/07_clean_documents.py#L49) | `(text: str) -> str` | `str` | None | `text_sanitizer` |
-| `07_clean_documents.py` | [deduplicate_sentences](file:///c:/--Files--/Programming/pipeline/scripts/07_clean_documents.py#L74) | `(text: str) -> str` | `str` | None | `split_sentences` |
-| `08_export_corpus.py` | [get_git_commit](file:///c:/--Files--/Programming/pipeline/scripts/08_export_corpus.py#L12) | `() -> str` | `str` | Exception caught | `subprocess` |
-| `09_statistics.py` | [compute_shannon_entropy](file:///c:/--Files--/Programming/pipeline/scripts/09_statistics.py#L18) | `(words: list) -> float` | `float` | None | `math`, `Counter` |
-| `09_statistics.py` | [get_domain_shingles](file:///c:/--Files--/Programming/pipeline/scripts/09_statistics.py#L35) | `(record: dict) -> set` | `set` | None | `re` |
-| `09_statistics.py` | [compute_minhash](file:///c:/--Files--/Programming/pipeline/scripts/09_statistics.py#L46) | `(shingles: set, num_hashes: int=32) -> list` | `list` | None | `hashlib` |
-| `11_corpus_representations.py` | [build_key_value_representation](file:///c:/--Files--/Programming/pipeline/scripts/11_corpus_representations.py#L9) | `(record: dict) -> str` | `str` | None | None |
-| `11_corpus_representations.py` | [build_template_representation](file:///c:/--Files--/Programming/pipeline/scripts/11_corpus_representations.py#L52) | `(record: dict) -> str` | `str` | None | None |
-| `11_corpus_representations.py` | [build_json_representation](file:///c:/--Files--/Programming/pipeline/scripts/11_corpus_representations.py#L79) | `(record: dict) -> str` | `str` | None | `json` |
-| `11_corpus_representations.py` | [build_mixed_representation](file:///c:/--Files--/Programming/pipeline/scripts/11_corpus_representations.py#L89) | `(narrative_doc: str, record: dict) -> str` | `str` | None | Internal functions |
-| `12_semantic_importance.py` | [compute_document_features](file:///c:/--Files--/Programming/pipeline/scripts/12_semantic_importance.py#L43) | `(doc_text: str, structured: dict, term_freq_map: Counter, total_docs: int) -> dict` | `dict` | None | `math`, `re` |
-| `13_tokenizer_analysis.py` | [analyze_tokenizer](file:///c:/--Files--/Programming/pipeline/scripts/13_tokenizer_analysis.py#L34) | `(model_name: str, vocab_terms: list, corpus_docs: list) -> dict` | `dict` | Exception caught | `transformers` |
-| `14_mlm_evaluation.py` | [evaluate_model_on_docs](file:///c:/--Files--/Programming/pipeline/scripts/14_mlm_evaluation.py#L51) | `(model, tokenizer, docs: list, vocab_terms: list, device: torch.device) -> dict` | `dict` | Exception caught | `torch`, `transformers` |
-| `16_statistical_analysis.py` | [cohens_d](file:///c:/--Files--/Programming/pipeline/scripts/16_statistical_analysis.py#L11) | `(x1: np.ndarray, x2: np.ndarray) -> float` | `float` | None | `numpy` |
-| `16_statistical_analysis.py` | [cliffs_delta](file:///c:/--Files--/Programming/pipeline/scripts/16_statistical_analysis.py#L18) | `(x1: np.ndarray, x2: np.ndarray) -> float` | `float` | None | None |
-| `16_statistical_analysis.py` | [bootstrap_ci](file:///c:/--Files--/Programming/pipeline/scripts/16_statistical_analysis.py#L24) | `(arr: np.ndarray, num_samples: int=1000, alpha: float=0.05) -> dict` | `dict` | None | `numpy` |
-| `17_decision_engine.py` | [run_decision_rules](file:///c:/--Files--/Programming/pipeline/scripts/17_decision_engine.py#L15) | `(top1_acc: float, perf_gap: float, frag_rate: float, thresholds: dict) -> dict` | `dict` | None | None |
+| `pipeline_utils.py` | [get_project_root](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/pipeline_utils.py#L8) | `() -> Path` | `Path` | None | `pathlib.Path` |
+| `pipeline_utils.py` | [load_config](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/pipeline_utils.py#L13) | `() -> dict` | `dict` | `FileNotFoundError`, `json.JSONDecodeError` | `json`, `pathlib` |
+| `pipeline_utils.py` | [setup_logging](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/pipeline_utils.py#L23) | `(stage_name: str) -> logging.Logger` | `Logger` | `OSError` | `logging`, `sys` |
+| `pipeline_utils.py` | [read_csv_safe](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/pipeline_utils.py#L60) | `(file_path: Path, **kwargs) -> pd.DataFrame` | `DataFrame` | `IOError` | `pandas` |
+| `pipeline_utils.py` | [detect_datasets](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/pipeline_utils.py#L113) | `() -> dict` | `dict` | `FileNotFoundError` | `pathlib` |
+| `text_sanitizer.py` | [strip_administrative_noise](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/text_sanitizer.py#L14) | `(text: str) -> str` | `str` | None | `re` |
+| `text_sanitizer.py` | [join_words_grammatical](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/text_sanitizer.py#L30) | `(words: list, conjunction: str="and") -> str` | `str` | None | None |
+| `text_sanitizer.py` | [format_cargo_description](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/text_sanitizer.py#L43) | `(cargo_prod: str, cargo_qty=None) -> str` | `str` | None | None |
+| `text_sanitizer.py` | [format_damage_description](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/text_sanitizer.py#L59) | `(degree: str, location: str=None) -> str` | `str` | None | None |
+| `text_sanitizer.py` | [format_casualty_count](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/text_sanitizer.py#L80) | `(count: int, singular: str, plural: str) -> str` | `str` | None | None |
+| `01_parse_dictionary.py` | [map_display_columns](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/01_parse_dictionary.py#L9) | `(df_dict: pd.DataFrame) -> tuple` | `(dict, dict)` | None | `pandas` |
+| `01_parse_dictionary.py` | [categorize_column](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/01_parse_dictionary.py#L80) | `(col_name: str, desc: str, table_name: str) -> str` | `str` | None | None |
+| `02_profile_dataset.py` | [profile_table](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/02_profile_dataset.py#L11) | `(file_path: Path) -> dict` | `dict` | Exception caught | `pandas` |
+| `02_profile_dataset.py` | [infer_foreign_keys](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/02_profile_dataset.py#L65) | `(profile_report: dict) -> dict` | `dict` | None | None |
+| `03_discover_relationships.py` | [build_relationship_graph](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/03_discover_relationships.py#L9) | `(profiling_report: dict) -> dict` | `dict` | None | `networkx` |
+| `04_select_semantic_columns.py` | [select_columns](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/04_select_semantic_columns.py#L8) | `(metadata: dict) -> dict` | `dict` | None | None |
+| `05_merge_tables.py` | [aggregate_dataframe](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/05_merge_tables.py#L11) | `(df: pd.DataFrame, key_col, cols_meta: dict) -> pd.DataFrame` | `DataFrame` | None | `pandas`, `numpy` |
+| `05_merge_tables.py` | [normalize_label](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/05_merge_tables.py#L194) | `(val: str) -> str` | `str` | None | `re` |
+| `05_merge_tables.py` | [deduplicate_child_records](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/05_merge_tables.py#L221) | `(records_list: list, table_type: str) -> list` | `list` | None | None |
+| `05a_validate_records.py` | [validate_raw_ids](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/05a_validate_records.py#L10) | `(datasets: dict) -> dict` | `dict` | None | `pandas` |
+| `05a_validate_records.py` | [validate_merged_records](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/05a_validate_records.py#L87) | `(merged_path: Path, config: dict) -> dict` | `dict` | Exception caught | `json`, `pandas` |
+| `06_generate_documents.py` | [extract_concepts](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/06_generate_documents.py#L53) | `(text: str) -> set` | `set` | None | `re` |
+| `06_generate_documents.py` | [calculate_unique_concept_gain](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/06_generate_documents.py#L63) | `(existing: set, candidate: set) -> int` | `int` | None | None |
+| `06_generate_documents.py` | [render_template](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/06_generate_documents.py#L79) | `(template_str: str, var_mapping: dict, pattern_id: str, perspective: str) -> dict` | `dict` | None | `re` |
+| `06_generate_documents.py` | [generate_vessel_operational_narrative](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/06_generate_documents.py#L133) | `(oid: int, occ: dict, v: dict) -> dict` | `dict` | None | `text_sanitizer` |
+| `06_generate_documents.py` | [generate_equipment_clause](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/06_generate_documents.py#L276) | `(v: dict) -> tuple` | `(str, set)` | None | `text_sanitizer` |
+| `06_generate_documents.py` | [generate_casualty_clause](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/06_generate_documents.py#L333) | `(v: dict) -> tuple` | `(str, set)` | None | `text_sanitizer` |
+| `06_generate_documents.py` | [build_consolidated_documents_for_vessel](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/06_generate_documents.py#L390) | `(oid: int, occ: dict, v: dict) -> list` | `list` | None | Internal functions |
+| `07_clean_documents.py` | [split_sentences](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/07_clean_documents.py#L11) | `(text: str) -> list` | `list` | None | `re` |
+| `07_clean_documents.py` | [clean_text](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/07_clean_documents.py#L49) | `(text: str) -> str` | `str` | None | `text_sanitizer` |
+| `07_clean_documents.py` | [deduplicate_sentences](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/07_clean_documents.py#L74) | `(text: str) -> str` | `str` | None | `split_sentences` |
+| `08_export_corpus.py` | [get_git_commit](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/08_export_corpus.py#L12) | `() -> str` | `str` | Exception caught | `subprocess` |
+| `09_statistics.py` | [compute_shannon_entropy](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/09_statistics.py#L18) | `(words: list) -> float` | `float` | None | `math`, `Counter` |
+| `09_statistics.py` | [get_domain_shingles](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/09_statistics.py#L35) | `(record: dict) -> set` | `set` | None | `re` |
+| `09_statistics.py` | [compute_minhash](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/09_statistics.py#L46) | `(shingles: set, num_hashes: int=32) -> list` | `list` | None | `hashlib` |
+| `11_corpus_representations.py` | [build_key_value_representation](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/11_corpus_representations.py#L9) | `(record: dict) -> str` | `str` | None | None |
+| `11_corpus_representations.py` | [build_template_representation](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/11_corpus_representations.py#L52) | `(record: dict) -> str` | `str` | None | None |
+| `11_corpus_representations.py` | [build_json_representation](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/11_corpus_representations.py#L79) | `(record: dict) -> str` | `str` | None | `json` |
+| `11_corpus_representations.py` | [build_mixed_representation](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/11_corpus_representations.py#L89) | `(narrative_doc: str, record: dict) -> str` | `str` | None | Internal functions |
+| `12_semantic_importance.py` | [compute_document_features](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/12_semantic_importance.py#L43) | `(doc_text: str, structured: dict, term_freq_map: Counter, total_docs: int) -> dict` | `dict` | None | `math`, `re` |
+| `13_tokenizer_analysis.py` | [analyze_tokenizer](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/13_tokenizer_analysis.py#L34) | `(model_name: str, vocab_terms: list, corpus_docs: list) -> dict` | `dict` | Exception caught | `transformers` |
+| `14_mlm_evaluation.py` | [evaluate_model_on_docs](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/14_mlm_evaluation.py#L51) | `(model, tokenizer, docs: list, vocab_terms: list, device: torch.device) -> dict` | `dict` | Exception caught | `torch`, `transformers` |
+| `16_statistical_analysis.py` | [load_matched_benchmark_matrix](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/16_statistical_analysis.py#L96) | `(comparison_path: Path, primary_metric: str="top1_acc") -> tuple` | `tuple` | `FileNotFoundError`, `ValueError` | `pandas`, `numpy` |
+| `16_statistical_analysis.py` | [cliffs_delta](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/16_statistical_analysis.py#L45) | `(x1: np.ndarray, x2: np.ndarray) -> float` | `float` | None | `numpy` |
+| `16_statistical_analysis.py` | [cohens_d_paired](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/16_statistical_analysis.py#L56) | `(diff: np.ndarray) -> float` | `float` | None | `numpy` |
+| `16_statistical_analysis.py` | [run_friedman_global_test](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/16_statistical_analysis.py#L139) | `(pvt: pd.DataFrame, models: list) -> tuple` | `(dict, DataFrame)` | None | `scipy.stats` |
+| `16_statistical_analysis.py` | [run_pairwise_comparisons](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/16_statistical_analysis.py#L194) | `(pvt: pd.DataFrame, models: list) -> tuple` | `(DataFrame, DataFrame, list)` | None | `scipy.stats`, `numpy` |
+| `16_statistical_analysis.py` | [run_bootstrap_uncertainty_and_rank_stability](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/16_statistical_analysis.py#L330) | `(pvt: pd.DataFrame, models: list, n_resamples: int=2000) -> tuple` | `(DataFrame, DataFrame, DataFrame)` | None | `numpy`, `pandas` |
+| `16_statistical_analysis.py` | [run_condition_robustness](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/16_statistical_analysis.py#L437) | `(df_mlm: pd.DataFrame, models: list, pvt_clean: pd.DataFrame) -> tuple` | `(DataFrame, dict)` | None | `scipy.stats`, `pandas` |
+| `16_statistical_analysis.py` | [run_stage12_ablation_sensitivity](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/16_statistical_analysis.py#L525) | `(stage12_dir: Path) -> tuple` | `(DataFrame, DataFrame, dict)` | None | `json`, `scipy.stats` |
+| `17_decision_engine.py` | [build_evidence_profiles](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/17_decision_engine.py#L60) | `(...) -> dict` | `dict` | None | `pandas` |
+| `17_decision_engine.py` | [classify_candidate_status](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/17_decision_engine.py#L349) | `(profiles: dict) -> dict` | `dict` | None | None |
+| `17_decision_engine.py` | [evaluate_selection_baselines](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/17_decision_engine.py#L402) | `(profiles: dict) -> dict` | `dict` | None | None |
+| `17_decision_engine.py` | [run_evidence_decision_hierarchy](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/17_decision_engine.py#L474) | `(profiles: dict, candidate_statuses: dict) -> dict` | `dict` | `ValueError` | None |
+| `17_decision_engine.py` | [generate_decision_report_md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/17_decision_engine.py#L753) | `(...) -> str` | `str` | None | None |
+| `18_lint_corpus.py` | [main](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/18_lint_corpus.py#L20) | `() -> None` | `None` | None | `re`, `json`, `tqdm` |
 
 ---
 
 ## 5. Next Navigational Steps
 
 To explore individual phase documentation, refer to the following phase modules:
-- [01_phase1_data_identification_and_mapping.md](file:///c:/--Files--/Programming/pipeline/documentation/01_phase1_data_identification_and_mapping.md)
-- [02_phase2_raw_data_preparation.md](file:///c:/--Files--/Programming/pipeline/documentation/02_phase2_raw_data_preparation.md)
-- [03_phase3_document_generation.md](file:///c:/--Files--/Programming/pipeline/documentation/03_phase3_document_generation.md)
-- [04_phase4_corpus_cleaning_and_export.md](file:///c:/--Files--/Programming/pipeline/documentation/04_phase4_corpus_cleaning_and_export.md)
-- [05_phase5_corpus_quality_evaluation.md](file:///c:/--Files--/Programming/pipeline/documentation/05_phase5_corpus_quality_evaluation.md)
-- [06_phase6_semantic_importance_analysis.md](file:///c:/--Files--/Programming/pipeline/documentation/06_phase6_semantic_importance_analysis.md)
-- [07_phase7_tokenizer_analysis.md](file:///c:/--Files--/Programming/pipeline/documentation/07_phase7_tokenizer_analysis.md)
-- [08_phase8_mlm_evaluation.md](file:///c:/--Files--/Programming/pipeline/documentation/08_phase8_mlm_evaluation.md)
-- [09_phase9_benchmarking_decision_engine_and_final_reports.md](file:///c:/--Files--/Programming/pipeline/documentation/09_phase9_benchmarking_decision_engine_and_final_reports.md)
-- [10_appendix_a_corpus_results_stages_1_to_10.md](file:///c:/--Files--/Programming/pipeline/documentation/10_appendix_a_corpus_results_stages_1_to_10.md)
-- [11_appendix_b_model_evaluation_results_stages_11_to_18.md](file:///c:/--Files--/Programming/pipeline/documentation/11_appendix_b_model_evaluation_results_stages_11_to_18.md)
-- [12_glossary.md](file:///d:/CAIR/TSBC-Pipeline/documentation/12_glossary.md)
-- [13_research_traceability_matrix.md](file:///d:/CAIR/TSBC-Pipeline/documentation/13_research_traceability_matrix.md)
-- [14_dapt_domain_adaptive_pretraining.md](file:///d:/CAIR/TSBC-Pipeline/documentation/14_dapt_domain_adaptive_pretraining.md)
+- [01_phase1_data_identification_and_mapping.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/01_phase1_data_identification_and_mapping.md)
+- [02_phase2_raw_data_preparation.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/02_phase2_raw_data_preparation.md)
+- [03_phase3_document_generation.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/03_phase3_document_generation.md)
+- [04_phase4_corpus_cleaning_and_export.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/04_phase4_corpus_cleaning_and_export.md)
+- [05_phase5_corpus_quality_evaluation.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/05_phase5_corpus_quality_evaluation.md)
+- [06_phase6_semantic_importance_analysis.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/06_phase6_semantic_importance_analysis.md)
+- [07_phase7_tokenizer_analysis.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/07_phase7_tokenizer_analysis.md)
+- [08_phase8_mlm_evaluation.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/08_phase8_mlm_evaluation.md)
+- [09_phase9_benchmarking_decision_engine_and_final_reports.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/09_phase9_benchmarking_decision_engine_and_final_reports.md)
+- [10_appendix_a_corpus_results_stages_1_to_10.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/10_appendix_a_corpus_results_stages_1_to_10.md)
+- [11_appendix_b_model_evaluation_results_stages_11_to_18.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/11_appendix_b_model_evaluation_results_stages_11_to_18.md)
+- [12_glossary.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/12_glossary.md)
+- [13_research_traceability_matrix.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/13_research_traceability_matrix.md)
+- [14_dapt_domain_adaptive_pretraining.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/14_dapt_domain_adaptive_pretraining.md)
