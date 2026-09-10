@@ -191,11 +191,11 @@ c:\--Files--\Programming\pipeline\
 │   ├── 08_export_corpus.py               # Phase 4: Dual-Format Corpus & Manifest Exporter
 │   ├── 09_statistics.py                  # Phase 5: Corpus Statistics & MinHash LSH
 │   ├── 10_extract_vocabulary.py          # Phase 5: Maritime Vocabulary Extractor
-│   ├── 11_corpus_representations.py     # Phase 6: Multi-Format Representation Builder
-│   ├── 12_semantic_importance.py         # Phase 6: 10-Feature Semantic Importance Scorer
-│   ├── 13_tokenizer_analysis.py          # Phase 7: 14-Tokenizer Benchmark Engine
-│   ├── 14_mlm_evaluation.py              # Phase 8: 350-Run Matrix MLM Evaluation Grid
-│   ├── 15_cross_model_benchmarking.py   # Phase 9: MUI Leaderboard & Cross-Model Benchmarker
+│   ├── 11_corpus_representations.py     # Phase 6: Multi-Format Representation Builder (5 Formats)
+│   ├── 12_semantic_importance.py         # Phase 6: 4-Dimension Domain Informativeness Scorer & Subset Generator
+│   ├── 13_tokenizer_analysis.py          # Phase 7: Multi-Architecture Tokenizer Profiling & Redundancy Clustering
+│   ├── 14_mlm_evaluation.py              # Phase 8: 175-Cell Cartesian MLM Evaluation Grid & Dual Masking
+│   ├── 15_cross_model_benchmarking.py   # Phase 9: MUI Multi-Criteria Leaderboard, Sensitivity & Pareto Selection
 │   ├── 16_statistical_analysis.py        # Phase 9: Statistical Significance & Ablation Engine
 │   ├── 17_decision_engine.py             # Phase 9: Programmatic Decision Engine & Report Writer
 │   └── 18_lint_corpus.py                 # Phase 9: Automated Corpus Quality Linter

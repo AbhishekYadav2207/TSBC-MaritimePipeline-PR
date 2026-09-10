@@ -1,10 +1,15 @@
-# Phase 7: Tokenizer Analysis Technical Documentation
+# Phase 7: Multi-Architecture Tokenizer Analysis & Redundancy Clustering Technical Documentation
 
 ## Executive Overview
-Phase 7 profiles and benchmarks 14 pretrained Hugging Face tokenizers across single-token vocabulary coverage, subword fertility (subwords/word), maritime subword fragmentation rate %, out-of-vocabulary (OOV/[UNK]) rate %, tokenization throughput speed (tokens/sec), sequence length distributions, and worst-fragmented domain terms.
+Phase 7 evaluates candidate pretrained language model tokenizers on specialized maritime terminology and text distributions. Tokenizer fragmentation directly impacts transformer language modeling: when domain-critical terms (e.g. `gyrocompass`, `fathometer`, `freeboard`) are excessively fragmented into generic subwords, the model's self-attention mechanism must spend capacity re-composing basic lexical units rather than encoding higher-order semantic relationships.
+
+Stage 13 performs three foundational benchmarking functions:
+1. **Multi-Faceted Tokenizer Profiling**: Measures subword fertility, single-token vocabulary coverage, fragmentation rate, out-of-vocabulary (OOV) rate, and tokenization speed across 12 candidate tokenizers from 14 registered models.
+2. **Subword Diagnostic Redundancy Clustering & Selection**: Calculates pairwise cosine similarity across subword piece splits to identify diagnostic equivalence classes, objectively selecting **7 canonical tokenizer archetypes** for Stage 14 MLM evaluation while eliminating redundant compute.
+3. **Statistical Association with Stage 12 Domain Informativeness**: Stratifies tokenizer behavior across Stage 12 Knowledge Tiers (High, Medium, Low, Redundant) to quantify the empirical relationship between document informativeness and subword fertility.
 
 Script involved in Phase 7:
-1. `scripts/13_tokenizer_analysis.py` (14-Tokenizer Benchmark Engine)
+* `scripts/13_tokenizer_analysis.py` (Multi-Architecture Tokenizer Analysis & Redundancy Selection Engine)
 
 ---
 
@@ -12,230 +17,197 @@ Script involved in Phase 7:
 
 ```mermaid
 flowchart TD
-    subgraph Inputs ["Input Artifacts & Tokenizers"]
+    subgraph Inputs ["Input Artifacts & Candidate Models"]
         VocabTXT["outputs/stage-10/maritime_vocabulary.txt"]
         CleanDocs["outputs/stage-07/clean_documents.jsonl"]
-        HFHub["Hugging Face Model Hub (14 Pretrained Tokenizers)"]
+        DocImpJSONL["outputs/stage-12/document_importance.jsonl"]
+        HFHub["Hugging Face Hub (14 Candidate Tokenizers)"]
     end
 
-    subgraph Processing ["Phase 7 Execution Pipeline"]
+    subgraph Processing ["Stage 13 Execution Engine"]
         S13["13_tokenizer_analysis.py"]
+        CandidateLoader["Candidate Tokenizer Loader & Instantiator"]
         VocabAnalyzer["Maritime Vocabulary Tokenization & Piece Counter"]
-        CorpusProfiler["Corpus Fertility, OOV Rate & Speed Profiler"]
-        SeqLenDist["Sequence Length Distribution Bucketer"]
+        RareVocabAnalyzer["Rare Maritime Vocabulary Profiler (20 Canonical Terms)"]
+        CorpusProfiler["Corpus Fertility & Speed Profiler (1,500 Sampled Docs)"]
+        Stage12Stratifier["Stage 12 Knowledge Tier Stratification & Correlation Engine"]
+        RedundancyClustering["Subword Piece Cosine Similarity & Clustering Engine"]
+        ArchetypeSelector["7 Canonical Archetype Selector"]
     end
 
-    subgraph Outputs ["Tokenizer Benchmark Artifacts"]
-        TokFolder["outputs/stage-13/tokenizer_analysis/*.json"]
-        BertLegacy["outputs/stage-13/tokenizer_analysis.json"]
+    subgraph Outputs ["Generated Artifacts & Reports"]
+        TokFolder["outputs/stage-13/tokenizer_analysis/*.json (12 Model Reports)"]
         TokCSV["outputs/stage-13/tokenizer_analysis/tokenizer_comparison.csv"]
+        SelectedJSON["outputs/stage-13/selected_models.json (Authoritative 7 Models)"]
+        Stage12TokJSON["outputs/stage-13/tokenizer_stage12_analysis.json"]
+        BertLegacy["outputs/stage-13/tokenizer_analysis.json"]
     end
 
-    VocabTXT & CleanDocs & HFHub --> S13
-    S13 --> VocabAnalyzer
-    VocabAnalyzer --> CorpusProfiler
-    CorpusProfiler --> SeqLenDist
-    SeqLenDist --> TokFolder & BertLegacy & TokCSV
+    VocabTXT & CleanDocs & DocImpJSONL & HFHub --> S13
+    S13 --> CandidateLoader
+    CandidateLoader --> VocabAnalyzer & RareVocabAnalyzer & CorpusProfiler
+    VocabAnalyzer & RareVocabAnalyzer & CorpusProfiler --> Stage12Stratifier
+    VocabAnalyzer --> RedundancyClustering
+    RedundancyClustering --> ArchetypeSelector
+    ArchetypeSelector --> SelectedJSON
+    VocabAnalyzer & CorpusProfiler --> TokFolder & TokCSV & BertLegacy
+    Stage12Stratifier --> Stage12TokJSON
 
-    TokCSV --> NextPhase9["Phase 9: 15_cross_model_benchmarking.py & 17_decision_engine.py"]
+    SelectedJSON & TokCSV --> NextStage14["Phase 8 / Stage 14: 14_mlm_evaluation.py"]
+    TokCSV --> NextStage15["Phase 9 / Stage 15: 15_cross_model_benchmarking.py"]
 ```
 
 ---
 
-## 2. 14 Pretrained Tokenizer Evaluation Registry
+## 2. Candidate Pool, Evaluated Models & Selection Architecture
 
-The pipeline evaluates 14 distinct pretrained Hugging Face tokenizers representing general, domain-specific, science, legal, financial, medical, and extended BPE architectures:
+### 2.1 Complete Candidate Pool (14 Registered Tokenizers)
+The benchmarking framework registers 14 candidate models across distinct domains and tokenizer families:
 
-| Model Identifier | Tokenizer Type | Vocabulary Size | Target Domain / Architecture |
-| :--- | :--- | :--- | :--- |
-| `bert-base-uncased` | WordPiece | 30,522 | General English (Baseline) |
-| `bert-large-uncased` | WordPiece | 30,522 | General English (Large Encoder) |
-| `roberta-base` | Byte-Level BPE | 50,265 | General English (Byte-BPE) |
-| `microsoft/deberta-v3-base` | DeBERTa WordPiece | 128,100 | Disentangled Attention |
-| `answerdotai/ModernBERT-base` | Modern Extended BPE | 50,280 | Modern Architecture |
-| `allenai/scibert_scivocab_uncased` | SciVocab WordPiece | 31,090 | Scientific Literature |
-| `dmis-lab/biobert-base-cased-v1.2` | Bio WordPiece | 28,996 | Biomedical |
-| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | PubMed WordPiece | 30,522 | Biomedical Abstracts & Text |
-| `emilyalsentzer/Bio_ClinicalBERT` | Clinical WordPiece | 28,996 | Clinical EHR Notes |
-| `nlpaueb/legal-bert-base-uncased` | Legal WordPiece | 30,522 | Legal Contracts & Legislation |
-| `ProsusAI/finbert` | Financial WordPiece | 30,522 | Financial Reports |
-| `anferico/bert-for-patents` | Patent WordPiece | 39,859 | Technical Patent Documents |
-| `google/electra-base-discriminator` | Electra WordPiece | 30,522 | Discriminative Pretraining |
-| `distilbert-base-uncased` | Distil WordPiece | 30,522 | Light Compressed Encoder |
-
----
-
-## 3. 14-Tokenizer Benchmark Engine (`scripts/13_tokenizer_analysis.py`)
-
-### 3.1 Standardized Function Documentation
-
-#### Function 1: `clean_model_filename`
-- **Purpose**: Replaces forward slashes `/` and hyphens `-` in Hugging Face model identifiers with underscores `_` to generate valid filesystem filenames.
-- **Why this function exists**: Hugging Face model names like `"microsoft/deberta-v3-base"` contain illegal filename characters on Windows and Linux systems.
-- **Where it is called**: Main loop of `13_tokenizer_analysis.py`.
-- **Inputs**: Model identifier string (`model_name`).
-- **Outputs**: Sanitized filename string (`str`).
-- **Parameters**: `model_name: str`.
-- **Return values**: `str` (e.g., `"microsoft_deberta_v3_base"`).
-- **Step-by-step execution**:
-  ```python
-  return model_name.replace("/", "_").replace("-", "_")
-  ```
-- **Edge cases**: None.
-- **Exception handling**: None required.
-- **Logging behavior**: Silent.
-- **Time complexity**: $O(L)$ where $L$ is model name length.
-- **Space complexity**: $O(L)$.
-- **Dependencies**: None.
-- **Example execution**: `fn = clean_model_filename("allenai/scibert_scivocab_uncased")`
-- **Common failure cases**: None.
+| Model Identifier | Architecture | Tokenizer Type | Vocabulary Size | Pretraining Domain |
+| :--- | :--- | :--- | :---: | :--- |
+| `bert-base-uncased` | BERT | WordPiece | 30,522 | General English (Wikipedia + BooksCorpus) |
+| `bert-large-uncased` | BERT | WordPiece | 30,522 | General English (Scale Baseline) |
+| `roberta-base` | RoBERTa | Byte-Level BPE | 50,265 | General English (OpenWebText, Stories) |
+| `microsoft/deberta-v3-base` | DeBERTa | SentencePiece | 128,100 | General English (Disentangled Attention) |
+| `answerdotai/ModernBERT-base` | ModernBERT | Extended Byte-BPE | 50,280 | Modern Web (FineWeb, RefinedWeb, StarCoder) |
+| `allenai/scibert_scivocab_uncased` | SciBERT | WordPiece (Custom) | 31,090 | Scientific Literature (Semantic Scholar) |
+| `dmis-lab/biobert-base-cased-v1.2` | BioBERT | WordPiece (Cased) | 28,996 | Biomedical (PubMed + PMC) |
+| `microsoft/BiomedNLP-PubMedBERT...` | PubMedBERT | WordPiece (Domain) | 30,522 | Biomedical Abstracts & Full Text |
+| `emilyalsentzer/Bio_ClinicalBERT` | ClinicalBERT | WordPiece | 28,996 | Clinical EHR Notes (MIMIC-III) |
+| `nlpaueb/legal-bert-base-uncased` | Legal-BERT | WordPiece (Custom) | 30,522 | Legal Texts (EU/US/UK Legislation, Cases) |
+| `ProsusAI/finbert` | FinBERT | WordPiece | 30,522 | Financial Reports (10-K, 10-Q, Earnings) |
+| `anferico/bert-for-patents` | Patent-BERT | WordPiece (Large) | 39,859 | US Patent Office Documents |
+| `google/electra-base-discriminator`| ELECTRA | WordPiece | 30,522 | General English (Replaced Token Detection) |
+| `distilbert-base-uncased` | DistilBERT | WordPiece | 30,522 | General English (Knowledge Distilled) |
 
 ---
 
-#### Function 2: `analyze_tokenizer`
-- **Purpose**: Profiles a single Hugging Face tokenizer against maritime vocabulary terms and corpus documents, computing fertility, fragmentation, OOV rate, speed, and length distribution.
-- **Why this function exists**: Subword over-segmentation (high fragmentation) corrupts domain semantic representations in transformer models. Profiling quantifies subword quality.
-- **Where it is called**: Main loop of `13_tokenizer_analysis.py`.
-- **Inputs**: Model name (`model_name`), Maritime vocabulary terms (`vocab_terms`), Sampled corpus documents (`corpus_docs`).
-- **Outputs**: Comprehensive evaluation metrics dictionary (`dict`).
-- **Parameters**: `model_name: str`, `vocab_terms: list`, `corpus_docs: list`.
-- **Return values**: `dict`.
-- **Internal Algorithm & Mathematical Formulations**:
-  1. Load tokenizer via `AutoTokenizer.from_pretrained(model_name)`.
-  2. **Maritime Vocabulary Analysis**: Tokenize each vocabulary term into subword pieces.
-     - Record piece counts array $P = [p_1, p_2, \dots, p_T]$.
-     - Count single-token terms ($p_i = 1$).
-     - **Single-Token Coverage** ($C_{\text{single}}$):
-       $$C_{\text{single}} = \frac{N_{\text{single}}}{T}$$
-     - **Maritime Fragmentation Rate** ($F_{\text{frag}}$):
-       $$F_{\text{frag}} = \frac{T - N_{\text{single}}}{T} = 1.0 - C_{\text{single}}$$
-     - Compute mean, median, P95, and max pieces per term.
-     - Sort worst fragmented terms ($p_i$ descending).
-  3. **Corpus Subword Fertility & OOV Rate**:
-     - Tokenize sampled corpus documents (1,500 documents).
-     - Compute total raw words $W_{\text{raw}}$ and total subword tokens $W_{\text{subword}}$.
-     - **Subword Fertility** ($\Phi$):
-       $$\Phi = \frac{W_{\text{subword}}}{W_{\text{raw}}}$$
-     - Count `[UNK]` tokens ($W_{\text{unk}}$).
-     - **OOV Rate** ($\eta_{\text{oov}}$):
-       $$\eta_{\text{oov}} = \frac{W_{\text{unk}}}{W_{\text{subword}}}$$
-  4. **Tokenizer Speed Profiling**:
-     - Measure total tokenization time $t_{\text{elapsed}}$ using `time.time()`.
-     - **Tokenizer Throughput** ($V_{\text{tok}}$):
-       $$V_{\text{tok}} = \frac{W_{\text{subword}}}{t_{\text{elapsed}}} \quad (\text{tokens/sec})$$
-  5. **Sequence Length Distribution**:
-     - Bucket document token lengths: `under_128`, `under_256`, `under_512`, `over_512`.
-  6. Return benchmark report dictionary.
-- **Step-by-step execution**:
-  ```python
-  tokenizer = AutoTokenizer.from_pretrained(model_name)
-  for term in vocab_terms:
-      tokens = tokenizer.tokenize(term)
-      num_pieces = len(tokens)
-      if num_pieces == 1: single_token_count += 1
-  # Profile corpus docs for fertility & speed...
-  ```
-- **Edge cases**: Handles tokenizers without explicit `unk_token` attribute safely.
-- **Exception handling**: Catches tokenizer load errors, logs warning, returns `None`.
-- **Logging behavior**: Logs progress for each tokenizer model.
-- **Time complexity**: $O(T \cdot P_{\text{avg}} + D \cdot L)$ where $T$ is terms count, $D$ is document count, and $L$ is doc length.
-- **Space complexity**: $O(W_{\text{subword}})$.
-- **Dependencies**: `transformers.AutoTokenizer`, `numpy`, `time`.
-- **Example execution**: `report = analyze_tokenizer("bert-base-uncased", vocab_terms, corpus_docs)`
-- **Common failure cases**: Network failure when fetching un-cached tokenizer configs from Hugging Face Hub.
+### 2.2 Subword Diagnostic Redundancy Clustering & Selection Rationale
+
+Evaluating all 14 models across the full 5-representation $\times$ 5-subset matrix in Stage 14 would require 350 heavy GPU/CPU evaluations. Stage 13 executes subword piece cosine similarity clustering across 100 benchmark maritime terms to detect exact diagnostic equivalence.
+
+#### Redundancy Clustering Findings:
+1. **WordPiece General Archetype**: `bert-large-uncased`, `ProsusAI/finbert`, `google/electra-base-discriminator`, and `distilbert-base-uncased` have **cosine similarity = 1.00000** and identical subword piece splits to `bert-base-uncased`. Their vocabulary files and tokenization algorithms are strictly identical. Evaluating all 5 models in Stage 14 produces redundant diagnostic overhead. `bert-base-uncased` is selected as the authoritative canonical archetype.
+2. **Clinical WordPiece Archetype**: `emilyalsentzer/Bio_ClinicalBERT` has **cosine similarity = 1.00000** and identical tokenization behavior to `dmis-lab/biobert-base-cased-v1.2`. `dmis-lab/biobert-base-cased-v1.2` is selected as the canonical representative.
+3. **Environment Dependency Constraints**: `microsoft/deberta-v3-base` and `anferico/bert-for-patents` require custom SentencePiece/protobuf backends that failed initialization in the standard evaluation environment and are cleanly flagged and excluded.
+
+#### The Authoritative 7 Selected Archetypes (`outputs/stage-13/selected_models.json`):
+Stage 13 outputs exactly 7 non-redundant canonical archetypes covering distinct vocabulary spaces and tokenization algorithms:
+1. `bert-base-uncased` (Standard General WordPiece, 30,522)
+2. `dmis-lab/biobert-base-cased-v1.2` (Cased Biomedical WordPiece, 28,996)
+3. `nlpaueb/legal-bert-base-uncased` (Custom Legal WordPiece, 30,522)
+4. `allenai/scibert_scivocab_uncased` (Scientific SciVocab WordPiece, 31,090)
+5. `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` (Domain-Initialized PubMed WordPiece, 30,522)
+6. `roberta-base` (Standard Byte-Level BPE, 50,265)
+7. `answerdotai/ModernBERT-base` (Modern Extended Web Byte-BPE, 50,280)
 
 ---
 
-### 3.2 Deep-Dive Code Block Explanations & Design Rationales
+## 3. Standardized Function Documentation (`scripts/13_tokenizer_analysis.py`)
 
-#### Code Block 1: Sequence Length Distribution Bucketing
-```python
-# Lines 89-92 in scripts/13_tokenizer_analysis.py
-if num_tokens <= 128: seq_length_dist["under_128"] += 1
-elif num_tokens <= 256: seq_length_dist["under_256"] += 1
-elif num_tokens <= 512: seq_length_dist["under_512"] += 1
-else: seq_length_dist["over_512"] += 1
-```
-- **Why is sequence length distribution bucketing required?**: Standard BERT models have a maximum position embedding limit of 512 tokens ($L_{\text{max}} = 512$). Documents exceeding 512 tokens require truncation or sliding-window chunking. Quantifying the proportion of documents exceeding 128, 256, and 512 tokens informs memory and sequence truncation settings during pretraining.
-- **Counterfactual impact**: Failing to profile sequence lengths leads to unmonitored truncation of critical document text during MLM training.
+#### Function 1: `analyze_tokenizer`
+* **Purpose**: Profiles a single tokenizer against maritime vocabulary terms and corpus documents, computing single-token coverage %, subword fertility, fragmentation rate %, OOV rate %, speed (tok/sec), sequence length percentiles, and worst-fragmented terms.
+* **Why this function exists**: Quantifies morphological compatibility with specialized maritime terms.
+* **Inputs**: Model name (`model_name: str`), Maritime vocabulary terms (`vocab_terms: list`), Sampled corpus documents (`corpus_docs: list`).
+* **Outputs**: Comprehensive evaluation metrics dictionary (`dict`).
+* **Internal Algorithm & Mathematical Formulations**:
+  1. **Vocabulary Fragmentation**: Tokenize each maritime domain term $w \in V_{\text{maritime}}$ into subwords $t_1, \dots, t_k$:
+     $$\text{Fragmentation Rate} = \frac{|\{w \in V_{\text{maritime}} : \text{len}(\text{tokenize}(w)) > 1\}|}{|V_{\text{maritime}}|}$$
+     $$\text{Single-Token Coverage} = 1.0 - \text{Fragmentation Rate}$$
+  2. **Corpus Subword Fertility**: Over 1,500 sampled clean corpus documents:
+     $$\text{Fertility} = \frac{\sum_{i=1}^N N_{\text{subwords}}(\text{doc}_i)}{\sum_{i=1}^N N_{\text{raw\_words}}(\text{doc}_i)}$$
+  3. **Out-of-Vocabulary (OOV) Rate**:
+     $$\text{OOV Rate} = \frac{\sum_{i=1}^N \text{Count}(\text{[UNK]} \in \text{tokens}(\text{doc}_i))}{\sum_{i=1}^N N_{\text{subwords}}(\text{doc}_i)}$$
+     *Note on BPE*: For Byte-Level BPE tokenizers (`roberta-base`, `ModernBERT-base`), unknown characters are decomposed into byte tokens rather than mapped to `[UNK]`. OOV status is explicitly labeled as `not_applicable` rather than reporting false $0.0\%$.
+  4. **Tokenization Speed**:
+     $$\text{Speed} = \frac{\sum_{i=1}^N N_{\text{subwords}}(\text{doc}_i)}{\Delta t_{\text{tokenize}}}$$
+
+#### Function 2: `analyze_vocabulary_category`
+* **Purpose**: Isolates subword fragmentation for specific vocabulary categories, specifically separating general maritime terms from high-specificity rare maritime terms (`RARE_MARITIME_TERMS`).
+* **Inputs**: Tokenizer object, term list, category name string.
+* **Outputs**: Dictionary of category-specific split counts, average pieces per term, and worst-fragmented items.
+
+#### Function 3: `compute_redundancy_and_selection`
+* **Purpose**: Analyzes pairwise diagnostic similarity among evaluated tokenizers and determines the minimal set of non-redundant canonical archetypes.
+* **Inputs**: List of model evaluation report dictionaries.
+* **Outputs**: Tuple of `(selected_models_list, exclusion_dict, pairwise_similarity_matrix)`.
 
 ---
 
-### 3.3 Output Schema Specifications
+## 4. Empirical Evaluation Results & Comparative Analysis
 
-#### 1. Per-Tokenizer JSON Reports: `outputs/stage-13/tokenizer_analysis/<clean_model_name>.json`
-- **Created By**: `scripts/13_tokenizer_analysis.py`
-- **Consumed By**: `scripts/15_cross_model_benchmarking.py`
-- **Purpose**: Stores detailed tokenization statistics, piece distributions, worst fragmented terms, and speed for a specific tokenizer.
-- **Storage Location**: `outputs/stage-13/tokenizer_analysis/`
-- **Format**: JSON UTF-8
+### 4.1 Cross-Tokenizer Benchmark Summary (`tokenizer_comparison.csv`)
 
-##### JSON Schema
-```json
-{
-  "model_name": "string",
-  "clean_model_name": "string",
-  "vocab_size": "integer",
-  "sampled_documents": "integer",
-  "total_raw_words_analyzed": "integer",
-  "total_subword_tokens_analyzed": "integer",
-  "average_subwords_per_word": "float",
-  "maritime_fragmentation_rate": "float",
-  "single_token_vocabulary_coverage": "float",
-  "single_token_count": "integer",
-  "total_maritime_terms": "integer",
-  "avg_pieces_per_term": "float",
-  "median_pieces_per_term": "float",
-  "p95_pieces_per_term": "float",
-  "max_pieces_per_term": "integer",
-  "oov_rate": "float",
-  "tokenizer_speed_tokens_per_sec": "float",
-  "sequence_length_distribution": {
-    "under_128": "integer",
-    "under_256": "integer",
-    "under_512": "integer",
-    "over_512": "integer"
-  },
-  "worst_fragmented_terms": [
-    {
-      "term": "string",
-      "tokens": ["string"],
-      "num_pieces": "integer"
-    }
-  ]
-}
+The empirical results over the complete evaluated model suite are summarized below (sorted by single-token vocabulary coverage):
+
+| Model Name | Selected for Stage 14 | Vocab Size | Fertility (Subwords/Word) | Single-Token Coverage (%) | Fragmentation Rate (%) | OOV Rate (%) | OOV Status | Avg Pieces / Term | Speed (tok/s) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| `bert-base-uncased` | **True** | 30,522 | **1.3984** | **73.43%** | **26.57%** | 0.00% | measured | 1.35 | 61,089 |
+| `dmis-lab/biobert-base-cased-v1.2` | **True** | 28,996 | 1.4789 | 64.48% | 35.52% | 0.00% | measured | 1.48 | 64,953 |
+| `nlpaueb/legal-bert-base-uncased` | **True** | 30,522 | 1.4806 | 62.09% | 37.91% | 0.03% | measured | 1.51 | 62,213 |
+| `allenai/scibert_scivocab_uncased` | **True** | 31,090 | 1.4517 | 57.91% | 42.09% | 0.00% | measured | 1.53 | 61,481 |
+| `microsoft/BiomedNLP-PubMedBERT...` | **True** | 30,522 | 1.4543 | 57.31% | 42.69% | 0.00% | measured | 1.59 | 63,963 |
+| `answerdotai/ModernBERT-base` | **True** | 50,280 | 1.5236 | 36.72% | 63.28% | N/A | byte_fallback | 1.84 | **73,967** |
+| `roberta-base` | **True** | 50,265 | 1.5609 | 34.93% | 65.07% | N/A | byte_fallback | 1.86 | 69,639 |
+| *Redundant Diagnostic Clones* | | | | | | | | | |
+| `bert-large-uncased` | False | 30,522 | 1.3984 | 73.43% | 26.57% | 0.00% | measured | 1.35 | 61,926 |
+| `ProsusAI/finbert` | False | 30,522 | 1.3984 | 73.43% | 26.57% | 0.00% | measured | 1.35 | 53,347 |
+| `google/electra-base-discriminator` | False | 30,522 | 1.3984 | 73.43% | 26.57% | 0.00% | measured | 1.35 | 61,445 |
+| `distilbert-base-uncased` | False | 30,522 | 1.3984 | 73.43% | 26.57% | 0.00% | measured | 1.35 | 57,714 |
+| `emilyalsentzer/Bio_ClinicalBERT` | False | 28,996 | 1.4789 | 64.48% | 35.52% | 0.00% | measured | 1.48 | 59,273 |
+
+---
+
+### 4.2 Key Empirical Observations
+1. **WordPiece vs. Byte-BPE Coverage Trade-off**: Standard WordPiece (`bert-base-uncased`) achieves the lowest fragmentation (**26.57%**) and lowest subword fertility (**1.3984** subwords/word) on maritime terms because its vocabulary includes common morphological roots (e.g. `vessel`, `anchor`, `cargo`, `hull`). Conversely, Byte-Level BPE tokenizers (`roberta-base`, `ModernBERT-base`) suffer high fragmentation (**63.28%–65.07%**) because their BPE mergers were learned on general web text where technical nautical compounds were infrequent.
+2. **Throughput Inversion**: While `ModernBERT-base` exhibits higher fragmentation, its tokenizer implementation delivers the highest throughput (**73,966.62 tokens/second**), outperforming standard WordPiece tokenizers (~61,000 tok/sec) by **21.1%**.
+3. **Worst-Fragmented Rare Nautical Terms**:
+   * `gyrocompass` $\rightarrow$ `['gy', '##ro', '##com', '##pass']` (4 pieces in WordPiece) vs `['gy', 'ro', 'comp', 'ass']` (4 pieces in BPE)
+   * `fathometer` $\rightarrow$ `['fat', '##hom', '##eter']` (3 pieces)
+   * `windlass` $\rightarrow$ `['wind', '##lass']` (2 pieces)
+   * `freeboard` $\rightarrow$ `['free', '##board']` (2 pieces)
+
+---
+
+### 4.3 Statistical Association with Stage 12 Domain Informativeness
+
+To investigate whether Stage 12 informativeness scores correlate with morphological difficulty, Stage 13 stratifies tokenizer metrics across documents classified by Stage 12 Knowledge Tiers (`outputs/stage-13/tokenizer_stage12_analysis.json`):
+
+| Model Name | Low Knowledge Fertility | Medium Knowledge Fertility | High Knowledge Fertility | $\Delta$ (High $-$ Low) | Spearman $\rho$ with Inform. Score |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| `bert-base-uncased` | 1.3368 | 1.3787 | **1.4346** | $+0.0978$ | **$+0.428$** ($p < 10^{-15}$) |
+| `dmis-lab/biobert-base-cased` | 1.4431 | 1.4614 | **1.5062** | $+0.0631$ | **$+0.384$** ($p < 10^{-12}$) |
+| `nlpaueb/legal-bert-base` | 1.4543 | 1.4646 | **1.5126** | $+0.0583$ | **$+0.369$** ($p < 10^{-11}$) |
+| `allenai/scibert_scivocab` | 1.4112 | 1.4328 | **1.4891** | $+0.0779$ | **$+0.412$** ($p < 10^{-14}$) |
+| `answerdotai/ModernBERT-base` | 1.4621 | 1.4984 | **1.5642** | $+0.1021$ | **$+0.441$** ($p < 10^{-16}$) |
+| `roberta-base` | 1.5012 | 1.5391 | **1.6028** | $+0.1016$ | **$+0.435$** ($p < 10^{-16}$) |
+
+> **Empirical Validation**: Across all evaluated architectures, subword fertility monotonically increases from Low $\rightarrow$ Medium $\rightarrow$ High Knowledge documents. High Knowledge documents contain denser technical specifications, compound equipment names, and casualty clauses that require greater subword decomposition. This confirms that Stage 12 informativeness scores successfully isolate morphologically complex domain text.
+
+---
+
+## 5. Output Artifacts & Verification Commands
+
+| Artifact Path | Format | Size | Description |
+| :--- | :--- | :---: | :--- |
+| `outputs/stage-13/selected_models.json` | JSON | 3.9 KB | Authoritative 7 canonical archetypes and exclusion rationale |
+| `outputs/stage-13/tokenizer_analysis/tokenizer_comparison.csv` | CSV | 1.2 KB | Full comparative metrics table for 12 evaluated tokenizers |
+| `outputs/stage-13/tokenizer_analysis/*.json` | JSON | ~10 KB ea | Per-model detailed vocabulary split and piece distribution reports |
+| `outputs/stage-13/tokenizer_stage12_analysis.json` | JSON | ~155 KB | Stratified tokenizer metrics across Stage 12 knowledge tiers |
+| `outputs/stage-13/tokenizer_analysis.json` | JSON | 31 KB | Backward-compatible baseline tokenizer analysis file |
+
+### Verification Commands
+```bash
+# Verify exactly 7 authoritative models are selected
+python -c "import json; d = json.load(open('outputs/stage-13/selected_models.json')); print('Selected Model Count:', len(d['selected_models']))"
+
+# Display tokenizer comparison table sorted by coverage
+python -c "import pandas as pd; df = pd.read_csv('outputs/stage-13/tokenizer_analysis/tokenizer_comparison.csv'); print(df[['model_name', 'vocab_size', 'single_token_coverage_pct', 'fragmentation_rate_pct', 'subwords_per_word_fertility']])"
 ```
 
 ---
 
-#### 2. Comparative Tokenizer CSV: `outputs/stage-13/tokenizer_analysis/tokenizer_comparison.csv`
-- **Created By**: `scripts/13_tokenizer_analysis.py`
-- **Consumed By**: `scripts/15_cross_model_benchmarking.py`, leaderboard generation.
-- **Purpose**: Compares all 14 tokenizers in a unified CSV table sorted by single-token vocabulary coverage percentage descending.
-- **Storage Location**: `outputs/stage-13/tokenizer_analysis/tokenizer_comparison.csv`
-- **Format**: CSV UTF-8
-
-##### Schema Columns
-`model_name`, `vocab_size`, `subwords_per_word_fertility`, `single_token_coverage_pct`, `fragmentation_rate_pct`, `oov_rate_pct`, `avg_pieces_per_term`, `median_pieces`, `p95_pieces`, `max_pieces`, `tokenizer_speed_tok_sec`
-
----
-
-## 4. Future Extension Points (Phase 7)
-
-1. **What can be extended?**:
-   - New Hugging Face tokenizers (e.g., `LlamaTokenizer`, `MistralTokenizer`) can be added to `TARGET_MODELS` list in `13_tokenizer_analysis.py`.
-   - Custom BPE or WordPiece tokenizer training on `maritime_corpus.txt` can be benchmarked against pretrained models.
-
-2. **Current Assumptions**:
-   - Assumes sampling 1,500 documents provides accurate fertility and speed metrics.
-   - Assumes single-token coverage against top 350 maritime terms accurately reflects domain vocabulary coverage.
-
-3. **Safe-to-Modify Functions**:
-   - `TARGET_MODELS` registry array in `13_tokenizer_analysis.py`.
-   - `analyze_tokenizer` (adding new tokenizer evaluation metrics).
-
-4. **Tightly Coupled Functions**:
-   - `13_tokenizer_analysis.py` expects `outputs/stage-10/maritime_vocabulary.txt` generated by Stage 10.
-
-5. **Recommended Extension Strategy**:
-   - When training a custom MaritimeBERT tokenizer, add its local directory path to `TARGET_MODELS` and rerun Stage 13 to compare its fragmentation rate directly against baseline BERT.
+## 6. Pipeline Integration & Next Phase Hand-Off
+* **Consumer 1 (Stage 14 `14_mlm_evaluation.py`)**: Ingests `outputs/stage-13/selected_models.json` to dynamically parameterize the 175-run matrix grid, evaluating only the 7 authoritative non-redundant archetypes.
+* **Consumer 2 (Stage 15 `15_cross_model_benchmarking.py`)**: Ingests `outputs/stage-13/tokenizer_analysis/tokenizer_comparison.csv` to incorporate fragmentation rates, single-token coverage, and OOV rates into the Maritime Understanding Index (MUI) composite formula.
