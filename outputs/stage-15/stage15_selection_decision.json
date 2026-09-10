@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-10T10:09:30.181190",
+  "timestamp": "2026-09-10T10:13:15.430620",
   "data_coverage": {
     "expected_cells": 175,
     "valid_cells": 175,
@@ -16,11 +16,21 @@
       "model_name": "bert-base-uncased",
       "rare_top1_acc_pct": 54.35
     },
+    "most_stable_representation_model": {
+      "model_name": "answerdotai/ModernBERT-base",
+      "mean_rank": 1.0,
+      "rank_std": 0.0
+    },
+    "most_stable_subset_model": {
+      "model_name": "answerdotai/ModernBERT-base",
+      "mean_rank": 1.0,
+      "rank_std": 0.0
+    },
     "most_robust_mui_winner": {
       "model_name": "answerdotai/ModernBERT-base",
       "total_wins": 2,
       "win_frequency": 0.5,
-      "baseline_score": 71.46
+      "baseline_score": 68.29
     }
   },
   "rank_stability": {
@@ -44,12 +54,12 @@
   "final_selection": {
     "recommended_model": "answerdotai/ModernBERT-base",
     "pareto_status": "Pareto-Optimal",
-    "baseline_mui_score": 71.46,
+    "baseline_mui_score": 68.29,
     "maritime_top1_acc_pct": 56.04,
     "rare_maritime_acc_pct": 29.09,
     "mlm_loss": 2.3063,
     "sensitivity_wins": "2/4 scenarios",
-    "selection_rationale": "answerdotai/ModernBERT-base demonstrated the strongest overall intrinsic MLM capability (56.04% Top-1 accuracy, 2.3063 MLM loss), unbroken ranking invariance across all evaluated representations and subsets, leading performance across 2/4 MUI sensitivity scenarios (baseline and performance-heavy paradigms), and confirmed membership in the non-dominated Pareto front."
+    "selection_rationale": "answerdotai/ModernBERT-base demonstrated the strongest intrinsic MLM capability (56.04% Top-1 accuracy, 2.3063 MLM loss), high ranking consistency across representations (mean rank 1.0) and subsets (mean rank 1.0), leading performance across 2/4 MUI sensitivity scenarios (baseline and performance-heavy paradigms), and confirmed non-dominated Pareto status."
   },
   "trade_offs": [
     {
@@ -64,6 +74,7 @@
       "alternative_model": "bert-base-uncased",
       "advantages_over_selected": [
         "lower subword fragmentation (26.6% vs 63.3%)",
+        "higher rare maritime token accuracy (54.3% vs 29.1%)",
         "smaller footprint (110M vs 149M params)",
         "lower latency (174.9ms vs 458.6ms)"
       ]
@@ -72,6 +83,7 @@
       "alternative_model": "dmis-lab/biobert-base-cased-v1.2",
       "advantages_over_selected": [
         "lower subword fragmentation (35.5% vs 63.3%)",
+        "higher rare maritime token accuracy (32.3% vs 29.1%)",
         "smaller footprint (110M vs 149M params)",
         "lower latency (154.1ms vs 458.6ms)"
       ]
@@ -87,10 +99,11 @@
     {
       "alternative_model": "roberta-base",
       "advantages_over_selected": [
+        "higher rare maritime token accuracy (30.1% vs 29.1%)",
         "smaller footprint (125M vs 149M params)",
         "lower latency (382.7ms vs 458.6ms)"
       ]
     }
   ],
-  "methodological_note": "MUI is an operational composite compatibility score, not a human-validated ground truth of domain comprehension. Model selection is defensibly justified by multidimensional evidence including intrinsic MLM loss, rare domain token accuracy, representation and subset stability, sensitivity analysis invariance, and Pareto non-dominance."
+  "methodological_note": "MUI is an operational composite compatibility index, not a human-validated ground truth of domain comprehension. Model selection is defensibly justified by multidimensional evidence including intrinsic MLM loss, rare domain token accuracy, representation and subset ranking agreement, sensitivity analysis invariance, and non-dominated Pareto status."
 }

@@ -1,7 +1,7 @@
 model_name,mui_score,maritime_top1_acc,top1_ci_error,rare_maritime_acc,mlm_loss,domain_shift_gap_pct,performance_gap_pct,single_token_coverage_pct,fragmentation_rate_pct,oov_rate_pct,params_millions,disk_size_mb,inference_latency_ms,throughput_docs_sec,tokenizer_speed_tok_sec
-answerdotai/ModernBERT-base,71.46,56.04,3.74,29.09,2.3063,-11.04,0.54,36.72,63.28,0.0,149,590,458.59,2.18,73966.62
-roberta-base,61.03,47.03,3.0,30.07,2.7948,2.97,3.58,34.93,65.07,0.0,125,500,382.75,2.61,69638.96
+answerdotai/ModernBERT-base,68.29,56.04,3.74,29.09,2.3063,-11.04,0.54,36.72,63.28,0.0,149,590,458.59,2.18,73966.62
 bert-base-uncased,59.25,29.08,3.08,54.35,4.6237,10.92,18.59,73.43,26.57,0.0,110,440,174.86,5.72,61089.25
+roberta-base,56.7,47.03,3.0,30.07,2.7948,2.97,3.58,34.93,65.07,0.0,125,500,382.75,2.61,69638.96
 dmis-lab/biobert-base-cased-v1.2,42.24,24.65,2.67,32.35,4.9969,10.35,16.57,64.48,35.52,0.0,110,440,154.06,6.49,64952.52
 allenai/scibert_scivocab_uncased,37.09,31.24,3.63,6.44,4.2628,3.76,18.36,57.91,42.09,0.0,110,440,323.41,3.09,61480.72
 nlpaueb/legal-bert-base-uncased,27.08,28.66,3.31,4.49,4.4541,6.34,16.46,62.09,37.91,0.03,110,440,249.28,4.01,62212.77
