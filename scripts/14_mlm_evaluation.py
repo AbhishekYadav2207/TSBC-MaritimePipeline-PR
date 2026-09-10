@@ -26,6 +26,11 @@ def stable_seed(*parts) -> int:
 
 # Default Representative Fallback Models (7 Distinct Tokenizer Archetypes)
 FALLBACK_TARGET_MODELS = [
+    "bert-base-uncased",                                            # Standard WordPiece (30,522)
+    "dmis-lab/biobert-base-cased-v1.2",                            # Bio/Clinical WordPiece (28,996 Cased)
+    "nlpaueb/legal-bert-base-uncased",                              # Legal WordPiece (30,522)
+    "allenai/scibert_scivocab_uncased",                             # SciVocab WordPiece (31,090)
+    "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",# PubMed Domain WordPiece (30,522)
     "roberta-base",                                                 # Standard Byte-Level BPE (50,265)
     "answerdotai/ModernBERT-base"                                   # Modern Extended BPE (50,280)
 ]
@@ -58,7 +63,7 @@ def load_selected_models(stage13_path: Path, fallback_models: list) -> list:
             models = data.get("selected_models", [])
             if isinstance(models, list) and len(models) == 7:
                 logger.info(f"Successfully loaded exactly {len(models)} authoritative models from Stage 13: {stage13_path}")
-                #return models
+                return models
             else:
                 found_cnt = len(models) if isinstance(models, list) else "invalid format"
                 logger.warning(
@@ -491,7 +496,9 @@ def evaluate_sampled_pll(model, tokenizer, docs: list, vocab_terms: list, device
     Computes Sampled Pseudo-Log-Likelihood (Salazar et al., ACL 2020) over a bounded,
     deterministic sample of documents and target positions.
     Evaluates one-token-at-a-time MLM scoring to compute likelihood and pseudo-perplexity.
-    Uses position-level span classification to distinguish domain vs general tokens.
+    Uses legacy token-ID classification for rare, maritime, and general
+    evaluation categories to preserve comparability with the original
+    Stage 14 benchmark.
     """
     if not docs:
         return {}
