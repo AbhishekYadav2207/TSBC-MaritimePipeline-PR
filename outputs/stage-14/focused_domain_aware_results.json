@@ -20,106 +20,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 46.17894911766052,
+      "evaluation_time_sec": 6.99526834487915,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
         "total_masked_tokens": 7600,
-        "overall_top1_accuracy": 0.5151315789473684,
-        "overall_mlm_loss": 3.8540084986199945
+        "overall_top1_accuracy": 0.28680385667002445,
+        "overall_mlm_loss": 6.399449020685683
       },
       "general_tokens_summary": {
-        "masked_sample_count": 5740,
-        "mlm_loss": 2.390588974958211,
-        "mlm_loss_derived_exponential": 10.919923610951843,
-        "top1_accuracy": 0.6606271777003484,
-        "top5_accuracy": 0.7493031358885017,
-        "top10_accuracy": 0.782404181184669
+        "masked_sample_count": 2313,
+        "mlm_loss": 1.9593549547397815,
+        "mlm_loss_derived_exponential": 7.094749154521024,
+        "top1_accuracy": 0.7185473411154345,
+        "top5_accuracy": 0.7842628620838737,
+        "top10_accuracy": 0.8166882836143536
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 1860,
-        "mlm_loss": 8.370152620027863,
-        "mlm_loss_derived_exponential": 4316.294765457889,
-        "top1_accuracy": 0.06612903225806452,
-        "top5_accuracy": 0.1338709677419355,
-        "top10_accuracy": 0.16021505376344086
+        "masked_sample_count": 4636,
+        "mlm_loss": 8.614707341335569,
+        "mlm_loss_derived_exponential": 5512.135203533287,
+        "top1_accuracy": 0.07139775668679896,
+        "top5_accuracy": 0.13848144952545297,
+        "top10_accuracy": 0.18377911993097498
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 4,
-        "mlm_loss": 13.083555698394775,
-        "mlm_loss_derived_exponential": 480967.84589138214,
-        "top1_accuracy": 0.0,
-        "top5_accuracy": 0.0,
-        "top10_accuracy": 0.0
+        "masked_sample_count": 651,
+        "mlm_loss": 5.296867822449008,
+        "mlm_loss_derived_exponential": 199.7103011965156,
+        "top1_accuracy": 0.23655913978494625,
+        "top5_accuracy": 0.34101382488479265,
+        "top10_accuracy": 0.49923195084485406
       },
       "category_recall": {
-        "vessel_terminology": 0.0687,
-        "navigation": 0.0,
-        "machinery_propulsion": 0.0,
-        "casualty_incident": 0.098,
-        "weather_environment": 0.0086,
+        "vessel_terminology": 0.0486,
+        "navigation": 0.2219,
+        "machinery_propulsion": 0.1569,
+        "casualty_incident": 0.0435,
+        "weather_environment": 0.0342,
         "safety_lifesaving": 0.0
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 1557,
-          "mlm_loss": 8.371370334730901,
-          "mlm_loss_derived_exponential": 4321.55398251953,
-          "top1_accuracy": 0.06872190109184328,
-          "top5_accuracy": 0.14065510597302505,
-          "top10_accuracy": 0.1682723185613359
+          "masked_sample_count": 3291,
+          "mlm_loss": 9.185577038839115,
+          "mlm_loss_derived_exponential": 9755.407628818957,
+          "top1_accuracy": 0.04861744150714069,
+          "top5_accuracy": 0.11759343664539654,
+          "top10_accuracy": 0.14949863263445762
         },
         "navigation": {
-          "masked_sample_count": 11,
-          "mlm_loss": 10.670342532071201,
-          "mlm_loss_derived_exponential": 43059.688296369786,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.0,
-          "top10_accuracy": 0.0
+          "masked_sample_count": 703,
+          "mlm_loss": 5.329114831953987,
+          "mlm_loss_derived_exponential": 206.2553227086399,
+          "top1_accuracy": 0.22190611664295876,
+          "top5_accuracy": 0.3229018492176387,
+          "top10_accuracy": 0.47083926031294454
         },
         "machinery_propulsion": {
-          "masked_sample_count": 23,
-          "mlm_loss": 10.099243122598399,
-          "mlm_loss_derived_exponential": 24324.59172153886,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.0,
-          "top10_accuracy": 0.0
+          "masked_sample_count": 51,
+          "mlm_loss": 7.106898229496152,
+          "mlm_loss_derived_exponential": 1220.356404006801,
+          "top1_accuracy": 0.1568627450980392,
+          "top5_accuracy": 0.23529411764705882,
+          "top10_accuracy": 0.2549019607843137
         },
         "casualty_incident": {
-          "masked_sample_count": 153,
-          "mlm_loss": 7.3833782066365865,
-          "mlm_loss_derived_exponential": 1609.0161860489359,
-          "top1_accuracy": 0.09803921568627451,
-          "top5_accuracy": 0.17647058823529413,
-          "top10_accuracy": 0.20915032679738563
+          "masked_sample_count": 368,
+          "mlm_loss": 9.526979187665427,
+          "mlm_loss_derived_exponential": 13725.067544839827,
+          "top1_accuracy": 0.043478260869565216,
+          "top5_accuracy": 0.06793478260869565,
+          "top10_accuracy": 0.07608695652173914
         },
         "weather_environment": {
-          "masked_sample_count": 116,
-          "mlm_loss": 9.183952151059076,
-          "mlm_loss_derived_exponential": 9739.569057608822,
-          "top1_accuracy": 0.008620689655172414,
-          "top5_accuracy": 0.02586206896551724,
-          "top10_accuracy": 0.034482758620689655
+          "masked_sample_count": 351,
+          "mlm_loss": 8.524079614470148,
+          "mlm_loss_derived_exponential": 5034.5509449396,
+          "top1_accuracy": 0.03418803418803419,
+          "top5_accuracy": 0.06552706552706553,
+          "top10_accuracy": 0.06837606837606838
         },
         "safety_lifesaving": {
-          "masked_sample_count": 4,
-          "mlm_loss": 10.485702514648438,
-          "mlm_loss_derived_exponential": 35799.976452903065,
+          "masked_sample_count": 226,
+          "mlm_loss": 10.438436449101541,
+          "mlm_loss_derived_exponential": 34147.219760283355,
           "top1_accuracy": 0.0,
           "top5_accuracy": 0.0,
           "top10_accuracy": 0.0
         }
       },
-      "performance_gap_top1": 0.5944981454422839,
+      "performance_gap_top1": 0.6471495844286356,
       "masking_diagnostics": {
         "total_eligible_tokens": 50800,
         "total_masked_tokens": 7600,
         "actual_mask_rate": 0.1496,
-        "rare_maritime_tokens_masked": 4,
-        "maritime_tokens_masked": 1856,
-        "general_tokens_masked": 5740,
-        "rare_maritime_mask_fraction": 0.0005,
-        "maritime_mask_fraction": 0.2442,
-        "general_mask_fraction": 0.7553
+        "rare_maritime_tokens_masked": 1302,
+        "maritime_tokens_masked": 3985,
+        "general_tokens_masked": 2313,
+        "rare_maritime_mask_fraction": 0.1713,
+        "maritime_mask_fraction": 0.5243,
+        "general_mask_fraction": 0.3043
       }
     }
   },
@@ -144,106 +144,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 40.91278672218323,
+      "evaluation_time_sec": 7.118056535720825,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
         "total_masked_tokens": 7600,
-        "overall_top1_accuracy": 0.5036842105263157,
-        "overall_mlm_loss": 3.7579753676497365
+        "overall_top1_accuracy": 0.11366795366795367,
+        "overall_mlm_loss": 7.499458654160795
       },
       "general_tokens_summary": {
-        "masked_sample_count": 5630,
-        "mlm_loss": 2.290623860419714,
-        "mlm_loss_derived_exponential": 9.881100186011167,
-        "top1_accuracy": 0.6635879218472469,
-        "top5_accuracy": 0.741918294849023,
-        "top10_accuracy": 0.7737122557726466
+        "masked_sample_count": 570,
+        "mlm_loss": 1.8159931911619775,
+        "mlm_loss_derived_exponential": 6.147178469899252,
+        "top1_accuracy": 0.7210526315789474,
+        "top5_accuracy": 0.8070175438596491,
+        "top10_accuracy": 0.8298245614035088
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 1970,
-        "mlm_loss": 7.951472314708124,
-        "mlm_loss_derived_exponential": 2839.7528840418904,
-        "top1_accuracy": 0.046700507614213196,
-        "top5_accuracy": 0.10456852791878173,
-        "top10_accuracy": 0.15532994923857868
+        "masked_sample_count": 5905,
+        "mlm_loss": 8.048074287337649,
+        "mlm_loss_derived_exponential": 3127.7659895371903,
+        "top1_accuracy": 0.0550381033022862,
+        "top5_accuracy": 0.16545300592718035,
+        "top10_accuracy": 0.2086367485182049
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 4,
-        "mlm_loss": 10.557510614395142,
-        "mlm_loss_derived_exponential": 38465.253812220915,
-        "top1_accuracy": 0.0,
-        "top5_accuracy": 0.0,
-        "top10_accuracy": 0.0
+        "masked_sample_count": 1158,
+        "mlm_loss": 7.269219829413839,
+        "mlm_loss_derived_exponential": 1435.4301357037461,
+        "top1_accuracy": 0.015544041450777202,
+        "top5_accuracy": 0.037132987910189985,
+        "top10_accuracy": 0.16580310880829016
       },
       "category_recall": {
-        "vessel_terminology": 0.0504,
-        "navigation": 0.0,
+        "vessel_terminology": 0.0692,
+        "navigation": 0.0414,
         "machinery_propulsion": 0.0,
-        "casualty_incident": 0.0523,
-        "weather_environment": 0.0,
-        "safety_lifesaving": 0.0
+        "casualty_incident": 0.0082,
+        "weather_environment": 0.0318,
+        "safety_lifesaving": 0.0097
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 1666,
-          "mlm_loss": 7.8238752876080815,
-          "mlm_loss_derived_exponential": 2499.5732283104344,
-          "top1_accuracy": 0.05042016806722689,
-          "top5_accuracy": 0.11044417767106843,
-          "top10_accuracy": 0.1644657863145258
+          "masked_sample_count": 3832,
+          "mlm_loss": 8.098523149320329,
+          "mlm_loss_derived_exponential": 3289.6062288619755,
+          "top1_accuracy": 0.0691544885177453,
+          "top5_accuracy": 0.1315240083507307,
+          "top10_accuracy": 0.19545929018789143
         },
         "navigation": {
-          "masked_sample_count": 11,
-          "mlm_loss": 9.837207360701127,
-          "mlm_loss_derived_exponential": 18717.372096203006,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.0,
-          "top10_accuracy": 0.0
+          "masked_sample_count": 1643,
+          "mlm_loss": 6.50517712535066,
+          "mlm_loss_derived_exponential": 668.594083828588,
+          "top1_accuracy": 0.041387705416920266,
+          "top5_accuracy": 0.29640900791235547,
+          "top10_accuracy": 0.38831405964698723
         },
         "machinery_propulsion": {
-          "masked_sample_count": 23,
-          "mlm_loss": 10.333862180295197,
-          "mlm_loss_derived_exponential": 30756.670615537052,
+          "masked_sample_count": 56,
+          "mlm_loss": 8.253944963216782,
+          "mlm_loss_derived_exponential": 3842.755487880308,
           "top1_accuracy": 0.0,
-          "top5_accuracy": 0.0,
-          "top10_accuracy": 0.043478260869565216
+          "top5_accuracy": 0.17857142857142858,
+          "top10_accuracy": 0.26785714285714285
         },
         "casualty_incident": {
-          "masked_sample_count": 153,
-          "mlm_loss": 7.831280737336165,
-          "mlm_loss_derived_exponential": 2518.1524008506667,
-          "top1_accuracy": 0.05228758169934641,
-          "top5_accuracy": 0.13725490196078433,
-          "top10_accuracy": 0.17647058823529413
+          "masked_sample_count": 365,
+          "mlm_loss": 10.208504387532194,
+          "mlm_loss_derived_exponential": 27132.956839501192,
+          "top1_accuracy": 0.00821917808219178,
+          "top5_accuracy": 0.06027397260273973,
+          "top10_accuracy": 0.0821917808219178
         },
         "weather_environment": {
-          "masked_sample_count": 116,
-          "mlm_loss": 9.386639068866598,
-          "mlm_loss_derived_exponential": 11927.942893906602,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.008620689655172414,
-          "top10_accuracy": 0.034482758620689655
+          "masked_sample_count": 346,
+          "mlm_loss": 10.373927597365627,
+          "mlm_loss_derived_exponential": 32013.968346460777,
+          "top1_accuracy": 0.031791907514450865,
+          "top5_accuracy": 0.057803468208092484,
+          "top10_accuracy": 0.06936416184971098
         },
         "safety_lifesaving": {
-          "masked_sample_count": 5,
-          "mlm_loss": 7.826015472412109,
-          "mlm_loss_derived_exponential": 2504.9285055475966,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.0,
-          "top10_accuracy": 0.0
+          "masked_sample_count": 308,
+          "mlm_loss": 9.613598544555776,
+          "mlm_loss_derived_exponential": 14966.932469446905,
+          "top1_accuracy": 0.00974025974025974,
+          "top5_accuracy": 0.012987012987012988,
+          "top10_accuracy": 0.01948051948051948
         }
       },
-      "performance_gap_top1": 0.6168874142330337,
+      "performance_gap_top1": 0.6660145282766612,
       "masking_diagnostics": {
         "total_eligible_tokens": 50800,
         "total_masked_tokens": 7600,
         "actual_mask_rate": 0.1496,
-        "rare_maritime_tokens_masked": 4,
-        "maritime_tokens_masked": 1966,
-        "general_tokens_masked": 5630,
-        "rare_maritime_mask_fraction": 0.0005,
-        "maritime_mask_fraction": 0.2587,
-        "general_mask_fraction": 0.7408
+        "rare_maritime_tokens_masked": 2283,
+        "maritime_tokens_masked": 4747,
+        "general_tokens_masked": 570,
+        "rare_maritime_mask_fraction": 0.3004,
+        "maritime_mask_fraction": 0.6246,
+        "general_mask_fraction": 0.075
       }
     }
   },
@@ -268,106 +268,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 41.48655104637146,
+      "evaluation_time_sec": 7.469801187515259,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
         "total_masked_tokens": 7600,
-        "overall_top1_accuracy": 0.5263157894736842,
-        "overall_mlm_loss": 3.566142716001047
+        "overall_top1_accuracy": 0.0773075641452849,
+        "overall_mlm_loss": 6.209712388405517
       },
       "general_tokens_summary": {
-        "masked_sample_count": 5569,
-        "mlm_loss": 2.2196409398362613,
-        "mlm_loss_derived_exponential": 9.204025473606809,
-        "top1_accuracy": 0.6737295744298797,
-        "top5_accuracy": 0.7538157658466511,
-        "top10_accuracy": 0.7820075417489675
+        "masked_sample_count": 7,
+        "mlm_loss": 6.184694681117045,
+        "mlm_loss_derived_exponential": 485.26478048780956,
+        "top1_accuracy": 0.14285714285714285,
+        "top5_accuracy": 0.14285714285714285,
+        "top10_accuracy": 0.2857142857142857
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 2031,
-        "mlm_loss": 7.258249260295331,
-        "mlm_loss_derived_exponential": 1419.7687146116198,
-        "top1_accuracy": 0.12210733628754308,
-        "top5_accuracy": 0.2171344165435746,
-        "top10_accuracy": 0.2604628261939931
+        "masked_sample_count": 5995,
+        "mlm_loss": 6.209741600073744,
+        "mlm_loss_derived_exponential": 497.572661934632,
+        "top1_accuracy": 0.07723102585487907,
+        "top5_accuracy": 0.33894912427022517,
+        "top10_accuracy": 0.4443703085904921
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 2,
-        "mlm_loss": 8.423737525939941,
-        "mlm_loss_derived_exponential": 4553.891977287423,
-        "top1_accuracy": 0.0,
-        "top5_accuracy": 0.0,
-        "top10_accuracy": 0.0
+        "masked_sample_count": 1964,
+        "mlm_loss": 4.37490252545957,
+        "mlm_loss_derived_exponential": 79.43209656778717,
+        "top1_accuracy": 0.06466395112016293,
+        "top5_accuracy": 0.6237270875763747,
+        "top10_accuracy": 0.8044806517311609
       },
       "category_recall": {
-        "vessel_terminology": 0.1348,
-        "navigation": 0.0,
-        "machinery_propulsion": 0.0,
-        "casualty_incident": 0.1229,
-        "weather_environment": 0.0,
-        "safety_lifesaving": 0.0
+        "vessel_terminology": 0.0819,
+        "navigation": 0.0854,
+        "machinery_propulsion": 0.1579,
+        "casualty_incident": 0.0551,
+        "weather_environment": 0.0592,
+        "safety_lifesaving": 0.0691
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 1676,
-          "mlm_loss": 7.377129642925223,
-          "mlm_loss_derived_exponential": 1598.9934922291823,
-          "top1_accuracy": 0.13484486873508353,
-          "top5_accuracy": 0.2309069212410501,
-          "top10_accuracy": 0.2690930787589499
+          "masked_sample_count": 5117,
+          "mlm_loss": 6.031069433702759,
+          "mlm_loss_derived_exponential": 416.1598468541541,
+          "top1_accuracy": 0.08188391635724057,
+          "top5_accuracy": 0.3734610123119015,
+          "top10_accuracy": 0.48719953097518076
         },
         "navigation": {
-          "masked_sample_count": 9,
-          "mlm_loss": 8.143551720513237,
-          "mlm_loss_derived_exponential": 3441.11807896283,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.0,
-          "top10_accuracy": 0.0
+          "masked_sample_count": 2213,
+          "mlm_loss": 4.392794767865899,
+          "mlm_loss_derived_exponential": 80.86610545589298,
+          "top1_accuracy": 0.08540442837776774,
+          "top5_accuracy": 0.605512878445549,
+          "top10_accuracy": 0.7844554902846814
         },
         "machinery_propulsion": {
-          "masked_sample_count": 25,
-          "mlm_loss": 8.585987377166749,
-          "mlm_loss_derived_exponential": 5356.078575001413,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.0,
-          "top10_accuracy": 0.0
+          "masked_sample_count": 171,
+          "mlm_loss": 4.309078546556813,
+          "mlm_loss_derived_exponential": 74.37192708862717,
+          "top1_accuracy": 0.15789473684210525,
+          "top5_accuracy": 0.4444444444444444,
+          "top10_accuracy": 0.7076023391812866
         },
         "casualty_incident": {
-          "masked_sample_count": 179,
-          "mlm_loss": 6.471156262985155,
-          "mlm_loss_derived_exponential": 646.2305075602512,
-          "top1_accuracy": 0.12290502793296089,
-          "top5_accuracy": 0.22346368715083798,
-          "top10_accuracy": 0.2569832402234637
+          "masked_sample_count": 1670,
+          "mlm_loss": 4.544880833209654,
+          "mlm_loss_derived_exponential": 94.14920708206523,
+          "top1_accuracy": 0.055089820359281436,
+          "top5_accuracy": 0.6095808383233533,
+          "top10_accuracy": 0.8203592814371258
         },
         "weather_environment": {
-          "masked_sample_count": 141,
-          "mlm_loss": 6.513402335187222,
-          "mlm_loss_derived_exponential": 674.1160891576914,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.09929078014184398,
-          "top10_accuracy": 0.22695035460992907
+          "masked_sample_count": 321,
+          "mlm_loss": 7.30456077812727,
+          "mlm_loss_derived_exponential": 1487.0666661833664,
+          "top1_accuracy": 0.059190031152647975,
+          "top5_accuracy": 0.1059190031152648,
+          "top10_accuracy": 0.1308411214953271
         },
         "safety_lifesaving": {
-          "masked_sample_count": 3,
-          "mlm_loss": 9.871363639831543,
-          "mlm_loss_derived_exponential": 19367.731584885903,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.0,
-          "top10_accuracy": 0.0
+          "masked_sample_count": 839,
+          "mlm_loss": 5.666077417569042,
+          "mlm_loss_derived_exponential": 288.89907843845054,
+          "top1_accuracy": 0.06912991656734208,
+          "top5_accuracy": 0.3635280095351609,
+          "top10_accuracy": 0.45172824791418353
         }
       },
-      "performance_gap_top1": 0.5516222381423366,
+      "performance_gap_top1": 0.06562611700226378,
       "masking_diagnostics": {
         "total_eligible_tokens": 50800,
         "total_masked_tokens": 7600,
         "actual_mask_rate": 0.1496,
-        "rare_maritime_tokens_masked": 2,
-        "maritime_tokens_masked": 2029,
-        "general_tokens_masked": 5569,
-        "rare_maritime_mask_fraction": 0.0003,
-        "maritime_mask_fraction": 0.267,
-        "general_mask_fraction": 0.7328
+        "rare_maritime_tokens_masked": 3562,
+        "maritime_tokens_masked": 4031,
+        "general_tokens_masked": 7,
+        "rare_maritime_mask_fraction": 0.4687,
+        "maritime_mask_fraction": 0.5304,
+        "general_mask_fraction": 0.0009
       }
     }
   },
@@ -392,106 +392,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 41.967233657836914,
+      "evaluation_time_sec": 7.423579216003418,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
         "total_masked_tokens": 7600,
-        "overall_top1_accuracy": 0.5168421052631579,
-        "overall_mlm_loss": 3.7524333713769766
+        "overall_top1_accuracy": 0.24518140589569162,
+        "overall_mlm_loss": 6.715626240245994
       },
       "general_tokens_summary": {
-        "masked_sample_count": 5492,
-        "mlm_loss": 2.0054010517962304,
-        "mlm_loss_derived_exponential": 7.429072742349856,
-        "top1_accuracy": 0.6997450837581938,
-        "top5_accuracy": 0.7800436999271668,
-        "top10_accuracy": 0.8049890750182083
+        "masked_sample_count": 1763,
+        "mlm_loss": 1.8079329555488366,
+        "mlm_loss_derived_exponential": 6.0978299107531155,
+        "top1_accuracy": 0.7498581962563812,
+        "top5_accuracy": 0.8150879183210437,
+        "top10_accuracy": 0.8332387975042541
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 2108,
-        "mlm_loss": 8.303999547438389,
-        "mlm_loss_derived_exponential": 4039.998288992463,
-        "top1_accuracy": 0.04032258064516129,
-        "top5_accuracy": 0.0967741935483871,
-        "top10_accuracy": 0.1413662239089184
+        "masked_sample_count": 5293,
+        "mlm_loss": 8.350287729178753,
+        "mlm_loss_derived_exponential": 4231.39806468306,
+        "top1_accuracy": 0.07708293973172115,
+        "top5_accuracy": 0.1889287738522577,
+        "top10_accuracy": 0.22709238617041375
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 4,
-        "mlm_loss": 9.033361434936523,
-        "mlm_loss_derived_exponential": 8377.974308312107,
-        "top1_accuracy": 0.0,
-        "top5_accuracy": 0.0,
-        "top10_accuracy": 0.0
+        "masked_sample_count": 545,
+        "mlm_loss": 4.459670422007031,
+        "mlm_loss_derived_exponential": 86.45900941335668,
+        "top1_accuracy": 0.3339449541284404,
+        "top5_accuracy": 0.5761467889908257,
+        "top10_accuracy": 0.5963302752293578
       },
       "category_recall": {
-        "vessel_terminology": 0.0426,
-        "navigation": 0.0,
+        "vessel_terminology": 0.0656,
+        "navigation": 0.2425,
         "machinery_propulsion": 0.0,
-        "casualty_incident": 0.0542,
-        "weather_environment": 0.0,
-        "safety_lifesaving": 0.0
+        "casualty_incident": 0.0183,
+        "weather_environment": 0.031,
+        "safety_lifesaving": 0.008
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 1786,
-          "mlm_loss": 8.302464442100263,
-          "mlm_loss_derived_exponential": 4033.8012238438782,
-          "top1_accuracy": 0.0425531914893617,
-          "top5_accuracy": 0.09854423292273236,
-          "top10_accuracy": 0.14669652855543114
+          "masked_sample_count": 4180,
+          "mlm_loss": 8.617257321158615,
+          "mlm_loss_derived_exponential": 5526.208973372657,
+          "top1_accuracy": 0.06555023923444976,
+          "top5_accuracy": 0.16794258373205742,
+          "top10_accuracy": 0.19282296650717703
         },
         "navigation": {
-          "masked_sample_count": 11,
-          "mlm_loss": 8.013623454354025,
-          "mlm_loss_derived_exponential": 3021.846823299671,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.0,
-          "top10_accuracy": 0.0
+          "masked_sample_count": 771,
+          "mlm_loss": 4.403735323672288,
+          "mlm_loss_derived_exponential": 81.75568295843016,
+          "top1_accuracy": 0.24254215304798962,
+          "top5_accuracy": 0.5045395590142672,
+          "top10_accuracy": 0.6355382619974059
         },
         "machinery_propulsion": {
-          "masked_sample_count": 25,
-          "mlm_loss": 9.88808141708374,
-          "mlm_loss_derived_exponential": 19694.238639079216,
+          "masked_sample_count": 64,
+          "mlm_loss": 8.385376952588558,
+          "mlm_loss_derived_exponential": 4382.510236625517,
           "top1_accuracy": 0.0,
-          "top5_accuracy": 0.0,
-          "top10_accuracy": 0.0
+          "top5_accuracy": 0.03125,
+          "top10_accuracy": 0.109375
         },
         "casualty_incident": {
-          "masked_sample_count": 166,
-          "mlm_loss": 7.6112637637429925,
-          "mlm_loss_derived_exponential": 2020.8303367738938,
-          "top1_accuracy": 0.05421686746987952,
-          "top5_accuracy": 0.1566265060240964,
-          "top10_accuracy": 0.19879518072289157
+          "masked_sample_count": 493,
+          "mlm_loss": 9.298272658926274,
+          "mlm_loss_derived_exponential": 10919.141826853485,
+          "top1_accuracy": 0.018255578093306288,
+          "top5_accuracy": 0.05273833671399594,
+          "top10_accuracy": 0.09533468559837728
         },
         "weather_environment": {
-          "masked_sample_count": 121,
-          "mlm_loss": 8.929793637646132,
-          "mlm_loss_derived_exponential": 7553.706414764376,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.01652892561983471,
-          "top10_accuracy": 0.024793388429752067
+          "masked_sample_count": 355,
+          "mlm_loss": 9.226192579302989,
+          "mlm_loss_derived_exponential": 10159.78520128307,
+          "top1_accuracy": 0.030985915492957747,
+          "top5_accuracy": 0.05352112676056338,
+          "top10_accuracy": 0.07323943661971831
         },
         "safety_lifesaving": {
-          "masked_sample_count": 3,
-          "mlm_loss": 11.145429929097494,
-          "mlm_loss_derived_exponential": 69246.6418059961,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.0,
-          "top10_accuracy": 0.0
+          "masked_sample_count": 251,
+          "mlm_loss": 10.565223963137166,
+          "mlm_loss_derived_exponential": 38763.096936570815,
+          "top1_accuracy": 0.00796812749003984,
+          "top5_accuracy": 0.05976095617529881,
+          "top10_accuracy": 0.12350597609561753
         }
       },
-      "performance_gap_top1": 0.6594225031130325,
+      "performance_gap_top1": 0.6727752565246601,
       "masking_diagnostics": {
         "total_eligible_tokens": 50800,
         "total_masked_tokens": 7600,
         "actual_mask_rate": 0.1496,
-        "rare_maritime_tokens_masked": 4,
-        "maritime_tokens_masked": 2104,
-        "general_tokens_masked": 5492,
-        "rare_maritime_mask_fraction": 0.0005,
-        "maritime_mask_fraction": 0.2768,
-        "general_mask_fraction": 0.7226
+        "rare_maritime_tokens_masked": 1089,
+        "maritime_tokens_masked": 4748,
+        "general_tokens_masked": 1763,
+        "rare_maritime_mask_fraction": 0.1433,
+        "maritime_mask_fraction": 0.6247,
+        "general_mask_fraction": 0.232
       }
     }
   },
@@ -516,106 +516,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 41.101816177368164,
+      "evaluation_time_sec": 7.204561710357666,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
         "total_masked_tokens": 7600,
-        "overall_top1_accuracy": 0.49236842105263157,
-        "overall_mlm_loss": 4.077992581337121
+        "overall_top1_accuracy": 0.2423476551530469,
+        "overall_mlm_loss": 6.912344173536522
       },
       "general_tokens_summary": {
-        "masked_sample_count": 5603,
-        "mlm_loss": 2.6004546204355057,
-        "mlm_loss_derived_exponential": 13.469860317002507,
-        "top1_accuracy": 0.6505443512404069,
-        "top5_accuracy": 0.7190790647867213,
-        "top10_accuracy": 0.7379975013385687
+        "masked_sample_count": 2256,
+        "mlm_loss": 2.047851229645159,
+        "mlm_loss_derived_exponential": 7.751227590883461,
+        "top1_accuracy": 0.7109929078014184,
+        "top5_accuracy": 0.7841312056737588,
+        "top10_accuracy": 0.7983156028368794
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 1997,
-        "mlm_loss": 8.22353349016624,
-        "mlm_loss_derived_exponential": 3727.650756296721,
-        "top1_accuracy": 0.0485728592889334,
-        "top5_accuracy": 0.0871306960440661,
-        "top10_accuracy": 0.1186780170255383
+        "masked_sample_count": 4866,
+        "mlm_loss": 9.167645464415871,
+        "mlm_loss_derived_exponential": 9582.03686176431,
+        "top1_accuracy": 0.02507192766132347,
+        "top5_accuracy": 0.05281545417180436,
+        "top10_accuracy": 0.06781750924784218
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 4,
-        "mlm_loss": 8.000023603439331,
-        "mlm_loss_derived_exponential": 2981.0283487331094,
+        "masked_sample_count": 478,
+        "mlm_loss": 9.243924245674739,
+        "mlm_loss_derived_exponential": 10341.541784246696,
         "top1_accuracy": 0.0,
-        "top5_accuracy": 0.0,
-        "top10_accuracy": 0.0
+        "top5_accuracy": 0.012552301255230125,
+        "top10_accuracy": 0.01882845188284519
       },
       "category_recall": {
-        "vessel_terminology": 0.0509,
+        "vessel_terminology": 0.0301,
         "navigation": 0.0,
         "machinery_propulsion": 0.0,
-        "casualty_incident": 0.0723,
-        "weather_environment": 0.0,
+        "casualty_incident": 0.0182,
+        "weather_environment": 0.0084,
         "safety_lifesaving": 0.0
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 1671,
-          "mlm_loss": 8.26571337219923,
-          "mlm_loss_derived_exponential": 3888.245755100875,
-          "top1_accuracy": 0.050867743865948535,
-          "top5_accuracy": 0.08258527827648116,
-          "top10_accuracy": 0.11131059245960502
+          "masked_sample_count": 3954,
+          "mlm_loss": 9.084568352443691,
+          "mlm_loss_derived_exponential": 8818.158606610963,
+          "top1_accuracy": 0.03009610520991401,
+          "top5_accuracy": 0.05892766818411735,
+          "top10_accuracy": 0.07561962569549822
         },
         "navigation": {
-          "masked_sample_count": 14,
-          "mlm_loss": 7.450308356966291,
-          "mlm_loss_derived_exponential": 1720.3935589320208,
+          "masked_sample_count": 502,
+          "mlm_loss": 9.246089840315253,
+          "mlm_loss_derived_exponential": 10363.961639106026,
           "top1_accuracy": 0.0,
-          "top5_accuracy": 0.0,
-          "top10_accuracy": 0.07142857142857142
+          "top5_accuracy": 0.013944223107569721,
+          "top10_accuracy": 0.0199203187250996
         },
         "machinery_propulsion": {
-          "masked_sample_count": 25,
-          "mlm_loss": 10.908116493225098,
-          "mlm_loss_derived_exponential": 54617.875224871146,
+          "masked_sample_count": 69,
+          "mlm_loss": 9.634311309759168,
+          "mlm_loss_derived_exponential": 15280.171855717103,
           "top1_accuracy": 0.0,
           "top5_accuracy": 0.0,
           "top10_accuracy": 0.0
         },
         "casualty_incident": {
-          "masked_sample_count": 166,
-          "mlm_loss": 7.183216510048831,
-          "mlm_loss_derived_exponential": 1317.138039772141,
-          "top1_accuracy": 0.07228915662650602,
-          "top5_accuracy": 0.20481927710843373,
-          "top10_accuracy": 0.2710843373493976
+          "masked_sample_count": 494,
+          "mlm_loss": 8.925725444608371,
+          "mlm_loss_derived_exponential": 7523.038901895813,
+          "top1_accuracy": 0.018218623481781375,
+          "top5_accuracy": 0.05060728744939271,
+          "top10_accuracy": 0.06680161943319839
         },
         "weather_environment": {
-          "masked_sample_count": 121,
-          "mlm_loss": 8.549078681252219,
-          "mlm_loss_derived_exponential": 5161.996391627292,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.01652892561983471,
-          "top10_accuracy": 0.04132231404958678
+          "masked_sample_count": 356,
+          "mlm_loss": 9.280002196853081,
+          "mlm_loss_derived_exponential": 10721.45546988393,
+          "top1_accuracy": 0.008426966292134831,
+          "top5_accuracy": 0.0449438202247191,
+          "top10_accuracy": 0.056179775280898875
         },
         "safety_lifesaving": {
-          "masked_sample_count": 4,
-          "mlm_loss": 9.632434725761414,
-          "mlm_loss_derived_exponential": 15251.524217986045,
+          "masked_sample_count": 228,
+          "mlm_loss": 9.767674688707318,
+          "mlm_loss_derived_exponential": 17460.11976402839,
           "top1_accuracy": 0.0,
           "top5_accuracy": 0.0,
           "top10_accuracy": 0.0
         }
       },
-      "performance_gap_top1": 0.6019714919514735,
+      "performance_gap_top1": 0.685920980140095,
       "masking_diagnostics": {
         "total_eligible_tokens": 50800,
         "total_masked_tokens": 7600,
         "actual_mask_rate": 0.1496,
-        "rare_maritime_tokens_masked": 4,
-        "maritime_tokens_masked": 1993,
-        "general_tokens_masked": 5603,
-        "rare_maritime_mask_fraction": 0.0005,
-        "maritime_mask_fraction": 0.2622,
-        "general_mask_fraction": 0.7372
+        "rare_maritime_tokens_masked": 956,
+        "maritime_tokens_masked": 4388,
+        "general_tokens_masked": 2256,
+        "rare_maritime_mask_fraction": 0.1258,
+        "maritime_mask_fraction": 0.5774,
+        "general_mask_fraction": 0.2968
       }
     }
   },
@@ -640,106 +640,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 109.87541770935059,
+      "evaluation_time_sec": 7.841907024383545,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
         "total_masked_tokens": 7600,
-        "overall_top1_accuracy": 0.358421052631579,
-        "overall_mlm_loss": 4.533506422138922
+        "overall_top1_accuracy": 0.4616908850726552,
+        "overall_mlm_loss": 3.301963332387445
       },
       "general_tokens_summary": {
-        "masked_sample_count": 3925,
-        "mlm_loss": 2.1066437445818287,
-        "mlm_loss_derived_exponential": 8.220604484148197,
-        "top1_accuracy": 0.6440764331210191,
-        "top5_accuracy": 0.7610191082802548,
-        "top10_accuracy": 0.8007643312101911
+        "masked_sample_count": 5100,
+        "mlm_loss": 2.1327350830805387,
+        "mlm_loss_derived_exponential": 8.437913674456453,
+        "top1_accuracy": 0.6419607843137255,
+        "top5_accuracy": 0.7472549019607844,
+        "top10_accuracy": 0.7941176470588235
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 3675,
-        "mlm_loss": 7.12546179884956,
-        "mlm_loss_derived_exponential": 1243.2221530717904,
-        "top1_accuracy": 0.05333333333333334,
-        "top5_accuracy": 0.13551020408163264,
-        "top10_accuracy": 0.16625850340136056
+        "masked_sample_count": 2470,
+        "mlm_loss": 5.716159312737736,
+        "mlm_loss_derived_exponential": 303.7361244346382,
+        "top1_accuracy": 0.08947368421052632,
+        "top5_accuracy": 0.4263157894736842,
+        "top10_accuracy": 0.48947368421052634
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 6,
-        "mlm_loss": 5.1530126730601,
-        "mlm_loss_derived_exponential": 172.95175332011092,
+        "masked_sample_count": 30,
+        "mlm_loss": 4.961188427607218,
+        "mlm_loss_derived_exponential": 142.76335903745272,
         "top1_accuracy": 0.0,
         "top5_accuracy": 0.0,
         "top10_accuracy": 0.16666666666666666
       },
       "category_recall": {
-        "vessel_terminology": 0.0599,
+        "vessel_terminology": 0.0912,
         "navigation": 0.0,
         "machinery_propulsion": 0.0,
-        "casualty_incident": 0.0258,
-        "weather_environment": 0.0,
+        "casualty_incident": 0.0331,
+        "weather_environment": 0.7333,
         "safety_lifesaving": 0.0
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 3140,
-          "mlm_loss": 6.993382938918034,
-          "mlm_loss_derived_exponential": 1089.4006252814202,
-          "top1_accuracy": 0.05987261146496815,
-          "top5_accuracy": 0.15286624203821655,
-          "top10_accuracy": 0.1859872611464968
+          "masked_sample_count": 2422,
+          "mlm_loss": 5.607353424950265,
+          "mlm_loss_derived_exponential": 272.42229703634615,
+          "top1_accuracy": 0.09124690338563171,
+          "top5_accuracy": 0.4347646573080099,
+          "top10_accuracy": 0.4991742361684558
         },
         "navigation": {
-          "masked_sample_count": 20,
-          "mlm_loss": 7.462423062324524,
-          "mlm_loss_derived_exponential": 1741.3623790789004,
+          "masked_sample_count": 30,
+          "mlm_loss": 4.961188427607218,
+          "mlm_loss_derived_exponential": 142.76335903745272,
           "top1_accuracy": 0.0,
           "top5_accuracy": 0.0,
-          "top10_accuracy": 0.05
+          "top10_accuracy": 0.16666666666666666
         },
         "machinery_propulsion": {
-          "masked_sample_count": 65,
-          "mlm_loss": 6.886541942449717,
-          "mlm_loss_derived_exponential": 979.0100836728334,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.03076923076923077,
-          "top10_accuracy": 0.06153846153846154
-        },
-        "casualty_incident": {
-          "masked_sample_count": 310,
-          "mlm_loss": 7.850465992958315,
-          "mlm_loss_derived_exponential": 2566.9302095765106,
-          "top1_accuracy": 0.025806451612903226,
-          "top5_accuracy": 0.05161290322580645,
-          "top10_accuracy": 0.07419354838709677
-        },
-        "weather_environment": {
-          "masked_sample_count": 138,
-          "mlm_loss": 8.47638381736866,
-          "mlm_loss_derived_exponential": 4800.060578651118,
+          "masked_sample_count": 0,
+          "mlm_loss": 0.0,
+          "mlm_loss_derived_exponential": 1.0,
           "top1_accuracy": 0.0,
           "top5_accuracy": 0.0,
           "top10_accuracy": 0.0
         },
+        "casualty_incident": {
+          "masked_sample_count": 242,
+          "mlm_loss": 6.147283550136345,
+          "mlm_loss_derived_exponential": 467.4458672923608,
+          "top1_accuracy": 0.03305785123966942,
+          "top5_accuracy": 0.13636363636363635,
+          "top10_accuracy": 0.30991735537190085
+        },
+        "weather_environment": {
+          "masked_sample_count": 15,
+          "mlm_loss": 1.0373008037606875,
+          "mlm_loss_derived_exponential": 2.821590699516612,
+          "top1_accuracy": 0.7333333333333333,
+          "top5_accuracy": 0.8666666666666667,
+          "top10_accuracy": 0.8666666666666667
+        },
         "safety_lifesaving": {
-          "masked_sample_count": 8,
-          "mlm_loss": 7.188580811023712,
-          "mlm_loss_derived_exponential": 1324.222549375345,
+          "masked_sample_count": 0,
+          "mlm_loss": 0.0,
+          "mlm_loss_derived_exponential": 1.0,
           "top1_accuracy": 0.0,
           "top5_accuracy": 0.0,
           "top10_accuracy": 0.0
         }
       },
-      "performance_gap_top1": 0.5907430997876858,
+      "performance_gap_top1": 0.5524871001031992,
       "masking_diagnostics": {
         "total_eligible_tokens": 50800,
         "total_masked_tokens": 7600,
         "actual_mask_rate": 0.1496,
-        "rare_maritime_tokens_masked": 6,
-        "maritime_tokens_masked": 3669,
-        "general_tokens_masked": 3925,
-        "rare_maritime_mask_fraction": 0.0008,
-        "maritime_mask_fraction": 0.4828,
-        "general_mask_fraction": 0.5164
+        "rare_maritime_tokens_masked": 60,
+        "maritime_tokens_masked": 2440,
+        "general_tokens_masked": 5100,
+        "rare_maritime_mask_fraction": 0.0079,
+        "maritime_mask_fraction": 0.3211,
+        "general_mask_fraction": 0.6711
       }
     }
   },
@@ -764,106 +764,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 165.86864066123962,
+      "evaluation_time_sec": 9.919256448745728,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
         "total_masked_tokens": 7600,
-        "overall_top1_accuracy": 0.45552631578947367,
-        "overall_mlm_loss": 3.7190525085687938
+        "overall_top1_accuracy": 0.47031778228532795,
+        "overall_mlm_loss": 3.3432053531489023
       },
       "general_tokens_summary": {
-        "masked_sample_count": 3898,
-        "mlm_loss": 1.5584112265898167,
-        "mlm_loss_derived_exponential": 4.751266559410795,
-        "top1_accuracy": 0.7360184710107748,
-        "top5_accuracy": 0.8183683940482298,
-        "top10_accuracy": 0.8545407901487942
+        "masked_sample_count": 4140,
+        "mlm_loss": 1.6677882077050576,
+        "mlm_loss_derived_exponential": 5.300431369432728,
+        "top1_accuracy": 0.7070048309178744,
+        "top5_accuracy": 0.8050724637681159,
+        "top10_accuracy": 0.8420289855072464
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 3702,
-        "mlm_loss": 5.994087548318673,
-        "mlm_loss_derived_exponential": 401.05057771524275,
-        "top1_accuracy": 0.16018368449486764,
-        "top5_accuracy": 0.24149108589951376,
-        "top10_accuracy": 0.2976769313884387
+        "masked_sample_count": 3255,
+        "mlm_loss": 5.47415066256135,
+        "mlm_loss_derived_exponential": 238.44785820811038,
+        "top1_accuracy": 0.1692780337941628,
+        "top5_accuracy": 0.2912442396313364,
+        "top10_accuracy": 0.37450076804915516
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 6,
-        "mlm_loss": 4.784739096959432,
-        "mlm_loss_derived_exponential": 119.67013670797547,
-        "top1_accuracy": 0.0,
-        "top5_accuracy": 0.5,
-        "top10_accuracy": 0.6666666666666666
+        "masked_sample_count": 205,
+        "mlm_loss": 4.826989387302864,
+        "mlm_loss_derived_exponential": 124.83456582062763,
+        "top1_accuracy": 0.00975609756097561,
+        "top5_accuracy": 0.01951219512195122,
+        "top10_accuracy": 0.24390243902439024
       },
       "category_recall": {
-        "vessel_terminology": 0.1815,
-        "navigation": 0.0,
+        "vessel_terminology": 0.2048,
+        "navigation": 0.0098,
         "machinery_propulsion": 0.0,
-        "casualty_incident": 0.0781,
+        "casualty_incident": 0.6627,
         "weather_environment": 0.0,
-        "safety_lifesaving": 0.0
+        "safety_lifesaving": 0.0425
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 3152,
-          "mlm_loss": 5.859393389498446,
-          "mlm_loss_derived_exponential": 350.51145558704286,
-          "top1_accuracy": 0.1814720812182741,
-          "top5_accuracy": 0.26903553299492383,
-          "top10_accuracy": 0.32138324873096447
+          "masked_sample_count": 2607,
+          "mlm_loss": 5.576149418704301,
+          "mlm_loss_derived_exponential": 264.0528886043362,
+          "top1_accuracy": 0.2048331415420023,
+          "top5_accuracy": 0.32988108937476024,
+          "top10_accuracy": 0.36517069428461835
         },
         "navigation": {
-          "masked_sample_count": 18,
-          "mlm_loss": 6.740136914783054,
-          "mlm_loss_derived_exponential": 845.6765135414026,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.16666666666666666,
-          "top10_accuracy": 0.2222222222222222
+          "masked_sample_count": 205,
+          "mlm_loss": 4.826989387302864,
+          "mlm_loss_derived_exponential": 124.83456582062763,
+          "top1_accuracy": 0.00975609756097561,
+          "top5_accuracy": 0.01951219512195122,
+          "top10_accuracy": 0.24390243902439024
         },
         "machinery_propulsion": {
-          "masked_sample_count": 63,
-          "mlm_loss": 6.696710272440835,
-          "mlm_loss_derived_exponential": 809.737622571412,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.031746031746031744,
-          "top10_accuracy": 0.07936507936507936
-        },
-        "casualty_incident": {
-          "masked_sample_count": 269,
-          "mlm_loss": 7.030325054997737,
-          "mlm_loss_derived_exponential": 1130.3979919902188,
-          "top1_accuracy": 0.07806691449814127,
-          "top5_accuracy": 0.13011152416356878,
-          "top10_accuracy": 0.1412639405204461
-        },
-        "weather_environment": {
-          "masked_sample_count": 196,
-          "mlm_loss": 6.366697962186774,
-          "mlm_loss_derived_exponential": 582.1324284771309,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.04591836734693878,
-          "top10_accuracy": 0.23469387755102042
-        },
-        "safety_lifesaving": {
-          "masked_sample_count": 10,
-          "mlm_loss": 6.776712274551391,
-          "mlm_loss_derived_exponential": 877.1800509511592,
+          "masked_sample_count": 0,
+          "mlm_loss": 0.0,
+          "mlm_loss_derived_exponential": 1.0,
           "top1_accuracy": 0.0,
           "top5_accuracy": 0.0,
           "top10_accuracy": 0.0
+        },
+        "casualty_incident": {
+          "masked_sample_count": 255,
+          "mlm_loss": 2.815646513945916,
+          "mlm_loss_derived_exponential": 16.703971640736043,
+          "top1_accuracy": 0.6627450980392157,
+          "top5_accuracy": 0.7254901960784313,
+          "top10_accuracy": 0.7254901960784313
+        },
+        "weather_environment": {
+          "masked_sample_count": 0,
+          "mlm_loss": 0.0,
+          "mlm_loss_derived_exponential": 1.0,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 400,
+          "mlm_loss": 4.668772501647473,
+          "mlm_loss_derived_exponential": 106.56685148004584,
+          "top1_accuracy": 0.0425,
+          "top5_accuracy": 0.215,
+          "top10_accuracy": 0.55
         }
       },
-      "performance_gap_top1": 0.5758347865159071,
+      "performance_gap_top1": 0.5377267971237115,
       "masking_diagnostics": {
         "total_eligible_tokens": 50800,
         "total_masked_tokens": 7600,
         "actual_mask_rate": 0.1496,
-        "rare_maritime_tokens_masked": 6,
-        "maritime_tokens_masked": 3696,
-        "general_tokens_masked": 3898,
-        "rare_maritime_mask_fraction": 0.0008,
-        "maritime_mask_fraction": 0.4863,
-        "general_mask_fraction": 0.5129
+        "rare_maritime_tokens_masked": 410,
+        "maritime_tokens_masked": 3050,
+        "general_tokens_masked": 4140,
+        "rare_maritime_mask_fraction": 0.0539,
+        "maritime_mask_fraction": 0.4013,
+        "general_mask_fraction": 0.5447
       }
     }
   },
@@ -888,106 +888,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 90.10366916656494,
+      "evaluation_time_sec": 6.238725185394287,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
-        "total_masked_tokens": 6499,
-        "overall_top1_accuracy": 0.1923372826588706,
-        "overall_mlm_loss": 6.175334210731399
+        "total_masked_tokens": 6522,
+        "overall_top1_accuracy": 0.2732286096256685,
+        "overall_mlm_loss": 5.572114244801097
       },
       "general_tokens_summary": {
-        "masked_sample_count": 1,
-        "mlm_loss": 7.175638198852539,
-        "mlm_loss_derived_exponential": 1307.1940846024022,
+        "masked_sample_count": 0,
+        "mlm_loss": 0.0,
+        "mlm_loss_derived_exponential": 1.0,
         "top1_accuracy": 0.0,
         "top5_accuracy": 0.0,
         "top10_accuracy": 0.0
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 6498,
-        "mlm_loss": 6.175180270443907,
-        "mlm_loss_derived_exponential": 480.66966664509215,
-        "top1_accuracy": 0.19236688211757463,
-        "top5_accuracy": 0.30809479839950754,
-        "top10_accuracy": 0.37365343182517696
+        "masked_sample_count": 5984,
+        "mlm_loss": 5.572114244801097,
+        "mlm_loss_derived_exponential": 262.98953612810277,
+        "top1_accuracy": 0.2732286096256685,
+        "top5_accuracy": 0.38786764705882354,
+        "top10_accuracy": 0.446524064171123
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 619,
-        "mlm_loss": 11.578127145382044,
-        "mlm_loss_derived_exponential": 106737.42711605033,
-        "top1_accuracy": 0.0,
-        "top5_accuracy": 0.0,
-        "top10_accuracy": 0.0
+        "masked_sample_count": 1523,
+        "mlm_loss": 8.187315727177687,
+        "mlm_loss_derived_exponential": 3595.0591634828565,
+        "top1_accuracy": 0.16414970453053185,
+        "top5_accuracy": 0.20157583716349312,
+        "top10_accuracy": 0.21996060407091267
       },
       "category_recall": {
-        "vessel_terminology": 0.1825,
-        "navigation": 0.1872,
-        "machinery_propulsion": 0.5,
-        "casualty_incident": 0.4309,
-        "weather_environment": 0.0926,
-        "safety_lifesaving": 0.2273
+        "vessel_terminology": 0.3145,
+        "navigation": 0.2591,
+        "machinery_propulsion": 0.3636,
+        "casualty_incident": 0.5311,
+        "weather_environment": 0.2334,
+        "safety_lifesaving": 0.2985
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 3994,
-          "mlm_loss": 5.986945962962789,
-          "mlm_loss_derived_exponential": 398.1966437188229,
-          "top1_accuracy": 0.18252378567851776,
-          "top5_accuracy": 0.28893340010015023,
-          "top10_accuracy": 0.34827240861291936
+          "masked_sample_count": 3281,
+          "mlm_loss": 4.819588990753118,
+          "mlm_loss_derived_exponential": 123.91415045041317,
+          "top1_accuracy": 0.314538250533374,
+          "top5_accuracy": 0.43005181347150256,
+          "top10_accuracy": 0.48613227674489484
         },
         "navigation": {
-          "masked_sample_count": 1880,
-          "mlm_loss": 7.262738251929099,
-          "mlm_loss_derived_exponential": 1426.1563708345757,
-          "top1_accuracy": 0.18723404255319148,
-          "top5_accuracy": 0.29840425531914894,
-          "top10_accuracy": 0.35319148936170214
+          "masked_sample_count": 2597,
+          "mlm_loss": 6.5295144309098525,
+          "mlm_loss_derived_exponential": 685.0654840934737,
+          "top1_accuracy": 0.25914516750096267,
+          "top5_accuracy": 0.3523296110897189,
+          "top10_accuracy": 0.38852522140931844
         },
         "machinery_propulsion": {
-          "masked_sample_count": 16,
-          "mlm_loss": 2.576452344452264,
-          "mlm_loss_derived_exponential": 13.150402209795574,
-          "top1_accuracy": 0.5,
-          "top5_accuracy": 0.625,
-          "top10_accuracy": 0.8125
+          "masked_sample_count": 22,
+          "mlm_loss": 3.55636786070483,
+          "mlm_loss_derived_exponential": 35.03571117856057,
+          "top1_accuracy": 0.36363636363636365,
+          "top5_accuracy": 0.6363636363636364,
+          "top10_accuracy": 0.6818181818181818
         },
         "casualty_incident": {
-          "masked_sample_count": 304,
-          "mlm_loss": 4.125374460279617,
-          "mlm_loss_derived_exponential": 61.89098062562814,
-          "top1_accuracy": 0.4309210526315789,
-          "top5_accuracy": 0.4934210526315789,
-          "top10_accuracy": 0.5164473684210527
+          "masked_sample_count": 209,
+          "mlm_loss": 3.1836250335087835,
+          "mlm_loss_derived_exponential": 24.134082028163274,
+          "top1_accuracy": 0.5311004784688995,
+          "top5_accuracy": 0.6555023923444976,
+          "top10_accuracy": 0.6985645933014354
         },
         "weather_environment": {
-          "masked_sample_count": 432,
-          "mlm_loss": 5.388733602882389,
-          "mlm_loss_derived_exponential": 218.92596271913422,
-          "top1_accuracy": 0.09259259259259259,
-          "top5_accuracy": 0.3333333333333333,
-          "top10_accuracy": 0.5138888888888888
+          "masked_sample_count": 437,
+          "mlm_loss": 4.559764121129246,
+          "mlm_loss_derived_exponential": 95.56093636564918,
+          "top1_accuracy": 0.2334096109839817,
+          "top5_accuracy": 0.43249427917620137,
+          "top10_accuracy": 0.6086956521739131
         },
         "safety_lifesaving": {
-          "masked_sample_count": 22,
-          "mlm_loss": 8.364043988923102,
-          "mlm_loss_derived_exponential": 4290.008481342843,
-          "top1_accuracy": 0.22727272727272727,
-          "top5_accuracy": 0.2727272727272727,
-          "top10_accuracy": 0.3181818181818182
+          "masked_sample_count": 67,
+          "mlm_loss": 5.031657706464889,
+          "mlm_loss_derived_exponential": 153.18674098486437,
+          "top1_accuracy": 0.29850746268656714,
+          "top5_accuracy": 0.4626865671641791,
+          "top10_accuracy": 0.5522388059701493
         }
       },
-      "performance_gap_top1": -0.19236688211757463,
+      "performance_gap_top1": -0.2732286096256685,
       "masking_diagnostics": {
-        "total_eligible_tokens": 43346,
-        "total_masked_tokens": 6499,
-        "actual_mask_rate": 0.1499,
-        "rare_maritime_tokens_masked": 619,
-        "maritime_tokens_masked": 5879,
-        "general_tokens_masked": 1,
-        "rare_maritime_mask_fraction": 0.0952,
-        "maritime_mask_fraction": 0.9046,
-        "general_mask_fraction": 0.0002
+        "total_eligible_tokens": 43474,
+        "total_masked_tokens": 6522,
+        "actual_mask_rate": 0.15,
+        "rare_maritime_tokens_masked": 2061,
+        "maritime_tokens_masked": 4461,
+        "general_tokens_masked": 0,
+        "rare_maritime_mask_fraction": 0.316,
+        "maritime_mask_fraction": 0.684,
+        "general_mask_fraction": 0.0
       }
     }
   },
@@ -1012,12 +1012,12 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 90.65982460975647,
+      "evaluation_time_sec": 6.135181427001953,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
-        "total_masked_tokens": 6761,
-        "overall_top1_accuracy": 0.17674900162697826,
-        "overall_mlm_loss": 6.160787257283832
+        "total_masked_tokens": 6789,
+        "overall_top1_accuracy": 0.2512226931855233,
+        "overall_mlm_loss": 5.014222979281087
       },
       "general_tokens_summary": {
         "masked_sample_count": 0,
@@ -1028,89 +1028,89 @@
         "top10_accuracy": 0.0
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 6761,
-        "mlm_loss": 6.160787257283832,
-        "mlm_loss_derived_exponential": 473.80093128283886,
-        "top1_accuracy": 0.17674900162697826,
-        "top5_accuracy": 0.25247744416506435,
-        "top10_accuracy": 0.3057240053246561
+        "masked_sample_count": 6134,
+        "mlm_loss": 5.014222979281087,
+        "mlm_loss_derived_exponential": 150.53911929460565,
+        "top1_accuracy": 0.2512226931855233,
+        "top5_accuracy": 0.33860449951092275,
+        "top10_accuracy": 0.40805347244864687
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 511,
-        "mlm_loss": 8.030409085850456,
-        "mlm_loss_derived_exponential": 3072.9985363918213,
-        "top1_accuracy": 0.11350293542074363,
-        "top5_accuracy": 0.14090019569471623,
-        "top10_accuracy": 0.17221135029354206
+        "masked_sample_count": 2840,
+        "mlm_loss": 6.004699832043454,
+        "mlm_loss_derived_exponential": 405.32930360453446,
+        "top1_accuracy": 0.1028169014084507,
+        "top5_accuracy": 0.1658450704225352,
+        "top10_accuracy": 0.2535211267605634
       },
       "category_recall": {
-        "vessel_terminology": 0.159,
-        "navigation": 0.2215,
-        "machinery_propulsion": 0.2857,
-        "casualty_incident": 0.1935,
-        "weather_environment": 0.0776,
-        "safety_lifesaving": 0.129
+        "vessel_terminology": 0.2384,
+        "navigation": 0.1939,
+        "machinery_propulsion": 0.5,
+        "casualty_incident": 0.3529,
+        "weather_environment": 0.1626,
+        "safety_lifesaving": 0.4267
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 4131,
-          "mlm_loss": 6.625728081109013,
-          "mlm_loss_derived_exponential": 754.2531701720912,
-          "top1_accuracy": 0.15904139433551198,
-          "top5_accuracy": 0.21520213023480997,
-          "top10_accuracy": 0.25780682643427744
+          "masked_sample_count": 4069,
+          "mlm_loss": 4.989826961979297,
+          "mlm_loss_derived_exponential": 146.91100010747374,
+          "top1_accuracy": 0.2383878102727943,
+          "top5_accuracy": 0.3187515360039322,
+          "top10_accuracy": 0.39665765544359793
         },
         "navigation": {
-          "masked_sample_count": 1955,
-          "mlm_loss": 5.753983550182948,
-          "mlm_loss_derived_exponential": 315.44475075572103,
-          "top1_accuracy": 0.22148337595907927,
-          "top5_accuracy": 0.30383631713554987,
-          "top10_accuracy": 0.36010230179028135
+          "masked_sample_count": 3698,
+          "mlm_loss": 5.386967344627808,
+          "mlm_loss_derived_exponential": 218.53962421756066,
+          "top1_accuracy": 0.19388858842617632,
+          "top5_accuracy": 0.26554894537587886,
+          "top10_accuracy": 0.3447809626825311
         },
         "machinery_propulsion": {
-          "masked_sample_count": 21,
-          "mlm_loss": 5.849745266582994,
-          "mlm_loss_derived_exponential": 347.14593954340245,
-          "top1_accuracy": 0.2857142857142857,
-          "top5_accuracy": 0.2857142857142857,
-          "top10_accuracy": 0.2857142857142857
+          "masked_sample_count": 18,
+          "mlm_loss": 3.567202868224639,
+          "mlm_loss_derived_exponential": 35.41738737087402,
+          "top1_accuracy": 0.5,
+          "top5_accuracy": 0.5555555555555556,
+          "top10_accuracy": 0.6666666666666666
         },
         "casualty_incident": {
-          "masked_sample_count": 310,
-          "mlm_loss": 5.02618305574682,
-          "mlm_loss_derived_exponential": 152.35038854100125,
-          "top1_accuracy": 0.1935483870967742,
-          "top5_accuracy": 0.3193548387096774,
-          "top10_accuracy": 0.4483870967741935
+          "masked_sample_count": 136,
+          "mlm_loss": 3.870382606972913,
+          "mlm_loss_derived_exponential": 47.96073268157674,
+          "top1_accuracy": 0.35294117647058826,
+          "top5_accuracy": 0.49264705882352944,
+          "top10_accuracy": 0.5955882352941176
         },
         "weather_environment": {
-          "masked_sample_count": 451,
-          "mlm_loss": 5.723883884513912,
-          "mlm_loss_derived_exponential": 306.0914411236548,
-          "top1_accuracy": 0.07760532150776053,
-          "top5_accuracy": 0.24833702882483372,
-          "top10_accuracy": 0.3259423503325942
+          "masked_sample_count": 289,
+          "mlm_loss": 4.7775494053196095,
+          "mlm_loss_derived_exponential": 118.81283090170442,
+          "top1_accuracy": 0.16262975778546712,
+          "top5_accuracy": 0.42560553633217996,
+          "top10_accuracy": 0.4913494809688581
         },
         "safety_lifesaving": {
-          "masked_sample_count": 31,
-          "mlm_loss": 6.440470325809363,
-          "mlm_loss_derived_exponential": 626.70148439005,
-          "top1_accuracy": 0.12903225806451613,
-          "top5_accuracy": 0.22580645161290322,
-          "top10_accuracy": 0.25806451612903225
+          "masked_sample_count": 150,
+          "mlm_loss": 3.6531189366888914,
+          "mlm_loss_derived_exponential": 38.59485342754795,
+          "top1_accuracy": 0.4266666666666667,
+          "top5_accuracy": 0.52,
+          "top10_accuracy": 0.5933333333333334
         }
       },
-      "performance_gap_top1": -0.17674900162697826,
+      "performance_gap_top1": -0.2512226931855233,
       "masking_diagnostics": {
-        "total_eligible_tokens": 45111,
-        "total_masked_tokens": 6761,
+        "total_eligible_tokens": 45288,
+        "total_masked_tokens": 6789,
         "actual_mask_rate": 0.1499,
-        "rare_maritime_tokens_masked": 511,
-        "maritime_tokens_masked": 6250,
+        "rare_maritime_tokens_masked": 3495,
+        "maritime_tokens_masked": 3294,
         "general_tokens_masked": 0,
-        "rare_maritime_mask_fraction": 0.0756,
-        "maritime_mask_fraction": 0.9244,
+        "rare_maritime_mask_fraction": 0.5148,
+        "maritime_mask_fraction": 0.4852,
         "general_mask_fraction": 0.0
       }
     }
@@ -1136,12 +1136,12 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 91.61360669136047,
+      "evaluation_time_sec": 6.798908948898315,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
-        "total_masked_tokens": 6716,
-        "overall_top1_accuracy": 0.28379988088147706,
-        "overall_mlm_loss": 4.554551699356486
+        "total_masked_tokens": 6736,
+        "overall_top1_accuracy": 0.35152202072538863,
+        "overall_mlm_loss": 3.841378105377311
       },
       "general_tokens_summary": {
         "masked_sample_count": 0,
@@ -1152,89 +1152,89 @@
         "top10_accuracy": 0.0
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 6716,
-        "mlm_loss": 4.554551699356486,
-        "mlm_loss_derived_exponential": 95.06412837154251,
-        "top1_accuracy": 0.28379988088147706,
-        "top5_accuracy": 0.43046456223942825,
-        "top10_accuracy": 0.5022334723049434
+        "masked_sample_count": 6176,
+        "mlm_loss": 3.841378105377311,
+        "mlm_loss_derived_exponential": 46.589635646594246,
+        "top1_accuracy": 0.35152202072538863,
+        "top5_accuracy": 0.5160297927461139,
+        "top10_accuracy": 0.5963406735751295
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 479,
-        "mlm_loss": 6.322283735638776,
-        "mlm_loss_derived_exponential": 556.8432241788695,
-        "top1_accuracy": 0.13569937369519833,
-        "top5_accuracy": 0.27348643006263046,
-        "top10_accuracy": 0.2985386221294363
+        "masked_sample_count": 2303,
+        "mlm_loss": 4.9457214746566835,
+        "mlm_loss_derived_exponential": 140.57223357847465,
+        "top1_accuracy": 0.17325227963525835,
+        "top5_accuracy": 0.40208423795049936,
+        "top10_accuracy": 0.49109856708640903
       },
       "category_recall": {
-        "vessel_terminology": 0.2604,
-        "navigation": 0.3509,
-        "machinery_propulsion": 0.4118,
-        "casualty_incident": 0.2526,
-        "weather_environment": 0.1469,
-        "safety_lifesaving": 0.0769
+        "vessel_terminology": 0.3312,
+        "navigation": 0.3034,
+        "machinery_propulsion": 0.4286,
+        "casualty_incident": 0.3406,
+        "weather_environment": 0.3234,
+        "safety_lifesaving": 0.1382
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 3937,
-          "mlm_loss": 4.787329661733473,
-          "mlm_loss_derived_exponential": 119.98055185030208,
-          "top1_accuracy": 0.2603505207010414,
-          "top5_accuracy": 0.39395478790957583,
-          "top10_accuracy": 0.47269494538989076
+          "masked_sample_count": 4318,
+          "mlm_loss": 3.780382906725846,
+          "mlm_loss_derived_exponential": 43.83282240516506,
+          "top1_accuracy": 0.3311718388142659,
+          "top5_accuracy": 0.5132005558128764,
+          "top10_accuracy": 0.6046780917091246
         },
         "navigation": {
-          "masked_sample_count": 2086,
-          "mlm_loss": 4.089073843638651,
-          "mlm_loss_derived_exponential": 59.68458883692134,
-          "top1_accuracy": 0.35091083413231067,
-          "top5_accuracy": 0.49760306807286675,
-          "top10_accuracy": 0.5532118887823586
+          "masked_sample_count": 3411,
+          "mlm_loss": 4.10592199269394,
+          "mlm_loss_derived_exponential": 60.69868249824766,
+          "top1_accuracy": 0.3034300791556728,
+          "top5_accuracy": 0.49780123131046616,
+          "top10_accuracy": 0.5775432424508942
         },
         "machinery_propulsion": {
-          "masked_sample_count": 17,
-          "mlm_loss": 4.519311773991349,
-          "mlm_loss_derived_exponential": 91.7724160753165,
-          "top1_accuracy": 0.4117647058823529,
-          "top5_accuracy": 0.4117647058823529,
-          "top10_accuracy": 0.5294117647058824
+          "masked_sample_count": 63,
+          "mlm_loss": 3.264649735882394,
+          "mlm_loss_derived_exponential": 26.170942643113275,
+          "top1_accuracy": 0.42857142857142855,
+          "top5_accuracy": 0.6190476190476191,
+          "top10_accuracy": 0.6666666666666666
         },
         "casualty_incident": {
-          "masked_sample_count": 293,
-          "mlm_loss": 4.381476054807216,
-          "mlm_loss_derived_exponential": 79.95596573396926,
-          "top1_accuracy": 0.2525597269624573,
-          "top5_accuracy": 0.4300341296928328,
-          "top10_accuracy": 0.49829351535836175
+          "masked_sample_count": 323,
+          "mlm_loss": 4.054289496531793,
+          "mlm_loss_derived_exponential": 57.644192044515414,
+          "top1_accuracy": 0.34055727554179566,
+          "top5_accuracy": 0.4582043343653251,
+          "top10_accuracy": 0.5077399380804953
         },
         "weather_environment": {
-          "masked_sample_count": 456,
-          "mlm_loss": 5.1819992684048515,
-          "mlm_loss_derived_exponential": 178.0384019659233,
-          "top1_accuracy": 0.14692982456140352,
-          "top5_accuracy": 0.36622807017543857,
-          "top10_accuracy": 0.43859649122807015
+          "masked_sample_count": 368,
+          "mlm_loss": 4.205754591513141,
+          "mlm_loss_derived_exponential": 67.07118992635375,
+          "top1_accuracy": 0.3233695652173913,
+          "top5_accuracy": 0.4701086956521739,
+          "top10_accuracy": 0.5380434782608695
         },
         "safety_lifesaving": {
-          "masked_sample_count": 13,
-          "mlm_loss": 6.541131688998296,
-          "mlm_loss_derived_exponential": 693.0704746204307,
-          "top1_accuracy": 0.07692307692307693,
-          "top5_accuracy": 0.23076923076923078,
-          "top10_accuracy": 0.3076923076923077
+          "masked_sample_count": 1483,
+          "mlm_loss": 4.653043409679869,
+          "mlm_loss_derived_exponential": 104.90376537729942,
+          "top1_accuracy": 0.13823331085637222,
+          "top5_accuracy": 0.42346594740391097,
+          "top10_accuracy": 0.5387727579231288
         }
       },
-      "performance_gap_top1": -0.28379988088147706,
+      "performance_gap_top1": -0.35152202072538863,
       "masking_diagnostics": {
-        "total_eligible_tokens": 44832,
-        "total_masked_tokens": 6716,
-        "actual_mask_rate": 0.1498,
-        "rare_maritime_tokens_masked": 479,
-        "maritime_tokens_masked": 6237,
+        "total_eligible_tokens": 44951,
+        "total_masked_tokens": 6736,
+        "actual_mask_rate": 0.1499,
+        "rare_maritime_tokens_masked": 2863,
+        "maritime_tokens_masked": 3873,
         "general_tokens_masked": 0,
-        "rare_maritime_mask_fraction": 0.0713,
-        "maritime_mask_fraction": 0.9287,
+        "rare_maritime_mask_fraction": 0.425,
+        "maritime_mask_fraction": 0.575,
         "general_mask_fraction": 0.0
       }
     }
@@ -1260,12 +1260,12 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 75.9938793182373,
+      "evaluation_time_sec": 6.500991106033325,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
-        "total_masked_tokens": 6643,
-        "overall_top1_accuracy": 0.29263886798133376,
-        "overall_mlm_loss": 5.017285591300416
+        "total_masked_tokens": 6660,
+        "overall_top1_accuracy": 0.4037025008119519,
+        "overall_mlm_loss": 3.9715810826813316
       },
       "general_tokens_summary": {
         "masked_sample_count": 0,
@@ -1276,89 +1276,89 @@
         "top10_accuracy": 0.0
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 6643,
-        "mlm_loss": 5.017285591300416,
-        "mlm_loss_derived_exponential": 151.00086892980934,
-        "top1_accuracy": 0.29263886798133376,
-        "top5_accuracy": 0.39876561794370013,
-        "top10_accuracy": 0.4598825831702544
+        "masked_sample_count": 6158,
+        "mlm_loss": 3.9715810826813316,
+        "mlm_loss_derived_exponential": 53.06837002464168,
+        "top1_accuracy": 0.4037025008119519,
+        "top5_accuracy": 0.5350763234816499,
+        "top10_accuracy": 0.5962974991880481
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 409,
-        "mlm_loss": 8.670074211923101,
-        "mlm_loss_derived_exponential": 5825.931687076584,
-        "top1_accuracy": 0.10757946210268948,
-        "top5_accuracy": 0.15403422982885084,
-        "top10_accuracy": 0.1687041564792176
+        "masked_sample_count": 1384,
+        "mlm_loss": 4.349287620759121,
+        "mlm_loss_derived_exponential": 77.4232885315374,
+        "top1_accuracy": 0.440028901734104,
+        "top5_accuracy": 0.5722543352601156,
+        "top10_accuracy": 0.6069364161849711
       },
       "category_recall": {
-        "vessel_terminology": 0.2469,
-        "navigation": 0.4016,
-        "machinery_propulsion": 0.55,
-        "casualty_incident": 0.2778,
-        "weather_environment": 0.1034,
-        "safety_lifesaving": 0.0
+        "vessel_terminology": 0.3942,
+        "navigation": 0.5191,
+        "machinery_propulsion": 0.4286,
+        "casualty_incident": 0.3763,
+        "weather_environment": 0.2102,
+        "safety_lifesaving": 0.3103
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 4066,
-          "mlm_loss": 5.296897717851581,
-          "mlm_loss_derived_exponential": 199.71627170561277,
-          "top1_accuracy": 0.2469257255287752,
-          "top5_accuracy": 0.34923757993113624,
-          "top10_accuracy": 0.4131824889326119
+          "masked_sample_count": 3818,
+          "mlm_loss": 3.9754659629121893,
+          "mlm_loss_derived_exponential": 53.27493526705234,
+          "top1_accuracy": 0.394185437401781,
+          "top5_accuracy": 0.5055002619172342,
+          "top10_accuracy": 0.571765322158198
         },
         "navigation": {
-          "masked_sample_count": 2027,
-          "mlm_loss": 4.685801162224654,
-          "mlm_loss_derived_exponential": 108.39708117624875,
-          "top1_accuracy": 0.4015786877158362,
-          "top5_accuracy": 0.47755303404045385,
-          "top10_accuracy": 0.5180069067587568
+          "masked_sample_count": 2726,
+          "mlm_loss": 3.4405414372406127,
+          "mlm_loss_derived_exponential": 31.203848521003568,
+          "top1_accuracy": 0.5190755685986794,
+          "top5_accuracy": 0.6349963316214233,
+          "top10_accuracy": 0.6694790902421129
         },
         "machinery_propulsion": {
-          "masked_sample_count": 20,
-          "mlm_loss": 3.1869272594820357,
-          "mlm_loss_derived_exponential": 24.213909953059172,
-          "top1_accuracy": 0.55,
-          "top5_accuracy": 0.55,
-          "top10_accuracy": 0.55
+          "masked_sample_count": 35,
+          "mlm_loss": 4.1114854858674725,
+          "mlm_loss_derived_exponential": 61.03732033514374,
+          "top1_accuracy": 0.42857142857142855,
+          "top5_accuracy": 0.5142857142857142,
+          "top10_accuracy": 0.6
         },
         "casualty_incident": {
-          "masked_sample_count": 270,
-          "mlm_loss": 4.2199196498177045,
-          "mlm_loss_derived_exponential": 68.02801800616619,
-          "top1_accuracy": 0.2777777777777778,
-          "top5_accuracy": 0.45185185185185184,
-          "top10_accuracy": 0.5407407407407407
+          "masked_sample_count": 194,
+          "mlm_loss": 3.935463917380158,
+          "mlm_loss_derived_exponential": 51.185890473621946,
+          "top1_accuracy": 0.37628865979381443,
+          "top5_accuracy": 0.5567010309278351,
+          "top10_accuracy": 0.6597938144329897
         },
         "weather_environment": {
-          "masked_sample_count": 406,
-          "mlm_loss": 5.635843833978833,
-          "mlm_loss_derived_exponential": 280.2953402777399,
-          "top1_accuracy": 0.10344827586206896,
-          "top5_accuracy": 0.34236453201970446,
-          "top10_accuracy": 0.45320197044334976
+          "masked_sample_count": 433,
+          "mlm_loss": 4.347724329690706,
+          "mlm_loss_derived_exponential": 77.30234795338191,
+          "top1_accuracy": 0.21016166281755197,
+          "top5_accuracy": 0.5196304849884527,
+          "top10_accuracy": 0.6581986143187067
         },
         "safety_lifesaving": {
-          "masked_sample_count": 12,
-          "mlm_loss": 9.39101646343867,
-          "mlm_loss_derived_exponential": 11980.27065245261,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.08333333333333333,
-          "top10_accuracy": 0.08333333333333333
+          "masked_sample_count": 29,
+          "mlm_loss": 4.2545093536981105,
+          "mlm_loss_derived_exponential": 70.42225629091774,
+          "top1_accuracy": 0.3103448275862069,
+          "top5_accuracy": 0.4827586206896552,
+          "top10_accuracy": 0.5517241379310345
         }
       },
-      "performance_gap_top1": -0.29263886798133376,
+      "performance_gap_top1": -0.4037025008119519,
       "masking_diagnostics": {
-        "total_eligible_tokens": 44325,
-        "total_masked_tokens": 6643,
+        "total_eligible_tokens": 44417,
+        "total_masked_tokens": 6660,
         "actual_mask_rate": 0.1499,
-        "rare_maritime_tokens_masked": 409,
-        "maritime_tokens_masked": 6234,
+        "rare_maritime_tokens_masked": 1886,
+        "maritime_tokens_masked": 4774,
         "general_tokens_masked": 0,
-        "rare_maritime_mask_fraction": 0.0616,
-        "maritime_mask_fraction": 0.9384,
+        "rare_maritime_mask_fraction": 0.2832,
+        "maritime_mask_fraction": 0.7168,
         "general_mask_fraction": 0.0
       }
     }
@@ -1384,12 +1384,12 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 39.73339104652405,
+      "evaluation_time_sec": 6.400235891342163,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
-        "total_masked_tokens": 6632,
-        "overall_top1_accuracy": 0.24728588661037396,
-        "overall_mlm_loss": 5.622191566535955
+        "total_masked_tokens": 6639,
+        "overall_top1_accuracy": 0.2711422519146163,
+        "overall_mlm_loss": 5.30522541723457
       },
       "general_tokens_summary": {
         "masked_sample_count": 0,
@@ -1400,89 +1400,89 @@
         "top10_accuracy": 0.0
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 6632,
-        "mlm_loss": 5.622191566535955,
-        "mlm_loss_derived_exponential": 276.49467620234435,
-        "top1_accuracy": 0.24728588661037396,
-        "top5_accuracy": 0.3336851628468034,
-        "top10_accuracy": 0.37680940892641734
+        "masked_sample_count": 6137,
+        "mlm_loss": 5.30522541723457,
+        "mlm_loss_derived_exponential": 201.38639326141325,
+        "top1_accuracy": 0.2711422519146163,
+        "top5_accuracy": 0.3685839986964315,
+        "top10_accuracy": 0.41567541143881376
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 411,
-        "mlm_loss": 8.226177367286013,
-        "mlm_loss_derived_exponential": 3737.5192466312346,
-        "top1_accuracy": 0.15328467153284672,
-        "top5_accuracy": 0.17518248175182483,
-        "top10_accuracy": 0.17518248175182483
+        "masked_sample_count": 1302,
+        "mlm_loss": 7.470509301501608,
+        "mlm_loss_derived_exponential": 1755.500536995457,
+        "top1_accuracy": 0.04608294930875576,
+        "top5_accuracy": 0.12442396313364056,
+        "top10_accuracy": 0.17434715821812596
       },
       "category_recall": {
-        "vessel_terminology": 0.2203,
-        "navigation": 0.3324,
-        "machinery_propulsion": 0.4167,
-        "casualty_incident": 0.2085,
-        "weather_environment": 0.0909,
-        "safety_lifesaving": 0.1053
+        "vessel_terminology": 0.2642,
+        "navigation": 0.263,
+        "machinery_propulsion": 0.3824,
+        "casualty_incident": 0.2371,
+        "weather_environment": 0.231,
+        "safety_lifesaving": 0.28
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 4149,
-          "mlm_loss": 5.905627612015067,
-          "mlm_loss_derived_exponential": 367.09754833534413,
-          "top1_accuracy": 0.220294046758255,
-          "top5_accuracy": 0.2993492407809111,
-          "top10_accuracy": 0.3420101229211858
+          "masked_sample_count": 3936,
+          "mlm_loss": 5.373141336464665,
+          "mlm_loss_derived_exponential": 215.53888550933684,
+          "top1_accuracy": 0.26422764227642276,
+          "top5_accuracy": 0.36051829268292684,
+          "top10_accuracy": 0.4113313008130081
         },
         "navigation": {
-          "masked_sample_count": 1850,
-          "mlm_loss": 4.954478244018046,
-          "mlm_loss_derived_exponential": 141.8085975832914,
-          "top1_accuracy": 0.3324324324324324,
-          "top5_accuracy": 0.4259459459459459,
-          "top10_accuracy": 0.45675675675675675
+          "masked_sample_count": 2574,
+          "mlm_loss": 5.511117504381773,
+          "mlm_loss_derived_exponential": 247.42747391572996,
+          "top1_accuracy": 0.263014763014763,
+          "top5_accuracy": 0.351981351981352,
+          "top10_accuracy": 0.3923853923853924
         },
         "machinery_propulsion": {
-          "masked_sample_count": 24,
-          "mlm_loss": 4.372976166194955,
-          "mlm_loss_derived_exponential": 79.27922909876115,
-          "top1_accuracy": 0.4166666666666667,
-          "top5_accuracy": 0.5,
-          "top10_accuracy": 0.5
+          "masked_sample_count": 34,
+          "mlm_loss": 4.016949389071402,
+          "mlm_loss_derived_exponential": 55.531442344838744,
+          "top1_accuracy": 0.38235294117647056,
+          "top5_accuracy": 0.5588235294117647,
+          "top10_accuracy": 0.5588235294117647
         },
         "casualty_incident": {
-          "masked_sample_count": 283,
-          "mlm_loss": 5.234821508376523,
-          "mlm_loss_derived_exponential": 187.69560126151097,
-          "top1_accuracy": 0.20848056537102475,
-          "top5_accuracy": 0.3321554770318021,
-          "top10_accuracy": 0.4098939929328622
+          "masked_sample_count": 194,
+          "mlm_loss": 5.30921600489969,
+          "mlm_loss_derived_exponential": 202.19164897141,
+          "top1_accuracy": 0.23711340206185566,
+          "top5_accuracy": 0.31443298969072164,
+          "top10_accuracy": 0.39690721649484534
         },
         "weather_environment": {
-          "masked_sample_count": 451,
-          "mlm_loss": 7.009188231668752,
-          "mlm_loss_derived_exponential": 1106.755710907267,
-          "top1_accuracy": 0.09090909090909091,
-          "top5_accuracy": 0.1574279379157428,
-          "top10_accuracy": 0.22394678492239467
+          "masked_sample_count": 554,
+          "mlm_loss": 5.0700438760513045,
+          "mlm_loss_derived_exponential": 159.1813114374661,
+          "top1_accuracy": 0.23104693140794225,
+          "top5_accuracy": 0.38267148014440433,
+          "top10_accuracy": 0.4368231046931408
         },
         "safety_lifesaving": {
-          "masked_sample_count": 19,
-          "mlm_loss": 6.157504534342718,
-          "mlm_loss_derived_exponential": 472.24812420835434,
-          "top1_accuracy": 0.10526315789473684,
-          "top5_accuracy": 0.3684210526315789,
-          "top10_accuracy": 0.3684210526315789
+          "masked_sample_count": 25,
+          "mlm_loss": 5.906958605870895,
+          "mlm_loss_derived_exponential": 367.58647822582805,
+          "top1_accuracy": 0.28,
+          "top5_accuracy": 0.36,
+          "top10_accuracy": 0.36
         }
       },
-      "performance_gap_top1": -0.24728588661037396,
+      "performance_gap_top1": -0.2711422519146163,
       "masking_diagnostics": {
-        "total_eligible_tokens": 44255,
-        "total_masked_tokens": 6632,
-        "actual_mask_rate": 0.1499,
-        "rare_maritime_tokens_masked": 411,
-        "maritime_tokens_masked": 6221,
+        "total_eligible_tokens": 44322,
+        "total_masked_tokens": 6639,
+        "actual_mask_rate": 0.1498,
+        "rare_maritime_tokens_masked": 1804,
+        "maritime_tokens_masked": 4835,
         "general_tokens_masked": 0,
-        "rare_maritime_mask_fraction": 0.062,
-        "maritime_mask_fraction": 0.938,
+        "rare_maritime_mask_fraction": 0.2717,
+        "maritime_mask_fraction": 0.7283,
         "general_mask_fraction": 0.0
       }
     }
@@ -1508,106 +1508,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 44.23763632774353,
+      "evaluation_time_sec": 7.444701194763184,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
-        "total_masked_tokens": 7349,
-        "overall_top1_accuracy": 0.2623486188597088,
-        "overall_mlm_loss": 4.710933874276865
+        "total_masked_tokens": 7361,
+        "overall_top1_accuracy": 0.482563084774596,
+        "overall_mlm_loss": 3.443397160147563
       },
       "general_tokens_summary": {
-        "masked_sample_count": 3,
-        "mlm_loss": 4.8089797099373754,
-        "mlm_loss_derived_exponential": 122.60645952712666,
-        "top1_accuracy": 0.3333333333333333,
-        "top5_accuracy": 0.6666666666666666,
-        "top10_accuracy": 0.6666666666666666
+        "masked_sample_count": 4100,
+        "mlm_loss": 3.1025946888358233,
+        "mlm_loss_derived_exponential": 22.255622845335516,
+        "top1_accuracy": 0.5678048780487804,
+        "top5_accuracy": 0.7014634146341463,
+        "top10_accuracy": 0.744390243902439
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 7346,
-        "mlm_loss": 4.710893833777684,
-        "mlm_loss_derived_exponential": 111.15146645246891,
-        "top1_accuracy": 0.2623196297304656,
-        "top5_accuracy": 0.3919139667846447,
-        "top10_accuracy": 0.46079499047100464
+        "masked_sample_count": 2954,
+        "mlm_loss": 3.916413454114432,
+        "mlm_loss_derived_exponential": 50.220005041334616,
+        "top1_accuracy": 0.36425186188219366,
+        "top5_accuracy": 0.593432633716994,
+        "top10_accuracy": 0.6448882870683819
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 118,
-        "mlm_loss": 7.623494100393885,
-        "mlm_loss_derived_exponential": 2045.6975292033308,
-        "top1_accuracy": 0.03389830508474576,
-        "top5_accuracy": 0.07627118644067797,
-        "top10_accuracy": 0.11016949152542373
+        "masked_sample_count": 307,
+        "mlm_loss": 2.319266782691308,
+        "mlm_loss_derived_exponential": 10.168216060136151,
+        "top1_accuracy": 0.6872964169381107,
+        "top5_accuracy": 0.7785016286644951,
+        "top10_accuracy": 0.8143322475570033
       },
       "category_recall": {
-        "vessel_terminology": 0.2714,
-        "navigation": 0.2498,
-        "machinery_propulsion": 0.5152,
-        "casualty_incident": 0.3038,
-        "weather_environment": 0.1236,
+        "vessel_terminology": 0.4196,
+        "navigation": 0.191,
+        "machinery_propulsion": 0.0051,
+        "casualty_incident": 0.4881,
+        "weather_environment": 0.7059,
         "safety_lifesaving": 0.0
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 5045,
-          "mlm_loss": 4.729349228836414,
-          "mlm_loss_derived_exponential": 113.22185684902917,
-          "top1_accuracy": 0.2713577799801784,
-          "top5_accuracy": 0.3902874132804757,
-          "top10_accuracy": 0.4487611496531219
+          "masked_sample_count": 1997,
+          "mlm_loss": 2.6605169512033013,
+          "mlm_loss_derived_exponential": 14.30368149311888,
+          "top1_accuracy": 0.41962944416624937,
+          "top5_accuracy": 0.7351026539809714,
+          "top10_accuracy": 0.8042063094641962
         },
         "navigation": {
-          "masked_sample_count": 1401,
-          "mlm_loss": 4.947901321340879,
-          "mlm_loss_derived_exponential": 140.87899371929842,
-          "top1_accuracy": 0.24982155603140613,
-          "top5_accuracy": 0.3683083511777302,
-          "top10_accuracy": 0.4475374732334047
+          "masked_sample_count": 1105,
+          "mlm_loss": 6.66898880473494,
+          "mlm_loss_derived_exponential": 787.5987854980842,
+          "top1_accuracy": 0.19095022624434388,
+          "top5_accuracy": 0.22624434389140272,
+          "top10_accuracy": 0.25610859728506785
         },
         "machinery_propulsion": {
-          "masked_sample_count": 33,
-          "mlm_loss": 2.4380376426001793,
-          "mlm_loss_derived_exponential": 11.450548612411824,
-          "top1_accuracy": 0.5151515151515151,
-          "top5_accuracy": 0.6363636363636364,
-          "top10_accuracy": 0.7272727272727273
+          "masked_sample_count": 197,
+          "mlm_loss": 6.726566180057332,
+          "mlm_loss_derived_exponential": 834.2775827847383,
+          "top1_accuracy": 0.005076142131979695,
+          "top5_accuracy": 0.050761421319796954,
+          "top10_accuracy": 0.08629441624365482
         },
         "casualty_incident": {
-          "masked_sample_count": 451,
-          "mlm_loss": 4.018592419524735,
-          "mlm_loss_derived_exponential": 55.62275719172354,
-          "top1_accuracy": 0.30376940133037694,
-          "top5_accuracy": 0.5033259423503326,
-          "top10_accuracy": 0.5676274944567627
+          "masked_sample_count": 84,
+          "mlm_loss": 4.866384481412491,
+          "mlm_loss_derived_exponential": 129.85058994933,
+          "top1_accuracy": 0.4880952380952381,
+          "top5_accuracy": 0.5238095238095238,
+          "top10_accuracy": 0.5357142857142857
         },
         "weather_environment": {
-          "masked_sample_count": 437,
-          "mlm_loss": 4.595384890578516,
-          "mlm_loss_derived_exponential": 99.02624248145453,
-          "top1_accuracy": 0.12356979405034325,
-          "top5_accuracy": 0.3340961098398169,
-          "top10_accuracy": 0.4897025171624714
+          "masked_sample_count": 187,
+          "mlm_loss": 1.1843286173238872,
+          "mlm_loss_derived_exponential": 3.2684916759688143,
+          "top1_accuracy": 0.7058823529411765,
+          "top5_accuracy": 0.9144385026737968,
+          "top10_accuracy": 0.93048128342246
         },
         "safety_lifesaving": {
-          "masked_sample_count": 25,
-          "mlm_loss": 9.263509216308593,
-          "mlm_loss_derived_exponential": 10546.076946197614,
+          "masked_sample_count": 0,
+          "mlm_loss": 0.0,
+          "mlm_loss_derived_exponential": 1.0,
           "top1_accuracy": 0.0,
           "top5_accuracy": 0.0,
           "top10_accuracy": 0.0
         }
       },
-      "performance_gap_top1": 0.07101370360286774,
+      "performance_gap_top1": 0.20355301616658678,
       "masking_diagnostics": {
-        "total_eligible_tokens": 49092,
-        "total_masked_tokens": 7349,
+        "total_eligible_tokens": 49178,
+        "total_masked_tokens": 7361,
         "actual_mask_rate": 0.1497,
-        "rare_maritime_tokens_masked": 118,
-        "maritime_tokens_masked": 7228,
-        "general_tokens_masked": 3,
-        "rare_maritime_mask_fraction": 0.0161,
-        "maritime_mask_fraction": 0.9835,
-        "general_mask_fraction": 0.0004
+        "rare_maritime_tokens_masked": 614,
+        "maritime_tokens_masked": 2647,
+        "general_tokens_masked": 4100,
+        "rare_maritime_mask_fraction": 0.0834,
+        "maritime_mask_fraction": 0.3596,
+        "general_mask_fraction": 0.557
       }
     }
   },
@@ -1632,106 +1632,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 56.474510192871094,
+      "evaluation_time_sec": 9.397464990615845,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
-        "total_masked_tokens": 7341,
-        "overall_top1_accuracy": 0.43481814466693913,
-        "overall_mlm_loss": 3.308308545859233
+        "total_masked_tokens": 7359,
+        "overall_top1_accuracy": 0.688413948256468,
+        "overall_mlm_loss": 1.7253461271838306
       },
       "general_tokens_summary": {
-        "masked_sample_count": 0,
-        "mlm_loss": 0.0,
-        "mlm_loss_derived_exponential": 1.0,
-        "top1_accuracy": 0.0,
-        "top5_accuracy": 0.0,
-        "top10_accuracy": 0.0
+        "masked_sample_count": 4377,
+        "mlm_loss": 1.925244327095527,
+        "mlm_loss_derived_exponential": 6.856823769090339,
+        "top1_accuracy": 0.6435915010281015,
+        "top5_accuracy": 0.7758738862234407,
+        "top10_accuracy": 0.8236234864062143
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 7341,
-        "mlm_loss": 3.308308545859233,
-        "mlm_loss_derived_exponential": 27.338843940606576,
-        "top1_accuracy": 0.43481814466693913,
-        "top5_accuracy": 0.5815284021250511,
-        "top10_accuracy": 0.6477319166326113
+        "masked_sample_count": 2735,
+        "mlm_loss": 1.4054359184037593,
+        "mlm_loss_derived_exponential": 4.077303725661018,
+        "top1_accuracy": 0.760146252285192,
+        "top5_accuracy": 0.8698354661791591,
+        "top10_accuracy": 0.8870201096892139
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 109,
-        "mlm_loss": 6.1056779059795065,
-        "mlm_loss_derived_exponential": 448.39650912161403,
-        "top1_accuracy": 0.1651376146788991,
-        "top5_accuracy": 0.2018348623853211,
-        "top10_accuracy": 0.21100917431192662
+        "masked_sample_count": 247,
+        "mlm_loss": 1.0335095899654665,
+        "mlm_loss_derived_exponential": 2.8109136981182776,
+        "top1_accuracy": 0.7894736842105263,
+        "top5_accuracy": 0.9190283400809717,
+        "top10_accuracy": 0.9190283400809717
       },
       "category_recall": {
-        "vessel_terminology": 0.4838,
-        "navigation": 0.291,
-        "machinery_propulsion": 0.4706,
-        "casualty_incident": 0.3452,
-        "weather_environment": 0.2749,
-        "safety_lifesaving": 0.037
+        "vessel_terminology": 0.861,
+        "navigation": 0.4466,
+        "machinery_propulsion": 0.5,
+        "casualty_incident": 0.8022,
+        "weather_environment": 0.3131,
+        "safety_lifesaving": 0.0
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 5343,
-          "mlm_loss": 2.905242349756819,
-          "mlm_loss_derived_exponential": 18.26967076599984,
-          "top1_accuracy": 0.4838105932996444,
-          "top5_accuracy": 0.6215609208309938,
-          "top10_accuracy": 0.682201010668164
+          "masked_sample_count": 2165,
+          "mlm_loss": 0.9415953941276651,
+          "mlm_loss_derived_exponential": 2.5640688573221153,
+          "top1_accuracy": 0.8609699769053117,
+          "top5_accuracy": 0.9473441108545034,
+          "top10_accuracy": 0.9598152424942263
         },
         "navigation": {
-          "masked_sample_count": 1110,
-          "mlm_loss": 5.0430527560109555,
-          "mlm_loss_derived_exponential": 154.94229480346132,
-          "top1_accuracy": 0.290990990990991,
-          "top5_accuracy": 0.4027027027027027,
-          "top10_accuracy": 0.45765765765765765
+          "masked_sample_count": 459,
+          "mlm_loss": 2.9453627550791874,
+          "mlm_loss_derived_exponential": 19.017559851777502,
+          "top1_accuracy": 0.4466230936819172,
+          "top5_accuracy": 0.5642701525054467,
+          "top10_accuracy": 0.5969498910675382
         },
         "machinery_propulsion": {
-          "masked_sample_count": 34,
-          "mlm_loss": 2.6655309811313224,
-          "mlm_loss_derived_exponential": 14.375580681916764,
-          "top1_accuracy": 0.47058823529411764,
-          "top5_accuracy": 0.5588235294117647,
-          "top10_accuracy": 0.6764705882352942
+          "masked_sample_count": 4,
+          "mlm_loss": 2.048518553376198,
+          "mlm_loss_derived_exponential": 7.756401895275578,
+          "top1_accuracy": 0.5,
+          "top5_accuracy": 0.75,
+          "top10_accuracy": 1.0
         },
         "casualty_incident": {
-          "masked_sample_count": 420,
-          "mlm_loss": 4.168201047515834,
-          "mlm_loss_derived_exponential": 64.59913673835014,
-          "top1_accuracy": 0.34523809523809523,
-          "top5_accuracy": 0.5142857142857142,
-          "top10_accuracy": 0.5571428571428572
+          "masked_sample_count": 445,
+          "mlm_loss": 1.7396238473819547,
+          "mlm_loss_derived_exponential": 5.695200755037934,
+          "top1_accuracy": 0.802247191011236,
+          "top5_accuracy": 0.903370786516854,
+          "top10_accuracy": 0.9078651685393259
         },
         "weather_environment": {
-          "masked_sample_count": 451,
-          "mlm_loss": 3.105379820466011,
-          "mlm_loss_derived_exponential": 22.31769408263108,
-          "top1_accuracy": 0.2749445676274945,
-          "top5_accuracy": 0.5920177383592018,
-          "top10_accuracy": 0.7671840354767184
+          "masked_sample_count": 99,
+          "mlm_loss": 1.732266020006265,
+          "mlm_loss_derived_exponential": 5.653450235924695,
+          "top1_accuracy": 0.31313131313131315,
+          "top5_accuracy": 0.9292929292929293,
+          "top10_accuracy": 0.9797979797979798
         },
         "safety_lifesaving": {
-          "masked_sample_count": 27,
-          "mlm_loss": 8.557047812475098,
-          "mlm_loss_derived_exponential": 5203.297366111816,
-          "top1_accuracy": 0.037037037037037035,
-          "top5_accuracy": 0.037037037037037035,
-          "top10_accuracy": 0.037037037037037035
+          "masked_sample_count": 0,
+          "mlm_loss": 0.0,
+          "mlm_loss_derived_exponential": 1.0,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
         }
       },
-      "performance_gap_top1": -0.43481814466693913,
+      "performance_gap_top1": -0.11655475125709047,
       "masking_diagnostics": {
-        "total_eligible_tokens": 49052,
-        "total_masked_tokens": 7341,
+        "total_eligible_tokens": 49168,
+        "total_masked_tokens": 7359,
         "actual_mask_rate": 0.1497,
-        "rare_maritime_tokens_masked": 109,
-        "maritime_tokens_masked": 7232,
-        "general_tokens_masked": 0,
-        "rare_maritime_mask_fraction": 0.0148,
-        "maritime_mask_fraction": 0.9852,
-        "general_mask_fraction": 0.0
+        "rare_maritime_tokens_masked": 494,
+        "maritime_tokens_masked": 2488,
+        "general_tokens_masked": 4377,
+        "rare_maritime_mask_fraction": 0.0671,
+        "maritime_mask_fraction": 0.3381,
+        "general_mask_fraction": 0.5948
       }
     }
   },
@@ -1756,106 +1756,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 26.20190405845642,
+      "evaluation_time_sec": 4.170612096786499,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
-        "total_masked_tokens": 3920,
-        "overall_top1_accuracy": 0.15178571428571427,
-        "overall_mlm_loss": 6.4378657391005465
+        "total_masked_tokens": 3878,
+        "overall_top1_accuracy": 0.20248380129589633,
+        "overall_mlm_loss": 5.860243689491253
       },
       "general_tokens_summary": {
-        "masked_sample_count": 5,
-        "mlm_loss": 4.103519549965858,
-        "mlm_loss_derived_exponential": 60.55303241791819,
-        "top1_accuracy": 0.2,
-        "top5_accuracy": 0.6,
-        "top10_accuracy": 0.6
-      },
-      "maritime_tokens_summary": {
-        "masked_sample_count": 3915,
-        "mlm_loss": 6.440847024144142,
-        "mlm_loss_derived_exponential": 626.9376062661896,
-        "top1_accuracy": 0.15172413793103448,
-        "top5_accuracy": 0.2641123882503193,
-        "top10_accuracy": 0.32005108556832695
-      },
-      "rare_maritime_tokens_summary": {
-        "masked_sample_count": 19,
-        "mlm_loss": 11.004246611344186,
-        "mlm_loss_derived_exponential": 60128.94456604756,
+        "masked_sample_count": 0,
+        "mlm_loss": 0.0,
+        "mlm_loss_derived_exponential": 1.0,
         "top1_accuracy": 0.0,
         "top5_accuracy": 0.0,
         "top10_accuracy": 0.0
       },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 3704,
+        "mlm_loss": 5.860243689491253,
+        "mlm_loss_derived_exponential": 350.8096222227867,
+        "top1_accuracy": 0.20248380129589633,
+        "top5_accuracy": 0.31830453563714906,
+        "top10_accuracy": 0.3669006479481641
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 380,
+        "mlm_loss": 6.006050416454137,
+        "mlm_loss_derived_exponential": 405.8771048858417,
+        "top1_accuracy": 0.24210526315789474,
+        "top5_accuracy": 0.3,
+        "top10_accuracy": 0.3078947368421053
+      },
       "category_recall": {
-        "vessel_terminology": 0.1407,
-        "navigation": 0.1693,
-        "machinery_propulsion": 0.0769,
-        "casualty_incident": 0.2562,
-        "weather_environment": 0.1584,
-        "safety_lifesaving": 0.2222
+        "vessel_terminology": 0.2216,
+        "navigation": 0.2251,
+        "machinery_propulsion": 0.2973,
+        "casualty_incident": 0.3459,
+        "weather_environment": 0.136,
+        "safety_lifesaving": 0.377
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 2821,
-          "mlm_loss": 6.665276271067648,
-          "mlm_loss_derived_exponential": 784.6802194800981,
-          "top1_accuracy": 0.14073023750443106,
-          "top5_accuracy": 0.23750443105281815,
-          "top10_accuracy": 0.2772066643034385
+          "masked_sample_count": 2513,
+          "mlm_loss": 5.711049789767313,
+          "mlm_loss_derived_exponential": 302.18813583934065,
+          "top1_accuracy": 0.2216474333465977,
+          "top5_accuracy": 0.3306804615996817,
+          "top10_accuracy": 0.3700756068444091
         },
         "navigation": {
-          "masked_sample_count": 567,
-          "mlm_loss": 6.082680091457686,
-          "mlm_loss_derived_exponential": 438.2020438994139,
-          "top1_accuracy": 0.1693121693121693,
-          "top5_accuracy": 0.3298059964726631,
-          "top10_accuracy": 0.41975308641975306
+          "masked_sample_count": 915,
+          "mlm_loss": 5.948312867697236,
+          "mlm_loss_derived_exponential": 383.10644226017786,
+          "top1_accuracy": 0.22513661202185792,
+          "top5_accuracy": 0.33114754098360655,
+          "top10_accuracy": 0.3737704918032787
         },
         "machinery_propulsion": {
-          "masked_sample_count": 13,
-          "mlm_loss": 6.2120446516917305,
-          "mlm_loss_derived_exponential": 498.71991804669744,
-          "top1_accuracy": 0.07692307692307693,
-          "top5_accuracy": 0.07692307692307693,
-          "top10_accuracy": 0.15384615384615385
+          "masked_sample_count": 37,
+          "mlm_loss": 4.160456811052722,
+          "mlm_loss_derived_exponential": 64.1007978657484,
+          "top1_accuracy": 0.2972972972972973,
+          "top5_accuracy": 0.4864864864864865,
+          "top10_accuracy": 0.5135135135135135
         },
         "casualty_incident": {
-          "masked_sample_count": 160,
-          "mlm_loss": 4.963726399792359,
-          "mlm_loss_derived_exponential": 143.12614865198591,
-          "top1_accuracy": 0.25625,
-          "top5_accuracy": 0.3875,
-          "top10_accuracy": 0.45625
+          "masked_sample_count": 159,
+          "mlm_loss": 4.370343166011028,
+          "mlm_loss_derived_exponential": 79.07076144208848,
+          "top1_accuracy": 0.34591194968553457,
+          "top5_accuracy": 0.48427672955974843,
+          "top10_accuracy": 0.5408805031446541
         },
         "weather_environment": {
-          "masked_sample_count": 322,
-          "mlm_loss": 5.808802140691543,
-          "mlm_loss_derived_exponential": 333.21973615338294,
-          "top1_accuracy": 0.15838509316770186,
-          "top5_accuracy": 0.32298136645962733,
-          "top10_accuracy": 0.45652173913043476
+          "masked_sample_count": 272,
+          "mlm_loss": 5.825557576396771,
+          "mlm_loss_derived_exponential": 338.8500151854442,
+          "top1_accuracy": 0.13602941176470587,
+          "top5_accuracy": 0.3235294117647059,
+          "top10_accuracy": 0.45955882352941174
         },
         "safety_lifesaving": {
-          "masked_sample_count": 36,
-          "mlm_loss": 7.282622208579495,
-          "mlm_loss_derived_exponential": 1454.797811206545,
-          "top1_accuracy": 0.2222222222222222,
-          "top5_accuracy": 0.2777777777777778,
-          "top10_accuracy": 0.3055555555555556
+          "masked_sample_count": 61,
+          "mlm_loss": 5.269472604915195,
+          "mlm_loss_derived_exponential": 194.3134554556087,
+          "top1_accuracy": 0.3770491803278688,
+          "top5_accuracy": 0.45901639344262296,
+          "top10_accuracy": 0.47540983606557374
         }
       },
-      "performance_gap_top1": 0.04827586206896553,
+      "performance_gap_top1": -0.20248380129589633,
       "masking_diagnostics": {
-        "total_eligible_tokens": 26115,
-        "total_masked_tokens": 3920,
-        "actual_mask_rate": 0.1501,
-        "rare_maritime_tokens_masked": 19,
-        "maritime_tokens_masked": 3896,
-        "general_tokens_masked": 5,
-        "rare_maritime_mask_fraction": 0.0048,
-        "maritime_mask_fraction": 0.9939,
-        "general_mask_fraction": 0.0013
+        "total_eligible_tokens": 25850,
+        "total_masked_tokens": 3878,
+        "actual_mask_rate": 0.15,
+        "rare_maritime_tokens_masked": 554,
+        "maritime_tokens_masked": 3324,
+        "general_tokens_masked": 0,
+        "rare_maritime_mask_fraction": 0.1429,
+        "maritime_mask_fraction": 0.8571,
+        "general_mask_fraction": 0.0
       }
     }
   },
@@ -1880,106 +1880,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 26.068873643875122,
+      "evaluation_time_sec": 4.692143440246582,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
-        "total_masked_tokens": 4228,
-        "overall_top1_accuracy": 0.09578997161778618,
-        "overall_mlm_loss": 7.0190542277553725
+        "total_masked_tokens": 4182,
+        "overall_top1_accuracy": 0.17220464135021096,
+        "overall_mlm_loss": 5.327573038917412
       },
       "general_tokens_summary": {
-        "masked_sample_count": 5,
-        "mlm_loss": 4.1751763939857485,
-        "mlm_loss_derived_exponential": 65.05131330947876,
-        "top1_accuracy": 0.4,
-        "top5_accuracy": 0.6,
-        "top10_accuracy": 0.6
-      },
-      "maritime_tokens_summary": {
-        "masked_sample_count": 4223,
-        "mlm_loss": 7.022421357560925,
-        "mlm_loss_derived_exponential": 1121.4988825386995,
-        "top1_accuracy": 0.0954297892493488,
-        "top5_accuracy": 0.17120530428605257,
-        "top10_accuracy": 0.20743547241297655
-      },
-      "rare_maritime_tokens_summary": {
-        "masked_sample_count": 19,
-        "mlm_loss": 9.692321024442974,
-        "mlm_loss_derived_exponential": 16192.784559551541,
+        "masked_sample_count": 0,
+        "mlm_loss": 0.0,
+        "mlm_loss_derived_exponential": 1.0,
         "top1_accuracy": 0.0,
         "top5_accuracy": 0.0,
         "top10_accuracy": 0.0
       },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 3792,
+        "mlm_loss": 5.327573038917412,
+        "mlm_loss_derived_exponential": 205.93756470981194,
+        "top1_accuracy": 0.17220464135021096,
+        "top5_accuracy": 0.2745253164556962,
+        "top10_accuracy": 0.3581223628691983
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 1202,
+        "mlm_loss": 4.827368746816187,
+        "mlm_loss_derived_exponential": 124.88193198459773,
+        "top1_accuracy": 0.10732113144758736,
+        "top5_accuracy": 0.1821963394342762,
+        "top10_accuracy": 0.31530782029950083
+      },
       "category_recall": {
-        "vessel_terminology": 0.0898,
-        "navigation": 0.1493,
-        "machinery_propulsion": 0.0,
-        "casualty_incident": 0.0881,
-        "weather_environment": 0.0359,
-        "safety_lifesaving": 0.1395
+        "vessel_terminology": 0.1669,
+        "navigation": 0.1511,
+        "machinery_propulsion": 0.2647,
+        "casualty_incident": 0.086,
+        "weather_environment": 0.1011,
+        "safety_lifesaving": 0.2128
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 2997,
-          "mlm_loss": 7.399621575710943,
-          "mlm_loss_derived_exponential": 1635.3654508768498,
-          "top1_accuracy": 0.08975642308975643,
-          "top5_accuracy": 0.1504838171504838,
-          "top10_accuracy": 0.17951284617951285
+          "masked_sample_count": 2882,
+          "mlm_loss": 5.319277091048223,
+          "mlm_loss_derived_exponential": 204.2361844474474,
+          "top1_accuracy": 0.16689798750867454,
+          "top5_accuracy": 0.26578764746703676,
+          "top10_accuracy": 0.34802220680083273
         },
         "navigation": {
-          "masked_sample_count": 683,
-          "mlm_loss": 5.8189533360627665,
-          "mlm_loss_derived_exponential": 336.619541646653,
-          "top1_accuracy": 0.1493411420204978,
-          "top5_accuracy": 0.2547584187408492,
-          "top10_accuracy": 0.30453879941434847
+          "masked_sample_count": 1621,
+          "mlm_loss": 4.856478176387247,
+          "mlm_loss_derived_exponential": 128.57060084643936,
+          "top1_accuracy": 0.15114127082048118,
+          "top5_accuracy": 0.23935842072794572,
+          "top10_accuracy": 0.36397285626156695
         },
         "machinery_propulsion": {
-          "masked_sample_count": 11,
-          "mlm_loss": 6.988677198236639,
-          "mlm_loss_derived_exponential": 1084.2862313841629,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.0,
-          "top10_accuracy": 0.0
+          "masked_sample_count": 34,
+          "mlm_loss": 4.496660158969462,
+          "mlm_loss_derived_exponential": 89.71698988325802,
+          "top1_accuracy": 0.2647058823529412,
+          "top5_accuracy": 0.35294117647058826,
+          "top10_accuracy": 0.4411764705882353
         },
         "casualty_incident": {
-          "masked_sample_count": 159,
-          "mlm_loss": 6.0534407590170325,
-          "mlm_loss_derived_exponential": 425.5748141584168,
-          "top1_accuracy": 0.0880503144654088,
-          "top5_accuracy": 0.16981132075471697,
-          "top10_accuracy": 0.23270440251572327
+          "masked_sample_count": 93,
+          "mlm_loss": 5.751783681011969,
+          "mlm_loss_derived_exponential": 314.7515762994917,
+          "top1_accuracy": 0.08602150537634409,
+          "top5_accuracy": 0.22580645161290322,
+          "top10_accuracy": 0.3763440860215054
         },
         "weather_environment": {
-          "masked_sample_count": 334,
-          "mlm_loss": 6.5164460607185335,
-          "mlm_loss_derived_exponential": 676.1710392749304,
-          "top1_accuracy": 0.03592814371257485,
-          "top5_accuracy": 0.19161676646706588,
-          "top10_accuracy": 0.25449101796407186
+          "masked_sample_count": 178,
+          "mlm_loss": 6.024255593129423,
+          "mlm_loss_derived_exponential": 413.3338389223353,
+          "top1_accuracy": 0.10112359550561797,
+          "top5_accuracy": 0.25280898876404495,
+          "top10_accuracy": 0.29775280898876405
         },
         "safety_lifesaving": {
-          "masked_sample_count": 43,
-          "mlm_loss": 7.615615898786589,
-          "mlm_loss_derived_exponential": 2029.6444294481687,
-          "top1_accuracy": 0.13953488372093023,
-          "top5_accuracy": 0.16279069767441862,
-          "top10_accuracy": 0.18604651162790697
+          "masked_sample_count": 94,
+          "mlm_loss": 4.670034009502567,
+          "mlm_loss_derived_exponential": 106.70137123130245,
+          "top1_accuracy": 0.2127659574468085,
+          "top5_accuracy": 0.35106382978723405,
+          "top10_accuracy": 0.5
         }
       },
-      "performance_gap_top1": 0.3045702107506512,
+      "performance_gap_top1": -0.17220464135021096,
       "masking_diagnostics": {
-        "total_eligible_tokens": 28140,
-        "total_masked_tokens": 4228,
-        "actual_mask_rate": 0.1502,
-        "rare_maritime_tokens_masked": 19,
-        "maritime_tokens_masked": 4204,
-        "general_tokens_masked": 5,
-        "rare_maritime_mask_fraction": 0.0045,
-        "maritime_mask_fraction": 0.9943,
-        "general_mask_fraction": 0.0012
+        "total_eligible_tokens": 27819,
+        "total_masked_tokens": 4182,
+        "actual_mask_rate": 0.1503,
+        "rare_maritime_tokens_masked": 1592,
+        "maritime_tokens_masked": 2590,
+        "general_tokens_masked": 0,
+        "rare_maritime_mask_fraction": 0.3807,
+        "maritime_mask_fraction": 0.6193,
+        "general_mask_fraction": 0.0
       }
     }
   },
@@ -2004,106 +2004,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 26.243566513061523,
+      "evaluation_time_sec": 4.307866096496582,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
-        "total_masked_tokens": 4142,
-        "overall_top1_accuracy": 0.19217769193626266,
-        "overall_mlm_loss": 5.51163063704767
+        "total_masked_tokens": 4095,
+        "overall_top1_accuracy": 0.27154255319148934,
+        "overall_mlm_loss": 4.2873971985342365
       },
       "general_tokens_summary": {
-        "masked_sample_count": 6,
-        "mlm_loss": 5.648558124899864,
-        "mlm_loss_derived_exponential": 283.88184841770385,
-        "top1_accuracy": 0.16666666666666666,
-        "top5_accuracy": 0.3333333333333333,
-        "top10_accuracy": 0.6666666666666666
-      },
-      "maritime_tokens_summary": {
-        "masked_sample_count": 4136,
-        "mlm_loss": 5.511431999492759,
-        "mlm_loss_derived_exponential": 247.505300884059,
-        "top1_accuracy": 0.1922147001934236,
-        "top5_accuracy": 0.32736943907156674,
-        "top10_accuracy": 0.3960348162475822
-      },
-      "rare_maritime_tokens_summary": {
-        "masked_sample_count": 17,
-        "mlm_loss": 8.174092152539421,
-        "mlm_loss_derived_exponential": 3547.8325706727064,
+        "masked_sample_count": 0,
+        "mlm_loss": 0.0,
+        "mlm_loss_derived_exponential": 1.0,
         "top1_accuracy": 0.0,
         "top5_accuracy": 0.0,
-        "top10_accuracy": 0.11764705882352941
+        "top10_accuracy": 0.0
+      },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 3760,
+        "mlm_loss": 4.2873971985342365,
+        "mlm_loss_derived_exponential": 72.77679821259889,
+        "top1_accuracy": 0.27154255319148934,
+        "top5_accuracy": 0.4574468085106383,
+        "top10_accuracy": 0.5390957446808511
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 1028,
+        "mlm_loss": 3.7344069058500895,
+        "mlm_loss_derived_exponential": 41.863189386013644,
+        "top1_accuracy": 0.26653696498054474,
+        "top5_accuracy": 0.5515564202334631,
+        "top10_accuracy": 0.6663424124513618
       },
       "category_recall": {
-        "vessel_terminology": 0.1805,
-        "navigation": 0.3045,
-        "machinery_propulsion": 0.2857,
-        "casualty_incident": 0.1609,
-        "weather_environment": 0.0769,
-        "safety_lifesaving": 0.0556
+        "vessel_terminology": 0.2587,
+        "navigation": 0.3111,
+        "machinery_propulsion": 0.425,
+        "casualty_incident": 0.3571,
+        "weather_environment": 0.2061,
+        "safety_lifesaving": 0.1923
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 2831,
-          "mlm_loss": 5.819086209085586,
-          "mlm_loss_derived_exponential": 336.66427227437265,
-          "top1_accuracy": 0.18050158954433063,
-          "top5_accuracy": 0.2974214058636524,
-          "top10_accuracy": 0.3659484281172731
+          "masked_sample_count": 2868,
+          "mlm_loss": 4.307675757527579,
+          "mlm_loss_derived_exponential": 74.26767210619332,
+          "top1_accuracy": 0.25871687587168757,
+          "top5_accuracy": 0.45571827057182707,
+          "top10_accuracy": 0.547071129707113
         },
         "navigation": {
-          "masked_sample_count": 739,
-          "mlm_loss": 4.239063067107812,
-          "mlm_loss_derived_exponential": 69.3428517944861,
-          "top1_accuracy": 0.3044654939106901,
-          "top5_accuracy": 0.45331529093369416,
-          "top10_accuracy": 0.5250338294993234
+          "masked_sample_count": 1617,
+          "mlm_loss": 3.6681421734033717,
+          "mlm_loss_derived_exponential": 39.17905032306147,
+          "top1_accuracy": 0.3110698824984539,
+          "top5_accuracy": 0.5479282622139765,
+          "top10_accuracy": 0.6394557823129252
         },
         "machinery_propulsion": {
-          "masked_sample_count": 7,
-          "mlm_loss": 5.106152244976589,
-          "mlm_loss_derived_exponential": 165.03412075501242,
-          "top1_accuracy": 0.2857142857142857,
-          "top5_accuracy": 0.2857142857142857,
-          "top10_accuracy": 0.2857142857142857
+          "masked_sample_count": 80,
+          "mlm_loss": 3.3103734388248993,
+          "mlm_loss_derived_exponential": 27.395354050734525,
+          "top1_accuracy": 0.425,
+          "top5_accuracy": 0.6125,
+          "top10_accuracy": 0.675
         },
         "casualty_incident": {
-          "masked_sample_count": 174,
-          "mlm_loss": 5.298884156620366,
-          "mlm_loss_derived_exponential": 200.11339014563467,
-          "top1_accuracy": 0.16091954022988506,
-          "top5_accuracy": 0.367816091954023,
-          "top10_accuracy": 0.41954022988505746
+          "masked_sample_count": 210,
+          "mlm_loss": 3.6994652955870455,
+          "mlm_loss_derived_exponential": 40.425682789023824,
+          "top1_accuracy": 0.35714285714285715,
+          "top5_accuracy": 0.5190476190476191,
+          "top10_accuracy": 0.5952380952380952
         },
         "weather_environment": {
-          "masked_sample_count": 351,
-          "mlm_loss": 5.5524820282904725,
-          "mlm_loss_derived_exponential": 257.8768198042653,
-          "top1_accuracy": 0.07692307692307693,
-          "top5_accuracy": 0.2962962962962963,
-          "top10_accuracy": 0.37606837606837606
+          "masked_sample_count": 262,
+          "mlm_loss": 4.699221965722439,
+          "mlm_loss_derived_exponential": 109.8616630521705,
+          "top1_accuracy": 0.20610687022900764,
+          "top5_accuracy": 0.4122137404580153,
+          "top10_accuracy": 0.46564885496183206
         },
         "safety_lifesaving": {
-          "masked_sample_count": 36,
-          "mlm_loss": 8.144017080465952,
-          "mlm_loss_derived_exponential": 3442.7198101712165,
-          "top1_accuracy": 0.05555555555555555,
-          "top5_accuracy": 0.19444444444444445,
-          "top10_accuracy": 0.19444444444444445
+          "masked_sample_count": 832,
+          "mlm_loss": 3.956103284785548,
+          "mlm_loss_derived_exponential": 52.25331243839096,
+          "top1_accuracy": 0.19230769230769232,
+          "top5_accuracy": 0.5180288461538461,
+          "top10_accuracy": 0.6466346153846154
         }
       },
-      "performance_gap_top1": -0.02554803352675694,
+      "performance_gap_top1": -0.27154255319148934,
       "masking_diagnostics": {
-        "total_eligible_tokens": 27610,
-        "total_masked_tokens": 4142,
-        "actual_mask_rate": 0.15,
-        "rare_maritime_tokens_masked": 17,
-        "maritime_tokens_masked": 4119,
-        "general_tokens_masked": 6,
-        "rare_maritime_mask_fraction": 0.0041,
-        "maritime_mask_fraction": 0.9944,
-        "general_mask_fraction": 0.0014
+        "total_eligible_tokens": 27258,
+        "total_masked_tokens": 4095,
+        "actual_mask_rate": 0.1502,
+        "rare_maritime_tokens_masked": 1363,
+        "maritime_tokens_masked": 2732,
+        "general_tokens_masked": 0,
+        "rare_maritime_mask_fraction": 0.3328,
+        "maritime_mask_fraction": 0.6672,
+        "general_mask_fraction": 0.0
       }
     }
   },
@@ -2128,106 +2128,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 25.73335337638855,
+      "evaluation_time_sec": 4.586853504180908,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
-        "total_masked_tokens": 4063,
-        "overall_top1_accuracy": 0.1860694068422348,
-        "overall_mlm_loss": 5.895208891744894
+        "total_masked_tokens": 4028,
+        "overall_top1_accuracy": 0.26788553259141495,
+        "overall_mlm_loss": 4.774234958029781
       },
       "general_tokens_summary": {
-        "masked_sample_count": 5,
-        "mlm_loss": 2.2846369493752716,
-        "mlm_loss_derived_exponential": 9.822119649957997,
-        "top1_accuracy": 0.6,
-        "top5_accuracy": 0.8,
-        "top10_accuracy": 0.8
-      },
-      "maritime_tokens_summary": {
-        "masked_sample_count": 4058,
-        "mlm_loss": 5.899657600397395,
-        "mlm_loss_derived_exponential": 364.9125005769917,
-        "top1_accuracy": 0.18555938886150813,
-        "top5_accuracy": 0.29349433218334153,
-        "top10_accuracy": 0.35288319369147364
-      },
-      "rare_maritime_tokens_summary": {
-        "masked_sample_count": 17,
-        "mlm_loss": 11.111510893877815,
-        "mlm_loss_derived_exponential": 66937.2501018751,
+        "masked_sample_count": 0,
+        "mlm_loss": 0.0,
+        "mlm_loss_derived_exponential": 1.0,
         "top1_accuracy": 0.0,
         "top5_accuracy": 0.0,
         "top10_accuracy": 0.0
       },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 3774,
+        "mlm_loss": 4.774234958029781,
+        "mlm_loss_derived_exponential": 118.41968392869657,
+        "top1_accuracy": 0.26788553259141495,
+        "top5_accuracy": 0.41255961844197137,
+        "top10_accuracy": 0.48224695283518815
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 537,
+        "mlm_loss": 2.498083399465651,
+        "mlm_loss_derived_exponential": 12.159167347309117,
+        "top1_accuracy": 0.5307262569832403,
+        "top5_accuracy": 0.750465549348231,
+        "top10_accuracy": 0.813780260707635
+      },
       "category_recall": {
-        "vessel_terminology": 0.1546,
-        "navigation": 0.3857,
-        "machinery_propulsion": 0.0833,
-        "casualty_incident": 0.1494,
-        "weather_environment": 0.0648,
-        "safety_lifesaving": 0.1
+        "vessel_terminology": 0.2519,
+        "navigation": 0.4726,
+        "machinery_propulsion": 0.1875,
+        "casualty_incident": 0.1971,
+        "weather_environment": 0.0881,
+        "safety_lifesaving": 0.2143
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 2904,
-          "mlm_loss": 6.252799722856923,
-          "mlm_loss_derived_exponential": 519.46514911806,
-          "top1_accuracy": 0.15461432506887052,
-          "top5_accuracy": 0.2510330578512397,
-          "top10_accuracy": 0.3040633608815427
+          "masked_sample_count": 2771,
+          "mlm_loss": 4.933907023106524,
+          "mlm_loss_derived_exponential": 138.9212218388152,
+          "top1_accuracy": 0.2518946228798268,
+          "top5_accuracy": 0.38505954529050884,
+          "top10_accuracy": 0.4568747744496572
         },
         "navigation": {
-          "masked_sample_count": 669,
-          "mlm_loss": 4.4129210597623905,
-          "mlm_loss_derived_exponential": 82.5101288515235,
-          "top1_accuracy": 0.38565022421524664,
-          "top5_accuracy": 0.4678624813153961,
-          "top10_accuracy": 0.5171898355754858
+          "masked_sample_count": 1170,
+          "mlm_loss": 3.158637596387519,
+          "mlm_loss_derived_exponential": 23.53850512930056,
+          "top1_accuracy": 0.47264957264957264,
+          "top5_accuracy": 0.6367521367521367,
+          "top10_accuracy": 0.6914529914529914
         },
         "machinery_propulsion": {
-          "masked_sample_count": 12,
-          "mlm_loss": 7.66474333157142,
-          "mlm_loss_derived_exponential": 2131.845534276955,
-          "top1_accuracy": 0.08333333333333333,
-          "top5_accuracy": 0.08333333333333333,
-          "top10_accuracy": 0.08333333333333333
+          "masked_sample_count": 48,
+          "mlm_loss": 5.024503933516826,
+          "mlm_loss_derived_exponential": 152.09478826895756,
+          "top1_accuracy": 0.1875,
+          "top5_accuracy": 0.2916666666666667,
+          "top10_accuracy": 0.4583333333333333
         },
         "casualty_incident": {
-          "masked_sample_count": 154,
-          "mlm_loss": 5.543206913904711,
-          "mlm_loss_derived_exponential": 255.49604086934804,
-          "top1_accuracy": 0.14935064935064934,
-          "top5_accuracy": 0.3181818181818182,
-          "top10_accuracy": 0.42857142857142855
+          "masked_sample_count": 137,
+          "mlm_loss": 5.227655218387308,
+          "mlm_loss_derived_exponential": 186.35532828147518,
+          "top1_accuracy": 0.19708029197080293,
+          "top5_accuracy": 0.38686131386861317,
+          "top10_accuracy": 0.46715328467153283
         },
         "weather_environment": {
-          "masked_sample_count": 293,
-          "mlm_loss": 5.490817974210294,
-          "mlm_loss_derived_exponential": 242.4554480724688,
-          "top1_accuracy": 0.06484641638225255,
-          "top5_accuracy": 0.32764505119453924,
-          "top10_accuracy": 0.4539249146757679
+          "masked_sample_count": 227,
+          "mlm_loss": 5.107557725969539,
+          "mlm_loss_derived_exponential": 165.2662361536026,
+          "top1_accuracy": 0.0881057268722467,
+          "top5_accuracy": 0.3700440528634361,
+          "top10_accuracy": 0.5198237885462555
         },
         "safety_lifesaving": {
-          "masked_sample_count": 30,
-          "mlm_loss": 10.533672359585761,
-          "mlm_loss_derived_exponential": 37559.15214002911,
-          "top1_accuracy": 0.1,
-          "top5_accuracy": 0.1,
-          "top10_accuracy": 0.1
+          "masked_sample_count": 28,
+          "mlm_loss": 5.202907699260062,
+          "mlm_loss_derived_exponential": 181.80009408455743,
+          "top1_accuracy": 0.21428571428571427,
+          "top5_accuracy": 0.39285714285714285,
+          "top10_accuracy": 0.6428571428571429
         }
       },
-      "performance_gap_top1": 0.41444061113849184,
+      "performance_gap_top1": -0.26788553259141495,
       "masking_diagnostics": {
-        "total_eligible_tokens": 27084,
-        "total_masked_tokens": 4063,
-        "actual_mask_rate": 0.15,
-        "rare_maritime_tokens_masked": 17,
-        "maritime_tokens_masked": 4041,
-        "general_tokens_masked": 5,
-        "rare_maritime_mask_fraction": 0.0042,
-        "maritime_mask_fraction": 0.9946,
-        "general_mask_fraction": 0.0012
+        "total_eligible_tokens": 26802,
+        "total_masked_tokens": 4028,
+        "actual_mask_rate": 0.1503,
+        "rare_maritime_tokens_masked": 791,
+        "maritime_tokens_masked": 3237,
+        "general_tokens_masked": 0,
+        "rare_maritime_mask_fraction": 0.1964,
+        "maritime_mask_fraction": 0.8036,
+        "general_mask_fraction": 0.0
       }
     }
   },
@@ -2252,106 +2252,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 26.82726788520813,
+      "evaluation_time_sec": 4.084292888641357,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
-        "total_masked_tokens": 4066,
-        "overall_top1_accuracy": 0.1249385145105755,
-        "overall_mlm_loss": 6.691963275376665
+        "total_masked_tokens": 4035,
+        "overall_top1_accuracy": 0.15162644281217208,
+        "overall_mlm_loss": 6.285722926289926
       },
       "general_tokens_summary": {
-        "masked_sample_count": 2,
-        "mlm_loss": 2.3902111053466797,
-        "mlm_loss_derived_exponential": 10.9157980831639,
-        "top1_accuracy": 0.0,
-        "top5_accuracy": 1.0,
-        "top10_accuracy": 1.0
-      },
-      "maritime_tokens_summary": {
-        "masked_sample_count": 4064,
-        "mlm_loss": 6.694080279397348,
-        "mlm_loss_derived_exponential": 807.6108162258491,
-        "top1_accuracy": 0.125,
-        "top5_accuracy": 0.19438976377952755,
-        "top10_accuracy": 0.23400590551181102
-      },
-      "rare_maritime_tokens_summary": {
-        "masked_sample_count": 19,
-        "mlm_loss": 8.998380987267746,
-        "mlm_loss_derived_exponential": 8089.975545707996,
+        "masked_sample_count": 0,
+        "mlm_loss": 0.0,
+        "mlm_loss_derived_exponential": 1.0,
         "top1_accuracy": 0.0,
         "top5_accuracy": 0.0,
         "top10_accuracy": 0.0
       },
+      "maritime_tokens_summary": {
+        "masked_sample_count": 3812,
+        "mlm_loss": 6.285722926289926,
+        "mlm_loss_derived_exponential": 536.8522549947273,
+        "top1_accuracy": 0.15162644281217208,
+        "top5_accuracy": 0.2334732423924449,
+        "top10_accuracy": 0.2767576075550892
+      },
+      "rare_maritime_tokens_summary": {
+        "masked_sample_count": 504,
+        "mlm_loss": 6.5738665458583645,
+        "mlm_loss_derived_exponential": 716.1334597274189,
+        "top1_accuracy": 0.08134920634920635,
+        "top5_accuracy": 0.16666666666666666,
+        "top10_accuracy": 0.22817460317460317
+      },
       "category_recall": {
-        "vessel_terminology": 0.1154,
-        "navigation": 0.2082,
-        "machinery_propulsion": 0.0833,
-        "casualty_incident": 0.106,
-        "weather_environment": 0.043,
-        "safety_lifesaving": 0.1026
+        "vessel_terminology": 0.1503,
+        "navigation": 0.1904,
+        "machinery_propulsion": 0.0652,
+        "casualty_incident": 0.1268,
+        "weather_environment": 0.0877,
+        "safety_lifesaving": 0.087
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 2929,
-          "mlm_loss": 6.916573755485018,
-          "mlm_loss_derived_exponential": 1008.8574738148003,
-          "top1_accuracy": 0.11539774667121884,
-          "top5_accuracy": 0.18470467736428817,
-          "top10_accuracy": 0.22533287811539773
+          "masked_sample_count": 2867,
+          "mlm_loss": 6.379446646846058,
+          "mlm_loss_derived_exponential": 589.6013596020288,
+          "top1_accuracy": 0.15033135681897453,
+          "top5_accuracy": 0.22567143355423788,
+          "top10_accuracy": 0.2745029647715382
         },
         "navigation": {
-          "masked_sample_count": 658,
-          "mlm_loss": 5.203415461238804,
-          "mlm_loss_derived_exponential": 181.89242870008502,
-          "top1_accuracy": 0.20820668693009117,
-          "top5_accuracy": 0.3009118541033435,
-          "top10_accuracy": 0.33586626139817627
+          "masked_sample_count": 1082,
+          "mlm_loss": 5.655437005551419,
+          "mlm_loss_derived_exponential": 285.84136970175956,
+          "top1_accuracy": 0.19038817005545286,
+          "top5_accuracy": 0.30406654343807765,
+          "top10_accuracy": 0.3465804066543438
         },
         "machinery_propulsion": {
-          "masked_sample_count": 12,
-          "mlm_loss": 7.939861198266347,
-          "mlm_loss_derived_exponential": 2806.970868836995,
-          "top1_accuracy": 0.08333333333333333,
-          "top5_accuracy": 0.08333333333333333,
-          "top10_accuracy": 0.08333333333333333
+          "masked_sample_count": 46,
+          "mlm_loss": 6.719744049800995,
+          "mlm_loss_derived_exponential": 828.6054026202777,
+          "top1_accuracy": 0.06521739130434782,
+          "top5_accuracy": 0.13043478260869565,
+          "top10_accuracy": 0.1956521739130435
         },
         "casualty_incident": {
-          "masked_sample_count": 151,
-          "mlm_loss": 6.424265427502576,
-          "mlm_loss_derived_exponential": 616.627693392233,
-          "top1_accuracy": 0.10596026490066225,
-          "top5_accuracy": 0.17880794701986755,
-          "top10_accuracy": 0.24503311258278146
+          "masked_sample_count": 142,
+          "mlm_loss": 5.8936509036682025,
+          "mlm_loss_derived_exponential": 362.7271517877319,
+          "top1_accuracy": 0.1267605633802817,
+          "top5_accuracy": 0.21830985915492956,
+          "top10_accuracy": 0.2676056338028169
         },
         "weather_environment": {
-          "masked_sample_count": 279,
-          "mlm_loss": 7.858040948872418,
-          "mlm_loss_derived_exponential": 2586.4484242269427,
-          "top1_accuracy": 0.043010752688172046,
-          "top5_accuracy": 0.06451612903225806,
-          "top10_accuracy": 0.0967741935483871
+          "masked_sample_count": 365,
+          "mlm_loss": 6.815422092722242,
+          "mlm_loss_derived_exponential": 911.8012992638629,
+          "top1_accuracy": 0.08767123287671233,
+          "top5_accuracy": 0.15342465753424658,
+          "top10_accuracy": 0.18082191780821918
         },
         "safety_lifesaving": {
-          "masked_sample_count": 39,
-          "mlm_loss": 7.7543308184697075,
-          "mlm_loss_derived_exponential": 2331.648526459718,
-          "top1_accuracy": 0.10256410256410256,
-          "top5_accuracy": 0.1282051282051282,
-          "top10_accuracy": 0.1282051282051282
+          "masked_sample_count": 23,
+          "mlm_loss": 8.63016502753548,
+          "mlm_loss_derived_exponential": 5598.002001061889,
+          "top1_accuracy": 0.08695652173913043,
+          "top5_accuracy": 0.08695652173913043,
+          "top10_accuracy": 0.13043478260869565
         }
       },
-      "performance_gap_top1": -0.125,
+      "performance_gap_top1": -0.15162644281217208,
       "masking_diagnostics": {
-        "total_eligible_tokens": 27148,
-        "total_masked_tokens": 4066,
-        "actual_mask_rate": 0.1498,
-        "rare_maritime_tokens_masked": 19,
-        "maritime_tokens_masked": 4045,
-        "general_tokens_masked": 2,
-        "rare_maritime_mask_fraction": 0.0047,
-        "maritime_mask_fraction": 0.9948,
-        "general_mask_fraction": 0.0005
+        "total_eligible_tokens": 26793,
+        "total_masked_tokens": 4035,
+        "actual_mask_rate": 0.1506,
+        "rare_maritime_tokens_masked": 727,
+        "maritime_tokens_masked": 3308,
+        "general_tokens_masked": 0,
+        "rare_maritime_mask_fraction": 0.1802,
+        "maritime_mask_fraction": 0.8198,
+        "general_mask_fraction": 0.0
       }
     }
   },
@@ -2376,106 +2376,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 38.3305299282074,
+      "evaluation_time_sec": 6.057597398757935,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
-        "total_masked_tokens": 5331,
-        "overall_top1_accuracy": 0.24291877696492215,
-        "overall_mlm_loss": 4.842280969939033
+        "total_masked_tokens": 5321,
+        "overall_top1_accuracy": 0.45179221774966455,
+        "overall_mlm_loss": 3.745609874447454
       },
       "general_tokens_summary": {
-        "masked_sample_count": 4,
-        "mlm_loss": 2.9278250113129616,
-        "mlm_loss_derived_exponential": 18.68694237634817,
-        "top1_accuracy": 0.25,
-        "top5_accuracy": 0.75,
-        "top10_accuracy": 0.75
+        "masked_sample_count": 3392,
+        "mlm_loss": 3.6607098540037804,
+        "mlm_loss_derived_exponential": 38.888938544452714,
+        "top1_accuracy": 0.49233490566037735,
+        "top5_accuracy": 0.6388561320754716,
+        "top10_accuracy": 0.6880896226415094
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 5327,
-        "mlm_loss": 4.843718518997509,
-        "mlm_loss_derived_exponential": 126.9405058720373,
-        "top1_accuracy": 0.24291345973343345,
-        "top5_accuracy": 0.37413178149052,
-        "top10_accuracy": 0.4445278768537638
+        "masked_sample_count": 1825,
+        "mlm_loss": 3.9034076110748193,
+        "mlm_loss_derived_exponential": 49.57108059030651,
+        "top1_accuracy": 0.37643835616438354,
+        "top5_accuracy": 0.6180821917808219,
+        "top10_accuracy": 0.6597260273972603
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 26,
-        "mlm_loss": 7.126742197917058,
-        "mlm_loss_derived_exponential": 1244.8149930750922,
-        "top1_accuracy": 0.0,
-        "top5_accuracy": 0.0,
-        "top10_accuracy": 0.0
+        "masked_sample_count": 104,
+        "mlm_loss": 1.480319810959582,
+        "mlm_loss_derived_exponential": 4.394350817769469,
+        "top1_accuracy": 0.7403846153846154,
+        "top5_accuracy": 0.7980769230769231,
+        "top10_accuracy": 0.9230769230769231
       },
       "category_recall": {
-        "vessel_terminology": 0.258,
-        "navigation": 0.2745,
-        "machinery_propulsion": 0.2273,
-        "casualty_incident": 0.2143,
-        "weather_environment": 0.0236,
-        "safety_lifesaving": 0.0222
+        "vessel_terminology": 0.45,
+        "navigation": 0.1328,
+        "machinery_propulsion": 0.0,
+        "casualty_incident": 0.1667,
+        "weather_environment": 0.9038,
+        "safety_lifesaving": 0.0
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 3961,
-          "mlm_loss": 4.795050678729096,
-          "mlm_loss_derived_exponential": 120.91050921872923,
-          "top1_accuracy": 0.25801565261297654,
-          "top5_accuracy": 0.38879070941681393,
-          "top10_accuracy": 0.4496339308255491
+          "masked_sample_count": 1360,
+          "mlm_loss": 2.5904741320423508,
+          "mlm_loss_derived_exponential": 13.33609317354117,
+          "top1_accuracy": 0.45,
+          "top5_accuracy": 0.774264705882353,
+          "top10_accuracy": 0.8286764705882353
         },
         "navigation": {
-          "masked_sample_count": 714,
-          "mlm_loss": 4.66686826275801,
-          "mlm_loss_derived_exponential": 106.36411582694949,
-          "top1_accuracy": 0.27450980392156865,
-          "top5_accuracy": 0.38935574229691877,
-          "top10_accuracy": 0.46638655462184875
+          "masked_sample_count": 580,
+          "mlm_loss": 7.311187080126898,
+          "mlm_loss_derived_exponential": 1496.9531382072746,
+          "top1_accuracy": 0.13275862068965516,
+          "top5_accuracy": 0.1482758620689655,
+          "top10_accuracy": 0.18448275862068966
         },
         "machinery_propulsion": {
-          "masked_sample_count": 22,
-          "mlm_loss": 4.592245247045701,
-          "mlm_loss_derived_exponential": 98.7158229380178,
-          "top1_accuracy": 0.22727272727272727,
-          "top5_accuracy": 0.36363636363636365,
-          "top10_accuracy": 0.45454545454545453
+          "masked_sample_count": 119,
+          "mlm_loss": 6.957791352472386,
+          "mlm_loss_derived_exponential": 1051.309020077684,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.025210084033613446,
+          "top10_accuracy": 0.07563025210084033
         },
         "casualty_incident": {
-          "masked_sample_count": 294,
-          "mlm_loss": 4.534937104979765,
-          "mlm_loss_derived_exponential": 93.21765219392454,
-          "top1_accuracy": 0.21428571428571427,
-          "top5_accuracy": 0.41496598639455784,
-          "top10_accuracy": 0.5136054421768708
+          "masked_sample_count": 30,
+          "mlm_loss": 8.38986896276474,
+          "mlm_loss_derived_exponential": 4402.240798971899,
+          "top1_accuracy": 0.16666666666666666,
+          "top5_accuracy": 0.2,
+          "top10_accuracy": 0.2
         },
         "weather_environment": {
-          "masked_sample_count": 297,
-          "mlm_loss": 5.591557403424322,
-          "mlm_loss_derived_exponential": 268.1529169503286,
-          "top1_accuracy": 0.02356902356902357,
-          "top5_accuracy": 0.13804713804713806,
-          "top10_accuracy": 0.29292929292929293
+          "masked_sample_count": 52,
+          "mlm_loss": 0.6395259348568149,
+          "mlm_loss_derived_exponential": 1.8955820368971168,
+          "top1_accuracy": 0.9038461538461539,
+          "top5_accuracy": 0.9038461538461539,
+          "top10_accuracy": 0.9038461538461539
         },
         "safety_lifesaving": {
-          "masked_sample_count": 45,
-          "mlm_loss": 9.442309171623654,
-          "mlm_loss_derived_exponential": 12610.803820620285,
-          "top1_accuracy": 0.022222222222222223,
-          "top5_accuracy": 0.08888888888888889,
-          "top10_accuracy": 0.13333333333333333
+          "masked_sample_count": 8,
+          "mlm_loss": 12.1791433095932,
+          "mlm_loss_derived_exponential": 194686.00512294177,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
         }
       },
-      "performance_gap_top1": 0.007086540266566549,
+      "performance_gap_top1": 0.11589654949599382,
       "masking_diagnostics": {
-        "total_eligible_tokens": 35592,
-        "total_masked_tokens": 5331,
+        "total_eligible_tokens": 35514,
+        "total_masked_tokens": 5321,
         "actual_mask_rate": 0.1498,
-        "rare_maritime_tokens_masked": 26,
-        "maritime_tokens_masked": 5301,
-        "general_tokens_masked": 4,
-        "rare_maritime_mask_fraction": 0.0049,
-        "maritime_mask_fraction": 0.9944,
-        "general_mask_fraction": 0.0008
+        "rare_maritime_tokens_masked": 208,
+        "maritime_tokens_masked": 1721,
+        "general_tokens_masked": 3392,
+        "rare_maritime_mask_fraction": 0.0391,
+        "maritime_mask_fraction": 0.3234,
+        "general_mask_fraction": 0.6375
       }
     }
   },
@@ -2500,106 +2500,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 49.72116303443909,
+      "evaluation_time_sec": 7.612149477005005,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
-        "total_masked_tokens": 5315,
-        "overall_top1_accuracy": 0.42784571966133583,
-        "overall_mlm_loss": 3.2639109250690126
+        "total_masked_tokens": 5321,
+        "overall_top1_accuracy": 0.6353749284487693,
+        "overall_mlm_loss": 2.0370031001396587
       },
       "general_tokens_summary": {
-        "masked_sample_count": 0,
-        "mlm_loss": 0.0,
-        "mlm_loss_derived_exponential": 1.0,
-        "top1_accuracy": 0.0,
-        "top5_accuracy": 0.0,
-        "top10_accuracy": 0.0
+        "masked_sample_count": 3352,
+        "mlm_loss": 2.5160516290366424,
+        "mlm_loss_derived_exponential": 12.379620704649279,
+        "top1_accuracy": 0.5480310262529833,
+        "top5_accuracy": 0.7031622911694511,
+        "top10_accuracy": 0.7574582338902148
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 5315,
-        "mlm_loss": 3.2639109250690126,
-        "mlm_loss_derived_exponential": 26.151614408525695,
-        "top1_accuracy": 0.42784571966133583,
-        "top5_accuracy": 0.5776105362182502,
-        "top10_accuracy": 0.639134524929445
+        "masked_sample_count": 1889,
+        "mlm_loss": 1.1869392203817495,
+        "mlm_loss_derived_exponential": 3.2770355578223533,
+        "top1_accuracy": 0.7903652726310217,
+        "top5_accuracy": 0.8819481206987825,
+        "top10_accuracy": 0.8978295394388566
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 26,
-        "mlm_loss": 6.2978569727677565,
-        "mlm_loss_derived_exponential": 543.4061272909565,
-        "top1_accuracy": 0.0,
-        "top5_accuracy": 0.0,
-        "top10_accuracy": 0.038461538461538464
+        "masked_sample_count": 80,
+        "mlm_loss": 0.6014569647610187,
+        "mlm_loss_derived_exponential": 1.8247754981606257,
+        "top1_accuracy": 0.9125,
+        "top5_accuracy": 0.95,
+        "top10_accuracy": 0.95
       },
       "category_recall": {
-        "vessel_terminology": 0.4837,
-        "navigation": 0.2676,
-        "machinery_propulsion": 0.2143,
-        "casualty_incident": 0.3045,
-        "weather_environment": 0.0984,
-        "safety_lifesaving": 0.1111
+        "vessel_terminology": 0.8565,
+        "navigation": 0.3668,
+        "machinery_propulsion": 0.0,
+        "casualty_incident": 0.8415,
+        "weather_environment": 0.0,
+        "safety_lifesaving": 0.0
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 4172,
-          "mlm_loss": 2.8606187917501282,
-          "mlm_loss_derived_exponential": 17.472335329120174,
-          "top1_accuracy": 0.48370086289549374,
-          "top5_accuracy": 0.6255992329817833,
-          "top10_accuracy": 0.6812080536912751
+          "masked_sample_count": 1658,
+          "mlm_loss": 0.7616140921900811,
+          "mlm_loss_derived_exponential": 2.1417303823624785,
+          "top1_accuracy": 0.856453558504222,
+          "top5_accuracy": 0.9583835946924005,
+          "top10_accuracy": 0.9686369119420989
         },
         "navigation": {
-          "masked_sample_count": 527,
-          "mlm_loss": 5.226987311267708,
-          "mlm_loss_derived_exponential": 186.23090178823654,
-          "top1_accuracy": 0.2675521821631879,
-          "top5_accuracy": 0.35294117647058826,
-          "top10_accuracy": 0.40417457305502846
+          "masked_sample_count": 199,
+          "mlm_loss": 3.545413356630047,
+          "mlm_loss_derived_exponential": 34.65400684560008,
+          "top1_accuracy": 0.36683417085427134,
+          "top5_accuracy": 0.3869346733668342,
+          "top10_accuracy": 0.45226130653266333
         },
         "machinery_propulsion": {
-          "masked_sample_count": 28,
-          "mlm_loss": 4.260089737359002,
-          "mlm_loss_derived_exponential": 70.81633804030035,
-          "top1_accuracy": 0.21428571428571427,
-          "top5_accuracy": 0.35714285714285715,
-          "top10_accuracy": 0.5357142857142857
+          "masked_sample_count": 0,
+          "mlm_loss": 0.0,
+          "mlm_loss_derived_exponential": 1.0,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
         },
         "casualty_incident": {
-          "masked_sample_count": 243,
-          "mlm_loss": 4.07510137907156,
-          "mlm_loss_derived_exponential": 58.85644709786479,
-          "top1_accuracy": 0.3045267489711934,
-          "top5_accuracy": 0.522633744855967,
-          "top10_accuracy": 0.5679012345679012
+          "masked_sample_count": 265,
+          "mlm_loss": 1.6694497129827175,
+          "mlm_loss_derived_exponential": 5.309245384365414,
+          "top1_accuracy": 0.8415094339622642,
+          "top5_accuracy": 0.9056603773584906,
+          "top10_accuracy": 0.909433962264151
         },
         "weather_environment": {
-          "masked_sample_count": 315,
-          "mlm_loss": 4.234147225627823,
-          "mlm_loss_derived_exponential": 69.00280980831766,
-          "top1_accuracy": 0.09841269841269841,
-          "top5_accuracy": 0.4095238095238095,
-          "top10_accuracy": 0.5777777777777777
+          "masked_sample_count": 0,
+          "mlm_loss": 0.0,
+          "mlm_loss_derived_exponential": 1.0,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
         },
         "safety_lifesaving": {
-          "masked_sample_count": 36,
-          "mlm_loss": 6.7638688050727875,
-          "mlm_loss_derived_exponential": 865.9860544902511,
-          "top1_accuracy": 0.1111111111111111,
-          "top5_accuracy": 0.2222222222222222,
-          "top10_accuracy": 0.2222222222222222
+          "masked_sample_count": 8,
+          "mlm_loss": 8.225928902626038,
+          "mlm_loss_derived_exponential": 3736.5907205402054,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
         }
       },
-      "performance_gap_top1": -0.42784571966133583,
+      "performance_gap_top1": -0.24233424637803846,
       "masking_diagnostics": {
-        "total_eligible_tokens": 35457,
-        "total_masked_tokens": 5315,
-        "actual_mask_rate": 0.1499,
-        "rare_maritime_tokens_masked": 26,
-        "maritime_tokens_masked": 5289,
-        "general_tokens_masked": 0,
-        "rare_maritime_mask_fraction": 0.0049,
-        "maritime_mask_fraction": 0.9951,
-        "general_mask_fraction": 0.0
+        "total_eligible_tokens": 35462,
+        "total_masked_tokens": 5321,
+        "actual_mask_rate": 0.15,
+        "rare_maritime_tokens_masked": 160,
+        "maritime_tokens_masked": 1809,
+        "general_tokens_masked": 3352,
+        "rare_maritime_mask_fraction": 0.0301,
+        "maritime_mask_fraction": 0.34,
+        "general_mask_fraction": 0.63
       }
     }
   },
@@ -2624,106 +2624,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 19.786866188049316,
+      "evaluation_time_sec": 2.6800708770751953,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
-        "total_masked_tokens": 1778,
-        "overall_top1_accuracy": 0.18841394825646793,
-        "overall_mlm_loss": 6.764809390518925
+        "total_masked_tokens": 1818,
+        "overall_top1_accuracy": 0.24253285543608125,
+        "overall_mlm_loss": 6.5137669423531
       },
       "general_tokens_summary": {
-        "masked_sample_count": 59,
-        "mlm_loss": 5.348217062511525,
-        "mlm_loss_derived_exponential": 210.2331309859558,
-        "top1_accuracy": 0.2542372881355932,
-        "top5_accuracy": 0.4406779661016949,
-        "top10_accuracy": 0.5254237288135594
+        "masked_sample_count": 12,
+        "mlm_loss": 4.9882945127319545,
+        "mlm_loss_derived_exponential": 146.68603887079655,
+        "top1_accuracy": 0.25,
+        "top5_accuracy": 0.3333333333333333,
+        "top10_accuracy": 0.4166666666666667
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 1719,
-        "mlm_loss": 6.813430069607021,
-        "mlm_loss_derived_exponential": 909.9867778835322,
-        "top1_accuracy": 0.18615474112856312,
-        "top5_accuracy": 0.32111692844677137,
-        "top10_accuracy": 0.3717277486910995
+        "masked_sample_count": 1662,
+        "mlm_loss": 6.524781183722205,
+        "mlm_loss_derived_exponential": 681.830561700691,
+        "top1_accuracy": 0.24247894103489773,
+        "top5_accuracy": 0.35018050541516244,
+        "top10_accuracy": 0.39290012033694344
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 547,
-        "mlm_loss": 11.400237648317104,
-        "mlm_loss_derived_exponential": 89342.95304054198,
-        "top1_accuracy": 0.0,
-        "top5_accuracy": 0.0,
-        "top10_accuracy": 0.0
+        "masked_sample_count": 724,
+        "mlm_loss": 9.519991859676358,
+        "mlm_loss_derived_exponential": 13629.500265017625,
+        "top1_accuracy": 0.12845303867403315,
+        "top5_accuracy": 0.1477900552486188,
+        "top10_accuracy": 0.1574585635359116
       },
       "category_recall": {
-        "vessel_terminology": 0.2484,
-        "navigation": 0.1001,
-        "machinery_propulsion": 0.0,
-        "casualty_incident": 0.75,
-        "weather_environment": 0.0385,
-        "safety_lifesaving": 0.0
+        "vessel_terminology": 0.3341,
+        "navigation": 0.1585,
+        "machinery_propulsion": 0.1111,
+        "casualty_incident": 0.6216,
+        "weather_environment": 0.4425,
+        "safety_lifesaving": 0.3182
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 914,
-          "mlm_loss": 5.279321230260974,
-          "mlm_loss_derived_exponential": 196.23663064910514,
-          "top1_accuracy": 0.24835886214442013,
-          "top5_accuracy": 0.4048140043763676,
-          "top10_accuracy": 0.46061269146608314
+          "masked_sample_count": 850,
+          "mlm_loss": 4.923360508652815,
+          "mlm_loss_derived_exponential": 137.46378610733308,
+          "top1_accuracy": 0.3341176470588235,
+          "top5_accuracy": 0.4376470588235294,
+          "top10_accuracy": 0.4752941176470588
         },
         "navigation": {
-          "masked_sample_count": 799,
-          "mlm_loss": 9.029579507366513,
-          "mlm_loss_derived_exponential": 8346.349255817984,
-          "top1_accuracy": 0.10012515644555695,
-          "top5_accuracy": 0.19774718397997496,
-          "top10_accuracy": 0.2202753441802253
+          "masked_sample_count": 902,
+          "mlm_loss": 8.31145212653604,
+          "mlm_loss_derived_exponential": 4070.2191676653815,
+          "top1_accuracy": 0.15853658536585366,
+          "top5_accuracy": 0.24722838137472283,
+          "top10_accuracy": 0.2793791574279379
         },
         "machinery_propulsion": {
-          "masked_sample_count": 4,
-          "mlm_loss": 6.198228478431702,
-          "mlm_loss_derived_exponential": 491.8768982771922,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.0,
-          "top10_accuracy": 0.0
+          "masked_sample_count": 9,
+          "mlm_loss": 7.11935430765152,
+          "mlm_loss_derived_exponential": 1235.6523245756007,
+          "top1_accuracy": 0.1111111111111111,
+          "top5_accuracy": 0.1111111111111111,
+          "top10_accuracy": 0.2222222222222222
         },
         "casualty_incident": {
-          "masked_sample_count": 44,
-          "mlm_loss": 2.5003494366749446,
-          "mlm_loss_derived_exponential": 12.186751714750018,
-          "top1_accuracy": 0.75,
-          "top5_accuracy": 0.7727272727272727,
-          "top10_accuracy": 0.7954545454545454
+          "masked_sample_count": 37,
+          "mlm_loss": 2.40335401062023,
+          "mlm_loss_derived_exponential": 11.06021030265741,
+          "top1_accuracy": 0.6216216216216216,
+          "top5_accuracy": 0.7837837837837838,
+          "top10_accuracy": 0.8108108108108109
         },
         "weather_environment": {
-          "masked_sample_count": 78,
-          "mlm_loss": 5.443299835309004,
-          "mlm_loss_derived_exponential": 231.20386072792678,
-          "top1_accuracy": 0.038461538461538464,
-          "top5_accuracy": 0.24358974358974358,
-          "top10_accuracy": 0.46153846153846156
+          "masked_sample_count": 113,
+          "mlm_loss": 2.66316250157831,
+          "mlm_loss_derived_exponential": 14.341572702508762,
+          "top1_accuracy": 0.4424778761061947,
+          "top5_accuracy": 0.672566371681416,
+          "top10_accuracy": 0.7699115044247787
         },
         "safety_lifesaving": {
-          "masked_sample_count": 0,
-          "mlm_loss": 0.0,
-          "mlm_loss_derived_exponential": 1.0,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.0,
-          "top10_accuracy": 0.0
+          "masked_sample_count": 22,
+          "mlm_loss": 5.152878423848464,
+          "mlm_loss_derived_exponential": 172.9285362420488,
+          "top1_accuracy": 0.3181818181818182,
+          "top5_accuracy": 0.4090909090909091,
+          "top10_accuracy": 0.5
         }
       },
-      "performance_gap_top1": 0.06808254700703009,
+      "performance_gap_top1": 0.007521058965102273,
       "masking_diagnostics": {
-        "total_eligible_tokens": 11856,
-        "total_masked_tokens": 1778,
-        "actual_mask_rate": 0.15,
-        "rare_maritime_tokens_masked": 547,
-        "maritime_tokens_masked": 1172,
-        "general_tokens_masked": 59,
-        "rare_maritime_mask_fraction": 0.3076,
-        "maritime_mask_fraction": 0.6592,
-        "general_mask_fraction": 0.0332
+        "total_eligible_tokens": 12108,
+        "total_masked_tokens": 1818,
+        "actual_mask_rate": 0.1501,
+        "rare_maritime_tokens_masked": 868,
+        "maritime_tokens_masked": 938,
+        "general_tokens_masked": 12,
+        "rare_maritime_mask_fraction": 0.4774,
+        "maritime_mask_fraction": 0.516,
+        "general_mask_fraction": 0.0066
       }
     }
   },
@@ -2748,106 +2748,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 18.979586839675903,
+      "evaluation_time_sec": 2.805382013320923,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
-        "total_masked_tokens": 1887,
-        "overall_top1_accuracy": 0.08479067302596714,
-        "overall_mlm_loss": 6.6763367345058136
+        "total_masked_tokens": 1924,
+        "overall_top1_accuracy": 0.13943112102621305,
+        "overall_mlm_loss": 6.012363305355826
       },
       "general_tokens_summary": {
-        "masked_sample_count": 69,
-        "mlm_loss": 6.051118267781061,
-        "mlm_loss_derived_exponential": 424.58756726218047,
-        "top1_accuracy": 0.15942028985507245,
-        "top5_accuracy": 0.2898550724637681,
-        "top10_accuracy": 0.4057971014492754
+        "masked_sample_count": 2,
+        "mlm_loss": 5.873969078063965,
+        "mlm_loss_derived_exponential": 355.6578161648385,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.0
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 1818,
-        "mlm_loss": 6.700066148259393,
-        "mlm_loss_derived_exponential": 812.4595661762161,
-        "top1_accuracy": 0.08195819581958196,
-        "top5_accuracy": 0.16666666666666666,
-        "top10_accuracy": 0.23377337733773376
+        "masked_sample_count": 1791,
+        "mlm_loss": 6.012517849439903,
+        "mlm_loss_derived_exponential": 408.51059464201313,
+        "top1_accuracy": 0.13958682300390843,
+        "top5_accuracy": 0.21496370742601897,
+        "top10_accuracy": 0.26912339475153546
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 548,
-        "mlm_loss": 8.824557492767807,
-        "mlm_loss_derived_exponential": 6799.181340188197,
-        "top1_accuracy": 0.0,
-        "top5_accuracy": 0.0018248175182481751,
-        "top10_accuracy": 0.009124087591240875
+        "masked_sample_count": 1116,
+        "mlm_loss": 6.708542633744951,
+        "mlm_loss_derived_exponential": 819.3756384793611,
+        "top1_accuracy": 0.07347670250896057,
+        "top5_accuracy": 0.11200716845878136,
+        "top10_accuracy": 0.15143369175627241
       },
       "category_recall": {
-        "vessel_terminology": 0.1127,
-        "navigation": 0.0354,
+        "vessel_terminology": 0.1518,
+        "navigation": 0.1013,
         "machinery_propulsion": 0.0,
-        "casualty_incident": 0.3158,
-        "weather_environment": 0.0149,
-        "safety_lifesaving": 0.0
+        "casualty_incident": 0.3704,
+        "weather_environment": 0.3855,
+        "safety_lifesaving": 0.24
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 1003,
-          "mlm_loss": 6.399681611021875,
-          "mlm_loss_derived_exponential": 601.6534475472267,
-          "top1_accuracy": 0.11266201395812563,
-          "top5_accuracy": 0.18843469591226322,
-          "top10_accuracy": 0.27018943170488535
+          "masked_sample_count": 1113,
+          "mlm_loss": 5.521459087655923,
+          "mlm_loss_derived_exponential": 249.99954244883776,
+          "top1_accuracy": 0.1518418688230009,
+          "top5_accuracy": 0.2138364779874214,
+          "top10_accuracy": 0.2749326145552561
         },
         "navigation": {
-          "masked_sample_count": 819,
-          "mlm_loss": 7.574321430972499,
-          "mlm_loss_derived_exponential": 1947.538275036855,
-          "top1_accuracy": 0.03540903540903541,
-          "top5_accuracy": 0.11965811965811966,
-          "top10_accuracy": 0.1562881562881563
+          "masked_sample_count": 1274,
+          "mlm_loss": 6.3638543654085185,
+          "mlm_loss_derived_exponential": 580.4794299235272,
+          "top1_accuracy": 0.10125588697017268,
+          "top5_accuracy": 0.1640502354788069,
+          "top10_accuracy": 0.21036106750392464
         },
         "machinery_propulsion": {
-          "masked_sample_count": 4,
-          "mlm_loss": 7.7322551012039185,
-          "mlm_loss_derived_exponential": 2280.7397046683236,
+          "masked_sample_count": 3,
+          "mlm_loss": 8.59998639424642,
+          "mlm_loss_derived_exponential": 5431.585690043792,
           "top1_accuracy": 0.0,
           "top5_accuracy": 0.0,
-          "top10_accuracy": 0.0
+          "top10_accuracy": 0.3333333333333333
         },
         "casualty_incident": {
-          "masked_sample_count": 38,
-          "mlm_loss": 4.9176389508341485,
-          "mlm_loss_derived_exponential": 136.67952484470493,
-          "top1_accuracy": 0.3157894736842105,
-          "top5_accuracy": 0.47368421052631576,
-          "top10_accuracy": 0.5263157894736842
+          "masked_sample_count": 27,
+          "mlm_loss": 4.979512970756601,
+          "mlm_loss_derived_exponential": 145.40354862585735,
+          "top1_accuracy": 0.37037037037037035,
+          "top5_accuracy": 0.4074074074074074,
+          "top10_accuracy": 0.48148148148148145
         },
         "weather_environment": {
-          "masked_sample_count": 67,
-          "mlm_loss": 6.427324165159197,
-          "mlm_loss_derived_exponential": 618.5166832275359,
-          "top1_accuracy": 0.014925373134328358,
-          "top5_accuracy": 0.07462686567164178,
-          "top10_accuracy": 0.19402985074626866
+          "masked_sample_count": 83,
+          "mlm_loss": 3.4845197802656385,
+          "mlm_loss_derived_exponential": 32.60676493752161,
+          "top1_accuracy": 0.3855421686746988,
+          "top5_accuracy": 0.5662650602409639,
+          "top10_accuracy": 0.6506024096385542
         },
         "safety_lifesaving": {
-          "masked_sample_count": 0,
-          "mlm_loss": 0.0,
-          "mlm_loss_derived_exponential": 1.0,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.0,
-          "top10_accuracy": 0.0
+          "masked_sample_count": 25,
+          "mlm_loss": 4.959205041788518,
+          "mlm_loss_derived_exponential": 142.48048483278222,
+          "top1_accuracy": 0.24,
+          "top5_accuracy": 0.4,
+          "top10_accuracy": 0.44
         }
       },
-      "performance_gap_top1": 0.0774620940354905,
+      "performance_gap_top1": -0.13958682300390843,
       "masking_diagnostics": {
-        "total_eligible_tokens": 12549,
-        "total_masked_tokens": 1887,
-        "actual_mask_rate": 0.1504,
-        "rare_maritime_tokens_masked": 548,
-        "maritime_tokens_masked": 1270,
-        "general_tokens_masked": 69,
-        "rare_maritime_mask_fraction": 0.2904,
-        "maritime_mask_fraction": 0.673,
-        "general_mask_fraction": 0.0366
+        "total_eligible_tokens": 12802,
+        "total_masked_tokens": 1924,
+        "actual_mask_rate": 0.1503,
+        "rare_maritime_tokens_masked": 1247,
+        "maritime_tokens_masked": 675,
+        "general_tokens_masked": 2,
+        "rare_maritime_mask_fraction": 0.6481,
+        "maritime_mask_fraction": 0.3508,
+        "general_mask_fraction": 0.001
       }
     }
   },
@@ -2872,106 +2872,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 19.155867338180542,
+      "evaluation_time_sec": 3.035444736480713,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
-        "total_masked_tokens": 1880,
-        "overall_top1_accuracy": 0.23297872340425532,
-        "overall_mlm_loss": 4.853307352158601
+        "total_masked_tokens": 1916,
+        "overall_top1_accuracy": 0.28467966573816156,
+        "overall_mlm_loss": 4.3064930483741
       },
       "general_tokens_summary": {
-        "masked_sample_count": 66,
-        "mlm_loss": 6.619071735915813,
-        "mlm_loss_derived_exponential": 749.2492730173435,
-        "top1_accuracy": 0.18181818181818182,
-        "top5_accuracy": 0.2878787878787879,
-        "top10_accuracy": 0.3333333333333333
+        "masked_sample_count": 0,
+        "mlm_loss": 0.0,
+        "mlm_loss_derived_exponential": 1.0,
+        "top1_accuracy": 0.0,
+        "top5_accuracy": 0.0,
+        "top10_accuracy": 0.0
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 1814,
-        "mlm_loss": 4.789062341503708,
-        "mlm_loss_derived_exponential": 120.18861993093702,
-        "top1_accuracy": 0.2348401323042999,
-        "top5_accuracy": 0.39305402425578834,
-        "top10_accuracy": 0.45148842337375966
+        "masked_sample_count": 1795,
+        "mlm_loss": 4.3064930483741,
+        "mlm_loss_derived_exponential": 74.17988697295887,
+        "top1_accuracy": 0.28467966573816156,
+        "top5_accuracy": 0.4445682451253482,
+        "top10_accuracy": 0.5142061281337047
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 503,
-        "mlm_loss": 5.664635134501675,
-        "mlm_loss_derived_exponential": 288.4827045261403,
-        "top1_accuracy": 0.17892644135188868,
-        "top5_accuracy": 0.2882703777335984,
-        "top10_accuracy": 0.3121272365805169
+        "masked_sample_count": 1002,
+        "mlm_loss": 4.9197436439540825,
+        "mlm_loss_derived_exponential": 136.96749623968526,
+        "top1_accuracy": 0.20758483033932135,
+        "top5_accuracy": 0.3712574850299401,
+        "top10_accuracy": 0.44011976047904194
       },
       "category_recall": {
-        "vessel_terminology": 0.2378,
-        "navigation": 0.2132,
-        "machinery_propulsion": 0.0,
-        "casualty_incident": 0.5625,
-        "weather_environment": 0.0513,
-        "safety_lifesaving": 0.0
+        "vessel_terminology": 0.3238,
+        "navigation": 0.2446,
+        "machinery_propulsion": 0.125,
+        "casualty_incident": 0.2771,
+        "weather_environment": 0.3735,
+        "safety_lifesaving": 0.2788
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 942,
-          "mlm_loss": 4.617700150375936,
-          "mlm_loss_derived_exponential": 101.2608793288663,
-          "top1_accuracy": 0.23779193205944799,
-          "top5_accuracy": 0.39171974522292996,
-          "top10_accuracy": 0.4554140127388535
+          "masked_sample_count": 1192,
+          "mlm_loss": 3.818519112357523,
+          "mlm_loss_derived_exponential": 45.536723593283995,
+          "top1_accuracy": 0.3238255033557047,
+          "top5_accuracy": 0.5100671140939598,
+          "top10_accuracy": 0.589765100671141
         },
         "navigation": {
-          "masked_sample_count": 802,
-          "mlm_loss": 5.009375876430051,
-          "mlm_loss_derived_exponential": 149.8112062601092,
-          "top1_accuracy": 0.21321695760598502,
-          "top5_accuracy": 0.3690773067331671,
-          "top10_accuracy": 0.41271820448877805
+          "masked_sample_count": 1194,
+          "mlm_loss": 4.5493772052766115,
+          "mlm_loss_derived_exponential": 94.57349009924532,
+          "top1_accuracy": 0.24455611390284757,
+          "top5_accuracy": 0.423785594639866,
+          "top10_accuracy": 0.49413735343383586
         },
         "machinery_propulsion": {
-          "masked_sample_count": 2,
-          "mlm_loss": 4.604821264743805,
-          "mlm_loss_derived_exponential": 99.96511396216516,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.5,
-          "top10_accuracy": 0.5
+          "masked_sample_count": 8,
+          "mlm_loss": 4.953358392231166,
+          "mlm_loss_derived_exponential": 141.64988185752415,
+          "top1_accuracy": 0.125,
+          "top5_accuracy": 0.375,
+          "top10_accuracy": 0.375
         },
         "casualty_incident": {
-          "masked_sample_count": 48,
-          "mlm_loss": 2.9110683052179716,
-          "mlm_loss_derived_exponential": 18.37641970953069,
-          "top1_accuracy": 0.5625,
-          "top5_accuracy": 0.7083333333333334,
-          "top10_accuracy": 0.75
+          "masked_sample_count": 83,
+          "mlm_loss": 4.429177076650113,
+          "mlm_loss_derived_exponential": 83.86237619900719,
+          "top1_accuracy": 0.27710843373493976,
+          "top5_accuracy": 0.42168674698795183,
+          "top10_accuracy": 0.5662650602409639
         },
         "weather_environment": {
-          "masked_sample_count": 78,
-          "mlm_loss": 6.2809213277621145,
-          "mlm_loss_derived_exponential": 534.2806847621158,
-          "top1_accuracy": 0.05128205128205128,
-          "top5_accuracy": 0.23076923076923078,
-          "top10_accuracy": 0.358974358974359
+          "masked_sample_count": 83,
+          "mlm_loss": 3.3550472722994726,
+          "mlm_loss_derived_exponential": 28.646958366293738,
+          "top1_accuracy": 0.37349397590361444,
+          "top5_accuracy": 0.5060240963855421,
+          "top10_accuracy": 0.6506024096385542
         },
         "safety_lifesaving": {
-          "masked_sample_count": 1,
-          "mlm_loss": 10.848299026489258,
-          "mlm_loss_derived_exponential": 51446.5676394282,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.0,
-          "top10_accuracy": 0.0
+          "masked_sample_count": 495,
+          "mlm_loss": 3.922651307239677,
+          "mlm_loss_derived_exponential": 50.53424914204728,
+          "top1_accuracy": 0.2787878787878788,
+          "top5_accuracy": 0.5272727272727272,
+          "top10_accuracy": 0.6303030303030303
         }
       },
-      "performance_gap_top1": -0.053021950486118075,
+      "performance_gap_top1": -0.28467966573816156,
       "masking_diagnostics": {
-        "total_eligible_tokens": 12533,
-        "total_masked_tokens": 1880,
-        "actual_mask_rate": 0.15,
-        "rare_maritime_tokens_masked": 503,
-        "maritime_tokens_masked": 1311,
-        "general_tokens_masked": 66,
-        "rare_maritime_mask_fraction": 0.2676,
-        "maritime_mask_fraction": 0.6973,
-        "general_mask_fraction": 0.0351
+        "total_eligible_tokens": 12801,
+        "total_masked_tokens": 1916,
+        "actual_mask_rate": 0.1497,
+        "rare_maritime_tokens_masked": 1123,
+        "maritime_tokens_masked": 793,
+        "general_tokens_masked": 0,
+        "rare_maritime_mask_fraction": 0.5861,
+        "maritime_mask_fraction": 0.4139,
+        "general_mask_fraction": 0.0
       }
     }
   },
@@ -2996,106 +2996,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 18.86888098716736,
+      "evaluation_time_sec": 2.5726850032806396,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
-        "total_masked_tokens": 1831,
-        "overall_top1_accuracy": 0.19606772255598034,
-        "overall_mlm_loss": 5.669402210469235
+        "total_masked_tokens": 1869,
+        "overall_top1_accuracy": 0.24242424242424243,
+        "overall_mlm_loss": 5.2780455066277705
       },
       "general_tokens_summary": {
-        "masked_sample_count": 60,
-        "mlm_loss": 4.813842036000763,
-        "mlm_loss_derived_exponential": 123.20406380686735,
-        "top1_accuracy": 0.2833333333333333,
-        "top5_accuracy": 0.4,
-        "top10_accuracy": 0.45
+        "masked_sample_count": 7,
+        "mlm_loss": 3.9942099122064456,
+        "mlm_loss_derived_exponential": 54.28293539194334,
+        "top1_accuracy": 0.2857142857142857,
+        "top5_accuracy": 0.5714285714285714,
+        "top10_accuracy": 0.7142857142857143
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 1771,
-        "mlm_loss": 5.698387874200521,
-        "mlm_loss_derived_exponential": 298.3859772813765,
-        "top1_accuracy": 0.19311123658949747,
-        "top5_accuracy": 0.3274985883681536,
-        "top10_accuracy": 0.38509316770186336
+        "masked_sample_count": 1709,
+        "mlm_loss": 5.283304049144418,
+        "mlm_loss_derived_exponential": 197.0197641114218,
+        "top1_accuracy": 0.2422469280280866,
+        "top5_accuracy": 0.3844353423054418,
+        "top10_accuracy": 0.44763019309537744
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 380,
-        "mlm_loss": 8.843433410242984,
-        "mlm_loss_derived_exponential": 6928.74105851604,
-        "top1_accuracy": 0.0,
-        "top5_accuracy": 0.002631578947368421,
-        "top10_accuracy": 0.010526315789473684
+        "masked_sample_count": 641,
+        "mlm_loss": 6.301100714746412,
+        "mlm_loss_derived_exponential": 545.1716584732583,
+        "top1_accuracy": 0.21840873634945399,
+        "top5_accuracy": 0.3073322932917317,
+        "top10_accuracy": 0.3338533541341654
       },
       "category_recall": {
-        "vessel_terminology": 0.1989,
-        "navigation": 0.1612,
-        "machinery_propulsion": 1.0,
-        "casualty_incident": 0.48,
-        "weather_environment": 0.0,
-        "safety_lifesaving": 0.0
+        "vessel_terminology": 0.2702,
+        "navigation": 0.2743,
+        "machinery_propulsion": 0.2857,
+        "casualty_incident": 0.4318,
+        "weather_environment": 0.2844,
+        "safety_lifesaving": 0.25
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 1076,
-          "mlm_loss": 5.302499821152518,
-          "mlm_loss_derived_exponential": 200.83824265487922,
-          "top1_accuracy": 0.19888475836431227,
-          "top5_accuracy": 0.35687732342007433,
-          "top10_accuracy": 0.42193308550185876
+          "masked_sample_count": 1029,
+          "mlm_loss": 4.862347179804535,
+          "mlm_loss_derived_exponential": 129.3274008005857,
+          "top1_accuracy": 0.27016520894071916,
+          "top5_accuracy": 0.4198250728862974,
+          "top10_accuracy": 0.48202137998056366
         },
         "navigation": {
-          "masked_sample_count": 676,
-          "mlm_loss": 6.536479750328774,
-          "mlm_loss_derived_exponential": 689.853840871106,
-          "top1_accuracy": 0.16124260355029585,
-          "top5_accuracy": 0.26331360946745563,
-          "top10_accuracy": 0.2958579881656805
+          "masked_sample_count": 886,
+          "mlm_loss": 5.372628565876231,
+          "mlm_loss_derived_exponential": 215.42839183955678,
+          "top1_accuracy": 0.2742663656884876,
+          "top5_accuracy": 0.40632054176072235,
+          "top10_accuracy": 0.4469525959367946
         },
         "machinery_propulsion": {
-          "masked_sample_count": 1,
-          "mlm_loss": 2.7342584133148193,
-          "mlm_loss_derived_exponential": 15.398320011628392,
-          "top1_accuracy": 1.0,
-          "top5_accuracy": 1.0,
-          "top10_accuracy": 1.0
+          "masked_sample_count": 7,
+          "mlm_loss": 7.718108972268445,
+          "mlm_loss_derived_exponential": 2248.70319726163,
+          "top1_accuracy": 0.2857142857142857,
+          "top5_accuracy": 0.2857142857142857,
+          "top10_accuracy": 0.2857142857142857
         },
         "casualty_incident": {
-          "masked_sample_count": 50,
-          "mlm_loss": 4.4279184523224835,
-          "mlm_loss_derived_exponential": 83.75689136896212,
-          "top1_accuracy": 0.48,
-          "top5_accuracy": 0.56,
-          "top10_accuracy": 0.58
+          "masked_sample_count": 44,
+          "mlm_loss": 4.637052930722183,
+          "mlm_loss_derived_exponential": 103.2396444288138,
+          "top1_accuracy": 0.4318181818181818,
+          "top5_accuracy": 0.5227272727272727,
+          "top10_accuracy": 0.5909090909090909
         },
         "weather_environment": {
-          "masked_sample_count": 83,
-          "mlm_loss": 7.395014455519527,
-          "mlm_loss_derived_exponential": 1627.848454835921,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.07228915662650602,
-          "top10_accuracy": 0.1927710843373494
+          "masked_sample_count": 109,
+          "mlm_loss": 4.324773207076167,
+          "mlm_loss_derived_exponential": 75.54837707933454,
+          "top1_accuracy": 0.28440366972477066,
+          "top5_accuracy": 0.42201834862385323,
+          "top10_accuracy": 0.6055045871559633
         },
         "safety_lifesaving": {
-          "masked_sample_count": 0,
-          "mlm_loss": 0.0,
-          "mlm_loss_derived_exponential": 1.0,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.0,
-          "top10_accuracy": 0.0
+          "masked_sample_count": 8,
+          "mlm_loss": 6.344469886273146,
+          "mlm_loss_derived_exponential": 569.3354971415786,
+          "top1_accuracy": 0.25,
+          "top5_accuracy": 0.375,
+          "top10_accuracy": 0.375
         }
       },
-      "performance_gap_top1": 0.09022209674383586,
+      "performance_gap_top1": 0.04346735768619911,
       "masking_diagnostics": {
-        "total_eligible_tokens": 12218,
-        "total_masked_tokens": 1831,
-        "actual_mask_rate": 0.1499,
-        "rare_maritime_tokens_masked": 380,
-        "maritime_tokens_masked": 1391,
-        "general_tokens_masked": 60,
-        "rare_maritime_mask_fraction": 0.2075,
-        "maritime_mask_fraction": 0.7597,
-        "general_mask_fraction": 0.0328
+        "total_eligible_tokens": 12479,
+        "total_masked_tokens": 1869,
+        "actual_mask_rate": 0.1498,
+        "rare_maritime_tokens_masked": 794,
+        "maritime_tokens_masked": 1068,
+        "general_tokens_masked": 7,
+        "rare_maritime_mask_fraction": 0.4248,
+        "maritime_mask_fraction": 0.5714,
+        "general_mask_fraction": 0.0037
       }
     }
   },
@@ -3120,106 +3120,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 19.150886297225952,
+      "evaluation_time_sec": 2.5915684700012207,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
-        "total_masked_tokens": 1847,
-        "overall_top1_accuracy": 0.13427179209528967,
-        "overall_mlm_loss": 6.397473753307672
+        "total_masked_tokens": 1886,
+        "overall_top1_accuracy": 0.17116599655370476,
+        "overall_mlm_loss": 6.162281678556332
       },
       "general_tokens_summary": {
-        "masked_sample_count": 60,
-        "mlm_loss": 6.020996316157592,
-        "mlm_loss_derived_exponential": 411.9888624754651,
-        "top1_accuracy": 0.18333333333333332,
-        "top5_accuracy": 0.35,
-        "top10_accuracy": 0.4166666666666667
+        "masked_sample_count": 8,
+        "mlm_loss": 4.592126089402882,
+        "mlm_loss_derived_exponential": 98.70406089403015,
+        "top1_accuracy": 0.5,
+        "top5_accuracy": 0.5,
+        "top10_accuracy": 0.5
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 1787,
-        "mlm_loss": 6.410114294006612,
-        "mlm_loss_derived_exponential": 607.9631636365219,
-        "top1_accuracy": 0.13262451035254616,
-        "top5_accuracy": 0.21824286513710128,
-        "top10_accuracy": 0.28539451594851706
+        "masked_sample_count": 1733,
+        "mlm_loss": 6.16952994440355,
+        "mlm_loss_derived_exponential": 477.9613848538238,
+        "top1_accuracy": 0.16964800923254472,
+        "top5_accuracy": 0.25620311598384304,
+        "top10_accuracy": 0.31563762261973455
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 380,
-        "mlm_loss": 8.549374910404808,
-        "mlm_loss_derived_exponential": 5163.525751953424,
-        "top1_accuracy": 0.0,
-        "top5_accuracy": 0.007894736842105263,
-        "top10_accuracy": 0.04736842105263158
+        "masked_sample_count": 591,
+        "mlm_loss": 7.642478209159096,
+        "mlm_loss_derived_exponential": 2084.9042484198308,
+        "top1_accuracy": 0.06937394247038917,
+        "top5_accuracy": 0.10152284263959391,
+        "top10_accuracy": 0.15736040609137056
       },
       "category_recall": {
-        "vessel_terminology": 0.1155,
-        "navigation": 0.1453,
-        "machinery_propulsion": 0.0,
-        "casualty_incident": 0.2778,
-        "weather_environment": 0.0,
-        "safety_lifesaving": 0.0
+        "vessel_terminology": 0.1617,
+        "navigation": 0.1533,
+        "machinery_propulsion": 0.25,
+        "casualty_incident": 0.2571,
+        "weather_environment": 0.4219,
+        "safety_lifesaving": 0.3333
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 1065,
-          "mlm_loss": 6.492219804521178,
-          "mlm_loss_derived_exponential": 659.9867800028685,
-          "top1_accuracy": 0.11549295774647887,
-          "top5_accuracy": 0.18215962441314554,
-          "top10_accuracy": 0.24882629107981222
+          "masked_sample_count": 1076,
+          "mlm_loss": 6.164469549801118,
+          "mlm_loss_derived_exponential": 475.54882105248504,
+          "top1_accuracy": 0.16171003717472118,
+          "top5_accuracy": 0.25,
+          "top10_accuracy": 0.30111524163568776
         },
         "navigation": {
-          "masked_sample_count": 709,
-          "mlm_loss": 6.705812038467575,
-          "mlm_loss_derived_exponential": 817.1413071461178,
-          "top1_accuracy": 0.14527503526093088,
-          "top5_accuracy": 0.23554301833568406,
-          "top10_accuracy": 0.2863187588152327
+          "masked_sample_count": 861,
+          "mlm_loss": 6.632987162051776,
+          "mlm_loss_derived_exponential": 759.7482755630975,
+          "top1_accuracy": 0.15331010452961671,
+          "top5_accuracy": 0.21370499419279906,
+          "top10_accuracy": 0.27409988385598144
         },
         "machinery_propulsion": {
-          "masked_sample_count": 5,
-          "mlm_loss": 9.17846622467041,
-          "mlm_loss_derived_exponential": 9686.284789122912,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.2,
-          "top10_accuracy": 0.2
+          "masked_sample_count": 8,
+          "mlm_loss": 7.027183189988136,
+          "mlm_loss_derived_exponential": 1126.852007511501,
+          "top1_accuracy": 0.25,
+          "top5_accuracy": 0.25,
+          "top10_accuracy": 0.25
         },
         "casualty_incident": {
-          "masked_sample_count": 54,
-          "mlm_loss": 4.656980864427708,
-          "mlm_loss_derived_exponential": 105.31763346508215,
-          "top1_accuracy": 0.2777777777777778,
-          "top5_accuracy": 0.5185185185185185,
-          "top10_accuracy": 0.6296296296296297
+          "masked_sample_count": 35,
+          "mlm_loss": 4.904972243309021,
+          "mlm_loss_derived_exponential": 134.9591639350134,
+          "top1_accuracy": 0.2571428571428571,
+          "top5_accuracy": 0.5428571428571428,
+          "top10_accuracy": 0.5428571428571428
         },
         "weather_environment": {
-          "masked_sample_count": 68,
-          "mlm_loss": 6.173044716610628,
-          "mlm_loss_derived_exponential": 479.644265984805,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.08823529411764706,
-          "top10_accuracy": 0.20588235294117646
+          "masked_sample_count": 128,
+          "mlm_loss": 3.010370320327638,
+          "mlm_loss_derived_exponential": 20.294914153077958,
+          "top1_accuracy": 0.421875,
+          "top5_accuracy": 0.609375,
+          "top10_accuracy": 0.6953125
         },
         "safety_lifesaving": {
-          "masked_sample_count": 1,
-          "mlm_loss": 9.751688003540039,
-          "mlm_loss_derived_exponential": 17183.209661256667,
-          "top1_accuracy": 0.0,
-          "top5_accuracy": 0.0,
-          "top10_accuracy": 0.0
+          "masked_sample_count": 3,
+          "mlm_loss": 6.201941394557555,
+          "mlm_loss_derived_exponential": 493.70659058981454,
+          "top1_accuracy": 0.3333333333333333,
+          "top5_accuracy": 0.3333333333333333,
+          "top10_accuracy": 0.3333333333333333
         }
       },
-      "performance_gap_top1": 0.05070882298078716,
+      "performance_gap_top1": 0.33035199076745525,
       "masking_diagnostics": {
-        "total_eligible_tokens": 12294,
-        "total_masked_tokens": 1847,
-        "actual_mask_rate": 0.1502,
-        "rare_maritime_tokens_masked": 380,
-        "maritime_tokens_masked": 1407,
-        "general_tokens_masked": 60,
-        "rare_maritime_mask_fraction": 0.2057,
-        "maritime_mask_fraction": 0.7618,
-        "general_mask_fraction": 0.0325
+        "total_eligible_tokens": 12547,
+        "total_masked_tokens": 1886,
+        "actual_mask_rate": 0.1503,
+        "rare_maritime_tokens_masked": 736,
+        "maritime_tokens_masked": 1142,
+        "general_tokens_masked": 8,
+        "rare_maritime_mask_fraction": 0.3902,
+        "maritime_mask_fraction": 0.6055,
+        "general_mask_fraction": 0.0042
       }
     }
   },
@@ -3244,106 +3244,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 22.581050157546997,
+      "evaluation_time_sec": 3.197547197341919,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
-        "total_masked_tokens": 2009,
-        "overall_top1_accuracy": 0.24888003982080636,
-        "overall_mlm_loss": 4.723031045467363
+        "total_masked_tokens": 2050,
+        "overall_top1_accuracy": 0.3496071829405163,
+        "overall_mlm_loss": 3.9447053603798645
       },
       "general_tokens_summary": {
-        "masked_sample_count": 71,
-        "mlm_loss": 4.566116957466157,
-        "mlm_loss_derived_exponential": 96.16995179400779,
-        "top1_accuracy": 0.19718309859154928,
-        "top5_accuracy": 0.4507042253521127,
-        "top10_accuracy": 0.5352112676056338
+        "masked_sample_count": 421,
+        "mlm_loss": 3.461941438442126,
+        "mlm_loss_derived_exponential": 31.87880721681558,
+        "top1_accuracy": 0.3515439429928741,
+        "top5_accuracy": 0.5819477434679335,
+        "top10_accuracy": 0.6769596199524941
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 1938,
-        "mlm_loss": 4.728779704006107,
-        "mlm_loss_derived_exponential": 113.15739254897244,
-        "top1_accuracy": 0.25077399380804954,
-        "top5_accuracy": 0.40144478844169246,
-        "top10_accuracy": 0.4613003095975232
+        "masked_sample_count": 1361,
+        "mlm_loss": 4.094039387665528,
+        "mlm_loss_derived_exponential": 59.981692320266724,
+        "top1_accuracy": 0.349008082292432,
+        "top5_accuracy": 0.5282880235121235,
+        "top10_accuracy": 0.5958853783982366
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 455,
-        "mlm_loss": 7.804640417832594,
-        "mlm_loss_derived_exponential": 2451.9537085809334,
-        "top1_accuracy": 0.0,
-        "top5_accuracy": 0.002197802197802198,
-        "top10_accuracy": 0.015384615384615385
+        "masked_sample_count": 480,
+        "mlm_loss": 6.379795919141421,
+        "mlm_loss_derived_exponential": 589.8073269895034,
+        "top1_accuracy": 0.15416666666666667,
+        "top5_accuracy": 0.3416666666666667,
+        "top10_accuracy": 0.3875
       },
       "category_recall": {
-        "vessel_terminology": 0.2792,
-        "navigation": 0.15,
-        "machinery_propulsion": 0.6,
-        "casualty_incident": 0.5556,
-        "weather_environment": 0.2468,
-        "safety_lifesaving": 1.0
+        "vessel_terminology": 0.393,
+        "navigation": 0.1983,
+        "machinery_propulsion": 0.6623,
+        "casualty_incident": 0.8871,
+        "weather_environment": 0.8456,
+        "safety_lifesaving": 0.0
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 1146,
-          "mlm_loss": 4.1519152569376,
-          "mlm_loss_derived_exponential": 63.55560912617594,
-          "top1_accuracy": 0.2792321116928447,
-          "top5_accuracy": 0.44589877835951136,
-          "top10_accuracy": 0.5174520069808028
+          "masked_sample_count": 748,
+          "mlm_loss": 3.3342002377890227,
+          "mlm_loss_derived_exponential": 28.05593617130195,
+          "top1_accuracy": 0.393048128342246,
+          "top5_accuracy": 0.5414438502673797,
+          "top10_accuracy": 0.6390374331550802
         },
         "navigation": {
-          "masked_sample_count": 760,
-          "mlm_loss": 6.01191237393926,
-          "mlm_loss_derived_exponential": 408.2633263502045,
-          "top1_accuracy": 0.15,
-          "top5_accuracy": 0.25526315789473686,
-          "top10_accuracy": 0.2868421052631579
+          "masked_sample_count": 807,
+          "mlm_loss": 5.457039057659099,
+          "mlm_loss_derived_exponential": 234.4023440014629,
+          "top1_accuracy": 0.1982651796778191,
+          "top5_accuracy": 0.36926889714993805,
+          "top10_accuracy": 0.42998760842627015
         },
         "machinery_propulsion": {
-          "masked_sample_count": 5,
-          "mlm_loss": 3.453625182900578,
-          "mlm_loss_derived_exponential": 31.61479423096453,
-          "top1_accuracy": 0.6,
-          "top5_accuracy": 0.6,
-          "top10_accuracy": 0.6
+          "masked_sample_count": 77,
+          "mlm_loss": 1.659854997892474,
+          "mlm_loss_derived_exponential": 5.258548288577759,
+          "top1_accuracy": 0.6623376623376623,
+          "top5_accuracy": 0.7922077922077922,
+          "top10_accuracy": 0.8701298701298701
         },
         "casualty_incident": {
-          "masked_sample_count": 63,
-          "mlm_loss": 2.6638558421788425,
-          "mlm_loss_derived_exponential": 14.35151974508466,
-          "top1_accuracy": 0.5555555555555556,
-          "top5_accuracy": 0.6349206349206349,
-          "top10_accuracy": 0.6666666666666666
+          "masked_sample_count": 62,
+          "mlm_loss": 0.7005676061155335,
+          "mlm_loss_derived_exponential": 2.0148960502758966,
+          "top1_accuracy": 0.8870967741935484,
+          "top5_accuracy": 0.9354838709677419,
+          "top10_accuracy": 0.9516129032258065
         },
         "weather_environment": {
-          "masked_sample_count": 77,
-          "mlm_loss": 3.4739330944336055,
-          "mlm_loss_derived_exponential": 32.26338817913398,
-          "top1_accuracy": 0.24675324675324675,
-          "top5_accuracy": 0.5454545454545454,
-          "top10_accuracy": 0.7012987012987013
+          "masked_sample_count": 149,
+          "mlm_loss": 0.6451461975894018,
+          "mlm_loss_derived_exponential": 1.906265700351057,
+          "top1_accuracy": 0.8456375838926175,
+          "top5_accuracy": 0.9932885906040269,
+          "top10_accuracy": 0.9932885906040269
         },
         "safety_lifesaving": {
           "masked_sample_count": 2,
-          "mlm_loss": 0.3191033899784088,
-          "mlm_loss_derived_exponential": 1.3758935711591092,
-          "top1_accuracy": 1.0,
-          "top5_accuracy": 1.0,
-          "top10_accuracy": 1.0
+          "mlm_loss": 8.152376651763916,
+          "mlm_loss_derived_exponential": 3471.6201006007586,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
         }
       },
-      "performance_gap_top1": -0.05359089521650026,
+      "performance_gap_top1": 0.002535860700442094,
       "masking_diagnostics": {
-        "total_eligible_tokens": 13413,
-        "total_masked_tokens": 2009,
-        "actual_mask_rate": 0.1498,
-        "rare_maritime_tokens_masked": 455,
-        "maritime_tokens_masked": 1483,
-        "general_tokens_masked": 71,
-        "rare_maritime_mask_fraction": 0.2265,
-        "maritime_mask_fraction": 0.7382,
-        "general_mask_fraction": 0.0353
+        "total_eligible_tokens": 13656,
+        "total_masked_tokens": 2050,
+        "actual_mask_rate": 0.1501,
+        "rare_maritime_tokens_masked": 748,
+        "maritime_tokens_masked": 881,
+        "general_tokens_masked": 421,
+        "rare_maritime_mask_fraction": 0.3649,
+        "maritime_mask_fraction": 0.4298,
+        "general_mask_fraction": 0.2054
       }
     }
   },
@@ -3368,106 +3368,106 @@
     },
     "evaluation_metrics": {
       "evaluated_documents": 200,
-      "evaluation_time_sec": 29.068427085876465,
+      "evaluation_time_sec": 3.7170569896698,
       "masking_strategy": "domain_aware_15",
       "overall_summary": {
-        "total_masked_tokens": 1938,
-        "overall_top1_accuracy": 0.2889576883384933,
-        "overall_mlm_loss": 4.129521535079305
+        "total_masked_tokens": 1977,
+        "overall_top1_accuracy": 0.4,
+        "overall_mlm_loss": 2.665883290374028
       },
       "general_tokens_summary": {
-        "masked_sample_count": 71,
-        "mlm_loss": 3.684097617448137,
-        "mlm_loss_derived_exponential": 39.80918312453462,
-        "top1_accuracy": 0.23943661971830985,
-        "top5_accuracy": 0.5211267605633803,
-        "top10_accuracy": 0.6619718309859155
+        "masked_sample_count": 443,
+        "mlm_loss": 3.232677025379049,
+        "mlm_loss_derived_exponential": 25.347421918019762,
+        "top1_accuracy": 0.3476297968397291,
+        "top5_accuracy": 0.6049661399548533,
+        "top10_accuracy": 0.7110609480812641
       },
       "maritime_tokens_summary": {
-        "masked_sample_count": 1867,
-        "mlm_loss": 4.146460527126338,
-        "mlm_loss_derived_exponential": 63.20987425281418,
-        "top1_accuracy": 0.29084092126405997,
-        "top5_accuracy": 0.42903053026245314,
-        "top10_accuracy": 0.499196572040707
+        "masked_sample_count": 1287,
+        "mlm_loss": 2.4707864569573808,
+        "mlm_loss_derived_exponential": 11.831748354362439,
+        "top1_accuracy": 0.41802641802641805,
+        "top5_accuracy": 0.8352758352758353,
+        "top10_accuracy": 0.8974358974358975
       },
       "rare_maritime_tokens_summary": {
-        "masked_sample_count": 387,
-        "mlm_loss": 6.145692336158851,
-        "mlm_loss_derived_exponential": 466.70265235841504,
-        "top1_accuracy": 0.0,
-        "top5_accuracy": 0.00516795865633075,
-        "top10_accuracy": 0.041343669250646
+        "masked_sample_count": 287,
+        "mlm_loss": 2.9020606395934516,
+        "mlm_loss_derived_exponential": 18.21163434533692,
+        "top1_accuracy": 0.27177700348432055,
+        "top5_accuracy": 0.8710801393728222,
+        "top10_accuracy": 0.9616724738675958
       },
       "category_recall": {
-        "vessel_terminology": 0.3259,
-        "navigation": 0.1844,
-        "machinery_propulsion": 0.3333,
-        "casualty_incident": 0.62,
-        "weather_environment": 0.1341,
-        "safety_lifesaving": 1.0
+        "vessel_terminology": 0.4394,
+        "navigation": 0.3057,
+        "machinery_propulsion": 0.6667,
+        "casualty_incident": 0.5153,
+        "weather_environment": 0.7773,
+        "safety_lifesaving": 0.0
       },
       "category_breakdown": {
         "vessel_terminology": {
-          "masked_sample_count": 1169,
-          "mlm_loss": 3.956773577282185,
-          "mlm_loss_derived_exponential": 52.288349182764435,
-          "top1_accuracy": 0.32591958939264326,
-          "top5_accuracy": 0.4593669803250642,
-          "top10_accuracy": 0.5346449957228401
+          "masked_sample_count": 635,
+          "mlm_loss": 2.5979009737974716,
+          "mlm_loss_derived_exponential": 13.435506935356493,
+          "top1_accuracy": 0.4393700787401575,
+          "top5_accuracy": 0.7496062992125985,
+          "top10_accuracy": 0.8267716535433071
         },
         "navigation": {
-          "masked_sample_count": 667,
-          "mlm_loss": 4.874139438585742,
-          "mlm_loss_derived_exponential": 130.86149039189056,
-          "top1_accuracy": 0.18440779610194902,
-          "top5_accuracy": 0.30134932533733133,
-          "top10_accuracy": 0.3373313343328336
+          "masked_sample_count": 530,
+          "mlm_loss": 2.8475167814853055,
+          "mlm_loss_derived_exponential": 17.244905757996676,
+          "top1_accuracy": 0.30566037735849055,
+          "top5_accuracy": 0.9037735849056604,
+          "top10_accuracy": 0.9641509433962264
         },
         "machinery_propulsion": {
-          "masked_sample_count": 6,
-          "mlm_loss": 2.414501408735911,
-          "mlm_loss_derived_exponential": 11.184192626424823,
-          "top1_accuracy": 0.3333333333333333,
-          "top5_accuracy": 0.6666666666666666,
-          "top10_accuracy": 0.8333333333333334
+          "masked_sample_count": 15,
+          "mlm_loss": 2.2972931961218515,
+          "mlm_loss_derived_exponential": 9.947220805475018,
+          "top1_accuracy": 0.6666666666666666,
+          "top5_accuracy": 0.9333333333333333,
+          "top10_accuracy": 1.0
         },
         "casualty_incident": {
-          "masked_sample_count": 50,
-          "mlm_loss": 2.624894397035241,
-          "mlm_loss_derived_exponential": 13.80311645907731,
-          "top1_accuracy": 0.62,
-          "top5_accuracy": 0.72,
-          "top10_accuracy": 0.78
+          "masked_sample_count": 196,
+          "mlm_loss": 1.54052990239848,
+          "mlm_loss_derived_exponential": 4.667062703576774,
+          "top1_accuracy": 0.5153061224489796,
+          "top5_accuracy": 0.9744897959183674,
+          "top10_accuracy": 0.9897959183673469
         },
         "weather_environment": {
-          "masked_sample_count": 82,
-          "mlm_loss": 4.016614046765537,
-          "mlm_loss_derived_exponential": 55.512823424945054,
-          "top1_accuracy": 0.13414634146341464,
-          "top5_accuracy": 0.4024390243902439,
-          "top10_accuracy": 0.5853658536585366
-        },
-        "safety_lifesaving": {
-          "masked_sample_count": 1,
-          "mlm_loss": 0.020486893132328987,
-          "mlm_loss_derived_exponential": 1.0206981899994119,
-          "top1_accuracy": 1.0,
+          "masked_sample_count": 211,
+          "mlm_loss": 0.6956763123404852,
+          "mlm_loss_derived_exponential": 2.0050646654645914,
+          "top1_accuracy": 0.7772511848341233,
           "top5_accuracy": 1.0,
           "top10_accuracy": 1.0
+        },
+        "safety_lifesaving": {
+          "masked_sample_count": 4,
+          "mlm_loss": 7.370710849761963,
+          "mlm_loss_derived_exponential": 1588.7627533578097,
+          "top1_accuracy": 0.0,
+          "top5_accuracy": 0.0,
+          "top10_accuracy": 0.0
         }
       },
-      "performance_gap_top1": -0.051404301545750125,
+      "performance_gap_top1": -0.07039662118668893,
       "masking_diagnostics": {
-        "total_eligible_tokens": 12991,
-        "total_masked_tokens": 1938,
-        "actual_mask_rate": 0.1492,
-        "rare_maritime_tokens_masked": 387,
-        "maritime_tokens_masked": 1480,
-        "general_tokens_masked": 71,
-        "rare_maritime_mask_fraction": 0.1997,
-        "maritime_mask_fraction": 0.7637,
-        "general_mask_fraction": 0.0366
+        "total_eligible_tokens": 13236,
+        "total_masked_tokens": 1977,
+        "actual_mask_rate": 0.1494,
+        "rare_maritime_tokens_masked": 534,
+        "maritime_tokens_masked": 1000,
+        "general_tokens_masked": 443,
+        "rare_maritime_mask_fraction": 0.2701,
+        "maritime_mask_fraction": 0.5058,
+        "general_mask_fraction": 0.2241
       }
     }
   }

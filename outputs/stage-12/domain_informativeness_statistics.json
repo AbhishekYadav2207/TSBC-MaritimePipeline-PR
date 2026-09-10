@@ -2,7 +2,7 @@
   "scoring_version": "stage12-domain-informativeness-v2",
   "pipeline_stage": "Stage 12: Domain Informativeness Analysis",
   "scientific_framing": "Stage 12 estimates domain informativeness using multiple observable signals representing domain relevance, information content, corpus representativeness, and redundancy/noise, and compares heuristic, lexical, representational, and hybrid selection signals.",
-  "total_documents": 96848,
+  "total_documents": 96869,
   "random_seed": 42,
   "configuration": {
     "scoring_version": "stage12-domain-informativeness-v2",
@@ -47,26 +47,26 @@
     }
   },
   "quantile_thresholds": {
-    "p20_low_boundary": 0.1912,
-    "p80_high_boundary": 0.3168
+    "p20_low_boundary": 0.1915,
+    "p80_high_boundary": 0.316
   },
   "informativeness_tier_breakdown": {
-    "Medium Informativeness": 51737,
-    "High Informativeness": 19376,
-    "Low Informativeness": 13517,
-    "Redundant / Noise": 12218
+    "Medium Informativeness": 51634,
+    "High Informativeness": 19372,
+    "Low Informativeness": 13595,
+    "Redundant / Noise": 12268
   },
   "legacy_knowledge_tier_breakdown": {
-    "Medium Knowledge": 51737,
-    "High Knowledge": 19376,
-    "Low Knowledge": 13517,
-    "Redundant": 12218
+    "Medium Knowledge": 51634,
+    "High Knowledge": 19372,
+    "Low Knowledge": 13595,
+    "Redundant": 12268
   },
   "redundancy_statistics": {
-    "total_flagged_redundant": 12218,
-    "boilerplate_matches": 109,
-    "near_duplicate_matches": 12180,
-    "redundancy_rate_pct": 12.62
+    "total_flagged_redundant": 12268,
+    "boilerplate_matches": 102,
+    "near_duplicate_matches": 12230,
+    "redundancy_rate_pct": 12.66
   },
   "representativeness_statistics": {
     "representation_method": "deterministic_tfidf_centroid_cosine_similarity",
@@ -90,42 +90,42 @@
     },
     "tfidf_representativeness": {
       "mean": 0.2393,
-      "median": 0.2774,
+      "median": 0.2772,
       "std": 0.1659,
       "min": 0.0,
-      "max": 0.6204
+      "max": 0.6207
     },
     "redundancy_noise": {
-      "mean": 0.1977,
-      "median": 0.2374,
-      "std": 0.1852,
+      "mean": 0.1982,
+      "median": 0.2384,
+      "std": 0.185,
       "min": 0.0,
       "max": 0.5
     },
     "heuristic_informativeness_score": {
       "mean": 0.3893,
       "median": 0.3833,
-      "std": 0.1002,
+      "std": 0.1001,
       "min": 0.1067,
       "max": 0.7421
     },
     "tfidf_relevance": {
-      "mean": 0.0606,
-      "median": 0.0583,
-      "std": 0.0328,
+      "mean": 0.0607,
+      "median": 0.0582,
+      "std": 0.0329,
       "min": 0.0,
-      "max": 0.32
+      "max": 0.3199
     },
     "domain_informativeness_score": {
       "mean": 0.2487,
       "median": 0.2406,
-      "std": 0.0753,
+      "std": 0.075,
       "min": 0.0298,
-      "max": 0.5441,
+      "max": 0.5442,
       "quartiles": [
-        0.2005,
+        0.201,
         0.2406,
-        0.295
+        0.2942
       ]
     }
   }

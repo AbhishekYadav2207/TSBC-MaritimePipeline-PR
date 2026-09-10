@@ -1,11 +1,11 @@
 {
-  "timestamp": "2026-09-10T11:01:30.356492",
-  "python_version": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
-  "platform": "Windows-10-10.0.26200-SP0",
-  "pytorch_version": "2.8.0+cpu",
-  "transformers_version": "5.8.1",
-  "cuda_available": false,
-  "device_count": 0,
-  "device_name": "CPU",
+  "timestamp": "2026-09-10T14:49:23.193239",
+  "python_version": "3.13.15 (main, Aug  6 2026, 11:06:22) [GCC 13.3.0]",
+  "platform": "Linux-6.6.122+-x86_64-with-glibc2.39",
+  "pytorch_version": "2.11.0+cu128",
+  "transformers_version": "5.16.1",
+  "cuda_available": true,
+  "device_count": 1,
+  "device_name": "Tesla T4",
   "random_seed": 42
 }

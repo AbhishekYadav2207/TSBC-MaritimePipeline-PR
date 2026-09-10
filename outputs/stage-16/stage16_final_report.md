@@ -9,7 +9,7 @@ This research stage rigorously validates the cross-model performance differences
 Rather than treating the evaluation configurations as independent datasets or replications, the evaluation framework
 models them as **25 matched representation-by-subset benchmark conditions** (5 representations $\times$ 5 knowledge subsets).
 
-* **Global Model Differences**: Non-parametric omnibus testing demonstrates statistically distinguishable model performance across the candidate encoders (Friedman $\chi^2 = 123.1886$, $p = 3.4841e-24$, $df = 6$).
+* **Global Model Differences**: Non-parametric omnibus testing demonstrates statistically distinguishable model performance across the candidate encoders (Friedman $\chi^2 = 127.9714$, $p = 3.4361e-25$, $df = 6$).
 * **Pairwise Reliability**: Across 21 model pairwise comparisons, 19 pairs show statistically significant differences after family-wise Holm-Bonferroni error rate control ($p_{\text{Holm}} < 0.05$).
 * **Primary Winner Robustness**: Model `answerdotai/ModernBERT-base` demonstrates unambiguous statistical superiority, attaining an empirical bootstrap rank-1 frequency of **$P(\text{rank}=1) = 100.0%$** across 2000 condition resamples.
 * **Effect Magnitude**: Large effect sizes ($d_z > 0.8$, Cliff's $\delta > 0.5$) separate domain-adapted and modernized architectures from baseline encoders, confirming that performance gaps reflect substantial practical margins rather than statistical artifacts.
@@ -26,8 +26,8 @@ The omnibus **Friedman test** was conducted across the matched benchmark configu
 | **Matched Benchmark Conditions ($N$)** | 25 |
 | **Models Evaluated ($k$)** | 7 |
 | **Degrees of Freedom ($df$)** | 6 |
-| **Chi-Square Statistic ($\chi^2$)** | **123.1886** |
-| **Raw $p$-value** | **3.484110e-24** |
+| **Chi-Square Statistic ($\chi^2$)** | **127.9714** |
+| **Raw $p$-value** | **3.436102e-25** |
 | **Omnibus Decision** | **Statistically Significant ($p < 0.001$)** |
 
 *Scientific Interpretation*: Candidate encoders exhibit statistically significant differences across the shared benchmark matrix. Because the omnibus null hypothesis is rejected, proceeding to pairwise post-hoc comparisons is statistically justified.
@@ -39,27 +39,27 @@ Pairwise non-parametric **Wilcoxon signed-rank tests** were conducted on matched
 
 | Model A | Model B | Paired $N$ | Mean Diff | Median Diff | Wilcoxon Stat | Raw $p$-value | Holm $p$-value | Holm Significant? | Paired $t$-stat |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| `allenai/scibert_scivocab_uncased` | `answerdotai/ModernBERT-base` | 25 | -0.2480 | -0.2300 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | -13.70 |
-| `allenai/scibert_scivocab_uncased` | `bert-base-uncased` | 25 | +0.0216 | +0.0312 | 99.0 | 0.090316 | 0.180632 | No | +1.74 |
-| `allenai/scibert_scivocab_uncased` | `dmis-lab/biobert-base-cased-v1.2` | 25 | +0.0660 | +0.0763 | 23.0 | 3.814697e-05 | 0.000229 | **Yes ($p < 0.05$)** | +6.50 |
-| `allenai/scibert_scivocab_uncased` | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 25 | +0.1065 | +0.0948 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | +12.44 |
-| `allenai/scibert_scivocab_uncased` | `nlpaueb/legal-bert-base-uncased` | 25 | +0.0259 | +0.0246 | 72.0 | 0.013555 | 0.040664 | **Yes ($p < 0.05$)** | +2.41 |
-| `allenai/scibert_scivocab_uncased` | `roberta-base` | 25 | -0.1579 | -0.1602 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | -15.41 |
-| `answerdotai/ModernBERT-base` | `bert-base-uncased` | 25 | +0.2696 | +0.3081 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | +11.22 |
-| `answerdotai/ModernBERT-base` | `dmis-lab/biobert-base-cased-v1.2` | 25 | +0.3140 | +0.3094 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | +20.29 |
-| `answerdotai/ModernBERT-base` | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 25 | +0.3545 | +0.3169 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | +20.63 |
-| `answerdotai/ModernBERT-base` | `nlpaueb/legal-bert-base-uncased` | 25 | +0.2738 | +0.2656 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | +18.10 |
-| `answerdotai/ModernBERT-base` | `roberta-base` | 25 | +0.0901 | +0.0939 | 1.0 | 1.192093e-07 | 1.251698e-06 | **Yes ($p < 0.05$)** | +8.98 |
-| `bert-base-uncased` | `dmis-lab/biobert-base-cased-v1.2` | 25 | +0.0444 | +0.0330 | 55.0 | 0.002785 | 0.011139 | **Yes ($p < 0.05$)** | +3.60 |
-| `bert-base-uncased` | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 25 | +0.0849 | +0.0692 | 7.0 | 1.132488e-06 | 1.019239e-05 | **Yes ($p < 0.05$)** | +5.71 |
-| `bert-base-uncased` | `nlpaueb/legal-bert-base-uncased` | 25 | +0.0042 | -0.0191 | 160.0 | 0.957845 | 0.957845 | No | +0.30 |
-| `bert-base-uncased` | `roberta-base` | 25 | -0.1795 | -0.2048 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | -11.23 |
-| `dmis-lab/biobert-base-cased-v1.2` | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 25 | +0.0405 | +0.0324 | 34.0 | 0.000217 | 0.001085 | **Yes ($p < 0.05$)** | +4.54 |
-| `dmis-lab/biobert-base-cased-v1.2` | `nlpaueb/legal-bert-base-uncased` | 25 | -0.0401 | -0.0414 | 14.0 | 6.556511e-06 | 4.589558e-05 | **Yes ($p < 0.05$)** | -5.97 |
-| `dmis-lab/biobert-base-cased-v1.2` | `roberta-base` | 25 | -0.2239 | -0.2204 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | -21.25 |
-| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | `nlpaueb/legal-bert-base-uncased` | 25 | -0.0807 | -0.0795 | 7.0 | 1.132488e-06 | 1.019239e-05 | **Yes ($p < 0.05$)** | -7.17 |
-| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | `roberta-base` | 25 | -0.2644 | -0.2796 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | -21.63 |
-| `nlpaueb/legal-bert-base-uncased` | `roberta-base` | 25 | -0.1837 | -0.1902 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | -17.68 |
+| `allenai/scibert_scivocab_uncased` | `answerdotai/ModernBERT-base` | 25 | -0.4044 | -0.4272 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | -19.46 |
+| `allenai/scibert_scivocab_uncased` | `bert-base-uncased` | 25 | +0.0289 | +0.0419 | 70.0 | 0.011453 | 0.03436 | **Yes ($p < 0.05$)** | +2.55 |
+| `allenai/scibert_scivocab_uncased` | `dmis-lab/biobert-base-cased-v1.2` | 25 | +0.0683 | +0.0686 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | +12.76 |
+| `allenai/scibert_scivocab_uncased` | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 25 | +0.1142 | +0.1063 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | +14.96 |
+| `allenai/scibert_scivocab_uncased` | `nlpaueb/legal-bert-base-uncased` | 25 | -0.0043 | +0.0105 | 152.0 | 0.791476 | 0.791476 | No | -0.28 |
+| `allenai/scibert_scivocab_uncased` | `roberta-base` | 25 | -0.3070 | -0.3315 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | -13.74 |
+| `answerdotai/ModernBERT-base` | `bert-base-uncased` | 25 | +0.4333 | +0.4632 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | +18.51 |
+| `answerdotai/ModernBERT-base` | `dmis-lab/biobert-base-cased-v1.2` | 25 | +0.4727 | +0.4863 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | +21.59 |
+| `answerdotai/ModernBERT-base` | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 25 | +0.5186 | +0.5473 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | +22.36 |
+| `answerdotai/ModernBERT-base` | `nlpaueb/legal-bert-base-uncased` | 25 | +0.4000 | +0.3735 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | +19.02 |
+| `answerdotai/ModernBERT-base` | `roberta-base` | 25 | +0.0973 | +0.0768 | 65.0 | 0.007371 | 0.029484 | **Yes ($p < 0.05$)** | +3.01 |
+| `bert-base-uncased` | `dmis-lab/biobert-base-cased-v1.2` | 25 | +0.0394 | +0.0254 | 56.0 | 0.003088 | 0.015439 | **Yes ($p < 0.05$)** | +3.18 |
+| `bert-base-uncased` | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 25 | +0.0853 | +0.0722 | 10.0 | 2.563000e-06 | 1.794100e-05 | **Yes ($p < 0.05$)** | +5.74 |
+| `bert-base-uncased` | `nlpaueb/legal-bert-base-uncased` | 25 | -0.0332 | -0.0223 | 99.0 | 0.090316 | 0.180632 | No | -1.98 |
+| `bert-base-uncased` | `roberta-base` | 25 | -0.3359 | -0.3855 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | -13.34 |
+| `dmis-lab/biobert-base-cased-v1.2` | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 25 | +0.0459 | +0.0465 | 4.0 | 4.172325e-07 | 3.755093e-06 | **Yes ($p < 0.05$)** | +8.43 |
+| `dmis-lab/biobert-base-cased-v1.2` | `nlpaueb/legal-bert-base-uncased` | 25 | -0.0726 | -0.0576 | 5.0 | 5.960464e-07 | 4.768372e-06 | **Yes ($p < 0.05$)** | -5.64 |
+| `dmis-lab/biobert-base-cased-v1.2` | `roberta-base` | 25 | -0.3754 | -0.4072 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | -15.04 |
+| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | `nlpaueb/legal-bert-base-uncased` | 25 | -0.1185 | -0.0876 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | -8.48 |
+| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | `roberta-base` | 25 | -0.4213 | -0.4497 | 0.0 | 5.960464e-08 | 1.251698e-06 | **Yes ($p < 0.05$)** | -16.20 |
+| `nlpaueb/legal-bert-base-uncased` | `roberta-base` | 25 | -0.3027 | -0.3555 | 11.0 | 3.278255e-06 | 1.966953e-05 | **Yes ($p < 0.05$)** | -8.45 |
 
 ---
 
@@ -68,27 +68,27 @@ Statistical significance establishes whether observed differences are reliably n
 
 | Model A | Model B | Mean Diff | 95% Paired CI | Cohen's $d_z$ | $d_z$ Tier | Cliff's $\delta$ | $\delta$ Tier | Practical Importance |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| `allenai/scibert_scivocab_uncased` | `answerdotai/ModernBERT-base` | -0.2480 | [-0.2853, -0.2106] | -2.74 | large | -0.95 | large | Substantial practical advantage |
-| `allenai/scibert_scivocab_uncased` | `bert-base-uncased` | +0.0216 | [-0.0040, +0.0472] | +0.35 | small | +0.10 | negligible | No statistically reliable difference |
-| `allenai/scibert_scivocab_uncased` | `dmis-lab/biobert-base-cased-v1.2` | +0.0660 | [+0.0450, +0.0869] | +1.30 | large | +0.45 | medium | Substantial practical advantage |
-| `allenai/scibert_scivocab_uncased` | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | +0.1065 | [+0.0889, +0.1242] | +2.49 | large | +0.58 | large | Substantial practical advantage |
-| `allenai/scibert_scivocab_uncased` | `nlpaueb/legal-bert-base-uncased` | +0.0259 | [+0.0037, +0.0480] | +0.48 | small | +0.20 | small | Statistically significant but small practical magnitude |
-| `allenai/scibert_scivocab_uncased` | `roberta-base` | -0.1579 | [-0.1790, -0.1367] | -3.08 | large | -0.80 | large | Substantial practical advantage |
-| `answerdotai/ModernBERT-base` | `bert-base-uncased` | +0.2696 | [+0.2200, +0.3192] | +2.24 | large | +0.99 | large | Substantial practical advantage |
-| `answerdotai/ModernBERT-base` | `dmis-lab/biobert-base-cased-v1.2` | +0.3140 | [+0.2820, +0.3459] | +4.06 | large | +1.00 | large | Substantial practical advantage |
-| `answerdotai/ModernBERT-base` | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | +0.3545 | [+0.3190, +0.3900] | +4.13 | large | +1.00 | large | Substantial practical advantage |
-| `answerdotai/ModernBERT-base` | `nlpaueb/legal-bert-base-uncased` | +0.2738 | [+0.2426, +0.3050] | +3.62 | large | +0.96 | large | Substantial practical advantage |
-| `answerdotai/ModernBERT-base` | `roberta-base` | +0.0901 | [+0.0694, +0.1108] | +1.80 | large | +0.51 | large | Substantial practical advantage |
-| `bert-base-uncased` | `dmis-lab/biobert-base-cased-v1.2` | +0.0444 | [+0.0189, +0.0698] | +0.72 | medium | +0.33 | medium | Substantial practical advantage |
-| `bert-base-uncased` | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | +0.0849 | [+0.0543, +0.1156] | +1.14 | large | +0.51 | large | Substantial practical advantage |
-| `bert-base-uncased` | `nlpaueb/legal-bert-base-uncased` | +0.0042 | [-0.0253, +0.0338] | +0.06 | negligible | +0.10 | negligible | No statistically reliable difference |
-| `bert-base-uncased` | `roberta-base` | -0.1795 | [-0.2125, -0.1465] | -2.25 | large | -0.94 | large | Substantial practical advantage |
-| `dmis-lab/biobert-base-cased-v1.2` | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | +0.0405 | [+0.0221, +0.0590] | +0.91 | large | +0.27 | small | Substantial practical advantage |
-| `dmis-lab/biobert-base-cased-v1.2` | `nlpaueb/legal-bert-base-uncased` | -0.0401 | [-0.0540, -0.0263] | -1.19 | large | -0.30 | small | Substantial practical advantage |
-| `dmis-lab/biobert-base-cased-v1.2` | `roberta-base` | -0.2239 | [-0.2456, -0.2021] | -4.25 | large | -0.98 | large | Substantial practical advantage |
-| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | `nlpaueb/legal-bert-base-uncased` | -0.0807 | [-0.1039, -0.0574] | -1.43 | large | -0.46 | medium | Substantial practical advantage |
-| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | `roberta-base` | -0.2644 | [-0.2896, -0.2392] | -4.33 | large | -0.97 | large | Substantial practical advantage |
-| `nlpaueb/legal-bert-base-uncased` | `roberta-base` | -0.1837 | [-0.2052, -0.1623] | -3.54 | large | -0.86 | large | Substantial practical advantage |
+| `allenai/scibert_scivocab_uncased` | `answerdotai/ModernBERT-base` | -0.4044 | [-0.4472, -0.3615] | -3.89 | large | -1.00 | large | Substantial practical advantage |
+| `allenai/scibert_scivocab_uncased` | `bert-base-uncased` | +0.0289 | [+0.0055, +0.0523] | +0.51 | medium | +0.21 | small | Substantial practical advantage |
+| `allenai/scibert_scivocab_uncased` | `dmis-lab/biobert-base-cased-v1.2` | +0.0683 | [+0.0573, +0.0794] | +2.55 | large | +0.41 | medium | Substantial practical advantage |
+| `allenai/scibert_scivocab_uncased` | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | +0.1142 | [+0.0985, +0.1300] | +2.99 | large | +0.51 | large | Substantial practical advantage |
+| `allenai/scibert_scivocab_uncased` | `nlpaueb/legal-bert-base-uncased` | -0.0043 | [-0.0359, +0.0272] | -0.06 | negligible | +0.14 | negligible | No statistically reliable difference |
+| `allenai/scibert_scivocab_uncased` | `roberta-base` | -0.3070 | [-0.3532, -0.2609] | -2.75 | large | -0.68 | large | Substantial practical advantage |
+| `answerdotai/ModernBERT-base` | `bert-base-uncased` | +0.4333 | [+0.3850, +0.4816] | +3.70 | large | +1.00 | large | Substantial practical advantage |
+| `answerdotai/ModernBERT-base` | `dmis-lab/biobert-base-cased-v1.2` | +0.4727 | [+0.4275, +0.5179] | +4.32 | large | +1.00 | large | Substantial practical advantage |
+| `answerdotai/ModernBERT-base` | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | +0.5186 | [+0.4707, +0.5664] | +4.47 | large | +1.00 | large | Substantial practical advantage |
+| `answerdotai/ModernBERT-base` | `nlpaueb/legal-bert-base-uncased` | +0.4000 | [+0.3566, +0.4435] | +3.80 | large | +1.00 | large | Substantial practical advantage |
+| `answerdotai/ModernBERT-base` | `roberta-base` | +0.0973 | [+0.0305, +0.1641] | +0.60 | medium | +0.23 | small | Substantial practical advantage |
+| `bert-base-uncased` | `dmis-lab/biobert-base-cased-v1.2` | +0.0394 | [+0.0138, +0.0650] | +0.64 | medium | +0.31 | small | Substantial practical advantage |
+| `bert-base-uncased` | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | +0.0853 | [+0.0546, +0.1160] | +1.15 | large | +0.42 | medium | Substantial practical advantage |
+| `bert-base-uncased` | `nlpaueb/legal-bert-base-uncased` | -0.0332 | [-0.0678, +0.0014] | -0.40 | small | -0.07 | negligible | No statistically reliable difference |
+| `bert-base-uncased` | `roberta-base` | -0.3359 | [-0.3879, -0.2840] | -2.67 | large | -0.71 | large | Substantial practical advantage |
+| `dmis-lab/biobert-base-cased-v1.2` | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | +0.0459 | [+0.0347, +0.0571] | +1.69 | large | +0.25 | small | Substantial practical advantage |
+| `dmis-lab/biobert-base-cased-v1.2` | `nlpaueb/legal-bert-base-uncased` | -0.0726 | [-0.0992, -0.0461] | -1.13 | large | -0.44 | medium | Substantial practical advantage |
+| `dmis-lab/biobert-base-cased-v1.2` | `roberta-base` | -0.3754 | [-0.4269, -0.3239] | -3.01 | large | -0.79 | large | Substantial practical advantage |
+| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | `nlpaueb/legal-bert-base-uncased` | -0.1185 | [-0.1474, -0.0897] | -1.70 | large | -0.60 | large | Substantial practical advantage |
+| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | `roberta-base` | -0.4213 | [-0.4749, -0.3676] | -3.24 | large | -0.86 | large | Substantial practical advantage |
+| `nlpaueb/legal-bert-base-uncased` | `roberta-base` | -0.3027 | [-0.3767, -0.2287] | -1.69 | large | -0.66 | large | Substantial practical advantage |
 
 ---
 
@@ -98,13 +98,13 @@ Deterministic bootstrap resampling ($B = 2,000$, seed = 42) of the matched bench
 ### Model Score 95% Confidence Intervals
 | Model Name | Bootstrap Mean | 95% CI Lower | 95% CI Upper | Resamples | Matched Conditions |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| `allenai/scibert_scivocab_uncased` | 0.3123 | 0.2765 | 0.3482 | 2000 | 25 |
-| `answerdotai/ModernBERT-base` | 0.5601 | 0.5230 | 0.5992 | 2000 | 25 |
-| `bert-base-uncased` | 0.2909 | 0.2589 | 0.3203 | 2000 | 25 |
-| `dmis-lab/biobert-base-cased-v1.2` | 0.2463 | 0.2216 | 0.2735 | 2000 | 25 |
-| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 0.2056 | 0.1684 | 0.2433 | 2000 | 25 |
-| `nlpaueb/legal-bert-base-uncased` | 0.2865 | 0.2555 | 0.3211 | 2000 | 25 |
-| `roberta-base` | 0.4700 | 0.4406 | 0.5008 | 2000 | 25 |
+| `allenai/scibert_scivocab_uncased` | 0.3260 | 0.2807 | 0.3689 | 2000 | 25 |
+| `answerdotai/ModernBERT-base` | 0.7306 | 0.6819 | 0.7782 | 2000 | 25 |
+| `bert-base-uncased` | 0.2973 | 0.2536 | 0.3373 | 2000 | 25 |
+| `dmis-lab/biobert-base-cased-v1.2` | 0.2577 | 0.2128 | 0.3006 | 2000 | 25 |
+| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 0.2117 | 0.1644 | 0.2579 | 2000 | 25 |
+| `nlpaueb/legal-bert-base-uncased` | 0.3306 | 0.3023 | 0.3619 | 2000 | 25 |
+| `roberta-base` | 0.6329 | 0.5501 | 0.7033 | 2000 | 25 |
 
 ---
 
@@ -116,9 +116,9 @@ $P(\text{rank}=1)$ denotes the proportion of resamples in which the model ranked
 | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
 | `answerdotai/ModernBERT-base` | **1.00** | ±0.00 | **1.0000** | 0.0000 | 1.0000 | **Decisive Leader** ($P_1 > 95\%$) |
 | `roberta-base` | **2.00** | ±0.00 | **0.0000** | 1.0000 | 1.0000 | **Strong Second** ($P_2 > 95\%$) |
-| `allenai/scibert_scivocab_uncased` | **3.05** | ±0.22 | **0.0000** | 0.0000 | 0.9510 | Consistently Top-Tier ($P_{\le 3} > 90\%$) |
-| `bert-base-uncased` | **4.34** | ±0.55 | **0.0000** | 0.0000 | 0.0415 | Mid/Lower Tier Encoder |
-| `nlpaueb/legal-bert-base-uncased` | **4.61** | ±0.50 | **0.0000** | 0.0000 | 0.0075 | Mid/Lower Tier Encoder |
+| `nlpaueb/legal-bert-base-uncased` | **3.41** | ±0.53 | **0.0000** | 0.0000 | 0.6135 | Mid/Lower Tier Encoder |
+| `allenai/scibert_scivocab_uncased` | **3.62** | ±0.50 | **0.0000** | 0.0000 | 0.3830 | Mid/Lower Tier Encoder |
+| `bert-base-uncased` | **4.97** | ±0.19 | **0.0000** | 0.0000 | 0.0035 | Mid/Lower Tier Encoder |
 | `dmis-lab/biobert-base-cased-v1.2` | **6.00** | ±0.00 | **0.0000** | 0.0000 | 0.0000 | Mid/Lower Tier Encoder |
 | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | **7.00** | ±0.00 | **0.0000** | 0.0000 | 0.0000 | Mid/Lower Tier Encoder |
 
@@ -131,11 +131,11 @@ To assess whether structural representation shifts alter model hierarchies, mode
 
 | Representation | Winning Model | Winner Top-1 | Spearman $\rho$ vs Global | Kendall $\tau$ vs Global | Ranking Stability Assessment |
 | :--- | :--- | :---: | :---: | :---: | :--- |
-| **Json** | `answerdotai/ModernBERT-base` | 0.5377 | 0.7143 | 0.6190 | Moderate ranking stability |
-| **Key_value** | `answerdotai/ModernBERT-base` | 0.6407 | 0.9643 | 0.9048 | High ranking stability |
-| **Mixed** | `answerdotai/ModernBERT-base` | 0.6829 | 0.9643 | 0.9048 | High ranking stability |
-| **Narrative** | `answerdotai/ModernBERT-base` | 0.4361 | 0.9643 | 0.9048 | High ranking stability |
-| **Template** | `answerdotai/ModernBERT-base` | 0.5047 | 0.8929 | 0.8095 | Moderate ranking stability |
+| **Json** | `answerdotai/ModernBERT-base` | 0.6073 | 0.9643 | 0.9048 | High ranking stability |
+| **Key_value** | `answerdotai/ModernBERT-base` | 0.8683 | 0.9643 | 0.9048 | High ranking stability |
+| **Mixed** | `answerdotai/ModernBERT-base` | 0.8586 | 0.9643 | 0.9048 | High ranking stability |
+| **Narrative** | `answerdotai/ModernBERT-base` | 0.7227 | 0.8929 | 0.8095 | Moderate ranking stability |
+| **Template** | `roberta-base` | 0.7175 | 0.8571 | 0.7143 | Moderate ranking stability |
 
 ---
 
@@ -144,11 +144,11 @@ Evaluations across knowledge-classified subsets evaluate whether domain-informat
 
 | Knowledge Subset | Winning Model | Winner Top-1 | Spearman $\rho$ vs Global | Kendall $\tau$ vs Global | Ranking Stability Assessment |
 | :--- | :--- | :---: | :---: | :---: | :--- |
-| **balanced_knowledge** | `answerdotai/ModernBERT-base` | 0.5458 | 1.0000 | 1.0000 | High ranking stability |
-| **high_knowledge** | `answerdotai/ModernBERT-base` | 0.5645 | 1.0000 | 1.0000 | High ranking stability |
-| **low_knowledge** | `answerdotai/ModernBERT-base` | 0.5631 | 1.0000 | 1.0000 | High ranking stability |
-| **medium_knowledge** | `answerdotai/ModernBERT-base` | 0.5704 | 0.8929 | 0.8095 | Moderate ranking stability |
-| **random_baseline** | `answerdotai/ModernBERT-base` | 0.5583 | 1.0000 | 1.0000 | High ranking stability |
+| **balanced_knowledge** | `answerdotai/ModernBERT-base` | 0.7199 | 0.8929 | 0.8095 | Moderate ranking stability |
+| **high_knowledge** | `answerdotai/ModernBERT-base` | 0.7237 | 0.9643 | 0.9048 | High ranking stability |
+| **low_knowledge** | `answerdotai/ModernBERT-base` | 0.7249 | 0.9643 | 0.9048 | High ranking stability |
+| **medium_knowledge** | `answerdotai/ModernBERT-base` | 0.7613 | 1.0000 | 1.0000 | High ranking stability |
+| **random_baseline** | `answerdotai/ModernBERT-base` | 0.7228 | 1.0000 | 1.0000 | High ranking stability |
 
 ---
 
@@ -158,18 +158,18 @@ Leave-one-dimension-out ablation on the Stage 12 Domain Informativeness Engine e
 ### Component Score & Ranking Sensitivity
 | Ablated Component | Mean $\Delta_{{\text{{score}}}}$ | Median $\Delta$ | SD $\Delta$ | Spearman $\rho$ | Kendall $\tau$ | Top-20% Jaccard Overlap | Selection Impact |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| `domain_relevance` | -0.0586 | -0.0615 | 0.0244 | 0.9631 | 0.8424 | **0.6695** | Moderate selection impact: component alters borderline selections |
-| `information_content` | +0.1942 | +0.1989 | 0.0329 | 0.9383 | 0.8453 | **0.8863** | Low selection impact: score shifts have limited effect on top document selection |
-| `tfidf_representativeness` | -0.0031 | +0.0031 | 0.0422 | 0.8658 | 0.7246 | **0.6106** | Moderate selection impact: component alters borderline selections |
-| `redundancy_noise` | -0.1488 | -0.1486 | 0.0557 | 0.8596 | 0.6725 | **0.4991** | High selection impact: component strongly influences document selection |
+| `domain_relevance` | -0.0586 | -0.0616 | 0.0244 | 0.9630 | 0.8398 | **0.6684** | Moderate selection impact: component alters borderline selections |
+| `information_content` | +0.1943 | +0.1991 | 0.0329 | 0.9364 | 0.8452 | **0.8875** | Low selection impact: score shifts have limited effect on top document selection |
+| `tfidf_representativeness` | -0.0031 | +0.0031 | 0.0422 | 0.8582 | 0.7223 | **0.6051** | Moderate selection impact: component alters borderline selections |
+| `redundancy_noise` | -0.1489 | -0.1493 | 0.0558 | 0.8605 | 0.6745 | **0.5049** | High selection impact: component strongly influences document selection |
 
 ### Stratum / Tier Transition Stability
 | Ablated Component | Same Tier (%) | High Tier Retention (%) | Medium Tier Retention (%) | Low Tier Retention (%) | Documents Shifted |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| `domain_relevance` | 89.66% | **80.18%** | 91.41% | 93.91% | 10,015 / 96,848 |
-| `information_content` | 80.99% | **93.94%** | 74.39% | 87.84% | 18,406 / 96,848 |
-| `tfidf_representativeness` | 76.13% | **75.79%** | 80.11% | 64.50% | 23,122 / 96,848 |
-| `redundancy_noise` | 66.55% | **66.58%** | 72.13% | 49.79% | 32,398 / 96,848 |
+| `domain_relevance` | 89.57% | **80.11%** | 91.36% | 93.69% | 10,100 / 96,869 |
+| `information_content` | 81.07% | **93.99%** | 74.57% | 87.58% | 18,342 / 96,869 |
+| `tfidf_representativeness` | 75.95% | **75.37%** | 79.98% | 64.46% | 23,300 / 96,869 |
+| `redundancy_noise` | 66.82% | **67.09%** | 72.36% | 49.98% | 32,145 / 96,869 |
 
 ---
 

@@ -1,8 +1,8 @@
 model_name,mean_rank,rank_std,p_rank_1,p_rank_2,p_rank_top3,num_resamples,seed
 answerdotai/ModernBERT-base,1.0,0.0,1.0,0.0,1.0,2000,42
 roberta-base,2.0,0.0,0.0,1.0,1.0,2000,42
-allenai/scibert_scivocab_uncased,3.05,0.22,0.0,0.0,0.951,2000,42
-bert-base-uncased,4.34,0.55,0.0,0.0,0.0415,2000,42
-nlpaueb/legal-bert-base-uncased,4.61,0.5,0.0,0.0,0.0075,2000,42
+nlpaueb/legal-bert-base-uncased,3.41,0.53,0.0,0.0,0.6135,2000,42
+allenai/scibert_scivocab_uncased,3.62,0.5,0.0,0.0,0.383,2000,42
+bert-base-uncased,4.97,0.19,0.0,0.0,0.0035,2000,42
 dmis-lab/biobert-base-cased-v1.2,6.0,0.0,0.0,0.0,0.0,2000,42
 microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext,7.0,0.0,0.0,0.0,0.0,2000,42

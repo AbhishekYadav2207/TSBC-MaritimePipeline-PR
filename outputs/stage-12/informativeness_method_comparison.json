@@ -4,41 +4,41 @@
   "comparison": {
     "heuristic_informativeness_h_inf": {
       "mean": 0.3893,
-      "std": 0.1002,
+      "std": 0.1001,
       "correlations": {
         "heuristic_informativeness_h_inf": 1.0,
-        "tfidf_domain_relevance": 0.6893,
-        "tfidf_corpus_representativeness": 0.7151,
-        "equal_weight_hybrid_informativeness": 0.747
+        "tfidf_domain_relevance": 0.6939,
+        "tfidf_corpus_representativeness": 0.7145,
+        "equal_weight_hybrid_informativeness": 0.7469
       }
     },
     "tfidf_domain_relevance": {
-      "mean": 0.0606,
-      "std": 0.0328,
+      "mean": 0.0607,
+      "std": 0.0329,
       "correlations": {
-        "heuristic_informativeness_h_inf": 0.6893,
+        "heuristic_informativeness_h_inf": 0.6939,
         "tfidf_domain_relevance": 1.0,
-        "tfidf_corpus_representativeness": 0.4624,
-        "equal_weight_hybrid_informativeness": 0.504
+        "tfidf_corpus_representativeness": 0.4656,
+        "equal_weight_hybrid_informativeness": 0.5081
       }
     },
     "tfidf_corpus_representativeness": {
       "mean": 0.2393,
       "std": 0.1659,
       "correlations": {
-        "heuristic_informativeness_h_inf": 0.7151,
-        "tfidf_domain_relevance": 0.4624,
+        "heuristic_informativeness_h_inf": 0.7145,
+        "tfidf_domain_relevance": 0.4656,
         "tfidf_corpus_representativeness": 1.0,
-        "equal_weight_hybrid_informativeness": 0.7105
+        "equal_weight_hybrid_informativeness": 0.7106
       }
     },
     "equal_weight_hybrid_informativeness": {
       "mean": 0.2487,
-      "std": 0.0753,
+      "std": 0.075,
       "correlations": {
-        "heuristic_informativeness_h_inf": 0.747,
-        "tfidf_domain_relevance": 0.504,
-        "tfidf_corpus_representativeness": 0.7105,
+        "heuristic_informativeness_h_inf": 0.7469,
+        "tfidf_domain_relevance": 0.5081,
+        "tfidf_corpus_representativeness": 0.7106,
         "equal_weight_hybrid_informativeness": 1.0
       }
     }

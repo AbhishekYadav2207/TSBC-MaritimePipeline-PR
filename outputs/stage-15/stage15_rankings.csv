@@ -1,8 +1,8 @@
 model_name,rep_rank__json,rep_rank__key_value,rep_rank__mixed,rep_rank__narrative,rep_rank__template,rep_top1__json,rep_top1__key_value,rep_top1__mixed,rep_top1__narrative,rep_top1__template,rep_mean_rank,rep_rank_std,subset_rank__balanced_knowledge,subset_rank__high_knowledge,subset_rank__low_knowledge,subset_rank__medium_knowledge,subset_rank__random_baseline,subset_top1__balanced_knowledge,subset_top1__high_knowledge,subset_top1__low_knowledge,subset_top1__medium_knowledge,subset_top1__random_baseline,subset_mean_rank,subset_rank_std,rep_stability_kendall_tau,subset_stability_kendall_tau
-allenai/scibert_scivocab_uncased,5,3,3,4,3,17.94,33.61,43.63,28.89,32.16,3.6,0.89,3,3,3,4,3,29.17,32.2,29.56,32.91,32.39,3.2,0.45,0.7143,0.9238
-answerdotai/ModernBERT-base,1,1,1,1,1,53.77,64.07,68.29,43.61,50.47,1.0,0.0,1,1,1,1,1,54.58,56.45,56.31,57.04,55.83,1.0,0.0,0.7143,0.9238
-bert-base-uncased,6,5,5,3,4,17.02,26.16,36.61,35.41,30.21,4.6,1.14,4,4,4,5,4,29.02,30.48,25.89,28.82,31.21,4.2,0.45,0.7143,0.9238
-dmis-lab/biobert-base-cased-v1.2,4,6,6,6,7,19.06,22.43,36.21,21.66,23.86,5.8,1.1,6,6,6,6,6,23.54,26.49,21.0,26.44,25.76,6.0,0.0,0.7143,0.9238
-microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext,7,7,7,7,5,9.72,19.47,35.58,13.69,24.5,6.6,0.89,7,7,7,7,7,20.0,22.48,16.26,22.29,21.92,7.0,0.0,0.7143,0.9238
-nlpaueb/legal-bert-base-uncased,3,4,4,5,6,22.2,28.12,42.49,26.13,24.36,4.4,1.14,5,5,5,3,5,26.2,29.59,24.5,33.58,29.44,4.6,0.89,0.7143,0.9238
-roberta-base,2,2,2,2,2,39.04,53.19,57.05,41.71,44.17,2.0,0.0,2,2,2,2,2,45.24,47.67,46.88,48.53,46.84,2.0,0.0,0.7143,0.9238
+allenai/scibert_scivocab_uncased,4,3,4,5,3,13.85,35.51,46.67,31.56,35.49,3.8,0.84,3,3,3,4,4,31.54,35.1,30.03,34.06,32.36,3.4,0.55,0.7333,0.9048
+answerdotai/ModernBERT-base,1,1,1,1,2,60.73,86.83,85.86,72.27,59.58,1.2,0.45,1,1,1,1,1,71.99,72.37,72.49,76.13,72.28,1.0,0.0,0.7333,0.9048
+bert-base-uncased,5,5,6,3,4,11.66,28.72,39.91,37.83,30.52,4.6,1.14,4,5,5,5,5,30.93,33.39,26.25,28.21,29.86,4.8,0.45,0.7333,0.9048
+dmis-lab/biobert-base-cased-v1.2,6,6,5,6,6,9.12,25.66,42.38,23.62,28.15,5.8,0.45,6,6,6,6,6,24.82,27.25,23.35,26.75,26.75,6.0,0.0,0.7333,0.9048
+microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext,7,7,7,7,7,4.59,20.66,39.1,16.77,24.85,7.0,0.0,7,7,7,7,7,19.82,24.58,15.96,23.63,21.97,7.0,0.0,0.7333,0.9048
+nlpaueb/legal-bert-base-uncased,2,4,3,4,5,27.55,29.15,46.72,32.17,29.64,3.6,1.14,5,4,4,3,3,30.9,34.44,29.73,36.56,33.61,3.8,0.84,0.7333,0.9048
+roberta-base,3,2,2,2,1,25.1,74.73,77.82,67.21,71.75,2.0,0.71,2,2,2,2,2,64.74,60.93,60.1,66.11,64.72,2.0,0.0,0.7333,0.9048

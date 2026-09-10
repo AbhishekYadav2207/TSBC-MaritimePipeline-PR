@@ -1,70 +1,40 @@
 {
   "nodes": [
     {
-      "id": "MDOTW_VW_INJURIES_PUBLIC",
-      "row_count": 23004
-    },
-    {
-      "id": "MDOTW_VW_OCCURRENCE_PUBLIC",
-      "row_count": 87760
-    },
-    {
       "id": "MDOTW_VW_OCCURRENCE_VESSEL_LSA_EQUIPMENT_PUBLIC",
       "row_count": 75257
     },
     {
-      "id": "MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC",
-      "row_count": 314447
+      "id": "MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC",
+      "row_count": 78399
     },
     {
       "id": "MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC",
       "row_count": 73926
     },
     {
-      "id": "MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC",
-      "row_count": 78399
+      "id": "MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC",
+      "row_count": 314447
+    },
+    {
+      "id": "MDOTW_VW_INJURIES_PUBLIC",
+      "row_count": 23004
+    },
+    {
+      "id": "MDOTW_VW_OCCURRENCE_PUBLIC",
+      "row_count": 87760
     }
   ],
   "edges": [
     {
-      "source": "MDOTW_VW_OCCURRENCE_PUBLIC",
-      "target": "MDOTW_VW_INJURIES_PUBLIC",
-      "key": "OccNo",
-      "type": "one_to_many"
-    },
-    {
-      "source": "MDOTW_VW_OCCURRENCE_PUBLIC",
-      "target": "MDOTW_VW_OCCURRENCE_VESSEL_LSA_EQUIPMENT_PUBLIC",
-      "key": "OccNo",
-      "type": "one_to_many"
-    },
-    {
-      "source": "MDOTW_VW_OCCURRENCE_PUBLIC",
-      "target": "MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC",
-      "key": "OccNo",
-      "type": "one_to_many"
-    },
-    {
-      "source": "MDOTW_VW_OCCURRENCE_PUBLIC",
-      "target": "MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC",
-      "key": "OccNo",
-      "type": "one_to_many"
-    },
-    {
-      "source": "MDOTW_VW_OCCURRENCE_PUBLIC",
-      "target": "MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC",
-      "key": "OccNo",
-      "type": "one_to_many"
-    },
-    {
       "source": "MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC",
-      "target": "MDOTW_VW_INJURIES_PUBLIC",
+      "target": "MDOTW_VW_OCCURRENCE_VESSEL_LSA_EQUIPMENT_PUBLIC",
       "key": "VesselID",
       "type": "one_to_many"
     },
     {
       "source": "MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC",
-      "target": "MDOTW_VW_OCCURRENCE_VESSEL_LSA_EQUIPMENT_PUBLIC",
+      "target": "MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC",
       "key": "VesselID",
       "type": "one_to_many"
     },
@@ -76,7 +46,7 @@
     },
     {
       "source": "MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC",
-      "target": "MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC",
+      "target": "MDOTW_VW_INJURIES_PUBLIC",
       "key": "VesselID",
       "type": "one_to_many"
     },
@@ -85,18 +55,108 @@
       "target": "MDOTW_VW_OCCURRENCE_PUBLIC",
       "key": "AccIncTypeID",
       "type": "one_to_many"
+    },
+    {
+      "source": "MDOTW_VW_OCCURRENCE_PUBLIC",
+      "target": "MDOTW_VW_OCCURRENCE_VESSEL_LSA_EQUIPMENT_PUBLIC",
+      "key": "OccID",
+      "type": "one_to_many"
+    },
+    {
+      "source": "MDOTW_VW_OCCURRENCE_PUBLIC",
+      "target": "MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC",
+      "key": "OccID",
+      "type": "one_to_many"
+    },
+    {
+      "source": "MDOTW_VW_OCCURRENCE_PUBLIC",
+      "target": "MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC",
+      "key": "OccID",
+      "type": "one_to_many"
+    },
+    {
+      "source": "MDOTW_VW_OCCURRENCE_PUBLIC",
+      "target": "MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC",
+      "key": "OccID",
+      "type": "one_to_many"
+    },
+    {
+      "source": "MDOTW_VW_OCCURRENCE_PUBLIC",
+      "target": "MDOTW_VW_INJURIES_PUBLIC",
+      "key": "OccID",
+      "type": "one_to_many"
     }
   ],
   "relationships": [
     {
-      "parent_table": "MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC",
+      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
+      "child_table": "MDOTW_VW_OCCURRENCE_VESSEL_LSA_EQUIPMENT_PUBLIC",
+      "join_key": "OccNo",
+      "relationship_type": "one_to_many"
+    },
+    {
+      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
+      "child_table": "MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC",
+      "join_key": "OccNo",
+      "relationship_type": "one_to_many"
+    },
+    {
+      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
+      "child_table": "MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC",
+      "join_key": "OccNo",
+      "relationship_type": "one_to_many"
+    },
+    {
+      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
+      "child_table": "MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC",
+      "join_key": "OccNo",
+      "relationship_type": "one_to_many"
+    },
+    {
+      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
       "child_table": "MDOTW_VW_INJURIES_PUBLIC",
-      "join_key": "VesselID",
+      "join_key": "OccNo",
+      "relationship_type": "one_to_many"
+    },
+    {
+      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
+      "child_table": "MDOTW_VW_OCCURRENCE_VESSEL_LSA_EQUIPMENT_PUBLIC",
+      "join_key": "OccID",
+      "relationship_type": "one_to_many"
+    },
+    {
+      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
+      "child_table": "MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC",
+      "join_key": "OccID",
+      "relationship_type": "one_to_many"
+    },
+    {
+      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
+      "child_table": "MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC",
+      "join_key": "OccID",
+      "relationship_type": "one_to_many"
+    },
+    {
+      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
+      "child_table": "MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC",
+      "join_key": "OccID",
+      "relationship_type": "one_to_many"
+    },
+    {
+      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
+      "child_table": "MDOTW_VW_INJURIES_PUBLIC",
+      "join_key": "OccID",
       "relationship_type": "one_to_many"
     },
     {
       "parent_table": "MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC",
       "child_table": "MDOTW_VW_OCCURRENCE_VESSEL_LSA_EQUIPMENT_PUBLIC",
+      "join_key": "VesselID",
+      "relationship_type": "one_to_many"
+    },
+    {
+      "parent_table": "MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC",
+      "child_table": "MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC",
       "join_key": "VesselID",
       "relationship_type": "one_to_many"
     },
@@ -108,7 +168,7 @@
     },
     {
       "parent_table": "MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC",
-      "child_table": "MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC",
+      "child_table": "MDOTW_VW_INJURIES_PUBLIC",
       "join_key": "VesselID",
       "relationship_type": "one_to_many"
     },
@@ -117,76 +177,38 @@
       "child_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
       "join_key": "AccIncTypeID",
       "relationship_type": "one_to_many"
-    },
-    {
-      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
-      "child_table": "MDOTW_VW_INJURIES_PUBLIC",
-      "join_key": "OccID",
-      "relationship_type": "one_to_many"
-    },
-    {
-      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
-      "child_table": "MDOTW_VW_OCCURRENCE_VESSEL_LSA_EQUIPMENT_PUBLIC",
-      "join_key": "OccID",
-      "relationship_type": "one_to_many"
-    },
-    {
-      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
-      "child_table": "MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC",
-      "join_key": "OccID",
-      "relationship_type": "one_to_many"
-    },
-    {
-      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
-      "child_table": "MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC",
-      "join_key": "OccID",
-      "relationship_type": "one_to_many"
-    },
-    {
-      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
-      "child_table": "MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC",
-      "join_key": "OccID",
-      "relationship_type": "one_to_many"
-    },
-    {
-      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
-      "child_table": "MDOTW_VW_INJURIES_PUBLIC",
-      "join_key": "OccNo",
-      "relationship_type": "one_to_many"
-    },
-    {
-      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
-      "child_table": "MDOTW_VW_OCCURRENCE_VESSEL_LSA_EQUIPMENT_PUBLIC",
-      "join_key": "OccNo",
-      "relationship_type": "one_to_many"
-    },
-    {
-      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
-      "child_table": "MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC",
-      "join_key": "OccNo",
-      "relationship_type": "one_to_many"
-    },
-    {
-      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
-      "child_table": "MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC",
-      "join_key": "OccNo",
-      "relationship_type": "one_to_many"
-    },
-    {
-      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
-      "child_table": "MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC",
-      "join_key": "OccNo",
-      "relationship_type": "one_to_many"
     }
   ],
   "key_parents": {
+    "OccNo": {
+      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
+      "child_tables": [
+        "MDOTW_VW_OCCURRENCE_VESSEL_LSA_EQUIPMENT_PUBLIC",
+        "MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC",
+        "MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC",
+        "MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC",
+        "MDOTW_VW_INJURIES_PUBLIC"
+      ],
+      "nunique": 48581
+    },
+    "OccID": {
+      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
+      "child_tables": [
+        "MDOTW_VW_OCCURRENCE_VESSEL_LSA_EQUIPMENT_PUBLIC",
+        "MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC",
+        "MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC",
+        "MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC",
+        "MDOTW_VW_INJURIES_PUBLIC"
+      ],
+      "nunique": 48594
+    },
     "VesselID": {
       "parent_table": "MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC",
       "child_tables": [
-        "MDOTW_VW_INJURIES_PUBLIC",
         "MDOTW_VW_OCCURRENCE_VESSEL_LSA_EQUIPMENT_PUBLIC",
+        "MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC",
         "MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC",
-        "MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC"
+        "MDOTW_VW_INJURIES_PUBLIC"
       ],
       "nunique": 27879
     },
@@ -196,28 +218,6 @@
         "MDOTW_VW_OCCURRENCE_PUBLIC"
       ],
       "nunique": 37
-    },
-    "OccID": {
-      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
-      "child_tables": [
-        "MDOTW_VW_INJURIES_PUBLIC",
-        "MDOTW_VW_OCCURRENCE_VESSEL_LSA_EQUIPMENT_PUBLIC",
-        "MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC",
-        "MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC",
-        "MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC"
-      ],
-      "nunique": 48594
-    },
-    "OccNo": {
-      "parent_table": "MDOTW_VW_OCCURRENCE_PUBLIC",
-      "child_tables": [
-        "MDOTW_VW_INJURIES_PUBLIC",
-        "MDOTW_VW_OCCURRENCE_VESSEL_LSA_EQUIPMENT_PUBLIC",
-        "MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC",
-        "MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC",
-        "MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC"
-      ],
-      "nunique": 48581
     }
   }
 }

@@ -10,7 +10,7 @@
   ],
   "selected_model_count": 7,
   "candidate_model_count": 14,
-  "evaluated_model_count": 12,
+  "evaluated_model_count": 13,
   "candidate_models": [
     "bert-base-uncased",
     "bert-large-uncased",
@@ -31,6 +31,7 @@
     "bert-base-uncased",
     "bert-large-uncased",
     "roberta-base",
+    "microsoft/deberta-v3-base",
     "answerdotai/ModernBERT-base",
     "allenai/scibert_scivocab_uncased",
     "dmis-lab/biobert-base-cased-v1.2",
@@ -72,16 +73,12 @@
       "similarity_score": 1.0,
       "explanation": "Excluded due to identical tokenizer diagnostic profile with dmis-lab/biobert-base-cased-v1.2 (cosine similarity 1.00000, identical vocabulary piece splits)."
     },
-    "microsoft/deberta-v3-base": {
-      "reason": "loading_dependency_failure",
-      "explanation": "Tokenizer failed to instantiate from pretrained repository in current environment (e.g. missing SentencePiece library or fast tokenizer backend)."
-    },
     "anferico/bert-for-patents": {
       "reason": "loading_dependency_failure",
       "explanation": "Tokenizer failed to instantiate from pretrained repository in current environment (e.g. missing SentencePiece library or fast tokenizer backend)."
     }
   },
-  "selection_timestamp": "2026-09-10 01:23:42",
+  "selection_timestamp": "2026-09-10 14:08:52",
   "selection_rationale": "Subword Term-Piece Diagnostic Redundancy Clustering & Canonical Archetype Selection",
   "target_stage": "Stage 14 (14_mlm_evaluation.py)"
 }

@@ -7,34 +7,34 @@
       "representation": "json",
       "subset": "medium_knowledge",
       "random_15": {
-        "mlm_loss": 5.588350651703609,
-        "top1": 0.2054263565891473,
-        "top5": 0.35658914728682173,
-        "top10": 0.4069767441860465,
-        "rare_top1": 1.0
+        "mlm_loss": 6.8390908365881335,
+        "top1": 0.11731044349070101,
+        "top5": 0.23032904148783978,
+        "top10": 0.2989985693848355,
+        "rare_top1": 0.17894736842105263
       },
       "domain_aware_15": {
-        "mlm_loss": 8.370152620027863,
-        "top1": 0.06612903225806452,
-        "top5": 0.1338709677419355,
-        "top10": 0.16021505376344086,
-        "rare_top1": 0.0,
+        "mlm_loss": 8.614707341335569,
+        "top1": 0.07139775668679896,
+        "top5": 0.13848144952545297,
+        "top10": 0.18377911993097498,
+        "rare_top1": 0.23655913978494625,
         "masking_diagnostics": {
           "total_eligible_tokens": 50800,
           "total_masked_tokens": 7600,
           "actual_mask_rate": 0.1496,
-          "rare_maritime_tokens_masked": 4,
-          "maritime_tokens_masked": 1856,
-          "general_tokens_masked": 5740,
-          "rare_maritime_mask_fraction": 0.0005,
-          "maritime_mask_fraction": 0.2442,
-          "general_mask_fraction": 0.7553
+          "rare_maritime_tokens_masked": 1302,
+          "maritime_tokens_masked": 3985,
+          "general_tokens_masked": 2313,
+          "rare_maritime_mask_fraction": 0.1713,
+          "maritime_mask_fraction": 0.5243,
+          "general_mask_fraction": 0.3043
         }
       },
       "delta_domain_minus_random": {
-        "top1_delta": -0.1393,
-        "rare_top1_delta": -1.0,
-        "loss_delta": 2.7818
+        "top1_delta": -0.0459,
+        "rare_top1_delta": 0.0576,
+        "loss_delta": 1.7756
       }
     },
     {
@@ -42,34 +42,34 @@
       "representation": "json",
       "subset": "medium_knowledge",
       "random_15": {
-        "mlm_loss": 5.693017180875867,
-        "top1": 0.19322033898305085,
-        "top5": 0.3288135593220339,
-        "top10": 0.4067796610169492,
-        "rare_top1": 0.0
+        "mlm_loss": 6.385029764309555,
+        "top1": 0.09766454352441614,
+        "top5": 0.2643312101910828,
+        "top10": 0.34182590233545646,
+        "rare_top1": 0.054455445544554455
       },
       "domain_aware_15": {
-        "mlm_loss": 7.951472314708124,
-        "top1": 0.046700507614213196,
-        "top5": 0.10456852791878173,
-        "top10": 0.15532994923857868,
-        "rare_top1": 0.0,
+        "mlm_loss": 8.048074287337649,
+        "top1": 0.0550381033022862,
+        "top5": 0.16545300592718035,
+        "top10": 0.2086367485182049,
+        "rare_top1": 0.015544041450777202,
         "masking_diagnostics": {
           "total_eligible_tokens": 50800,
           "total_masked_tokens": 7600,
           "actual_mask_rate": 0.1496,
-          "rare_maritime_tokens_masked": 4,
-          "maritime_tokens_masked": 1966,
-          "general_tokens_masked": 5630,
-          "rare_maritime_mask_fraction": 0.0005,
-          "maritime_mask_fraction": 0.2587,
-          "general_mask_fraction": 0.7408
+          "rare_maritime_tokens_masked": 2283,
+          "maritime_tokens_masked": 4747,
+          "general_tokens_masked": 570,
+          "rare_maritime_mask_fraction": 0.3004,
+          "maritime_mask_fraction": 0.6246,
+          "general_mask_fraction": 0.075
         }
       },
       "delta_domain_minus_random": {
-        "top1_delta": -0.1465,
-        "rare_top1_delta": 0.0,
-        "loss_delta": 2.2585
+        "top1_delta": -0.0426,
+        "rare_top1_delta": -0.0389,
+        "loss_delta": 1.663
       }
     },
     {
@@ -77,34 +77,34 @@
       "representation": "json",
       "subset": "medium_knowledge",
       "random_15": {
-        "mlm_loss": 4.654943259467996,
-        "top1": 0.3047945205479452,
-        "top5": 0.4691780821917808,
-        "top10": 0.5342465753424658,
-        "rare_top1": 0.0
+        "mlm_loss": 4.554561574823013,
+        "top1": 0.30272452068617556,
+        "top5": 0.44904137235116043,
+        "top10": 0.508577194752775,
+        "rare_top1": 0.6397306397306397
       },
       "domain_aware_15": {
-        "mlm_loss": 7.258249260295331,
-        "top1": 0.12210733628754308,
-        "top5": 0.2171344165435746,
-        "top10": 0.2604628261939931,
-        "rare_top1": 0.0,
+        "mlm_loss": 6.209741600073744,
+        "top1": 0.07723102585487907,
+        "top5": 0.33894912427022517,
+        "top10": 0.4443703085904921,
+        "rare_top1": 0.06466395112016293,
         "masking_diagnostics": {
           "total_eligible_tokens": 50800,
           "total_masked_tokens": 7600,
           "actual_mask_rate": 0.1496,
-          "rare_maritime_tokens_masked": 2,
-          "maritime_tokens_masked": 2029,
-          "general_tokens_masked": 5569,
-          "rare_maritime_mask_fraction": 0.0003,
-          "maritime_mask_fraction": 0.267,
-          "general_mask_fraction": 0.7328
+          "rare_maritime_tokens_masked": 3562,
+          "maritime_tokens_masked": 4031,
+          "general_tokens_masked": 7,
+          "rare_maritime_mask_fraction": 0.4687,
+          "maritime_mask_fraction": 0.5304,
+          "general_mask_fraction": 0.0009
         }
       },
       "delta_domain_minus_random": {
-        "top1_delta": -0.1827,
-        "rare_top1_delta": 0.0,
-        "loss_delta": 2.6033
+        "top1_delta": -0.2255,
+        "rare_top1_delta": -0.5751,
+        "loss_delta": 1.6552
       }
     },
     {
@@ -112,34 +112,34 @@
       "representation": "json",
       "subset": "medium_knowledge",
       "random_15": {
-        "mlm_loss": 5.419938124626254,
-        "top1": 0.18666666666666668,
-        "top5": 0.32,
-        "top10": 0.41,
-        "rare_top1": 0.0
+        "mlm_loss": 5.716650327602389,
+        "top1": 0.1571994715984148,
+        "top5": 0.34081902245706736,
+        "top10": 0.4081902245706737,
+        "rare_top1": 0.24
       },
       "domain_aware_15": {
-        "mlm_loss": 8.303999547438389,
-        "top1": 0.04032258064516129,
-        "top5": 0.0967741935483871,
-        "top10": 0.1413662239089184,
-        "rare_top1": 0.0,
+        "mlm_loss": 8.350287729178753,
+        "top1": 0.07708293973172115,
+        "top5": 0.1889287738522577,
+        "top10": 0.22709238617041375,
+        "rare_top1": 0.3339449541284404,
         "masking_diagnostics": {
           "total_eligible_tokens": 50800,
           "total_masked_tokens": 7600,
           "actual_mask_rate": 0.1496,
-          "rare_maritime_tokens_masked": 4,
-          "maritime_tokens_masked": 2104,
-          "general_tokens_masked": 5492,
-          "rare_maritime_mask_fraction": 0.0005,
-          "maritime_mask_fraction": 0.2768,
-          "general_mask_fraction": 0.7226
+          "rare_maritime_tokens_masked": 1089,
+          "maritime_tokens_masked": 4748,
+          "general_tokens_masked": 1763,
+          "rare_maritime_mask_fraction": 0.1433,
+          "maritime_mask_fraction": 0.6247,
+          "general_mask_fraction": 0.232
         }
       },
       "delta_domain_minus_random": {
-        "top1_delta": -0.1463,
-        "rare_top1_delta": 0.0,
-        "loss_delta": 2.8841
+        "top1_delta": -0.0801,
+        "rare_top1_delta": 0.0939,
+        "loss_delta": 2.6336
       }
     },
     {
@@ -147,34 +147,34 @@
       "representation": "json",
       "subset": "medium_knowledge",
       "random_15": {
-        "mlm_loss": 7.1036640676056315,
-        "top1": 0.10921501706484642,
-        "top5": 0.18430034129692832,
-        "top10": 0.21843003412969283,
-        "rare_top1": 0.0
+        "mlm_loss": 7.844745610141499,
+        "top1": 0.06064690026954178,
+        "top5": 0.10107816711590296,
+        "top10": 0.1280323450134771,
+        "rare_top1": 0.06097560975609756
       },
       "domain_aware_15": {
-        "mlm_loss": 8.22353349016624,
-        "top1": 0.0485728592889334,
-        "top5": 0.0871306960440661,
-        "top10": 0.1186780170255383,
+        "mlm_loss": 9.167645464415871,
+        "top1": 0.02507192766132347,
+        "top5": 0.05281545417180436,
+        "top10": 0.06781750924784218,
         "rare_top1": 0.0,
         "masking_diagnostics": {
           "total_eligible_tokens": 50800,
           "total_masked_tokens": 7600,
           "actual_mask_rate": 0.1496,
-          "rare_maritime_tokens_masked": 4,
-          "maritime_tokens_masked": 1993,
-          "general_tokens_masked": 5603,
-          "rare_maritime_mask_fraction": 0.0005,
-          "maritime_mask_fraction": 0.2622,
-          "general_mask_fraction": 0.7372
+          "rare_maritime_tokens_masked": 956,
+          "maritime_tokens_masked": 4388,
+          "general_tokens_masked": 2256,
+          "rare_maritime_mask_fraction": 0.1258,
+          "maritime_mask_fraction": 0.5774,
+          "general_mask_fraction": 0.2968
         }
       },
       "delta_domain_minus_random": {
-        "top1_delta": -0.0606,
-        "rare_top1_delta": 0.0,
-        "loss_delta": 1.1199
+        "top1_delta": -0.0356,
+        "rare_top1_delta": -0.061,
+        "loss_delta": 1.3229
       }
     },
     {
@@ -182,34 +182,34 @@
       "representation": "json",
       "subset": "medium_knowledge",
       "random_15": {
-        "mlm_loss": 3.013011882541199,
-        "top1": 0.4162062615101289,
-        "top5": 0.6335174953959485,
-        "top10": 0.7274401473296501,
-        "rare_top1": 0.0
+        "mlm_loss": 3.406357744471075,
+        "top1": 0.26785714285714285,
+        "top5": 0.673469387755102,
+        "top10": 0.7346938775510204,
+        "rare_top1": 0.5714285714285714
       },
       "domain_aware_15": {
-        "mlm_loss": 7.12546179884956,
-        "top1": 0.05333333333333334,
-        "top5": 0.13551020408163264,
-        "top10": 0.16625850340136056,
+        "mlm_loss": 5.716159312737736,
+        "top1": 0.08947368421052632,
+        "top5": 0.4263157894736842,
+        "top10": 0.48947368421052634,
         "rare_top1": 0.0,
         "masking_diagnostics": {
           "total_eligible_tokens": 50800,
           "total_masked_tokens": 7600,
           "actual_mask_rate": 0.1496,
-          "rare_maritime_tokens_masked": 6,
-          "maritime_tokens_masked": 3669,
-          "general_tokens_masked": 3925,
-          "rare_maritime_mask_fraction": 0.0008,
-          "maritime_mask_fraction": 0.4828,
-          "general_mask_fraction": 0.5164
+          "rare_maritime_tokens_masked": 60,
+          "maritime_tokens_masked": 2440,
+          "general_tokens_masked": 5100,
+          "rare_maritime_mask_fraction": 0.0079,
+          "maritime_mask_fraction": 0.3211,
+          "general_mask_fraction": 0.6711
         }
       },
       "delta_domain_minus_random": {
-        "top1_delta": -0.3629,
-        "rare_top1_delta": 0.0,
-        "loss_delta": 4.1124
+        "top1_delta": -0.1784,
+        "rare_top1_delta": -0.5714,
+        "loss_delta": 2.3098
       }
     },
     {
@@ -217,34 +217,34 @@
       "representation": "json",
       "subset": "medium_knowledge",
       "random_15": {
-        "mlm_loss": 2.346285502679781,
-        "top1": 0.5612431444241316,
-        "top5": 0.7148080438756855,
-        "top10": 0.7696526508226691,
-        "rare_top1": 0.0
+        "mlm_loss": 2.284785672682127,
+        "top1": 0.6079295154185022,
+        "top5": 0.7422907488986784,
+        "top10": 0.7951541850220264,
+        "rare_top1": 0.8214285714285714
       },
       "domain_aware_15": {
-        "mlm_loss": 5.994087548318673,
-        "top1": 0.16018368449486764,
-        "top5": 0.24149108589951376,
-        "top10": 0.2976769313884387,
-        "rare_top1": 0.0,
+        "mlm_loss": 5.47415066256135,
+        "top1": 0.1692780337941628,
+        "top5": 0.2912442396313364,
+        "top10": 0.37450076804915516,
+        "rare_top1": 0.00975609756097561,
         "masking_diagnostics": {
           "total_eligible_tokens": 50800,
           "total_masked_tokens": 7600,
           "actual_mask_rate": 0.1496,
-          "rare_maritime_tokens_masked": 6,
-          "maritime_tokens_masked": 3696,
-          "general_tokens_masked": 3898,
-          "rare_maritime_mask_fraction": 0.0008,
-          "maritime_mask_fraction": 0.4863,
-          "general_mask_fraction": 0.5129
+          "rare_maritime_tokens_masked": 410,
+          "maritime_tokens_masked": 3050,
+          "general_tokens_masked": 4140,
+          "rare_maritime_mask_fraction": 0.0539,
+          "maritime_mask_fraction": 0.4013,
+          "general_mask_fraction": 0.5447
         }
       },
       "delta_domain_minus_random": {
-        "top1_delta": -0.4011,
-        "rare_top1_delta": 0.0,
-        "loss_delta": 3.6478
+        "top1_delta": -0.4387,
+        "rare_top1_delta": -0.8117,
+        "loss_delta": 3.1894
       }
     },
     {
@@ -252,34 +252,34 @@
       "representation": "mixed",
       "subset": "high_knowledge",
       "random_15": {
-        "mlm_loss": 3.9053416094120967,
-        "top1": 0.39543726235741444,
-        "top5": 0.5494296577946768,
-        "top10": 0.6185044359949303,
-        "rare_top1": 0.7422680412371134
+        "mlm_loss": 3.497892719858286,
+        "top1": 0.45363010068892423,
+        "top5": 0.5877053524112348,
+        "top10": 0.6555378908320085,
+        "rare_top1": 0.7117117117117117
       },
       "domain_aware_15": {
-        "mlm_loss": 6.175180270443907,
-        "top1": 0.19236688211757463,
-        "top5": 0.30809479839950754,
-        "top10": 0.37365343182517696,
-        "rare_top1": 0.0,
+        "mlm_loss": 5.572114244801097,
+        "top1": 0.2732286096256685,
+        "top5": 0.38786764705882354,
+        "top10": 0.446524064171123,
+        "rare_top1": 0.16414970453053185,
         "masking_diagnostics": {
-          "total_eligible_tokens": 43346,
-          "total_masked_tokens": 6499,
-          "actual_mask_rate": 0.1499,
-          "rare_maritime_tokens_masked": 619,
-          "maritime_tokens_masked": 5879,
-          "general_tokens_masked": 1,
-          "rare_maritime_mask_fraction": 0.0952,
-          "maritime_mask_fraction": 0.9046,
-          "general_mask_fraction": 0.0002
+          "total_eligible_tokens": 43474,
+          "total_masked_tokens": 6522,
+          "actual_mask_rate": 0.15,
+          "rare_maritime_tokens_masked": 2061,
+          "maritime_tokens_masked": 4461,
+          "general_tokens_masked": 0,
+          "rare_maritime_mask_fraction": 0.316,
+          "maritime_mask_fraction": 0.684,
+          "general_mask_fraction": 0.0
         }
       },
       "delta_domain_minus_random": {
-        "top1_delta": -0.2031,
-        "rare_top1_delta": -0.7423,
-        "loss_delta": 2.2698
+        "top1_delta": -0.1804,
+        "rare_top1_delta": -0.5476,
+        "loss_delta": 2.0742
       }
     },
     {
@@ -287,34 +287,34 @@
       "representation": "mixed",
       "subset": "high_knowledge",
       "random_15": {
-        "mlm_loss": 4.130322043872218,
-        "top1": 0.3871932974266906,
-        "top5": 0.471573907839617,
-        "top10": 0.5266307600239377,
-        "rare_top1": 0.5142857142857142
+        "mlm_loss": 3.552502722629683,
+        "top1": 0.45716745587602237,
+        "top5": 0.5479982780886784,
+        "top10": 0.5970727507533362,
+        "rare_top1": 0.6437994722955145
       },
       "domain_aware_15": {
-        "mlm_loss": 6.160787257283832,
-        "top1": 0.17674900162697826,
-        "top5": 0.25247744416506435,
-        "top10": 0.3057240053246561,
-        "rare_top1": 0.11350293542074363,
+        "mlm_loss": 5.014222979281087,
+        "top1": 0.2512226931855233,
+        "top5": 0.33860449951092275,
+        "top10": 0.40805347244864687,
+        "rare_top1": 0.1028169014084507,
         "masking_diagnostics": {
-          "total_eligible_tokens": 45111,
-          "total_masked_tokens": 6761,
+          "total_eligible_tokens": 45288,
+          "total_masked_tokens": 6789,
           "actual_mask_rate": 0.1499,
-          "rare_maritime_tokens_masked": 511,
-          "maritime_tokens_masked": 6250,
+          "rare_maritime_tokens_masked": 3495,
+          "maritime_tokens_masked": 3294,
           "general_tokens_masked": 0,
-          "rare_maritime_mask_fraction": 0.0756,
-          "maritime_mask_fraction": 0.9244,
+          "rare_maritime_mask_fraction": 0.5148,
+          "maritime_mask_fraction": 0.4852,
           "general_mask_fraction": 0.0
         }
       },
       "delta_domain_minus_random": {
-        "top1_delta": -0.2104,
-        "rare_top1_delta": -0.4008,
-        "loss_delta": 2.0305
+        "top1_delta": -0.2059,
+        "rare_top1_delta": -0.541,
+        "loss_delta": 1.4617
       }
     },
     {
@@ -322,34 +322,34 @@
       "representation": "mixed",
       "subset": "high_knowledge",
       "random_15": {
-        "mlm_loss": 3.4234226748423104,
-        "top1": 0.44656716417910447,
-        "top5": 0.5552238805970149,
-        "top10": 0.6298507462686567,
-        "rare_top1": 0.1791044776119403
+        "mlm_loss": 3.0777740318562095,
+        "top1": 0.49551020408163265,
+        "top5": 0.6179591836734694,
+        "top10": 0.6726530612244898,
+        "rare_top1": 0.5030487804878049
       },
       "domain_aware_15": {
-        "mlm_loss": 4.554551699356486,
-        "top1": 0.28379988088147706,
-        "top5": 0.43046456223942825,
-        "top10": 0.5022334723049434,
-        "rare_top1": 0.13569937369519833,
+        "mlm_loss": 3.841378105377311,
+        "top1": 0.35152202072538863,
+        "top5": 0.5160297927461139,
+        "top10": 0.5963406735751295,
+        "rare_top1": 0.17325227963525835,
         "masking_diagnostics": {
-          "total_eligible_tokens": 44832,
-          "total_masked_tokens": 6716,
-          "actual_mask_rate": 0.1498,
-          "rare_maritime_tokens_masked": 479,
-          "maritime_tokens_masked": 6237,
+          "total_eligible_tokens": 44951,
+          "total_masked_tokens": 6736,
+          "actual_mask_rate": 0.1499,
+          "rare_maritime_tokens_masked": 2863,
+          "maritime_tokens_masked": 3873,
           "general_tokens_masked": 0,
-          "rare_maritime_mask_fraction": 0.0713,
-          "maritime_mask_fraction": 0.9287,
+          "rare_maritime_mask_fraction": 0.425,
+          "maritime_mask_fraction": 0.575,
           "general_mask_fraction": 0.0
         }
       },
       "delta_domain_minus_random": {
-        "top1_delta": -0.1628,
-        "rare_top1_delta": -0.0434,
-        "loss_delta": 1.1311
+        "top1_delta": -0.144,
+        "rare_top1_delta": -0.3298,
+        "loss_delta": 0.7636
       }
     },
     {
@@ -357,34 +357,34 @@
       "representation": "mixed",
       "subset": "high_knowledge",
       "random_15": {
-        "mlm_loss": 3.143570948934206,
-        "top1": 0.476,
-        "top5": 0.6057142857142858,
-        "top10": 0.6725714285714286,
-        "rare_top1": 0.21875
+        "mlm_loss": 2.8134937222396252,
+        "top1": 0.5329227854097585,
+        "top5": 0.650876361913785,
+        "top10": 0.7119848413074372,
+        "rare_top1": 0.6515837104072398
       },
       "domain_aware_15": {
-        "mlm_loss": 5.017285591300416,
-        "top1": 0.29263886798133376,
-        "top5": 0.39876561794370013,
-        "top10": 0.4598825831702544,
-        "rare_top1": 0.10757946210268948,
+        "mlm_loss": 3.9715810826813316,
+        "top1": 0.4037025008119519,
+        "top5": 0.5350763234816499,
+        "top10": 0.5962974991880481,
+        "rare_top1": 0.440028901734104,
         "masking_diagnostics": {
-          "total_eligible_tokens": 44325,
-          "total_masked_tokens": 6643,
+          "total_eligible_tokens": 44417,
+          "total_masked_tokens": 6660,
           "actual_mask_rate": 0.1499,
-          "rare_maritime_tokens_masked": 409,
-          "maritime_tokens_masked": 6234,
+          "rare_maritime_tokens_masked": 1886,
+          "maritime_tokens_masked": 4774,
           "general_tokens_masked": 0,
-          "rare_maritime_mask_fraction": 0.0616,
-          "maritime_mask_fraction": 0.9384,
+          "rare_maritime_mask_fraction": 0.2832,
+          "maritime_mask_fraction": 0.7168,
           "general_mask_fraction": 0.0
         }
       },
       "delta_domain_minus_random": {
-        "top1_delta": -0.1834,
-        "rare_top1_delta": -0.1112,
-        "loss_delta": 1.8737
+        "top1_delta": -0.1292,
+        "rare_top1_delta": -0.2116,
+        "loss_delta": 1.1581
       }
     },
     {
@@ -392,34 +392,34 @@
       "representation": "mixed",
       "subset": "high_knowledge",
       "random_15": {
-        "mlm_loss": 4.298379443310675,
-        "top1": 0.4001178550383029,
-        "top5": 0.47672362993517975,
-        "top10": 0.5209192692987625,
-        "rare_top1": 0.15625
+        "mlm_loss": 3.906780794563021,
+        "top1": 0.44925444925444924,
+        "top5": 0.5343915343915344,
+        "top10": 0.5747955747955747,
+        "rare_top1": 0.4787234042553192
       },
       "domain_aware_15": {
-        "mlm_loss": 5.622191566535955,
-        "top1": 0.24728588661037396,
-        "top5": 0.3336851628468034,
-        "top10": 0.37680940892641734,
-        "rare_top1": 0.15328467153284672,
+        "mlm_loss": 5.30522541723457,
+        "top1": 0.2711422519146163,
+        "top5": 0.3685839986964315,
+        "top10": 0.41567541143881376,
+        "rare_top1": 0.04608294930875576,
         "masking_diagnostics": {
-          "total_eligible_tokens": 44255,
-          "total_masked_tokens": 6632,
-          "actual_mask_rate": 0.1499,
-          "rare_maritime_tokens_masked": 411,
-          "maritime_tokens_masked": 6221,
+          "total_eligible_tokens": 44322,
+          "total_masked_tokens": 6639,
+          "actual_mask_rate": 0.1498,
+          "rare_maritime_tokens_masked": 1804,
+          "maritime_tokens_masked": 4835,
           "general_tokens_masked": 0,
-          "rare_maritime_mask_fraction": 0.062,
-          "maritime_mask_fraction": 0.938,
+          "rare_maritime_mask_fraction": 0.2717,
+          "maritime_mask_fraction": 0.7283,
           "general_mask_fraction": 0.0
         }
       },
       "delta_domain_minus_random": {
-        "top1_delta": -0.1528,
-        "rare_top1_delta": -0.003,
-        "loss_delta": 1.3238
+        "top1_delta": -0.1781,
+        "rare_top1_delta": -0.4326,
+        "loss_delta": 1.3984
       }
     },
     {
@@ -427,34 +427,34 @@
       "representation": "mixed",
       "subset": "high_knowledge",
       "random_15": {
-        "mlm_loss": 2.2845575683158525,
-        "top1": 0.565864833906071,
-        "top5": 0.7353951890034365,
-        "top10": 0.788659793814433,
-        "rare_top1": 0.42105263157894735
+        "mlm_loss": 1.453521773291503,
+        "top1": 0.7278911564625851,
+        "top5": 0.8390022675736961,
+        "top10": 0.854875283446712,
+        "rare_top1": 0.6470588235294118
       },
       "domain_aware_15": {
-        "mlm_loss": 4.710893833777684,
-        "top1": 0.2623196297304656,
-        "top5": 0.3919139667846447,
-        "top10": 0.46079499047100464,
-        "rare_top1": 0.03389830508474576,
+        "mlm_loss": 3.916413454114432,
+        "top1": 0.36425186188219366,
+        "top5": 0.593432633716994,
+        "top10": 0.6448882870683819,
+        "rare_top1": 0.6872964169381107,
         "masking_diagnostics": {
-          "total_eligible_tokens": 49092,
-          "total_masked_tokens": 7349,
+          "total_eligible_tokens": 49178,
+          "total_masked_tokens": 7361,
           "actual_mask_rate": 0.1497,
-          "rare_maritime_tokens_masked": 118,
-          "maritime_tokens_masked": 7228,
-          "general_tokens_masked": 3,
-          "rare_maritime_mask_fraction": 0.0161,
-          "maritime_mask_fraction": 0.9835,
-          "general_mask_fraction": 0.0004
+          "rare_maritime_tokens_masked": 614,
+          "maritime_tokens_masked": 2647,
+          "general_tokens_masked": 4100,
+          "rare_maritime_mask_fraction": 0.0834,
+          "maritime_mask_fraction": 0.3596,
+          "general_mask_fraction": 0.557
         }
       },
       "delta_domain_minus_random": {
-        "top1_delta": -0.3035,
-        "rare_top1_delta": -0.3872,
-        "loss_delta": 2.4263
+        "top1_delta": -0.3636,
+        "rare_top1_delta": 0.0402,
+        "loss_delta": 2.4629
       }
     },
     {
@@ -462,34 +462,34 @@
       "representation": "mixed",
       "subset": "high_knowledge",
       "random_15": {
-        "mlm_loss": 1.5902437077932854,
-        "top1": 0.6834254143646409,
-        "top5": 0.8270718232044199,
-        "top10": 0.8767955801104972,
-        "rare_top1": 0.75
+        "mlm_loss": 0.8791267172437097,
+        "top1": 0.8366834170854272,
+        "top5": 0.9020100502512562,
+        "top10": 0.9246231155778895,
+        "rare_top1": 0.6666666666666666
       },
       "domain_aware_15": {
-        "mlm_loss": 3.308308545859233,
-        "top1": 0.43481814466693913,
-        "top5": 0.5815284021250511,
-        "top10": 0.6477319166326113,
-        "rare_top1": 0.1651376146788991,
+        "mlm_loss": 1.4054359184037593,
+        "top1": 0.760146252285192,
+        "top5": 0.8698354661791591,
+        "top10": 0.8870201096892139,
+        "rare_top1": 0.7894736842105263,
         "masking_diagnostics": {
-          "total_eligible_tokens": 49052,
-          "total_masked_tokens": 7341,
+          "total_eligible_tokens": 49168,
+          "total_masked_tokens": 7359,
           "actual_mask_rate": 0.1497,
-          "rare_maritime_tokens_masked": 109,
-          "maritime_tokens_masked": 7232,
-          "general_tokens_masked": 0,
-          "rare_maritime_mask_fraction": 0.0148,
-          "maritime_mask_fraction": 0.9852,
-          "general_mask_fraction": 0.0
+          "rare_maritime_tokens_masked": 494,
+          "maritime_tokens_masked": 2488,
+          "general_tokens_masked": 4377,
+          "rare_maritime_mask_fraction": 0.0671,
+          "maritime_mask_fraction": 0.3381,
+          "general_mask_fraction": 0.5948
         }
       },
       "delta_domain_minus_random": {
-        "top1_delta": -0.2486,
-        "rare_top1_delta": -0.5849,
-        "loss_delta": 1.7181
+        "top1_delta": -0.0765,
+        "rare_top1_delta": 0.1228,
+        "loss_delta": 0.5263
       }
     },
     {
@@ -497,349 +497,349 @@
       "representation": "key_value",
       "subset": "random_baseline",
       "random_15": {
-        "mlm_loss": 4.506354655858481,
-        "top1": 0.3082614056720099,
-        "top5": 0.4722564734895191,
-        "top10": 0.5351418002466092,
-        "rare_top1": 1.0
+        "mlm_loss": 4.555896917724147,
+        "top1": 0.29989440337909185,
+        "top5": 0.46884899683210135,
+        "top10": 0.5395987328405492,
+        "rare_top1": 0.5925925925925926
       },
       "domain_aware_15": {
-        "mlm_loss": 6.440847024144142,
-        "top1": 0.15172413793103448,
-        "top5": 0.2641123882503193,
-        "top10": 0.32005108556832695,
-        "rare_top1": 0.0,
+        "mlm_loss": 5.860243689491253,
+        "top1": 0.20248380129589633,
+        "top5": 0.31830453563714906,
+        "top10": 0.3669006479481641,
+        "rare_top1": 0.24210526315789474,
         "masking_diagnostics": {
-          "total_eligible_tokens": 26115,
-          "total_masked_tokens": 3920,
+          "total_eligible_tokens": 25850,
+          "total_masked_tokens": 3878,
+          "actual_mask_rate": 0.15,
+          "rare_maritime_tokens_masked": 554,
+          "maritime_tokens_masked": 3324,
+          "general_tokens_masked": 0,
+          "rare_maritime_mask_fraction": 0.1429,
+          "maritime_mask_fraction": 0.8571,
+          "general_mask_fraction": 0.0
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.0974,
+        "rare_top1_delta": -0.3505,
+        "loss_delta": 1.3043
+      }
+    },
+    {
+      "model_name": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "random_15": {
+        "mlm_loss": 4.663268978288519,
+        "top1": 0.2733755942947702,
+        "top5": 0.4001584786053883,
+        "top10": 0.46038034865293187,
+        "rare_top1": 0.34951456310679613
+      },
+      "domain_aware_15": {
+        "mlm_loss": 5.327573038917412,
+        "top1": 0.17220464135021096,
+        "top5": 0.2745253164556962,
+        "top10": 0.3581223628691983,
+        "rare_top1": 0.10732113144758736,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 27819,
+          "total_masked_tokens": 4182,
+          "actual_mask_rate": 0.1503,
+          "rare_maritime_tokens_masked": 1592,
+          "maritime_tokens_masked": 2590,
+          "general_tokens_masked": 0,
+          "rare_maritime_mask_fraction": 0.3807,
+          "maritime_mask_fraction": 0.6193,
+          "general_mask_fraction": 0.0
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.1012,
+        "rare_top1_delta": -0.2422,
+        "loss_delta": 0.6643
+      }
+    },
+    {
+      "model_name": "nlpaueb/legal-bert-base-uncased",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "random_15": {
+        "mlm_loss": 4.335199286702505,
+        "top1": 0.30255255255255253,
+        "top5": 0.4527027027027027,
+        "top10": 0.5225225225225225,
+        "rare_top1": 0.3333333333333333
+      },
+      "domain_aware_15": {
+        "mlm_loss": 4.2873971985342365,
+        "top1": 0.27154255319148934,
+        "top5": 0.4574468085106383,
+        "top10": 0.5390957446808511,
+        "rare_top1": 0.26653696498054474,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 27258,
+          "total_masked_tokens": 4095,
+          "actual_mask_rate": 0.1502,
+          "rare_maritime_tokens_masked": 1363,
+          "maritime_tokens_masked": 2732,
+          "general_tokens_masked": 0,
+          "rare_maritime_mask_fraction": 0.3328,
+          "maritime_mask_fraction": 0.6672,
+          "general_mask_fraction": 0.0
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.031,
+        "rare_top1_delta": -0.0668,
+        "loss_delta": -0.0478
+      }
+    },
+    {
+      "model_name": "allenai/scibert_scivocab_uncased",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "random_15": {
+        "mlm_loss": 3.9037185526671783,
+        "top1": 0.3546099290780142,
+        "top5": 0.5124113475177305,
+        "top10": 0.5939716312056738,
+        "rare_top1": 0.6555555555555556
+      },
+      "domain_aware_15": {
+        "mlm_loss": 4.774234958029781,
+        "top1": 0.26788553259141495,
+        "top5": 0.41255961844197137,
+        "top10": 0.48224695283518815,
+        "rare_top1": 0.5307262569832403,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 26802,
+          "total_masked_tokens": 4028,
+          "actual_mask_rate": 0.1503,
+          "rare_maritime_tokens_masked": 791,
+          "maritime_tokens_masked": 3237,
+          "general_tokens_masked": 0,
+          "rare_maritime_mask_fraction": 0.1964,
+          "maritime_mask_fraction": 0.8036,
+          "general_mask_fraction": 0.0
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.0867,
+        "rare_top1_delta": -0.1248,
+        "loss_delta": 0.8705
+      }
+    },
+    {
+      "model_name": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "random_15": {
+        "mlm_loss": 5.565072232901083,
+        "top1": 0.21496953872932986,
+        "top5": 0.30809399477806787,
+        "top10": 0.35857267188859876,
+        "rare_top1": 0.34615384615384615
+      },
+      "domain_aware_15": {
+        "mlm_loss": 6.285722926289926,
+        "top1": 0.15162644281217208,
+        "top5": 0.2334732423924449,
+        "top10": 0.2767576075550892,
+        "rare_top1": 0.08134920634920635,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 26793,
+          "total_masked_tokens": 4035,
+          "actual_mask_rate": 0.1506,
+          "rare_maritime_tokens_masked": 727,
+          "maritime_tokens_masked": 3308,
+          "general_tokens_masked": 0,
+          "rare_maritime_mask_fraction": 0.1802,
+          "maritime_mask_fraction": 0.8198,
+          "general_mask_fraction": 0.0
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.0633,
+        "rare_top1_delta": -0.2648,
+        "loss_delta": 0.7207
+      }
+    },
+    {
+      "model_name": "roberta-base",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "random_15": {
+        "mlm_loss": 1.2104203796282813,
+        "top1": 0.7686832740213523,
+        "top5": 0.9039145907473309,
+        "top10": 0.9110320284697508,
+        "rare_top1": 0.9285714285714286
+      },
+      "domain_aware_15": {
+        "mlm_loss": 3.9034076110748193,
+        "top1": 0.37643835616438354,
+        "top5": 0.6180821917808219,
+        "top10": 0.6597260273972603,
+        "rare_top1": 0.7403846153846154,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 35514,
+          "total_masked_tokens": 5321,
+          "actual_mask_rate": 0.1498,
+          "rare_maritime_tokens_masked": 208,
+          "maritime_tokens_masked": 1721,
+          "general_tokens_masked": 3392,
+          "rare_maritime_mask_fraction": 0.0391,
+          "maritime_mask_fraction": 0.3234,
+          "general_mask_fraction": 0.6375
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.3922,
+        "rare_top1_delta": -0.1882,
+        "loss_delta": 2.693
+      }
+    },
+    {
+      "model_name": "answerdotai/ModernBERT-base",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "random_15": {
+        "mlm_loss": 0.8234152534820763,
+        "top1": 0.8701754385964913,
+        "top5": 0.8947368421052632,
+        "top10": 0.9017543859649123,
+        "rare_top1": 0.8181818181818182
+      },
+      "domain_aware_15": {
+        "mlm_loss": 1.1869392203817495,
+        "top1": 0.7903652726310217,
+        "top5": 0.8819481206987825,
+        "top10": 0.8978295394388566,
+        "rare_top1": 0.9125,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 35462,
+          "total_masked_tokens": 5321,
+          "actual_mask_rate": 0.15,
+          "rare_maritime_tokens_masked": 160,
+          "maritime_tokens_masked": 1809,
+          "general_tokens_masked": 3352,
+          "rare_maritime_mask_fraction": 0.0301,
+          "maritime_mask_fraction": 0.34,
+          "general_mask_fraction": 0.63
+        }
+      },
+      "delta_domain_minus_random": {
+        "top1_delta": -0.0798,
+        "rare_top1_delta": 0.0943,
+        "loss_delta": 0.3635
+      }
+    },
+    {
+      "model_name": "bert-base-uncased",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "random_15": {
+        "mlm_loss": 3.448959943232351,
+        "top1": 0.416289592760181,
+        "top5": 0.6184012066365008,
+        "top10": 0.6862745098039216,
+        "rare_top1": 0.6697247706422018
+      },
+      "domain_aware_15": {
+        "mlm_loss": 6.524781183722205,
+        "top1": 0.24247894103489773,
+        "top5": 0.35018050541516244,
+        "top10": 0.39290012033694344,
+        "rare_top1": 0.12845303867403315,
+        "masking_diagnostics": {
+          "total_eligible_tokens": 12108,
+          "total_masked_tokens": 1818,
           "actual_mask_rate": 0.1501,
-          "rare_maritime_tokens_masked": 19,
-          "maritime_tokens_masked": 3896,
-          "general_tokens_masked": 5,
-          "rare_maritime_mask_fraction": 0.0048,
-          "maritime_mask_fraction": 0.9939,
-          "general_mask_fraction": 0.0013
+          "rare_maritime_tokens_masked": 868,
+          "maritime_tokens_masked": 938,
+          "general_tokens_masked": 12,
+          "rare_maritime_mask_fraction": 0.4774,
+          "maritime_mask_fraction": 0.516,
+          "general_mask_fraction": 0.0066
         }
       },
       "delta_domain_minus_random": {
-        "top1_delta": -0.1565,
-        "rare_top1_delta": -1.0,
-        "loss_delta": 1.9345
+        "top1_delta": -0.1738,
+        "rare_top1_delta": -0.5413,
+        "loss_delta": 3.0758
       }
     },
     {
       "model_name": "dmis-lab/biobert-base-cased-v1.2",
-      "representation": "key_value",
-      "subset": "random_baseline",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
       "random_15": {
-        "mlm_loss": 4.98905642630706,
-        "top1": 0.2547568710359408,
-        "top5": 0.36363636363636365,
-        "top10": 0.41120507399577166,
-        "rare_top1": 1.0
+        "mlm_loss": 4.53077534628553,
+        "top1": 0.2503113325031133,
+        "top5": 0.40224159402241594,
+        "top10": 0.49688667496886674,
+        "rare_top1": 0.2388888888888889
       },
       "domain_aware_15": {
-        "mlm_loss": 7.022421357560925,
-        "top1": 0.0954297892493488,
-        "top5": 0.17120530428605257,
-        "top10": 0.20743547241297655,
-        "rare_top1": 0.0,
+        "mlm_loss": 6.012517849439903,
+        "top1": 0.13958682300390843,
+        "top5": 0.21496370742601897,
+        "top10": 0.26912339475153546,
+        "rare_top1": 0.07347670250896057,
         "masking_diagnostics": {
-          "total_eligible_tokens": 28140,
-          "total_masked_tokens": 4228,
-          "actual_mask_rate": 0.1502,
-          "rare_maritime_tokens_masked": 19,
-          "maritime_tokens_masked": 4204,
-          "general_tokens_masked": 5,
-          "rare_maritime_mask_fraction": 0.0045,
-          "maritime_mask_fraction": 0.9943,
-          "general_mask_fraction": 0.0012
+          "total_eligible_tokens": 12802,
+          "total_masked_tokens": 1924,
+          "actual_mask_rate": 0.1503,
+          "rare_maritime_tokens_masked": 1247,
+          "maritime_tokens_masked": 675,
+          "general_tokens_masked": 2,
+          "rare_maritime_mask_fraction": 0.6481,
+          "maritime_mask_fraction": 0.3508,
+          "general_mask_fraction": 0.001
         }
       },
       "delta_domain_minus_random": {
-        "top1_delta": -0.1593,
-        "rare_top1_delta": -1.0,
-        "loss_delta": 2.0334
+        "top1_delta": -0.1107,
+        "rare_top1_delta": -0.1654,
+        "loss_delta": 1.4817
       }
     },
     {
       "model_name": "nlpaueb/legal-bert-base-uncased",
-      "representation": "key_value",
-      "subset": "random_baseline",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
       "random_15": {
-        "mlm_loss": 4.349294262090312,
-        "top1": 0.31851851851851853,
-        "top5": 0.4486772486772487,
-        "top10": 0.5079365079365079,
-        "rare_top1": 0.0
+        "mlm_loss": 4.090116454864048,
+        "top1": 0.31215161649944256,
+        "top5": 0.5039018952062431,
+        "top10": 0.5629877369007804,
+        "rare_top1": 0.08387096774193549
       },
       "domain_aware_15": {
-        "mlm_loss": 5.511431999492759,
-        "top1": 0.1922147001934236,
-        "top5": 0.32736943907156674,
-        "top10": 0.3960348162475822,
-        "rare_top1": 0.0,
+        "mlm_loss": 4.3064930483741,
+        "top1": 0.28467966573816156,
+        "top5": 0.4445682451253482,
+        "top10": 0.5142061281337047,
+        "rare_top1": 0.20758483033932135,
         "masking_diagnostics": {
-          "total_eligible_tokens": 27610,
-          "total_masked_tokens": 4142,
-          "actual_mask_rate": 0.15,
-          "rare_maritime_tokens_masked": 17,
-          "maritime_tokens_masked": 4119,
-          "general_tokens_masked": 6,
-          "rare_maritime_mask_fraction": 0.0041,
-          "maritime_mask_fraction": 0.9944,
-          "general_mask_fraction": 0.0014
-        }
-      },
-      "delta_domain_minus_random": {
-        "top1_delta": -0.1263,
-        "rare_top1_delta": 0.0,
-        "loss_delta": 1.1621
-      }
-    },
-    {
-      "model_name": "allenai/scibert_scivocab_uncased",
-      "representation": "key_value",
-      "subset": "random_baseline",
-      "random_15": {
-        "mlm_loss": 3.9993437467220807,
-        "top1": 0.3358208955223881,
-        "top5": 0.48507462686567165,
-        "top10": 0.5597014925373134,
-        "rare_top1": 0.0
-      },
-      "domain_aware_15": {
-        "mlm_loss": 5.899657600397395,
-        "top1": 0.18555938886150813,
-        "top5": 0.29349433218334153,
-        "top10": 0.35288319369147364,
-        "rare_top1": 0.0,
-        "masking_diagnostics": {
-          "total_eligible_tokens": 27084,
-          "total_masked_tokens": 4063,
-          "actual_mask_rate": 0.15,
-          "rare_maritime_tokens_masked": 17,
-          "maritime_tokens_masked": 4041,
-          "general_tokens_masked": 5,
-          "rare_maritime_mask_fraction": 0.0042,
-          "maritime_mask_fraction": 0.9946,
-          "general_mask_fraction": 0.0012
-        }
-      },
-      "delta_domain_minus_random": {
-        "top1_delta": -0.1503,
-        "rare_top1_delta": 0.0,
-        "loss_delta": 1.9003
-      }
-    },
-    {
-      "model_name": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
-      "representation": "key_value",
-      "subset": "random_baseline",
-      "random_15": {
-        "mlm_loss": 5.571527729480385,
-        "top1": 0.22234273318872017,
-        "top5": 0.3036876355748373,
-        "top10": 0.3492407809110629,
-        "rare_top1": 0.0
-      },
-      "domain_aware_15": {
-        "mlm_loss": 6.694080279397348,
-        "top1": 0.125,
-        "top5": 0.19438976377952755,
-        "top10": 0.23400590551181102,
-        "rare_top1": 0.0,
-        "masking_diagnostics": {
-          "total_eligible_tokens": 27148,
-          "total_masked_tokens": 4066,
-          "actual_mask_rate": 0.1498,
-          "rare_maritime_tokens_masked": 19,
-          "maritime_tokens_masked": 4045,
-          "general_tokens_masked": 2,
-          "rare_maritime_mask_fraction": 0.0047,
-          "maritime_mask_fraction": 0.9948,
-          "general_mask_fraction": 0.0005
-        }
-      },
-      "delta_domain_minus_random": {
-        "top1_delta": -0.0973,
-        "rare_top1_delta": 0.0,
-        "loss_delta": 1.1226
-      }
-    },
-    {
-      "model_name": "roberta-base",
-      "representation": "key_value",
-      "subset": "random_baseline",
-      "random_15": {
-        "mlm_loss": 2.55500002138949,
-        "top1": 0.5373475609756098,
-        "top5": 0.680640243902439,
-        "top10": 0.743140243902439,
-        "rare_top1": 0.0
-      },
-      "domain_aware_15": {
-        "mlm_loss": 4.843718518997509,
-        "top1": 0.24291345973343345,
-        "top5": 0.37413178149052,
-        "top10": 0.4445278768537638,
-        "rare_top1": 0.0,
-        "masking_diagnostics": {
-          "total_eligible_tokens": 35592,
-          "total_masked_tokens": 5331,
-          "actual_mask_rate": 0.1498,
-          "rare_maritime_tokens_masked": 26,
-          "maritime_tokens_masked": 5301,
-          "general_tokens_masked": 4,
-          "rare_maritime_mask_fraction": 0.0049,
-          "maritime_mask_fraction": 0.9944,
-          "general_mask_fraction": 0.0008
-        }
-      },
-      "delta_domain_minus_random": {
-        "top1_delta": -0.2944,
-        "rare_top1_delta": 0.0,
-        "loss_delta": 2.2887
-      }
-    },
-    {
-      "model_name": "answerdotai/ModernBERT-base",
-      "representation": "key_value",
-      "subset": "random_baseline",
-      "random_15": {
-        "mlm_loss": 1.7896264449869306,
-        "top1": 0.6527196652719666,
-        "top5": 0.7887029288702929,
-        "top10": 0.8396094839609484,
-        "rare_top1": 0.0
-      },
-      "domain_aware_15": {
-        "mlm_loss": 3.2639109250690126,
-        "top1": 0.42784571966133583,
-        "top5": 0.5776105362182502,
-        "top10": 0.639134524929445,
-        "rare_top1": 0.0,
-        "masking_diagnostics": {
-          "total_eligible_tokens": 35457,
-          "total_masked_tokens": 5315,
-          "actual_mask_rate": 0.1499,
-          "rare_maritime_tokens_masked": 26,
-          "maritime_tokens_masked": 5289,
+          "total_eligible_tokens": 12801,
+          "total_masked_tokens": 1916,
+          "actual_mask_rate": 0.1497,
+          "rare_maritime_tokens_masked": 1123,
+          "maritime_tokens_masked": 793,
           "general_tokens_masked": 0,
-          "rare_maritime_mask_fraction": 0.0049,
-          "maritime_mask_fraction": 0.9951,
+          "rare_maritime_mask_fraction": 0.5861,
+          "maritime_mask_fraction": 0.4139,
           "general_mask_fraction": 0.0
         }
       },
       "delta_domain_minus_random": {
-        "top1_delta": -0.2249,
-        "rare_top1_delta": 0.0,
-        "loss_delta": 1.4743
-      }
-    },
-    {
-      "model_name": "bert-base-uncased",
-      "representation": "narrative",
-      "subset": "balanced_knowledge",
-      "random_15": {
-        "mlm_loss": 3.935951608050697,
-        "top1": 0.38321167883211676,
-        "top5": 0.5675182481751825,
-        "top10": 0.6313868613138686,
-        "rare_top1": 0.75
-      },
-      "domain_aware_15": {
-        "mlm_loss": 6.813430069607021,
-        "top1": 0.18615474112856312,
-        "top5": 0.32111692844677137,
-        "top10": 0.3717277486910995,
-        "rare_top1": 0.0,
-        "masking_diagnostics": {
-          "total_eligible_tokens": 11856,
-          "total_masked_tokens": 1778,
-          "actual_mask_rate": 0.15,
-          "rare_maritime_tokens_masked": 547,
-          "maritime_tokens_masked": 1172,
-          "general_tokens_masked": 59,
-          "rare_maritime_mask_fraction": 0.3076,
-          "maritime_mask_fraction": 0.6592,
-          "general_mask_fraction": 0.0332
-        }
-      },
-      "delta_domain_minus_random": {
-        "top1_delta": -0.1971,
-        "rare_top1_delta": -0.75,
-        "loss_delta": 2.8775
-      }
-    },
-    {
-      "model_name": "dmis-lab/biobert-base-cased-v1.2",
-      "representation": "narrative",
-      "subset": "balanced_knowledge",
-      "random_15": {
-        "mlm_loss": 4.868512303946524,
-        "top1": 0.22564102564102564,
-        "top5": 0.3333333333333333,
-        "top10": 0.4393162393162393,
-        "rare_top1": 0.4155844155844156
-      },
-      "domain_aware_15": {
-        "mlm_loss": 6.700066148259393,
-        "top1": 0.08195819581958196,
-        "top5": 0.16666666666666666,
-        "top10": 0.23377337733773376,
-        "rare_top1": 0.0,
-        "masking_diagnostics": {
-          "total_eligible_tokens": 12549,
-          "total_masked_tokens": 1887,
-          "actual_mask_rate": 0.1504,
-          "rare_maritime_tokens_masked": 548,
-          "maritime_tokens_masked": 1270,
-          "general_tokens_masked": 69,
-          "rare_maritime_mask_fraction": 0.2904,
-          "maritime_mask_fraction": 0.673,
-          "general_mask_fraction": 0.0366
-        }
-      },
-      "delta_domain_minus_random": {
-        "top1_delta": -0.1437,
-        "rare_top1_delta": -0.4156,
-        "loss_delta": 1.8316
-      }
-    },
-    {
-      "model_name": "nlpaueb/legal-bert-base-uncased",
-      "representation": "narrative",
-      "subset": "balanced_knowledge",
-      "random_15": {
-        "mlm_loss": 4.60642084577538,
-        "top1": 0.24333333333333335,
-        "top5": 0.42,
-        "top10": 0.5116666666666667,
-        "rare_top1": 0.08139534883720931
-      },
-      "domain_aware_15": {
-        "mlm_loss": 4.789062341503708,
-        "top1": 0.2348401323042999,
-        "top5": 0.39305402425578834,
-        "top10": 0.45148842337375966,
-        "rare_top1": 0.17892644135188868,
-        "masking_diagnostics": {
-          "total_eligible_tokens": 12533,
-          "total_masked_tokens": 1880,
-          "actual_mask_rate": 0.15,
-          "rare_maritime_tokens_masked": 503,
-          "maritime_tokens_masked": 1311,
-          "general_tokens_masked": 66,
-          "rare_maritime_mask_fraction": 0.2676,
-          "maritime_mask_fraction": 0.6973,
-          "general_mask_fraction": 0.0351
-        }
-      },
-      "delta_domain_minus_random": {
-        "top1_delta": -0.0085,
-        "rare_top1_delta": 0.0975,
-        "loss_delta": 0.1826
+        "top1_delta": -0.0275,
+        "rare_top1_delta": 0.1237,
+        "loss_delta": 0.2164
       }
     },
     {
@@ -847,34 +847,34 @@
       "representation": "narrative",
       "subset": "balanced_knowledge",
       "random_15": {
-        "mlm_loss": 4.065966330845953,
-        "top1": 0.2977624784853701,
-        "top5": 0.5232358003442341,
-        "top10": 0.6006884681583476,
-        "rare_top1": 0.01818181818181818
+        "mlm_loss": 4.175210988871799,
+        "top1": 0.3154848046309696,
+        "top5": 0.5036179450072359,
+        "top10": 0.5672937771345875,
+        "rare_top1": 0.24210526315789474
       },
       "domain_aware_15": {
-        "mlm_loss": 5.698387874200521,
-        "top1": 0.19311123658949747,
-        "top5": 0.3274985883681536,
-        "top10": 0.38509316770186336,
-        "rare_top1": 0.0,
+        "mlm_loss": 5.283304049144418,
+        "top1": 0.2422469280280866,
+        "top5": 0.3844353423054418,
+        "top10": 0.44763019309537744,
+        "rare_top1": 0.21840873634945399,
         "masking_diagnostics": {
-          "total_eligible_tokens": 12218,
-          "total_masked_tokens": 1831,
-          "actual_mask_rate": 0.1499,
-          "rare_maritime_tokens_masked": 380,
-          "maritime_tokens_masked": 1391,
-          "general_tokens_masked": 60,
-          "rare_maritime_mask_fraction": 0.2075,
-          "maritime_mask_fraction": 0.7597,
-          "general_mask_fraction": 0.0328
+          "total_eligible_tokens": 12479,
+          "total_masked_tokens": 1869,
+          "actual_mask_rate": 0.1498,
+          "rare_maritime_tokens_masked": 794,
+          "maritime_tokens_masked": 1068,
+          "general_tokens_masked": 7,
+          "rare_maritime_mask_fraction": 0.4248,
+          "maritime_mask_fraction": 0.5714,
+          "general_mask_fraction": 0.0037
         }
       },
       "delta_domain_minus_random": {
-        "top1_delta": -0.1047,
-        "rare_top1_delta": -0.0182,
-        "loss_delta": 1.6324
+        "top1_delta": -0.0732,
+        "rare_top1_delta": -0.0237,
+        "loss_delta": 1.1081
       }
     },
     {
@@ -882,34 +882,34 @@
       "representation": "narrative",
       "subset": "balanced_knowledge",
       "random_15": {
-        "mlm_loss": 6.072856484109364,
-        "top1": 0.16638655462184873,
-        "top5": 0.253781512605042,
-        "top10": 0.31092436974789917,
-        "rare_top1": 0.0
+        "mlm_loss": 6.023912969325924,
+        "top1": 0.1867043847241867,
+        "top5": 0.27722772277227725,
+        "top10": 0.32814710042432815,
+        "rare_top1": 0.02040816326530612
       },
       "domain_aware_15": {
-        "mlm_loss": 6.410114294006612,
-        "top1": 0.13262451035254616,
-        "top5": 0.21824286513710128,
-        "top10": 0.28539451594851706,
-        "rare_top1": 0.0,
+        "mlm_loss": 6.16952994440355,
+        "top1": 0.16964800923254472,
+        "top5": 0.25620311598384304,
+        "top10": 0.31563762261973455,
+        "rare_top1": 0.06937394247038917,
         "masking_diagnostics": {
-          "total_eligible_tokens": 12294,
-          "total_masked_tokens": 1847,
-          "actual_mask_rate": 0.1502,
-          "rare_maritime_tokens_masked": 380,
-          "maritime_tokens_masked": 1407,
-          "general_tokens_masked": 60,
-          "rare_maritime_mask_fraction": 0.2057,
-          "maritime_mask_fraction": 0.7618,
-          "general_mask_fraction": 0.0325
+          "total_eligible_tokens": 12547,
+          "total_masked_tokens": 1886,
+          "actual_mask_rate": 0.1503,
+          "rare_maritime_tokens_masked": 736,
+          "maritime_tokens_masked": 1142,
+          "general_tokens_masked": 8,
+          "rare_maritime_mask_fraction": 0.3902,
+          "maritime_mask_fraction": 0.6055,
+          "general_mask_fraction": 0.0042
         }
       },
       "delta_domain_minus_random": {
-        "top1_delta": -0.0338,
-        "rare_top1_delta": 0.0,
-        "loss_delta": 0.3373
+        "top1_delta": -0.0171,
+        "rare_top1_delta": 0.049,
+        "loss_delta": 0.1456
       }
     },
     {
@@ -917,34 +917,34 @@
       "representation": "narrative",
       "subset": "balanced_knowledge",
       "random_15": {
-        "mlm_loss": 2.994423719101917,
-        "top1": 0.45076923076923076,
-        "top5": 0.6323076923076923,
-        "top10": 0.6861538461538461,
-        "rare_top1": 0.7536231884057971
+        "mlm_loss": 1.8193558407661852,
+        "top1": 0.6699346405228758,
+        "top5": 0.8071895424836601,
+        "top10": 0.8398692810457516,
+        "rare_top1": 0.625
       },
       "domain_aware_15": {
-        "mlm_loss": 4.728779704006107,
-        "top1": 0.25077399380804954,
-        "top5": 0.40144478844169246,
-        "top10": 0.4613003095975232,
-        "rare_top1": 0.0,
+        "mlm_loss": 4.094039387665528,
+        "top1": 0.349008082292432,
+        "top5": 0.5282880235121235,
+        "top10": 0.5958853783982366,
+        "rare_top1": 0.15416666666666667,
         "masking_diagnostics": {
-          "total_eligible_tokens": 13413,
-          "total_masked_tokens": 2009,
-          "actual_mask_rate": 0.1498,
-          "rare_maritime_tokens_masked": 455,
-          "maritime_tokens_masked": 1483,
-          "general_tokens_masked": 71,
-          "rare_maritime_mask_fraction": 0.2265,
-          "maritime_mask_fraction": 0.7382,
-          "general_mask_fraction": 0.0353
+          "total_eligible_tokens": 13656,
+          "total_masked_tokens": 2050,
+          "actual_mask_rate": 0.1501,
+          "rare_maritime_tokens_masked": 748,
+          "maritime_tokens_masked": 881,
+          "general_tokens_masked": 421,
+          "rare_maritime_mask_fraction": 0.3649,
+          "maritime_mask_fraction": 0.4298,
+          "general_mask_fraction": 0.2054
         }
       },
       "delta_domain_minus_random": {
-        "top1_delta": -0.2,
-        "rare_top1_delta": -0.7536,
-        "loss_delta": 1.7344
+        "top1_delta": -0.3209,
+        "rare_top1_delta": -0.4708,
+        "loss_delta": 2.2747
       }
     },
     {
@@ -952,34 +952,34 @@
       "representation": "narrative",
       "subset": "balanced_knowledge",
       "random_15": {
-        "mlm_loss": 2.869496301716825,
-        "top1": 0.4581196581196581,
-        "top5": 0.6615384615384615,
-        "top10": 0.7333333333333333,
-        "rare_top1": 0.7307692307692307
+        "mlm_loss": 1.2211048292258966,
+        "top1": 0.7365853658536585,
+        "top5": 0.9024390243902439,
+        "top10": 0.9463414634146341,
+        "rare_top1": 0.7209302325581395
       },
       "domain_aware_15": {
-        "mlm_loss": 4.146460527126338,
-        "top1": 0.29084092126405997,
-        "top5": 0.42903053026245314,
-        "top10": 0.499196572040707,
-        "rare_top1": 0.0,
+        "mlm_loss": 2.4707864569573808,
+        "top1": 0.41802641802641805,
+        "top5": 0.8352758352758353,
+        "top10": 0.8974358974358975,
+        "rare_top1": 0.27177700348432055,
         "masking_diagnostics": {
-          "total_eligible_tokens": 12991,
-          "total_masked_tokens": 1938,
-          "actual_mask_rate": 0.1492,
-          "rare_maritime_tokens_masked": 387,
-          "maritime_tokens_masked": 1480,
-          "general_tokens_masked": 71,
-          "rare_maritime_mask_fraction": 0.1997,
-          "maritime_mask_fraction": 0.7637,
-          "general_mask_fraction": 0.0366
+          "total_eligible_tokens": 13236,
+          "total_masked_tokens": 1977,
+          "actual_mask_rate": 0.1494,
+          "rare_maritime_tokens_masked": 534,
+          "maritime_tokens_masked": 1000,
+          "general_tokens_masked": 443,
+          "rare_maritime_mask_fraction": 0.2701,
+          "maritime_mask_fraction": 0.5058,
+          "general_mask_fraction": 0.2241
         }
       },
       "delta_domain_minus_random": {
-        "top1_delta": -0.1673,
-        "rare_top1_delta": -0.7308,
-        "loss_delta": 1.277
+        "top1_delta": -0.3186,
+        "rare_top1_delta": -0.4492,
+        "loss_delta": 1.2497
       }
     }
   ]

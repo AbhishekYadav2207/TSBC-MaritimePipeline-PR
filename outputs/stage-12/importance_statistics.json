@@ -1,8 +1,8 @@
 {
-  "total_documents": 96848,
-  "mean_importance_score": 38.92929218982323,
+  "total_documents": 96869,
+  "mean_importance_score": 38.92957024435062,
   "median_importance_score": 38.33,
-  "std_importance_score": 10.017523491655465,
+  "std_importance_score": 10.014759998330835,
   "min_importance_score": 10.67,
   "max_importance_score": 74.21,
   "quartiles": [
@@ -11,9 +11,9 @@
     45.43
   ],
   "knowledge_tier_breakdown": {
-    "Medium Knowledge": 51737,
-    "High Knowledge": 19376,
-    "Low Knowledge": 13517,
-    "Redundant": 12218
+    "Medium Knowledge": 51634,
+    "High Knowledge": 19372,
+    "Low Knowledge": 13595,
+    "Redundant": 12268
   }
 }

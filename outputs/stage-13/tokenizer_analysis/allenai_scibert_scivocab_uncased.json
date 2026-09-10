@@ -3,23 +3,23 @@
   "clean_model_name": "allenai_scibert_scivocab_uncased",
   "vocab_size": 31090,
   "sampled_documents": 1500,
-  "total_raw_words_analyzed": 60750,
-  "total_subword_tokens_analyzed": 88190,
-  "average_subwords_per_word": 1.4516872427983538,
-  "maritime_fragmentation_rate": 0.4209,
-  "single_token_vocabulary_coverage": 0.5791,
-  "single_token_count": 194,
+  "total_raw_words_analyzed": 60660,
+  "total_subword_tokens_analyzed": 88126,
+  "average_subwords_per_word": 1.4527860204418068,
+  "maritime_fragmentation_rate": 0.4179,
+  "single_token_vocabulary_coverage": 0.5821,
+  "single_token_count": 195,
   "total_maritime_terms": 335,
-  "avg_pieces_per_term": 1.534,
+  "avg_pieces_per_term": 1.531,
   "median_pieces_per_term": 1.0,
   "p95_pieces_per_term": 3.0,
   "max_pieces_per_term": 4,
   "oov_rate": 0.0,
   "oov_status": "measured",
-  "tokenizer_speed_tokens_per_sec": 61480.71865635051,
+  "tokenizer_speed_tokens_per_sec": 41486.163072380725,
   "sequence_length_distribution": {
-    "under_128": 1499,
-    "under_256": 1,
+    "under_128": 1500,
+    "under_256": 0,
     "under_512": 0,
     "over_512": 0
   },
@@ -608,10 +608,10 @@
     "maritime_terminology": {
       "category": "maritime_terminology",
       "total_terms": 335,
-      "single_token_count": 194,
-      "single_token_coverage": 0.5791,
-      "fragmentation_rate": 0.4209,
-      "avg_pieces_per_term": 1.534,
+      "single_token_count": 195,
+      "single_token_coverage": 0.5821,
+      "fragmentation_rate": 0.4179,
+      "avg_pieces_per_term": 1.531,
       "median_pieces_per_term": 1.0,
       "p95_pieces_per_term": 3.0,
       "max_pieces_per_term": 4,
@@ -1021,17 +1021,17 @@
   "informativeness_stratification": {
     "Medium Knowledge": {
       "tier": "Medium Knowledge",
-      "document_count": 673,
-      "total_raw_words": 25880,
-      "total_subword_tokens": 37220,
-      "mean_fertility": 1.4382,
-      "mean_sequence_length": 55.3,
-      "mean_document_fragmentation": 0.303,
-      "mean_document_coverage": 0.697,
+      "document_count": 683,
+      "total_raw_words": 26259,
+      "total_subword_tokens": 37851,
+      "mean_fertility": 1.4414,
+      "mean_sequence_length": 55.42,
+      "mean_document_fragmentation": 0.3055,
+      "mean_document_coverage": 0.6945,
       "oov_rate": 0.0,
       "oov_status": "measured",
       "sequence_length_distribution": {
-        "under_128": 673,
+        "under_128": 683,
         "under_256": 0,
         "under_512": 0,
         "over_512": 0
@@ -1039,49 +1039,31 @@
     },
     "High Knowledge": {
       "tier": "High Knowledge",
-      "document_count": 422,
-      "total_raw_words": 25715,
-      "total_subword_tokens": 37834,
-      "mean_fertility": 1.4713,
-      "mean_sequence_length": 89.65,
-      "mean_document_fragmentation": 0.3031,
-      "mean_document_coverage": 0.6969,
+      "document_count": 414,
+      "total_raw_words": 25400,
+      "total_subword_tokens": 37367,
+      "mean_fertility": 1.4711,
+      "mean_sequence_length": 90.26,
+      "mean_document_fragmentation": 0.3039,
+      "mean_document_coverage": 0.6961,
       "oov_rate": 0.0,
       "oov_status": "measured",
       "sequence_length_distribution": {
-        "under_128": 421,
-        "under_256": 1,
+        "under_128": 414,
+        "under_256": 0,
         "under_512": 0,
         "over_512": 0
       }
     },
     "Low Knowledge": {
       "tier": "Low Knowledge",
-      "document_count": 199,
-      "total_raw_words": 2767,
-      "total_subword_tokens": 4043,
-      "mean_fertility": 1.4611,
-      "mean_sequence_length": 20.32,
-      "mean_document_fragmentation": 0.318,
-      "mean_document_coverage": 0.682,
-      "oov_rate": 0.0,
-      "oov_status": "measured",
-      "sequence_length_distribution": {
-        "under_128": 199,
-        "under_256": 0,
-        "under_512": 0,
-        "over_512": 0
-      }
-    },
-    "Redundant": {
-      "tier": "Redundant",
       "document_count": 206,
-      "total_raw_words": 6388,
-      "total_subword_tokens": 9093,
-      "mean_fertility": 1.4235,
-      "mean_sequence_length": 44.14,
-      "mean_document_fragmentation": 0.2949,
-      "mean_document_coverage": 0.7051,
+      "total_raw_words": 2931,
+      "total_subword_tokens": 4274,
+      "mean_fertility": 1.4582,
+      "mean_sequence_length": 20.75,
+      "mean_document_fragmentation": 0.317,
+      "mean_document_coverage": 0.683,
       "oov_rate": 0.0,
       "oov_status": "measured",
       "sequence_length_distribution": {
@@ -1090,24 +1072,42 @@
         "under_512": 0,
         "over_512": 0
       }
+    },
+    "Redundant": {
+      "tier": "Redundant",
+      "document_count": 197,
+      "total_raw_words": 6070,
+      "total_subword_tokens": 8634,
+      "mean_fertility": 1.4224,
+      "mean_sequence_length": 43.83,
+      "mean_document_fragmentation": 0.2968,
+      "mean_document_coverage": 0.7032,
+      "oov_rate": 0.0,
+      "oov_status": "measured",
+      "sequence_length_distribution": {
+        "under_128": 197,
+        "under_256": 0,
+        "under_512": 0,
+        "over_512": 0
+      }
     }
   },
   "document_correlations": {
     "informativeness_vs_fertility": {
-      "rho": 0.1182,
-      "p_value": 4e-06,
+      "rho": 0.1032,
+      "p_value": 6.2e-05,
       "sample_size": 1500,
       "status": "computed"
     },
     "informativeness_vs_fragmentation": {
-      "rho": 0.0329,
-      "p_value": 0.203198,
+      "rho": 0.0241,
+      "p_value": 0.350235,
       "sample_size": 1500,
       "status": "computed"
     },
     "informativeness_vs_coverage": {
-      "rho": -0.0329,
-      "p_value": 0.203198,
+      "rho": -0.0241,
+      "p_value": 0.350235,
       "sample_size": 1500,
       "status": "computed"
     },
@@ -1465,45 +1465,45 @@
     "model": "allenai/scibert_scivocab_uncased",
     "clean_model_name": "allenai_scibert_scivocab_uncased",
     "vocab_size": 31090,
-    "domain_token_coverage": 0.5791,
-    "domain_fragmentation": 0.4209,
-    "domain_fertility": 1.4517,
+    "domain_token_coverage": 0.5821,
+    "domain_fragmentation": 0.4179,
+    "domain_fertility": 1.4528,
     "domain_unknown_rate": 0.0,
     "oov_status": "measured",
-    "mean_sequence_length": 58.79,
-    "tokenization_speed": 61480.72,
-    "mean_document_fragmentation": 0.3039,
-    "mean_document_coverage": 0.6961,
+    "mean_sequence_length": 58.75,
+    "tokenization_speed": 41486.16,
+    "mean_document_fragmentation": 0.3055,
+    "mean_document_coverage": 0.6945,
     "general_vocab_coverage": 0.9681,
     "rare_maritime_coverage": 0.0,
     "stratified_by_informativeness_tier": {
       "Medium Knowledge": {
-        "document_count": 673,
-        "mean_fertility": 1.4382,
-        "mean_sequence_length": 55.3,
-        "mean_document_fragmentation": 0.303,
-        "mean_document_coverage": 0.697
+        "document_count": 683,
+        "mean_fertility": 1.4414,
+        "mean_sequence_length": 55.42,
+        "mean_document_fragmentation": 0.3055,
+        "mean_document_coverage": 0.6945
       },
       "High Knowledge": {
-        "document_count": 422,
-        "mean_fertility": 1.4713,
-        "mean_sequence_length": 89.65,
-        "mean_document_fragmentation": 0.3031,
-        "mean_document_coverage": 0.6969
+        "document_count": 414,
+        "mean_fertility": 1.4711,
+        "mean_sequence_length": 90.26,
+        "mean_document_fragmentation": 0.3039,
+        "mean_document_coverage": 0.6961
       },
       "Low Knowledge": {
-        "document_count": 199,
-        "mean_fertility": 1.4611,
-        "mean_sequence_length": 20.32,
-        "mean_document_fragmentation": 0.318,
-        "mean_document_coverage": 0.682
+        "document_count": 206,
+        "mean_fertility": 1.4582,
+        "mean_sequence_length": 20.75,
+        "mean_document_fragmentation": 0.317,
+        "mean_document_coverage": 0.683
       },
       "Redundant": {
-        "document_count": 206,
-        "mean_fertility": 1.4235,
-        "mean_sequence_length": 44.14,
-        "mean_document_fragmentation": 0.2949,
-        "mean_document_coverage": 0.7051
+        "document_count": 197,
+        "mean_fertility": 1.4224,
+        "mean_sequence_length": 43.83,
+        "mean_document_fragmentation": 0.2968,
+        "mean_document_coverage": 0.7032
       }
     }
   },

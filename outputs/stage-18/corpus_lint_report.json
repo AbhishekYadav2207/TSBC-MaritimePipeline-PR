@@ -1,12 +1,12 @@
 {
   "status": "PASS",
-  "total_documents_linted": 96848,
-  "total_violations": 191,
-  "violation_rate": "0.197%",
+  "total_documents_linted": 96869,
+  "total_violations": 193,
+  "violation_rate": "0.199%",
   "rule_summary": {
     "repeated_adjacent_words": {
-      "count": 159,
-      "percentage": "0.164%",
+      "count": 161,
+      "percentage": "0.166%",
       "samples": [
         {
           "occurrence_id": 660,
@@ -83,7 +83,7 @@
         {
           "occurrence_id": 24510,
           "match": "na other",
-          "snippet": "During maritime operations, the FISHING 'ESPADON DES MERS' (registered in Canada, constructed of wood) in clear weather, calm (glassy) - 0 meters seas"
+          "snippet": "Under clear weather, calm (glassy) - 0 meters seas, and night light conditions, the FISHING 'ESPADON DES MERS', registered in Canada, constructed of w"
         },
         {
           "occurrence_id": 25123,
@@ -93,7 +93,7 @@
         {
           "occurrence_id": 27038,
           "match": "na other",
-          "snippet": "During maritime operations, the FISHING 'NO FUTURE' (with a gross tonnage of 13 GT, registered in Canada, constructed of reinforced plastic) in fog we"
+          "snippet": "While proceeding in the underway \u2013 not making way/adrift phase under fog weather, moderate - 1.25 to 2.5 meters seas, and night light conditions, the "
         }
       ]
     }

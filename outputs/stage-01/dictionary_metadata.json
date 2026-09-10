@@ -3,7 +3,7 @@
     "MDOTW_VW_OCCURRENCE_PUBLIC": {
       "AccIncTypeDisplayEng": {
         "full_name": "Accident/incident type (English)",
-        "description": "The type of accident or incident, in English. ",
+        "description": "The type of accident or incident, in English.",
         "data_type": "varchar",
         "category": "other",
         "is_boolean": false,
@@ -12,7 +12,7 @@
       },
       "AccIncTypeDisplayFre": {
         "full_name": "Accident/incident type (French)",
-        "description": "The type of accident or incident, in French. ",
+        "description": "The type of accident or incident, in French.",
         "data_type": "varchar",
         "category": "other",
         "is_boolean": false,
@@ -22,7 +22,7 @@
       "AccIncTypeID": {
         "full_name": "Accident/incident type identification number",
         "description": "A system-generated number for the purposes of database administration.",
-        "data_type": "unknown",
+        "data_type": "nan",
         "category": "other",
         "is_boolean": false,
         "id_to_display_map": "AccIncTypeDisplayEng",
@@ -120,7 +120,7 @@
       },
       "BergyBitsEnumDisplayEng": {
         "full_name": "Bergy bits (English)",
-        "description": "Indicates whether there were bergy bits at the occurrence location, in English. ",
+        "description": "Indicates whether there were bergy bits at the occurrence location, in English.",
         "data_type": "varchar",
         "category": "other",
         "is_boolean": true,
@@ -129,7 +129,7 @@
       },
       "BergyBitsEnumDisplayFre": {
         "full_name": "Bergy bits (French)",
-        "description": "Indicates whether there were bergy bits at the occurrence location, in French. ",
+        "description": "Indicates whether there were bergy bits at the occurrence location, in French.",
         "data_type": "varchar",
         "category": "other",
         "is_boolean": true,
@@ -642,7 +642,7 @@
       },
       "OccTypeDisplayEng": {
         "full_name": "Occurrence type (English)",
-        "description": "Indicates whether the occurrence was an accident or reportable incident, in English. ",
+        "description": "Indicates whether the occurrence was an accident or reportable incident, in English.",
         "data_type": "varchar",
         "category": "other",
         "is_boolean": true,
@@ -1074,7 +1074,7 @@
       },
       "SubstantiallyInterestedStateDisplayEng": {
         "full_name": "Substantially interested state (English)",
-        "description": "The name of the substantially interested state investigating the occurrence, in English. ",
+        "description": "The name of the substantially interested state investigating the occurrence, in English.",
         "data_type": "varchar",
         "category": "other",
         "is_boolean": false,
@@ -1083,7 +1083,7 @@
       },
       "SubstantiallyInterestedStateDisplayFre": {
         "full_name": "Substantially interested state (French)",
-        "description": "The name of the substantially interested state investigating the occurrence, in French. ",
+        "description": "The name of the substantially interested state investigating the occurrence, in French.",
         "data_type": "varchar",
         "category": "other",
         "is_boolean": false,
@@ -1436,7 +1436,7 @@
     "MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC": {
       "AccIncTypeDisplayEng": {
         "full_name": "Accident/incident type (English)",
-        "description": "The type of accident or incident, in English. ",
+        "description": "The type of accident or incident, in English.",
         "data_type": "varchar",
         "category": "other",
         "is_boolean": false,
@@ -1445,7 +1445,7 @@
       },
       "AccIncTypeDisplayFre": {
         "full_name": "Accident/incident type (French)",
-        "description": "The type of accident or incident, in French. ",
+        "description": "The type of accident or incident, in French.",
         "data_type": "varchar",
         "category": "other",
         "is_boolean": false,
@@ -1706,7 +1706,7 @@
       },
       "DeparturePortDisplayEng": {
         "full_name": "Departure port (English)",
-        "description": "The port from which the vessel departed, in English. ",
+        "description": "The port from which the vessel departed, in English.",
         "data_type": "varchar",
         "category": "spatial",
         "is_boolean": false,
@@ -1715,7 +1715,7 @@
       },
       "DeparturePortDisplayFre": {
         "full_name": "Departure port (French)",
-        "description": "The port from which the vessel departed, in French. ",
+        "description": "The port from which the vessel departed, in French.",
         "data_type": "varchar",
         "category": "spatial",
         "is_boolean": false,
@@ -1832,7 +1832,7 @@
       },
       "DestinationPortDisplayEng": {
         "full_name": "Destination port (English)",
-        "description": "The vessel's destination port, in English. ",
+        "description": "The vessel's destination port, in English.",
         "data_type": "varchar",
         "category": "spatial",
         "is_boolean": false,
@@ -1967,7 +1967,7 @@
       },
       "GrossTonnage": {
         "full_name": "Gross tonnage",
-        "description": "The gross tonnage of the vessel involved in the occurrence. Gross tonnage is the volume capacity of the spaces within the hull and of the enclosed spaces above deck for cargo, fuel, passengers, and crew. ",
+        "description": "The gross tonnage of the vessel involved in the occurrence. Gross tonnage is the volume capacity of the spaces within the hull and of the enclosed spaces above deck for cargo, fuel, passengers, and crew.",
         "data_type": "numeric",
         "category": "vessel_profile",
         "is_boolean": false,
@@ -2012,7 +2012,7 @@
       },
       "ImoClass": {
         "full_name": "International Maritime Organization class",
-        "description": "Indicates the IMO Classification of an occurrence, based on the IMO Code of International Standards and Recommended Practices for a Safety Investigation into a Marine Casualty or Marine Incident (Casualty Investigation Code). ",
+        "description": "Indicates the IMO Classification of an occurrence, based on the IMO Code of International Standards and Recommended Practices for a Safety Investigation into a Marine Casualty or Marine Incident (Casualty Investigation Code).",
         "data_type": "varchar",
         "category": "vessel_profile",
         "is_boolean": false,
@@ -2049,7 +2049,7 @@
       "LengthTypeID": {
         "full_name": "Length type identification number",
         "description": "A system-generated number for the purposes of database administration.",
-        "data_type": "unknown",
+        "data_type": "nan",
         "category": "vessel_profile",
         "is_boolean": false,
         "id_to_display_map": "LengthTypeDisplayEng",
@@ -2183,7 +2183,7 @@
       },
       "OccTypeDisplayEng": {
         "full_name": "Occurrence type (English)",
-        "description": "Indicates whether the occurrence was an accident or reportable incident, in English. ",
+        "description": "Indicates whether the occurrence was an accident or reportable incident, in English.",
         "data_type": "varchar",
         "category": "other",
         "is_boolean": true,
@@ -2624,7 +2624,7 @@
       },
       "SmsTypeDisplayEng": {
         "full_name": "Safety management system type (English)",
-        "description": "The type of safety management system used on board, in English. ",
+        "description": "The type of safety management system used on board, in English.",
         "data_type": "varchar",
         "category": "vessel_profile",
         "is_boolean": false,
@@ -2633,7 +2633,7 @@
       },
       "SmsTypeDisplayFre": {
         "full_name": "Safety management system type (French)",
-        "description": "The type of safety management system used on board, in French. ",
+        "description": "The type of safety management system used on board, in French.",
         "data_type": "varchar",
         "category": "vessel_profile",
         "is_boolean": false,
@@ -2697,7 +2697,7 @@
       "TotalPeopleOnBoard": {
         "full_name": "Total people on board",
         "description": "The total number of people on board the vessel.",
-        "data_type": "unknown",
+        "data_type": "nan",
         "category": "other",
         "is_boolean": false,
         "id_to_display_map": null,
@@ -3447,7 +3447,7 @@
       },
       "CapsuleAudioFilesSegregatedEnumDisplayEng": {
         "full_name": "Capsule audio files segregated (English)",
-        "description": "Indicates whether the audio files on the voice data recorder's float-free capsule were segregated, in English. ",
+        "description": "Indicates whether the audio files on the voice data recorder's float-free capsule were segregated, in English.",
         "data_type": "varchar",
         "category": "equipment",
         "is_boolean": true,
@@ -3483,7 +3483,7 @@
       },
       "DataExtractedEnumDisplayEng": {
         "full_name": "Data extracted (English)",
-        "description": "Indicates whether data were extracted from the vessel's video data recorder float-free device, in English. ",
+        "description": "Indicates whether data were extracted from the vessel's video data recorder float-free device, in English.",
         "data_type": "varchar",
         "category": "equipment",
         "is_boolean": true,
@@ -3492,7 +3492,7 @@
       },
       "DataExtractedEnumDisplayFre": {
         "full_name": "Data extracted (French)",
-        "description": "Indicates whether data were extracted from the vessel's video data recorder float-free device, in French. ",
+        "description": "Indicates whether data were extracted from the vessel's video data recorder float-free device, in French.",
         "data_type": "varchar",
         "category": "equipment",
         "is_boolean": true,

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-10T10:13:15.430620",
+  "timestamp": "2026-09-10T14:48:43.511118",
   "data_coverage": {
     "expected_cells": 175,
     "valid_cells": 175,
@@ -9,16 +9,16 @@
   "criteria_winners": {
     "best_overall_intrinsic_mlm": {
       "model_name": "answerdotai/ModernBERT-base",
-      "top1_acc_pct": 56.04,
-      "mlm_loss": 2.3063
+      "top1_acc_pct": 73.05,
+      "mlm_loss": 1.4386
     },
     "strongest_domain_model": {
-      "model_name": "bert-base-uncased",
-      "rare_top1_acc_pct": 54.35
+      "model_name": "answerdotai/ModernBERT-base",
+      "rare_top1_acc_pct": 70.51
     },
     "most_stable_representation_model": {
-      "model_name": "answerdotai/ModernBERT-base",
-      "mean_rank": 1.0,
+      "model_name": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "mean_rank": 7.0,
       "rank_std": 0.0
     },
     "most_stable_subset_model": {
@@ -28,24 +28,23 @@
     },
     "most_robust_mui_winner": {
       "model_name": "answerdotai/ModernBERT-base",
-      "total_wins": 2,
-      "win_frequency": 0.5,
-      "baseline_score": 68.29
+      "total_wins": 4,
+      "win_frequency": 1.0,
+      "baseline_score": 78.56
     }
   },
   "rank_stability": {
-    "representation_kendall_tau": 0.7143,
-    "representation_spearman_rho": 0.8071,
-    "subset_kendall_tau": 0.9238,
+    "representation_kendall_tau": 0.7333,
+    "representation_spearman_rho": 0.85,
+    "subset_kendall_tau": 0.9048,
     "subset_spearman_rho": 0.9571
   },
   "pareto_summary": {
-    "pareto_optimal_count": 6,
+    "pareto_optimal_count": 5,
     "pareto_optimal_models": [
       "allenai/scibert_scivocab_uncased",
       "answerdotai/ModernBERT-base",
       "bert-base-uncased",
-      "dmis-lab/biobert-base-cased-v1.2",
       "nlpaueb/legal-bert-base-uncased",
       "roberta-base"
     ],
@@ -54,54 +53,43 @@
   "final_selection": {
     "recommended_model": "answerdotai/ModernBERT-base",
     "pareto_status": "Pareto-Optimal",
-    "baseline_mui_score": 68.29,
-    "maritime_top1_acc_pct": 56.04,
-    "rare_maritime_acc_pct": 29.09,
-    "mlm_loss": 2.3063,
-    "sensitivity_wins": "2/4 scenarios",
-    "selection_rationale": "answerdotai/ModernBERT-base demonstrated the strongest intrinsic MLM capability (56.04% Top-1 accuracy, 2.3063 MLM loss), high ranking consistency across representations (mean rank 1.0) and subsets (mean rank 1.0), leading performance across 2/4 MUI sensitivity scenarios (baseline and performance-heavy paradigms), and confirmed non-dominated Pareto status."
+    "baseline_mui_score": 78.56,
+    "maritime_top1_acc_pct": 73.05,
+    "rare_maritime_acc_pct": 70.51,
+    "mlm_loss": 1.4386,
+    "sensitivity_wins": "4/4 scenarios",
+    "selection_rationale": "answerdotai/ModernBERT-base demonstrated the strongest intrinsic MLM capability (73.05% Top-1 accuracy, 1.4386 MLM loss), high ranking consistency across representations (mean rank 7.0) and subsets (mean rank 1.0), unanimous leader across all 4 MUI sensitivity scenarios, and confirmed non-dominated Pareto status."
   },
   "trade_offs": [
     {
       "alternative_model": "allenai/scibert_scivocab_uncased",
       "advantages_over_selected": [
-        "lower subword fragmentation (42.1% vs 63.3%)",
+        "lower subword fragmentation (41.8% vs 63.0%)",
         "smaller footprint (110M vs 149M params)",
-        "lower latency (323.4ms vs 458.6ms)"
+        "lower latency (23.8ms vs 35.0ms)"
       ]
     },
     {
       "alternative_model": "bert-base-uncased",
       "advantages_over_selected": [
-        "lower subword fragmentation (26.6% vs 63.3%)",
-        "higher rare maritime token accuracy (54.3% vs 29.1%)",
+        "lower subword fragmentation (26.6% vs 63.0%)",
         "smaller footprint (110M vs 149M params)",
-        "lower latency (174.9ms vs 458.6ms)"
-      ]
-    },
-    {
-      "alternative_model": "dmis-lab/biobert-base-cased-v1.2",
-      "advantages_over_selected": [
-        "lower subword fragmentation (35.5% vs 63.3%)",
-        "higher rare maritime token accuracy (32.3% vs 29.1%)",
-        "smaller footprint (110M vs 149M params)",
-        "lower latency (154.1ms vs 458.6ms)"
+        "lower latency (21.4ms vs 35.0ms)"
       ]
     },
     {
       "alternative_model": "nlpaueb/legal-bert-base-uncased",
       "advantages_over_selected": [
-        "lower subword fragmentation (37.9% vs 63.3%)",
+        "lower subword fragmentation (37.6% vs 63.0%)",
         "smaller footprint (110M vs 149M params)",
-        "lower latency (249.3ms vs 458.6ms)"
+        "lower latency (24.4ms vs 35.0ms)"
       ]
     },
     {
       "alternative_model": "roberta-base",
       "advantages_over_selected": [
-        "higher rare maritime token accuracy (30.1% vs 29.1%)",
         "smaller footprint (125M vs 149M params)",
-        "lower latency (382.7ms vs 458.6ms)"
+        "lower latency (27.1ms vs 35.0ms)"
       ]
     }
   ],
