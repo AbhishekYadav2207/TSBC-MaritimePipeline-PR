@@ -1,4 +1,36 @@
 {
+  "domain_relevance": {
+    "ablated_feature_removed": "domain_relevance",
+    "relevance_score": 30.74,
+    "performance_drop_pct": 5.86,
+    "jaccard_overlap_p80": 0.6695,
+    "spearman_rho": 0.9631,
+    "justification": "Leave-one-out removal of domain_relevance yields 0.67 Jaccard selection retention and 0.96 rank correlation."
+  },
+  "information_content": {
+    "ablated_feature_removed": "information_content",
+    "relevance_score": 5.45,
+    "performance_drop_pct": 19.42,
+    "jaccard_overlap_p80": 0.8863,
+    "spearman_rho": 0.9383,
+    "justification": "Leave-one-out removal of information_content yields 0.89 Jaccard selection retention and 0.94 rank correlation."
+  },
+  "tfidf_representativeness": {
+    "ablated_feature_removed": "tfidf_representativeness",
+    "relevance_score": 25.19,
+    "performance_drop_pct": 0.31,
+    "jaccard_overlap_p80": 0.6106,
+    "spearman_rho": 0.8658,
+    "justification": "Leave-one-out removal of tfidf_representativeness yields 0.61 Jaccard selection retention and 0.87 rank correlation."
+  },
+  "redundancy_noise": {
+    "ablated_feature_removed": "redundancy_noise",
+    "relevance_score": 39.76,
+    "performance_drop_pct": 14.88,
+    "jaccard_overlap_p80": 0.4991,
+    "spearman_rho": 0.8596,
+    "justification": "Leave-one-out removal of redundancy_noise yields 0.50 Jaccard selection retention and 0.86 rank correlation."
+  },
   "Rare Vocabulary": {
     "ablated_feature_removed": "Rare Vocabulary",
     "relevance_score": 83.1,

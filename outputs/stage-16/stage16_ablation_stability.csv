@@ -1,0 +1,5 @@
+ablated_component,overall_tier_stability_pct,high_tier_retention_pct,medium_tier_retention_pct,low_tier_retention_pct,stratum_shift_count,total_documents
+domain_relevance,89.66,80.18,91.41,93.91,10015,96848
+information_content,80.99,93.94,74.39,87.84,18406,96848
+tfidf_representativeness,76.13,75.79,80.11,64.5,23122,96848
+redundancy_noise,66.55,66.58,72.13,49.79,32398,96848

@@ -1,0 +1,11 @@
+condition_type,condition_name,winning_model,winner_top1_acc,spearman_rho_vs_global,kendall_tau_vs_global,ranking_stability_assessment,num_models
+representation,json,answerdotai/ModernBERT-base,0.5377,0.7143,0.619,Moderate ranking stability,7
+representation,key_value,answerdotai/ModernBERT-base,0.6407,0.9643,0.9048,High ranking stability,7
+representation,mixed,answerdotai/ModernBERT-base,0.6829,0.9643,0.9048,High ranking stability,7
+representation,narrative,answerdotai/ModernBERT-base,0.4361,0.9643,0.9048,High ranking stability,7
+representation,template,answerdotai/ModernBERT-base,0.5047,0.8929,0.8095,Moderate ranking stability,7
+subset,balanced_knowledge,answerdotai/ModernBERT-base,0.5458,1.0,1.0,High ranking stability,7
+subset,high_knowledge,answerdotai/ModernBERT-base,0.5645,1.0,1.0,High ranking stability,7
+subset,low_knowledge,answerdotai/ModernBERT-base,0.5631,1.0,1.0,High ranking stability,7
+subset,medium_knowledge,answerdotai/ModernBERT-base,0.5704,0.8929,0.8095,Moderate ranking stability,7
+subset,random_baseline,answerdotai/ModernBERT-base,0.5583,1.0,1.0,High ranking stability,7
