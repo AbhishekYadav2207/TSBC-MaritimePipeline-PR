@@ -26,11 +26,6 @@ def stable_seed(*parts) -> int:
 
 # Default Representative Fallback Models (7 Distinct Tokenizer Archetypes)
 FALLBACK_TARGET_MODELS = [
-    "bert-base-uncased",                                            # Standard WordPiece (30,522)
-    "dmis-lab/biobert-base-cased-v1.2",                            # Bio/Clinical WordPiece (28,996 Cased)
-    "nlpaueb/legal-bert-base-uncased",                              # Legal WordPiece (30,522)
-    "allenai/scibert_scivocab_uncased",                             # SciVocab WordPiece (31,090)
-    "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",# PubMed Domain WordPiece (30,522)
     "roberta-base",                                                 # Standard Byte-Level BPE (50,265)
     "answerdotai/ModernBERT-base"                                   # Modern Extended BPE (50,280)
 ]
@@ -63,7 +58,7 @@ def load_selected_models(stage13_path: Path, fallback_models: list) -> list:
             models = data.get("selected_models", [])
             if isinstance(models, list) and len(models) == 7:
                 logger.info(f"Successfully loaded exactly {len(models)} authoritative models from Stage 13: {stage13_path}")
-                return models
+                #return models
             else:
                 found_cnt = len(models) if isinstance(models, list) else "invalid format"
                 logger.warning(
@@ -110,68 +105,85 @@ def build_vocabulary_token_sets(tokenizer, vocab_terms: list):
 
     return maritime_token_ids, rare_token_ids, category_token_ids
 
-def classify_token_positions(raw_text: str, input_ids: list, offsets: list, special_tokens_mask: list,
-                              vocab_terms_set: set, rare_terms_set: set,
-                              maritime_token_ids: set, rare_token_ids: set,
-                              category_token_ids: dict = None):
+def classify_token_positions(
+    raw_text: str,
+    input_ids: list,
+    offsets: list,
+    special_tokens_mask: list,
+    vocab_terms_set: set,
+    rare_terms_set: set,
+    maritime_token_ids: set,
+    rare_token_ids: set,
+    category_token_ids: dict = None
+):
     """
-    Classifies token positions into rare maritime, other maritime, and general.
-    Uses tokenizer offset mappings for robust subword-span matching when available.
-    Also maps token positions to maritime categories.
-    Falls back safely to vocabulary token IDs when offsets are unavailable.
+    Experiment 2:
+    Legacy token-ID based classification from the original Stage 14.
+
+    A token is classified as:
+      - Rare maritime  -> token ID is in rare_token_ids
+      - Maritime       -> token ID is in maritime_token_ids
+      - General        -> neither
+
+    No character-offset or span matching is used.
     """
-    seq_len = len(input_ids)
+
     eligible_positions = []
-    for i in range(seq_len):
+
+    for i, token_id in enumerate(input_ids):
+
+        # Exclude special tokens
         if special_tokens_mask[i]:
             continue
-        if offsets is not None and offsets[i] == [0, 0] and i != 0:
-            # Padding token
+
+        # Exclude padding
+        if offsets is not None and offsets[i] == [0, 0]:
             continue
+
         eligible_positions.append(i)
 
+    # Legacy token-ID classification
     rare_positions = set()
     maritime_positions = set()
-    category_positions = {cat: set() for cat in CATEGORIES}
 
-    if offsets is not None and len(raw_text) > 0:
-        # Robust Span Matching using Offset Mapping (prevents subword false-positives)
-        for term in rare_terms_set:
-            for m in re.finditer(r"\b" + re.escape(term) + r"\b", raw_text, re.IGNORECASE):
-                c_start, c_end = m.span()
-                for idx in eligible_positions:
-                    t_start, t_end = offsets[idx]
-                    if t_start < c_end and t_end > c_start:
-                        rare_positions.add(idx)
-                        category_positions["navigation"].add(idx)
+    category_positions = {
+        cat: set()
+        for cat in CATEGORIES
+    }
 
-        for term in vocab_terms_set:
-            cat = get_term_category(term)
-            for m in re.finditer(r"\b" + re.escape(term) + r"\b", raw_text, re.IGNORECASE):
-                c_start, c_end = m.span()
-                for idx in eligible_positions:
-                    t_start, t_end = offsets[idx]
-                    if t_start < c_end and t_end > c_start:
-                        if idx not in rare_positions:
-                            maritime_positions.add(idx)
-                        category_positions[cat].add(idx)
-    else:
-        # Safe Fallback: Token ID membership
-        for idx in eligible_positions:
-            t_id = input_ids[idx]
-            if t_id in rare_token_ids:
-                rare_positions.add(idx)
-                category_positions["navigation"].add(idx)
-            elif t_id in maritime_token_ids:
-                maritime_positions.add(idx)
-                if category_token_ids:
-                    for cat, cat_ids in category_token_ids.items():
-                        if t_id in cat_ids:
-                            category_positions[cat].add(idx)
+    for pos in eligible_positions:
 
-    general_positions = [p for p in eligible_positions if p not in rare_positions and p not in maritime_positions]
+        token_id = input_ids[pos]
 
-    return eligible_positions, rare_positions, maritime_positions, general_positions, category_positions
+        # Same logic as old Stage 14:
+        # is_rare = target_id in rare_token_ids
+        if token_id in rare_token_ids:
+            rare_positions.add(pos)
+
+        # Same logic as old Stage 14:
+        # is_maritime = target_id in maritime_token_ids
+        if token_id in maritime_token_ids:
+            maritime_positions.add(pos)
+
+            # Legacy category classification
+            for cat, cat_ids in category_token_ids.items():
+                if token_id in cat_ids:
+                    category_positions[cat].add(pos)
+
+    # General = eligible tokens that are not maritime
+    general_positions = [
+        pos
+        for pos in eligible_positions
+        if pos not in maritime_positions
+    ]
+
+    return (
+        eligible_positions,
+        rare_positions,
+        maritime_positions,
+        general_positions,
+        category_positions
+    )
 
 def create_random_mask(eligible_positions: list, rng: random.Random, mask_budget: int):
     """Conventional Random-15% masking baseline."""
