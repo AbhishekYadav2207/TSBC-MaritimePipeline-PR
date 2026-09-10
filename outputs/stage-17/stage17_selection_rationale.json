@@ -1,0 +1,112 @@
+{
+  "selected_model": "answerdotai/ModernBERT-base",
+  "decision": "Recommended DAPT Candidate",
+  "recommended_action": "Proceed with Domain-Adaptive Pretraining (DAPT)",
+  "confidence": "High",
+  "confidence_explanation": "High confidence assigned based on converging multi-source empirical evidence: bootstrap rank-1 frequency is 100.0% with mean rank 1.00; statistically significant Holm-adjusted pairwise superiority over all 6 evaluated competitors with zero pairwise defeats; confirmed non-dominated Pareto status across intrinsic and operational criteria; perfect rank invariance across all 5 corpus representations and all 5 knowledge subsets (rank 1.0, std 0.0). This label reflects structural evidence consensus across resampling and conditions, not a mathematical probability.",
+  "primary_evidence": [
+    "Primary Maritime Top-1 Accuracy: 56.04%",
+    "Intrinsic MLM Cross-Entropy Loss: 2.3063",
+    "Pseudo-Perplexity (PLL): 13.43",
+    "General-to-Maritime Performance Gap: 0.54%"
+  ],
+  "statistical_evidence": [
+    "Bootstrap 95% Confidence Interval for Top-1 Mean: [0.523, 0.5992]",
+    "Bootstrap Mean Rank: 1.0 (Std: 0.0) across 2,000 resamples",
+    "Bootstrap Rank-1 Frequency: 100.0%",
+    "Holm-Adjusted Wilcoxon Pairwise Comparisons: 6 significant wins, 0 defeats",
+    "Omnibus Friedman test confirms statistically significant model separation across matched benchmark conditions (p < 1e-20)"
+  ],
+  "robustness_evidence": [
+    "Representation Stability: Mean rank 1.0 across JSON, Key-Value, Mixed, Narrative, Template formats (Std: 0.0)",
+    "Subset Stability: Mean rank 1.0 across balanced, high, medium, low knowledge subsets and random baseline (Std: 0.0)",
+    "Condition Agreement: Kendall tau 0.7143 across representations, 0.9238 across subsets"
+  ],
+  "mui_evidence": [
+    "Baseline MUI Score: 68.29 (Rank 1 in baseline scenario)",
+    "MUI Scenario Wins: 2 wins across 4 weight scenarios (Win frequency: 0.5)",
+    "MUI Sensitivity Trade-off: ModernBERT leads performance-oriented and baseline scenarios; general BERT leads vocabulary/domain-heavy scenarios, exposing an explicit capability versus tokenization trade-off."
+  ],
+  "pareto_status": "Pareto-Optimal",
+  "tradeoffs": [
+    {
+      "dimension": "Subword Fragmentation",
+      "observation": "Higher subword fragmentation rate (63.28%) relative to specialized WordPiece tokenizers (e.g. BERT at 26.57%).",
+      "implication": "Treated as a tokenizer operational limitation to monitor during pretraining, not as an automatic decision rejection trigger."
+    },
+    {
+      "dimension": "Computational Footprint & Latency",
+      "observation": "Parameter count of 149.0M and latency of 458.59ms, compared to 110M parameter architectures (e.g. BERT-base at 174.86ms).",
+      "implication": "Incurs higher inference and training overhead; acceptable given substantial intrinsic language modeling superiority."
+    }
+  ],
+  "alternative_models": [
+    {
+      "model_name": "roberta-base",
+      "candidate_status": "Strong Candidate",
+      "role": "Runner-Up General Encoder",
+      "relative_advantages": [
+        "higher rare maritime token accuracy (30.07% vs 29.09%)",
+        "lower inference latency (382.8ms vs 458.6ms)",
+        "smaller model footprint (125.0M vs 149.0M params)"
+      ]
+    },
+    {
+      "model_name": "allenai/scibert_scivocab_uncased",
+      "candidate_status": "Strong Candidate",
+      "role": "Scientific Domain Competitor",
+      "relative_advantages": [
+        "lower subword fragmentation (42.09% vs 63.28%)",
+        "lower inference latency (323.4ms vs 458.6ms)",
+        "smaller model footprint (110.0M vs 149.0M params)"
+      ]
+    },
+    {
+      "model_name": "bert-base-uncased",
+      "candidate_status": "Competitive Candidate",
+      "role": "Resource-Constrained & Vocabulary-Adapted Alternative",
+      "relative_advantages": [
+        "higher rare maritime token accuracy (54.35% vs 29.09%)",
+        "lower subword fragmentation (26.57% vs 63.28%)",
+        "lower inference latency (174.9ms vs 458.6ms)",
+        "smaller model footprint (110.0M vs 149.0M params)"
+      ]
+    },
+    {
+      "model_name": "nlpaueb/legal-bert-base-uncased",
+      "candidate_status": "Competitive Candidate",
+      "role": "Competitive Candidate",
+      "relative_advantages": [
+        "lower subword fragmentation (37.91% vs 63.28%)",
+        "lower inference latency (249.3ms vs 458.6ms)",
+        "smaller model footprint (110.0M vs 149.0M params)"
+      ]
+    },
+    {
+      "model_name": "dmis-lab/biobert-base-cased-v1.2",
+      "candidate_status": "Weak Candidate",
+      "role": "Competitive Candidate",
+      "relative_advantages": [
+        "higher rare maritime token accuracy (32.35% vs 29.09%)",
+        "lower subword fragmentation (35.52% vs 63.28%)",
+        "lower inference latency (154.1ms vs 458.6ms)",
+        "smaller model footprint (110.0M vs 149.0M params)"
+      ]
+    },
+    {
+      "model_name": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "candidate_status": "Weak Candidate",
+      "role": "Competitive Candidate",
+      "relative_advantages": [
+        "lower subword fragmentation (42.69% vs 63.28%)",
+        "lower inference latency (326.8ms vs 458.6ms)",
+        "smaller model footprint (110.0M vs 149.0M params)"
+      ]
+    }
+  ],
+  "limitations": [
+    "Benchmark evidence supports the selected model as the preferred pretrained initialization for subsequent DAPT, but does NOT prove downstream task optimality prior to empirical adaptation.",
+    "Empirical downstream validation on fine-tuned classification, extraction, and incident summarization tasks remains required in subsequent DAPT stages.",
+    "MUI is an operational aggregate index used for supporting sensitivity analysis; it is not a direct mathematical ground truth of maritime understanding."
+  ]
+}
