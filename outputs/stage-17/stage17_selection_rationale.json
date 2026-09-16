@@ -5,13 +5,13 @@
   "confidence": "High",
   "confidence_explanation": "High confidence assigned based on converging multi-source empirical evidence: bootstrap rank-1 frequency is 100.0% with mean rank 1.00; statistically significant Holm-adjusted pairwise superiority over all 6 evaluated competitors with zero pairwise defeats; confirmed non-dominated Pareto status across intrinsic and operational criteria. This label reflects structural evidence consensus across resampling and conditions, not a mathematical probability.",
   "primary_evidence": [
-    "Primary Maritime Top-1 Accuracy: 73.05%",
-    "Intrinsic MLM Cross-Entropy Loss: 1.4386",
-    "Pseudo-Perplexity (PLL): 15.45",
-    "General-to-Maritime Performance Gap: -16.66%"
+    "Primary Maritime Top-1 Accuracy: 73.17%",
+    "Intrinsic MLM Cross-Entropy Loss: 1.4269",
+    "Pseudo-Perplexity (PLL): 18.33",
+    "General-to-Maritime Performance Gap: -17.16%"
   ],
   "statistical_evidence": [
-    "Bootstrap 95% Confidence Interval for Top-1 Mean: [0.6819, 0.7782]",
+    "Bootstrap 95% Confidence Interval for Top-1 Mean: [0.6839, 0.7805]",
     "Bootstrap Mean Rank: 1.0 (Std: 0.0) across 2,000 resamples",
     "Bootstrap Rank-1 Frequency: 100.0%",
     "Holm-Adjusted Wilcoxon Pairwise Comparisons: 6 significant wins, 0 defeats",
@@ -20,7 +20,7 @@
   "robustness_evidence": [
     "Representation Stability: Mean rank 1.2 across JSON, Key-Value, Mixed, Narrative, Template formats (Std: 0.45)",
     "Subset Stability: Mean rank 1.0 across balanced, high, medium, low knowledge subsets and random baseline (Std: 0.0)",
-    "Condition Agreement: Kendall tau 0.7333 across representations, 0.9048 across subsets"
+    "Condition Agreement: Kendall tau 0.6952 across representations, 0.9619 across subsets"
   ],
   "mui_evidence": [
     "Baseline MUI Score: 78.56 (Rank 1 in baseline scenario)",
@@ -36,7 +36,7 @@
     },
     {
       "dimension": "Computational Footprint & Latency",
-      "observation": "Parameter count of 149.0M and latency of 35.04ms, compared to 110M parameter architectures (e.g. BERT-base at 21.43ms).",
+      "observation": "Parameter count of 149.0M and latency of 34.13ms, compared to 110M parameter architectures (e.g. BERT-base at 22.37ms).",
       "implication": "Incurs higher inference and training overhead; acceptable given substantial intrinsic language modeling superiority."
     }
   ],
@@ -46,7 +46,7 @@
       "candidate_status": "Strong Candidate",
       "role": "Runner-Up General Encoder",
       "relative_advantages": [
-        "lower inference latency (27.1ms vs 35.0ms)",
+        "lower inference latency (26.9ms vs 34.1ms)",
         "smaller model footprint (125.0M vs 149.0M params)"
       ]
     },
@@ -56,7 +56,7 @@
       "role": "Competitive Candidate",
       "relative_advantages": [
         "lower subword fragmentation (37.61% vs 62.99%)",
-        "lower inference latency (24.4ms vs 35.0ms)",
+        "lower inference latency (24.3ms vs 34.1ms)",
         "smaller model footprint (110.0M vs 149.0M params)"
       ]
     },
@@ -66,7 +66,7 @@
       "role": "Scientific Domain Competitor",
       "relative_advantages": [
         "lower subword fragmentation (41.79% vs 62.99%)",
-        "lower inference latency (23.8ms vs 35.0ms)",
+        "lower inference latency (23.9ms vs 34.1ms)",
         "smaller model footprint (110.0M vs 149.0M params)"
       ]
     },
@@ -76,7 +76,7 @@
       "role": "Resource-Constrained & Vocabulary-Adapted Alternative",
       "relative_advantages": [
         "lower subword fragmentation (26.57% vs 62.99%)",
-        "lower inference latency (21.4ms vs 35.0ms)",
+        "lower inference latency (22.4ms vs 34.1ms)",
         "smaller model footprint (110.0M vs 149.0M params)"
       ]
     },
@@ -86,7 +86,7 @@
       "role": "Competitive Candidate",
       "relative_advantages": [
         "lower subword fragmentation (35.52% vs 62.99%)",
-        "lower inference latency (24.8ms vs 35.0ms)",
+        "lower inference latency (24.4ms vs 34.1ms)",
         "smaller model footprint (110.0M vs 149.0M params)"
       ]
     },
@@ -96,7 +96,7 @@
       "role": "Competitive Candidate",
       "relative_advantages": [
         "lower subword fragmentation (42.39% vs 62.99%)",
-        "lower inference latency (23.5ms vs 35.0ms)",
+        "lower inference latency (23.4ms vs 34.1ms)",
         "smaller model footprint (110.0M vs 149.0M params)"
       ]
     }

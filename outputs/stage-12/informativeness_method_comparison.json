@@ -4,41 +4,41 @@
   "comparison": {
     "heuristic_informativeness_h_inf": {
       "mean": 0.3893,
-      "std": 0.1001,
+      "std": 0.1002,
       "correlations": {
         "heuristic_informativeness_h_inf": 1.0,
-        "tfidf_domain_relevance": 0.6939,
-        "tfidf_corpus_representativeness": 0.7145,
-        "equal_weight_hybrid_informativeness": 0.7469
+        "tfidf_domain_relevance": 0.6956,
+        "tfidf_corpus_representativeness": 0.7147,
+        "equal_weight_hybrid_informativeness": 0.7475
       }
     },
     "tfidf_domain_relevance": {
-      "mean": 0.0607,
+      "mean": 0.0612,
       "std": 0.0329,
       "correlations": {
-        "heuristic_informativeness_h_inf": 0.6939,
+        "heuristic_informativeness_h_inf": 0.6956,
         "tfidf_domain_relevance": 1.0,
-        "tfidf_corpus_representativeness": 0.4656,
-        "equal_weight_hybrid_informativeness": 0.5081
+        "tfidf_corpus_representativeness": 0.4733,
+        "equal_weight_hybrid_informativeness": 0.5122
       }
     },
     "tfidf_corpus_representativeness": {
-      "mean": 0.2393,
-      "std": 0.1659,
+      "mean": 0.2394,
+      "std": 0.166,
       "correlations": {
-        "heuristic_informativeness_h_inf": 0.7145,
-        "tfidf_domain_relevance": 0.4656,
+        "heuristic_informativeness_h_inf": 0.7147,
+        "tfidf_domain_relevance": 0.4733,
         "tfidf_corpus_representativeness": 1.0,
-        "equal_weight_hybrid_informativeness": 0.7106
+        "equal_weight_hybrid_informativeness": 0.7108
       }
     },
     "equal_weight_hybrid_informativeness": {
-      "mean": 0.2487,
-      "std": 0.075,
+      "mean": 0.2488,
+      "std": 0.0753,
       "correlations": {
-        "heuristic_informativeness_h_inf": 0.7469,
-        "tfidf_domain_relevance": 0.5081,
-        "tfidf_corpus_representativeness": 0.7106,
+        "heuristic_informativeness_h_inf": 0.7475,
+        "tfidf_domain_relevance": 0.5122,
+        "tfidf_corpus_representativeness": 0.7108,
         "equal_weight_hybrid_informativeness": 1.0
       }
     }

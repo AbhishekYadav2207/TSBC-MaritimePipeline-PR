@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-10T14:48:43.511118",
+  "timestamp": "2026-09-16T14:24:27.419447",
   "data_coverage": {
     "expected_cells": 175,
     "valid_cells": 175,
@@ -9,17 +9,17 @@
   "criteria_winners": {
     "best_overall_intrinsic_mlm": {
       "model_name": "answerdotai/ModernBERT-base",
-      "top1_acc_pct": 73.05,
-      "mlm_loss": 1.4386
+      "top1_acc_pct": 73.17,
+      "mlm_loss": 1.4269
     },
     "strongest_domain_model": {
       "model_name": "answerdotai/ModernBERT-base",
-      "rare_top1_acc_pct": 70.51
+      "rare_top1_acc_pct": 73.03
     },
     "most_stable_representation_model": {
-      "model_name": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
-      "mean_rank": 7.0,
-      "rank_std": 0.0
+      "model_name": "answerdotai/ModernBERT-base",
+      "mean_rank": 1.2,
+      "rank_std": 0.45
     },
     "most_stable_subset_model": {
       "model_name": "answerdotai/ModernBERT-base",
@@ -34,10 +34,10 @@
     }
   },
   "rank_stability": {
-    "representation_kendall_tau": 0.7333,
-    "representation_spearman_rho": 0.85,
-    "subset_kendall_tau": 0.9048,
-    "subset_spearman_rho": 0.9571
+    "representation_kendall_tau": 0.6952,
+    "representation_spearman_rho": 0.8107,
+    "subset_kendall_tau": 0.9619,
+    "subset_spearman_rho": 0.9857
   },
   "pareto_summary": {
     "pareto_optimal_count": 5,
@@ -54,11 +54,11 @@
     "recommended_model": "answerdotai/ModernBERT-base",
     "pareto_status": "Pareto-Optimal",
     "baseline_mui_score": 78.56,
-    "maritime_top1_acc_pct": 73.05,
-    "rare_maritime_acc_pct": 70.51,
-    "mlm_loss": 1.4386,
+    "maritime_top1_acc_pct": 73.17,
+    "rare_maritime_acc_pct": 73.03,
+    "mlm_loss": 1.4269,
     "sensitivity_wins": "4/4 scenarios",
-    "selection_rationale": "answerdotai/ModernBERT-base demonstrated the strongest intrinsic MLM capability (73.05% Top-1 accuracy, 1.4386 MLM loss), high ranking consistency across representations (mean rank 7.0) and subsets (mean rank 1.0), unanimous leader across all 4 MUI sensitivity scenarios, and confirmed non-dominated Pareto status."
+    "selection_rationale": "answerdotai/ModernBERT-base demonstrated the strongest intrinsic MLM capability (73.17% Top-1 accuracy, 1.4269 MLM loss), high ranking consistency across representations (mean rank 1.2) and subsets (mean rank 1.0), unanimous leader across all 4 MUI sensitivity scenarios, and confirmed non-dominated Pareto status."
   },
   "trade_offs": [
     {
@@ -66,7 +66,7 @@
       "advantages_over_selected": [
         "lower subword fragmentation (41.8% vs 63.0%)",
         "smaller footprint (110M vs 149M params)",
-        "lower latency (23.8ms vs 35.0ms)"
+        "lower latency (23.9ms vs 34.1ms)"
       ]
     },
     {
@@ -74,7 +74,7 @@
       "advantages_over_selected": [
         "lower subword fragmentation (26.6% vs 63.0%)",
         "smaller footprint (110M vs 149M params)",
-        "lower latency (21.4ms vs 35.0ms)"
+        "lower latency (22.4ms vs 34.1ms)"
       ]
     },
     {
@@ -82,14 +82,14 @@
       "advantages_over_selected": [
         "lower subword fragmentation (37.6% vs 63.0%)",
         "smaller footprint (110M vs 149M params)",
-        "lower latency (24.4ms vs 35.0ms)"
+        "lower latency (24.3ms vs 34.1ms)"
       ]
     },
     {
       "alternative_model": "roberta-base",
       "advantages_over_selected": [
         "smaller footprint (125M vs 149M params)",
-        "lower latency (27.1ms vs 35.0ms)"
+        "lower latency (26.9ms vs 34.1ms)"
       ]
     }
   ],
