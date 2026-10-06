@@ -162,5 +162,4 @@ For exhaustive, in-depth technical documentation on specific components, refer t
 14. **[13_research_traceability_matrix.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/13_research_traceability_matrix.md)**: Full bidirectional traceability between raw database columns, scripts, and evaluation metrics.
 15. **[14_dapt_domain_adaptive_pretraining.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/14_dapt_domain_adaptive_pretraining.md)**: Execution specifications and training configurations for the subsequent DAPT pretraining phase.
 
-#   T S B C - M a r i t i m e P i p e l i n e - P R  
- 
+#
