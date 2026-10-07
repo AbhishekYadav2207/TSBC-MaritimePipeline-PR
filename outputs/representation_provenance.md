@@ -1,6 +1,6 @@
 # MaritimeBench: Representation Provenance & Cryptographic Traceability Manifest
 
-**Generated:** `2026-10-07T15:10:04.725242+00:00` | **Git Commit:** `b1160bd92836234f0e56b2e5d8c2c66d8bf7a49c` | **Pipeline Version:** `2.1`  
+**Generated:** `2026-10-07T16:49:13.757689+00:00` | **Git Commit:** `dda55b0776c47e018e5a3ea7675ba1a9f1b85793` | **Pipeline Version:** `2.1`  
 **Target Corpus:** Frozen Corpus A (MARSIS / TSB Canadian Maritime Corpus)  
 
 ---
@@ -9,9 +9,9 @@
 
 | Artifact Role | File Path | SHA-256 Checksum | Size |
 |---|---|---|---|
-| **Text Corpus** | `outputs/stage-08/maritime_corpus.txt` | `51f7a9cd897ccda060fd10c9661a8f8129ebe7a6c4e19846cb6c931bd9c099cd` | 24,549,202 bytes |
-| **Metadata Corpus** | `outputs/stage-08/maritime_corpus.jsonl` | `ea95122199de9ca831a90b14b35962e33accb05ae83893442a9613d72aefcb32` | 774,173,719 bytes |
-| **Stage 07 Clean Input** | `outputs/stage-07/clean_documents.jsonl` | `a29e3d7db30b7e52c2f1d35812cd17e1f4f070da73a5f3665b7399938a73d56c` | 785,395,491 bytes (96,844 docs) |
+| **Text Corpus** | `outputs/stage-08/maritime_corpus.txt` | `c69534d3c4f893da6b93c5d4a9353092bf8e98a6809247b07b86f72f39a47c0f` | 24,553,933 bytes |
+| **Metadata Corpus** | `outputs/stage-08/maritime_corpus.jsonl` | `353fbc18aa471c28669f65cdf4c94efc014864b316fa025114bc24d81bee25a0` | 774,365,691 bytes |
+| **Stage 07 Clean Input** | `outputs/stage-07/clean_documents.jsonl` | `4e0b642be5e03f8ebb0f9d77fc5aec694f3c241e406d77dc4201894571f332d8` | 785,587,917 bytes (96,848 docs) |
 
 ## 2. Multi-Format Corpus Representations (Stage 11)
 
@@ -19,11 +19,11 @@ All representations derive deterministically from the frozen source via `scripts
 
 | Representation | Path | SHA-256 Checksum | Docs | Size |
 |---|---|---|---|---|
-| **json** | `outputs/stage-11/corpus_representations/json.jsonl` | `e0cb3fd7a6ebbcaa4a5df7f7a90554d1c4508974c609083bc50efe3920ad6220` | 96,844 | 759,801,357 bytes |
-| **key_value** | `outputs/stage-11/corpus_representations/key_value.jsonl` | `1b0b0e991505f5589024096be5a47cb5873e2cbedba88878ef703c4c86e55f6c` | 96,844 | 65,167,543 bytes |
-| **mixed** | `outputs/stage-11/corpus_representations/mixed.jsonl` | `c57b92cd15ef0ca841fbdb88c7b0863445505d65e2469fcf5cbb77b34c9ef272` | 96,844 | 91,828,343 bytes |
-| **narrative** | `outputs/stage-11/corpus_representations/narrative.jsonl` | `d9fe116532303ced6174985fa092c351f1232833f5aa6904eb2a484ce0193da7` | 96,844 | 31,485,928 bytes |
-| **template** | `outputs/stage-11/corpus_representations/template.jsonl` | `8e7d3312c5fbed9db5f46343db9afe4236383c0fe179e303b78a706f638e0ca2` | 96,844 | 51,747,609 bytes |
+| **json** | `outputs/stage-11/corpus_representations/json.jsonl` | `19ddfa5f9f8c9aea5112297b63c3454ebd6a1b6b03b3f73447319356aedd447a` | 96,848 | 759,911,186 bytes |
+| **key_value** | `outputs/stage-11/corpus_representations/key_value.jsonl` | `47b79a48420139c7a61722accdb9e1f4692c5984d52ff44f1093454488a26cca` | 96,848 | 65,173,231 bytes |
+| **mixed** | `outputs/stage-11/corpus_representations/mixed.jsonl` | `60a4e3989110c297caef81f9dee2a8be830fa0d5f48fa672cf2681faa756c1b3` | 96,848 | 91,838,853 bytes |
+| **narrative** | `outputs/stage-11/corpus_representations/narrative.jsonl` | `fdbffb7846637cdb013d48afc98fcdf5e3dae5c9177542cd3c398253ecf73b31` | 96,848 | 31,490,946 bytes |
+| **template** | `outputs/stage-11/corpus_representations/template.jsonl` | `ece9aad029adbff1bbc43707e6a36f5ba758338e23603169f8a5a5c8c532b2aa` | 96,848 | 51,749,263 bytes |
 
 ## 3. Cryptographic Verification & Invariance Guarantees
 

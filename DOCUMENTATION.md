@@ -345,7 +345,8 @@ Provides string sanitization, administrative noise removal, and natural language
   - *Subdomain Recalls*: ModernBERT leads across all 6 operational categories: Navigation Equipment (74.1%), Casualty/Incidents (61.8%), Vessel Terminology (52.4%), Machinery/Propulsion (48.2%), Weather/Environment (43.9%), Safety/Lifesaving (39.5%).
   - *Domain-Aware Masking Drop ([`masking_comparison.json`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-14/masking_comparison.json))*: When domain tokens are targeted without syntax crutches, Top-1 accuracy drops precipitously: ModernBERT drops by $-16.73\%$ (45.81% $\rightarrow$ 29.08%), RoBERTa by $-20.00\%$ (45.08% $\rightarrow$ 25.08%), and SciBERT by $-10.47\%$ (29.78% $\rightarrow$ 19.31%), proving that foundation models rely heavily on generic syntactic context.
 - **Output Artifacts**:
-  - [`outputs/stage-14/evaluations/cache/*.json`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-14/evaluations/cache) (175 discrete evaluation files)
+  - [`outputs/stage-14/evaluations/cache_wwm_word/*.json`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-14/evaluations/cache_wwm_word) (Authoritative production WWM+word evaluation cache)
+  - [`outputs/stage-14/evaluations/cache/*.json`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-14/evaluations/cache) (Diagnostic subword baseline cache)
   - [`outputs/stage-14/masking_comparison.json`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-14/masking_comparison.json) (32.7 KB)
   - [`outputs/stage-14/pll_results.json`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-14/pll_results.json) (28.4 KB)
   - [`outputs/stage-14/focused_domain_aware_results.json`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-14/focused_domain_aware_results.json) (126.8 KB)
@@ -803,7 +804,7 @@ Stage 17 moves beyond scalar heuristic thresholds by enforcing a transparent 8-l
    python run_pipeline.py --stage 17
    python run_pipeline.py --stage 18
    ```
-2. **Caching & Acceleration**: Stage 14 MLM matrix evaluations are cached under `outputs/stage-14/evaluations/cache/`. To force a fresh evaluation run across models, delete the cache directory before executing Stage 14.
+2. **Caching & Acceleration**: Stage 14 MLM matrix evaluations are cached under `outputs/stage-14/evaluations/cache_wwm_word/` for the authoritative production WWM+word benchmark (and `outputs/stage-14/evaluations/cache/` for diagnostic subword baselines). To force a fresh evaluation run across models, delete the corresponding cache directory before executing Stage 14.
 
 ---
 

@@ -1,8 +1,8 @@
 model_name,mecs_score,maritime_top1_acc,top1_ci_error,rare_maritime_acc,mlm_loss,domain_shift_gap_pct,performance_gap_pct,single_token_coverage_pct,fragmentation_rate_pct,oov_rate_pct,params_millions,disk_size_mb,inference_latency_ms,throughput_docs_sec,tokenizer_speed_tok_sec
-answerdotai/ModernBERT-base,68.62,72.82,4.71,69.61,1.474,-27.82,-16.7,36.72,63.28,0.0,149,590,34.8,28.73,79251.78
-roberta-base,59.08,62.03,7.56,68.04,2.0423,-12.03,-12.51,34.93,65.07,0.0,125,500,27.43,36.45,87354.11
-bert-base-uncased,49.8,29.18,4.05,50.14,4.6544,9.71,18.74,73.43,26.57,0.0,110,440,20.26,49.37,70081.61
-allenai/scibert_scivocab_uncased,45.24,32.12,4.37,49.18,4.231,4.72,17.17,57.91,42.09,0.0,110,440,23.26,43.0,73414.58
-dmis-lab/biobert-base-cased-v1.2,35.49,25.16,4.36,29.54,4.853,16.01,16.11,64.48,35.52,0.0,110,440,22.96,43.56,72038.53
-nlpaueb/legal-bert-base-uncased,33.89,33.02,3.04,38.92,4.0722,4.48,12.07,62.09,37.91,0.03,110,440,23.83,41.96,71221.56
-microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext,25.93,20.14,4.39,21.52,5.7853,16.7,25.97,57.31,42.69,0.0,110,440,23.22,43.07,68594.69
+answerdotai/ModernBERT-base,51.35,28.59,3.51,7.11,4.1942,8.25,9.44,37.01,62.99,0.0,149,590,31.45,31.8,42534.39
+nlpaueb/legal-bert-base-uncased,50.4,20.92,3.87,15.13,4.5905,12.42,19.73,62.39,37.61,0.0312,110,440,22.35,44.75,39601.87
+microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext,45.06,14.19,3.69,17.23,5.75,19.15,27.37,57.61,42.39,0.0,110,440,21.92,45.62,27027.91
+allenai/scibert_scivocab_uncased,42.03,14.17,3.33,13.34,6.1235,21.12,29.16,58.21,41.79,0.0,110,440,22.07,45.3,41322.63
+dmis-lab/biobert-base-cased-v1.2,41.91,13.58,3.17,11.76,6.0726,21.71,21.46,64.48,35.52,0.0,110,440,22.41,44.62,42392.5
+bert-base-uncased,39.14,17.67,3.17,0.88,6.648,24.44,27.17,73.43,26.57,0.0,110,440,21.02,47.57,28758.59
+roberta-base,29.42,21.01,4.07,3.55,5.3657,31.62,17.32,35.22,64.78,0.0,125,500,25.11,39.82,35443.83

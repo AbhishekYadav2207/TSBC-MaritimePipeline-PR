@@ -502,7 +502,7 @@
         "bert-base-uncased": 1.0,
         "bert-large-uncased": 1.0,
         "roberta-base": 0.93186,
-        "answerdotai/ModernBERT-base": 0.92953,
+        "answerdotai/ModernBERT-base": 0.92958,
         "allenai/scibert_scivocab_uncased": 0.95091,
         "dmis-lab/biobert-base-cased-v1.2": 0.96353,
         "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.95004,
@@ -516,7 +516,7 @@
         "bert-base-uncased": 1.0,
         "bert-large-uncased": 1.0,
         "roberta-base": 0.93186,
-        "answerdotai/ModernBERT-base": 0.92953,
+        "answerdotai/ModernBERT-base": 0.92958,
         "allenai/scibert_scivocab_uncased": 0.95091,
         "dmis-lab/biobert-base-cased-v1.2": 0.96353,
         "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.95004,
@@ -530,7 +530,7 @@
         "bert-base-uncased": 0.93186,
         "bert-large-uncased": 0.93186,
         "roberta-base": 1.0,
-        "answerdotai/ModernBERT-base": 0.97847,
+        "answerdotai/ModernBERT-base": 0.97883,
         "allenai/scibert_scivocab_uncased": 0.9351,
         "dmis-lab/biobert-base-cased-v1.2": 0.92895,
         "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.92518,
@@ -541,24 +541,24 @@
         "distilbert-base-uncased": 0.93186
       },
       "answerdotai/ModernBERT-base": {
-        "bert-base-uncased": 0.92953,
-        "bert-large-uncased": 0.92953,
-        "roberta-base": 0.97847,
+        "bert-base-uncased": 0.92958,
+        "bert-large-uncased": 0.92958,
+        "roberta-base": 0.97883,
         "answerdotai/ModernBERT-base": 1.0,
-        "allenai/scibert_scivocab_uncased": 0.941,
-        "dmis-lab/biobert-base-cased-v1.2": 0.92935,
-        "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.93446,
-        "emilyalsentzer/Bio_ClinicalBERT": 0.92935,
-        "nlpaueb/legal-bert-base-uncased": 0.92295,
-        "ProsusAI/finbert": 0.92953,
-        "google/electra-base-discriminator": 0.92953,
-        "distilbert-base-uncased": 0.92953
+        "allenai/scibert_scivocab_uncased": 0.94118,
+        "dmis-lab/biobert-base-cased-v1.2": 0.92949,
+        "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.93467,
+        "emilyalsentzer/Bio_ClinicalBERT": 0.92949,
+        "nlpaueb/legal-bert-base-uncased": 0.9231,
+        "ProsusAI/finbert": 0.92958,
+        "google/electra-base-discriminator": 0.92958,
+        "distilbert-base-uncased": 0.92958
       },
       "allenai/scibert_scivocab_uncased": {
         "bert-base-uncased": 0.95091,
         "bert-large-uncased": 0.95091,
         "roberta-base": 0.9351,
-        "answerdotai/ModernBERT-base": 0.941,
+        "answerdotai/ModernBERT-base": 0.94118,
         "allenai/scibert_scivocab_uncased": 1.0,
         "dmis-lab/biobert-base-cased-v1.2": 0.94353,
         "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.98075,
@@ -572,7 +572,7 @@
         "bert-base-uncased": 0.96353,
         "bert-large-uncased": 0.96353,
         "roberta-base": 0.92895,
-        "answerdotai/ModernBERT-base": 0.92935,
+        "answerdotai/ModernBERT-base": 0.92949,
         "allenai/scibert_scivocab_uncased": 0.94353,
         "dmis-lab/biobert-base-cased-v1.2": 1.0,
         "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.93363,
@@ -586,7 +586,7 @@
         "bert-base-uncased": 0.95004,
         "bert-large-uncased": 0.95004,
         "roberta-base": 0.92518,
-        "answerdotai/ModernBERT-base": 0.93446,
+        "answerdotai/ModernBERT-base": 0.93467,
         "allenai/scibert_scivocab_uncased": 0.98075,
         "dmis-lab/biobert-base-cased-v1.2": 0.93363,
         "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 1.0,
@@ -600,7 +600,7 @@
         "bert-base-uncased": 0.96353,
         "bert-large-uncased": 0.96353,
         "roberta-base": 0.92895,
-        "answerdotai/ModernBERT-base": 0.92935,
+        "answerdotai/ModernBERT-base": 0.92949,
         "allenai/scibert_scivocab_uncased": 0.94353,
         "dmis-lab/biobert-base-cased-v1.2": 1.0,
         "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.93363,
@@ -614,7 +614,7 @@
         "bert-base-uncased": 0.95715,
         "bert-large-uncased": 0.95715,
         "roberta-base": 0.93129,
-        "answerdotai/ModernBERT-base": 0.92295,
+        "answerdotai/ModernBERT-base": 0.9231,
         "allenai/scibert_scivocab_uncased": 0.93642,
         "dmis-lab/biobert-base-cased-v1.2": 0.94288,
         "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.93228,
@@ -628,7 +628,7 @@
         "bert-base-uncased": 1.0,
         "bert-large-uncased": 1.0,
         "roberta-base": 0.93186,
-        "answerdotai/ModernBERT-base": 0.92953,
+        "answerdotai/ModernBERT-base": 0.92958,
         "allenai/scibert_scivocab_uncased": 0.95091,
         "dmis-lab/biobert-base-cased-v1.2": 0.96353,
         "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.95004,
@@ -642,7 +642,7 @@
         "bert-base-uncased": 1.0,
         "bert-large-uncased": 1.0,
         "roberta-base": 0.93186,
-        "answerdotai/ModernBERT-base": 0.92953,
+        "answerdotai/ModernBERT-base": 0.92958,
         "allenai/scibert_scivocab_uncased": 0.95091,
         "dmis-lab/biobert-base-cased-v1.2": 0.96353,
         "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.95004,
@@ -656,7 +656,7 @@
         "bert-base-uncased": 1.0,
         "bert-large-uncased": 1.0,
         "roberta-base": 0.93186,
-        "answerdotai/ModernBERT-base": 0.92953,
+        "answerdotai/ModernBERT-base": 0.92958,
         "allenai/scibert_scivocab_uncased": 0.95091,
         "dmis-lab/biobert-base-cased-v1.2": 0.96353,
         "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 0.95004,
@@ -759,20 +759,20 @@
     "title": "Stage 12 Domain Informativeness \u2194 Stage 13 Tokenizer Compatibility & Selection Analysis",
     "source_stage_12_file": "outputs/stage-12/document_importance.jsonl",
     "data_source_description": "Authoritative Stage 12 source of document informativeness scores, ranks, and tiers. Scores reflect Stage 12 heuristic/hybrid methodology outputs.",
-    "total_available_documents": 96844,
+    "total_available_documents": 96874,
     "sampled_documents_count": 1500,
     "observed_knowledge_tier_distribution": {
-      "Medium Knowledge": 689,
-      "High Knowledge": 411,
-      "Low Knowledge": 197,
-      "Redundant": 203
+      "Medium Knowledge": 677,
+      "High Knowledge": 413,
+      "Low Knowledge": 204,
+      "Redundant": 206
     },
     "vocabulary_categories_analyzed": [
       "maritime_terminology",
       "general_vocabulary",
       "rare_maritime_terminology"
     ],
-    "timestamp": "2026-10-07 20:27:15"
+    "timestamp": "2026-10-07 18:55:24"
   },
   "scientific_interpretation": {
     "core_question": "How compatible is each candidate tokenizer with specialized maritime vocabulary, and how does tokenizer-diagnostic redundancy inform the deterministic selection of representative models for Stage 14 MLM evaluation?",
@@ -808,9 +808,9 @@
       {
         "model": "answerdotai/ModernBERT-base",
         "selected_for_stage14": true,
-        "single_token_coverage": 0.3672,
-        "fragmentation_rate": 0.6328,
-        "avg_pieces_per_term": 1.839,
+        "single_token_coverage": 0.3701,
+        "fragmentation_rate": 0.6299,
+        "avg_pieces_per_term": 1.836,
         "max_pieces_per_term": 5
       },
       {
@@ -1080,75 +1080,75 @@
       {
         "model": "bert-base-uncased",
         "selected_for_stage14": true,
-        "document_count": 411,
-        "mean_fertility": 1.434,
+        "document_count": 413,
+        "mean_fertility": 1.4349,
         "mean_sequence_length": 87.59,
-        "mean_document_fragmentation": 0.2739,
-        "mean_document_coverage": 0.7261,
+        "mean_document_fragmentation": 0.2735,
+        "mean_document_coverage": 0.7265,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "bert-large-uncased",
         "selected_for_stage14": false,
-        "document_count": 411,
-        "mean_fertility": 1.434,
+        "document_count": 413,
+        "mean_fertility": 1.4349,
         "mean_sequence_length": 87.59,
-        "mean_document_fragmentation": 0.2739,
-        "mean_document_coverage": 0.7261,
+        "mean_document_fragmentation": 0.2735,
+        "mean_document_coverage": 0.7265,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "roberta-base",
         "selected_for_stage14": true,
-        "document_count": 411,
-        "mean_fertility": 1.5406,
-        "mean_sequence_length": 94.11,
-        "mean_document_fragmentation": 0.508,
-        "mean_document_coverage": 0.492,
+        "document_count": 413,
+        "mean_fertility": 1.5411,
+        "mean_sequence_length": 94.07,
+        "mean_document_fragmentation": 0.5083,
+        "mean_document_coverage": 0.4917,
         "oov_rate": null,
         "oov_status": "not_applicable"
       },
       {
         "model": "answerdotai/ModernBERT-base",
         "selected_for_stage14": true,
-        "document_count": 411,
-        "mean_fertility": 1.4881,
-        "mean_sequence_length": 90.9,
-        "mean_document_fragmentation": 0.4956,
-        "mean_document_coverage": 0.5044,
+        "document_count": 413,
+        "mean_fertility": 1.4878,
+        "mean_sequence_length": 90.82,
+        "mean_document_fragmentation": 0.4946,
+        "mean_document_coverage": 0.5054,
         "oov_rate": null,
         "oov_status": "not_applicable"
       },
       {
         "model": "allenai/scibert_scivocab_uncased",
         "selected_for_stage14": true,
-        "document_count": 411,
-        "mean_fertility": 1.4712,
-        "mean_sequence_length": 89.87,
-        "mean_document_fragmentation": 0.3038,
-        "mean_document_coverage": 0.6962,
+        "document_count": 413,
+        "mean_fertility": 1.4716,
+        "mean_sequence_length": 89.83,
+        "mean_document_fragmentation": 0.3042,
+        "mean_document_coverage": 0.6958,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "dmis-lab/biobert-base-cased-v1.2",
         "selected_for_stage14": true,
-        "document_count": 411,
-        "mean_fertility": 1.5057,
-        "mean_sequence_length": 91.98,
-        "mean_document_fragmentation": 0.2832,
-        "mean_document_coverage": 0.7168,
+        "document_count": 413,
+        "mean_fertility": 1.5074,
+        "mean_sequence_length": 92.01,
+        "mean_document_fragmentation": 0.2828,
+        "mean_document_coverage": 0.7172,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
         "selected_for_stage14": true,
-        "document_count": 411,
-        "mean_fertility": 1.4757,
-        "mean_sequence_length": 90.15,
+        "document_count": 413,
+        "mean_fertility": 1.4764,
+        "mean_sequence_length": 90.12,
         "mean_document_fragmentation": 0.2953,
         "mean_document_coverage": 0.7047,
         "oov_rate": 0.0,
@@ -1157,55 +1157,55 @@
       {
         "model": "emilyalsentzer/Bio_ClinicalBERT",
         "selected_for_stage14": false,
-        "document_count": 411,
-        "mean_fertility": 1.5057,
-        "mean_sequence_length": 91.98,
-        "mean_document_fragmentation": 0.2832,
-        "mean_document_coverage": 0.7168,
+        "document_count": 413,
+        "mean_fertility": 1.5074,
+        "mean_sequence_length": 92.01,
+        "mean_document_fragmentation": 0.2828,
+        "mean_document_coverage": 0.7172,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "nlpaueb/legal-bert-base-uncased",
         "selected_for_stage14": true,
-        "document_count": 411,
-        "mean_fertility": 1.5122,
-        "mean_sequence_length": 92.37,
+        "document_count": 413,
+        "mean_fertility": 1.5126,
+        "mean_sequence_length": 92.33,
         "mean_document_fragmentation": 0.3074,
         "mean_document_coverage": 0.6926,
-        "oov_rate": 0.00029,
+        "oov_rate": 0.000288,
         "oov_status": "measured"
       },
       {
         "model": "ProsusAI/finbert",
         "selected_for_stage14": false,
-        "document_count": 411,
-        "mean_fertility": 1.434,
+        "document_count": 413,
+        "mean_fertility": 1.4349,
         "mean_sequence_length": 87.59,
-        "mean_document_fragmentation": 0.2739,
-        "mean_document_coverage": 0.7261,
+        "mean_document_fragmentation": 0.2735,
+        "mean_document_coverage": 0.7265,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "google/electra-base-discriminator",
         "selected_for_stage14": false,
-        "document_count": 411,
-        "mean_fertility": 1.434,
+        "document_count": 413,
+        "mean_fertility": 1.4349,
         "mean_sequence_length": 87.59,
-        "mean_document_fragmentation": 0.2739,
-        "mean_document_coverage": 0.7261,
+        "mean_document_fragmentation": 0.2735,
+        "mean_document_coverage": 0.7265,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "distilbert-base-uncased",
         "selected_for_stage14": false,
-        "document_count": 411,
-        "mean_fertility": 1.434,
+        "document_count": 413,
+        "mean_fertility": 1.4349,
         "mean_sequence_length": 87.59,
-        "mean_document_fragmentation": 0.2739,
-        "mean_document_coverage": 0.7261,
+        "mean_document_fragmentation": 0.2735,
+        "mean_document_coverage": 0.7265,
         "oov_rate": 0.0,
         "oov_status": "measured"
       }
@@ -1214,132 +1214,132 @@
       {
         "model": "bert-base-uncased",
         "selected_for_stage14": true,
-        "document_count": 197,
-        "mean_fertility": 1.3466,
-        "mean_sequence_length": 18.36,
-        "mean_document_fragmentation": 0.2254,
-        "mean_document_coverage": 0.7746,
+        "document_count": 204,
+        "mean_fertility": 1.3432,
+        "mean_sequence_length": 19.59,
+        "mean_document_fragmentation": 0.2262,
+        "mean_document_coverage": 0.7738,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "bert-large-uncased",
         "selected_for_stage14": false,
-        "document_count": 197,
-        "mean_fertility": 1.3466,
-        "mean_sequence_length": 18.36,
-        "mean_document_fragmentation": 0.2254,
-        "mean_document_coverage": 0.7746,
+        "document_count": 204,
+        "mean_fertility": 1.3432,
+        "mean_sequence_length": 19.59,
+        "mean_document_fragmentation": 0.2262,
+        "mean_document_coverage": 0.7738,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "roberta-base",
         "selected_for_stage14": true,
-        "document_count": 197,
-        "mean_fertility": 2.0015,
-        "mean_sequence_length": 27.29,
-        "mean_document_fragmentation": 0.6759,
-        "mean_document_coverage": 0.3241,
+        "document_count": 204,
+        "mean_fertility": 1.9452,
+        "mean_sequence_length": 28.37,
+        "mean_document_fragmentation": 0.6669,
+        "mean_document_coverage": 0.3331,
         "oov_rate": null,
         "oov_status": "not_applicable"
       },
       {
         "model": "answerdotai/ModernBERT-base",
         "selected_for_stage14": true,
-        "document_count": 197,
-        "mean_fertility": 1.9937,
-        "mean_sequence_length": 27.18,
-        "mean_document_fragmentation": 0.6796,
-        "mean_document_coverage": 0.3204,
+        "document_count": 204,
+        "mean_fertility": 1.9398,
+        "mean_sequence_length": 28.29,
+        "mean_document_fragmentation": 0.6698,
+        "mean_document_coverage": 0.3302,
         "oov_rate": null,
         "oov_status": "not_applicable"
       },
       {
         "model": "allenai/scibert_scivocab_uncased",
         "selected_for_stage14": true,
-        "document_count": 197,
-        "mean_fertility": 1.4758,
-        "mean_sequence_length": 20.12,
-        "mean_document_fragmentation": 0.3194,
-        "mean_document_coverage": 0.6806,
+        "document_count": 204,
+        "mean_fertility": 1.4625,
+        "mean_sequence_length": 21.33,
+        "mean_document_fragmentation": 0.3183,
+        "mean_document_coverage": 0.6817,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "dmis-lab/biobert-base-cased-v1.2",
         "selected_for_stage14": true,
-        "document_count": 197,
-        "mean_fertility": 1.4538,
-        "mean_sequence_length": 19.82,
-        "mean_document_fragmentation": 0.258,
-        "mean_document_coverage": 0.742,
+        "document_count": 204,
+        "mean_fertility": 1.4497,
+        "mean_sequence_length": 21.14,
+        "mean_document_fragmentation": 0.2579,
+        "mean_document_coverage": 0.7421,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
         "selected_for_stage14": true,
-        "document_count": 197,
-        "mean_fertility": 1.4784,
-        "mean_sequence_length": 20.16,
-        "mean_document_fragmentation": 0.3189,
-        "mean_document_coverage": 0.6811,
+        "document_count": 204,
+        "mean_fertility": 1.4645,
+        "mean_sequence_length": 21.36,
+        "mean_document_fragmentation": 0.3177,
+        "mean_document_coverage": 0.6823,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "emilyalsentzer/Bio_ClinicalBERT",
         "selected_for_stage14": false,
-        "document_count": 197,
-        "mean_fertility": 1.4538,
-        "mean_sequence_length": 19.82,
-        "mean_document_fragmentation": 0.258,
-        "mean_document_coverage": 0.742,
+        "document_count": 204,
+        "mean_fertility": 1.4497,
+        "mean_sequence_length": 21.14,
+        "mean_document_fragmentation": 0.2579,
+        "mean_document_coverage": 0.7421,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "nlpaueb/legal-bert-base-uncased",
         "selected_for_stage14": true,
-        "document_count": 197,
-        "mean_fertility": 1.4635,
-        "mean_sequence_length": 19.95,
-        "mean_document_fragmentation": 0.303,
-        "mean_document_coverage": 0.697,
-        "oov_rate": 0.000509,
+        "document_count": 204,
+        "mean_fertility": 1.4565,
+        "mean_sequence_length": 21.24,
+        "mean_document_fragmentation": 0.3027,
+        "mean_document_coverage": 0.6973,
+        "oov_rate": 0.000692,
         "oov_status": "measured"
       },
       {
         "model": "ProsusAI/finbert",
         "selected_for_stage14": false,
-        "document_count": 197,
-        "mean_fertility": 1.3466,
-        "mean_sequence_length": 18.36,
-        "mean_document_fragmentation": 0.2254,
-        "mean_document_coverage": 0.7746,
+        "document_count": 204,
+        "mean_fertility": 1.3432,
+        "mean_sequence_length": 19.59,
+        "mean_document_fragmentation": 0.2262,
+        "mean_document_coverage": 0.7738,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "google/electra-base-discriminator",
         "selected_for_stage14": false,
-        "document_count": 197,
-        "mean_fertility": 1.3466,
-        "mean_sequence_length": 18.36,
-        "mean_document_fragmentation": 0.2254,
-        "mean_document_coverage": 0.7746,
+        "document_count": 204,
+        "mean_fertility": 1.3432,
+        "mean_sequence_length": 19.59,
+        "mean_document_fragmentation": 0.2262,
+        "mean_document_coverage": 0.7738,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "distilbert-base-uncased",
         "selected_for_stage14": false,
-        "document_count": 197,
-        "mean_fertility": 1.3466,
-        "mean_sequence_length": 18.36,
-        "mean_document_fragmentation": 0.2254,
-        "mean_document_coverage": 0.7746,
+        "document_count": 204,
+        "mean_fertility": 1.3432,
+        "mean_sequence_length": 19.59,
+        "mean_document_fragmentation": 0.2262,
+        "mean_document_coverage": 0.7738,
         "oov_rate": 0.0,
         "oov_status": "measured"
       }
@@ -1348,64 +1348,64 @@
       {
         "model": "bert-base-uncased",
         "selected_for_stage14": true,
-        "document_count": 689,
-        "mean_fertility": 1.382,
-        "mean_sequence_length": 52.85,
-        "mean_document_fragmentation": 0.2601,
-        "mean_document_coverage": 0.7399,
+        "document_count": 677,
+        "mean_fertility": 1.383,
+        "mean_sequence_length": 53.12,
+        "mean_document_fragmentation": 0.2599,
+        "mean_document_coverage": 0.7401,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "bert-large-uncased",
         "selected_for_stage14": false,
-        "document_count": 689,
-        "mean_fertility": 1.382,
-        "mean_sequence_length": 52.85,
-        "mean_document_fragmentation": 0.2601,
-        "mean_document_coverage": 0.7399,
+        "document_count": 677,
+        "mean_fertility": 1.383,
+        "mean_sequence_length": 53.12,
+        "mean_document_fragmentation": 0.2599,
+        "mean_document_coverage": 0.7401,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "roberta-base",
         "selected_for_stage14": true,
-        "document_count": 689,
-        "mean_fertility": 1.554,
-        "mean_sequence_length": 59.42,
-        "mean_document_fragmentation": 0.5372,
-        "mean_document_coverage": 0.4628,
+        "document_count": 677,
+        "mean_fertility": 1.5568,
+        "mean_sequence_length": 59.8,
+        "mean_document_fragmentation": 0.5382,
+        "mean_document_coverage": 0.4618,
         "oov_rate": null,
         "oov_status": "not_applicable"
       },
       {
         "model": "answerdotai/ModernBERT-base",
         "selected_for_stage14": true,
-        "document_count": 689,
-        "mean_fertility": 1.523,
-        "mean_sequence_length": 58.24,
-        "mean_document_fragmentation": 0.5525,
-        "mean_document_coverage": 0.4475,
+        "document_count": 677,
+        "mean_fertility": 1.5243,
+        "mean_sequence_length": 58.55,
+        "mean_document_fragmentation": 0.5527,
+        "mean_document_coverage": 0.4473,
         "oov_rate": null,
         "oov_status": "not_applicable"
       },
       {
         "model": "allenai/scibert_scivocab_uncased",
         "selected_for_stage14": true,
-        "document_count": 689,
-        "mean_fertility": 1.4403,
-        "mean_sequence_length": 55.07,
-        "mean_document_fragmentation": 0.3045,
-        "mean_document_coverage": 0.6955,
+        "document_count": 677,
+        "mean_fertility": 1.4422,
+        "mean_sequence_length": 55.4,
+        "mean_document_fragmentation": 0.3046,
+        "mean_document_coverage": 0.6954,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "dmis-lab/biobert-base-cased-v1.2",
         "selected_for_stage14": true,
-        "document_count": 689,
-        "mean_fertility": 1.4641,
-        "mean_sequence_length": 55.98,
+        "document_count": 677,
+        "mean_fertility": 1.4654,
+        "mean_sequence_length": 56.29,
         "mean_document_fragmentation": 0.2741,
         "mean_document_coverage": 0.7259,
         "oov_rate": 0.0,
@@ -1414,20 +1414,20 @@
       {
         "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
         "selected_for_stage14": true,
-        "document_count": 689,
-        "mean_fertility": 1.4415,
-        "mean_sequence_length": 55.12,
-        "mean_document_fragmentation": 0.2991,
-        "mean_document_coverage": 0.7009,
+        "document_count": 677,
+        "mean_fertility": 1.444,
+        "mean_sequence_length": 55.47,
+        "mean_document_fragmentation": 0.2992,
+        "mean_document_coverage": 0.7008,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "emilyalsentzer/Bio_ClinicalBERT",
         "selected_for_stage14": false,
-        "document_count": 689,
-        "mean_fertility": 1.4641,
-        "mean_sequence_length": 55.98,
+        "document_count": 677,
+        "mean_fertility": 1.4654,
+        "mean_sequence_length": 56.29,
         "mean_document_fragmentation": 0.2741,
         "mean_document_coverage": 0.7259,
         "oov_rate": 0.0,
@@ -1436,44 +1436,44 @@
       {
         "model": "nlpaueb/legal-bert-base-uncased",
         "selected_for_stage14": true,
-        "document_count": 689,
-        "mean_fertility": 1.4661,
-        "mean_sequence_length": 56.06,
-        "mean_document_fragmentation": 0.3069,
-        "mean_document_coverage": 0.6931,
-        "oov_rate": 0.000311,
+        "document_count": 677,
+        "mean_fertility": 1.4679,
+        "mean_sequence_length": 56.39,
+        "mean_document_fragmentation": 0.3072,
+        "mean_document_coverage": 0.6928,
+        "oov_rate": 0.000367,
         "oov_status": "measured"
       },
       {
         "model": "ProsusAI/finbert",
         "selected_for_stage14": false,
-        "document_count": 689,
-        "mean_fertility": 1.382,
-        "mean_sequence_length": 52.85,
-        "mean_document_fragmentation": 0.2601,
-        "mean_document_coverage": 0.7399,
+        "document_count": 677,
+        "mean_fertility": 1.383,
+        "mean_sequence_length": 53.12,
+        "mean_document_fragmentation": 0.2599,
+        "mean_document_coverage": 0.7401,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "google/electra-base-discriminator",
         "selected_for_stage14": false,
-        "document_count": 689,
-        "mean_fertility": 1.382,
-        "mean_sequence_length": 52.85,
-        "mean_document_fragmentation": 0.2601,
-        "mean_document_coverage": 0.7399,
+        "document_count": 677,
+        "mean_fertility": 1.383,
+        "mean_sequence_length": 53.12,
+        "mean_document_fragmentation": 0.2599,
+        "mean_document_coverage": 0.7401,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "distilbert-base-uncased",
         "selected_for_stage14": false,
-        "document_count": 689,
-        "mean_fertility": 1.382,
-        "mean_sequence_length": 52.85,
-        "mean_document_fragmentation": 0.2601,
-        "mean_document_coverage": 0.7399,
+        "document_count": 677,
+        "mean_fertility": 1.383,
+        "mean_sequence_length": 53.12,
+        "mean_document_fragmentation": 0.2599,
+        "mean_document_coverage": 0.7401,
         "oov_rate": 0.0,
         "oov_status": "measured"
       }
@@ -1482,132 +1482,132 @@
       {
         "model": "bert-base-uncased",
         "selected_for_stage14": true,
-        "document_count": 203,
-        "mean_fertility": 1.3573,
-        "mean_sequence_length": 43.38,
-        "mean_document_fragmentation": 0.269,
-        "mean_document_coverage": 0.731,
+        "document_count": 206,
+        "mean_fertility": 1.354,
+        "mean_sequence_length": 42.07,
+        "mean_document_fragmentation": 0.2687,
+        "mean_document_coverage": 0.7313,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "bert-large-uncased",
         "selected_for_stage14": false,
-        "document_count": 203,
-        "mean_fertility": 1.3573,
-        "mean_sequence_length": 43.38,
-        "mean_document_fragmentation": 0.269,
-        "mean_document_coverage": 0.731,
+        "document_count": 206,
+        "mean_fertility": 1.354,
+        "mean_sequence_length": 42.07,
+        "mean_document_fragmentation": 0.2687,
+        "mean_document_coverage": 0.7313,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "roberta-base",
         "selected_for_stage14": true,
-        "document_count": 203,
-        "mean_fertility": 1.5022,
-        "mean_sequence_length": 48.01,
-        "mean_document_fragmentation": 0.4699,
-        "mean_document_coverage": 0.5301,
+        "document_count": 206,
+        "mean_fertility": 1.4918,
+        "mean_sequence_length": 46.35,
+        "mean_document_fragmentation": 0.4691,
+        "mean_document_coverage": 0.5309,
         "oov_rate": null,
         "oov_status": "not_applicable"
       },
       {
         "model": "answerdotai/ModernBERT-base",
         "selected_for_stage14": true,
-        "document_count": 203,
-        "mean_fertility": 1.4867,
-        "mean_sequence_length": 47.52,
-        "mean_document_fragmentation": 0.5299,
-        "mean_document_coverage": 0.4701,
+        "document_count": 206,
+        "mean_fertility": 1.4813,
+        "mean_sequence_length": 46.03,
+        "mean_document_fragmentation": 0.5261,
+        "mean_document_coverage": 0.4739,
         "oov_rate": null,
         "oov_status": "not_applicable"
       },
       {
         "model": "allenai/scibert_scivocab_uncased",
         "selected_for_stage14": true,
-        "document_count": 203,
-        "mean_fertility": 1.4211,
-        "mean_sequence_length": 45.42,
-        "mean_document_fragmentation": 0.2926,
-        "mean_document_coverage": 0.7074,
+        "document_count": 206,
+        "mean_fertility": 1.4193,
+        "mean_sequence_length": 44.1,
+        "mean_document_fragmentation": 0.2919,
+        "mean_document_coverage": 0.7081,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "dmis-lab/biobert-base-cased-v1.2",
         "selected_for_stage14": true,
-        "document_count": 203,
-        "mean_fertility": 1.4567,
-        "mean_sequence_length": 46.56,
-        "mean_document_fragmentation": 0.2729,
-        "mean_document_coverage": 0.7271,
+        "document_count": 206,
+        "mean_fertility": 1.4488,
+        "mean_sequence_length": 45.02,
+        "mean_document_fragmentation": 0.2721,
+        "mean_document_coverage": 0.7279,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
         "selected_for_stage14": true,
-        "document_count": 203,
-        "mean_fertility": 1.4189,
-        "mean_sequence_length": 45.35,
-        "mean_document_fragmentation": 0.2884,
-        "mean_document_coverage": 0.7116,
+        "document_count": 206,
+        "mean_fertility": 1.4165,
+        "mean_sequence_length": 44.01,
+        "mean_document_fragmentation": 0.2883,
+        "mean_document_coverage": 0.7117,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "emilyalsentzer/Bio_ClinicalBERT",
         "selected_for_stage14": false,
-        "document_count": 203,
-        "mean_fertility": 1.4567,
-        "mean_sequence_length": 46.56,
-        "mean_document_fragmentation": 0.2729,
-        "mean_document_coverage": 0.7271,
+        "document_count": 206,
+        "mean_fertility": 1.4488,
+        "mean_sequence_length": 45.02,
+        "mean_document_fragmentation": 0.2721,
+        "mean_document_coverage": 0.7279,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "nlpaueb/legal-bert-base-uncased",
         "selected_for_stage14": true,
-        "document_count": 203,
-        "mean_fertility": 1.4303,
-        "mean_sequence_length": 45.71,
-        "mean_document_fragmentation": 0.2941,
-        "mean_document_coverage": 0.7059,
-        "oov_rate": 0.000108,
+        "document_count": 206,
+        "mean_fertility": 1.427,
+        "mean_sequence_length": 44.34,
+        "mean_document_fragmentation": 0.2908,
+        "mean_document_coverage": 0.7092,
+        "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "ProsusAI/finbert",
         "selected_for_stage14": false,
-        "document_count": 203,
-        "mean_fertility": 1.3573,
-        "mean_sequence_length": 43.38,
-        "mean_document_fragmentation": 0.269,
-        "mean_document_coverage": 0.731,
+        "document_count": 206,
+        "mean_fertility": 1.354,
+        "mean_sequence_length": 42.07,
+        "mean_document_fragmentation": 0.2687,
+        "mean_document_coverage": 0.7313,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "google/electra-base-discriminator",
         "selected_for_stage14": false,
-        "document_count": 203,
-        "mean_fertility": 1.3573,
-        "mean_sequence_length": 43.38,
-        "mean_document_fragmentation": 0.269,
-        "mean_document_coverage": 0.731,
+        "document_count": 206,
+        "mean_fertility": 1.354,
+        "mean_sequence_length": 42.07,
+        "mean_document_fragmentation": 0.2687,
+        "mean_document_coverage": 0.7313,
         "oov_rate": 0.0,
         "oov_status": "measured"
       },
       {
         "model": "distilbert-base-uncased",
         "selected_for_stage14": false,
-        "document_count": 203,
-        "mean_fertility": 1.3573,
-        "mean_sequence_length": 43.38,
-        "mean_document_fragmentation": 0.269,
-        "mean_document_coverage": 0.731,
+        "document_count": 206,
+        "mean_fertility": 1.354,
+        "mean_sequence_length": 42.07,
+        "mean_document_fragmentation": 0.2687,
+        "mean_document_coverage": 0.7313,
         "oov_rate": 0.0,
         "oov_status": "measured"
       }
@@ -1618,19 +1618,19 @@
       "model": "bert-base-uncased",
       "selected_for_stage14": true,
       "fertility_correlation": {
-        "rho": 0.308,
+        "rho": 0.3072,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
       },
       "fragmentation_correlation": {
-        "rho": 0.1516,
+        "rho": 0.1582,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
       },
       "coverage_correlation": {
-        "rho": -0.1516,
+        "rho": -0.1582,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
@@ -1640,19 +1640,19 @@
       "model": "bert-large-uncased",
       "selected_for_stage14": false,
       "fertility_correlation": {
-        "rho": 0.308,
+        "rho": 0.3072,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
       },
       "fragmentation_correlation": {
-        "rho": 0.1516,
+        "rho": 0.1582,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
       },
       "coverage_correlation": {
-        "rho": -0.1516,
+        "rho": -0.1582,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
@@ -1662,20 +1662,20 @@
       "model": "roberta-base",
       "selected_for_stage14": true,
       "fertility_correlation": {
-        "rho": -0.2754,
+        "rho": -0.2598,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
       },
       "fragmentation_correlation": {
-        "rho": -0.1197,
-        "p_value": 3e-06,
+        "rho": -0.1252,
+        "p_value": 1e-06,
         "sample_size": 1500,
         "status": "computed"
       },
       "coverage_correlation": {
-        "rho": 0.1197,
-        "p_value": 3e-06,
+        "rho": 0.1252,
+        "p_value": 1e-06,
         "sample_size": 1500,
         "status": "computed"
       }
@@ -1684,19 +1684,19 @@
       "model": "answerdotai/ModernBERT-base",
       "selected_for_stage14": true,
       "fertility_correlation": {
-        "rho": -0.3426,
+        "rho": -0.3277,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
       },
       "fragmentation_correlation": {
-        "rho": -0.4194,
+        "rho": -0.3946,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
       },
       "coverage_correlation": {
-        "rho": 0.4194,
+        "rho": 0.3946,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
@@ -1706,20 +1706,20 @@
       "model": "allenai/scibert_scivocab_uncased",
       "selected_for_stage14": true,
       "fertility_correlation": {
-        "rho": 0.1133,
-        "p_value": 1.1e-05,
+        "rho": 0.1166,
+        "p_value": 6e-06,
         "sample_size": 1500,
         "status": "computed"
       },
       "fragmentation_correlation": {
-        "rho": 0.0436,
-        "p_value": 0.091323,
+        "rho": 0.0458,
+        "p_value": 0.076101,
         "sample_size": 1500,
         "status": "computed"
       },
       "coverage_correlation": {
-        "rho": -0.0436,
-        "p_value": 0.091323,
+        "rho": -0.0458,
+        "p_value": 0.076101,
         "sample_size": 1500,
         "status": "computed"
       }
@@ -1728,19 +1728,19 @@
       "model": "dmis-lab/biobert-base-cased-v1.2",
       "selected_for_stage14": true,
       "fertility_correlation": {
-        "rho": 0.1869,
+        "rho": 0.1983,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
       },
       "fragmentation_correlation": {
-        "rho": 0.1241,
+        "rho": 0.1286,
         "p_value": 1e-06,
         "sample_size": 1500,
         "status": "computed"
       },
       "coverage_correlation": {
-        "rho": -0.1241,
+        "rho": -0.1286,
         "p_value": 1e-06,
         "sample_size": 1500,
         "status": "computed"
@@ -1750,20 +1750,20 @@
       "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
       "selected_for_stage14": true,
       "fertility_correlation": {
-        "rho": 0.1209,
-        "p_value": 3e-06,
+        "rho": 0.1224,
+        "p_value": 2e-06,
         "sample_size": 1500,
         "status": "computed"
       },
       "fragmentation_correlation": {
-        "rho": 0.0141,
-        "p_value": 0.584271,
+        "rho": 0.0148,
+        "p_value": 0.56665,
         "sample_size": 1500,
         "status": "computed"
       },
       "coverage_correlation": {
-        "rho": -0.0141,
-        "p_value": 0.584271,
+        "rho": -0.0148,
+        "p_value": 0.56665,
         "sample_size": 1500,
         "status": "computed"
       }
@@ -1772,19 +1772,19 @@
       "model": "emilyalsentzer/Bio_ClinicalBERT",
       "selected_for_stage14": false,
       "fertility_correlation": {
-        "rho": 0.1869,
+        "rho": 0.1983,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
       },
       "fragmentation_correlation": {
-        "rho": 0.1241,
+        "rho": 0.1286,
         "p_value": 1e-06,
         "sample_size": 1500,
         "status": "computed"
       },
       "coverage_correlation": {
-        "rho": -0.1241,
+        "rho": -0.1286,
         "p_value": 1e-06,
         "sample_size": 1500,
         "status": "computed"
@@ -1794,20 +1794,20 @@
       "model": "nlpaueb/legal-bert-base-uncased",
       "selected_for_stage14": true,
       "fertility_correlation": {
-        "rho": 0.2474,
+        "rho": 0.2435,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
       },
       "fragmentation_correlation": {
-        "rho": 0.0647,
-        "p_value": 0.012139,
+        "rho": 0.0768,
+        "p_value": 0.002916,
         "sample_size": 1500,
         "status": "computed"
       },
       "coverage_correlation": {
-        "rho": -0.0647,
-        "p_value": 0.012139,
+        "rho": -0.0768,
+        "p_value": 0.002916,
         "sample_size": 1500,
         "status": "computed"
       }
@@ -1816,19 +1816,19 @@
       "model": "ProsusAI/finbert",
       "selected_for_stage14": false,
       "fertility_correlation": {
-        "rho": 0.308,
+        "rho": 0.3072,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
       },
       "fragmentation_correlation": {
-        "rho": 0.1516,
+        "rho": 0.1582,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
       },
       "coverage_correlation": {
-        "rho": -0.1516,
+        "rho": -0.1582,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
@@ -1838,19 +1838,19 @@
       "model": "google/electra-base-discriminator",
       "selected_for_stage14": false,
       "fertility_correlation": {
-        "rho": 0.308,
+        "rho": 0.3072,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
       },
       "fragmentation_correlation": {
-        "rho": 0.1516,
+        "rho": 0.1582,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
       },
       "coverage_correlation": {
-        "rho": -0.1516,
+        "rho": -0.1582,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
@@ -1860,19 +1860,19 @@
       "model": "distilbert-base-uncased",
       "selected_for_stage14": false,
       "fertility_correlation": {
-        "rho": 0.308,
+        "rho": 0.3072,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
       },
       "fragmentation_correlation": {
-        "rho": 0.1516,
+        "rho": 0.1582,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
       },
       "coverage_correlation": {
-        "rho": -0.1516,
+        "rho": -0.1582,
         "p_value": 0.0,
         "sample_size": 1500,
         "status": "computed"
@@ -6155,43 +6155,43 @@
       "vocab_size": 30522,
       "domain_token_coverage": 0.7343,
       "domain_fragmentation": 0.2657,
-      "domain_fertility": 1.3993,
+      "domain_fertility": 1.3996,
       "domain_unknown_rate": 0.0,
       "oov_status": "measured",
-      "mean_sequence_length": 56.56,
-      "tokenization_speed": 35820.49,
-      "mean_document_fragmentation": 0.2605,
-      "mean_document_coverage": 0.7395,
+      "mean_sequence_length": 56.53,
+      "tokenization_speed": 28758.59,
+      "mean_document_fragmentation": 0.2603,
+      "mean_document_coverage": 0.7397,
       "general_vocab_coverage": 0.9787,
       "rare_maritime_coverage": 0.0,
       "stratified_by_informativeness_tier": {
         "Medium Knowledge": {
-          "document_count": 689,
-          "mean_fertility": 1.382,
-          "mean_sequence_length": 52.85,
-          "mean_document_fragmentation": 0.2601,
-          "mean_document_coverage": 0.7399
+          "document_count": 677,
+          "mean_fertility": 1.383,
+          "mean_sequence_length": 53.12,
+          "mean_document_fragmentation": 0.2599,
+          "mean_document_coverage": 0.7401
         },
         "High Knowledge": {
-          "document_count": 411,
-          "mean_fertility": 1.434,
+          "document_count": 413,
+          "mean_fertility": 1.4349,
           "mean_sequence_length": 87.59,
-          "mean_document_fragmentation": 0.2739,
-          "mean_document_coverage": 0.7261
+          "mean_document_fragmentation": 0.2735,
+          "mean_document_coverage": 0.7265
         },
         "Low Knowledge": {
-          "document_count": 197,
-          "mean_fertility": 1.3466,
-          "mean_sequence_length": 18.36,
-          "mean_document_fragmentation": 0.2254,
-          "mean_document_coverage": 0.7746
+          "document_count": 204,
+          "mean_fertility": 1.3432,
+          "mean_sequence_length": 19.59,
+          "mean_document_fragmentation": 0.2262,
+          "mean_document_coverage": 0.7738
         },
         "Redundant": {
-          "document_count": 203,
-          "mean_fertility": 1.3573,
-          "mean_sequence_length": 43.38,
-          "mean_document_fragmentation": 0.269,
-          "mean_document_coverage": 0.731
+          "document_count": 206,
+          "mean_fertility": 1.354,
+          "mean_sequence_length": 42.07,
+          "mean_document_fragmentation": 0.2687,
+          "mean_document_coverage": 0.7313
         }
       }
     },
@@ -6201,43 +6201,43 @@
       "vocab_size": 30522,
       "domain_token_coverage": 0.7343,
       "domain_fragmentation": 0.2657,
-      "domain_fertility": 1.3993,
+      "domain_fertility": 1.3996,
       "domain_unknown_rate": 0.0,
       "oov_status": "measured",
-      "mean_sequence_length": 56.56,
-      "tokenization_speed": 34686.15,
-      "mean_document_fragmentation": 0.2605,
-      "mean_document_coverage": 0.7395,
+      "mean_sequence_length": 56.53,
+      "tokenization_speed": 40909.94,
+      "mean_document_fragmentation": 0.2603,
+      "mean_document_coverage": 0.7397,
       "general_vocab_coverage": 0.9787,
       "rare_maritime_coverage": 0.0,
       "stratified_by_informativeness_tier": {
         "Medium Knowledge": {
-          "document_count": 689,
-          "mean_fertility": 1.382,
-          "mean_sequence_length": 52.85,
-          "mean_document_fragmentation": 0.2601,
-          "mean_document_coverage": 0.7399
+          "document_count": 677,
+          "mean_fertility": 1.383,
+          "mean_sequence_length": 53.12,
+          "mean_document_fragmentation": 0.2599,
+          "mean_document_coverage": 0.7401
         },
         "High Knowledge": {
-          "document_count": 411,
-          "mean_fertility": 1.434,
+          "document_count": 413,
+          "mean_fertility": 1.4349,
           "mean_sequence_length": 87.59,
-          "mean_document_fragmentation": 0.2739,
-          "mean_document_coverage": 0.7261
+          "mean_document_fragmentation": 0.2735,
+          "mean_document_coverage": 0.7265
         },
         "Low Knowledge": {
-          "document_count": 197,
-          "mean_fertility": 1.3466,
-          "mean_sequence_length": 18.36,
-          "mean_document_fragmentation": 0.2254,
-          "mean_document_coverage": 0.7746
+          "document_count": 204,
+          "mean_fertility": 1.3432,
+          "mean_sequence_length": 19.59,
+          "mean_document_fragmentation": 0.2262,
+          "mean_document_coverage": 0.7738
         },
         "Redundant": {
-          "document_count": 203,
-          "mean_fertility": 1.3573,
-          "mean_sequence_length": 43.38,
-          "mean_document_fragmentation": 0.269,
-          "mean_document_coverage": 0.731
+          "document_count": 206,
+          "mean_fertility": 1.354,
+          "mean_sequence_length": 42.07,
+          "mean_document_fragmentation": 0.2687,
+          "mean_document_coverage": 0.7313
         }
       }
     },
@@ -6247,43 +6247,43 @@
       "vocab_size": 50265,
       "domain_token_coverage": 0.3522,
       "domain_fragmentation": 0.6478,
-      "domain_fertility": 1.5628,
+      "domain_fertility": 1.5624,
       "domain_unknown_rate": null,
       "oov_status": "not_applicable",
-      "mean_sequence_length": 63.16,
-      "tokenization_speed": 44894.75,
-      "mean_document_fragmentation": 0.5383,
-      "mean_document_coverage": 0.4617,
+      "mean_sequence_length": 63.11,
+      "tokenization_speed": 35443.83,
+      "mean_document_fragmentation": 0.538,
+      "mean_document_coverage": 0.462,
       "general_vocab_coverage": 0.4255,
       "rare_maritime_coverage": 0.0,
       "stratified_by_informativeness_tier": {
         "Medium Knowledge": {
-          "document_count": 689,
-          "mean_fertility": 1.554,
-          "mean_sequence_length": 59.42,
-          "mean_document_fragmentation": 0.5372,
-          "mean_document_coverage": 0.4628
+          "document_count": 677,
+          "mean_fertility": 1.5568,
+          "mean_sequence_length": 59.8,
+          "mean_document_fragmentation": 0.5382,
+          "mean_document_coverage": 0.4618
         },
         "High Knowledge": {
-          "document_count": 411,
-          "mean_fertility": 1.5406,
-          "mean_sequence_length": 94.11,
-          "mean_document_fragmentation": 0.508,
-          "mean_document_coverage": 0.492
+          "document_count": 413,
+          "mean_fertility": 1.5411,
+          "mean_sequence_length": 94.07,
+          "mean_document_fragmentation": 0.5083,
+          "mean_document_coverage": 0.4917
         },
         "Low Knowledge": {
-          "document_count": 197,
-          "mean_fertility": 2.0015,
-          "mean_sequence_length": 27.29,
-          "mean_document_fragmentation": 0.6759,
-          "mean_document_coverage": 0.3241
+          "document_count": 204,
+          "mean_fertility": 1.9452,
+          "mean_sequence_length": 28.37,
+          "mean_document_fragmentation": 0.6669,
+          "mean_document_coverage": 0.3331
         },
         "Redundant": {
-          "document_count": 203,
-          "mean_fertility": 1.5022,
-          "mean_sequence_length": 48.01,
-          "mean_document_fragmentation": 0.4699,
-          "mean_document_coverage": 0.5301
+          "document_count": 206,
+          "mean_fertility": 1.4918,
+          "mean_sequence_length": 46.35,
+          "mean_document_fragmentation": 0.4691,
+          "mean_document_coverage": 0.5309
         }
       }
     },
@@ -6291,45 +6291,45 @@
       "model": "answerdotai/ModernBERT-base",
       "clean_model_name": "answerdotai_ModernBERT_base",
       "vocab_size": 50280,
-      "domain_token_coverage": 0.3672,
-      "domain_fragmentation": 0.6328,
-      "domain_fertility": 1.5255,
+      "domain_token_coverage": 0.3701,
+      "domain_fragmentation": 0.6299,
+      "domain_fertility": 1.525,
       "domain_unknown_rate": null,
       "oov_status": "not_applicable",
-      "mean_sequence_length": 61.66,
-      "tokenization_speed": 38930.25,
-      "mean_document_fragmentation": 0.5506,
-      "mean_document_coverage": 0.4494,
+      "mean_sequence_length": 61.6,
+      "tokenization_speed": 42534.39,
+      "mean_document_fragmentation": 0.549,
+      "mean_document_coverage": 0.451,
       "general_vocab_coverage": 0.4681,
       "rare_maritime_coverage": 0.0,
       "stratified_by_informativeness_tier": {
         "Medium Knowledge": {
-          "document_count": 689,
-          "mean_fertility": 1.523,
-          "mean_sequence_length": 58.24,
-          "mean_document_fragmentation": 0.5525,
-          "mean_document_coverage": 0.4475
+          "document_count": 677,
+          "mean_fertility": 1.5243,
+          "mean_sequence_length": 58.55,
+          "mean_document_fragmentation": 0.5527,
+          "mean_document_coverage": 0.4473
         },
         "High Knowledge": {
-          "document_count": 411,
-          "mean_fertility": 1.4881,
-          "mean_sequence_length": 90.9,
-          "mean_document_fragmentation": 0.4956,
-          "mean_document_coverage": 0.5044
+          "document_count": 413,
+          "mean_fertility": 1.4878,
+          "mean_sequence_length": 90.82,
+          "mean_document_fragmentation": 0.4946,
+          "mean_document_coverage": 0.5054
         },
         "Low Knowledge": {
-          "document_count": 197,
-          "mean_fertility": 1.9937,
-          "mean_sequence_length": 27.18,
-          "mean_document_fragmentation": 0.6796,
-          "mean_document_coverage": 0.3204
+          "document_count": 204,
+          "mean_fertility": 1.9398,
+          "mean_sequence_length": 28.29,
+          "mean_document_fragmentation": 0.6698,
+          "mean_document_coverage": 0.3302
         },
         "Redundant": {
-          "document_count": 203,
-          "mean_fertility": 1.4867,
-          "mean_sequence_length": 47.52,
-          "mean_document_fragmentation": 0.5299,
-          "mean_document_coverage": 0.4701
+          "document_count": 206,
+          "mean_fertility": 1.4813,
+          "mean_sequence_length": 46.03,
+          "mean_document_fragmentation": 0.5261,
+          "mean_document_coverage": 0.4739
         }
       }
     },
@@ -6339,43 +6339,43 @@
       "vocab_size": 31090,
       "domain_token_coverage": 0.5821,
       "domain_fragmentation": 0.4179,
-      "domain_fertility": 1.4526,
+      "domain_fertility": 1.453,
       "domain_unknown_rate": 0.0,
       "oov_status": "measured",
-      "mean_sequence_length": 58.71,
-      "tokenization_speed": 32805.94,
+      "mean_sequence_length": 58.69,
+      "tokenization_speed": 41322.63,
       "mean_document_fragmentation": 0.3046,
       "mean_document_coverage": 0.6954,
       "general_vocab_coverage": 0.9681,
       "rare_maritime_coverage": 0.0,
       "stratified_by_informativeness_tier": {
         "Medium Knowledge": {
-          "document_count": 689,
-          "mean_fertility": 1.4403,
-          "mean_sequence_length": 55.07,
-          "mean_document_fragmentation": 0.3045,
-          "mean_document_coverage": 0.6955
+          "document_count": 677,
+          "mean_fertility": 1.4422,
+          "mean_sequence_length": 55.4,
+          "mean_document_fragmentation": 0.3046,
+          "mean_document_coverage": 0.6954
         },
         "High Knowledge": {
-          "document_count": 411,
-          "mean_fertility": 1.4712,
-          "mean_sequence_length": 89.87,
-          "mean_document_fragmentation": 0.3038,
-          "mean_document_coverage": 0.6962
+          "document_count": 413,
+          "mean_fertility": 1.4716,
+          "mean_sequence_length": 89.83,
+          "mean_document_fragmentation": 0.3042,
+          "mean_document_coverage": 0.6958
         },
         "Low Knowledge": {
-          "document_count": 197,
-          "mean_fertility": 1.4758,
-          "mean_sequence_length": 20.12,
-          "mean_document_fragmentation": 0.3194,
-          "mean_document_coverage": 0.6806
+          "document_count": 204,
+          "mean_fertility": 1.4625,
+          "mean_sequence_length": 21.33,
+          "mean_document_fragmentation": 0.3183,
+          "mean_document_coverage": 0.6817
         },
         "Redundant": {
-          "document_count": 203,
-          "mean_fertility": 1.4211,
-          "mean_sequence_length": 45.42,
-          "mean_document_fragmentation": 0.2926,
-          "mean_document_coverage": 0.7074
+          "document_count": 206,
+          "mean_fertility": 1.4193,
+          "mean_sequence_length": 44.1,
+          "mean_document_fragmentation": 0.2919,
+          "mean_document_coverage": 0.7081
         }
       }
     },
@@ -6385,43 +6385,43 @@
       "vocab_size": 28996,
       "domain_token_coverage": 0.6448,
       "domain_fragmentation": 0.3552,
-      "domain_fertility": 1.4801,
+      "domain_fertility": 1.4803,
       "domain_unknown_rate": 0.0,
       "oov_status": "measured",
-      "mean_sequence_length": 59.82,
-      "tokenization_speed": 34540.14,
-      "mean_document_fragmentation": 0.2743,
-      "mean_document_coverage": 0.7257,
+      "mean_sequence_length": 59.8,
+      "tokenization_speed": 42392.5,
+      "mean_document_fragmentation": 0.274,
+      "mean_document_coverage": 0.726,
       "general_vocab_coverage": 0.9468,
       "rare_maritime_coverage": 0.0,
       "stratified_by_informativeness_tier": {
         "Medium Knowledge": {
-          "document_count": 689,
-          "mean_fertility": 1.4641,
-          "mean_sequence_length": 55.98,
+          "document_count": 677,
+          "mean_fertility": 1.4654,
+          "mean_sequence_length": 56.29,
           "mean_document_fragmentation": 0.2741,
           "mean_document_coverage": 0.7259
         },
         "High Knowledge": {
-          "document_count": 411,
-          "mean_fertility": 1.5057,
-          "mean_sequence_length": 91.98,
-          "mean_document_fragmentation": 0.2832,
-          "mean_document_coverage": 0.7168
+          "document_count": 413,
+          "mean_fertility": 1.5074,
+          "mean_sequence_length": 92.01,
+          "mean_document_fragmentation": 0.2828,
+          "mean_document_coverage": 0.7172
         },
         "Low Knowledge": {
-          "document_count": 197,
-          "mean_fertility": 1.4538,
-          "mean_sequence_length": 19.82,
-          "mean_document_fragmentation": 0.258,
-          "mean_document_coverage": 0.742
+          "document_count": 204,
+          "mean_fertility": 1.4497,
+          "mean_sequence_length": 21.14,
+          "mean_document_fragmentation": 0.2579,
+          "mean_document_coverage": 0.7421
         },
         "Redundant": {
-          "document_count": 203,
-          "mean_fertility": 1.4567,
-          "mean_sequence_length": 46.56,
-          "mean_document_fragmentation": 0.2729,
-          "mean_document_coverage": 0.7271
+          "document_count": 206,
+          "mean_fertility": 1.4488,
+          "mean_sequence_length": 45.02,
+          "mean_document_fragmentation": 0.2721,
+          "mean_document_coverage": 0.7279
         }
       }
     },
@@ -6431,43 +6431,43 @@
       "vocab_size": 30522,
       "domain_token_coverage": 0.5761,
       "domain_fragmentation": 0.4239,
-      "domain_fertility": 1.4549,
+      "domain_fertility": 1.4556,
       "domain_unknown_rate": 0.0,
       "oov_status": "measured",
       "mean_sequence_length": 58.8,
-      "tokenization_speed": 33899.18,
+      "tokenization_speed": 27027.91,
       "mean_document_fragmentation": 0.2992,
       "mean_document_coverage": 0.7008,
       "general_vocab_coverage": 0.9362,
       "rare_maritime_coverage": 0.0,
       "stratified_by_informativeness_tier": {
         "Medium Knowledge": {
-          "document_count": 689,
-          "mean_fertility": 1.4415,
-          "mean_sequence_length": 55.12,
-          "mean_document_fragmentation": 0.2991,
-          "mean_document_coverage": 0.7009
+          "document_count": 677,
+          "mean_fertility": 1.444,
+          "mean_sequence_length": 55.47,
+          "mean_document_fragmentation": 0.2992,
+          "mean_document_coverage": 0.7008
         },
         "High Knowledge": {
-          "document_count": 411,
-          "mean_fertility": 1.4757,
-          "mean_sequence_length": 90.15,
+          "document_count": 413,
+          "mean_fertility": 1.4764,
+          "mean_sequence_length": 90.12,
           "mean_document_fragmentation": 0.2953,
           "mean_document_coverage": 0.7047
         },
         "Low Knowledge": {
-          "document_count": 197,
-          "mean_fertility": 1.4784,
-          "mean_sequence_length": 20.16,
-          "mean_document_fragmentation": 0.3189,
-          "mean_document_coverage": 0.6811
+          "document_count": 204,
+          "mean_fertility": 1.4645,
+          "mean_sequence_length": 21.36,
+          "mean_document_fragmentation": 0.3177,
+          "mean_document_coverage": 0.6823
         },
         "Redundant": {
-          "document_count": 203,
-          "mean_fertility": 1.4189,
-          "mean_sequence_length": 45.35,
-          "mean_document_fragmentation": 0.2884,
-          "mean_document_coverage": 0.7116
+          "document_count": 206,
+          "mean_fertility": 1.4165,
+          "mean_sequence_length": 44.01,
+          "mean_document_fragmentation": 0.2883,
+          "mean_document_coverage": 0.7117
         }
       }
     },
@@ -6477,43 +6477,43 @@
       "vocab_size": 28996,
       "domain_token_coverage": 0.6448,
       "domain_fragmentation": 0.3552,
-      "domain_fertility": 1.4801,
+      "domain_fertility": 1.4803,
       "domain_unknown_rate": 0.0,
       "oov_status": "measured",
-      "mean_sequence_length": 59.82,
-      "tokenization_speed": 36139.89,
-      "mean_document_fragmentation": 0.2743,
-      "mean_document_coverage": 0.7257,
+      "mean_sequence_length": 59.8,
+      "tokenization_speed": 33004.13,
+      "mean_document_fragmentation": 0.274,
+      "mean_document_coverage": 0.726,
       "general_vocab_coverage": 0.9468,
       "rare_maritime_coverage": 0.0,
       "stratified_by_informativeness_tier": {
         "Medium Knowledge": {
-          "document_count": 689,
-          "mean_fertility": 1.4641,
-          "mean_sequence_length": 55.98,
+          "document_count": 677,
+          "mean_fertility": 1.4654,
+          "mean_sequence_length": 56.29,
           "mean_document_fragmentation": 0.2741,
           "mean_document_coverage": 0.7259
         },
         "High Knowledge": {
-          "document_count": 411,
-          "mean_fertility": 1.5057,
-          "mean_sequence_length": 91.98,
-          "mean_document_fragmentation": 0.2832,
-          "mean_document_coverage": 0.7168
+          "document_count": 413,
+          "mean_fertility": 1.5074,
+          "mean_sequence_length": 92.01,
+          "mean_document_fragmentation": 0.2828,
+          "mean_document_coverage": 0.7172
         },
         "Low Knowledge": {
-          "document_count": 197,
-          "mean_fertility": 1.4538,
-          "mean_sequence_length": 19.82,
-          "mean_document_fragmentation": 0.258,
-          "mean_document_coverage": 0.742
+          "document_count": 204,
+          "mean_fertility": 1.4497,
+          "mean_sequence_length": 21.14,
+          "mean_document_fragmentation": 0.2579,
+          "mean_document_coverage": 0.7421
         },
         "Redundant": {
-          "document_count": 203,
-          "mean_fertility": 1.4567,
-          "mean_sequence_length": 46.56,
-          "mean_document_fragmentation": 0.2729,
-          "mean_document_coverage": 0.7271
+          "document_count": 206,
+          "mean_fertility": 1.4488,
+          "mean_sequence_length": 45.02,
+          "mean_document_fragmentation": 0.2721,
+          "mean_document_coverage": 0.7279
         }
       }
     },
@@ -6523,43 +6523,43 @@
       "vocab_size": 30522,
       "domain_token_coverage": 0.6239,
       "domain_fragmentation": 0.3761,
-      "domain_fertility": 1.4813,
-      "domain_unknown_rate": 0.00029,
+      "domain_fertility": 1.4816,
+      "domain_unknown_rate": 0.000312,
       "oov_status": "measured",
-      "mean_sequence_length": 59.87,
-      "tokenization_speed": 34757.58,
-      "mean_document_fragmentation": 0.3048,
-      "mean_document_coverage": 0.6952,
+      "mean_sequence_length": 59.85,
+      "tokenization_speed": 39601.87,
+      "mean_document_fragmentation": 0.3044,
+      "mean_document_coverage": 0.6956,
       "general_vocab_coverage": 0.8298,
       "rare_maritime_coverage": 0.1,
       "stratified_by_informativeness_tier": {
         "Medium Knowledge": {
-          "document_count": 689,
-          "mean_fertility": 1.4661,
-          "mean_sequence_length": 56.06,
-          "mean_document_fragmentation": 0.3069,
-          "mean_document_coverage": 0.6931
+          "document_count": 677,
+          "mean_fertility": 1.4679,
+          "mean_sequence_length": 56.39,
+          "mean_document_fragmentation": 0.3072,
+          "mean_document_coverage": 0.6928
         },
         "High Knowledge": {
-          "document_count": 411,
-          "mean_fertility": 1.5122,
-          "mean_sequence_length": 92.37,
+          "document_count": 413,
+          "mean_fertility": 1.5126,
+          "mean_sequence_length": 92.33,
           "mean_document_fragmentation": 0.3074,
           "mean_document_coverage": 0.6926
         },
         "Low Knowledge": {
-          "document_count": 197,
-          "mean_fertility": 1.4635,
-          "mean_sequence_length": 19.95,
-          "mean_document_fragmentation": 0.303,
-          "mean_document_coverage": 0.697
+          "document_count": 204,
+          "mean_fertility": 1.4565,
+          "mean_sequence_length": 21.24,
+          "mean_document_fragmentation": 0.3027,
+          "mean_document_coverage": 0.6973
         },
         "Redundant": {
-          "document_count": 203,
-          "mean_fertility": 1.4303,
-          "mean_sequence_length": 45.71,
-          "mean_document_fragmentation": 0.2941,
-          "mean_document_coverage": 0.7059
+          "document_count": 206,
+          "mean_fertility": 1.427,
+          "mean_sequence_length": 44.34,
+          "mean_document_fragmentation": 0.2908,
+          "mean_document_coverage": 0.7092
         }
       }
     },
@@ -6569,43 +6569,43 @@
       "vocab_size": 30522,
       "domain_token_coverage": 0.7343,
       "domain_fragmentation": 0.2657,
-      "domain_fertility": 1.3993,
+      "domain_fertility": 1.3996,
       "domain_unknown_rate": 0.0,
       "oov_status": "measured",
-      "mean_sequence_length": 56.56,
-      "tokenization_speed": 32934.56,
-      "mean_document_fragmentation": 0.2605,
-      "mean_document_coverage": 0.7395,
+      "mean_sequence_length": 56.53,
+      "tokenization_speed": 36610.12,
+      "mean_document_fragmentation": 0.2603,
+      "mean_document_coverage": 0.7397,
       "general_vocab_coverage": 0.9787,
       "rare_maritime_coverage": 0.0,
       "stratified_by_informativeness_tier": {
         "Medium Knowledge": {
-          "document_count": 689,
-          "mean_fertility": 1.382,
-          "mean_sequence_length": 52.85,
-          "mean_document_fragmentation": 0.2601,
-          "mean_document_coverage": 0.7399
+          "document_count": 677,
+          "mean_fertility": 1.383,
+          "mean_sequence_length": 53.12,
+          "mean_document_fragmentation": 0.2599,
+          "mean_document_coverage": 0.7401
         },
         "High Knowledge": {
-          "document_count": 411,
-          "mean_fertility": 1.434,
+          "document_count": 413,
+          "mean_fertility": 1.4349,
           "mean_sequence_length": 87.59,
-          "mean_document_fragmentation": 0.2739,
-          "mean_document_coverage": 0.7261
+          "mean_document_fragmentation": 0.2735,
+          "mean_document_coverage": 0.7265
         },
         "Low Knowledge": {
-          "document_count": 197,
-          "mean_fertility": 1.3466,
-          "mean_sequence_length": 18.36,
-          "mean_document_fragmentation": 0.2254,
-          "mean_document_coverage": 0.7746
+          "document_count": 204,
+          "mean_fertility": 1.3432,
+          "mean_sequence_length": 19.59,
+          "mean_document_fragmentation": 0.2262,
+          "mean_document_coverage": 0.7738
         },
         "Redundant": {
-          "document_count": 203,
-          "mean_fertility": 1.3573,
-          "mean_sequence_length": 43.38,
-          "mean_document_fragmentation": 0.269,
-          "mean_document_coverage": 0.731
+          "document_count": 206,
+          "mean_fertility": 1.354,
+          "mean_sequence_length": 42.07,
+          "mean_document_fragmentation": 0.2687,
+          "mean_document_coverage": 0.7313
         }
       }
     },
@@ -6615,43 +6615,43 @@
       "vocab_size": 30522,
       "domain_token_coverage": 0.7343,
       "domain_fragmentation": 0.2657,
-      "domain_fertility": 1.3993,
+      "domain_fertility": 1.3996,
       "domain_unknown_rate": 0.0,
       "oov_status": "measured",
-      "mean_sequence_length": 56.56,
-      "tokenization_speed": 33441.46,
-      "mean_document_fragmentation": 0.2605,
-      "mean_document_coverage": 0.7395,
+      "mean_sequence_length": 56.53,
+      "tokenization_speed": 39522.14,
+      "mean_document_fragmentation": 0.2603,
+      "mean_document_coverage": 0.7397,
       "general_vocab_coverage": 0.9787,
       "rare_maritime_coverage": 0.0,
       "stratified_by_informativeness_tier": {
         "Medium Knowledge": {
-          "document_count": 689,
-          "mean_fertility": 1.382,
-          "mean_sequence_length": 52.85,
-          "mean_document_fragmentation": 0.2601,
-          "mean_document_coverage": 0.7399
+          "document_count": 677,
+          "mean_fertility": 1.383,
+          "mean_sequence_length": 53.12,
+          "mean_document_fragmentation": 0.2599,
+          "mean_document_coverage": 0.7401
         },
         "High Knowledge": {
-          "document_count": 411,
-          "mean_fertility": 1.434,
+          "document_count": 413,
+          "mean_fertility": 1.4349,
           "mean_sequence_length": 87.59,
-          "mean_document_fragmentation": 0.2739,
-          "mean_document_coverage": 0.7261
+          "mean_document_fragmentation": 0.2735,
+          "mean_document_coverage": 0.7265
         },
         "Low Knowledge": {
-          "document_count": 197,
-          "mean_fertility": 1.3466,
-          "mean_sequence_length": 18.36,
-          "mean_document_fragmentation": 0.2254,
-          "mean_document_coverage": 0.7746
+          "document_count": 204,
+          "mean_fertility": 1.3432,
+          "mean_sequence_length": 19.59,
+          "mean_document_fragmentation": 0.2262,
+          "mean_document_coverage": 0.7738
         },
         "Redundant": {
-          "document_count": 203,
-          "mean_fertility": 1.3573,
-          "mean_sequence_length": 43.38,
-          "mean_document_fragmentation": 0.269,
-          "mean_document_coverage": 0.731
+          "document_count": 206,
+          "mean_fertility": 1.354,
+          "mean_sequence_length": 42.07,
+          "mean_document_fragmentation": 0.2687,
+          "mean_document_coverage": 0.7313
         }
       }
     },
@@ -6661,43 +6661,43 @@
       "vocab_size": 30522,
       "domain_token_coverage": 0.7343,
       "domain_fragmentation": 0.2657,
-      "domain_fertility": 1.3993,
+      "domain_fertility": 1.3996,
       "domain_unknown_rate": 0.0,
       "oov_status": "measured",
-      "mean_sequence_length": 56.56,
-      "tokenization_speed": 32668.13,
-      "mean_document_fragmentation": 0.2605,
-      "mean_document_coverage": 0.7395,
+      "mean_sequence_length": 56.53,
+      "tokenization_speed": 39734.8,
+      "mean_document_fragmentation": 0.2603,
+      "mean_document_coverage": 0.7397,
       "general_vocab_coverage": 0.9787,
       "rare_maritime_coverage": 0.0,
       "stratified_by_informativeness_tier": {
         "Medium Knowledge": {
-          "document_count": 689,
-          "mean_fertility": 1.382,
-          "mean_sequence_length": 52.85,
-          "mean_document_fragmentation": 0.2601,
-          "mean_document_coverage": 0.7399
+          "document_count": 677,
+          "mean_fertility": 1.383,
+          "mean_sequence_length": 53.12,
+          "mean_document_fragmentation": 0.2599,
+          "mean_document_coverage": 0.7401
         },
         "High Knowledge": {
-          "document_count": 411,
-          "mean_fertility": 1.434,
+          "document_count": 413,
+          "mean_fertility": 1.4349,
           "mean_sequence_length": 87.59,
-          "mean_document_fragmentation": 0.2739,
-          "mean_document_coverage": 0.7261
+          "mean_document_fragmentation": 0.2735,
+          "mean_document_coverage": 0.7265
         },
         "Low Knowledge": {
-          "document_count": 197,
-          "mean_fertility": 1.3466,
-          "mean_sequence_length": 18.36,
-          "mean_document_fragmentation": 0.2254,
-          "mean_document_coverage": 0.7746
+          "document_count": 204,
+          "mean_fertility": 1.3432,
+          "mean_sequence_length": 19.59,
+          "mean_document_fragmentation": 0.2262,
+          "mean_document_coverage": 0.7738
         },
         "Redundant": {
-          "document_count": 203,
-          "mean_fertility": 1.3573,
-          "mean_sequence_length": 43.38,
-          "mean_document_fragmentation": 0.269,
-          "mean_document_coverage": 0.731
+          "document_count": 206,
+          "mean_fertility": 1.354,
+          "mean_sequence_length": 42.07,
+          "mean_document_fragmentation": 0.2687,
+          "mean_document_coverage": 0.7313
         }
       }
     }

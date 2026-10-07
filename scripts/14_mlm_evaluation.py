@@ -1390,7 +1390,7 @@ def main():
                         choices=["subword", "whole_word", "wwm_subword", "wwm_word"], default="whole_word",
                         help="MLM masking strategy: 'whole_word' (PRIMARY WWM) or 'subword' (baseline/diagnostic). Default: 'whole_word'.")
     parser.add_argument("--evaluation_unit", "--evaluation-unit", dest="evaluation_unit", type=str,
-                        choices=["subword", "word"], default=None,
+                        choices=["subword", "word"], default="word",
                         help="Evaluation scoring unit: 'word' (strict whole-word reconstruction) or 'subword' (subword token accuracy). Default: 'word' for whole_word.")
     parser.add_argument("--device", type=str, choices=["auto", "cpu", "cuda"], default="auto",
                         help="Compute device: 'auto' (use CUDA if available), 'cuda' (require CUDA), 'cpu' (force CPU). Default: 'auto'.")
@@ -1422,6 +1422,8 @@ def main():
             internal_mode = "wwm_subword"
     else:
         internal_mode = "subword"
+
+    is_wwm = internal_mode in ("wwm_subword", "wwm_word")
 
     root = get_project_root()
     config = load_config()
@@ -1548,16 +1550,27 @@ def main():
 
                 # Check cache if not running fresh
                 if not args.fresh and cache_path.exists():
-                    run_count += 1
-                    with open(cache_path, "r", encoding="utf-8") as f_c:
-                        eval_record = json.load(f_c)
-                    exp_key = (eval_record.get("clean_model_name", clean_model), rep, sub)
-                    if exp_key in seen_combinations:
-                        logger.error(f"Duplicate evaluation key encountered in cache: {exp_key}")
-                        duplicate_records.append(exp_key)
-                    seen_combinations.add(exp_key)
-                    random_15_records.append(eval_record)
-                    continue
+                    try:
+                        with open(cache_path, "r", encoding="utf-8") as f_c:
+                            eval_record = json.load(f_c)
+                        cached_mode = eval_record.get("masking_mode") or eval_record.get("experiment_metadata", {}).get("masking_mode")
+                        cached_unit = eval_record.get("evaluation_unit") or eval_record.get("experiment_metadata", {}).get("evaluation_unit")
+                        if cached_mode == resolved_masking_mode and cached_unit == resolved_evaluation_unit:
+                            run_count += 1
+                            exp_key = (eval_record.get("clean_model_name", clean_model), rep, sub)
+                            if exp_key in seen_combinations:
+                                logger.error(f"Duplicate evaluation key encountered in cache: {exp_key}")
+                                duplicate_records.append(exp_key)
+                            seen_combinations.add(exp_key)
+                            random_15_records.append(eval_record)
+                            continue
+                        else:
+                            logger.warning(
+                                f"Cache entry at {cache_path} protocol mismatch (cached: {cached_mode}/{cached_unit}, "
+                                f"expected: {resolved_masking_mode}/{resolved_evaluation_unit}). Recomputing cell."
+                            )
+                    except Exception as e:
+                        logger.warning(f"Error loading cache entry {cache_path}: {e}. Recomputing cell.")
 
                 sub_path = subsets_dir / f"{sub}.jsonl"
                 sub_occ_ids = set()
@@ -1593,20 +1606,39 @@ def main():
                 maritime_top1 = eval_res.get("maritime_tokens_summary", {}).get("top1_accuracy", 0.0)
                 domain_shift_gap = float(gen_eng_top1 - maritime_top1)
 
+                top1_val = float(eval_res.get("overall_summary", {}).get("overall_top1_accuracy", 0.0))
+                top5_val = float(eval_res.get("overall_summary", {}).get("word_reconstruction_top5_accuracy" if resolved_evaluation_unit == "word" else "top5_accuracy", top1_val))
+                top10_val = float(eval_res.get("overall_summary", {}).get("word_reconstruction_top10_accuracy" if resolved_evaluation_unit == "word" else "top10_accuracy", top5_val))
+                loss_val = float(eval_res.get("overall_summary", {}).get("overall_mlm_loss", 0.0))
+                masked_w = eval_res.get("word_reconstruction_summary", {}).get("total_masked_words", 0) if internal_mode in ("wwm_subword", "wwm_word") else 0
+                masked_t = eval_res.get("overall_summary", {}).get("total_masked_tokens", 0)
+                mar_cnt = eval_res.get("maritime_tokens_summary", {}).get("masked_sample_count", 0)
+                gen_cnt = eval_res.get("general_tokens_summary", {}).get("masked_sample_count", 0)
+
                 eval_record = {
+                    "model": model_name,
+                    "model_name": model_name,
+                    "clean_model_name": clean_model,
+                    "tokenizer": getattr(tokenizer, "name_or_path", str(tokenizer.__class__.__name__)),
+                    "representation": rep,
+                    "subset": sub,
                     "masking_mode": resolved_masking_mode,
                     "evaluation_unit": resolved_evaluation_unit,
                     "mask_rate": 0.15,
                     "scoring_method": "strict_word_reconstruction" if resolved_evaluation_unit == "word" else "subword_mlm_accuracy",
-                    "tokenizer": getattr(tokenizer, "name_or_path", str(tokenizer.__class__.__name__)),
-                    "model": model_name,
-                    "model_name": model_name,
-                    "clean_model_name": clean_model,
-                    "representation": rep,
-                    "subset": sub,
+                    "execution_type": "production_benchmark",
+                    "seed": cell_seed,
                     "evaluated_doc_count": len(target_docs),
                     "general_english_baseline_top1": float(gen_eng_top1),
                     "domain_shift_gap": domain_shift_gap,
+                    "overall_mlm_loss": loss_val,
+                    "overall_top1_accuracy": top1_val,
+                    "overall_top5_accuracy": top5_val,
+                    "overall_top10_accuracy": top10_val,
+                    "masked_word_count": masked_w,
+                    "masked_token_count": masked_t,
+                    "maritime_targets_count": mar_cnt,
+                    "general_targets_count": gen_cnt,
                     "experiment_metadata": {
                         "masking_strategy": "wwm_15" if is_wwm else "random_15",
                         "masking_mode": resolved_masking_mode,
@@ -1619,8 +1651,8 @@ def main():
                         "tokenizer_identifier": getattr(tokenizer, "name_or_path", str(tokenizer.__class__.__name__)),
                         "model_identifier": model_name,
                         "evaluated_document_count": len(target_docs),
-                        "masked_word_count": eval_res.get("word_reconstruction_summary", {}).get("total_masked_words", 0) if internal_mode in ("wwm_subword", "wwm_word") else 0,
-                        "masked_token_count": eval_res.get("overall_summary", {}).get("total_masked_tokens", 0),
+                        "masked_word_count": masked_w,
+                        "masked_token_count": masked_t,
                         "scoring_method": "strict_word_reconstruction" if resolved_evaluation_unit == "word" else "subword_mlm_accuracy",
                         "cache_namespace": cache_random_dir.name,
                         "code_fingerprint": "TSBC-MaritimePipeline-v2.1-A01-WWM"
@@ -1671,7 +1703,7 @@ def main():
 
     selection_artifact = {
         "selection_method": "Multi-attribute diversity optimization (v2.1): Primary ranking by mean Top-1 (descending) & mean MLM loss (ascending)",
-        "screening_basis": f"Stage 14 Random-15 MLM benchmark results aggregated across all {len(target_models)} models",
+        "screening_basis": f"Stage 14 {eval_name} benchmark results aggregated across all {len(target_models)} models",
         "total_cells_evaluated": len(all_ranked_cells),
         "selected_cell_count": len(selected_cells),
         "selected_configurations": selected_cells,

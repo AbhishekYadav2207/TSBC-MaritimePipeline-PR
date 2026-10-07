@@ -230,5 +230,80 @@
       "logging_terminology": "Explicit 'WWM-15 Word Evaluations' terminology enforced."
     },
     "SAFE_TO_RERUN_STAGE_14": true
-  }
+  },
+  "stage14_20_cell_validation": {
+    "status": "PASS",
+    "expected_cells": 20,
+    "completed_cells": 20,
+    "failed_cells": 0,
+    "total_runtime_sec": 973.2,
+    "primary_protocol_verified": {
+      "masking_mode": "whole_word",
+      "evaluation_unit": "word",
+      "mask_rate": 0.15,
+      "scoring_method": "strict_word_reconstruction"
+    },
+    "cache_isolation": {
+      "namespace": "outputs/stage-14/smoke_20_wwm_word/",
+      "isolated": true,
+      "no_production_cache_contamination": true
+    },
+    "model_stats": {
+      "roberta_base": {
+        "cells_evaluated": 10,
+        "mean_top1": 0.4106,
+        "min_top1": 0.3251,
+        "max_top1": 0.4698,
+        "mean_loss": 4.8206
+      },
+      "modernbert_base": {
+        "cells_evaluated": 10,
+        "mean_top1": 0.4902,
+        "min_top1": 0.3973,
+        "max_top1": 0.5549,
+        "mean_loss": 3.5638
+      }
+    },
+    "representation_breakdown": {
+      "key_value": {
+        "roberta_mean_top1": 0.3721,
+        "modernbert_mean_top1": 0.4422
+      },
+      "mixed": {
+        "roberta_mean_top1": 0.4491,
+        "modernbert_mean_top1": 0.5382
+      }
+    },
+    "subset_breakdown": {
+      "high_knowledge": {
+        "roberta": 0.4276,
+        "modernbert": 0.5138
+      },
+      "medium_knowledge": {
+        "roberta": 0.4325,
+        "modernbert": 0.509
+      },
+      "balanced_knowledge": {
+        "roberta": 0.4028,
+        "modernbert": 0.4761
+      },
+      "random_baseline": {
+        "roberta": 0.4103,
+        "modernbert": 0.4884
+      },
+      "low_knowledge": {
+        "roberta": 0.3798,
+        "modernbert": 0.4637
+      }
+    },
+    "sanity_checks": {
+      "top1_le_top5_le_top10": true,
+      "all_losses_finite": true,
+      "zero_masked_words_count": 0,
+      "suspicious_cells_count": 0,
+      "target_trace_verified": true
+    },
+    "SAFE_TO_RUN_FULL_175": true
+  },
+  "SAFE_TO_RUN_FULL_175": true
 }

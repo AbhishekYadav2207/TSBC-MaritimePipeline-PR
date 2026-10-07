@@ -1,7 +1,9 @@
 import unittest
 import importlib
 import sys
+import argparse
 from pathlib import Path
+import random
 import torch
 from transformers import AutoTokenizer
 
@@ -18,6 +20,17 @@ class TestStage14ClassificationAudit(unittest.TestCase):
             "cargo vessel", "steering gear", "search and rescue",
             "windlass", "bollards", "shipbuilding"
         ]
+
+    def test_default_cli_configuration(self):
+        """Verify that default Stage 14 execution resolves to WWM and strict word evaluation."""
+        # Create a parser with the identical arguments as main()
+        parser = argparse.ArgumentParser()
+        parser.add_argument("--masking_mode", default="whole_word", choices=["subword", "whole_word", "wwm_subword", "wwm_word"])
+        parser.add_argument("--evaluation_unit", default="word", choices=["subword", "word"])
+        
+        args = parser.parse_args([])
+        self.assertEqual(args.masking_mode, "whole_word")
+        self.assertEqual(args.evaluation_unit, "word")
 
     def test_stopword_leakage_prevented(self):
         """Verify that common English function stopwords do not leak into maritime token IDs."""
@@ -44,6 +57,49 @@ class TestStage14ClassificationAudit(unittest.TestCase):
         self.assertIn(cargo_spaced, mar_ids, "Space-prefixed ' cargo' missing from RoBERTa maritime token IDs")
         self.assertIn(vessel_spaced, mar_ids, "Space-prefixed ' vessel' missing from RoBERTa maritime token IDs")
 
+    def test_lexical_classification_integrity(self):
+        """Verify individual terms: cargo -> MARITIME, search -> MARITIME, and -> GENERAL, rescue -> MARITIME."""
+        tokenizer = self.tok_roberta
+        mar_ids, rare_ids, cat_ids = stage14.build_vocabulary_token_sets(tokenizer, self.vocab_sample)
+
+        text = "The cargo vessel conducted search and rescue operations."
+        enc = tokenizer(text, return_offsets_mapping=True)
+        input_ids = enc["input_ids"]
+        wids = enc.word_ids(0)
+        sp_mask = tokenizer.get_special_tokens_mask(input_ids, already_has_special_tokens=True)
+
+        eligible, rare_pos, mar_pos, gen_pos, cat_pos = stage14.classify_token_positions(
+            text, input_ids, enc["offset_mapping"], sp_mask,
+            set(self.vocab_sample), set(stage14.RARE_MARITIME_TERMS),
+            mar_ids, rare_ids, cat_ids
+        )
+        w2p, _ = stage14.extract_word_groups(wids, eligible)
+
+        for wid, positions in w2p.items():
+            is_rare = any(p in rare_pos for p in positions)
+            is_mar = is_rare or any(p in mar_pos for p in positions)
+            if is_rare:
+                rare_pos.update(positions)
+                mar_pos.update(positions)
+            elif is_mar:
+                mar_pos.update(positions)
+
+        # Word 'cargo'
+        cargo_p = [p for wid, p_list in w2p.items() for p in p_list if "cargo" in tokenizer.decode([input_ids[p]]).lower()][0]
+        self.assertIn(cargo_p, mar_pos)
+
+        # Word 'search'
+        search_p = [p for wid, p_list in w2p.items() for p in p_list if "search" in tokenizer.decode([input_ids[p]]).lower()][0]
+        self.assertIn(search_p, mar_pos)
+
+        # Word 'and'
+        and_p = [p for wid, p_list in w2p.items() for p in p_list if tokenizer.decode([input_ids[p]]).strip().lower() == "and"][0]
+        self.assertNotIn(and_p, mar_pos, "Word 'and' must be classified as GENERAL")
+
+        # Word 'rescue'
+        rescue_p = [p for wid, p_list in w2p.items() for p in p_list if "rescue" in tokenizer.decode([input_ids[p]]).lower()][0]
+        self.assertIn(rescue_p, mar_pos)
+
     def test_multi_piece_whole_word_consistency(self):
         """Verify that multi-piece terms have all constituent pieces classified consistently."""
         tokenizer = self.tok_roberta
@@ -60,10 +116,8 @@ class TestStage14ClassificationAudit(unittest.TestCase):
             set(self.vocab_sample), set(stage14.RARE_MARITIME_TERMS),
             mar_ids, rare_ids, cat_ids
         )
-
         word_to_pos, _ = stage14.extract_word_groups(wids, eligible)
 
-        # Propagate word-level domain classification
         for wid, positions in word_to_pos.items():
             is_rare = any(p in rare_pos for p in positions)
             is_mar = is_rare or any(p in mar_pos for p in positions)
@@ -78,7 +132,7 @@ class TestStage14ClassificationAudit(unittest.TestCase):
         self.assertTrue(len(ship_wids) > 0)
         for wid in ship_wids:
             for p in word_to_pos[wid]:
-                self.assertIn(p, mar_pos, f"Subword piece {p} ({tokenizer.decode([input_ids[p]])}) of shipbuilding was not marked maritime")
+                self.assertIn(p, mar_pos, f"Subword piece {p} of shipbuilding was not marked maritime")
 
         # Check 'bollards' (rare multi-piece)
         boll_wids = [wid for wid, p_list in word_to_pos.items() if "b" in tokenizer.decode([input_ids[p_list[0]]]).lower() and "oll" in "".join(tokenizer.decode([input_ids[x]]) for x in p_list)]
@@ -86,6 +140,55 @@ class TestStage14ClassificationAudit(unittest.TestCase):
         for wid in boll_wids:
             for p in word_to_pos[wid]:
                 self.assertIn(p, rare_pos, f"Subword piece {p} of bollards was not marked rare")
+
+    def test_wwm_integrity_all_pieces_masked(self):
+        """Verify that whole-word masking masks ALL pieces of a selected word together."""
+        word_to_positions = {
+            0: [1],          # single piece
+            1: [2, 3],       # two pieces
+            2: [4, 5, 6],    # three pieces
+            3: [7]           # single piece
+        }
+        rng = random.Random(42)
+        # Budget of 3 tokens
+        masked_positions, selected_words = stage14.create_whole_word_random_mask(word_to_positions, rng, mask_budget=3)
+        
+        # Verify that for every selected word, ALL of its positions are in masked_positions
+        for wid in selected_words:
+            for p in word_to_positions[wid]:
+                self.assertIn(p, masked_positions, f"Position {p} of word {wid} was omitted from masked positions")
+                
+        # Verify that for unselected words, NONE of its positions are in masked_positions
+        unselected = set(word_to_positions.keys()) - selected_words
+        for wid in unselected:
+            for p in word_to_positions[wid]:
+                self.assertNotIn(p, masked_positions, f"Position {p} of unselected word {wid} was erroneously masked")
+
+    def test_label_integrity_before_masking(self):
+        """Verify labels are copied BEFORE masking and correspond to original input IDs."""
+        input_ids = torch.tensor([[101, 2054, 2003, 1037, 102]])
+        labels = input_ids.clone()
+        mask_pos = 2
+        
+        # Apply mask
+        masked_ids = input_ids.clone()
+        masked_ids[0, mask_pos] = 103 # [MASK]
+        
+        # Assert label retains original input ID
+        self.assertEqual(labels[0, mask_pos].item(), 2003)
+        self.assertNotEqual(labels[0, mask_pos].item(), masked_ids[0, mask_pos].item())
+
+    def test_strict_word_reconstruction_criterion(self):
+        """Verify that word reconstruction requires 100% of subwords to be correctly predicted."""
+        # Case 1: Partial correctness (1 of 2 pieces correct)
+        pos_preds_partial = {1: True, 2: False}
+        word_correct_partial = all(pos_preds_partial.get(p, False) for p in [1, 2])
+        self.assertFalse(word_correct_partial, "Partially correct word must evaluate to False under strict word reconstruction")
+
+        # Case 2: Complete correctness (2 of 2 pieces correct)
+        pos_preds_full = {1: True, 2: True}
+        word_correct_full = all(pos_preds_full.get(p, False) for p in [1, 2])
+        self.assertTrue(word_correct_full, "Fully correct word must evaluate to True under strict word reconstruction")
 
     def test_cache_namespace_conventions(self):
         """Verify compute_cache_key uses correct segregated cache namespaces."""

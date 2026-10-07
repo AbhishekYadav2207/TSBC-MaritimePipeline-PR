@@ -3,12 +3,17 @@
 ## Executive Overview
 Phase 8 implements the core intrinsic capability benchmarking engine of the pipeline (`scripts/14_mlm_evaluation.py`). It dynamically ingests the 7 canonical archetype models identified by Stage 13 and executes an exhaustive **175-cell Cartesian evaluation grid** (7 models $\times$ 5 representations $\times$ 5 knowledge subsets).
 
-Stage 14 incorporates three advanced methodological capabilities in Version 2.1:
-1. **Dual Masking Evaluation Protocols**:
-   * **Standard Uniform 15% Bernoulli Masking (`random_15`)**: Baseline protocol evaluating general masked contextual recovery.
+Stage 14 incorporates the following methodological capabilities in Version 2.1:
+1. **Authoritative Production Protocol: Whole-Word Masking (WWM) with Strict Word Reconstruction**:
+   * Evaluates intact word recovery by masking all constituent subwords of selected words together using tokenizer `word_ids()`.
+   * Requires strict reconstruction (every constituent subword predicted correctly) to score a word as accurate.
+   * Eliminates subword length fragmentation bias across tokenizers.
+   * Cached to `outputs/stage-14/evaluations/cache_wwm_word/`.
+2. **Diagnostic Evaluation Protocols**:
+   * **Baseline Subword Masking & Scoring**: Standard 15% Bernoulli masking evaluated at subword level, cached to `outputs/stage-14/evaluations/cache/`.
    * **Targeted Domain-Aware 15% Masking (`domain_aware_15`)**: Prioritizes rare and domain-specific maritime tokens to measure how heavily models rely on domain knowledge vs. generic syntactic predictability.
-2. **Sampled Pseudo-Log-Likelihood (PLL) Scoring**: Iteratively evaluates bidirectional sentence probabilities, generating pseudo-perplexity metrics decoupled from random masking artifacts.
-3. **Resumable SHA-256 Checkpoint Caching**: Manages 175 discrete evaluation cache files indexed by deterministic SHA-256 seeds, ensuring reproducibility across hardware platforms.
+3. **Sampled Pseudo-Log-Likelihood (PLL) Scoring**: Iteratively evaluates bidirectional sentence probabilities, generating pseudo-perplexity metrics decoupled from random masking artifacts.
+4. **Resumable SHA-256 Checkpoint Caching**: Manages 175 discrete evaluation cache files indexed by deterministic SHA-256 seeds, ensuring reproducibility across hardware platforms.
 
 Script involved in Phase 8:
 * `scripts/14_mlm_evaluation.py` (Multi-Model Masked Language Model Benchmark Matrix)
@@ -41,7 +46,8 @@ flowchart TD
     end
 
     subgraph Outputs ["Generated Evaluation Artifacts"]
-        CacheFolder["outputs/stage-14/evaluations/cache/*.json (175 Cache Files)"]
+        CacheFolder["outputs/stage-14/evaluations/cache_wwm_word/*.json (Authoritative WWM+Word Cache)"]
+        DiagnosticCacheFolder["outputs/stage-14/evaluations/cache/*.json (Diagnostic Subword Cache)"]
         MaskingCompJSON["outputs/stage-14/masking_comparison.json"]
         PLLResultsJSON["outputs/stage-14/pll_results.json"]
         PLLSelectJSON["outputs/stage-14/pll_selection.json"]
@@ -184,7 +190,8 @@ Comparing identical models under standard `random_15` vs. targeted `domain_aware
 
 | Artifact Path | Format | Size | Description |
 | :--- | :--- | :---: | :--- |
-| `outputs/stage-14/evaluations/cache/*.json` | JSON | ~3 KB ea | 175 discrete evaluation cache files |
+| `outputs/stage-14/evaluations/cache_wwm_word/*.json` | JSON | ~3 KB ea | 175 discrete authoritative WWM+word evaluation cache files |
+| `outputs/stage-14/evaluations/cache/*.json` | JSON | ~3 KB ea | 175 discrete diagnostic subword evaluation cache files |
 | `outputs/stage-14/masking_comparison.json` | JSON | 32.7 KB | Comparative analysis between Random and Domain-Aware masking |
 | `outputs/stage-14/pll_results.json` | JSON | 28.4 KB | Sampled Pseudo-Log-Likelihood scoring across screened models |
 | `outputs/stage-14/pll_selection.json` | JSON | 8.6 KB | Screened configuration metadata for focused evaluation |

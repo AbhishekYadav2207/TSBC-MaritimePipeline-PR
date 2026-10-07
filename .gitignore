@@ -38,6 +38,7 @@ outputs_baseline_v2/
 
 outputs/logs/
 outputs/archive/
+outputs/stage-*/smoke_*
 
 runner.ipynb
 dapt/

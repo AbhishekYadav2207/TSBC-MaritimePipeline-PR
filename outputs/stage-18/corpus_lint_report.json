@@ -1,12 +1,12 @@
 {
   "status": "PASS",
-  "total_documents_linted": 96860,
-  "total_violations": 198,
-  "violation_rate": "0.204%",
+  "total_documents_linted": 96874,
+  "total_violations": 190,
+  "violation_rate": "0.196%",
   "rule_summary": {
     "repeated_adjacent_words": {
-      "count": 166,
-      "percentage": "0.171%",
+      "count": 158,
+      "percentage": "0.163%",
       "samples": [
         {
           "occurrence_id": 660,

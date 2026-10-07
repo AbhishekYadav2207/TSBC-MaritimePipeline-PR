@@ -128,6 +128,46 @@
 - **Pipeline Integrity**: 26/26 artifacts verified (`tests/verify_pipeline.py`).
 - **Audit Verdict**: `SAFE_TO_RERUN_STAGE_14 = TRUE`.
 
+
+---
+
+## 4.2 Controlled 20-Cell Stage-14 Validation Results
+
+Following fresh Stage 01–13 execution and active cohort locking ($N=7$), a controlled 20-cell validation was executed on CPU covering 2 representative models (`roberta-base`, `answerdotai/ModernBERT-base`), 2 representations (`key_value`, `mixed`), and all 5 canonical subsets (`balanced_knowledge`, `high_knowledge`, `low_knowledge`, `medium_knowledge`, `random_baseline`).
+
+- **Protocol**: Whole-Word Masking (WWM) with strict multi-piece word reconstruction (`masking_mode = whole_word`, `evaluation_unit = word`, mask rate = 15%).
+- **Cache Isolation**: Results persisted exclusively to `outputs/stage-14/smoke_20_wwm_word/` (zero production cache contamination).
+- **Execution Metric**: Expected = 20, Completed = 20, Failed = 0.
+
+### Per-Model Summary
+| Model | Cells | Mean Top-1 | Min Top-1 | Max Top-1 | Mean MLM Loss |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **`roberta-base`** | 10 | **0.4106** | 0.3251 | 0.4698 | 4.8206 |
+| **`answerdotai/ModernBERT-base`** | 10 | **0.4902** | 0.3973 | 0.5549 | 3.5638 |
+
+### Per-Representation Summary (Mean Top-1)
+| Representation | `roberta-base` | `answerdotai/ModernBERT-base` | Relative Pattern |
+| :--- | :---: | :---: | :--- |
+| **`key_value`** | 0.3721 | 0.4422 | Structured schema without connective syntax |
+| **`mixed`** | 0.4491 | 0.5382 | Hybrid narrative syntax provides rich contextual cues |
+
+### Per-Subset Stratification Summary (Mean Top-1)
+| Knowledge Subset | `roberta-base` | `answerdotai/ModernBERT-base` | Observation |
+| :--- | :---: | :---: | :--- |
+| **`high_knowledge`** | 0.4276 | 0.5138 | Highest density of informative terms |
+| **`medium_knowledge`** | 0.4325 | 0.5090 | Strong domain predictability |
+| **`balanced_knowledge`** | 0.4028 | 0.4761 | Stable representative corpus sample |
+| **`random_baseline`** | 0.4103 | 0.4884 | Unstratified random sample |
+| **`low_knowledge`** | 0.3798 | 0.4637 | Monotonically lowest domain predictability |
+
+### Implementation Sanity & Bug Verification
+- $	ext{Top-1} \le 	ext{Top-5} \le 	ext{Top-10}$ verified across 100% of cells.
+- All MLM losses finite (no NaN / inf).
+- Masked word counts (3,282 – 5,273 per cell) and token counts (4,864 – 7,401 per cell) logically consistent.
+- Maritime target counts (476 – 1,040 per cell) reflect robust stopword-filtered vocabulary without leakage.
+- Target trace verification confirmed: `label_id == original_input_id` and `pred_id == argmax(logits)` across all positions.
+- Suspicious cells: **0**.
+
 ## 5. Google Colab Execution Readiness
 
 - **Project Root Detection**: **PASS** (`find_project_root()` detects workspace in local runs, `/content/TSBC-MaritimePipeline-*`, `/content`, and Drive mounts).

@@ -1,92 +1,92 @@
 {
-  "total_documents": 96844,
-  "total_characters": 24349927,
-  "total_tokens_words": 3733492,
-  "maritime_information_density_mid": 3.667397707026023,
+  "total_documents": 96874,
+  "total_characters": 24357090,
+  "total_tokens_words": 3734709,
+  "maritime_information_density_mid": 3.6676485370078367,
   "length_stats": {
-    "mean": 38.55160877287184,
+    "mean": 38.55223279724178,
     "median": 37.0,
-    "std": 20.170488148831943,
+    "std": 20.169051985385977,
     "min": 4,
     "max": 513,
     "percentiles": {
       "P10": 10.0,
       "P25": 25.0,
       "P50": 37.0,
-      "P75": 50.0,
+      "P75": 51.0,
       "P90": 67.0,
       "P95": 73.0
     },
     "buckets": {
-      "<20": 18238,
-      "20-50": 53352,
-      "50-100": 24962,
-      "100-200": 268,
+      "<20": 18260,
+      "20-50": 53286,
+      "50-100": 25030,
+      "100-200": 274,
       "200-512": 23,
       ">512": 1
     }
   },
   "vocabulary_size": 42780,
-  "type_token_ratio": 0.011458441587661097,
-  "type_token_ratio_lexical_diversity": 0.011458441587661097,
-  "shannon_entropy": 8.317179212447558,
-  "template_scaffolding_ratio": 0.5847453268950356,
-  "template_pattern_concentration": 0.4183015984469869,
+  "type_token_ratio": 0.01145470771618351,
+  "type_token_ratio_lexical_diversity": 0.01145470771618351,
+  "shannon_entropy": 8.317208409892594,
+  "template_scaffolding_ratio": 0.5846610806892854,
+  "template_pattern_concentration": 0.41817205855028183,
   "duplication": {
-    "sentence_duplicate_ratio": 0.0942980956348195,
-    "paragraph_duplicate_ratio": 3.097765478499159e-05,
-    "scaffold_reduced_near_duplicate_rate": 0.1788
+    "sentence_duplicate_ratio": 0.09442887066998995,
+    "paragraph_duplicate_ratio": 6.193612321159225e-05,
+    "scaffold_reduced_near_duplicate_rate": 0.1672
   },
   "top_raw_bigrams": [
     [
       "a marine",
-      56344
+      56374
     ],
     [
       "marine occurrence",
-      56334
+      56364
     ],
     [
       "registered in",
-      54460
+      54490
     ],
     [
       "with a",
-      52518
+      52550
     ],
     [
       "constructed of",
-      51046
+      51078
     ],
     [
       "a gross",
-      50354
+      50386
     ],
     [
       "gross tonnage",
-      50354
+      50386
     ],
     [
       "tonnage of",
-      50354
+      50386
     ],
     [
       "gt registered",
-      50309
+      50341
     ],
     [
       "in canada",
-      44087
+      44114
     ]
   ],
   "top_domain_bigrams": [
     [
       "navigation equipment",
-      34301
+      34302
     ],
     [
       "magnetic compass",
-      19937
+      19938
     ],
     [
       "equipment included",
@@ -94,19 +94,19 @@
     ],
     [
       "vhf radio",
-      18282
+      18283
     ],
     [
       "equipment reported",
-      17589
+      17590
     ],
     [
       "reported inactive",
-      17589
+      17590
     ],
     [
       "inactive included",
-      17589
+      17590
     ],
     [
       "active navigation",
@@ -114,25 +114,25 @@
     ],
     [
       "the vessel",
-      12109
+      12104
     ],
     [
       "weather and",
-      11875
+      11881
     ]
   ],
   "top_domain_trigrams": [
     [
       "navigation equipment reported",
-      17589
+      17590
     ],
     [
       "equipment reported inactive",
-      17589
+      17590
     ],
     [
       "reported inactive included",
-      17589
+      17590
     ],
     [
       "active navigation equipment",
@@ -144,7 +144,7 @@
     ],
     [
       "clear weather and",
-      8042
+      8047
     ],
     [
       "the fishing vessel",
@@ -156,7 +156,7 @@
     ],
     [
       "weather and calm",
-      6065
+      6067
     ],
     [
       "people on board",
@@ -166,11 +166,11 @@
   "top_domain_4grams": [
     [
       "navigation equipment reported inactive",
-      17589
+      17590
     ],
     [
       "equipment reported inactive included",
-      17589
+      17590
     ],
     [
       "active navigation equipment included",
@@ -182,15 +182,15 @@
     ],
     [
       "weather and calm glassy",
-      5320
+      5324
     ],
     [
       "and calm glassy 0",
-      5320
+      5324
     ],
     [
       "clear weather and calm",
-      4717
+      4719
     ],
     [
       "people on board reported",
@@ -198,11 +198,11 @@
     ],
     [
       "and day light conditions",
-      4176
+      4172
     ],
     [
-      "a marine occurrence active",
-      3840
+      "seas and day light",
+      3786
     ]
   ]
 }

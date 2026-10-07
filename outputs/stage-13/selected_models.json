@@ -654,7 +654,7 @@
       "wwm_compatibility_status": "FULLY_COMPATIBLE"
     }
   },
-  "selection_timestamp": "2026-10-07 20:27:14",
+  "selection_timestamp": "2026-10-07 18:55:23",
   "selection_rationale": "Subword Term-Piece Diagnostic Redundancy Clustering & Canonical Archetype Selection (v2.1 Reconciled)",
   "target_stage": "Stage 14 (14_mlm_evaluation.py)"
 }
