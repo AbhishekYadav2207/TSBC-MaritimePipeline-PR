@@ -142,6 +142,22 @@ python run_pipeline.py --stage 18
 
 ---
 
+## MaritimeBench Interactive Notebook Orchestrator
+
+The canonical interactive notebook [`notebooks/MaritimeBench_Full_Pipeline.ipynb`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/notebooks/MaritimeBench_Full_Pipeline.ipynb) provides a pure sequential execution and artifact-inventory orchestrator for both local and Google Colab environments:
+
+- **Orchestration Layer**: The notebook is an orchestration and artifact-inventory layer.
+- **Production Scripts Authoritative**: Canonical production scripts (`scripts/01_*` through `scripts/18_*`) are heavily tested and remain solely responsible for their own data models, scientific logic, and internal schemas.
+- **Validation Scope**: Notebook verification is intentionally limited to:
+  1. **Process success**: Subprocess exit code `0` is strictly required before proceeding to subsequent stages.
+  2. **Artifact existence**: Expected output files and directories must exist.
+  3. **Artifact non-zero size**: Files must be `> 0` bytes, and generated directories must contain at least 1 file.
+  4. **Runtime metadata**: Tracks wall-clock runtimes, execution status, and hardware preflight checks (Stage 14 GPU gating).
+- **No Schema Over-Validation**: The notebook does not define or inspect internal JSON keys, CSV schemas, or expected row/table counts.
+- **Final Inventory Reporting**: Produces machine-readable (`outputs/maritimebench_output_inventory.json`) and human-readable (`outputs/maritimebench_output_inventory.md`) artifact inventories with a terminal summary table for manual inspection.
+
+---
+
 ## Detailed Documentation Section Guides
 
 For exhaustive, in-depth technical documentation on specific components, refer to the dedicated section guides in [`documentation/`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/):
@@ -162,5 +178,6 @@ For exhaustive, in-depth technical documentation on specific components, refer t
 14. **[13_research_traceability_matrix.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/13_research_traceability_matrix.md)**: Full bidirectional traceability between raw database columns, scripts, and evaluation metrics.
 15. **[14_dapt_domain_adaptive_pretraining.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/14_dapt_domain_adaptive_pretraining.md)**: Execution specifications and training configurations for the subsequent DAPT pretraining phase.
 
-#   T S B C - M a r i t i m e P i p e l i n e - P R  
+#   T S B C - M a r i t i m e P i p e l i n e - P R 
+ 
  

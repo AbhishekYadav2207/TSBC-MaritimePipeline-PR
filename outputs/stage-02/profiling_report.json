@@ -92,286 +92,1176 @@
     "possible_pks": [],
     "inferred_fks": []
   },
-  "MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC": {
-    "file_name": "MARSISdb_MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC.csv",
-    "row_count": 78399,
-    "col_count": 46,
+  "MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC": {
+    "file_name": "MARSISdb_MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC.csv",
+    "row_count": 314447,
+    "col_count": 14,
     "columns": {
       "OccNo": {
-        "null_count": 70397,
-        "nunique": 1552,
-        "cardinality_ratio": 0.019796170869526397,
+        "null_count": 38035,
+        "nunique": 21715,
+        "cardinality_ratio": 0.06905774264025416,
         "data_type": "object"
       },
       "OccID": {
-        "null_count": 70397,
-        "nunique": 1552,
-        "cardinality_ratio": 0.019796170869526397,
+        "null_count": 38035,
+        "nunique": 21725,
+        "cardinality_ratio": 0.06908954450193515,
         "data_type": "float64"
       },
       "VesselID": {
-        "null_count": 70397,
-        "nunique": 1006,
-        "cardinality_ratio": 0.012831796323932703,
+        "null_count": 38035,
+        "nunique": 12677,
+        "cardinality_ratio": 0.0403152200529819,
         "data_type": "float64"
       },
       "VesselName": {
-        "null_count": 70397,
-        "nunique": 1018,
-        "cardinality_ratio": 0.012984859500758937,
+        "null_count": 38035,
+        "nunique": 12606,
+        "cardinality_ratio": 0.040089426835046925,
         "data_type": "object"
       },
-      "VesselSoftwareAudioID": {
-        "null_count": 70397,
-        "nunique": 3467,
-        "cardinality_ratio": 0.04422250283804641,
+      "XrfOccVesselNavAidID": {
+        "null_count": 38035,
+        "nunique": 171880,
+        "cardinality_ratio": 0.5466103985727324,
         "data_type": "float64"
       },
-      "RecordingEquipID": {
-        "null_count": 70397,
-        "nunique": 5,
-        "cardinality_ratio": 6.377632367759793e-05,
+      "NavigationAidTypeID": {
+        "null_count": 38035,
+        "nunique": 43,
+        "cardinality_ratio": 0.00013674800522822607,
         "data_type": "float64"
       },
-      "RecordingEquipDisplayEng": {
-        "null_count": 70397,
-        "nunique": 5,
-        "cardinality_ratio": 6.377632367759793e-05,
+      "NavigationAidTypeDisplayEng": {
+        "null_count": 38035,
+        "nunique": 42,
+        "cardinality_ratio": 0.0001335678190601278,
         "data_type": "object"
       },
-      "RecordingEquipDisplayFre": {
-        "null_count": 70397,
-        "nunique": 5,
-        "cardinality_ratio": 6.377632367759793e-05,
+      "NavigationAidTypeDisplayFre": {
+        "null_count": 39703,
+        "nunique": 41,
+        "cardinality_ratio": 0.0001303876328920295,
         "data_type": "object"
       },
-      "SoftwareAudioMakeID": {
-        "null_count": 77180,
-        "nunique": 23,
-        "cardinality_ratio": 0.00029337108891695047,
+      "NavigationAidSubTypeID": {
+        "null_count": 312077,
+        "nunique": 7,
+        "cardinality_ratio": 2.2261303176687964e-05,
         "data_type": "float64"
       },
-      "SoftwareAudioMakeDisplayEng": {
-        "null_count": 77180,
-        "nunique": 24,
-        "cardinality_ratio": 0.00030612635365247004,
+      "NavigationAidSubTypeDisplayEng": {
+        "null_count": 312077,
+        "nunique": 7,
+        "cardinality_ratio": 2.2261303176687964e-05,
         "data_type": "object"
       },
-      "SoftwareAudioMakeDisplayFre": {
-        "null_count": 77180,
-        "nunique": 23,
-        "cardinality_ratio": 0.00029337108891695047,
+      "NavigationAidSubTypeDisplayFre": {
+        "null_count": 312077,
+        "nunique": 7,
+        "cardinality_ratio": 2.2261303176687964e-05,
         "data_type": "object"
       },
-      "SoftwareAudioModelID": {
-        "null_count": 77180,
-        "nunique": 54,
-        "cardinality_ratio": 0.0006887842957180576,
-        "data_type": "float64"
-      },
-      "SoftwareAudioModelDisplayEng": {
-        "null_count": 77180,
-        "nunique": 54,
-        "cardinality_ratio": 0.0006887842957180576,
-        "data_type": "object"
-      },
-      "SoftwareAudioModelDisplayFre": {
-        "null_count": 77180,
-        "nunique": 54,
-        "cardinality_ratio": 0.0006887842957180576,
-        "data_type": "object"
-      },
-      "SoftwareVersion": {
-        "null_count": 78329,
-        "nunique": 27,
-        "cardinality_ratio": 0.0003443921478590288,
-        "data_type": "object"
-      },
-      "SerialNumber": {
-        "null_count": 78297,
-        "nunique": 33,
-        "cardinality_ratio": 0.00042092373627214635,
-        "data_type": "object"
-      },
-      "VdrDetailID": {
-        "null_count": 76877,
-        "nunique": 559,
-        "cardinality_ratio": 0.007130192987155448,
-        "data_type": "float64"
-      },
-      "RecCapacity_NumberOfDays": {
-        "null_count": 78372,
+      "OnOffEnum": {
+        "null_count": 62514,
         "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+        "cardinality_ratio": 9.540558504294841e-06,
         "data_type": "float64"
       },
-      "RecAudioFilesDelEnum": {
-        "null_count": 77873,
+      "OnOffEnumDisplayEng": {
+        "null_count": 62514,
         "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+        "cardinality_ratio": 9.540558504294841e-06,
+        "data_type": "object"
+      },
+      "OnOffEnumDisplayFre": {
+        "null_count": 62514,
+        "nunique": 3,
+        "cardinality_ratio": 9.540558504294841e-06,
+        "data_type": "object"
+      }
+    },
+    "possible_pks": [],
+    "inferred_fks": []
+  },
+  "MDOTW_VW_INJURIES_PUBLIC": {
+    "file_name": "MARSISdb_MDOTW_VW_INJURIES_PUBLIC.csv",
+    "row_count": 23004,
+    "col_count": 18,
+    "columns": {
+      "OccNo": {
+        "null_count": 0,
+        "nunique": 15817,
+        "cardinality_ratio": 0.6875760737263085,
+        "data_type": "object"
+      },
+      "OccID": {
+        "null_count": 0,
+        "nunique": 15817,
+        "cardinality_ratio": 0.6875760737263085,
+        "data_type": "int64"
+      },
+      "VesselID": {
+        "null_count": 6516,
+        "nunique": 10193,
+        "cardinality_ratio": 0.44309685272126587,
         "data_type": "float64"
       },
-      "RecAudioFilesDelEnumDisplayEng": {
-        "null_count": 77873,
-        "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+      "VesselName": {
+        "null_count": 1,
+        "nunique": 10126,
+        "cardinality_ratio": 0.44018431577117023,
         "data_type": "object"
       },
-      "RecAudioFilesDelEnumDisplayFre": {
-        "null_count": 77873,
-        "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "object"
+      "XrfOccVesselVictimCountID": {
+        "null_count": 0,
+        "nunique": 23003,
+        "cardinality_ratio": 0.9999565292992523,
+        "data_type": "int64"
       },
-      "RecAudioFilesSegregatedEnum": {
-        "null_count": 77874,
-        "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "float64"
-      },
-      "RecAudioFilesSegregatedEnumDisplayEng": {
-        "null_count": 77874,
-        "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "object"
-      },
-      "RecAudioFilesSegregatedEnumDisplayFre": {
-        "null_count": 77874,
-        "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "object"
-      },
-      "CapsuleRecCapacity_NumberOfDays": {
-        "null_count": 78376,
+      "ManuallyEnteredStatsIND": {
+        "null_count": 0,
         "nunique": 2,
-        "cardinality_ratio": 2.551052947103917e-05,
+        "cardinality_ratio": 8.69414014953921e-05,
+        "data_type": "int64"
+      },
+      "VictimMissing": {
+        "null_count": 0,
+        "nunique": 12,
+        "cardinality_ratio": 0.0005216484089723526,
+        "data_type": "int64"
+      },
+      "VictimMinorInjuries": {
+        "null_count": 0,
+        "nunique": 18,
+        "cardinality_ratio": 0.000782472613458529,
+        "data_type": "int64"
+      },
+      "VictimSeriousInjuries": {
+        "null_count": 0,
+        "nunique": 9,
+        "cardinality_ratio": 0.0003912363067292645,
+        "data_type": "int64"
+      },
+      "VictimDeath": {
+        "null_count": 0,
+        "nunique": 14,
+        "cardinality_ratio": 0.0006085898104677448,
+        "data_type": "int64"
+      },
+      "TotalVesselInjuries": {
+        "null_count": 0,
+        "nunique": 23,
+        "cardinality_ratio": 0.0009998261171970091,
+        "data_type": "int64"
+      },
+      "TotalPeopleInWater": {
+        "null_count": 0,
+        "nunique": 12,
+        "cardinality_ratio": 0.0005216484089723526,
+        "data_type": "int64"
+      },
+      "PeopleInWaterWearingLSE": {
+        "null_count": 0,
+        "nunique": 9,
+        "cardinality_ratio": 0.0003912363067292645,
+        "data_type": "int64"
+      },
+      "PeopleInWaterLseTypeID": {
+        "null_count": 22905,
+        "nunique": 4,
+        "cardinality_ratio": 0.0001738828029907842,
         "data_type": "float64"
       },
-      "CapsuleAudioFilesDelEnum": {
-        "null_count": 77879,
-        "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+      "PeopleInWaterLseTypeDisplayEng": {
+        "null_count": 22905,
+        "nunique": 4,
+        "cardinality_ratio": 0.0001738828029907842,
+        "data_type": "object"
+      },
+      "PeopleInWaterLseTypeDisplayFre": {
+        "null_count": 22905,
+        "nunique": 4,
+        "cardinality_ratio": 0.0001738828029907842,
+        "data_type": "object"
+      },
+      "PeopleInWaterNoLSE": {
+        "null_count": 0,
+        "nunique": 5,
+        "cardinality_ratio": 0.00021735350373848025,
+        "data_type": "int64"
+      },
+      "PeopleInWaterDontKnowLSE": {
+        "null_count": 0,
+        "nunique": 6,
+        "cardinality_ratio": 0.0002608242044861763,
+        "data_type": "int64"
+      }
+    },
+    "possible_pks": [
+      "XrfOccVesselVictimCountID"
+    ],
+    "inferred_fks": []
+  },
+  "MDOTW_VW_OCCURRENCE_PUBLIC": {
+    "file_name": "MARSISdb_MDOTW_VW_OCCURRENCE_PUBLIC.csv",
+    "row_count": 87760,
+    "col_count": 159,
+    "columns": {
+      "OccID": {
+        "null_count": 0,
+        "nunique": 48594,
+        "cardinality_ratio": 0.5537146763901549,
+        "data_type": "int64"
+      },
+      "OccNo": {
+        "null_count": 0,
+        "nunique": 48581,
+        "cardinality_ratio": 0.5535665451230629,
+        "data_type": "object"
+      },
+      "OccClassID": {
+        "null_count": 0,
+        "nunique": 16,
+        "cardinality_ratio": 0.00018231540565177758,
+        "data_type": "int64"
+      },
+      "OccClassDisplayEng": {
+        "null_count": 0,
+        "nunique": 16,
+        "cardinality_ratio": 0.00018231540565177758,
+        "data_type": "object"
+      },
+      "OccClassDisplayFre": {
+        "null_count": 0,
+        "nunique": 16,
+        "cardinality_ratio": 0.00018231540565177758,
+        "data_type": "object"
+      },
+      "OccDate": {
+        "null_count": 0,
+        "nunique": 16302,
+        "cardinality_ratio": 0.1857566089334549,
+        "data_type": "object"
+      },
+      "OccTime": {
+        "null_count": 4797,
+        "nunique": 1470,
+        "cardinality_ratio": 0.016750227894257064,
+        "data_type": "object"
+      },
+      "TimeZoneID": {
+        "null_count": 0,
+        "nunique": 14,
+        "cardinality_ratio": 0.0001595259799453054,
+        "data_type": "int64"
+      },
+      "TimeZoneDisplayEng": {
+        "null_count": 0,
+        "nunique": 14,
+        "cardinality_ratio": 0.0001595259799453054,
+        "data_type": "object"
+      },
+      "TimeZoneDisplayFre": {
+        "null_count": 0,
+        "nunique": 14,
+        "cardinality_ratio": 0.0001595259799453054,
+        "data_type": "object"
+      },
+      "ProvinceID": {
+        "null_count": 60729,
+        "nunique": 14,
+        "cardinality_ratio": 0.0001595259799453054,
         "data_type": "float64"
       },
-      "CapsuleAudioFilesDelEnumDisplayEng": {
-        "null_count": 77879,
-        "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+      "ProvinceDisplayEng": {
+        "null_count": 60729,
+        "nunique": 14,
+        "cardinality_ratio": 0.0001595259799453054,
         "data_type": "object"
       },
-      "CapsuleAudioFilesDelEnumDisplayFre": {
-        "null_count": 77879,
-        "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+      "ProvinceDisplayFre": {
+        "null_count": 60729,
+        "nunique": 14,
+        "cardinality_ratio": 0.0001595259799453054,
         "data_type": "object"
       },
-      "CapsuleAudioFilesSegregatedEnum": {
-        "null_count": 77882,
-        "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+      "OccurrenceTypeID": {
+        "null_count": 0,
+        "nunique": 2,
+        "cardinality_ratio": 2.2789425706472198e-05,
+        "data_type": "int64"
+      },
+      "OccTypeDisplayEng": {
+        "null_count": 0,
+        "nunique": 2,
+        "cardinality_ratio": 2.2789425706472198e-05,
+        "data_type": "object"
+      },
+      "OccTypeDisplayFre": {
+        "null_count": 0,
+        "nunique": 2,
+        "cardinality_ratio": 2.2789425706472198e-05,
+        "data_type": "object"
+      },
+      "AccIncTypeID": {
+        "null_count": 0,
+        "nunique": 33,
+        "cardinality_ratio": 0.00037602552415679126,
+        "data_type": "int64"
+      },
+      "AccIncTypeDisplayEng": {
+        "null_count": 0,
+        "nunique": 33,
+        "cardinality_ratio": 0.00037602552415679126,
+        "data_type": "object"
+      },
+      "AccIncTypeDisplayFre": {
+        "null_count": 0,
+        "nunique": 33,
+        "cardinality_ratio": 0.00037602552415679126,
+        "data_type": "object"
+      },
+      "ImoClassLevelID": {
+        "null_count": 70712,
+        "nunique": 4,
+        "cardinality_ratio": 4.5578851412944395e-05,
         "data_type": "float64"
       },
-      "CapsuleAudioFilesSegregatedEnumDisplayEng": {
-        "null_count": 77882,
-        "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+      "ImoClasslevelDisplayEng": {
+        "null_count": 70712,
+        "nunique": 4,
+        "cardinality_ratio": 4.5578851412944395e-05,
         "data_type": "object"
       },
-      "CapsuleAudioFilesSegregatedEnumDisplayFre": {
-        "null_count": 77882,
-        "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+      "ImoClassLevelDisplayFre": {
+        "null_count": 70712,
+        "nunique": 4,
+        "cardinality_ratio": 4.5578851412944395e-05,
         "data_type": "object"
       },
-      "DataExtractedEnum": {
-        "null_count": 76883,
+      "Summary": {
+        "null_count": 0,
+        "nunique": 48316,
+        "cardinality_ratio": 0.5505469462169553,
+        "data_type": "object"
+      },
+      "InjuriesIND": {
+        "null_count": 59746,
         "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+        "cardinality_ratio": 3.418413855970829e-05,
         "data_type": "float64"
       },
-      "DataExtractedEnumDisplayEng": {
-        "null_count": 76883,
+      "InjuriesIND_DisplayEng": {
+        "null_count": 59746,
         "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+        "cardinality_ratio": 3.418413855970829e-05,
         "data_type": "object"
       },
-      "DataExtractedEnumDisplayFre": {
-        "null_count": 76883,
+      "InjuriesIND_DisplayFre": {
+        "null_count": 59746,
         "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+        "cardinality_ratio": 3.418413855970829e-05,
         "data_type": "object"
       },
-      "ReasonNotExtractedID": {
-        "null_count": 77635,
+      "SearchAndRescueIND": {
+        "null_count": 3572,
         "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+        "cardinality_ratio": 3.418413855970829e-05,
         "data_type": "float64"
       },
-      "ReasonNotExtractedDisplayEng": {
-        "null_count": 77635,
+      "SearchAndRescueIND_DisplayEng": {
+        "null_count": 3572,
         "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+        "cardinality_ratio": 3.418413855970829e-05,
         "data_type": "object"
       },
-      "ReasonNotExtractedDisplayFre": {
-        "null_count": 77635,
+      "SearchAndRescueIND_DisplayFre": {
+        "null_count": 3572,
         "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+        "cardinality_ratio": 3.418413855970829e-05,
         "data_type": "object"
       },
-      "EquipSeizedEnum": {
-        "null_count": 76883,
-        "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+      "DamageIND": {
+        "null_count": 9379,
+        "nunique": 4,
+        "cardinality_ratio": 4.5578851412944395e-05,
         "data_type": "float64"
       },
-      "EquipSeizedEnumDisplayEng": {
-        "null_count": 76883,
-        "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+      "DamageIND_DisplayEng": {
+        "null_count": 9379,
+        "nunique": 4,
+        "cardinality_ratio": 4.5578851412944395e-05,
         "data_type": "object"
       },
-      "EquipSeizedEnumDisplayFre": {
-        "null_count": 76883,
-        "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+      "DamageIND_DisplayFre": {
+        "null_count": 9379,
+        "nunique": 4,
+        "cardinality_ratio": 4.5578851412944395e-05,
         "data_type": "object"
       },
-      "InstructionsPostedEnum": {
-        "null_count": 77864,
+      "SafetyCommIssuedIND": {
+        "null_count": 77833,
         "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+        "cardinality_ratio": 3.418413855970829e-05,
         "data_type": "float64"
       },
-      "InstructionsPostedEnumDisplayEng": {
-        "null_count": 77864,
+      "SafetyCommIssuedIND_DisplayEng": {
+        "null_count": 77833,
         "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+        "cardinality_ratio": 3.418413855970829e-05,
         "data_type": "object"
       },
-      "InstructionsPostedEnumDisplayFre": {
-        "null_count": 77864,
+      "SafetyCommIssuedIND_DisplayFre": {
+        "null_count": 77833,
         "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+        "cardinality_ratio": 3.418413855970829e-05,
         "data_type": "object"
       },
-      "InstructionAvailableEnum": {
-        "null_count": 77867,
+      "PollutionIND": {
+        "null_count": 1985,
         "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+        "cardinality_ratio": 3.418413855970829e-05,
         "data_type": "float64"
       },
-      "InstructionAvailableEnumDisplayEng": {
-        "null_count": 77867,
+      "PollutionIND_DisplayEng": {
+        "null_count": 1985,
         "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+        "cardinality_ratio": 3.418413855970829e-05,
         "data_type": "object"
       },
-      "InstructionAvailableEnumDisplayFre": {
-        "null_count": 77867,
+      "PollutionIND_DisplayFre": {
+        "null_count": 1985,
         "nunique": 3,
-        "cardinality_ratio": 3.8265794206558755e-05,
+        "cardinality_ratio": 3.418413855970829e-05,
         "data_type": "object"
+      },
+      "DeployedIND": {
+        "null_count": 72954,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "float64"
+      },
+      "DeployedIND_DisplayEng": {
+        "null_count": 72954,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "object"
+      },
+      "DeployedIND_DisplayFre": {
+        "null_count": 72954,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "object"
+      },
+      "AreaTypeID": {
+        "null_count": 5,
+        "nunique": 13,
+        "cardinality_ratio": 0.00014813126709206927,
+        "data_type": "float64"
+      },
+      "AreaTypeDisplayEng": {
+        "null_count": 5,
+        "nunique": 13,
+        "cardinality_ratio": 0.00014813126709206927,
+        "data_type": "object"
+      },
+      "AreaTypeDisplayFre": {
+        "null_count": 5,
+        "nunique": 13,
+        "cardinality_ratio": 0.00014813126709206927,
+        "data_type": "object"
+      },
+      "RoutingID": {
+        "null_count": 76302,
+        "nunique": 14,
+        "cardinality_ratio": 0.0001595259799453054,
+        "data_type": "float64"
+      },
+      "RoutingDisplayEng": {
+        "null_count": 76302,
+        "nunique": 14,
+        "cardinality_ratio": 0.0001595259799453054,
+        "data_type": "object"
+      },
+      "RoutingDisplayFre": {
+        "null_count": 83550,
+        "nunique": 13,
+        "cardinality_ratio": 0.00014813126709206927,
+        "data_type": "object"
+      },
+      "WithInPilotBoardingAreaEnum": {
+        "null_count": 76194,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "float64"
+      },
+      "WithInPilotBoardingAreaEnum_DisplayEng": {
+        "null_count": 76194,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "object"
+      },
+      "WithInPilotBoardingAreaEnum_DisplayFre": {
+        "null_count": 76194,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "object"
+      },
+      "Latitude": {
+        "null_count": 27,
+        "nunique": 22748,
+        "cardinality_ratio": 0.2592069279854148,
+        "data_type": "float64"
+      },
+      "LatEnum": {
+        "null_count": 24,
+        "nunique": 2,
+        "cardinality_ratio": 2.2789425706472198e-05,
+        "data_type": "float64"
+      },
+      "LatEnum_Bearing_DisplayEng": {
+        "null_count": 24,
+        "nunique": 2,
+        "cardinality_ratio": 2.2789425706472198e-05,
+        "data_type": "object"
+      },
+      "LatEnum_Bearing_DisplayFre": {
+        "null_count": 24,
+        "nunique": 2,
+        "cardinality_ratio": 2.2789425706472198e-05,
+        "data_type": "object"
+      },
+      "Longitude": {
+        "null_count": 27,
+        "nunique": 26438,
+        "cardinality_ratio": 0.30125341841385594,
+        "data_type": "float64"
+      },
+      "LongEnum": {
+        "null_count": 24,
+        "nunique": 2,
+        "cardinality_ratio": 2.2789425706472198e-05,
+        "data_type": "float64"
+      },
+      "LongEnum_Bearing_DisplayEng": {
+        "null_count": 24,
+        "nunique": 2,
+        "cardinality_ratio": 2.2789425706472198e-05,
+        "data_type": "object"
+      },
+      "LongEnum_Bearing_DisplayFre": {
+        "null_count": 24,
+        "nunique": 2,
+        "cardinality_ratio": 2.2789425706472198e-05,
+        "data_type": "object"
+      },
+      "PositionEstimatedIND": {
+        "null_count": 70750,
+        "nunique": 2,
+        "cardinality_ratio": 2.2789425706472198e-05,
+        "data_type": "float64"
+      },
+      "PositionEstimatedIND_DisplayEng": {
+        "null_count": 70750,
+        "nunique": 2,
+        "cardinality_ratio": 2.2789425706472198e-05,
+        "data_type": "object"
+      },
+      "PositionEstimatedIND_DisplayFre": {
+        "null_count": 70750,
+        "nunique": 2,
+        "cardinality_ratio": 2.2789425706472198e-05,
+        "data_type": "object"
+      },
+      "NearestLocationDistance_Nm": {
+        "null_count": 75617,
+        "nunique": 1323,
+        "cardinality_ratio": 0.015075205104831358,
+        "data_type": "float64"
+      },
+      "NearestLocationDescription": {
+        "null_count": 9,
+        "nunique": 35037,
+        "cardinality_ratio": 0.3992365542388332,
+        "data_type": "object"
+      },
+      "BearingID": {
+        "null_count": 76174,
+        "nunique": 17,
+        "cardinality_ratio": 0.00019371011850501368,
+        "data_type": "float64"
+      },
+      "BearingDisplay": {
+        "null_count": 76174,
+        "nunique": 16,
+        "cardinality_ratio": 0.00018231540565177758,
+        "data_type": "object"
+      },
+      "FatigueInvestEnum": {
+        "null_count": 79344,
+        "nunique": 2,
+        "cardinality_ratio": 2.2789425706472198e-05,
+        "data_type": "float64"
+      },
+      "FatigueInvestEnum_DisplayEng": {
+        "null_count": 79344,
+        "nunique": 2,
+        "cardinality_ratio": 2.2789425706472198e-05,
+        "data_type": "object"
+      },
+      "FatigueInvestEnum_DisplayFre": {
+        "null_count": 79344,
+        "nunique": 2,
+        "cardinality_ratio": 2.2789425706472198e-05,
+        "data_type": "object"
+      },
+      "FatigueContFactorEnum": {
+        "null_count": 79871,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "float64"
+      },
+      "FatigueContFactorEnum_DisplayEng": {
+        "null_count": 79871,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "object"
+      },
+      "FatigueContFactorEnum_DisplayFre": {
+        "null_count": 79871,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "object"
+      },
+      "WeatherFactorEnum": {
+        "null_count": 78450,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "float64"
+      },
+      "WeatherFactorEnum_DisplayEng": {
+        "null_count": 78450,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "object"
+      },
+      "WeatherFactorEnum_DisplayFre": {
+        "null_count": 78450,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "object"
+      },
+      "ReleasedDate": {
+        "null_count": 15,
+        "nunique": 25758,
+        "cardinality_ratio": 0.29350501367365545,
+        "data_type": "object"
+      },
+      "OccClosedDate": {
+        "null_count": 67,
+        "nunique": 19675,
+        "cardinality_ratio": 0.22419097538742025,
+        "data_type": "object"
+      },
+      "RegionResponsibilityID": {
+        "null_count": 0,
+        "nunique": 9,
+        "cardinality_ratio": 0.00010255241567912489,
+        "data_type": "int64"
+      },
+      "RegionResponsibilityDisplayEng": {
+        "null_count": 0,
+        "nunique": 9,
+        "cardinality_ratio": 0.00010255241567912489,
+        "data_type": "object"
+      },
+      "RegionResponsibilityDisplayFre": {
+        "null_count": 0,
+        "nunique": 9,
+        "cardinality_ratio": 0.00010255241567912489,
+        "data_type": "object"
+      },
+      "RegionOfOccurrenceID": {
+        "null_count": 0,
+        "nunique": 9,
+        "cardinality_ratio": 0.00010255241567912489,
+        "data_type": "int64"
+      },
+      "RegionOfOccurrenceDisplayEng": {
+        "null_count": 0,
+        "nunique": 9,
+        "cardinality_ratio": 0.00010255241567912489,
+        "data_type": "object"
+      },
+      "RegionOfOccurrenceDisplayFre": {
+        "null_count": 0,
+        "nunique": 9,
+        "cardinality_ratio": 0.00010255241567912489,
+        "data_type": "object"
+      },
+      "ReportSourceID": {
+        "null_count": 87760,
+        "nunique": 0,
+        "cardinality_ratio": 0.0,
+        "data_type": "float64"
+      },
+      "ReportSourceeDisplayEng": {
+        "null_count": 87760,
+        "nunique": 0,
+        "cardinality_ratio": 0.0,
+        "data_type": "float64"
+      },
+      "ReportSourceDisplayFre": {
+        "null_count": 87760,
+        "nunique": 0,
+        "cardinality_ratio": 0.0,
+        "data_type": "float64"
+      },
+      "PositionTypeEnum": {
+        "null_count": 70750,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "float64"
+      },
+      "PositionTypeDisplayEng": {
+        "null_count": 70750,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "object"
+      },
+      "PositionTypeDisplayFre": {
+        "null_count": 70750,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "object"
+      },
+      "Position": {
+        "null_count": 87760,
+        "nunique": 0,
+        "cardinality_ratio": 0.0,
+        "data_type": "float64"
+      },
+      "PositionInText": {
+        "null_count": 87760,
+        "nunique": 0,
+        "cardinality_ratio": 0.0,
+        "data_type": "float64"
+      },
+      "EntryDate": {
+        "null_count": 0,
+        "nunique": 13653,
+        "cardinality_ratio": 0.15557201458523245,
+        "data_type": "object"
+      },
+      "MajorChangesIncludedInDaily": {
+        "null_count": 12220,
+        "nunique": 1,
+        "cardinality_ratio": 1.1394712853236099e-05,
+        "data_type": "float64"
+      },
+      "IncludedInDailyEnum": {
+        "null_count": 15,
+        "nunique": 1,
+        "cardinality_ratio": 1.1394712853236099e-05,
+        "data_type": "float64"
+      },
+      "IncludedInDailyEnumDisplayEng": {
+        "null_count": 15,
+        "nunique": 1,
+        "cardinality_ratio": 1.1394712853236099e-05,
+        "data_type": "object"
+      },
+      "IncludedInDailyEnumDisplayFre": {
+        "null_count": 15,
+        "nunique": 1,
+        "cardinality_ratio": 1.1394712853236099e-05,
+        "data_type": "object"
+      },
+      "EnvironmentalConditionID": {
+        "null_count": 11,
+        "nunique": 48583,
+        "cardinality_ratio": 0.5535893345487694,
+        "data_type": "float64"
+      },
+      "VisibilityDistance_Nm": {
+        "null_count": 41898,
+        "nunique": 155,
+        "cardinality_ratio": 0.0017661804922515952,
+        "data_type": "float64"
+      },
+      "LightConditionID": {
+        "null_count": 51265,
+        "nunique": 4,
+        "cardinality_ratio": 4.5578851412944395e-05,
+        "data_type": "float64"
+      },
+      "LightConditionDisplayEng": {
+        "null_count": 51265,
+        "nunique": 4,
+        "cardinality_ratio": 4.5578851412944395e-05,
+        "data_type": "object"
+      },
+      "LightConditionDisplayFre": {
+        "null_count": 51265,
+        "nunique": 4,
+        "cardinality_ratio": 4.5578851412944395e-05,
+        "data_type": "object"
+      },
+      "WeatherConditionID": {
+        "null_count": 15222,
+        "nunique": 13,
+        "cardinality_ratio": 0.00014813126709206927,
+        "data_type": "float64"
+      },
+      "WeatherConditionDisplayEng": {
+        "null_count": 15222,
+        "nunique": 13,
+        "cardinality_ratio": 0.00014813126709206927,
+        "data_type": "object"
+      },
+      "WeatherConditionDisplayFre": {
+        "null_count": 15222,
+        "nunique": 13,
+        "cardinality_ratio": 0.00014813126709206927,
+        "data_type": "object"
+      },
+      "WindDirectionID": {
+        "null_count": 37590,
+        "nunique": 17,
+        "cardinality_ratio": 0.00019371011850501368,
+        "data_type": "float64"
+      },
+      "WindDirection": {
+        "null_count": 37590,
+        "nunique": 16,
+        "cardinality_ratio": 0.00018231540565177758,
+        "data_type": "object"
+      },
+      "WindSpeedTypeID": {
+        "null_count": 32857,
+        "nunique": 2,
+        "cardinality_ratio": 2.2789425706472198e-05,
+        "data_type": "float64"
+      },
+      "WindSpeedTypeDisplayEng": {
+        "null_count": 32857,
+        "nunique": 2,
+        "cardinality_ratio": 2.2789425706472198e-05,
+        "data_type": "object"
+      },
+      "WindSpeedTypeDisplayFre": {
+        "null_count": 32857,
+        "nunique": 2,
+        "cardinality_ratio": 2.2789425706472198e-05,
+        "data_type": "object"
+      },
+      "BeaufortScaleID": {
+        "null_count": 84219,
+        "nunique": 12,
+        "cardinality_ratio": 0.00013673655423883317,
+        "data_type": "float64"
+      },
+      "BeaufortScaleDisplayEng": {
+        "null_count": 84219,
+        "nunique": 12,
+        "cardinality_ratio": 0.00013673655423883317,
+        "data_type": "object"
+      },
+      "BeaufortScaleDisplayFre": {
+        "null_count": 84219,
+        "nunique": 12,
+        "cardinality_ratio": 0.00013673655423883317,
+        "data_type": "object"
+      },
+      "WindSpeed_Knots": {
+        "null_count": 36414,
+        "nunique": 123,
+        "cardinality_ratio": 0.0014015496809480401,
+        "data_type": "float64"
+      },
+      "SeaStateID": {
+        "null_count": 8095,
+        "nunique": 17,
+        "cardinality_ratio": 0.00019371011850501368,
+        "data_type": "float64"
+      },
+      "SeaStateDisplayEng": {
+        "null_count": 8095,
+        "nunique": 17,
+        "cardinality_ratio": 0.00019371011850501368,
+        "data_type": "object"
+      },
+      "SeaStateDisplayFre": {
+        "null_count": 8095,
+        "nunique": 17,
+        "cardinality_ratio": 0.00019371011850501368,
+        "data_type": "object"
+      },
+      "SwellDirectionID": {
+        "null_count": 85711,
+        "nunique": 17,
+        "cardinality_ratio": 0.00019371011850501368,
+        "data_type": "float64"
+      },
+      "SwellDirection": {
+        "null_count": 85711,
+        "nunique": 16,
+        "cardinality_ratio": 0.00018231540565177758,
+        "data_type": "object"
+      },
+      "SwellHeight_Meters": {
+        "null_count": 84940,
+        "nunique": 59,
+        "cardinality_ratio": 0.0006722880583409298,
+        "data_type": "float64"
+      },
+      "AirTemp_Celsius": {
+        "null_count": 61041,
+        "nunique": 78,
+        "cardinality_ratio": 0.0008887876025524157,
+        "data_type": "float64"
+      },
+      "SeatTemp_Celsius": {
+        "null_count": 84558,
+        "nunique": 57,
+        "cardinality_ratio": 0.0006494986326344576,
+        "data_type": "float64"
+      },
+      "IceCoverage_ScaleOutOf1to10": {
+        "null_count": 86595,
+        "nunique": 11,
+        "cardinality_ratio": 0.00012534184138559708,
+        "data_type": "float64"
+      },
+      "IcebergEnum": {
+        "null_count": 86946,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "float64"
+      },
+      "IcebergEnumDisplayEng": {
+        "null_count": 86946,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "object"
+      },
+      "IcebergEnumDisplayFre": {
+        "null_count": 86946,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "object"
+      },
+      "BergyBitsEnum": {
+        "null_count": 86948,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "float64"
+      },
+      "BergyBitsEnumDisplayEng": {
+        "null_count": 86948,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "object"
+      },
+      "BergyBitsEnumDisplayFre": {
+        "null_count": 86948,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "object"
+      },
+      "GrowlersEnum": {
+        "null_count": 86952,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "float64"
+      },
+      "GrowlersEnumDisplayEng": {
+        "null_count": 86952,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "object"
+      },
+      "GrowlersEnumDisplayFre": {
+        "null_count": 86952,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "object"
+      },
+      "UnderIceRegimeEnum": {
+        "null_count": 85126,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "float64"
+      },
+      "UnderIceRegimeEnumDisplayEng": {
+        "null_count": 85126,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "object"
+      },
+      "UnderIceRegimeEnumDisplayFre": {
+        "null_count": 85126,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "object"
+      },
+      "ObservedByID": {
+        "null_count": 86923,
+        "nunique": 4,
+        "cardinality_ratio": 4.5578851412944395e-05,
+        "data_type": "float64"
+      },
+      "ObservedByDisplayEng": {
+        "null_count": 86923,
+        "nunique": 4,
+        "cardinality_ratio": 4.5578851412944395e-05,
+        "data_type": "object"
+      },
+      "ObservedByDisplayFre": {
+        "null_count": 86931,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "object"
+      },
+      "VesselIcingPresentEnum": {
+        "null_count": 86888,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "float64"
+      },
+      "VesselIcingPresentEnumDisplayEng": {
+        "null_count": 86888,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "object"
+      },
+      "VesselIcingPresentEnumDisplayFre": {
+        "null_count": 86888,
+        "nunique": 3,
+        "cardinality_ratio": 3.418413855970829e-05,
+        "data_type": "object"
+      },
+      "VesselIcingQualificationID": {
+        "null_count": 87725,
+        "nunique": 4,
+        "cardinality_ratio": 4.5578851412944395e-05,
+        "data_type": "float64"
+      },
+      "VesselIcingQualificationDisplayEng": {
+        "null_count": 87725,
+        "nunique": 4,
+        "cardinality_ratio": 4.5578851412944395e-05,
+        "data_type": "object"
+      },
+      "VesselIcingQualificationDisplayFre": {
+        "null_count": 87725,
+        "nunique": 4,
+        "cardinality_ratio": 4.5578851412944395e-05,
+        "data_type": "object"
+      },
+      "NotificationDetailID": {
+        "null_count": 14,
+        "nunique": 86303,
+        "cardinality_ratio": 0.9833979033728351,
+        "data_type": "float64"
+      },
+      "ReportedDate": {
+        "null_count": 14,
+        "nunique": 22002,
+        "cardinality_ratio": 0.2507064721969006,
+        "data_type": "object"
+      },
+      "ReportedByID": {
+        "null_count": 15,
+        "nunique": 54,
+        "cardinality_ratio": 0.0006153144940747493,
+        "data_type": "float64"
+      },
+      "ReportedByDisplayEng": {
+        "null_count": 15,
+        "nunique": 54,
+        "cardinality_ratio": 0.0006153144940747493,
+        "data_type": "object"
+      },
+      "ReportedByDisplayFre": {
+        "null_count": 15,
+        "nunique": 54,
+        "cardinality_ratio": 0.0006153144940747493,
+        "data_type": "object"
+      },
+      "SubstantiallyInsterestedStateIND": {
+        "null_count": 87572,
+        "nunique": 2,
+        "cardinality_ratio": 2.2789425706472198e-05,
+        "data_type": "float64"
+      },
+      "OtherStateInvestigatingID": {
+        "null_count": 87708,
+        "nunique": 13,
+        "cardinality_ratio": 0.00014813126709206927,
+        "data_type": "float64"
+      },
+      "OtherStateInvestigatingDisplayEng": {
+        "null_count": 87708,
+        "nunique": 13,
+        "cardinality_ratio": 0.00014813126709206927,
+        "data_type": "object"
+      },
+      "OtherStateInvestigatingDisplayFre": {
+        "null_count": 87708,
+        "nunique": 13,
+        "cardinality_ratio": 0.00014813126709206927,
+        "data_type": "object"
+      },
+      "SubstantiallyInterestedStateID": {
+        "null_count": 87624,
+        "nunique": 29,
+        "cardinality_ratio": 0.0003304466727438469,
+        "data_type": "float64"
+      },
+      "SubstantiallyInterestedStateDisplayEng": {
+        "null_count": 87624,
+        "nunique": 29,
+        "cardinality_ratio": 0.0003304466727438469,
+        "data_type": "object"
+      },
+      "SubstantiallyInterestedStateDisplayFre": {
+        "null_count": 87624,
+        "nunique": 29,
+        "cardinality_ratio": 0.0003304466727438469,
+        "data_type": "object"
+      },
+      "TotalDeaths": {
+        "null_count": 0,
+        "nunique": 14,
+        "cardinality_ratio": 0.0001595259799453054,
+        "data_type": "int64"
+      },
+      "TotalMinorInjuries": {
+        "null_count": 0,
+        "nunique": 18,
+        "cardinality_ratio": 0.00020510483135824977,
+        "data_type": "int64"
+      },
+      "TotalSeriousInjuries": {
+        "null_count": 0,
+        "nunique": 9,
+        "cardinality_ratio": 0.00010255241567912489,
+        "data_type": "int64"
+      },
+      "TotalMissingIndividuals": {
+        "null_count": 0,
+        "nunique": 12,
+        "cardinality_ratio": 0.00013673655423883317,
+        "data_type": "int64"
+      },
+      "TotalPeopleInTheWater": {
+        "null_count": 0,
+        "nunique": 12,
+        "cardinality_ratio": 0.00013673655423883317,
+        "data_type": "int64"
       }
     },
     "possible_pks": [],
@@ -1616,1176 +2506,286 @@
     "possible_pks": [],
     "inferred_fks": []
   },
-  "MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC": {
-    "file_name": "MARSISdb_MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC.csv",
-    "row_count": 314447,
-    "col_count": 14,
+  "MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC": {
+    "file_name": "MARSISdb_MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC.csv",
+    "row_count": 78399,
+    "col_count": 46,
     "columns": {
       "OccNo": {
-        "null_count": 38035,
-        "nunique": 21715,
-        "cardinality_ratio": 0.06905774264025416,
+        "null_count": 70397,
+        "nunique": 1552,
+        "cardinality_ratio": 0.019796170869526397,
         "data_type": "object"
       },
       "OccID": {
-        "null_count": 38035,
-        "nunique": 21725,
-        "cardinality_ratio": 0.06908954450193515,
+        "null_count": 70397,
+        "nunique": 1552,
+        "cardinality_ratio": 0.019796170869526397,
         "data_type": "float64"
       },
       "VesselID": {
-        "null_count": 38035,
-        "nunique": 12677,
-        "cardinality_ratio": 0.0403152200529819,
+        "null_count": 70397,
+        "nunique": 1006,
+        "cardinality_ratio": 0.012831796323932703,
         "data_type": "float64"
       },
       "VesselName": {
-        "null_count": 38035,
-        "nunique": 12606,
-        "cardinality_ratio": 0.040089426835046925,
+        "null_count": 70397,
+        "nunique": 1018,
+        "cardinality_ratio": 0.012984859500758937,
         "data_type": "object"
       },
-      "XrfOccVesselNavAidID": {
-        "null_count": 38035,
-        "nunique": 171880,
-        "cardinality_ratio": 0.5466103985727324,
+      "VesselSoftwareAudioID": {
+        "null_count": 70397,
+        "nunique": 3467,
+        "cardinality_ratio": 0.04422250283804641,
         "data_type": "float64"
       },
-      "NavigationAidTypeID": {
-        "null_count": 38035,
-        "nunique": 43,
-        "cardinality_ratio": 0.00013674800522822607,
-        "data_type": "float64"
-      },
-      "NavigationAidTypeDisplayEng": {
-        "null_count": 38035,
-        "nunique": 42,
-        "cardinality_ratio": 0.0001335678190601278,
-        "data_type": "object"
-      },
-      "NavigationAidTypeDisplayFre": {
-        "null_count": 39703,
-        "nunique": 41,
-        "cardinality_ratio": 0.0001303876328920295,
-        "data_type": "object"
-      },
-      "NavigationAidSubTypeID": {
-        "null_count": 312077,
-        "nunique": 7,
-        "cardinality_ratio": 2.2261303176687964e-05,
-        "data_type": "float64"
-      },
-      "NavigationAidSubTypeDisplayEng": {
-        "null_count": 312077,
-        "nunique": 7,
-        "cardinality_ratio": 2.2261303176687964e-05,
-        "data_type": "object"
-      },
-      "NavigationAidSubTypeDisplayFre": {
-        "null_count": 312077,
-        "nunique": 7,
-        "cardinality_ratio": 2.2261303176687964e-05,
-        "data_type": "object"
-      },
-      "OnOffEnum": {
-        "null_count": 62514,
-        "nunique": 3,
-        "cardinality_ratio": 9.540558504294841e-06,
-        "data_type": "float64"
-      },
-      "OnOffEnumDisplayEng": {
-        "null_count": 62514,
-        "nunique": 3,
-        "cardinality_ratio": 9.540558504294841e-06,
-        "data_type": "object"
-      },
-      "OnOffEnumDisplayFre": {
-        "null_count": 62514,
-        "nunique": 3,
-        "cardinality_ratio": 9.540558504294841e-06,
-        "data_type": "object"
-      }
-    },
-    "possible_pks": [],
-    "inferred_fks": []
-  },
-  "MDOTW_VW_INJURIES_PUBLIC": {
-    "file_name": "MARSISdb_MDOTW_VW_INJURIES_PUBLIC.csv",
-    "row_count": 23004,
-    "col_count": 18,
-    "columns": {
-      "OccNo": {
-        "null_count": 0,
-        "nunique": 15817,
-        "cardinality_ratio": 0.6875760737263085,
-        "data_type": "object"
-      },
-      "OccID": {
-        "null_count": 0,
-        "nunique": 15817,
-        "cardinality_ratio": 0.6875760737263085,
-        "data_type": "int64"
-      },
-      "VesselID": {
-        "null_count": 6516,
-        "nunique": 10193,
-        "cardinality_ratio": 0.44309685272126587,
-        "data_type": "float64"
-      },
-      "VesselName": {
-        "null_count": 1,
-        "nunique": 10126,
-        "cardinality_ratio": 0.44018431577117023,
-        "data_type": "object"
-      },
-      "XrfOccVesselVictimCountID": {
-        "null_count": 0,
-        "nunique": 23003,
-        "cardinality_ratio": 0.9999565292992523,
-        "data_type": "int64"
-      },
-      "ManuallyEnteredStatsIND": {
-        "null_count": 0,
-        "nunique": 2,
-        "cardinality_ratio": 8.69414014953921e-05,
-        "data_type": "int64"
-      },
-      "VictimMissing": {
-        "null_count": 0,
-        "nunique": 12,
-        "cardinality_ratio": 0.0005216484089723526,
-        "data_type": "int64"
-      },
-      "VictimMinorInjuries": {
-        "null_count": 0,
-        "nunique": 18,
-        "cardinality_ratio": 0.000782472613458529,
-        "data_type": "int64"
-      },
-      "VictimSeriousInjuries": {
-        "null_count": 0,
-        "nunique": 9,
-        "cardinality_ratio": 0.0003912363067292645,
-        "data_type": "int64"
-      },
-      "VictimDeath": {
-        "null_count": 0,
-        "nunique": 14,
-        "cardinality_ratio": 0.0006085898104677448,
-        "data_type": "int64"
-      },
-      "TotalVesselInjuries": {
-        "null_count": 0,
-        "nunique": 23,
-        "cardinality_ratio": 0.0009998261171970091,
-        "data_type": "int64"
-      },
-      "TotalPeopleInWater": {
-        "null_count": 0,
-        "nunique": 12,
-        "cardinality_ratio": 0.0005216484089723526,
-        "data_type": "int64"
-      },
-      "PeopleInWaterWearingLSE": {
-        "null_count": 0,
-        "nunique": 9,
-        "cardinality_ratio": 0.0003912363067292645,
-        "data_type": "int64"
-      },
-      "PeopleInWaterLseTypeID": {
-        "null_count": 22905,
-        "nunique": 4,
-        "cardinality_ratio": 0.0001738828029907842,
-        "data_type": "float64"
-      },
-      "PeopleInWaterLseTypeDisplayEng": {
-        "null_count": 22905,
-        "nunique": 4,
-        "cardinality_ratio": 0.0001738828029907842,
-        "data_type": "object"
-      },
-      "PeopleInWaterLseTypeDisplayFre": {
-        "null_count": 22905,
-        "nunique": 4,
-        "cardinality_ratio": 0.0001738828029907842,
-        "data_type": "object"
-      },
-      "PeopleInWaterNoLSE": {
-        "null_count": 0,
+      "RecordingEquipID": {
+        "null_count": 70397,
         "nunique": 5,
-        "cardinality_ratio": 0.00021735350373848025,
-        "data_type": "int64"
-      },
-      "PeopleInWaterDontKnowLSE": {
-        "null_count": 0,
-        "nunique": 6,
-        "cardinality_ratio": 0.0002608242044861763,
-        "data_type": "int64"
-      }
-    },
-    "possible_pks": [
-      "XrfOccVesselVictimCountID"
-    ],
-    "inferred_fks": []
-  },
-  "MDOTW_VW_OCCURRENCE_PUBLIC": {
-    "file_name": "MARSISdb_MDOTW_VW_OCCURRENCE_PUBLIC.csv",
-    "row_count": 87760,
-    "col_count": 159,
-    "columns": {
-      "OccID": {
-        "null_count": 0,
-        "nunique": 48594,
-        "cardinality_ratio": 0.5537146763901549,
-        "data_type": "int64"
-      },
-      "OccNo": {
-        "null_count": 0,
-        "nunique": 48581,
-        "cardinality_ratio": 0.5535665451230629,
-        "data_type": "object"
-      },
-      "OccClassID": {
-        "null_count": 0,
-        "nunique": 16,
-        "cardinality_ratio": 0.00018231540565177758,
-        "data_type": "int64"
-      },
-      "OccClassDisplayEng": {
-        "null_count": 0,
-        "nunique": 16,
-        "cardinality_ratio": 0.00018231540565177758,
-        "data_type": "object"
-      },
-      "OccClassDisplayFre": {
-        "null_count": 0,
-        "nunique": 16,
-        "cardinality_ratio": 0.00018231540565177758,
-        "data_type": "object"
-      },
-      "OccDate": {
-        "null_count": 0,
-        "nunique": 16302,
-        "cardinality_ratio": 0.1857566089334549,
-        "data_type": "object"
-      },
-      "OccTime": {
-        "null_count": 4797,
-        "nunique": 1470,
-        "cardinality_ratio": 0.016750227894257064,
-        "data_type": "object"
-      },
-      "TimeZoneID": {
-        "null_count": 0,
-        "nunique": 14,
-        "cardinality_ratio": 0.0001595259799453054,
-        "data_type": "int64"
-      },
-      "TimeZoneDisplayEng": {
-        "null_count": 0,
-        "nunique": 14,
-        "cardinality_ratio": 0.0001595259799453054,
-        "data_type": "object"
-      },
-      "TimeZoneDisplayFre": {
-        "null_count": 0,
-        "nunique": 14,
-        "cardinality_ratio": 0.0001595259799453054,
-        "data_type": "object"
-      },
-      "ProvinceID": {
-        "null_count": 60729,
-        "nunique": 14,
-        "cardinality_ratio": 0.0001595259799453054,
+        "cardinality_ratio": 6.377632367759793e-05,
         "data_type": "float64"
       },
-      "ProvinceDisplayEng": {
-        "null_count": 60729,
-        "nunique": 14,
-        "cardinality_ratio": 0.0001595259799453054,
+      "RecordingEquipDisplayEng": {
+        "null_count": 70397,
+        "nunique": 5,
+        "cardinality_ratio": 6.377632367759793e-05,
         "data_type": "object"
       },
-      "ProvinceDisplayFre": {
-        "null_count": 60729,
-        "nunique": 14,
-        "cardinality_ratio": 0.0001595259799453054,
+      "RecordingEquipDisplayFre": {
+        "null_count": 70397,
+        "nunique": 5,
+        "cardinality_ratio": 6.377632367759793e-05,
         "data_type": "object"
       },
-      "OccurrenceTypeID": {
-        "null_count": 0,
-        "nunique": 2,
-        "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "int64"
-      },
-      "OccTypeDisplayEng": {
-        "null_count": 0,
-        "nunique": 2,
-        "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
-      },
-      "OccTypeDisplayFre": {
-        "null_count": 0,
-        "nunique": 2,
-        "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
-      },
-      "AccIncTypeID": {
-        "null_count": 0,
-        "nunique": 33,
-        "cardinality_ratio": 0.00037602552415679126,
-        "data_type": "int64"
-      },
-      "AccIncTypeDisplayEng": {
-        "null_count": 0,
-        "nunique": 33,
-        "cardinality_ratio": 0.00037602552415679126,
-        "data_type": "object"
-      },
-      "AccIncTypeDisplayFre": {
-        "null_count": 0,
-        "nunique": 33,
-        "cardinality_ratio": 0.00037602552415679126,
-        "data_type": "object"
-      },
-      "ImoClassLevelID": {
-        "null_count": 70712,
-        "nunique": 4,
-        "cardinality_ratio": 4.5578851412944395e-05,
+      "SoftwareAudioMakeID": {
+        "null_count": 77180,
+        "nunique": 23,
+        "cardinality_ratio": 0.00029337108891695047,
         "data_type": "float64"
       },
-      "ImoClasslevelDisplayEng": {
-        "null_count": 70712,
-        "nunique": 4,
-        "cardinality_ratio": 4.5578851412944395e-05,
+      "SoftwareAudioMakeDisplayEng": {
+        "null_count": 77180,
+        "nunique": 24,
+        "cardinality_ratio": 0.00030612635365247004,
         "data_type": "object"
       },
-      "ImoClassLevelDisplayFre": {
-        "null_count": 70712,
-        "nunique": 4,
-        "cardinality_ratio": 4.5578851412944395e-05,
+      "SoftwareAudioMakeDisplayFre": {
+        "null_count": 77180,
+        "nunique": 23,
+        "cardinality_ratio": 0.00029337108891695047,
         "data_type": "object"
       },
-      "Summary": {
-        "null_count": 0,
-        "nunique": 48316,
-        "cardinality_ratio": 0.5505469462169553,
-        "data_type": "object"
-      },
-      "InjuriesIND": {
-        "null_count": 59746,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "float64"
-      },
-      "InjuriesIND_DisplayEng": {
-        "null_count": 59746,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "InjuriesIND_DisplayFre": {
-        "null_count": 59746,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "SearchAndRescueIND": {
-        "null_count": 3572,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "float64"
-      },
-      "SearchAndRescueIND_DisplayEng": {
-        "null_count": 3572,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "SearchAndRescueIND_DisplayFre": {
-        "null_count": 3572,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "DamageIND": {
-        "null_count": 9379,
-        "nunique": 4,
-        "cardinality_ratio": 4.5578851412944395e-05,
-        "data_type": "float64"
-      },
-      "DamageIND_DisplayEng": {
-        "null_count": 9379,
-        "nunique": 4,
-        "cardinality_ratio": 4.5578851412944395e-05,
-        "data_type": "object"
-      },
-      "DamageIND_DisplayFre": {
-        "null_count": 9379,
-        "nunique": 4,
-        "cardinality_ratio": 4.5578851412944395e-05,
-        "data_type": "object"
-      },
-      "SafetyCommIssuedIND": {
-        "null_count": 77833,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "float64"
-      },
-      "SafetyCommIssuedIND_DisplayEng": {
-        "null_count": 77833,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "SafetyCommIssuedIND_DisplayFre": {
-        "null_count": 77833,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "PollutionIND": {
-        "null_count": 1985,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "float64"
-      },
-      "PollutionIND_DisplayEng": {
-        "null_count": 1985,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "PollutionIND_DisplayFre": {
-        "null_count": 1985,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "DeployedIND": {
-        "null_count": 72954,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "float64"
-      },
-      "DeployedIND_DisplayEng": {
-        "null_count": 72954,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "DeployedIND_DisplayFre": {
-        "null_count": 72954,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "AreaTypeID": {
-        "null_count": 5,
-        "nunique": 13,
-        "cardinality_ratio": 0.00014813126709206927,
-        "data_type": "float64"
-      },
-      "AreaTypeDisplayEng": {
-        "null_count": 5,
-        "nunique": 13,
-        "cardinality_ratio": 0.00014813126709206927,
-        "data_type": "object"
-      },
-      "AreaTypeDisplayFre": {
-        "null_count": 5,
-        "nunique": 13,
-        "cardinality_ratio": 0.00014813126709206927,
-        "data_type": "object"
-      },
-      "RoutingID": {
-        "null_count": 76302,
-        "nunique": 14,
-        "cardinality_ratio": 0.0001595259799453054,
-        "data_type": "float64"
-      },
-      "RoutingDisplayEng": {
-        "null_count": 76302,
-        "nunique": 14,
-        "cardinality_ratio": 0.0001595259799453054,
-        "data_type": "object"
-      },
-      "RoutingDisplayFre": {
-        "null_count": 83550,
-        "nunique": 13,
-        "cardinality_ratio": 0.00014813126709206927,
-        "data_type": "object"
-      },
-      "WithInPilotBoardingAreaEnum": {
-        "null_count": 76194,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "float64"
-      },
-      "WithInPilotBoardingAreaEnum_DisplayEng": {
-        "null_count": 76194,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "WithInPilotBoardingAreaEnum_DisplayFre": {
-        "null_count": 76194,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "Latitude": {
-        "null_count": 27,
-        "nunique": 22748,
-        "cardinality_ratio": 0.2592069279854148,
-        "data_type": "float64"
-      },
-      "LatEnum": {
-        "null_count": 24,
-        "nunique": 2,
-        "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "float64"
-      },
-      "LatEnum_Bearing_DisplayEng": {
-        "null_count": 24,
-        "nunique": 2,
-        "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
-      },
-      "LatEnum_Bearing_DisplayFre": {
-        "null_count": 24,
-        "nunique": 2,
-        "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
-      },
-      "Longitude": {
-        "null_count": 27,
-        "nunique": 26438,
-        "cardinality_ratio": 0.30125341841385594,
-        "data_type": "float64"
-      },
-      "LongEnum": {
-        "null_count": 24,
-        "nunique": 2,
-        "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "float64"
-      },
-      "LongEnum_Bearing_DisplayEng": {
-        "null_count": 24,
-        "nunique": 2,
-        "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
-      },
-      "LongEnum_Bearing_DisplayFre": {
-        "null_count": 24,
-        "nunique": 2,
-        "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
-      },
-      "PositionEstimatedIND": {
-        "null_count": 70750,
-        "nunique": 2,
-        "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "float64"
-      },
-      "PositionEstimatedIND_DisplayEng": {
-        "null_count": 70750,
-        "nunique": 2,
-        "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
-      },
-      "PositionEstimatedIND_DisplayFre": {
-        "null_count": 70750,
-        "nunique": 2,
-        "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
-      },
-      "NearestLocationDistance_Nm": {
-        "null_count": 75617,
-        "nunique": 1323,
-        "cardinality_ratio": 0.015075205104831358,
-        "data_type": "float64"
-      },
-      "NearestLocationDescription": {
-        "null_count": 9,
-        "nunique": 35037,
-        "cardinality_ratio": 0.3992365542388332,
-        "data_type": "object"
-      },
-      "BearingID": {
-        "null_count": 76174,
-        "nunique": 17,
-        "cardinality_ratio": 0.00019371011850501368,
-        "data_type": "float64"
-      },
-      "BearingDisplay": {
-        "null_count": 76174,
-        "nunique": 16,
-        "cardinality_ratio": 0.00018231540565177758,
-        "data_type": "object"
-      },
-      "FatigueInvestEnum": {
-        "null_count": 79344,
-        "nunique": 2,
-        "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "float64"
-      },
-      "FatigueInvestEnum_DisplayEng": {
-        "null_count": 79344,
-        "nunique": 2,
-        "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
-      },
-      "FatigueInvestEnum_DisplayFre": {
-        "null_count": 79344,
-        "nunique": 2,
-        "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
-      },
-      "FatigueContFactorEnum": {
-        "null_count": 79871,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "float64"
-      },
-      "FatigueContFactorEnum_DisplayEng": {
-        "null_count": 79871,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "FatigueContFactorEnum_DisplayFre": {
-        "null_count": 79871,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "WeatherFactorEnum": {
-        "null_count": 78450,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "float64"
-      },
-      "WeatherFactorEnum_DisplayEng": {
-        "null_count": 78450,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "WeatherFactorEnum_DisplayFre": {
-        "null_count": 78450,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "ReleasedDate": {
-        "null_count": 15,
-        "nunique": 25758,
-        "cardinality_ratio": 0.29350501367365545,
-        "data_type": "object"
-      },
-      "OccClosedDate": {
-        "null_count": 67,
-        "nunique": 19675,
-        "cardinality_ratio": 0.22419097538742025,
-        "data_type": "object"
-      },
-      "RegionResponsibilityID": {
-        "null_count": 0,
-        "nunique": 9,
-        "cardinality_ratio": 0.00010255241567912489,
-        "data_type": "int64"
-      },
-      "RegionResponsibilityDisplayEng": {
-        "null_count": 0,
-        "nunique": 9,
-        "cardinality_ratio": 0.00010255241567912489,
-        "data_type": "object"
-      },
-      "RegionResponsibilityDisplayFre": {
-        "null_count": 0,
-        "nunique": 9,
-        "cardinality_ratio": 0.00010255241567912489,
-        "data_type": "object"
-      },
-      "RegionOfOccurrenceID": {
-        "null_count": 0,
-        "nunique": 9,
-        "cardinality_ratio": 0.00010255241567912489,
-        "data_type": "int64"
-      },
-      "RegionOfOccurrenceDisplayEng": {
-        "null_count": 0,
-        "nunique": 9,
-        "cardinality_ratio": 0.00010255241567912489,
-        "data_type": "object"
-      },
-      "RegionOfOccurrenceDisplayFre": {
-        "null_count": 0,
-        "nunique": 9,
-        "cardinality_ratio": 0.00010255241567912489,
-        "data_type": "object"
-      },
-      "ReportSourceID": {
-        "null_count": 87760,
-        "nunique": 0,
-        "cardinality_ratio": 0.0,
-        "data_type": "float64"
-      },
-      "ReportSourceeDisplayEng": {
-        "null_count": 87760,
-        "nunique": 0,
-        "cardinality_ratio": 0.0,
-        "data_type": "float64"
-      },
-      "ReportSourceDisplayFre": {
-        "null_count": 87760,
-        "nunique": 0,
-        "cardinality_ratio": 0.0,
-        "data_type": "float64"
-      },
-      "PositionTypeEnum": {
-        "null_count": 70750,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "float64"
-      },
-      "PositionTypeDisplayEng": {
-        "null_count": 70750,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "PositionTypeDisplayFre": {
-        "null_count": 70750,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "Position": {
-        "null_count": 87760,
-        "nunique": 0,
-        "cardinality_ratio": 0.0,
-        "data_type": "float64"
-      },
-      "PositionInText": {
-        "null_count": 87760,
-        "nunique": 0,
-        "cardinality_ratio": 0.0,
-        "data_type": "float64"
-      },
-      "EntryDate": {
-        "null_count": 0,
-        "nunique": 13653,
-        "cardinality_ratio": 0.15557201458523245,
-        "data_type": "object"
-      },
-      "MajorChangesIncludedInDaily": {
-        "null_count": 12220,
-        "nunique": 1,
-        "cardinality_ratio": 1.1394712853236099e-05,
-        "data_type": "float64"
-      },
-      "IncludedInDailyEnum": {
-        "null_count": 15,
-        "nunique": 1,
-        "cardinality_ratio": 1.1394712853236099e-05,
-        "data_type": "float64"
-      },
-      "IncludedInDailyEnumDisplayEng": {
-        "null_count": 15,
-        "nunique": 1,
-        "cardinality_ratio": 1.1394712853236099e-05,
-        "data_type": "object"
-      },
-      "IncludedInDailyEnumDisplayFre": {
-        "null_count": 15,
-        "nunique": 1,
-        "cardinality_ratio": 1.1394712853236099e-05,
-        "data_type": "object"
-      },
-      "EnvironmentalConditionID": {
-        "null_count": 11,
-        "nunique": 48583,
-        "cardinality_ratio": 0.5535893345487694,
-        "data_type": "float64"
-      },
-      "VisibilityDistance_Nm": {
-        "null_count": 41898,
-        "nunique": 155,
-        "cardinality_ratio": 0.0017661804922515952,
-        "data_type": "float64"
-      },
-      "LightConditionID": {
-        "null_count": 51265,
-        "nunique": 4,
-        "cardinality_ratio": 4.5578851412944395e-05,
-        "data_type": "float64"
-      },
-      "LightConditionDisplayEng": {
-        "null_count": 51265,
-        "nunique": 4,
-        "cardinality_ratio": 4.5578851412944395e-05,
-        "data_type": "object"
-      },
-      "LightConditionDisplayFre": {
-        "null_count": 51265,
-        "nunique": 4,
-        "cardinality_ratio": 4.5578851412944395e-05,
-        "data_type": "object"
-      },
-      "WeatherConditionID": {
-        "null_count": 15222,
-        "nunique": 13,
-        "cardinality_ratio": 0.00014813126709206927,
-        "data_type": "float64"
-      },
-      "WeatherConditionDisplayEng": {
-        "null_count": 15222,
-        "nunique": 13,
-        "cardinality_ratio": 0.00014813126709206927,
-        "data_type": "object"
-      },
-      "WeatherConditionDisplayFre": {
-        "null_count": 15222,
-        "nunique": 13,
-        "cardinality_ratio": 0.00014813126709206927,
-        "data_type": "object"
-      },
-      "WindDirectionID": {
-        "null_count": 37590,
-        "nunique": 17,
-        "cardinality_ratio": 0.00019371011850501368,
-        "data_type": "float64"
-      },
-      "WindDirection": {
-        "null_count": 37590,
-        "nunique": 16,
-        "cardinality_ratio": 0.00018231540565177758,
-        "data_type": "object"
-      },
-      "WindSpeedTypeID": {
-        "null_count": 32857,
-        "nunique": 2,
-        "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "float64"
-      },
-      "WindSpeedTypeDisplayEng": {
-        "null_count": 32857,
-        "nunique": 2,
-        "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
-      },
-      "WindSpeedTypeDisplayFre": {
-        "null_count": 32857,
-        "nunique": 2,
-        "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
-      },
-      "BeaufortScaleID": {
-        "null_count": 84219,
-        "nunique": 12,
-        "cardinality_ratio": 0.00013673655423883317,
-        "data_type": "float64"
-      },
-      "BeaufortScaleDisplayEng": {
-        "null_count": 84219,
-        "nunique": 12,
-        "cardinality_ratio": 0.00013673655423883317,
-        "data_type": "object"
-      },
-      "BeaufortScaleDisplayFre": {
-        "null_count": 84219,
-        "nunique": 12,
-        "cardinality_ratio": 0.00013673655423883317,
-        "data_type": "object"
-      },
-      "WindSpeed_Knots": {
-        "null_count": 36414,
-        "nunique": 123,
-        "cardinality_ratio": 0.0014015496809480401,
-        "data_type": "float64"
-      },
-      "SeaStateID": {
-        "null_count": 8095,
-        "nunique": 17,
-        "cardinality_ratio": 0.00019371011850501368,
-        "data_type": "float64"
-      },
-      "SeaStateDisplayEng": {
-        "null_count": 8095,
-        "nunique": 17,
-        "cardinality_ratio": 0.00019371011850501368,
-        "data_type": "object"
-      },
-      "SeaStateDisplayFre": {
-        "null_count": 8095,
-        "nunique": 17,
-        "cardinality_ratio": 0.00019371011850501368,
-        "data_type": "object"
-      },
-      "SwellDirectionID": {
-        "null_count": 85711,
-        "nunique": 17,
-        "cardinality_ratio": 0.00019371011850501368,
-        "data_type": "float64"
-      },
-      "SwellDirection": {
-        "null_count": 85711,
-        "nunique": 16,
-        "cardinality_ratio": 0.00018231540565177758,
-        "data_type": "object"
-      },
-      "SwellHeight_Meters": {
-        "null_count": 84940,
-        "nunique": 59,
-        "cardinality_ratio": 0.0006722880583409298,
-        "data_type": "float64"
-      },
-      "AirTemp_Celsius": {
-        "null_count": 61041,
-        "nunique": 78,
-        "cardinality_ratio": 0.0008887876025524157,
-        "data_type": "float64"
-      },
-      "SeatTemp_Celsius": {
-        "null_count": 84558,
-        "nunique": 57,
-        "cardinality_ratio": 0.0006494986326344576,
-        "data_type": "float64"
-      },
-      "IceCoverage_ScaleOutOf1to10": {
-        "null_count": 86595,
-        "nunique": 11,
-        "cardinality_ratio": 0.00012534184138559708,
-        "data_type": "float64"
-      },
-      "IcebergEnum": {
-        "null_count": 86946,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "float64"
-      },
-      "IcebergEnumDisplayEng": {
-        "null_count": 86946,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "IcebergEnumDisplayFre": {
-        "null_count": 86946,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "BergyBitsEnum": {
-        "null_count": 86948,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "float64"
-      },
-      "BergyBitsEnumDisplayEng": {
-        "null_count": 86948,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "BergyBitsEnumDisplayFre": {
-        "null_count": 86948,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "GrowlersEnum": {
-        "null_count": 86952,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "float64"
-      },
-      "GrowlersEnumDisplayEng": {
-        "null_count": 86952,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "GrowlersEnumDisplayFre": {
-        "null_count": 86952,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "UnderIceRegimeEnum": {
-        "null_count": 85126,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "float64"
-      },
-      "UnderIceRegimeEnumDisplayEng": {
-        "null_count": 85126,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "UnderIceRegimeEnumDisplayFre": {
-        "null_count": 85126,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "ObservedByID": {
-        "null_count": 86923,
-        "nunique": 4,
-        "cardinality_ratio": 4.5578851412944395e-05,
-        "data_type": "float64"
-      },
-      "ObservedByDisplayEng": {
-        "null_count": 86923,
-        "nunique": 4,
-        "cardinality_ratio": 4.5578851412944395e-05,
-        "data_type": "object"
-      },
-      "ObservedByDisplayFre": {
-        "null_count": 86931,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "VesselIcingPresentEnum": {
-        "null_count": 86888,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "float64"
-      },
-      "VesselIcingPresentEnumDisplayEng": {
-        "null_count": 86888,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "VesselIcingPresentEnumDisplayFre": {
-        "null_count": 86888,
-        "nunique": 3,
-        "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
-      },
-      "VesselIcingQualificationID": {
-        "null_count": 87725,
-        "nunique": 4,
-        "cardinality_ratio": 4.5578851412944395e-05,
-        "data_type": "float64"
-      },
-      "VesselIcingQualificationDisplayEng": {
-        "null_count": 87725,
-        "nunique": 4,
-        "cardinality_ratio": 4.5578851412944395e-05,
-        "data_type": "object"
-      },
-      "VesselIcingQualificationDisplayFre": {
-        "null_count": 87725,
-        "nunique": 4,
-        "cardinality_ratio": 4.5578851412944395e-05,
-        "data_type": "object"
-      },
-      "NotificationDetailID": {
-        "null_count": 14,
-        "nunique": 86303,
-        "cardinality_ratio": 0.9833979033728351,
-        "data_type": "float64"
-      },
-      "ReportedDate": {
-        "null_count": 14,
-        "nunique": 22002,
-        "cardinality_ratio": 0.2507064721969006,
-        "data_type": "object"
-      },
-      "ReportedByID": {
-        "null_count": 15,
+      "SoftwareAudioModelID": {
+        "null_count": 77180,
         "nunique": 54,
-        "cardinality_ratio": 0.0006153144940747493,
+        "cardinality_ratio": 0.0006887842957180576,
         "data_type": "float64"
       },
-      "ReportedByDisplayEng": {
-        "null_count": 15,
+      "SoftwareAudioModelDisplayEng": {
+        "null_count": 77180,
         "nunique": 54,
-        "cardinality_ratio": 0.0006153144940747493,
+        "cardinality_ratio": 0.0006887842957180576,
         "data_type": "object"
       },
-      "ReportedByDisplayFre": {
-        "null_count": 15,
+      "SoftwareAudioModelDisplayFre": {
+        "null_count": 77180,
         "nunique": 54,
-        "cardinality_ratio": 0.0006153144940747493,
+        "cardinality_ratio": 0.0006887842957180576,
         "data_type": "object"
       },
-      "SubstantiallyInsterestedStateIND": {
-        "null_count": 87572,
+      "SoftwareVersion": {
+        "null_count": 78329,
+        "nunique": 27,
+        "cardinality_ratio": 0.0003443921478590288,
+        "data_type": "object"
+      },
+      "SerialNumber": {
+        "null_count": 78297,
+        "nunique": 33,
+        "cardinality_ratio": 0.00042092373627214635,
+        "data_type": "object"
+      },
+      "VdrDetailID": {
+        "null_count": 76877,
+        "nunique": 559,
+        "cardinality_ratio": 0.007130192987155448,
+        "data_type": "float64"
+      },
+      "RecCapacity_NumberOfDays": {
+        "null_count": 78372,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "float64"
+      },
+      "RecAudioFilesDelEnum": {
+        "null_count": 77873,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "float64"
+      },
+      "RecAudioFilesDelEnumDisplayEng": {
+        "null_count": 77873,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "object"
+      },
+      "RecAudioFilesDelEnumDisplayFre": {
+        "null_count": 77873,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "object"
+      },
+      "RecAudioFilesSegregatedEnum": {
+        "null_count": 77874,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "float64"
+      },
+      "RecAudioFilesSegregatedEnumDisplayEng": {
+        "null_count": 77874,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "object"
+      },
+      "RecAudioFilesSegregatedEnumDisplayFre": {
+        "null_count": 77874,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "object"
+      },
+      "CapsuleRecCapacity_NumberOfDays": {
+        "null_count": 78376,
         "nunique": 2,
-        "cardinality_ratio": 2.2789425706472198e-05,
+        "cardinality_ratio": 2.551052947103917e-05,
         "data_type": "float64"
       },
-      "OtherStateInvestigatingID": {
-        "null_count": 87708,
-        "nunique": 13,
-        "cardinality_ratio": 0.00014813126709206927,
+      "CapsuleAudioFilesDelEnum": {
+        "null_count": 77879,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
         "data_type": "float64"
       },
-      "OtherStateInvestigatingDisplayEng": {
-        "null_count": 87708,
-        "nunique": 13,
-        "cardinality_ratio": 0.00014813126709206927,
+      "CapsuleAudioFilesDelEnumDisplayEng": {
+        "null_count": 77879,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
         "data_type": "object"
       },
-      "OtherStateInvestigatingDisplayFre": {
-        "null_count": 87708,
-        "nunique": 13,
-        "cardinality_ratio": 0.00014813126709206927,
+      "CapsuleAudioFilesDelEnumDisplayFre": {
+        "null_count": 77879,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
         "data_type": "object"
       },
-      "SubstantiallyInterestedStateID": {
-        "null_count": 87624,
-        "nunique": 29,
-        "cardinality_ratio": 0.0003304466727438469,
+      "CapsuleAudioFilesSegregatedEnum": {
+        "null_count": 77882,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
         "data_type": "float64"
       },
-      "SubstantiallyInterestedStateDisplayEng": {
-        "null_count": 87624,
-        "nunique": 29,
-        "cardinality_ratio": 0.0003304466727438469,
+      "CapsuleAudioFilesSegregatedEnumDisplayEng": {
+        "null_count": 77882,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
         "data_type": "object"
       },
-      "SubstantiallyInterestedStateDisplayFre": {
-        "null_count": 87624,
-        "nunique": 29,
-        "cardinality_ratio": 0.0003304466727438469,
+      "CapsuleAudioFilesSegregatedEnumDisplayFre": {
+        "null_count": 77882,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
         "data_type": "object"
       },
-      "TotalDeaths": {
-        "null_count": 0,
-        "nunique": 14,
-        "cardinality_ratio": 0.0001595259799453054,
-        "data_type": "int64"
+      "DataExtractedEnum": {
+        "null_count": 76883,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "float64"
       },
-      "TotalMinorInjuries": {
-        "null_count": 0,
-        "nunique": 18,
-        "cardinality_ratio": 0.00020510483135824977,
-        "data_type": "int64"
+      "DataExtractedEnumDisplayEng": {
+        "null_count": 76883,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "object"
       },
-      "TotalSeriousInjuries": {
-        "null_count": 0,
-        "nunique": 9,
-        "cardinality_ratio": 0.00010255241567912489,
-        "data_type": "int64"
+      "DataExtractedEnumDisplayFre": {
+        "null_count": 76883,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "object"
       },
-      "TotalMissingIndividuals": {
-        "null_count": 0,
-        "nunique": 12,
-        "cardinality_ratio": 0.00013673655423883317,
-        "data_type": "int64"
+      "ReasonNotExtractedID": {
+        "null_count": 77635,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "float64"
       },
-      "TotalPeopleInTheWater": {
-        "null_count": 0,
-        "nunique": 12,
-        "cardinality_ratio": 0.00013673655423883317,
-        "data_type": "int64"
+      "ReasonNotExtractedDisplayEng": {
+        "null_count": 77635,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "object"
+      },
+      "ReasonNotExtractedDisplayFre": {
+        "null_count": 77635,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "object"
+      },
+      "EquipSeizedEnum": {
+        "null_count": 76883,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "float64"
+      },
+      "EquipSeizedEnumDisplayEng": {
+        "null_count": 76883,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "object"
+      },
+      "EquipSeizedEnumDisplayFre": {
+        "null_count": 76883,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "object"
+      },
+      "InstructionsPostedEnum": {
+        "null_count": 77864,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "float64"
+      },
+      "InstructionsPostedEnumDisplayEng": {
+        "null_count": 77864,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "object"
+      },
+      "InstructionsPostedEnumDisplayFre": {
+        "null_count": 77864,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "object"
+      },
+      "InstructionAvailableEnum": {
+        "null_count": 77867,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "float64"
+      },
+      "InstructionAvailableEnumDisplayEng": {
+        "null_count": 77867,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "object"
+      },
+      "InstructionAvailableEnumDisplayFre": {
+        "null_count": 77867,
+        "nunique": 3,
+        "cardinality_ratio": 3.8265794206558755e-05,
+        "data_type": "object"
       }
     },
     "possible_pks": [],

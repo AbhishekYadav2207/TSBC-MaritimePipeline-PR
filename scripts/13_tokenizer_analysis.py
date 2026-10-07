@@ -37,6 +37,67 @@ RARE_MARITIME_TERMS = [
     "leeward", "sart", "stempost", "transom", "windlass", "windward"
 ]
 
+# Authoritative Candidate Model Registry & Architectural Specifications
+MODEL_METADATA = {
+    "bert-base-uncased": {
+        "architecture": "BERT Base Encoder",
+        "tokenizer_family": "WordPiece"
+    },
+    "bert-large-uncased": {
+        "architecture": "BERT Large Encoder",
+        "tokenizer_family": "WordPiece"
+    },
+    "roberta-base": {
+        "architecture": "RoBERTa Base Encoder",
+        "tokenizer_family": "Byte-Level BPE"
+    },
+    "microsoft/deberta-v3-base": {
+        "architecture": "DeBERTa-v3 Base Encoder (Disentangled Attention)",
+        "tokenizer_family": "SentencePiece BPE"
+    },
+    "answerdotai/ModernBERT-base": {
+        "architecture": "ModernBERT Base Encoder",
+        "tokenizer_family": "Extended Byte-Level BPE"
+    },
+    "allenai/scibert_scivocab_uncased": {
+        "architecture": "SciBERT Base Encoder",
+        "tokenizer_family": "Scientific WordPiece"
+    },
+    "dmis-lab/biobert-base-cased-v1.2": {
+        "architecture": "BioBERT Base Encoder",
+        "tokenizer_family": "Biomedical WordPiece (Cased)"
+    },
+    "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": {
+        "architecture": "PubMedBERT Base Encoder",
+        "tokenizer_family": "Biomedical WordPiece"
+    },
+    "emilyalsentzer/Bio_ClinicalBERT": {
+        "architecture": "ClinicalBERT Base Encoder",
+        "tokenizer_family": "Biomedical WordPiece (Cased)"
+    },
+    "nlpaueb/legal-bert-base-uncased": {
+        "architecture": "Legal-BERT Base Encoder",
+        "tokenizer_family": "Legal WordPiece"
+    },
+    "ProsusAI/finbert": {
+        "architecture": "FinBERT Base Encoder",
+        "tokenizer_family": "Financial WordPiece"
+    },
+    "anferico/bert-for-patents": {
+        "architecture": "BERT for Patents Base Encoder",
+        "tokenizer_family": "Patent WordPiece"
+    },
+    "google/electra-base-discriminator": {
+        "architecture": "ELECTRA Base Discriminator",
+        "tokenizer_family": "WordPiece"
+    },
+    "distilbert-base-uncased": {
+        "architecture": "DistilBERT Base Student",
+        "tokenizer_family": "WordPiece"
+    }
+}
+
+
 SCIENTIFIC_DISCLAIMER = (
     "Scientific Note: This analysis measures empirical tokenizer properties and statistical associations "
     "(Spearman rank correlation) between document informativeness scores and subword tokenizer behaviors. "
@@ -332,6 +393,7 @@ def analyze_tokenizer(
     return {
         "model_name": model_name,
         "clean_model_name": clean_model_filename(model_name),
+        "tokenizer_class": tokenizer.__class__.__name__,
         "vocab_size": tokenizer.vocab_size if hasattr(tokenizer, "vocab_size") else len(tokenizer),
         "sampled_documents": len(doc_profiles),
         "total_raw_words_analyzed": total_raw_words,
@@ -374,11 +436,12 @@ def analyze_tokenizer(
         "scientific_disclaimer": SCIENTIFIC_DISCLAIMER
     }
 
-def compute_redundancy_and_selection(reports: list) -> tuple:
+def compute_redundancy_and_selection(reports: list, loading_failed_models: dict = None) -> tuple:
     """
     Builds diagnostic feature vectors, calculates pairwise similarity matrix across
     the complete candidate pool, identifies tokenizer-diagnostic redundancy groups,
-    and selects exactly 7 diverse representative models for Stage 14 MLM evaluation.
+    and deterministically selects all non-redundant candidates that survive screening
+    for Stage 14 MLM evaluation (Issue A06 remediation).
     """
     model_names = [r["model_name"] for r in reports]
 
@@ -422,11 +485,13 @@ def compute_redundancy_and_selection(reports: list) -> tuple:
         "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 6,
         "roberta-base": 5,
         "answerdotai/ModernBERT-base": 4,
+        "microsoft/deberta-v3-base": 3,
         "bert-large-uncased": 1,
         "distilbert-base-uncased": 1,
         "google/electra-base-discriminator": 1,
         "ProsusAI/finbert": 1,
-        "emilyalsentzer/Bio_ClinicalBERT": 1
+        "emilyalsentzer/Bio_ClinicalBERT": 1,
+        "anferico/bert-for-patents": 1
     }
 
     selected_models = []
@@ -439,6 +504,7 @@ def compute_redundancy_and_selection(reports: list) -> tuple:
         for non_rep in sorted_cluster[1:]:
             excluded_models[non_rep] = {
                 "reason": "tokenizer_diagnostic_redundancy",
+                "candidate_status": "EXCLUDED_TOKENIZER_DUPLICATE",
                 "represented_by": rep,
                 "similarity_score": pairwise_similarity[rep][non_rep],
                 "explanation": (
@@ -455,7 +521,8 @@ def compute_redundancy_and_selection(reports: list) -> tuple:
         "allenai/scibert_scivocab_uncased",
         "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
         "roberta-base",
-        "answerdotai/ModernBERT-base"
+        "answerdotai/ModernBERT-base",
+        "microsoft/deberta-v3-base"
     ]
     ordered_selected = [m for m in desired_order if m in selected_models]
     # Add any other selected if needed
@@ -463,15 +530,59 @@ def compute_redundancy_and_selection(reports: list) -> tuple:
         if m not in ordered_selected:
             ordered_selected.append(m)
 
-    selected_7 = ordered_selected[:7]
+    # Retain ALL non-redundant candidates that survive screening (eliminates silent [:7] pruning defect)
+    retained_models = list(ordered_selected)
+
+    # Machine-readable candidate selection audit across all candidate models
+    candidate_selection_audit = []
+    for m in CANDIDATE_MODELS:
+        meta = MODEL_METADATA.get(m, {})
+        rep_report = next((r for r in reports if r["model_name"] == m), None)
+        tok_class = rep_report.get("tokenizer_class", meta.get("tokenizer_family", "Unknown")) if rep_report else "Unavailable"
+        arch_name = meta.get("architecture", "Transformer Encoder")
+        ord_score = canonical_preference.get(m, 0)
+
+        if m in retained_models:
+            status = "RETAINED"
+            reason = "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria."
+            rep_by = None
+            sim_score = None
+        elif m in excluded_models:
+            ex = excluded_models[m]
+            status = ex.get("candidate_status", "EXCLUDED_TOKENIZER_DUPLICATE")
+            reason = ex.get("explanation", "Excluded as diagnostic duplicate.")
+            rep_by = ex.get("represented_by")
+            sim_score = ex.get("similarity_score")
+        elif loading_failed_models and m in loading_failed_models:
+            ex = loading_failed_models[m]
+            status = ex.get("candidate_status", "EXCLUDED_MODEL_UNAVAILABLE")
+            reason = ex.get("explanation", "Tokenizer failed to instantiate from pretrained repository.")
+            rep_by = None
+            sim_score = None
+        else:
+            status = "EXCLUDED_UNSPECIFIED"
+            reason = "Candidate not selected."
+            rep_by = None
+            sim_score = None
+
+        candidate_selection_audit.append({
+            "model": m,
+            "tokenizer": tok_class,
+            "architecture": arch_name,
+            "candidate_status": status,
+            "selection_reason": reason,
+            "ordering_score": ord_score,
+            "represented_by": rep_by,
+            "similarity_score": sim_score
+        })
 
     selection_rationale = {
-        "methodology": "Subword Term-Piece Diagnostic Redundancy Clustering & Canonical Archetype Selection",
+        "methodology": "Subword Term-Piece Diagnostic Redundancy Clustering & Canonical Archetype Selection (v2.1 Reconciled)",
         "distance_metric": "Cosine Similarity across 335-Dimensional Maritime Vocabulary Term-Piece Profiling Vectors",
         "redundancy_threshold": 0.999,
         "candidate_model_count": len(CANDIDATE_MODELS),
         "evaluated_model_count": len(reports),
-        "selected_model_count": len(selected_7),
+        "selected_model_count": len(retained_models),
         "cluster_count": len(clusters),
         "clusters": {
             f"Cluster_{idx+1}": {
@@ -486,9 +597,8 @@ def compute_redundancy_and_selection(reports: list) -> tuple:
             "Pairwise similarity on 335 domain terms identified complete diagnostic redundancy (similarity = 1.00000) "
             "among standard WordPiece models (bert-base, bert-large, distilbert, electra, finbert) and "
             "biomedical cased WordPiece models (biobert, bio_clinicalbert). "
-            "Selecting one representative per distinct cluster eliminates redundant computations while maximizing "
-            "architectural and domain diversity across WordPiece (General, Bio, Legal, SciVocab, PubMed) and "
-            "Byte-Level BPE (Standard RoBERTa, ModernBERT) for Stage 14 MLM evaluation."
+            "All non-redundant candidates surviving screening are retained without arbitrary list truncation, "
+            "yielding an auditable candidate selection for Stage 14 MLM evaluation."
         )
     }
 
@@ -497,7 +607,7 @@ def compute_redundancy_and_selection(reports: list) -> tuple:
         "clusters": clusters
     }
 
-    return selected_7, excluded_models, redundancy_info, selection_rationale
+    return retained_models, excluded_models, redundancy_info, selection_rationale, candidate_selection_audit
 
 def main():
     root = get_project_root()
@@ -607,31 +717,46 @@ def main():
         f"Successfully evaluated {len(summary_reports)} out of {len(CANDIDATE_MODELS)} candidate models."
     )
 
-    # 4. Redundancy Analysis & Representative 7-Model Selection
-    selected_7, redundancy_excluded, redundancy_info, selection_rationale = compute_redundancy_and_selection(summary_reports)
+    # 4. Redundancy Analysis & Representative Candidate Selection (A06 Remediation)
+    retained_models, redundancy_excluded, redundancy_info, selection_rationale, candidate_audit = compute_redundancy_and_selection(
+        summary_reports, loading_failed_models
+    )
 
     # Merge all excluded models (redundant + loading failed)
     all_excluded = dict(redundancy_excluded)
     all_excluded.update(loading_failed_models)
 
-    logger.info(f"Selected 7 Representative Models for Stage 14: {selected_7}")
+    logger.info(f"Selected {len(retained_models)} Representative Models for Stage 14: {retained_models}")
     logger.info(f"Excluded Models ({len(all_excluded)}): {list(all_excluded.keys())}")
 
     # 5. Export Stage 14 Model Manifest (outputs/stage-13/selected_models.json)
     selected_models_manifest = {
-        "selected_models": selected_7,
-        "selected_model_count": len(selected_7),
+        "selected_models": retained_models,
+        "selected_model_count": len(retained_models),
         "candidate_model_count": len(CANDIDATE_MODELS),
         "evaluated_model_count": len(summary_reports),
         "candidate_models": CANDIDATE_MODELS,
         "evaluated_models": evaluated_model_names,
         "excluded_models": all_excluded,
+        "candidate_selection_audit": candidate_audit,
         "selection_timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
         "selection_rationale": selection_rationale["methodology"],
         "target_stage": "Stage 14 (14_mlm_evaluation.py)"
     }
     with open(stage_dir / "selected_models.json", "w", encoding="utf-8") as fm:
         json.dump(selected_models_manifest, fm, indent=2)
+
+    # Dedicated machine-readable candidate selection audit artifacts (A06 Logging)
+    candidate_audit_artifact = {
+        "candidate_count": len(candidate_audit),
+        "retained_count": len(retained_models),
+        "excluded_count": len(all_excluded),
+        "candidates": candidate_audit
+    }
+    with open(stage_dir / "candidate_selection_audit.json", "w", encoding="utf-8") as fa:
+        json.dump(candidate_audit_artifact, fa, indent=2)
+
+    pd.DataFrame(candidate_audit).to_csv(stage_dir / "candidate_selection_audit.csv", index=False)
 
     # 6. Copy BERT baseline to outputs/stage-13/tokenizer_analysis.json for backwards compatibility
     bert_report = next((r for r in summary_reports if r["model_name"] == "bert-base-uncased"), summary_reports[0])
@@ -646,7 +771,7 @@ def main():
         oov_disp = round(r["oov_rate"] * 100, 4) if r["oov_rate"] is not None else "N/A"
         csv_rows.append({
             "model_name": r["model_name"],
-            "selected_for_stage14": r["model_name"] in selected_7,
+            "selected_for_stage14": r["model_name"] in retained_models,
             "vocab_size": r["vocab_size"],
             "subwords_per_word_fertility": round(r["average_subwords_per_word"], 4),
             "single_token_coverage_pct": round(r["single_token_vocabulary_coverage"] * 100, 2),
@@ -669,11 +794,12 @@ def main():
     stage12_analysis_artifact = {
         "candidate_model_count": len(CANDIDATE_MODELS),
         "evaluated_model_count": len(summary_reports),
-        "selected_model_count": len(selected_7),
+        "selected_model_count": len(retained_models),
         "candidate_models": CANDIDATE_MODELS,
         "evaluated_models": evaluated_model_names,
-        "selected_models": selected_7,
+        "selected_models": retained_models,
         "excluded_models": all_excluded,
+        "candidate_selection_audit": candidate_audit,
         "redundancy_analysis": redundancy_info,
         "selection_rationale": selection_rationale,
         "metadata": {
@@ -705,7 +831,7 @@ def main():
             cat_name: [
                 {
                     "model": r["model_name"],
-                    "selected_for_stage14": r["model_name"] in selected_7,
+                    "selected_for_stage14": r["model_name"] in retained_models,
                     "single_token_coverage": r["vocabulary_categories"][cat_name]["single_token_coverage"],
                     "fragmentation_rate": r["vocabulary_categories"][cat_name]["fragmentation_rate"],
                     "avg_pieces_per_term": r["vocabulary_categories"][cat_name]["avg_pieces_per_term"],
@@ -719,7 +845,7 @@ def main():
             tier: [
                 {
                     "model": r["model_name"],
-                    "selected_for_stage14": r["model_name"] in selected_7,
+                    "selected_for_stage14": r["model_name"] in retained_models,
                     "document_count": r["informativeness_stratification"].get(tier, {}).get("document_count", 0),
                     "mean_fertility": r["informativeness_stratification"].get(tier, {}).get("mean_fertility"),
                     "mean_sequence_length": r["informativeness_stratification"].get(tier, {}).get("mean_sequence_length"),
@@ -736,7 +862,7 @@ def main():
         "document_level_correlations": [
             {
                 "model": r["model_name"],
-                "selected_for_stage14": r["model_name"] in selected_7,
+                "selected_for_stage14": r["model_name"] in retained_models,
                 "fertility_correlation": r["document_correlations"]["informativeness_vs_fertility"],
                 "fragmentation_correlation": r["document_correlations"]["informativeness_vs_fragmentation"],
                 "coverage_correlation": r["document_correlations"]["informativeness_vs_coverage"]
@@ -759,7 +885,7 @@ def main():
     logger.info(
         f"Stage 13 successfully completed. "
         f"Evaluated {len(summary_reports)} candidate tokenizers across {len(sampled_records)} joined Stage 12 documents. "
-        f"Selected 7 representative models ({selected_7}). "
+        f"Selected {len(retained_models)} representative models ({retained_models}). "
         f"Saved artifacts to {stage_dir} and {tok_dir}"
     )
 

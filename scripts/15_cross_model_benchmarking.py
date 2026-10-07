@@ -126,10 +126,15 @@ def discover_stage14_results(cache_dir: Path, pll_path: Path = None):
 
         combo_key = (model_name, rep, sub)
         if combo_key in seen_combinations:
-            logger.warning(f"Duplicate evaluation record encountered for {combo_key} in {jf.name}. Overwriting with latest.")
-            valid_rows = [r for r in valid_rows if (r["model_name"], r["representation"], r["subset"]) != combo_key]
+            logger.error(f"Duplicate evaluation record encountered for {combo_key} in {jf.name}. Flagging duplicate.")
+            invalid_files.append({"file": jf.name, "reason": f"Duplicate record for combination {combo_key}"})
+            continue
 
         seen_combinations.add(combo_key)
+
+        doc_count = item.get("evaluated_doc_count")
+        if doc_count is None:
+            doc_count = item.get("experiment_metadata", {}).get("evaluation_documents", 200)
 
         metrics = item.get("evaluation_metrics", {})
         mar_sum = metrics.get("maritime_tokens_summary", {})
@@ -157,7 +162,8 @@ def discover_stage14_results(cache_dir: Path, pll_path: Path = None):
             "machinery_acc": cat_rec.get("machinery_propulsion", np.nan),
             "vessel_acc": cat_rec.get("vessel_terminology", np.nan),
             "casualty_acc": cat_rec.get("casualty_incident", np.nan),
-            "eval_time_sec": metrics.get("evaluation_time_sec", np.nan)
+            "eval_time_sec": metrics.get("evaluation_time_sec", np.nan),
+            "evaluated_doc_count": float(doc_count)
         })
 
     df_mlm = pd.DataFrame(valid_rows)
@@ -300,7 +306,8 @@ def build_model_profiles(df_mlm: pd.DataFrame, tok_data: dict, pll_dict: dict, m
 
         # Operational metrics
         avg_eval_time = grp["eval_time_sec"].mean() if "eval_time_sec" in grp and grp["eval_time_sec"].notna().any() else np.nan
-        latency_ms = ((avg_eval_time / 200.0) * 1000.0) if (avg_eval_time and avg_eval_time > 0) else np.nan
+        avg_doc_count = grp["evaluated_doc_count"].mean() if "evaluated_doc_count" in grp and grp["evaluated_doc_count"].notna().any() and grp["evaluated_doc_count"].mean() > 0 else 200.0
+        latency_ms = ((avg_eval_time / avg_doc_count) * 1000.0) if (avg_eval_time and avg_eval_time > 0) else np.nan
         throughput = (1000.0 / latency_ms) if (latency_ms and latency_ms > 0) else np.nan
 
         params_m = p_info.get("params_m", np.nan)

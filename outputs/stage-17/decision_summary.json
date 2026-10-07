@@ -4,24 +4,24 @@
   "decision": "Proceed with Domain-Adaptive Pretraining (DAPT)",
   "recommended_dapt_candidate": "answerdotai/ModernBERT-base",
   "strategy": "Strategy A: Pretrained Encoder Initialization (answerdotai/ModernBERT-base) + Domain-Adaptive Pretraining (DAPT)",
-  "rationale": "Empirical evidence synthesis selects answerdotai/ModernBERT-base based on leading primary Top-1 accuracy (73.17%), lowest MLM loss (1.4269), 100% bootstrap rank-1 frequency, confirmed non-dominated Pareto status, and statistically significant Holm-adjusted pairwise superiority over all evaluated competitors.",
+  "rationale": "Empirical evidence synthesis selects answerdotai/ModernBERT-base based on leading primary Top-1 accuracy (72.82%), lowest MLM loss (1.4740), 100% bootstrap rank-1 frequency, confirmed non-dominated Pareto status, and statistically significant Holm-adjusted pairwise superiority over all evaluated competitors.",
   "decision_confidence": "High",
-  "confidence_explanation": "High confidence assigned based on converging multi-source empirical evidence: bootstrap rank-1 frequency is 100.0% with mean rank 1.00; statistically significant Holm-adjusted pairwise superiority over all 6 evaluated competitors with zero pairwise defeats; confirmed non-dominated Pareto status across intrinsic and operational criteria. This label reflects structural evidence consensus across resampling and conditions, not a mathematical probability.",
+  "confidence_explanation": "High confidence assigned based on converging multi-source empirical evidence: bootstrap rank-1 frequency is 100.0% with mean rank 1.00; statistically significant Holm-adjusted pairwise superiority over all 7 evaluated competitors with zero pairwise defeats; confirmed non-dominated Pareto status across intrinsic and operational criteria. This label reflects structural evidence consensus across resampling and conditions, not a mathematical probability.",
   "eval_metrics": {
-    "top1_accuracy": 73.17,
-    "mlm_loss": 1.4269,
-    "fragmentation_rate": 62.99,
-    "performance_gap": -17.16
+    "top1_accuracy": 72.82,
+    "mlm_loss": 1.474,
+    "fragmentation_rate": 63.28,
+    "performance_gap": -16.7
   },
   "trade_offs_identified": [
     {
       "dimension": "Subword Fragmentation",
-      "observation": "Higher subword fragmentation rate (62.99%) relative to specialized WordPiece tokenizers (e.g. BERT at 26.57%).",
+      "observation": "Higher subword fragmentation rate (63.28%) relative to specialized WordPiece tokenizers (e.g. BERT at 26.57%).",
       "implication": "Treated as a tokenizer operational limitation to monitor during pretraining, not as an automatic decision rejection trigger."
     },
     {
       "dimension": "Computational Footprint & Latency",
-      "observation": "Parameter count of 149.0M and latency of 34.13ms, compared to 110M parameter architectures (e.g. BERT-base at 22.37ms).",
+      "observation": "Parameter count of 149.0M and latency of 34.8ms, compared to 110M parameter architectures (e.g. BERT-base at 20.26ms).",
       "implication": "Incurs higher inference and training overhead; acceptable given substantial intrinsic language modeling superiority."
     }
   ],

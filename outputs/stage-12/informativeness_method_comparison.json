@@ -3,42 +3,42 @@
   "description": "Pairwise Spearman rank correlation matrix across heuristic, lexical, representational, and hybrid informativeness baselines.",
   "comparison": {
     "heuristic_informativeness_h_inf": {
-      "mean": 0.3893,
+      "mean": 0.3892,
       "std": 0.1002,
       "correlations": {
         "heuristic_informativeness_h_inf": 1.0,
-        "tfidf_domain_relevance": 0.6956,
-        "tfidf_corpus_representativeness": 0.7147,
-        "equal_weight_hybrid_informativeness": 0.7475
+        "tfidf_domain_relevance": 0.6937,
+        "tfidf_corpus_representativeness": 0.7144,
+        "equal_weight_hybrid_informativeness": 0.748
       }
     },
     "tfidf_domain_relevance": {
-      "mean": 0.0612,
-      "std": 0.0329,
+      "mean": 0.0614,
+      "std": 0.033,
       "correlations": {
-        "heuristic_informativeness_h_inf": 0.6956,
+        "heuristic_informativeness_h_inf": 0.6937,
         "tfidf_domain_relevance": 1.0,
-        "tfidf_corpus_representativeness": 0.4733,
-        "equal_weight_hybrid_informativeness": 0.5122
+        "tfidf_corpus_representativeness": 0.4767,
+        "equal_weight_hybrid_informativeness": 0.5104
       }
     },
     "tfidf_corpus_representativeness": {
-      "mean": 0.2394,
+      "mean": 0.2393,
       "std": 0.166,
       "correlations": {
-        "heuristic_informativeness_h_inf": 0.7147,
-        "tfidf_domain_relevance": 0.4733,
+        "heuristic_informativeness_h_inf": 0.7144,
+        "tfidf_domain_relevance": 0.4767,
         "tfidf_corpus_representativeness": 1.0,
-        "equal_weight_hybrid_informativeness": 0.7108
+        "equal_weight_hybrid_informativeness": 0.7107
       }
     },
     "equal_weight_hybrid_informativeness": {
-      "mean": 0.2488,
+      "mean": 0.2489,
       "std": 0.0753,
       "correlations": {
-        "heuristic_informativeness_h_inf": 0.7475,
-        "tfidf_domain_relevance": 0.5122,
-        "tfidf_corpus_representativeness": 0.7108,
+        "heuristic_informativeness_h_inf": 0.748,
+        "tfidf_domain_relevance": 0.5104,
+        "tfidf_corpus_representativeness": 0.7107,
         "equal_weight_hybrid_informativeness": 1.0
       }
     }

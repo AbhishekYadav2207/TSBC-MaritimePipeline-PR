@@ -1,12 +1,12 @@
 {
-  "total_documents": 96861,
-  "total_characters": 24356921,
-  "total_tokens_words": 3734580,
-  "maritime_information_density_mid": 3.6645084587825134,
+  "total_documents": 96860,
+  "total_characters": 24353176,
+  "total_tokens_words": 3733990,
+  "maritime_information_density_mid": 3.6693992217440323,
   "length_stats": {
-    "mean": 38.55607520054511,
+    "mean": 38.55038199463143,
     "median": 37.0,
-    "std": 20.17042805665378,
+    "std": 20.1717417479054,
     "min": 4,
     "max": 513,
     "percentiles": {
@@ -18,71 +18,71 @@
       "P95": 73.0
     },
     "buckets": {
-      "<20": 18206,
-      "20-50": 53365,
-      "50-100": 24995,
-      "100-200": 271,
+      "<20": 18234,
+      "20-50": 53367,
+      "50-100": 24965,
+      "100-200": 270,
       "200-512": 23,
       ">512": 1
     }
   },
   "vocabulary_size": 42780,
-  "type_token_ratio": 0.011455103385119611,
-  "type_token_ratio_lexical_diversity": 0.011455103385119611,
-  "shannon_entropy": 8.317042740655213,
-  "template_scaffolding_ratio": 0.5847918641453658,
-  "template_pattern_concentration": 0.41822818265349315,
+  "type_token_ratio": 0.011456913382199738,
+  "type_token_ratio_lexical_diversity": 0.011456913382199738,
+  "shannon_entropy": 8.317208046382257,
+  "template_scaffolding_ratio": 0.5846161880454955,
+  "template_pattern_concentration": 0.41823250051620897,
   "duplication": {
-    "sentence_duplicate_ratio": 0.09422619010612565,
-    "paragraph_duplicate_ratio": 5.162036320083274e-05,
-    "scaffold_reduced_near_duplicate_rate": 0.1676
+    "sentence_duplicate_ratio": 0.09431850682052745,
+    "paragraph_duplicate_ratio": 4.129671691099901e-05,
+    "scaffold_reduced_near_duplicate_rate": 0.1736
   },
   "top_raw_bigrams": [
     [
       "a marine",
-      56361
+      56360
     ],
     [
       "marine occurrence",
-      56351
+      56350
     ],
     [
       "registered in",
-      54473
+      54469
     ],
     [
       "with a",
-      52534
+      52536
     ],
     [
       "constructed of",
-      51061
+      51062
     ],
     [
       "a gross",
-      50370
+      50372
     ],
     [
       "gross tonnage",
-      50370
+      50372
     ],
     [
       "tonnage of",
-      50370
+      50372
     ],
     [
       "gt registered",
-      50325
+      50327
     ],
     [
       "in canada",
-      44095
+      44090
     ]
   ],
   "top_domain_bigrams": [
     [
       "navigation equipment",
-      34304
+      34303
     ],
     [
       "magnetic compass",
@@ -90,7 +90,7 @@
     ],
     [
       "equipment included",
-      18601
+      18600
     ],
     [
       "vhf radio",
@@ -110,15 +110,15 @@
     ],
     [
       "active navigation",
-      16700
+      16699
     ],
     [
       "the vessel",
-      12110
+      12095
     ],
     [
       "weather and",
-      11880
+      11877
     ]
   ],
   "top_domain_trigrams": [
@@ -136,15 +136,15 @@
     ],
     [
       "active navigation equipment",
-      16700
+      16699
     ],
     [
       "navigation equipment included",
-      16700
+      16699
     ],
     [
       "clear weather and",
-      8048
+      8047
     ],
     [
       "the fishing vessel",
@@ -152,7 +152,7 @@
     ],
     [
       "weather and calm",
-      6066
+      6068
     ],
     [
       "meters seas and",
@@ -174,23 +174,23 @@
     ],
     [
       "active navigation equipment included",
-      16700
+      16699
     ],
     [
       "under clear weather and",
-      6439
+      6392
     ],
     [
       "weather and calm glassy",
-      5322
+      5324
     ],
     [
       "and calm glassy 0",
-      5322
+      5324
     ],
     [
       "clear weather and calm",
-      4717
+      4720
     ],
     [
       "people on board reported",
@@ -198,11 +198,11 @@
     ],
     [
       "and day light conditions",
-      4166
+      4162
     ],
     [
       "a marine occurrence active",
-      3831
+      3902
     ]
   ]
 }

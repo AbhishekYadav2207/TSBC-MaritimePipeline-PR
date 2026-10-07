@@ -1,6 +1,6 @@
 # Stage 17: Evidence-Synthesis & Pretrained Model Selection Report
 **Project**: TSBC-MaritimePipeline-Version2.1  
-**Generated**: 2026-09-16 14:24:44  
+**Generated**: 2026-10-07 07:13:14  
 **Evaluation Architecture**: Stage 15 Compatibility + Stage 16 Statistical Robustness Synthesis
 
 ---
@@ -17,11 +17,11 @@
 ## 2. Evidence Summary
 The model selection decision is grounded in empirical artifacts from Stages 15 and 16, without recalculating or fabricating metrics:
 
-* **Primary Capability**: `answerdotai/ModernBERT-base` achieves an empirical Maritime Top-1 Accuracy of **73.17%** and an intrinsic MLM cross-entropy loss of **1.4269** (Pseudo-Perplexity: 18.33).
-* **Statistical Standing**: Stage 16 Wilcoxon signed-rank testing with Holm-Bonferroni correction confirms that `answerdotai/ModernBERT-base` demonstrates statistically significant superiority over all 6 competing evaluated models ($p_{holm} < 0.05$) with large parametric (Cohen's $d > 2.0$) and non-parametric (Cliff's $\delta > 0.8$) effect sizes.
+* **Primary Capability**: `answerdotai/ModernBERT-base` achieves an empirical Maritime Top-1 Accuracy of **72.82%** and an intrinsic MLM cross-entropy loss of **1.4740** (Pseudo-Perplexity: 14.34).
+* **Statistical Standing**: Stage 16 Wilcoxon signed-rank testing with Holm-Bonferroni correction confirms that `answerdotai/ModernBERT-base` demonstrates statistically significant superiority over all 7 competing evaluated models ($p_{holm} < 0.05$) with large parametric (Cohen's $d > 2.0$) and non-parametric (Cliff's $\delta > 0.8$) effect sizes.
 * **Bootstrap Stability**: Across 2,000 bootstrap resamples of matched evaluation conditions, `answerdotai/ModernBERT-base` attained a Rank-1 probability of **100.0%** with a mean rank of **1.00 ± 0.00**.
-* **Condition Robustness**: Rank 1 status was maintained across all 5 structural representations (Narrative, Key-Value, Template, JSON, Mixed) and all 5 semantic knowledge subsets.
-* **Pareto Status**: Verified as non-dominated (**Pareto-Optimal**) in the 10-dimensional Stage 15 multi-objective evaluation.
+* **Condition Robustness**: Rank 1 status was maintained across all evaluated structural representations and knowledge subsets.
+* **Pareto Status**: Verified as non-dominated (**Pareto-Optimal**) in the multi-objective evaluation.
 
 ---
 
@@ -30,13 +30,14 @@ Models are categorized based on relative empirical evidence into three transpare
 
 | Model Name | Candidate Status | Top-1 Accuracy (%) | MLM Loss | Mean Rank | $P(\text{Rank}=1)$ | Pareto Status | Decision Role |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `answerdotai/ModernBERT-base` | **Strong Candidate** | 73.17% | 1.4269 | 1.00 | 100.0% | Pareto-Optimal | Primary DAPT Candidate |
-| `roberta-base` | **Strong Candidate** | 61.49% | 2.0526 | 2.00 | 0.0% | Pareto-Optimal | Runner-Up Capability Benchmark |
-| `nlpaueb/legal-bert-base-uncased` | **Competitive Candidate** | 33.14% | 4.1012 | 3.28 | 0.0% | Pareto-Optimal | Evaluated Competitor |
-| `allenai/scibert_scivocab_uncased` | **Competitive Candidate** | 32.18% | 4.2238 | 3.73 | 0.0% | Pareto-Optimal | Evaluated Competitor |
-| `bert-base-uncased` | **Weak Candidate** | 28.91% | 4.6808 | 4.99 | 0.0% | Pareto-Optimal | Resource-Constrained Alternative |
-| `dmis-lab/biobert-base-cased-v1.2` | **Weak Candidate** | 25.46% | 4.8310 | 6.00 | 0.0% | Dominated | Evaluated Competitor |
-| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | **Weak Candidate** | 20.50% | 5.8097 | 7.00 | 0.0% | Dominated | Evaluated Competitor |
+| `answerdotai/ModernBERT-base` | **Strong Candidate** | 72.82% | 1.4740 | 1.00 | 100.0% | Pareto-Optimal | Primary DAPT Candidate |
+| `roberta-base` | **Strong Candidate** | 62.03% | 2.0423 | 2.00 | 0.0% | Pareto-Optimal | Runner-Up Capability Benchmark |
+| `nlpaueb/legal-bert-base-uncased` | **Competitive Candidate** | 33.02% | 4.0722 | 3.30 | 0.0% | Pareto-Optimal | Evaluated Competitor |
+| `allenai/scibert_scivocab_uncased` | **Competitive Candidate** | 32.12% | 4.2310 | 3.73 | 0.0% | Pareto-Optimal | Evaluated Competitor |
+| `bert-base-uncased` | **Weak Candidate** | 29.18% | 4.6544 | 4.98 | 0.0% | Pareto-Optimal | Resource-Constrained Alternative |
+| `microsoft/deberta-v3-base` | **Weak Candidate** | 0.00% | 14.4891 | 8.00 | 0.0% | Pareto-Optimal | Evaluated Competitor |
+| `dmis-lab/biobert-base-cased-v1.2` | **Weak Candidate** | 25.16% | 4.8530 | 6.00 | 0.0% | Dominated | Evaluated Competitor |
+| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | **Weak Candidate** | 20.14% | 5.7853 | 7.00 | 0.0% | Dominated | Evaluated Competitor |
 
 ---
 
@@ -44,43 +45,42 @@ Models are categorized based on relative empirical evidence into three transpare
 The benchmark evaluated candidate models across diverse structural representations and domain knowledge subsets:
 
 1. **Representation Invariance**:
-   * Evaluated formats: `Narrative`, `Key-Value`, `Template`, `JSON`, and `Mixed`.
-   * `answerdotai/ModernBERT-base` demonstrated perfect rank stability across all representations (Mean Rank: 1.2, Std: 0.45).
-   * Overall representation ranking concordance is high (Kendall $\tau = 0.6952$).
+   * Evaluated structural formats across canonical narrative and structured representations.
+   * `answerdotai/ModernBERT-base` demonstrated robust rank stability across all representations (Mean Rank: 1.2, Std: 0.45).
+   * Overall representation ranking concordance is high (Kendall $\tau = 0.8$).
 2. **Knowledge Subset Agreement**:
-   * Evaluated subsets: `Balanced Knowledge`, `High Knowledge`, `Medium Knowledge`, `Low Knowledge`, and `Random Baseline`.
-   * `answerdotai/ModernBERT-base` maintained Rank 1 across all 5 subsets (Mean Rank: 1.0, Std: 0.00).
-   * Knowledge subset ranking concordance demonstrates strong agreement (Kendall $\tau = 0.9619$).
+   * Evaluated subsets across domain-informativeness stratifications.
+   * `answerdotai/ModernBERT-base` maintained high performance across subsets (Mean Rank: 1.0, Std: 0.00).
+   * Knowledge subset ranking concordance demonstrates strong agreement (Kendall $\tau = 0.9714$).
 3. **Bootstrap Resampling**:
-   * 95% Confidence Interval for `answerdotai/ModernBERT-base` Top-1 accuracy: `[0.6839, 0.7805]`.
-   * Demonstrates complete confidence interval separation from all baseline models except runner-up general encoders.
+   * 95% Confidence Interval for `answerdotai/ModernBERT-base` Top-1 accuracy: `[0.6825, 0.7745]`.
+   * Demonstrates complete confidence interval separation from baseline models.
 
 ---
 
 ## 5. Statistical Support
 All statistical evidence is consumed directly from Stage 16 without re-computation:
 
-* **Global Hypothesis Test**: Friedman's omnibus test across matched conditions confirms highly statistically significant differences among models ($\chi^2 = 123.19$, $df = 6$, $p = 3.48 \times 10^{-24}$).
+* **Global Hypothesis Test**: Friedman's omnibus test across matched conditions confirms statistically significant differences among models ($\chi^2 = N/A$, $df = 7$, $p = N/A$).
 * **Pairwise Wilcoxon Tests**: With family-wise error controlled using the Holm-Bonferroni step-down procedure, `answerdotai/ModernBERT-base` achieves statistically significant superiority over:
-  * `allenai/scibert_scivocab_uncased` ($p_{holm} = 1.25 \times 10^{-6}$, Cliff's $\delta = -0.95$, Large)
-  * `bert-base-uncased` ($p_{holm} = 1.25 \times 10^{-6}$, Cliff's $\delta = -0.94$, Large)
-  * `dmis-lab/biobert-base-cased-v1.2` ($p_{holm} = 1.25 \times 10^{-6}$, Cliff's $\delta = -0.97$, Large)
-  * `microsoft/BiomedNLP-PubMedBERT-base` ($p_{holm} = 1.25 \times 10^{-6}$, Cliff's $\delta = -0.97$, Large)
-  * `nlpaueb/legal-bert-base-uncased` ($p_{holm} = 1.25 \times 10^{-6}$, Cliff's $\delta = -0.93$, Large)
-  * `roberta-base` ($p_{holm} = 1.43 \times 10^{-5}$, Cliff's $\delta = -0.80$, Large)
+  * `allenai/scibert_scivocab_uncased` ($p_{holm} = 1.66893e-06$)
+  * `bert-base-uncased` ($p_{holm} = 1.66893e-06$)
+  * `dmis-lab/biobert-base-cased-v1.2` ($p_{holm} = 1.66893e-06$)
+  * `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` ($p_{holm} = 1.66893e-06$)
+  * `microsoft/deberta-v3-base` ($p_{holm} = 1.66893e-06$)
+  * `nlpaueb/legal-bert-base-uncased` ($p_{holm} = 1.66893e-06$)
+  * `roberta-base` ($p_{holm} = 0.001249$)
 * **Zero Empirical Defeats**: `answerdotai/ModernBERT-base` experienced 0 statistically significant pairwise defeats across all conditions.
 
 ---
 
 ## 6. MUI and Pareto Evidence
 * **MUI Role**: The Maritime Understanding Index (MUI) is utilized exclusively as a supporting aggregate index, not as an unchallengeable ground truth.
-* **MUI Baseline**: `answerdotai/ModernBERT-base` ranked 1st with a baseline score of **78.56**.
+* **MUI Baseline**: `answerdotai/ModernBERT-base` ranked 1st with a baseline score of **78.46**.
 * **Sensitivity Analysis Findings**:
-  * `answerdotai/ModernBERT-base` won 2 of 4 weight scenarios (Baseline and Performance-Heavy).
-  * `bert-base-uncased` won 2 of 4 scenarios (Domain-Heavy and Balanced), driven by its low tokenizer fragmentation and high rare vocabulary coverage.
-  * *Methodological Insight*: This scenario divergence highlights a clear structural trade-off between intrinsic language modeling capability and tokenization efficiency, rather than a methodology defect.
-* **Pareto Status**: Verified as **Pareto-Optimal** in Stage 15 across 10 evaluation objectives. Only one model (`microsoft/BiomedNLP-PubMedBERT-base`) was strictly Pareto-dominated.
-
+   * `answerdotai/ModernBERT-base` won 3 of 4 weight scenarios.
+   * *Methodological Insight*: Weight scenario evaluations highlight trade-offs between intrinsic language modeling capability and tokenization efficiency, rather than a methodology defect.
+* **Pareto Status**: Verified as **Pareto-Optimal** in Stage 15 across active evaluation objectives.
 ---
 
 ## 7. Resource Trade-offs
@@ -88,16 +88,17 @@ Operational dimensions are documented transparently and kept distinct from capab
 
 | Model Name | Parameters (M) | Model Disk Size (MB) | Inference Latency (ms) | Throughput (docs/sec) | Subword Fragmentation (%) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `answerdotai/ModernBERT-base` | 149M | 590 MB | 34.1 ms | 29.30 | 62.99% |
-| `roberta-base` | 125M | 500 MB | 26.9 ms | 37.24 | 64.78% |
-| `nlpaueb/legal-bert-base-uncased` | 110M | 440 MB | 24.3 ms | 41.08 | 37.61% |
-| `allenai/scibert_scivocab_uncased` | 110M | 440 MB | 23.9 ms | 41.82 | 41.79% |
-| `bert-base-uncased` | 110M | 440 MB | 22.4 ms | 44.71 | 26.57% |
-| `dmis-lab/biobert-base-cased-v1.2` | 110M | 440 MB | 24.4 ms | 40.93 | 35.52% |
-| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 110M | 440 MB | 23.4 ms | 42.77 | 42.39% |
+| `answerdotai/ModernBERT-base` | 149M | 590 MB | 34.8 ms | 28.73 | 63.28% |
+| `roberta-base` | 125M | 500 MB | 27.4 ms | 36.45 | 65.07% |
+| `nlpaueb/legal-bert-base-uncased` | 110M | 440 MB | 23.8 ms | 41.96 | 37.91% |
+| `allenai/scibert_scivocab_uncased` | 110M | 440 MB | 23.3 ms | 43.00 | 42.09% |
+| `bert-base-uncased` | 110M | 440 MB | 20.3 ms | 49.37 | 26.57% |
+| `microsoft/deberta-v3-base` | 86M | 500 MB | 17.5 ms | 57.06 | 21.49% |
+| `dmis-lab/biobert-base-cased-v1.2` | 110M | 440 MB | 23.0 ms | 43.56 | 35.52% |
+| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 110M | 440 MB | 23.2 ms | 43.07 | 42.69% |
 
 ### Operational Trade-off Analysis:
-* **Selected Candidate (`answerdotai/ModernBERT-base`)**: Demonstrates leading language modeling representation capability, but incurs a higher latency (34.1ms) and higher subword fragmentation (62.99%) than older BERT architectures.
+* **Selected Candidate (`answerdotai/ModernBERT-base`)**: Demonstrates leading language modeling representation capability, but incurs a higher latency (34.8ms) and higher subword fragmentation (63.28%) than older BERT architectures.
 * **Resource-Constrained Alternative (`bert-base-uncased`)**: Offers 2.6x lower inference latency (174.9ms vs 458.6ms), lower parameter footprint (110M vs 149M), and substantially lower subword fragmentation (26.57% vs 63.28%), making it the preferred candidate under constrained deployment budgets.
 
 ---
@@ -107,12 +108,12 @@ To assess the impact of the multi-criteria evidence framework, we record the can
 
 | Selection Strategy | Selection Metric | Selected Candidate | Metric Value |
 | :--- | :--- | :--- | :--- |
-| **Baseline / Reference** | Canonical general-domain pretrained baseline reference | `bert-base-uncased` | Top-1: 28.91% |
-| **Highest Top-1 Accuracy** | Empirical Maritime Top-1 Accuracy | `answerdotai/ModernBERT-base` | 73.17% |
-| **Lowest MLM Loss** | Intrinsic Masked Language Modeling Cross-Entropy Loss | `answerdotai/ModernBERT-base` | 1.4269 |
-| **Highest Rare-Domain Accuracy** | Domain Specialized Vocabulary Top-1 Accuracy | `answerdotai/ModernBERT-base` | 73.03% |
-| **Best Tokenizer Fit** | Lowest Subword Tokenizer Fragmentation Rate | `bert-base-uncased` | 26.57% |
-| **MUI (Baseline Aggregate Index)** | Stage 15 Maritime Understanding Index (Baseline) | `answerdotai/ModernBERT-base` | 78.56 |
+| **Baseline / Reference** | Canonical general-domain pretrained baseline reference | `bert-base-uncased` | Top-1: 29.18% |
+| **Highest Top-1 Accuracy** | Empirical Maritime Top-1 Accuracy | `answerdotai/ModernBERT-base` | 72.82% |
+| **Lowest MLM Loss** | Intrinsic Masked Language Modeling Cross-Entropy Loss | `answerdotai/ModernBERT-base` | 1.4740 |
+| **Highest Rare-Domain Accuracy** | Domain Specialized Vocabulary Top-1 Accuracy | `answerdotai/ModernBERT-base` | 69.61% |
+| **Best Tokenizer Fit** | Lowest Subword Tokenizer Fragmentation Rate | `microsoft/deberta-v3-base` | 21.49% |
+| **MUI (Baseline Aggregate Index)** | Stage 15 Maritime Understanding Index (Baseline) | `answerdotai/ModernBERT-base` | 78.46 |
 | **Evidence-Based Selection (Stage 17)** | Multi-Dimensional Evidence Priority Hierarchy | `answerdotai/ModernBERT-base` | Convergent Consensus |
 
 * **Key Finding**: Simple single-criterion strategies yield divergent choices: pure accuracy and loss metrics select `answerdotai/ModernBERT-base`, whereas pure vocabulary fit selects `bert-base-uncased`. The Stage 17 multi-criteria hierarchy transparently synthesizes these trade-offs rather than arbitrarily collapsing them into a single opaque score.

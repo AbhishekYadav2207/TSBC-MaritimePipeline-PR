@@ -1,0 +1,506 @@
+{
+  "report_type": "MaritimeBench Execution & Artifact Inventory Report",
+  "timestamp": "2026-10-07T07:14:57.901179+00:00",
+  "git_commit": "NOT_A_GIT_REPO",
+  "environment": "Linux 6.6.122+ (x86_64)",
+  "python_version": "3.13.15",
+  "torch_version": "2.11.0+cu130",
+  "cuda_available": true,
+  "gpu_name": "Tesla T4",
+  "masking_mode": "subword",
+  "evaluation_unit": "subword",
+  "pipeline_status": "SUCCESS",
+  "stages": [
+    {
+      "stage": "Stage 01",
+      "script": "scripts/01_parse_dictionary.py",
+      "return_code": 0,
+      "status": "PASS",
+      "runtime_seconds": 3.29,
+      "artifacts": [
+        {
+          "path": "outputs/stage-01/dictionary_metadata.json",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 181464,
+          "size_display": "177.2 KB",
+          "items_count": 1
+        }
+      ]
+    },
+    {
+      "stage": "Stage 02",
+      "script": "scripts/02_profile_dataset.py",
+      "return_code": 0,
+      "status": "PASS",
+      "runtime_seconds": 11.5,
+      "artifacts": [
+        {
+          "path": "outputs/stage-02/profiling_report.json",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 81152,
+          "size_display": "79.2 KB",
+          "items_count": 1
+        }
+      ]
+    },
+    {
+      "stage": "Stage 03",
+      "script": "scripts/03_discover_relationships.py",
+      "return_code": 0,
+      "status": "PASS",
+      "runtime_seconds": 1.57,
+      "artifacts": [
+        {
+          "path": "outputs/stage-03/relationships.json",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 6681,
+          "size_display": "6.5 KB",
+          "items_count": 1
+        }
+      ]
+    },
+    {
+      "stage": "Stage 04",
+      "script": "scripts/04_select_semantic_columns.py",
+      "return_code": 0,
+      "status": "PASS",
+      "runtime_seconds": 1.2,
+      "artifacts": [
+        {
+          "path": "outputs/stage-04/selected_semantic_columns.json",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 7171,
+          "size_display": "7.0 KB",
+          "items_count": 1
+        }
+      ]
+    },
+    {
+      "stage": "Stage 05",
+      "script": "scripts/05_merge_tables.py",
+      "return_code": 0,
+      "status": "PASS",
+      "runtime_seconds": 87.36,
+      "artifacts": [
+        {
+          "path": "outputs/stage-05/merged_records.jsonl",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 331416365,
+          "size_display": "316.1 MB",
+          "items_count": 1
+        },
+        {
+          "path": "outputs/stage-05/merge_reconciliation_report.json",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 1253,
+          "size_display": "1.2 KB",
+          "items_count": 1
+        }
+      ]
+    },
+    {
+      "stage": "Stage 05a",
+      "script": "scripts/05a_validate_records.py",
+      "return_code": 0,
+      "status": "PASS",
+      "runtime_seconds": 24.41,
+      "artifacts": [
+        {
+          "path": "outputs/stage-05a/validation_report.json",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 873,
+          "size_display": "873 B",
+          "items_count": 1
+        }
+      ]
+    },
+    {
+      "stage": "Stage 06",
+      "script": "scripts/06_generate_documents.py",
+      "return_code": 0,
+      "status": "PASS",
+      "runtime_seconds": 36.08,
+      "artifacts": [
+        {
+          "path": "outputs/stage-06/raw_documents.jsonl",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 861899924,
+          "size_display": "822.0 MB",
+          "items_count": 1
+        }
+      ]
+    },
+    {
+      "stage": "Stage 07",
+      "script": "scripts/07_clean_documents.py",
+      "return_code": 0,
+      "status": "PASS",
+      "runtime_seconds": 39.67,
+      "artifacts": [
+        {
+          "path": "outputs/stage-07/clean_documents.jsonl",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 785440601,
+          "size_display": "749.1 MB",
+          "items_count": 1
+        }
+      ]
+    },
+    {
+      "stage": "Stage 08",
+      "script": "scripts/08_export_corpus.py",
+      "return_code": 0,
+      "status": "PASS",
+      "runtime_seconds": 37.55,
+      "artifacts": [
+        {
+          "path": "outputs/stage-08/maritime_corpus.jsonl",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 774216739,
+          "size_display": "738.4 MB",
+          "items_count": 1
+        },
+        {
+          "path": "outputs/stage-08/maritime_corpus.txt",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 24552501,
+          "size_display": "23.4 MB",
+          "items_count": 1
+        },
+        {
+          "path": "outputs/stage-08/manifest.json",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 688,
+          "size_display": "688 B",
+          "items_count": 1
+        }
+      ]
+    },
+    {
+      "stage": "Stage 09",
+      "script": "scripts/09_statistics.py",
+      "return_code": 0,
+      "status": "PASS",
+      "runtime_seconds": 41.62,
+      "artifacts": [
+        {
+          "path": "outputs/stage-09/statistics.json",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 3299,
+          "size_display": "3.2 KB",
+          "items_count": 1
+        },
+        {
+          "path": "outputs/stage-09/corpus_quality_report.md",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 2917,
+          "size_display": "2.8 KB",
+          "items_count": 1
+        }
+      ]
+    },
+    {
+      "stage": "Stage 10",
+      "script": "scripts/10_extract_vocabulary.py",
+      "return_code": 0,
+      "status": "PASS",
+      "runtime_seconds": 25.68,
+      "artifacts": [
+        {
+          "path": "outputs/stage-10/maritime_vocabulary.txt",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 2752,
+          "size_display": "2.7 KB",
+          "items_count": 1
+        }
+      ]
+    },
+    {
+      "stage": "Stage 11",
+      "script": "scripts/11_corpus_representations.py",
+      "return_code": 0,
+      "status": "PASS",
+      "runtime_seconds": 38.57,
+      "artifacts": [
+        {
+          "path": "outputs/stage-11/corpus_representations",
+          "exists": true,
+          "type": "DIRECTORY",
+          "size_bytes": 999671299,
+          "size_display": "953.4 MB",
+          "items_count": 5
+        }
+      ]
+    },
+    {
+      "stage": "Stage 12",
+      "script": "scripts/12_semantic_importance.py",
+      "return_code": 0,
+      "status": "PASS",
+      "runtime_seconds": 84.02,
+      "artifacts": [
+        {
+          "path": "outputs/stage-12/document_importance.jsonl",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 87533256,
+          "size_display": "83.5 MB",
+          "items_count": 1
+        },
+        {
+          "path": "outputs/stage-12/subsets",
+          "exists": true,
+          "type": "DIRECTORY",
+          "size_bytes": 414411742,
+          "size_display": "395.2 MB",
+          "items_count": 16
+        }
+      ]
+    },
+    {
+      "stage": "Stage 13",
+      "script": "scripts/13_tokenizer_analysis.py",
+      "return_code": 0,
+      "status": "PASS",
+      "runtime_seconds": 70.6,
+      "artifacts": [
+        {
+          "path": "outputs/stage-13/selected_models.json",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 10205,
+          "size_display": "10.0 KB",
+          "items_count": 1
+        },
+        {
+          "path": "outputs/stage-13/candidate_selection_audit.json",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 6328,
+          "size_display": "6.2 KB",
+          "items_count": 1
+        },
+        {
+          "path": "outputs/stage-13/candidate_selection_audit.csv",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 3303,
+          "size_display": "3.2 KB",
+          "items_count": 1
+        },
+        {
+          "path": "outputs/stage-13/tokenizer_analysis",
+          "exists": true,
+          "type": "DIRECTORY",
+          "size_bytes": 392467,
+          "size_display": "383.3 KB",
+          "items_count": 14
+        }
+      ]
+    },
+    {
+      "stage": "Stage 14",
+      "script": "scripts/14_mlm_evaluation.py",
+      "return_code": 0,
+      "status": "PASS",
+      "runtime_seconds": 1534.46,
+      "artifacts": [
+        {
+          "path": "outputs/stage-14/evaluations",
+          "exists": true,
+          "type": "DIRECTORY",
+          "size_bytes": 36330,
+          "size_display": "35.5 KB",
+          "items_count": 9
+        },
+        {
+          "path": "outputs/stage-14/pll_results.json",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 31359,
+          "size_display": "30.6 KB",
+          "items_count": 1
+        },
+        {
+          "path": "outputs/stage-14/pll_selection.json",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 8370,
+          "size_display": "8.2 KB",
+          "items_count": 1
+        }
+      ]
+    },
+    {
+      "stage": "Stage 15",
+      "script": "scripts/15_cross_model_benchmarking.py",
+      "return_code": 0,
+      "status": "PASS",
+      "runtime_seconds": 8.11,
+      "artifacts": [
+        {
+          "path": "outputs/stage-15/leaderboard.csv",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 1203,
+          "size_display": "1.2 KB",
+          "items_count": 1
+        },
+        {
+          "path": "outputs/stage-15/comparison.csv",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 51015,
+          "size_display": "49.8 KB",
+          "items_count": 1
+        },
+        {
+          "path": "outputs/stage-15/stage15_model_profiles.csv",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 4753,
+          "size_display": "4.6 KB",
+          "items_count": 1
+        },
+        {
+          "path": "outputs/stage-15/stage15_pareto.csv",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 2079,
+          "size_display": "2.0 KB",
+          "items_count": 1
+        },
+        {
+          "path": "outputs/stage-15/stage15_mui_sensitivity.csv",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 724,
+          "size_display": "724 B",
+          "items_count": 1
+        },
+        {
+          "path": "outputs/stage-15/stage15_report.md",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 9312,
+          "size_display": "9.1 KB",
+          "items_count": 1
+        }
+      ]
+    },
+    {
+      "stage": "Stage 16",
+      "script": "scripts/16_statistical_analysis.py",
+      "return_code": 0,
+      "status": "PASS",
+      "runtime_seconds": 3.51,
+      "artifacts": [
+        {
+          "path": "outputs/stage-16/stage16_pairwise_tests.csv",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 5726,
+          "size_display": "5.6 KB",
+          "items_count": 1
+        },
+        {
+          "path": "outputs/stage-16/stage16_global_tests.csv",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 235,
+          "size_display": "235 B",
+          "items_count": 1
+        },
+        {
+          "path": "outputs/stage-16/stage16_bootstrap.csv",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 3882,
+          "size_display": "3.8 KB",
+          "items_count": 1
+        },
+        {
+          "path": "outputs/stage-16/ablation_study.json",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 2635,
+          "size_display": "2.6 KB",
+          "items_count": 1
+        },
+        {
+          "path": "outputs/stage-16/stage16_final_report.md",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 20882,
+          "size_display": "20.4 KB",
+          "items_count": 1
+        }
+      ]
+    },
+    {
+      "stage": "Stage 17",
+      "script": "scripts/17_decision_engine.py",
+      "return_code": 0,
+      "status": "PASS",
+      "runtime_seconds": 11.36,
+      "artifacts": [
+        {
+          "path": "outputs/stage-17/decision_summary.json",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 2423,
+          "size_display": "2.4 KB",
+          "items_count": 1
+        },
+        {
+          "path": "outputs/stage-17/stage17_model_selection.csv",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 2832,
+          "size_display": "2.8 KB",
+          "items_count": 1
+        },
+        {
+          "path": "outputs/stage-17/benchmark_report.md",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 10757,
+          "size_display": "10.5 KB",
+          "items_count": 1
+        }
+      ]
+    },
+    {
+      "stage": "Stage 18",
+      "script": "scripts/18_lint_corpus.py",
+      "return_code": 0,
+      "status": "PASS",
+      "runtime_seconds": 19.58,
+      "artifacts": [
+        {
+          "path": "outputs/stage-18/corpus_lint_report.json",
+          "exists": true,
+          "type": "FILE",
+          "size_bytes": 3488,
+          "size_display": "3.4 KB",
+          "items_count": 1
+        }
+      ]
+    }
+  ]
+}

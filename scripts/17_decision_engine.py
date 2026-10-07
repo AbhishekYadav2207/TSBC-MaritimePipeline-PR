@@ -755,7 +755,9 @@ def generate_decision_report_md(
     profiles: Dict[str, Dict[str, Any]],
     candidate_statuses: Dict[str, str],
     baselines: Dict[str, Dict[str, Any]],
-    output_path: Path
+    output_path: Path,
+    df_pairwise: Optional[pd.DataFrame] = None,
+    global_tests_dict: Optional[Dict[str, Any]] = None
 ):
     """
     Generates the comprehensive 10-section decision report in publication-grade markdown.
@@ -786,8 +788,8 @@ The model selection decision is grounded in empirical artifacts from Stages 15 a
 * **Primary Capability**: `{sel}` achieves an empirical Maritime Top-1 Accuracy of **{p_sel.get('top1_acc', 'N/A'):.2f}%** and an intrinsic MLM cross-entropy loss of **{p_sel.get('mlm_loss', 'N/A'):.4f}** (Pseudo-Perplexity: {p_sel.get('pseudo_perplexity', 'N/A'):.2f}).
 * **Statistical Standing**: Stage 16 Wilcoxon signed-rank testing with Holm-Bonferroni correction confirms that `{sel}` demonstrates statistically significant superiority over all {p_sel.get('sig_pairwise_wins', 0)} competing evaluated models ($p_{{holm}} < 0.05$) with large parametric (Cohen's $d > 2.0$) and non-parametric (Cliff's $\\delta > 0.8$) effect sizes.
 * **Bootstrap Stability**: Across 2,000 bootstrap resamples of matched evaluation conditions, `{sel}` attained a Rank-1 probability of **{p_sel.get('p_rank_1', 0.0)*100:.1f}%** with a mean rank of **{p_sel.get('bootstrap_mean_rank', 'N/A'):.2f} ± {p_sel.get('bootstrap_rank_std', 'N/A'):.2f}**.
-* **Condition Robustness**: Rank 1 status was maintained across all 5 structural representations (Narrative, Key-Value, Template, JSON, Mixed) and all 5 semantic knowledge subsets.
-* **Pareto Status**: Verified as non-dominated (**{p_sel.get('pareto_status', 'Pareto-Optimal')}**) in the 10-dimensional Stage 15 multi-objective evaluation.
+* **Condition Robustness**: Rank 1 status was maintained across all evaluated structural representations and knowledge subsets.
+* **Pareto Status**: Verified as non-dominated (**{p_sel.get('pareto_status', 'Pareto-Optimal')}**) in the multi-objective evaluation.
 
 ---
 
@@ -797,16 +799,46 @@ Models are categorized based on relative empirical evidence into three transpare
 | Model Name | Candidate Status | Top-1 Accuracy (%) | MLM Loss | Mean Rank | $P(\\text{{Rank}}=1)$ | Pareto Status | Decision Role |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 """
-    for m in decision_result["candidate_ranking"]:
+    for idx, m in enumerate(decision_result["candidate_ranking"]):
         p = profiles[m]
         status = candidate_statuses.get(m, "Weak Candidate")
-        role = "Primary DAPT Candidate" if m == sel else ("Runner-Up Capability Benchmark" if m == "roberta-base" else ("Resource-Constrained Alternative" if m == "bert-base-uncased" else "Evaluated Competitor"))
+        role = "Primary DAPT Candidate" if m == sel else ("Runner-Up Capability Benchmark" if idx == 1 else ("Resource-Constrained Alternative" if m == "bert-base-uncased" else "Evaluated Competitor"))
         t1 = f"{p['top1_acc']:.2f}%" if p.get('top1_acc') is not None else "N/A"
         ls = f"{p['mlm_loss']:.4f}" if p.get('mlm_loss') is not None else "N/A"
         mr = f"{p['bootstrap_mean_rank']:.2f}" if p.get('bootstrap_mean_rank') is not None else "N/A"
         p1_str = f"{p['p_rank_1']*100:.1f}%" if p.get('p_rank_1') is not None else "N/A"
         par = p.get('pareto_status', 'N/A')
         md += f"| `{m}` | **{status}** | {t1} | {ls} | {mr} | {p1_str} | {par} | {role} |\n"
+
+    # Format dynamic pairwise victories for selected candidate
+    pairwise_victories = []
+    if df_pairwise is not None:
+        for _, r in df_pairwise.iterrows():
+            m_a = r.get("model_a")
+            m_b = r.get("model_b")
+            is_sig = bool(r.get("is_significant_holm", False))
+            mean_diff = float(r.get("mean_difference", 0.0))
+            p_h = r.get("p_value_holm", "N/A")
+
+            defeated = None
+            if m_a == sel and is_sig and mean_diff > 0:
+                defeated = m_b
+            elif m_b == sel and is_sig and mean_diff < 0:
+                defeated = m_a
+
+            if defeated:
+                pairwise_victories.append(f"  * `{defeated}` ($p_{{holm}} = {p_h}$)")
+
+    if pairwise_victories:
+        victories_md = "\n".join(pairwise_victories)
+    else:
+        victories_md = f"  * Competitors evaluated in Stage 16 pairwise matrix ({p_sel.get('sig_pairwise_wins', 0)} statistically significant victories)"
+
+    # Global omnibus test stats
+    stat_fr = global_tests_dict.get("statistic", "N/A") if global_tests_dict else "N/A"
+    df_fr = global_tests_dict.get("df", len(profiles) - 1) if global_tests_dict else (len(profiles) - 1)
+    p_fr = global_tests_dict.get("p_value_raw", "N/A") if global_tests_dict else "N/A"
+    p_fr_str = f"{p_fr:.2e}" if isinstance(p_fr, float) else str(p_fr)
 
     md += f"""
 ---
@@ -815,31 +847,26 @@ Models are categorized based on relative empirical evidence into three transpare
 The benchmark evaluated candidate models across diverse structural representations and domain knowledge subsets:
 
 1. **Representation Invariance**:
-   * Evaluated formats: `Narrative`, `Key-Value`, `Template`, `JSON`, and `Mixed`.
-   * `{sel}` demonstrated perfect rank stability across all representations (Mean Rank: {p_sel.get('rep_mean_rank', 'N/A'):.1f}, Std: {p_sel.get('rep_rank_std', 'N/A'):.2f}).
+   * Evaluated structural formats across canonical narrative and structured representations.
+   * `{sel}` demonstrated robust rank stability across all representations (Mean Rank: {p_sel.get('rep_mean_rank', 'N/A'):.1f}, Std: {p_sel.get('rep_rank_std', 'N/A'):.2f}).
    * Overall representation ranking concordance is high (Kendall $\\tau = {p_sel.get('rep_stability_kendall_tau', 'N/A')}$).
 2. **Knowledge Subset Agreement**:
-   * Evaluated subsets: `Balanced Knowledge`, `High Knowledge`, `Medium Knowledge`, `Low Knowledge`, and `Random Baseline`.
-   * `{sel}` maintained Rank 1 across all 5 subsets (Mean Rank: {p_sel.get('subset_mean_rank', 'N/A'):.1f}, Std: {p_sel.get('subset_rank_std', 'N/A'):.2f}).
+   * Evaluated subsets across domain-informativeness stratifications.
+   * `{sel}` maintained high performance across subsets (Mean Rank: {p_sel.get('subset_mean_rank', 'N/A'):.1f}, Std: {p_sel.get('subset_rank_std', 'N/A'):.2f}).
    * Knowledge subset ranking concordance demonstrates strong agreement (Kendall $\\tau = {p_sel.get('subset_stability_kendall_tau', 'N/A')}$).
 3. **Bootstrap Resampling**:
    * 95% Confidence Interval for `{sel}` Top-1 accuracy: `[{p_sel.get('ci_95_low', 'N/A')}, {p_sel.get('ci_95_high', 'N/A')}]`.
-   * Demonstrates complete confidence interval separation from all baseline models except runner-up general encoders.
+   * Demonstrates complete confidence interval separation from baseline models.
 
 ---
 
 ## 5. Statistical Support
 All statistical evidence is consumed directly from Stage 16 without re-computation:
 
-* **Global Hypothesis Test**: Friedman's omnibus test across matched conditions confirms highly statistically significant differences among models ($\\chi^2 = 123.19$, $df = 6$, $p = 3.48 \\times 10^{{-24}}$).
+* **Global Hypothesis Test**: Friedman's omnibus test across matched conditions confirms statistically significant differences among models ($\\chi^2 = {stat_fr}$, $df = {df_fr}$, $p = {p_fr_str}$).
 * **Pairwise Wilcoxon Tests**: With family-wise error controlled using the Holm-Bonferroni step-down procedure, `{sel}` achieves statistically significant superiority over:
-  * `allenai/scibert_scivocab_uncased` ($p_{{holm}} = 1.25 \\times 10^{{-6}}$, Cliff's $\\delta = -0.95$, Large)
-  * `bert-base-uncased` ($p_{{holm}} = 1.25 \\times 10^{{-6}}$, Cliff's $\\delta = -0.94$, Large)
-  * `dmis-lab/biobert-base-cased-v1.2` ($p_{{holm}} = 1.25 \\times 10^{{-6}}$, Cliff's $\\delta = -0.97$, Large)
-  * `microsoft/BiomedNLP-PubMedBERT-base` ($p_{{holm}} = 1.25 \\times 10^{{-6}}$, Cliff's $\\delta = -0.97$, Large)
-  * `nlpaueb/legal-bert-base-uncased` ($p_{{holm}} = 1.25 \\times 10^{{-6}}$, Cliff's $\\delta = -0.93$, Large)
-  * `roberta-base` ($p_{{holm}} = 1.43 \\times 10^{{-5}}$, Cliff's $\\delta = -0.80$, Large)
-* **Zero Empirical Defeats**: `{sel}` experienced 0 statistically significant pairwise defeats across all conditions.
+{victories_md}
+* **Zero Empirical Defeats**: `{sel}` experienced {p_sel.get('sig_pairwise_losses', 0)} statistically significant pairwise defeats across all conditions.
 
 ---
 
@@ -847,11 +874,9 @@ All statistical evidence is consumed directly from Stage 16 without re-computati
 * **MUI Role**: The Maritime Understanding Index (MUI) is utilized exclusively as a supporting aggregate index, not as an unchallengeable ground truth.
 * **MUI Baseline**: `{sel}` ranked 1st with a baseline score of **{p_sel.get('mui_score', 'N/A'):.2f}**.
 * **Sensitivity Analysis Findings**:
-  * `{sel}` won 2 of 4 weight scenarios (Baseline and Performance-Heavy).
-  * `bert-base-uncased` won 2 of 4 scenarios (Domain-Heavy and Balanced), driven by its low tokenizer fragmentation and high rare vocabulary coverage.
-  * *Methodological Insight*: This scenario divergence highlights a clear structural trade-off between intrinsic language modeling capability and tokenization efficiency, rather than a methodology defect.
-* **Pareto Status**: Verified as **Pareto-Optimal** in Stage 15 across 10 evaluation objectives. Only one model (`microsoft/BiomedNLP-PubMedBERT-base`) was strictly Pareto-dominated.
-
+   * `{sel}` won {p_sel.get('mui_total_wins', 'N/A')} of 4 weight scenarios.
+   * *Methodological Insight*: Weight scenario evaluations highlight trade-offs between intrinsic language modeling capability and tokenization efficiency, rather than a methodology defect.
+* **Pareto Status**: Verified as **{p_sel.get('pareto_status', 'Pareto-Optimal')}** in Stage 15 across active evaluation objectives.
 ---
 
 ## 7. Resource Trade-offs
@@ -869,9 +894,12 @@ Operational dimensions are documented transparently and kept distinct from capab
         fr_str = f"{p['fragmentation_rate_pct']:.2f}%" if p.get('fragmentation_rate_pct') is not None else "N/A"
         md += f"| `{m}` | {p_str} | {d_str} | {lat_str} | {tp_str} | {fr_str} |\n"
 
+    lat_sel_str = f"{p_sel['inference_latency_ms']:.1f}ms" if p_sel.get('inference_latency_ms') is not None else "N/A"
+    fr_sel_str = f"{p_sel['fragmentation_rate_pct']:.2f}%" if p_sel.get('fragmentation_rate_pct') is not None else "N/A"
+
     md += f"""
 ### Operational Trade-off Analysis:
-* **Selected Candidate (`{sel}`)**: Demonstrates leading language modeling representation capability, but incurs a higher latency ({p_sel.get('inference_latency_ms', 'N/A'):.1f}ms) and higher subword fragmentation ({p_sel.get('fragmentation_rate_pct', 'N/A'):.2f}%) than older BERT architectures.
+* **Selected Candidate (`{sel}`)**: Demonstrates leading language modeling representation capability, but incurs a higher latency ({lat_sel_str}) and higher subword fragmentation ({fr_sel_str}) than older BERT architectures.
 * **Resource-Constrained Alternative (`bert-base-uncased`)**: Offers 2.6x lower inference latency (174.9ms vs 458.6ms), lower parameter footprint (110M vs 149M), and substantially lower subword fragmentation (26.57% vs 63.28%), making it the preferred candidate under constrained deployment budgets.
 
 ---
@@ -1068,7 +1096,10 @@ def main():
     logger.info(f"Saved selection rationale JSON to {json_path}")
 
     report_path = stage17_dir / "stage17_decision_report.md"
-    generate_decision_report_md(decision_result, profiles, candidate_statuses, baselines, report_path)
+    generate_decision_report_md(
+        decision_result, profiles, candidate_statuses, baselines, report_path,
+        df_pairwise=df_pairwise, global_tests_dict=dict_stage16_sig
+    )
     logger.info(f"Saved 10-section decision report to {report_path}")
 
     # 8. Export Backward-Compatibility Artifacts

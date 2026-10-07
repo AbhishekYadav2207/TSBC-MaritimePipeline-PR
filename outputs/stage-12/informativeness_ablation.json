@@ -5,71 +5,71 @@
     "full_hybrid": {
       "spearman_rank_correlation_with_full": 1.0,
       "kendall_tau_correlation_with_full": 1.0,
-      "mean_score": 0.2488,
+      "mean_score": 0.2489,
       "median_score": 0.2407,
       "std_score": 0.0753,
       "min_score": 0.0298,
-      "max_score": 0.544,
+      "max_score": 0.5445,
       "quartiles": [
-        0.2007,
+        0.2006,
         0.2407,
-        0.2946
+        0.295
       ]
     },
     "minus_domain_relevance": {
       "spearman_rank_correlation_with_full": 0.9752,
-      "kendall_tau_correlation_with_full": 0.8551,
-      "mean_score": 0.3075,
-      "median_score": 0.3051,
+      "kendall_tau_correlation_with_full": 0.857,
+      "mean_score": 0.3076,
+      "median_score": 0.305,
       "std_score": 0.0852,
       "min_score": 0.0369,
-      "max_score": 0.5306,
+      "max_score": 0.5264,
       "quartiles": [
-        0.2565,
-        0.3051,
-        0.3549
+        0.2564,
+        0.305,
+        0.3551
       ]
     },
     "minus_information_content": {
-      "spearman_rank_correlation_with_full": 0.9054,
-      "kendall_tau_correlation_with_full": 0.8168,
+      "spearman_rank_correlation_with_full": 0.9062,
+      "kendall_tau_correlation_with_full": 0.814,
       "mean_score": 0.0546,
-      "median_score": 0.0282,
-      "std_score": 0.0682,
+      "median_score": 0.0284,
+      "std_score": 0.0681,
       "min_score": 0.0,
-      "max_score": 0.4151,
+      "max_score": 0.4158,
       "quartiles": [
         0.0,
-        0.0282,
-        0.0901
+        0.0284,
+        0.0903
       ]
     },
     "minus_tfidf_representativeness": {
-      "spearman_rank_correlation_with_full": 0.7942,
-      "kendall_tau_correlation_with_full": 0.701,
+      "spearman_rank_correlation_with_full": 0.7955,
+      "kendall_tau_correlation_with_full": 0.6998,
       "mean_score": 0.252,
       "median_score": 0.2528,
-      "std_score": 0.0743,
+      "std_score": 0.0742,
       "min_score": 0.025,
       "max_score": 0.5638,
       "quartiles": [
-        0.1973,
+        0.1975,
         0.2528,
-        0.3074
+        0.3075
       ]
     },
     "minus_redundancy_noise": {
-      "spearman_rank_correlation_with_full": 0.7901,
-      "kendall_tau_correlation_with_full": 0.6819,
+      "spearman_rank_correlation_with_full": 0.7904,
+      "kendall_tau_correlation_with_full": 0.6824,
       "mean_score": 0.3976,
       "median_score": 0.4025,
       "std_score": 0.0925,
       "min_score": 0.1544,
-      "max_score": 0.7253,
+      "max_score": 0.726,
       "quartiles": [
         0.3185,
         0.4025,
-        0.469
+        0.4688
       ]
     }
   }

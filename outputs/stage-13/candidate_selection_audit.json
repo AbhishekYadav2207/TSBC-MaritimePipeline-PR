@@ -1,0 +1,147 @@
+{
+  "candidate_count": 14,
+  "retained_count": 8,
+  "excluded_count": 6,
+  "candidates": [
+    {
+      "model": "bert-base-uncased",
+      "tokenizer": "BertTokenizer",
+      "architecture": "BERT Base Encoder",
+      "candidate_status": "RETAINED",
+      "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
+      "ordering_score": 10,
+      "represented_by": null,
+      "similarity_score": null
+    },
+    {
+      "model": "bert-large-uncased",
+      "tokenizer": "BertTokenizer",
+      "architecture": "BERT Large Encoder",
+      "candidate_status": "EXCLUDED_TOKENIZER_DUPLICATE",
+      "selection_reason": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits).",
+      "ordering_score": 1,
+      "represented_by": "bert-base-uncased",
+      "similarity_score": 1.0
+    },
+    {
+      "model": "roberta-base",
+      "tokenizer": "RobertaTokenizer",
+      "architecture": "RoBERTa Base Encoder",
+      "candidate_status": "RETAINED",
+      "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
+      "ordering_score": 5,
+      "represented_by": null,
+      "similarity_score": null
+    },
+    {
+      "model": "microsoft/deberta-v3-base",
+      "tokenizer": "DebertaV2Tokenizer",
+      "architecture": "DeBERTa-v3 Base Encoder (Disentangled Attention)",
+      "candidate_status": "RETAINED",
+      "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
+      "ordering_score": 3,
+      "represented_by": null,
+      "similarity_score": null
+    },
+    {
+      "model": "answerdotai/ModernBERT-base",
+      "tokenizer": "TokenizersBackend",
+      "architecture": "ModernBERT Base Encoder",
+      "candidate_status": "RETAINED",
+      "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
+      "ordering_score": 4,
+      "represented_by": null,
+      "similarity_score": null
+    },
+    {
+      "model": "allenai/scibert_scivocab_uncased",
+      "tokenizer": "BertTokenizer",
+      "architecture": "SciBERT Base Encoder",
+      "candidate_status": "RETAINED",
+      "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
+      "ordering_score": 7,
+      "represented_by": null,
+      "similarity_score": null
+    },
+    {
+      "model": "dmis-lab/biobert-base-cased-v1.2",
+      "tokenizer": "BertTokenizer",
+      "architecture": "BioBERT Base Encoder",
+      "candidate_status": "RETAINED",
+      "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
+      "ordering_score": 9,
+      "represented_by": null,
+      "similarity_score": null
+    },
+    {
+      "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "tokenizer": "BertTokenizer",
+      "architecture": "PubMedBERT Base Encoder",
+      "candidate_status": "RETAINED",
+      "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
+      "ordering_score": 6,
+      "represented_by": null,
+      "similarity_score": null
+    },
+    {
+      "model": "emilyalsentzer/Bio_ClinicalBERT",
+      "tokenizer": "BertTokenizer",
+      "architecture": "ClinicalBERT Base Encoder",
+      "candidate_status": "EXCLUDED_TOKENIZER_DUPLICATE",
+      "selection_reason": "Excluded due to identical tokenizer diagnostic profile with dmis-lab/biobert-base-cased-v1.2 (cosine similarity 1.00000, identical vocabulary piece splits).",
+      "ordering_score": 1,
+      "represented_by": "dmis-lab/biobert-base-cased-v1.2",
+      "similarity_score": 1.0
+    },
+    {
+      "model": "nlpaueb/legal-bert-base-uncased",
+      "tokenizer": "BertTokenizer",
+      "architecture": "Legal-BERT Base Encoder",
+      "candidate_status": "RETAINED",
+      "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
+      "ordering_score": 8,
+      "represented_by": null,
+      "similarity_score": null
+    },
+    {
+      "model": "ProsusAI/finbert",
+      "tokenizer": "BertTokenizer",
+      "architecture": "FinBERT Base Encoder",
+      "candidate_status": "EXCLUDED_TOKENIZER_DUPLICATE",
+      "selection_reason": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits).",
+      "ordering_score": 1,
+      "represented_by": "bert-base-uncased",
+      "similarity_score": 1.0
+    },
+    {
+      "model": "anferico/bert-for-patents",
+      "tokenizer": "Unavailable",
+      "architecture": "BERT for Patents Base Encoder",
+      "candidate_status": "EXCLUDED_MODEL_UNAVAILABLE",
+      "selection_reason": "Tokenizer failed to instantiate from pretrained repository in current environment (e.g. missing SentencePiece library or fast tokenizer backend).",
+      "ordering_score": 1,
+      "represented_by": null,
+      "similarity_score": null
+    },
+    {
+      "model": "google/electra-base-discriminator",
+      "tokenizer": "BertTokenizer",
+      "architecture": "ELECTRA Base Discriminator",
+      "candidate_status": "EXCLUDED_TOKENIZER_DUPLICATE",
+      "selection_reason": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits).",
+      "ordering_score": 1,
+      "represented_by": "bert-base-uncased",
+      "similarity_score": 1.0
+    },
+    {
+      "model": "distilbert-base-uncased",
+      "tokenizer": "BertTokenizer",
+      "architecture": "DistilBERT Base Student",
+      "candidate_status": "EXCLUDED_TOKENIZER_DUPLICATE",
+      "selection_reason": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits).",
+      "ordering_score": 1,
+      "represented_by": "bert-base-uncased",
+      "similarity_score": 1.0
+    }
+  ]
+}

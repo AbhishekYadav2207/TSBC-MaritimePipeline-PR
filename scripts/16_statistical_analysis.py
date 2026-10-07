@@ -4,12 +4,12 @@ Maritime Accident Corpus Generation Pipeline Version 2.1
 
 Scientific Purpose:
 Validate whether model differences identified in Stage 15 are statistically reliable,
-quantify their practical magnitude across matched benchmark conditions (5 representations x 5 subsets = 25 conditions),
+quantify their practical magnitude across matched benchmark conditions (representations x subsets),
 evaluate bootstrap uncertainty and empirical rank stability, assess condition robustness,
 and measure how sensitive Stage 12 document selection is to individual scoring components.
 
 Experimental Design:
-Models are evaluated across 25 matched representation-by-subset benchmark conditions.
+Models are evaluated across matched representation-by-subset benchmark conditions.
 Treat these as paired benchmark evaluation configurations, NOT independent datasets or replications.
 """
 
@@ -90,6 +90,35 @@ def categorize_effect_magnitude(d_z: float, delta: float) -> Tuple[str, str]:
     return d_mag, delta_mag
 
 
+def apply_holm_bonferroni(raw_p_values: List[float]) -> List[float]:
+    """
+    Applies Holm-Bonferroni step-down correction to a list of p-values.
+    Dynamically derives m_valid from non-null/finite p-values only.
+    Invalid/NaN p-values remain NaN and do not participate in the multiplier.
+    """
+    n_total = len(raw_p_values)
+    valid_indices = [
+        i for i, p in enumerate(raw_p_values)
+        if p is not None and pd.notna(p) and np.isfinite(p)
+    ]
+    m_valid = len(valid_indices)
+
+    result = [np.nan] * n_total
+    if m_valid == 0:
+        return result
+
+    sorted_indices = sorted(valid_indices, key=lambda i: raw_p_values[i])
+    cum_max = 0.0
+    for rank, idx in enumerate(sorted_indices):
+        multiplier = m_valid - rank
+        raw_p = raw_p_values[idx]
+        adj_p = min(1.0, float(raw_p) * multiplier)
+        cum_max = max(cum_max, adj_p)
+        result[idx] = cum_max
+
+    return result
+
+
 # ==============================================================================
 # DATA LOADING & MATCHED PAIRING
 # ==============================================================================
@@ -119,18 +148,18 @@ def load_matched_benchmark_matrix(comparison_path: Path, primary_metric: str = "
     # Pivot: index = matched condition, columns = models, values = primary metric
     pvt = df.pivot(index="condition", columns="model_name", values=primary_metric)
 
-    # Keep only complete matched conditions shared by all models
+    # Keep only complete matched conditions shared by all models for omnibus tests
     pvt_clean = pvt.dropna(how="any")
 
-    models = sorted(list(pvt_clean.columns))
+    models = sorted(list(pvt.columns))
     conditions = list(pvt_clean.index)
 
     logger.info(
-        f"Loaded matched benchmark matrix: {len(conditions)} conditions across {len(models)} models. "
+        f"Loaded matched benchmark matrix: {len(conditions)} complete conditions across {len(models)} models. "
         f"Primary metric: '{primary_metric}'"
     )
 
-    return pvt_clean, df, models, conditions
+    return pvt_clean, pvt, df, models, conditions
 
 
 # ==============================================================================
@@ -195,44 +224,89 @@ def run_pairwise_comparisons(pvt: pd.DataFrame, models: List[str]) -> Tuple[pd.D
     """
     Executes pairwise Wilcoxon signed-rank tests with Holm-Bonferroni correction,
     secondary paired t-tests, and effect size estimations (paired Cohen's d_z and Cliff's Delta).
+    Computes comparisons on the exact matched condition intersection for each pair,
+    ensuring missing conditions in model C do not truncate valid comparisons between A and B.
     """
     pairs = list(combinations(models, 2))
     raw_results = []
 
     for m1, m2 in pairs:
-        v1 = pvt[m1].values
-        v2 = pvt[m2].values
+        col1 = pvt[m1].dropna()
+        col2 = pvt[m2].dropna()
+        shared_conditions = col1.index.intersection(col2.index)
+        n_paired = len(shared_conditions)
+        total_a = len(col1)
+        total_b = len(col2)
+        unmatched_a = total_a - n_paired
+        unmatched_b = total_b - n_paired
+
+        if n_paired < 2:
+            raw_results.append({
+                "model_a": m1,
+                "model_b": m2,
+                "num_paired_conditions": n_paired,
+                "total_conditions_a": total_a,
+                "total_conditions_b": total_b,
+                "unmatched_a": unmatched_a,
+                "unmatched_b": unmatched_b,
+                "wins_a": 0,
+                "losses_a": 0,
+                "ties": 0,
+                "paired_win_rate_a": np.nan,
+                "mean_difference": np.nan,
+                "median_difference": np.nan,
+                "ci_95_low": np.nan,
+                "ci_95_high": np.nan,
+                "wilcoxon_stat": np.nan,
+                "p_value_raw": np.nan,
+                "paired_t_stat": np.nan,
+                "p_value_t_test": np.nan,
+                "cohens_d_paired": np.nan,
+                "cohens_d_magnitude": "undefined",
+                "cliffs_delta": np.nan,
+                "cliffs_delta_magnitude": "undefined",
+                "test_status": "NOT_TESTABLE (insufficient paired n < 2)",
+                "statistical_family": STATISTICAL_FAMILY
+            })
+            continue
+
+        v1 = col1.loc[shared_conditions].values
+        v2 = col2.loc[shared_conditions].values
         diff = v1 - v2
-        n_paired = len(diff)
+
+        wins_a = int(np.sum(diff > 0))
+        losses_a = int(np.sum(diff < 0))
+        ties = int(np.sum(diff == 0))
+        win_rate = float((wins_a + 0.5 * ties) / n_paired)
 
         mean_diff = float(np.mean(diff))
         median_diff = float(np.median(diff))
 
         # 95% Confidence Interval for paired mean difference
-        if n_paired > 1:
-            sem = float(stats.sem(diff))
-            ci_half = float(stats.t.ppf(0.975, df=n_paired - 1) * sem) if sem > 0 else 0.0
-            ci_low = mean_diff - ci_half
-            ci_high = mean_diff + ci_half
-        else:
-            ci_low, ci_high = mean_diff, mean_diff
+        sem = float(stats.sem(diff))
+        ci_half = float(stats.t.ppf(0.975, df=n_paired - 1) * sem) if sem > 0 else 0.0
+        ci_low = mean_diff - ci_half
+        ci_high = mean_diff + ci_half
 
         # Paired Wilcoxon signed-rank test
-        try:
-            if np.all(diff == 0):
-                w_stat, p_w = 0.0, 1.0
-            else:
+        if np.all(diff == 0):
+            w_stat, p_w = 0.0, 1.0
+            test_status = "IDENTICAL_TIES"
+        else:
+            try:
                 w_res = stats.wilcoxon(diff, alternative="two-sided")
                 w_stat, p_w = float(w_res.statistic), float(w_res.pvalue)
-        except Exception:
-            w_stat, p_w = 0.0, 1.0
+                test_status = "TESTED"
+            except Exception as e:
+                w_stat, p_w = np.nan, np.nan
+                test_status = f"NOT_TESTABLE ({e})"
 
         # Secondary Paired t-test
         try:
             t_res = stats.ttest_rel(v1, v2)
             t_stat, p_t = float(t_res.statistic), float(t_res.pvalue)
         except Exception:
-            t_stat, p_t = 0.0, 1.0
+            t_stat, p_t = np.nan, np.nan
 
         d_z = cohens_d_paired(diff)
         delta = cliffs_delta(v1, v2)
@@ -242,53 +316,68 @@ def run_pairwise_comparisons(pvt: pd.DataFrame, models: List[str]) -> Tuple[pd.D
             "model_a": m1,
             "model_b": m2,
             "num_paired_conditions": n_paired,
+            "total_conditions_a": total_a,
+            "total_conditions_b": total_b,
+            "unmatched_a": unmatched_a,
+            "unmatched_b": unmatched_b,
+            "wins_a": wins_a,
+            "losses_a": losses_a,
+            "ties": ties,
+            "paired_win_rate_a": round(win_rate, 4),
             "mean_difference": round(mean_diff, 4),
             "median_difference": round(median_diff, 4),
             "ci_95_low": round(ci_low, 4),
             "ci_95_high": round(ci_high, 4),
-            "wilcoxon_stat": round(w_stat, 2),
+            "wilcoxon_stat": round(w_stat, 2) if np.isfinite(w_stat) else np.nan,
             "p_value_raw": p_w,
-            "paired_t_stat": round(t_stat, 4) if np.isfinite(t_stat) else 0.0,
-            "p_value_t_test": p_t if np.isfinite(p_t) else 1.0,
-            "cohens_d_paired": round(d_z, 4),
+            "paired_t_stat": round(t_stat, 4) if np.isfinite(t_stat) else np.nan,
+            "p_value_t_test": p_t if np.isfinite(p_t) else np.nan,
+            "cohens_d_paired": round(d_z, 4) if np.isfinite(d_z) else np.nan,
             "cohens_d_magnitude": d_mag,
-            "cliffs_delta": round(delta, 4),
+            "cliffs_delta": round(delta, 4) if np.isfinite(delta) else np.nan,
             "cliffs_delta_magnitude": delta_mag,
+            "test_status": test_status,
             "statistical_family": STATISTICAL_FAMILY
         })
 
-    # Apply Holm-Bonferroni Correction
-    m_total = len(raw_results)
-    sorted_indices = sorted(range(m_total), key=lambda i: raw_results[i]["p_value_raw"])
-
-    holm_p_values = [0.0] * m_total
-    cum_max = 0.0
-    for rank, idx in enumerate(sorted_indices):
-        multiplier = m_total - rank
-        raw_p = raw_results[idx]["p_value_raw"]
-        adjusted_p = min(1.0, raw_p * multiplier)
-        cum_max = max(cum_max, adjusted_p)
-        holm_p_values[idx] = cum_max
-
-    for i in range(m_total):
-        raw_results[i]["p_value_holm"] = holm_p_values[i]
-        raw_results[i]["is_significant_holm"] = bool(holm_p_values[i] < 0.05)
+    # Apply Holm-Bonferroni Step-Down Correction on valid tests
+    raw_p_vals = [
+        r["p_value_raw"] if r["test_status"] in ("TESTED", "IDENTICAL_TIES") else np.nan
+        for r in raw_results
+    ]
+    holm_p_vals = apply_holm_bonferroni(raw_p_vals)
+    for i, r in enumerate(raw_results):
+        r["p_value_holm"] = holm_p_vals[i]
+        r["is_significant_holm"] = bool(pd.notna(holm_p_vals[i]) and holm_p_vals[i] < 0.05)
 
     # Format Pairwise Tests Table
     pairwise_rows = []
     for r in raw_results:
+        raw_p_disp = f"{r['p_value_raw']:.6e}" if (pd.notna(r["p_value_raw"]) and r["p_value_raw"] < 1e-4) else (round(r["p_value_raw"], 6) if pd.notna(r["p_value_raw"]) else "N/A")
+        holm_p_disp = f"{r['p_value_holm']:.6e}" if (pd.notna(r["p_value_holm"]) and r["p_value_holm"] < 1e-4) else (round(r["p_value_holm"], 6) if pd.notna(r["p_value_holm"]) else "N/A")
+        t_p_disp = f"{r['p_value_t_test']:.6e}" if (pd.notna(r["p_value_t_test"]) and r["p_value_t_test"] < 1e-4) else (round(r["p_value_t_test"], 6) if pd.notna(r["p_value_t_test"]) else "N/A")
+
         pairwise_rows.append({
             "model_a": r["model_a"],
             "model_b": r["model_b"],
             "num_paired_conditions": r["num_paired_conditions"],
+            "total_conditions_a": r["total_conditions_a"],
+            "total_conditions_b": r["total_conditions_b"],
+            "unmatched_a": r["unmatched_a"],
+            "unmatched_b": r["unmatched_b"],
+            "wins_a": r["wins_a"],
+            "losses_a": r["losses_a"],
+            "ties": r["ties"],
+            "paired_win_rate_a": r["paired_win_rate_a"],
             "mean_difference": r["mean_difference"],
             "median_difference": r["median_difference"],
             "wilcoxon_stat": r["wilcoxon_stat"],
-            "p_value_raw": f"{r['p_value_raw']:.6e}" if r["p_value_raw"] < 1e-4 else round(r["p_value_raw"], 6),
-            "p_value_holm": f"{r['p_value_holm']:.6e}" if r["p_value_holm"] < 1e-4 else round(r["p_value_holm"], 6),
+            "p_value_raw": raw_p_disp,
+            "p_value_holm": holm_p_disp,
             "is_significant_holm": r["is_significant_holm"],
+            "test_status": r["test_status"],
             "paired_t_stat": r["paired_t_stat"],
-            "p_value_t_test": f"{r['p_value_t_test']:.6e}" if r["p_value_t_test"] < 1e-4 else round(r["p_value_t_test"], 6),
+            "p_value_t_test": t_p_disp,
             "statistical_family": r["statistical_family"]
         })
     df_pairwise = pd.DataFrame(pairwise_rows)
@@ -741,16 +830,17 @@ def generate_final_report(
     sig_count = int(df_pairwise["is_significant_holm"].sum())
     total_pairs = len(df_pairwise)
 
+    num_conds = global_res.get('num_matched_conditions', 'N/A')
     md = f"""# Stage 16: Statistical Validation & Component Sensitivity Report
 **Maritime Corpus Pipeline Version 2.1**
-*Benchmark Environment: 25 matched representation-by-subset benchmark conditions across {len(models)} encoder models.*
+*Benchmark Environment: {num_conds} matched benchmark conditions across {len(models)} encoder models.*
 
 ---
 
 ## 1. Executive Conclusion
 This research stage rigorously validates the cross-model performance differences identified in Stage 15.
 Rather than treating the evaluation configurations as independent datasets or replications, the evaluation framework
-models them as **25 matched representation-by-subset benchmark conditions** (5 representations $\\times$ 5 knowledge subsets).
+models them as **{num_conds} matched benchmark conditions** across evaluated representations and knowledge subsets.
 
 * **Global Model Differences**: Non-parametric omnibus testing demonstrates statistically distinguishable model performance across the candidate encoders (Friedman $\\chi^2 = {global_res['statistic']}$, $p = {global_res['p_value_raw']:.4e}$, $df = {global_res['df']}$).
 * **Pairwise Reliability**: Across {total_pairs} model pairwise comparisons, {sig_count} pairs show statistically significant differences after family-wise Holm-Bonferroni error rate control ($p_{{\\text{{Holm}}}} < 0.05$).
@@ -918,18 +1008,18 @@ def main():
 
     # 1. Load Matched Benchmark Matrix
     comp_path = output_dir / "stage-15" / "comparison.csv"
-    pvt, df_raw, models, conditions = load_matched_benchmark_matrix(comp_path, PRIMARY_METRIC)
+    pvt_clean, pvt_full, df_raw, models, conditions = load_matched_benchmark_matrix(comp_path, PRIMARY_METRIC)
 
     # 2. Module 1: Global Model Comparison (Friedman Test)
     logger.info("Module 1: Running Friedman omnibus global comparison...")
-    global_res, df_global = run_friedman_global_test(pvt, models)
+    global_res, df_global = run_friedman_global_test(pvt_clean, models)
     global_csv_path = stage_dir / "stage16_global_tests.csv"
     df_global.to_csv(global_csv_path, index=False)
     logger.info(f"Saved global test results to {global_csv_path}")
 
     # 3. Module 2 & 3: Pairwise Comparisons & Effect Sizes
-    logger.info("Modules 2 & 3: Computing pairwise Wilcoxon tests with Holm correction and effect sizes...")
-    df_pairwise, df_effects, raw_pairwise = run_pairwise_comparisons(pvt, models)
+    logger.info("Modules 2 & 3: Computing pairwise Wilcoxon tests with Holm correction and effect sizes on matched condition intersections...")
+    df_pairwise, df_effects, raw_pairwise = run_pairwise_comparisons(pvt_full, models)
     pairwise_csv_path = stage_dir / "stage16_pairwise_tests.csv"
     effects_csv_path = stage_dir / "stage16_effect_sizes.csv"
     df_pairwise.to_csv(pairwise_csv_path, index=False)
@@ -939,7 +1029,7 @@ def main():
     # 4. Module 4 & 5: Bootstrap Uncertainty & Rank Stability
     logger.info(f"Modules 4 & 5: Executing {BOOTSTRAP_RESAMPLES} deterministic bootstrap resamples (seed={BOOTSTRAP_SEED})...")
     df_bootstrap, df_rank_stability, json_boot = run_bootstrap_uncertainty_and_rank_stability(
-        pvt, models, num_resamples=BOOTSTRAP_RESAMPLES, seed=BOOTSTRAP_SEED
+        pvt_clean, models, num_resamples=BOOTSTRAP_RESAMPLES, seed=BOOTSTRAP_SEED
     )
     boot_csv_path = stage_dir / "stage16_bootstrap.csv"
     rank_csv_path = stage_dir / "stage16_rank_stability.csv"
@@ -949,7 +1039,7 @@ def main():
 
     # 5. Module 6 & 7: Condition Robustness (Representations & Subsets)
     logger.info("Modules 6 & 7: Evaluating ranking robustness across representations and subsets...")
-    df_robustness = run_condition_robustness(df_raw, pvt, models, PRIMARY_METRIC)
+    df_robustness = run_condition_robustness(df_raw, pvt_clean, models, PRIMARY_METRIC)
     robustness_csv_path = stage_dir / "stage16_condition_robustness.csv"
     df_robustness.to_csv(robustness_csv_path, index=False)
     logger.info(f"Saved condition robustness analysis to {robustness_csv_path}")

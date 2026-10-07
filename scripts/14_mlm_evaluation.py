@@ -7,6 +7,7 @@ import time
 import re
 import hashlib
 import argparse
+from collections import defaultdict
 from pathlib import Path
 from tqdm import tqdm
 import torch
@@ -50,25 +51,47 @@ RARE_MARITIME_TERMS = [
     "bilge", "fairlead", "windward", "leeward", "davit", "bitts", "bollard"
 ]
 
-def load_selected_models(stage13_path: Path, fallback_models: list) -> list:
+
+def compute_cache_key(model_name: str, rep: str, sub: str, masking_mode: str = "subword", evaluation_unit: str = "subword") -> str:
+    """
+    Computes a unique, collision-proof cache key incorporating model identity,
+    representation, subset partition, masking strategy, and evaluation scoring unit.
+    """
+    clean_model = model_name.replace("/", "_").replace("-", "_")
+    if masking_mode in ("wwm_word", "word") or (masking_mode == "whole_word" and evaluation_unit == "word"):
+        sub_dir = "cache_wwm_word"
+    elif masking_mode in ("wwm_subword", "whole_word"):
+        sub_dir = "cache_wwm_subword"
+    else:
+        sub_dir = "cache"
+    return f"{sub_dir}/{clean_model}__{rep}__{sub}.json"
+
+
+def load_selected_models(stage13_path: Path, fallback_models: list = None) -> list:
     """
     Dynamically loads authoritative models selected by Stage 13.
-    Validates that exactly 7 models are provided to guarantee experiment integrity.
-    Falls back to documented representative defaults if Stage 13 artifact is missing or invalid.
+    Accepts list or dict manifest, ensuring non-empty cohort.
+    Falls back to documented defaults if Stage 13 artifact is missing or invalid.
     """
     if stage13_path.exists():
         try:
             with open(stage13_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
-            models = data.get("selected_models", [])
-            if isinstance(models, list) and len(models) == 7:
-                logger.info(f"Successfully loaded exactly {len(models)} authoritative models from Stage 13: {stage13_path}")
+            if isinstance(data, list):
+                models = data
+            elif isinstance(data, dict):
+                models = data.get("selected_models", [])
+            else:
+                models = []
+
+            if isinstance(models, list) and len(models) > 0:
+                logger.info(f"Successfully loaded {len(models)} authoritative models from Stage 13: {stage13_path}")
                 return models
             else:
                 found_cnt = len(models) if isinstance(models, list) else "invalid format"
                 logger.warning(
-                    f"Stage 13 artifact at {stage13_path} did not provide exactly 7 models (found {found_cnt}). "
-                    f"Falling back to default 7 representative models."
+                    f"Stage 13 artifact at {stage13_path} did not provide valid model list (found {found_cnt}). "
+                    f"Falling back to default representative models."
                 )
         except Exception as e:
             logger.warning(f"Failed to read Stage 13 artifact ({e}). Using fallback models.")
@@ -76,6 +99,35 @@ def load_selected_models(stage13_path: Path, fallback_models: list) -> list:
         logger.warning(f"Stage 13 artifact not found at {stage13_path}. Falling back to default {len(fallback_models)} models.")
     
     return list(fallback_models)
+
+DEFAULT_REPRESENTATIONS = ["narrative", "key_value", "template", "json", "mixed"]
+DEFAULT_SUBSETS = ["high_knowledge", "medium_knowledge", "low_knowledge", "balanced_knowledge", "random_baseline"]
+
+def discover_representations(reps_dir: Path, fallback_reps: list) -> list:
+    """Dynamically discovers representation files from Stage 11."""
+    if reps_dir.exists():
+        found = [p.stem for p in sorted(reps_dir.glob("*.jsonl"))]
+        if found:
+            logger.info(f"Discovered {len(found)} representations from {reps_dir}: {found}")
+            return found
+    return list(fallback_reps)
+
+def discover_subsets(subsets_dir: Path, fallback_subs: list) -> list:
+    """
+    Dynamically discovers canonical benchmark subset files from Stage 12.
+    Filters strictly to canonical stratification subsets, excluding auxiliary
+    general_english_baseline and percentage ratio scaling subsets.
+    """
+    if subsets_dir.exists():
+        canonical_set = set(fallback_subs)
+        found = [
+            p.stem for p in sorted(subsets_dir.glob("*.jsonl"))
+            if p.stem in canonical_set and p.stem != "general_english_baseline"
+        ]
+        if found:
+            logger.info(f"Discovered {len(found)} canonical benchmark subsets from {subsets_dir}: {found}")
+            return found
+    return list(fallback_subs)
 
 def clean_model_filename(model_name: str) -> str:
     return model_name.replace("/", "_").replace("-", "_")
@@ -195,7 +247,7 @@ def classify_token_positions(
     )
 
 def create_random_mask(eligible_positions: list, rng: random.Random, mask_budget: int):
-    """Conventional Random-15% masking baseline."""
+    """Conventional Random-15% subword masking baseline."""
     if not eligible_positions or mask_budget <= 0:
         return []
     if len(eligible_positions) <= mask_budget:
@@ -205,20 +257,12 @@ def create_random_mask(eligible_positions: list, rng: random.Random, mask_budget
 def create_domain_aware_mask(eligible_positions: list, rare_positions: set, maritime_positions: set,
                              general_positions: list, rng: random.Random, mask_budget: int):
     """
-    Lightweight domain-aware selective masking policy.
+    Lightweight domain-aware selective masking policy (subword level).
     Total budget is strictly maintained at approximately 15% of eligible tokens.
     Priority:
       1. Rare maritime tokens (highest)
       2. Domain maritime vocabulary tokens (next)
       3. General tokens (random fill to meet total budget)
-
-    Important Scientific Note:
-      Because priority is given to rare and maritime domain tokens, documents that are
-      densely packed with maritime terminology may fill the entire 15% budget with domain
-      tokens alone, leaving general_mask_fraction = 0.0. This is an expected and intentional
-      property of task-guided selective masking (Train No Evil principle). The masking
-      diagnostics record rare_maritime_mask_fraction, maritime_mask_fraction, and
-      general_mask_fraction so this selective distribution is fully auditable.
     """
     if not eligible_positions or mask_budget <= 0:
         return []
@@ -251,16 +295,118 @@ def create_domain_aware_mask(eligible_positions: list, rare_positions: set, mari
 
     return selected
 
+def extract_word_groups(word_ids: list, eligible_positions: list) -> tuple:
+    """
+    Groups eligible token positions by intact whole-word boundaries.
+    word_ids: list mapping token position -> word integer id (or None for special tokens)
+    Returns:
+      word_to_positions: dict mapping wid -> list of token positions [p1, p2, ...]
+      position_to_word: dict mapping pos -> wid
+    """
+    word_to_positions = defaultdict(list)
+    position_to_word = {}
+    eligible_set = set(eligible_positions)
+    for pos, wid in enumerate(word_ids):
+        if wid is not None and pos in eligible_set:
+            word_to_positions[wid].append(pos)
+            position_to_word[pos] = wid
+    return dict(word_to_positions), position_to_word
+
+def create_whole_word_random_mask(word_to_positions: dict, rng: random.Random, mask_budget: int) -> tuple:
+    """
+    Selects whole words until the total number of subword pieces reaches mask_budget.
+    Guarantees all subword pieces of a selected word are masked together (zero sibling leakage).
+    """
+    if not word_to_positions or mask_budget <= 0:
+        return [], set()
+
+    words = list(word_to_positions.keys())
+    rng.shuffle(words)
+
+    selected_positions = []
+    selected_words = set()
+    total_tokens = 0
+
+    for wid in words:
+        positions = word_to_positions[wid]
+        w_len = len(positions)
+        if total_tokens == 0 or total_tokens + w_len <= mask_budget or (total_tokens < mask_budget and (total_tokens + w_len - mask_budget <= mask_budget - total_tokens)):
+            selected_positions.extend(positions)
+            selected_words.add(wid)
+            total_tokens += w_len
+            if total_tokens >= mask_budget:
+                break
+
+    return selected_positions, selected_words
+
+def create_whole_word_domain_aware_mask(
+    word_to_positions: dict, rare_positions: set, maritime_positions: set,
+    general_positions: list, rng: random.Random, mask_budget: int
+) -> tuple:
+    """
+    Selects whole words prioritizing rare maritime terms, then maritime vocabulary,
+    then general words, up to mask_budget. All pieces of selected words are masked together.
+    """
+    if not word_to_positions or mask_budget <= 0:
+        return [], set()
+
+    rare_words = []
+    maritime_words = []
+    general_words = []
+
+    for wid, positions in word_to_positions.items():
+        if any(p in rare_positions for p in positions):
+            rare_words.append(wid)
+        elif any(p in maritime_positions for p in positions):
+            maritime_words.append(wid)
+        else:
+            general_words.append(wid)
+
+    rng.shuffle(rare_words)
+    rng.shuffle(maritime_words)
+    rng.shuffle(general_words)
+
+    selected_positions = []
+    selected_words = set()
+    total_tokens = 0
+
+    for pool in [rare_words, maritime_words, general_words]:
+        for wid in pool:
+            if total_tokens >= mask_budget:
+                break
+            positions = word_to_positions[wid]
+            w_len = len(positions)
+            if total_tokens == 0 or total_tokens + w_len <= mask_budget or (total_tokens < mask_budget and (total_tokens + w_len - mask_budget <= mask_budget - total_tokens)):
+                selected_positions.extend(positions)
+                selected_words.add(wid)
+                total_tokens += w_len
+        if total_tokens >= mask_budget:
+            break
+
+    return selected_positions, selected_words
+
 def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, device: torch.device,
                            masking_strategy: str = "random_15", seed: int = 42,
-                           max_docs: int = 200, max_length: int = 256, batch_size: int = 16) -> dict:
+                           max_docs: int = 200, max_length: int = 256, batch_size: int = 16,
+                           masking_mode: str = "subword") -> dict:
     """
-    Evaluates a pretrained MLM model on a collection of documents under either
-    'random_15' (control baseline) or 'domain_aware_15' (focused experiment).
-    Uses position-level span classification for evaluation metrics to prevent subword false-positives.
+    Evaluates a pretrained MLM model on a collection of documents.
+    Supports three scientifically verified evaluation modes (A01 robustness):
+      - MODE 1: 'subword' -> subword masking + subword evaluation (baseline default)
+      - MODE 2: 'wwm_subword' -> whole-word masking + subword diagnostic evaluation
+      - MODE 3: 'wwm_word' -> whole-word masking + strict word reconstruction evaluation
     """
     if not docs:
         return {}
+
+    is_wwm = masking_mode in ("wwm_subword", "wwm_word")
+    eval_unit = "word" if masking_mode == "wwm_word" else "subword"
+
+    if is_wwm and not getattr(tokenizer, "is_fast", False):
+        raise RuntimeError(
+            f"Tokenizer {tokenizer.__class__.__name__} is not a fast tokenizer supporting word_ids(). "
+            f"Whole-Word Masking (WWM) requires verified word-boundary mapping. Silent fallback to subword masking is strictly disallowed."
+        )
 
     rng = random.Random(seed)
     torch_rng = torch.Generator(device=device.type if device.type != "cpu" else "cpu")
@@ -274,6 +420,18 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
     maritime_stats = {"loss": 0.0, "top1": 0, "top5": 0, "top10": 0, "count": 0}
     rare_stats = {"loss": 0.0, "top1": 0, "top5": 0, "top10": 0, "count": 0}
     cat_stats = {cat: {"loss": 0.0, "top1": 0, "top5": 0, "top10": 0, "count": 0} for cat in CATEGORIES}
+
+    # Strict whole-word reconstruction tracking (for Modes 2 & 3)
+    word_eval_stats = {
+        "total_words": 0,
+        "correct_words": 0,
+        "maritime_total_words": 0,
+        "maritime_correct_words": 0,
+        "rare_total_words": 0,
+        "rare_correct_words": 0,
+        "general_total_words": 0,
+        "general_correct_words": 0
+    }
 
     # Diagnostics for domain-aware masking audit
     diag_eligible = 0
@@ -310,7 +468,6 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
             try:
                 inputs = tokenizer(batch_texts, **encoding_kwargs)
             except Exception as e:
-                # Fallback without offset mapping if fast tokenizer raised error
                 encoding_kwargs.pop("return_offsets_mapping", None)
                 inputs = tokenizer(batch_texts, **encoding_kwargs)
                 supports_offsets = False
@@ -330,6 +487,8 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
             batch_rare_pos = []
             batch_mar_pos = []
             batch_cat_pos = []
+            batch_selected_words = []
+            batch_word_to_positions = []
 
             for b in range(batch_size_actual):
                 seq_ids = input_ids[b].cpu().tolist()
@@ -350,10 +509,31 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
                 diag_eligible += n_eligible
                 budget = max(1, round(0.15 * n_eligible)) if n_eligible > 0 else 0
 
-                if masking_strategy == "domain_aware_15":
-                    selected = create_domain_aware_mask(eligible_positions, rare_pos, mar_pos, gen_pos, rng, budget)
+                if is_wwm:
+                    try:
+                        wids = inputs.word_ids(b)
+                    except Exception as e:
+                        raise RuntimeError(f"Tokenizer failed to provide word_ids() for Whole-Word Masking: {e}. Silent fallback is disallowed.")
+                    if wids is None:
+                        raise RuntimeError("Tokenizer returned None for word_ids(). Cannot construct Whole-Word Mask without verified word boundaries. Silent fallback is disallowed.")
+
+                    word_to_positions, position_to_word = extract_word_groups(wids, eligible_positions)
+                    batch_word_to_positions.append(word_to_positions)
+
+                    if masking_strategy == "domain_aware_15":
+                        selected, sel_words = create_whole_word_domain_aware_mask(
+                            word_to_positions, rare_pos, mar_pos, gen_pos, rng, budget
+                        )
+                    else:
+                        selected, sel_words = create_whole_word_random_mask(word_to_positions, rng, budget)
+                    batch_selected_words.append(sel_words)
                 else:
-                    selected = create_random_mask(eligible_positions, rng, budget)
+                    batch_word_to_positions.append({})
+                    batch_selected_words.append(set())
+                    if masking_strategy == "domain_aware_15":
+                        selected = create_domain_aware_mask(eligible_positions, rare_pos, mar_pos, gen_pos, rng, budget)
+                    else:
+                        selected = create_random_mask(eligible_positions, rng, budget)
 
                 for pos in selected:
                     masked_indices[b, pos] = True
@@ -383,6 +563,9 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
                 mar_pos_set = batch_mar_pos[b]
                 cat_pos_dict = batch_cat_pos[b]
 
+                # Store per-position top-1 predictions for word-level reconstruction evaluation
+                b_pos_pred_top1 = {}
+
                 for pos_tensor in mask_positions:
                     pos = pos_tensor.item()
                     target_id = labels[b, pos].item()
@@ -394,6 +577,8 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
                     is_top1 = 1 if target_id == top_k_indices[0] else 0
                     is_top5 = 1 if target_id in top_k_indices[:5] else 0
                     is_top10 = 1 if target_id in top_k_indices[:10] else 0
+
+                    b_pos_pred_top1[pos] = (target_id == top_k_indices[0])
 
                     # Position-level classification avoids subword false-positives
                     is_rare = pos in rare_pos_set
@@ -427,6 +612,38 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
                         general_stats["top10"] += is_top10
                         general_stats["count"] += 1
 
+                # Strict whole-word reconstruction evaluation
+                if is_wwm:
+                    sel_words_set = batch_selected_words[b]
+                    w2p = batch_word_to_positions[b]
+                    for wid in sel_words_set:
+                        w_positions = w2p.get(wid, [])
+                        if not w_positions:
+                            continue
+                        # A word is reconstructed correctly iff ALL subword pieces are correctly predicted
+                        word_correct = all(b_pos_pred_top1.get(p, False) for p in w_positions)
+
+                        w_is_rare = any(p in rare_pos_set for p in w_positions)
+                        w_is_maritime = w_is_rare or any(p in mar_pos_set for p in w_positions)
+
+                        word_eval_stats["total_words"] += 1
+                        if word_correct:
+                            word_eval_stats["correct_words"] += 1
+
+                        if w_is_rare:
+                            word_eval_stats["rare_total_words"] += 1
+                            if word_correct:
+                                word_eval_stats["rare_correct_words"] += 1
+
+                        if w_is_maritime:
+                            word_eval_stats["maritime_total_words"] += 1
+                            if word_correct:
+                                word_eval_stats["maritime_correct_words"] += 1
+                        else:
+                            word_eval_stats["general_total_words"] += 1
+                            if word_correct:
+                                word_eval_stats["general_correct_words"] += 1
+
     eval_time = time.time() - t_start
 
     def summarize(st):
@@ -438,6 +655,7 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
             "mlm_loss": float(avg_loss),
             "mlm_loss_derived_exponential": float(loss_exp),
             "top1_accuracy": float(st["top1"] / cnt),
+            "subword_top1_accuracy": float(st["top1"] / cnt),
             "top5_accuracy": float(st["top5"] / cnt),
             "top10_accuracy": float(st["top10"] / cnt)
         }
@@ -447,27 +665,58 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
     rare_summary = summarize(rare_stats)
     cat_summaries = {cat: summarize(st) for cat, st in cat_stats.items()}
 
-    performance_gap = gen_summary["top1_accuracy"] - mar_summary["top1_accuracy"]
+    performance_gap = gen_summary["subword_top1_accuracy"] - mar_summary["subword_top1_accuracy"]
 
-    # Overall masked accuracy (combining general + maritime)
-    tot_eval_count = gen_stats_cnt = general_stats["count"] + maritime_stats["count"]
+    # Overall masked subword accuracy (combining general + maritime)
+    tot_eval_count = general_stats["count"] + maritime_stats["count"]
     if tot_eval_count > 0:
-        overall_top1 = (general_stats["top1"] + maritime_stats["top1"]) / tot_eval_count
+        overall_subword_top1 = (general_stats["top1"] + maritime_stats["top1"]) / tot_eval_count
         overall_loss = (general_stats["loss"] + maritime_stats["loss"]) / tot_eval_count
     else:
-        overall_top1 = gen_summary["top1_accuracy"]
+        overall_subword_top1 = gen_summary["subword_top1_accuracy"]
         overall_loss = gen_summary["mlm_loss"]
 
     actual_mask_rate = float(diag_masked / diag_eligible) if diag_eligible > 0 else 0.0
     safe_masked = max(diag_masked, 1)
 
+    # Word reconstruction accuracy calculations for WWM
+    word_recon_acc = None
+    mar_word_recon_acc = None
+    rare_word_recon_acc = None
+    gen_word_recon_acc = None
+
+    if is_wwm and word_eval_stats["total_words"] > 0:
+        word_recon_acc = float(word_eval_stats["correct_words"] / word_eval_stats["total_words"])
+        mar_word_recon_acc = float(word_eval_stats["maritime_correct_words"] / max(word_eval_stats["maritime_total_words"], 1))
+        rare_word_recon_acc = float(word_eval_stats["rare_correct_words"] / max(word_eval_stats["rare_total_words"], 1))
+        gen_word_recon_acc = float(word_eval_stats["general_correct_words"] / max(word_eval_stats["general_total_words"], 1))
+
+    # In Mode 3 ('wwm_word'), primary top1 is strict word reconstruction
+    if masking_mode == "wwm_word":
+        primary_overall_top1 = word_recon_acc if word_recon_acc is not None else overall_subword_top1
+        mar_summary["top1_accuracy"] = mar_word_recon_acc if mar_word_recon_acc is not None else mar_summary["top1_accuracy"]
+        gen_summary["top1_accuracy"] = gen_word_recon_acc if gen_word_recon_acc is not None else gen_summary["top1_accuracy"]
+        rare_summary["top1_accuracy"] = rare_word_recon_acc if rare_word_recon_acc is not None else rare_summary["top1_accuracy"]
+    else:
+        primary_overall_top1 = overall_subword_top1
+
+    # Attach explicit unambiguous metrics to summaries
+    mar_summary["word_reconstruction_accuracy"] = mar_word_recon_acc
+    gen_summary["word_reconstruction_accuracy"] = gen_word_recon_acc
+    rare_summary["word_reconstruction_accuracy"] = rare_word_recon_acc
+
     result = {
         "evaluated_documents": len(eval_docs),
         "evaluation_time_sec": float(eval_time),
         "masking_strategy": masking_strategy,
+        "masking_mode": "whole_word" if is_wwm else "subword",
+        "evaluation_unit": eval_unit,
         "overall_summary": {
             "total_masked_tokens": diag_masked,
-            "overall_top1_accuracy": float(overall_top1),
+            "overall_top1_accuracy": float(primary_overall_top1),
+            "subword_top1_accuracy": float(overall_subword_top1),
+            "word_reconstruction_accuracy": word_recon_acc,
+            "maritime_word_reconstruction_accuracy": mar_word_recon_acc,
             "overall_mlm_loss": float(overall_loss)
         },
         "general_tokens_summary": gen_summary,
@@ -477,6 +726,22 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
         "category_breakdown": cat_summaries,
         "performance_gap_top1": float(performance_gap)
     }
+
+    if is_wwm:
+        result["word_reconstruction_summary"] = {
+            "total_masked_words": word_eval_stats["total_words"],
+            "correct_words": word_eval_stats["correct_words"],
+            "word_reconstruction_accuracy": word_recon_acc,
+            "maritime_masked_words": word_eval_stats["maritime_total_words"],
+            "maritime_correct_words": word_eval_stats["maritime_correct_words"],
+            "maritime_word_reconstruction_accuracy": mar_word_recon_acc,
+            "rare_masked_words": word_eval_stats["rare_total_words"],
+            "rare_correct_words": word_eval_stats["rare_correct_words"],
+            "rare_word_reconstruction_accuracy": rare_word_recon_acc,
+            "general_masked_words": word_eval_stats["general_total_words"],
+            "general_correct_words": word_eval_stats["general_correct_words"],
+            "general_word_reconstruction_accuracy": gen_word_recon_acc
+        }
 
     if masking_strategy == "domain_aware_15":
         result["masking_diagnostics"] = {
@@ -641,9 +906,9 @@ def evaluate_sampled_pll(model, tokenizer, docs: list, vocab_terms: list, device
 
 def screen_and_select_configurations(random_15_records: list, num_select: int = 4) -> tuple:
     """
-    Analyzes the 25 representation x subset cells from the 175 Random-15 results.
+    Analyzes the representation x subset cells dynamically from Random-15 results.
     Ranks cells by mean_top1 (descending) and mean_mlm_loss (ascending).
-    Selects exactly 4 diverse configurations balancing strong performance,
+    Selects top diverse configurations balancing strong performance,
     representation diversity, and subset diversity.
     """
     from collections import defaultdict
@@ -781,24 +1046,79 @@ def run_smoke_test(stage13_path: Path, output_dir: Path):
     )
     logger.info(f"[OK] Loaded {len(sample_docs)} sample documents for smoke testing.")
 
-    # 3. Test Random-15 evaluation
+    # 3. Test Mode 1: Random-15 Subword Baseline (backward compatible)
     eval_rand = evaluate_model_on_docs(
         model, tokenizer, sample_docs, vocab_terms, device,
-        masking_strategy="random_15", max_docs=len(sample_docs), max_length=64, batch_size=2
+        masking_strategy="random_15", max_docs=len(sample_docs), max_length=64, batch_size=2,
+        masking_mode="subword"
     )
     assert "overall_summary" in eval_rand, "Random-15 summary missing"
-    logger.info(f"[OK] Random-15 evaluation passed: Top1={eval_rand['overall_summary']['overall_top1_accuracy']:.4f}, Loss={eval_rand['overall_summary']['overall_mlm_loss']:.4f}")
+    assert eval_rand["masking_mode"] == "subword", f"Expected subword masking mode, got {eval_rand['masking_mode']}"
+    assert eval_rand["evaluation_unit"] == "subword", f"Expected subword evaluation unit, got {eval_rand['evaluation_unit']}"
+    assert 0.0 <= eval_rand["overall_summary"]["overall_top1_accuracy"] <= 1.0, "Invalid top-1 accuracy range"
+    assert math.isfinite(eval_rand["overall_summary"]["overall_mlm_loss"]), "Loss must be finite"
+    logger.info(f"[OK] Mode 1 (Subword Baseline) passed: Top1={eval_rand['overall_summary']['overall_top1_accuracy']:.4f}, Loss={eval_rand['overall_summary']['overall_mlm_loss']:.4f}")
 
-    # 4. Test Domain-Aware-15 evaluation
+    # 4. Test Whole-Word Masking (WWM) Grouping & Mask Construction
+    test_wwm_text = "The containership had unseaworthiness issues in 2024-2025 with EPIRB navigation."
+    enc_test = tokenizer([test_wwm_text], return_offsets_mapping=True, return_tensors="pt")
+    wids_test = enc_test.word_ids(0)
+    sp_mask_test = tokenizer.get_special_tokens_mask(enc_test["input_ids"][0].tolist(), already_has_special_tokens=True)
+    el_pos_test = [idx for idx, wid in enumerate(wids_test) if wid is not None and not sp_mask_test[idx]]
+    w2p_test, p2w_test = extract_word_groups(wids_test, el_pos_test)
+
+    # Verify multi-piece word grouping
+    multi_piece_words = [wid for wid, poses in w2p_test.items() if len(poses) > 1]
+    single_piece_words = [wid for wid, poses in w2p_test.items() if len(poses) == 1]
+    assert len(w2p_test) > 0, "Failed to identify intact words"
+    assert len(multi_piece_words) > 0, "Failed to detect multi-piece words in technical text"
+    assert len(single_piece_words) > 0, "Failed to detect single-piece words"
+
+    # Verify WWM mask construction: all pieces of a selected word must be masked together
+    rng = random.Random(42)
+    sel_test_pos, sel_test_words = create_whole_word_random_mask(w2p_test, rng, mask_budget=max(1, round(0.15 * len(el_pos_test))))
+    for wid in sel_test_words:
+        for p in w2p_test[wid]:
+            assert p in sel_test_pos, f"Subword piece at pos {p} for word {wid} was leaked (not masked under WWM)!"
+    logger.info(f"[OK] Whole-Word Masking grouping & construction passed (multi-piece: {len(multi_piece_words)}, single-piece: {len(single_piece_words)}, no sibling leakage).")
+
+    # 5. Test Mode 2: Whole-Word Masking + Subword Diagnostic Evaluation
+    eval_wwm_sub = evaluate_model_on_docs(
+        model, tokenizer, sample_docs, vocab_terms, device,
+        masking_strategy="random_15", max_docs=len(sample_docs), max_length=64, batch_size=2,
+        masking_mode="wwm_subword"
+    )
+    assert eval_wwm_sub["masking_mode"] == "whole_word", f"Expected whole_word mode, got {eval_wwm_sub['masking_mode']}"
+    assert eval_wwm_sub["evaluation_unit"] == "subword", f"Expected subword unit, got {eval_wwm_sub['evaluation_unit']}"
+    assert 0.0 <= eval_wwm_sub["overall_summary"]["subword_top1_accuracy"] <= 1.0
+    logger.info(f"[OK] Mode 2 (WWM + Subword Diagnostic) passed: SubwordTop1={eval_wwm_sub['overall_summary']['subword_top1_accuracy']:.4f}")
+
+    # 6. Test Mode 3: Whole-Word Masking + Strict Word Reconstruction Evaluation
+    eval_wwm_word = evaluate_model_on_docs(
+        model, tokenizer, sample_docs, vocab_terms, device,
+        masking_strategy="random_15", max_docs=len(sample_docs), max_length=64, batch_size=2,
+        masking_mode="wwm_word"
+    )
+    assert eval_wwm_word["masking_mode"] == "whole_word"
+    assert eval_wwm_word["evaluation_unit"] == "word"
+    word_recon_acc = eval_wwm_word["overall_summary"]["word_reconstruction_accuracy"]
+    sub_acc = eval_wwm_word["overall_summary"]["subword_top1_accuracy"]
+    assert word_recon_acc is not None, "Word reconstruction accuracy must not be None in Mode 3"
+    assert 0.0 <= word_recon_acc <= 1.0, f"Word reconstruction accuracy out of range: {word_recon_acc}"
+    assert 0.0 <= sub_acc <= 1.0, f"Subword accuracy out of range: {sub_acc}"
+    logger.info(f"[OK] Mode 3 (WWM + Strict Word Reconstruction) passed: WordReconAcc={word_recon_acc:.4f}, SubwordTop1={sub_acc:.4f}")
+
+    # 7. Test Domain-Aware-15 with WWM
     eval_domain = evaluate_model_on_docs(
         model, tokenizer, sample_docs, vocab_terms, device,
-        masking_strategy="domain_aware_15", max_docs=len(sample_docs), max_length=64, batch_size=2
+        masking_strategy="domain_aware_15", max_docs=len(sample_docs), max_length=64, batch_size=2,
+        masking_mode="wwm_word"
     )
     assert "masking_diagnostics" in eval_domain, "Domain-Aware diagnostics missing"
     diag = eval_domain["masking_diagnostics"]
-    logger.info(f"[OK] Domain-Aware-15 evaluation passed: MaskRate={diag['actual_mask_rate']:.4f}, RareMasked={diag['rare_maritime_tokens_masked']}, MaritimeMasked={diag['maritime_tokens_masked']}")
+    logger.info(f"[OK] Domain-Aware-15 WWM evaluation passed: MaskRate={diag['actual_mask_rate']:.4f}, RareMasked={diag['rare_maritime_tokens_masked']}, MaritimeMasked={diag['maritime_tokens_masked']}")
 
-    # 5. Test Sampled PLL
+    # 8. Test Sampled PLL
     eval_pll = evaluate_sampled_pll(
         model, tokenizer, sample_docs, vocab_terms, device,
         max_docs=len(sample_docs), max_seq_len=64, max_positions_per_doc=8, seed=42
@@ -807,7 +1127,7 @@ def run_smoke_test(stage13_path: Path, output_dir: Path):
     assert not math.isnan(eval_pll["mean_token_pll"]), "PLL returned NaN"
     logger.info(f"[OK] Sampled PLL passed: ScoredTokens={eval_pll['number_of_scored_tokens']}, MeanPLL={eval_pll['mean_token_pll']:.4f}, PseudoPPL={eval_pll['pseudo_perplexity']:.4f}")
 
-    # 6. Test Selection Logic on synthetic records
+    # 9. Test Selection Logic on synthetic records
     mock_records = []
     reps = ["narrative", "key_value", "template", "json", "mixed"]
     subs = ["high_knowledge", "medium_knowledge", "low_knowledge", "balanced_knowledge", "random_baseline"]
@@ -826,18 +1146,53 @@ def run_smoke_test(stage13_path: Path, output_dir: Path):
                 }
             })
     ranked, selected = screen_and_select_configurations(mock_records, num_select=4)
-    assert len(selected) == 4, f"Expected 4 selected cells, got {len(selected)}"
-    assert len(ranked) == 25, f"Expected 25 ranked cells, got {len(ranked)}"
-    logger.info(f"[OK] Selection logic passed: selected 4 diverse configurations from {len(ranked)} cells.")
+    assert len(selected) == min(4, len(ranked)), f"Expected {min(4, len(ranked))} selected cells, got {len(selected)}"
+    assert len(ranked) == len(reps) * len(subs), f"Expected {len(reps) * len(subs)} ranked cells, got {len(ranked)}"
+    logger.info(f"[OK] Selection logic passed: selected {len(selected)} diverse configurations from {len(ranked)} cells.")
 
-    logger.info("=== [SUCCESS] All Stage 14 Smoke Tests Completed Successfully! ===")
+    logger.info("=== [SUCCESS] All Stage 14 Smoke Tests (Modes 1, 2, 3 + WWM + PLL) Completed Successfully! ===")
     return True
 
 def main():
     parser = argparse.ArgumentParser(description="Stage 14: Masked Language Model Benchmarking & Analysis")
-    parser.add_argument("--fresh", action="store_true", help="Force fresh recomputation of all 175 Random-15 evaluations, ignoring old cache.")
+    parser.add_argument("--fresh", action="store_true", help="Force fresh recomputation of all evaluations, ignoring old cache.")
     parser.add_argument("--smoke-test", action="store_true", help="Run lightweight smoke test on a minimal sample without executing full benchmark.")
+    parser.add_argument("--masking_mode", "--masking-mode", dest="masking_mode", type=str,
+                        choices=["subword", "whole_word", "wwm_subword", "wwm_word"], default="subword",
+                        help="MLM masking strategy: 'subword' (Mode 1 baseline) or 'whole_word' (Modes 2 & 3 WWM). Default: 'subword'.")
+    parser.add_argument("--evaluation_unit", "--evaluation-unit", dest="evaluation_unit", type=str,
+                        choices=["subword", "word"], default=None,
+                        help="Evaluation scoring unit: 'subword' (subword token accuracy) or 'word' (strict whole-word reconstruction). Default: 'subword'.")
+    parser.add_argument("--device", type=str, choices=["auto", "cpu", "cuda"], default="auto",
+                        help="Compute device: 'auto' (use CUDA if available), 'cuda' (require CUDA), 'cpu' (force CPU). Default: 'auto'.")
+    parser.add_argument("--models", nargs="+", default=None, help="Optional subset of models to evaluate instead of full cohort.")
+    parser.add_argument("--max-docs", type=int, default=200, help="Maximum documents per configuration cell (default: 200).")
     args = parser.parse_args()
+
+    # Resolve masking_mode and evaluation_unit
+    if args.masking_mode == "wwm_word":
+        resolved_masking_mode = "whole_word"
+        resolved_evaluation_unit = "word"
+    elif args.masking_mode == "wwm_subword":
+        resolved_masking_mode = "whole_word"
+        resolved_evaluation_unit = "subword"
+    elif args.masking_mode == "whole_word":
+        resolved_masking_mode = "whole_word"
+        resolved_evaluation_unit = args.evaluation_unit if args.evaluation_unit else "subword"
+    else:  # subword
+        resolved_masking_mode = "subword"
+        resolved_evaluation_unit = "subword"
+        if args.evaluation_unit and args.evaluation_unit != "subword":
+            logger.warning("Evaluation unit 'word' is only applicable with whole-word masking. Overriding to 'subword' for baseline subword masking.")
+
+    # Determine internal execution mode key ('subword', 'wwm_subword', 'wwm_word')
+    if resolved_masking_mode == "whole_word":
+        if resolved_evaluation_unit == "word":
+            internal_mode = "wwm_word"
+        else:
+            internal_mode = "wwm_subword"
+    else:
+        internal_mode = "subword"
 
     root = get_project_root()
     config = load_config()
@@ -854,6 +1209,9 @@ def main():
 
     # Load Authoritative Models from Stage 13
     target_models = load_selected_models(stage13_path, FALLBACK_TARGET_MODELS)
+    if args.models:
+        target_models = [m for m in target_models if m in args.models]
+        logger.info(f"Filtered target models to user-specified subset: {target_models}")
 
     vocab_path = output_dir / "stage-10" / "maritime_vocabulary.txt"
     vocab_terms = []
@@ -861,12 +1219,12 @@ def main():
         with open(vocab_path, "r", encoding="utf-8") as fv:
             vocab_terms = [line.strip() for line in fv if line.strip()]
 
-    # Matrix Dimensions: 5 representations x 5 subsets
-    representations = ["narrative", "key_value", "template", "json", "mixed"]
-    subsets = ["high_knowledge", "medium_knowledge", "low_knowledge", "balanced_knowledge", "random_baseline"]
-
     reps_dir = output_dir / "stage-11" / "corpus_representations"
     subsets_dir = output_dir / "stage-12" / "subsets"
+
+    # Dynamically Discover Matrix Dimensions from Stage 11 and Stage 12 Outputs
+    representations = discover_representations(reps_dir, DEFAULT_REPRESENTATIONS)
+    subsets = discover_subsets(subsets_dir, DEFAULT_SUBSETS)
 
     # Load General English Baseline Subset
     gen_eng_docs = []
@@ -876,7 +1234,10 @@ def main():
             gen_eng_docs = [json.loads(l)["document"] for l in f]
 
     eval_out_dir = stage_dir / "evaluations"
-    cache_random_dir = eval_out_dir / "cache"
+    if internal_mode == "subword":
+        cache_random_dir = eval_out_dir / "cache"
+    else:
+        cache_random_dir = eval_out_dir / f"cache_{internal_mode}"
     cache_domain_dir = cache_random_dir / "domain_aware_15"
     cache_pll_dir = cache_random_dir / "pll"
 
@@ -884,8 +1245,19 @@ def main():
     cache_domain_dir.mkdir(parents=True, exist_ok=True)
     cache_pll_dir.mkdir(parents=True, exist_ok=True)
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    logger.info(f"Using compute device: {device}")
+    if args.device == "cuda":
+        if not torch.cuda.is_available():
+            raise RuntimeError("CUDA compute device requested via '--device cuda', but torch.cuda is not available on this runtime.")
+        device = torch.device("cuda")
+    elif args.device == "cpu":
+        device = torch.device("cpu")
+    else:  # auto
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    logger.info(
+        f"Using compute device: {device} | Masking mode: {resolved_masking_mode} "
+        f"| Evaluation unit: {resolved_evaluation_unit} | Internal mode: {internal_mode}"
+    )
 
     total_random_runs = len(target_models) * len(representations) * len(subsets)
     logger.info(f"Broad Random-15 evaluations: {total_random_runs} runs ({len(target_models)} models x {len(representations)} reps x {len(subsets)} subsets)")
@@ -893,12 +1265,14 @@ def main():
     if args.fresh:
         logger.info("Executing fresh benchmark: existing Random-15 cache will be recomputed.")
     else:
-        logger.info("Preserving existing Random-15 cache entries where available.")
+        logger.info(f"Preserving existing Random-15 cache entries in {cache_random_dir} where available.")
 
     # =========================================================================
-    # PHASE 1: Broad Random-15 Evaluation (175 runs)
+    # PHASE 1: Broad Random-15 Evaluation (factorial runs)
     # =========================================================================
     random_15_records = []
+    seen_combinations = set()
+    duplicate_records = []
     run_count = 0
 
     for model_name in target_models:
@@ -917,7 +1291,8 @@ def main():
         # Evaluate General English Baseline once for Domain Shift calculation
         gen_eng_eval = evaluate_model_on_docs(
             model, tokenizer, gen_eng_docs, vocab_terms, device,
-            masking_strategy="random_15", seed=42, max_docs=200, max_length=256, batch_size=16
+            masking_strategy="random_15", seed=42, max_docs=min(args.max_docs, 200), max_length=256, batch_size=16,
+            masking_mode=internal_mode
         )
         gen_eng_top1 = gen_eng_eval.get("general_tokens_summary", {}).get("top1_accuracy", 0.85)
 
@@ -938,6 +1313,11 @@ def main():
                     run_count += 1
                     with open(cache_path, "r", encoding="utf-8") as f_c:
                         eval_record = json.load(f_c)
+                    exp_key = (eval_record.get("clean_model_name", clean_model), rep, sub)
+                    if exp_key in seen_combinations:
+                        logger.error(f"Duplicate evaluation key encountered in cache: {exp_key}")
+                        duplicate_records.append(exp_key)
+                    seen_combinations.add(exp_key)
                     random_15_records.append(eval_record)
                     continue
 
@@ -955,7 +1335,7 @@ def main():
                     rec["document"]
                     for rec in rep_records
                     if rec.get("occurrence_id") in sub_occ_ids
-                ][:200]
+                ][:args.max_docs]
 
                 if not target_docs:
                     logger.warning(f"Representation '{rep}' has 0 matching documents for subset '{sub}'. Skipping.")
@@ -968,7 +1348,8 @@ def main():
 
                 eval_res = evaluate_model_on_docs(
                     model, tokenizer, target_docs, vocab_terms, device,
-                    masking_strategy="random_15", seed=cell_seed, max_docs=200, max_length=256, batch_size=16
+                    masking_strategy="random_15", seed=cell_seed, max_docs=args.max_docs, max_length=256, batch_size=16,
+                    masking_mode=internal_mode
                 )
 
                 maritime_top1 = eval_res.get("maritime_tokens_summary", {}).get("top1_accuracy", 0.0)
@@ -984,6 +1365,9 @@ def main():
                     "domain_shift_gap": domain_shift_gap,
                     "experiment_metadata": {
                         "masking_strategy": "random_15",
+                        "masking_mode": resolved_masking_mode,
+                        "evaluation_unit": resolved_evaluation_unit,
+                        "internal_mode": internal_mode,
                         "mask_rate": 0.15,
                         "max_length": 256,
                         "evaluation_documents": len(target_docs),
@@ -995,6 +1379,12 @@ def main():
                 with open(cache_path, "w", encoding="utf-8") as f:
                     json.dump(eval_record, f, indent=2)
 
+                exp_key = (clean_model, rep, sub)
+                if exp_key in seen_combinations:
+                    logger.error(f"Duplicate evaluation key encountered: {exp_key}")
+                    duplicate_records.append(exp_key)
+                seen_combinations.add(exp_key)
+
                 run_count += 1
                 random_15_records.append(eval_record)
                 logger.info(f"[{run_count}/{total_random_runs}] Completed: {clean_model} | Rep: {rep} | Subset: {sub} | Top1: {maritime_top1:.4f}")
@@ -1002,6 +1392,15 @@ def main():
         if eval_record is not None:
             with open(eval_out_dir / f"{clean_model}.json", "w", encoding="utf-8") as f:
                 json.dump(eval_record, f, indent=2)
+
+    if duplicate_records:
+        raise RuntimeError(f"Duplicate evaluation keys detected during Phase 1: {duplicate_records}")
+
+    expected_factorial_keys = {(clean_model_filename(m), r, s) for m in target_models for r in representations for s in subsets}
+    observed_factorial_keys = {(r.get("clean_model_name", clean_model_filename(r.get("model_name", ""))), r["representation"], r["subset"]) for r in random_15_records}
+    missing_factorial_keys = expected_factorial_keys - observed_factorial_keys
+    if missing_factorial_keys and not args.models:
+        logger.warning(f"Phase 1 has {len(missing_factorial_keys)} missing factorial cells: {sorted(missing_factorial_keys)}")
 
     # Copy BERT baseline to bert_mlm_evaluation.json for backward compatibility
     bert_clean = clean_model_filename("bert-base-uncased")
@@ -1013,14 +1412,14 @@ def main():
     logger.info(f"Phase 1 complete: {len(random_15_records)} Random-15 evaluations available.")
 
     # =========================================================================
-    # PHASE 2: Screen 25 Cells & Select Exactly 4 Diverse Configurations
+    # PHASE 2: Screen Cells & Select Diverse Configurations
     # =========================================================================
-    logger.info("Phase 2: Screening 25 cells across 7 models to select exactly 4 strong, diverse configurations...")
     all_ranked_cells, selected_cells = screen_and_select_configurations(random_15_records, num_select=4)
+    logger.info(f"Phase 2: Screening {len(all_ranked_cells)} cells across {len(target_models)} models to select {len(selected_cells)} diverse configurations...")
 
     selection_artifact = {
         "selection_method": "Multi-attribute diversity optimization (v2.1): Primary ranking by mean Top-1 (descending) & mean MLM loss (ascending)",
-        "screening_basis": "Stage 14 Random-15 MLM benchmark results aggregated across all 7 models",
+        "screening_basis": f"Stage 14 Random-15 MLM benchmark results aggregated across all {len(target_models)} models",
         "total_cells_evaluated": len(all_ranked_cells),
         "selected_cell_count": len(selected_cells),
         "selected_configurations": selected_cells,
@@ -1035,7 +1434,7 @@ def main():
         logger.info(f"  * Rep: {s['representation']:10s} | Subset: {s['subset']:20s} | Rank: {s['rank']:2d} | Top1: {s['mean_top1']:.4f}")
 
     # =========================================================================
-    # PHASE 3: Focused Domain-Aware 15% Masking Evaluation (28 runs)
+    # PHASE 3: Focused Domain-Aware 15% Masking Evaluation
     # =========================================================================
     focused_domain_runs = len(selected_cells) * len(target_models)
     logger.info(f"Phase 3: Starting focused Domain-Aware 15% evaluations ({focused_domain_runs} runs: {len(selected_cells)} cells x {len(target_models)} models)...")
@@ -1060,7 +1459,7 @@ def main():
             rec["document"]
             for rec in rep_records
             if rec.get("occurrence_id") in sub_occ_ids
-        ][:200]
+        ][:args.max_docs]
 
         for model_name in target_models:
             clean_model = clean_model_filename(model_name)
@@ -1084,7 +1483,8 @@ def main():
                 cell_seed = stable_seed(model_name, rep, sub, "domain_aware_15")
                 domain_res = evaluate_model_on_docs(
                     model, tokenizer, target_docs, vocab_terms, device,
-                    masking_strategy="domain_aware_15", seed=cell_seed, max_docs=200, max_length=256, batch_size=16
+                    masking_strategy="domain_aware_15", seed=cell_seed, max_docs=args.max_docs, max_length=256, batch_size=16,
+                    masking_mode=internal_mode
                 )
 
                 eval_domain_rec = {
@@ -1096,6 +1496,9 @@ def main():
                     "masking_condition": "domain_aware_15",
                     "experiment_metadata": {
                         "masking_strategy": "domain_aware_15",
+                        "masking_mode": resolved_masking_mode,
+                        "evaluation_unit": resolved_evaluation_unit,
+                        "internal_mode": internal_mode,
                         "mask_rate": 0.15,
                         "priority": [
                             "rare_maritime",
@@ -1168,7 +1571,7 @@ def main():
     logger.info(f"Phase 3 complete: Saved {len(focused_domain_results)} domain-aware evaluations and comparison artifact.")
 
     # =========================================================================
-    # PHASE 4: Focused Sampled Pseudo-Log-Likelihood (PLL) Evaluation (28 runs)
+    # PHASE 4: Focused Sampled Pseudo-Log-Likelihood (PLL) Evaluation
     # =========================================================================
     focused_pll_runs = len(selected_cells) * len(target_models)
     logger.info(f"Phase 4: Starting focused Sampled PLL evaluations ({focused_pll_runs} runs: {len(selected_cells)} cells x {len(target_models)} models)...")

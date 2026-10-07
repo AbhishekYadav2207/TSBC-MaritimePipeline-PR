@@ -1,5 +1,5 @@
 ablated_component,mean_score_diff,median_score_diff,std_score_diff,min_score_diff,max_score_diff,spearman_rho_with_full,kendall_tau_with_full,jaccard_selection_overlap_p80,selection_impact_interpretation
-domain_relevance,-0.0587,-0.0616,0.0244,-0.1202,0.1255,0.9623,0.837,0.6712,Moderate selection impact: component alters borderline selections
-information_content,0.1942,0.1989,0.0329,0.0298,0.2499,0.9381,0.8489,0.8867,Low selection impact: score shifts have limited effect on top document selection
-tfidf_representativeness,-0.0031,0.0032,0.0422,-0.1141,0.1087,0.8637,0.7284,0.6106,Moderate selection impact: component alters borderline selections
-redundancy_noise,-0.1488,-0.1484,0.0557,-0.2742,-0.0386,0.8594,0.6739,0.5026,High selection impact: component strongly influences document selection
+domain_relevance,-0.0587,-0.0616,0.0245,-0.1202,0.1257,0.9634,0.8425,0.6709,Moderate selection impact: component alters borderline selections
+information_content,0.1942,0.1989,0.0328,0.0298,0.25,0.9357,0.8454,0.89,Low selection impact: score shifts have limited effect on top document selection
+tfidf_representativeness,-0.0032,0.0031,0.0422,-0.1141,0.1051,0.8624,0.7269,0.6119,Moderate selection impact: component alters borderline selections
+redundancy_noise,-0.1487,-0.1483,0.0557,-0.2732,-0.0386,0.8601,0.6735,0.5002,High selection impact: component strongly influences document selection
