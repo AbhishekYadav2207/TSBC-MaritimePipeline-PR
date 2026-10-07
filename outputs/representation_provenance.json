@@ -2,30 +2,30 @@
   "title": "MaritimeBench Representation Cryptographic Provenance Manifest",
   "version": "2.1",
   "frozen_corpus_identifier": "Corpus A (MARSIS / TSB Canadian Maritime Corpus)",
-  "git_commit": "e36464b67e8971752073835f4a31075fc6282957",
-  "generated_timestamp": "2026-10-07T08:10:47.979234+00:00",
+  "git_commit": "b1160bd92836234f0e56b2e5d8c2c66d8bf7a49c",
+  "generated_timestamp": "2026-10-07T15:10:04.725242+00:00",
   "source_corpus": {
     "text_corpus": {
       "path": "outputs/stage-08/maritime_corpus.txt",
-      "sha256": "6a4d69587fbe05fc76fc26843b2af48d960c62f7807386361ea95eae03d470ff",
-      "size_bytes": 24552501
+      "sha256": "51f7a9cd897ccda060fd10c9661a8f8129ebe7a6c4e19846cb6c931bd9c099cd",
+      "size_bytes": 24549202
     },
     "metadata_corpus": {
       "path": "outputs/stage-08/maritime_corpus.jsonl",
-      "sha256": "19013423d5fd7b160570e79381af8c269423856920f64d14c474642085965fb3",
-      "size_bytes": 774216739
+      "sha256": "ea95122199de9ca831a90b14b35962e33accb05ae83893442a9613d72aefcb32",
+      "size_bytes": 774173719
     },
     "stage08_manifest": {
       "path": "outputs/stage-08/manifest.json",
-      "sha256": "d5d32006aadc620eb174e3499698344e20002b85e92785d23daf999e477ddffc"
+      "sha256": "8f7b0f555427c9b8c1152f80fc0476513c99b32bb7d4ac796d94d88ffad2b2ea"
     }
   },
   "intermediate_dependency": {
     "description": "Normalized structured documents from Stage 07 used as direct input for representation rendering",
     "path": "outputs/stage-07/clean_documents.jsonl",
-    "sha256": "aaf0c6c3dffefff9f62c6ddf3fa2813f0554d88e6ddf29b1d0ec1e7d50d1c253",
-    "size_bytes": 785440601,
-    "document_count": 96860
+    "sha256": "a29e3d7db30b7e52c2f1d35812cd17e1f4f070da73a5f3665b7399938a73d56c",
+    "size_bytes": 785395491,
+    "document_count": 96844
   },
   "generation_environment": {
     "generation_script": "scripts/11_corpus_representations.py",
@@ -33,94 +33,94 @@
     "generation_config": "config/config.json",
     "generation_config_sha256": "a6df52c174e84ebeba28481854ec5526ade169caae47f059c17927fb3b19e1b5",
     "deterministic_ordering": "occurrence_id_sequential_matching_source_corpus",
-    "git_commit": "e36464b67e8971752073835f4a31075fc6282957",
-    "timestamp": "2026-10-07T08:10:47.979234+00:00"
+    "git_commit": "b1160bd92836234f0e56b2e5d8c2c66d8bf7a49c",
+    "timestamp": "2026-10-07T15:10:04.725242+00:00"
   },
   "representations": {
     "narrative": {
       "representation_name": "narrative",
       "file_path": "outputs/stage-11/corpus_representations/narrative.jsonl",
-      "sha256": "a72abfe37bc5157cc723d4e5dbf04bbcbac2527a9066e5b862d5bea50a08b310",
-      "size_bytes": 31393532,
-      "document_count": 96860,
+      "sha256": "d9fe116532303ced6174985fa092c351f1232833f5aa6904eb2a484ce0193da7",
+      "size_bytes": 31485928,
+      "document_count": 96844,
       "source_intermediate_artifact": "outputs/stage-07/clean_documents.jsonl",
-      "source_intermediate_sha256": "aaf0c6c3dffefff9f62c6ddf3fa2813f0554d88e6ddf29b1d0ec1e7d50d1c253",
+      "source_intermediate_sha256": "a29e3d7db30b7e52c2f1d35812cd17e1f4f070da73a5f3665b7399938a73d56c",
       "source_corpus_path": "outputs/stage-08/maritime_corpus.jsonl",
-      "source_corpus_sha256": "19013423d5fd7b160570e79381af8c269423856920f64d14c474642085965fb3",
+      "source_corpus_sha256": "ea95122199de9ca831a90b14b35962e33accb05ae83893442a9613d72aefcb32",
       "generation_script": "scripts/11_corpus_representations.py",
       "generation_script_sha256": "a6f54957b4ed7eaccc0f873fb85f3cdda2216f2876c2a19fe532f462523568e4",
       "generation_config_sha256": "a6df52c174e84ebeba28481854ec5526ade169caae47f059c17927fb3b19e1b5",
       "ordering_identifier": "occurrence_id_sequential_matching_source_corpus",
-      "git_commit": "e36464b67e8971752073835f4a31075fc6282957",
-      "timestamp": "2026-10-07T08:10:47.979234+00:00"
+      "git_commit": "b1160bd92836234f0e56b2e5d8c2c66d8bf7a49c",
+      "timestamp": "2026-10-07T15:10:04.725242+00:00"
     },
     "key_value": {
       "representation_name": "key_value",
       "file_path": "outputs/stage-11/corpus_representations/key_value.jsonl",
-      "sha256": "ef950b87c3242cd0021ecee2ac973576aefb0ef25a9763e16ac2baed41adde37",
-      "size_bytes": 65083031,
-      "document_count": 96860,
+      "sha256": "1b0b0e991505f5589024096be5a47cb5873e2cbedba88878ef703c4c86e55f6c",
+      "size_bytes": 65167543,
+      "document_count": 96844,
       "source_intermediate_artifact": "outputs/stage-07/clean_documents.jsonl",
-      "source_intermediate_sha256": "aaf0c6c3dffefff9f62c6ddf3fa2813f0554d88e6ddf29b1d0ec1e7d50d1c253",
+      "source_intermediate_sha256": "a29e3d7db30b7e52c2f1d35812cd17e1f4f070da73a5f3665b7399938a73d56c",
       "source_corpus_path": "outputs/stage-08/maritime_corpus.jsonl",
-      "source_corpus_sha256": "19013423d5fd7b160570e79381af8c269423856920f64d14c474642085965fb3",
+      "source_corpus_sha256": "ea95122199de9ca831a90b14b35962e33accb05ae83893442a9613d72aefcb32",
       "generation_script": "scripts/11_corpus_representations.py",
       "generation_script_sha256": "a6f54957b4ed7eaccc0f873fb85f3cdda2216f2876c2a19fe532f462523568e4",
       "generation_config_sha256": "a6df52c174e84ebeba28481854ec5526ade169caae47f059c17927fb3b19e1b5",
       "ordering_identifier": "occurrence_id_sequential_matching_source_corpus",
-      "git_commit": "e36464b67e8971752073835f4a31075fc6282957",
-      "timestamp": "2026-10-07T08:10:47.979234+00:00"
+      "git_commit": "b1160bd92836234f0e56b2e5d8c2c66d8bf7a49c",
+      "timestamp": "2026-10-07T15:10:04.725242+00:00"
     },
     "template": {
       "representation_name": "template",
       "file_path": "outputs/stage-11/corpus_representations/template.jsonl",
-      "sha256": "938492c53a867793939686489d8a27b26ed0885a7a337e572e74004281c0444e",
-      "size_bytes": 51662229,
-      "document_count": 96860,
+      "sha256": "8e7d3312c5fbed9db5f46343db9afe4236383c0fe179e303b78a706f638e0ca2",
+      "size_bytes": 51747609,
+      "document_count": 96844,
       "source_intermediate_artifact": "outputs/stage-07/clean_documents.jsonl",
-      "source_intermediate_sha256": "aaf0c6c3dffefff9f62c6ddf3fa2813f0554d88e6ddf29b1d0ec1e7d50d1c253",
+      "source_intermediate_sha256": "a29e3d7db30b7e52c2f1d35812cd17e1f4f070da73a5f3665b7399938a73d56c",
       "source_corpus_path": "outputs/stage-08/maritime_corpus.jsonl",
-      "source_corpus_sha256": "19013423d5fd7b160570e79381af8c269423856920f64d14c474642085965fb3",
+      "source_corpus_sha256": "ea95122199de9ca831a90b14b35962e33accb05ae83893442a9613d72aefcb32",
       "generation_script": "scripts/11_corpus_representations.py",
       "generation_script_sha256": "a6f54957b4ed7eaccc0f873fb85f3cdda2216f2876c2a19fe532f462523568e4",
       "generation_config_sha256": "a6df52c174e84ebeba28481854ec5526ade169caae47f059c17927fb3b19e1b5",
       "ordering_identifier": "occurrence_id_sequential_matching_source_corpus",
-      "git_commit": "e36464b67e8971752073835f4a31075fc6282957",
-      "timestamp": "2026-10-07T08:10:47.979234+00:00"
+      "git_commit": "b1160bd92836234f0e56b2e5d8c2c66d8bf7a49c",
+      "timestamp": "2026-10-07T15:10:04.725242+00:00"
     },
     "json": {
       "representation_name": "json",
       "file_path": "outputs/stage-11/corpus_representations/json.jsonl",
-      "sha256": "ec36551206d62b3b2eb24c6d0eeb6bfac33c1425521f568183bfa1a06c7d6ed0",
-      "size_bytes": 759785016,
-      "document_count": 96860,
+      "sha256": "e0cb3fd7a6ebbcaa4a5df7f7a90554d1c4508974c609083bc50efe3920ad6220",
+      "size_bytes": 759801357,
+      "document_count": 96844,
       "source_intermediate_artifact": "outputs/stage-07/clean_documents.jsonl",
-      "source_intermediate_sha256": "aaf0c6c3dffefff9f62c6ddf3fa2813f0554d88e6ddf29b1d0ec1e7d50d1c253",
+      "source_intermediate_sha256": "a29e3d7db30b7e52c2f1d35812cd17e1f4f070da73a5f3665b7399938a73d56c",
       "source_corpus_path": "outputs/stage-08/maritime_corpus.jsonl",
-      "source_corpus_sha256": "19013423d5fd7b160570e79381af8c269423856920f64d14c474642085965fb3",
+      "source_corpus_sha256": "ea95122199de9ca831a90b14b35962e33accb05ae83893442a9613d72aefcb32",
       "generation_script": "scripts/11_corpus_representations.py",
       "generation_script_sha256": "a6f54957b4ed7eaccc0f873fb85f3cdda2216f2876c2a19fe532f462523568e4",
       "generation_config_sha256": "a6df52c174e84ebeba28481854ec5526ade169caae47f059c17927fb3b19e1b5",
       "ordering_identifier": "occurrence_id_sequential_matching_source_corpus",
-      "git_commit": "e36464b67e8971752073835f4a31075fc6282957",
-      "timestamp": "2026-10-07T08:10:47.979234+00:00"
+      "git_commit": "b1160bd92836234f0e56b2e5d8c2c66d8bf7a49c",
+      "timestamp": "2026-10-07T15:10:04.725242+00:00"
     },
     "mixed": {
       "representation_name": "mixed",
       "file_path": "outputs/stage-11/corpus_representations/mixed.jsonl",
-      "sha256": "6299d094966104588ddc3410f4ea1f0ef74fb25eb590ce8798b20826d6f418fc",
-      "size_bytes": 91747491,
-      "document_count": 96860,
+      "sha256": "c57b92cd15ef0ca841fbdb88c7b0863445505d65e2469fcf5cbb77b34c9ef272",
+      "size_bytes": 91828343,
+      "document_count": 96844,
       "source_intermediate_artifact": "outputs/stage-07/clean_documents.jsonl",
-      "source_intermediate_sha256": "aaf0c6c3dffefff9f62c6ddf3fa2813f0554d88e6ddf29b1d0ec1e7d50d1c253",
+      "source_intermediate_sha256": "a29e3d7db30b7e52c2f1d35812cd17e1f4f070da73a5f3665b7399938a73d56c",
       "source_corpus_path": "outputs/stage-08/maritime_corpus.jsonl",
-      "source_corpus_sha256": "19013423d5fd7b160570e79381af8c269423856920f64d14c474642085965fb3",
+      "source_corpus_sha256": "ea95122199de9ca831a90b14b35962e33accb05ae83893442a9613d72aefcb32",
       "generation_script": "scripts/11_corpus_representations.py",
       "generation_script_sha256": "a6f54957b4ed7eaccc0f873fb85f3cdda2216f2876c2a19fe532f462523568e4",
       "generation_config_sha256": "a6df52c174e84ebeba28481854ec5526ade169caae47f059c17927fb3b19e1b5",
       "ordering_identifier": "occurrence_id_sequential_matching_source_corpus",
-      "git_commit": "e36464b67e8971752073835f4a31075fc6282957",
-      "timestamp": "2026-10-07T08:10:47.979234+00:00"
+      "git_commit": "b1160bd92836234f0e56b2e5d8c2c66d8bf7a49c",
+      "timestamp": "2026-10-07T15:10:04.725242+00:00"
     }
   },
   "traceability_guarantee": "Every multi-format representation file is strictly locked via SHA-256 cryptographic hashes. Lineage traces deterministically from frozen Corpus A through Stage 07 clean documents to the 5 Stage 11 representations."

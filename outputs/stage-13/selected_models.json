@@ -9,13 +9,12 @@
     "answerdotai/ModernBERT-base"
   ],
   "selected_model_count": 7,
-  "candidate_model_count": 14,
-  "evaluated_model_count": 13,
+  "candidate_model_count": 13,
+  "evaluated_model_count": 12,
   "candidate_models": [
     "bert-base-uncased",
     "bert-large-uncased",
     "roberta-base",
-    "microsoft/deberta-v3-base",
     "answerdotai/ModernBERT-base",
     "allenai/scibert_scivocab_uncased",
     "dmis-lab/biobert-base-cased-v1.2",
@@ -31,7 +30,6 @@
     "bert-base-uncased",
     "bert-large-uncased",
     "roberta-base",
-    "microsoft/deberta-v3-base",
     "answerdotai/ModernBERT-base",
     "allenai/scibert_scivocab_uncased",
     "dmis-lab/biobert-base-cased-v1.2",
@@ -71,13 +69,6 @@
       "similarity_score": 1.0,
       "explanation": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits)."
     },
-    "microsoft/deberta-v3-base": {
-      "reason": "benchmark_compatibility_anomaly",
-      "candidate_status": "EXCLUDED_BENCHMARK_ANOMALY",
-      "represented_by": null,
-      "similarity_score": null,
-      "explanation": "Excluded after benchmark compatibility anomaly: zero MLM Top-1/Top-5/Top-10 across the evaluated standard cells and English diagnostic."
-    },
     "emilyalsentzer/Bio_ClinicalBERT": {
       "reason": "tokenizer_diagnostic_redundancy",
       "candidate_status": "EXCLUDED_TOKENIZER_DUPLICATE",
@@ -99,7 +90,29 @@
       "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
       "ordering_score": 10,
       "represented_by": null,
-      "similarity_score": null
+      "similarity_score": null,
+      "wwm_profile": {
+        "model_id": "bert-base-uncased",
+        "tokenizer_class": "BertTokenizer",
+        "is_fast": true,
+        "tokenizer_family": "WordPiece",
+        "vocab_size": 30522,
+        "special_tokens": {
+          "unk_token": "[UNK]",
+          "sep_token": "[SEP]",
+          "pad_token": "[PAD]",
+          "cls_token": "[CLS]",
+          "mask_token": "[MASK]"
+        },
+        "mask_token": "[MASK]",
+        "mask_token_id": 103,
+        "word_ids_supported": true,
+        "model_config_type": "bert",
+        "model_vocab_size": 30522,
+        "mlm_head_compatible": true,
+        "wwm_compatible": true,
+        "wwm_compatibility_status": "FULLY_COMPATIBLE"
+      }
     },
     {
       "model": "bert-large-uncased",
@@ -109,7 +122,29 @@
       "selection_reason": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits).",
       "ordering_score": 1,
       "represented_by": "bert-base-uncased",
-      "similarity_score": 1.0
+      "similarity_score": 1.0,
+      "wwm_profile": {
+        "model_id": "bert-large-uncased",
+        "tokenizer_class": "BertTokenizer",
+        "is_fast": true,
+        "tokenizer_family": "WordPiece",
+        "vocab_size": 30522,
+        "special_tokens": {
+          "unk_token": "[UNK]",
+          "sep_token": "[SEP]",
+          "pad_token": "[PAD]",
+          "cls_token": "[CLS]",
+          "mask_token": "[MASK]"
+        },
+        "mask_token": "[MASK]",
+        "mask_token_id": 103,
+        "word_ids_supported": true,
+        "model_config_type": "bert",
+        "model_vocab_size": 30522,
+        "mlm_head_compatible": true,
+        "wwm_compatible": true,
+        "wwm_compatibility_status": "FULLY_COMPATIBLE"
+      }
     },
     {
       "model": "roberta-base",
@@ -119,17 +154,31 @@
       "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
       "ordering_score": 5,
       "represented_by": null,
-      "similarity_score": null
-    },
-    {
-      "model": "microsoft/deberta-v3-base",
-      "tokenizer": "DebertaV2Tokenizer",
-      "architecture": "DeBERTa-v3 Base Encoder (Disentangled Attention)",
-      "candidate_status": "EXCLUDED_BENCHMARK_ANOMALY",
-      "selection_reason": "Excluded after benchmark compatibility anomaly: zero MLM Top-1/Top-5/Top-10 across the evaluated standard cells and English diagnostic.",
-      "ordering_score": 3,
-      "represented_by": null,
-      "similarity_score": null
+      "similarity_score": null,
+      "wwm_profile": {
+        "model_id": "roberta-base",
+        "tokenizer_class": "RobertaTokenizer",
+        "is_fast": true,
+        "tokenizer_family": "BPE",
+        "vocab_size": 50265,
+        "special_tokens": {
+          "bos_token": "<s>",
+          "eos_token": "</s>",
+          "unk_token": "<unk>",
+          "sep_token": "</s>",
+          "pad_token": "<pad>",
+          "cls_token": "<s>",
+          "mask_token": "<mask>"
+        },
+        "mask_token": "<mask>",
+        "mask_token_id": 50264,
+        "word_ids_supported": true,
+        "model_config_type": "roberta",
+        "model_vocab_size": 50265,
+        "mlm_head_compatible": true,
+        "wwm_compatible": true,
+        "wwm_compatibility_status": "FULLY_COMPATIBLE"
+      }
     },
     {
       "model": "answerdotai/ModernBERT-base",
@@ -139,7 +188,29 @@
       "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
       "ordering_score": 4,
       "represented_by": null,
-      "similarity_score": null
+      "similarity_score": null,
+      "wwm_profile": {
+        "model_id": "answerdotai/ModernBERT-base",
+        "tokenizer_class": "TokenizersBackend",
+        "is_fast": true,
+        "tokenizer_family": "BPE",
+        "vocab_size": 50280,
+        "special_tokens": {
+          "unk_token": "[UNK]",
+          "sep_token": "[SEP]",
+          "pad_token": "[PAD]",
+          "cls_token": "[CLS]",
+          "mask_token": "[MASK]"
+        },
+        "mask_token": "[MASK]",
+        "mask_token_id": 50284,
+        "word_ids_supported": true,
+        "model_config_type": "modernbert",
+        "model_vocab_size": 50368,
+        "mlm_head_compatible": true,
+        "wwm_compatible": true,
+        "wwm_compatibility_status": "FULLY_COMPATIBLE"
+      }
     },
     {
       "model": "allenai/scibert_scivocab_uncased",
@@ -149,7 +220,29 @@
       "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
       "ordering_score": 7,
       "represented_by": null,
-      "similarity_score": null
+      "similarity_score": null,
+      "wwm_profile": {
+        "model_id": "allenai/scibert_scivocab_uncased",
+        "tokenizer_class": "BertTokenizer",
+        "is_fast": true,
+        "tokenizer_family": "WordPiece",
+        "vocab_size": 31090,
+        "special_tokens": {
+          "unk_token": "[UNK]",
+          "sep_token": "[SEP]",
+          "pad_token": "[PAD]",
+          "cls_token": "[CLS]",
+          "mask_token": "[MASK]"
+        },
+        "mask_token": "[MASK]",
+        "mask_token_id": 104,
+        "word_ids_supported": true,
+        "model_config_type": "bert",
+        "model_vocab_size": 31090,
+        "mlm_head_compatible": true,
+        "wwm_compatible": true,
+        "wwm_compatibility_status": "FULLY_COMPATIBLE"
+      }
     },
     {
       "model": "dmis-lab/biobert-base-cased-v1.2",
@@ -159,7 +252,29 @@
       "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
       "ordering_score": 9,
       "represented_by": null,
-      "similarity_score": null
+      "similarity_score": null,
+      "wwm_profile": {
+        "model_id": "dmis-lab/biobert-base-cased-v1.2",
+        "tokenizer_class": "BertTokenizer",
+        "is_fast": true,
+        "tokenizer_family": "WordPiece",
+        "vocab_size": 28996,
+        "special_tokens": {
+          "unk_token": "[UNK]",
+          "sep_token": "[SEP]",
+          "pad_token": "[PAD]",
+          "cls_token": "[CLS]",
+          "mask_token": "[MASK]"
+        },
+        "mask_token": "[MASK]",
+        "mask_token_id": 103,
+        "word_ids_supported": true,
+        "model_config_type": "bert",
+        "model_vocab_size": 28996,
+        "mlm_head_compatible": true,
+        "wwm_compatible": true,
+        "wwm_compatibility_status": "FULLY_COMPATIBLE"
+      }
     },
     {
       "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
@@ -169,7 +284,29 @@
       "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
       "ordering_score": 6,
       "represented_by": null,
-      "similarity_score": null
+      "similarity_score": null,
+      "wwm_profile": {
+        "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+        "tokenizer_class": "BertTokenizer",
+        "is_fast": true,
+        "tokenizer_family": "WordPiece",
+        "vocab_size": 30522,
+        "special_tokens": {
+          "unk_token": "[UNK]",
+          "sep_token": "[SEP]",
+          "pad_token": "[PAD]",
+          "cls_token": "[CLS]",
+          "mask_token": "[MASK]"
+        },
+        "mask_token": "[MASK]",
+        "mask_token_id": 4,
+        "word_ids_supported": true,
+        "model_config_type": "bert",
+        "model_vocab_size": 30522,
+        "mlm_head_compatible": true,
+        "wwm_compatible": true,
+        "wwm_compatibility_status": "FULLY_COMPATIBLE"
+      }
     },
     {
       "model": "emilyalsentzer/Bio_ClinicalBERT",
@@ -179,7 +316,29 @@
       "selection_reason": "Excluded due to identical tokenizer diagnostic profile with dmis-lab/biobert-base-cased-v1.2 (cosine similarity 1.00000, identical vocabulary piece splits).",
       "ordering_score": 1,
       "represented_by": "dmis-lab/biobert-base-cased-v1.2",
-      "similarity_score": 1.0
+      "similarity_score": 1.0,
+      "wwm_profile": {
+        "model_id": "emilyalsentzer/Bio_ClinicalBERT",
+        "tokenizer_class": "BertTokenizer",
+        "is_fast": true,
+        "tokenizer_family": "WordPiece",
+        "vocab_size": 28996,
+        "special_tokens": {
+          "unk_token": "[UNK]",
+          "sep_token": "[SEP]",
+          "pad_token": "[PAD]",
+          "cls_token": "[CLS]",
+          "mask_token": "[MASK]"
+        },
+        "mask_token": "[MASK]",
+        "mask_token_id": 103,
+        "word_ids_supported": true,
+        "model_config_type": "bert",
+        "model_vocab_size": 28996,
+        "mlm_head_compatible": true,
+        "wwm_compatible": true,
+        "wwm_compatibility_status": "FULLY_COMPATIBLE"
+      }
     },
     {
       "model": "nlpaueb/legal-bert-base-uncased",
@@ -189,7 +348,29 @@
       "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
       "ordering_score": 8,
       "represented_by": null,
-      "similarity_score": null
+      "similarity_score": null,
+      "wwm_profile": {
+        "model_id": "nlpaueb/legal-bert-base-uncased",
+        "tokenizer_class": "BertTokenizer",
+        "is_fast": true,
+        "tokenizer_family": "WordPiece",
+        "vocab_size": 30522,
+        "special_tokens": {
+          "unk_token": "[UNK]",
+          "sep_token": "[SEP]",
+          "pad_token": "[PAD]",
+          "cls_token": "[CLS]",
+          "mask_token": "[MASK]"
+        },
+        "mask_token": "[MASK]",
+        "mask_token_id": 103,
+        "word_ids_supported": true,
+        "model_config_type": "bert",
+        "model_vocab_size": 30522,
+        "mlm_head_compatible": true,
+        "wwm_compatible": true,
+        "wwm_compatibility_status": "FULLY_COMPATIBLE"
+      }
     },
     {
       "model": "ProsusAI/finbert",
@@ -199,7 +380,29 @@
       "selection_reason": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits).",
       "ordering_score": 1,
       "represented_by": "bert-base-uncased",
-      "similarity_score": 1.0
+      "similarity_score": 1.0,
+      "wwm_profile": {
+        "model_id": "ProsusAI/finbert",
+        "tokenizer_class": "BertTokenizer",
+        "is_fast": true,
+        "tokenizer_family": "WordPiece",
+        "vocab_size": 30522,
+        "special_tokens": {
+          "unk_token": "[UNK]",
+          "sep_token": "[SEP]",
+          "pad_token": "[PAD]",
+          "cls_token": "[CLS]",
+          "mask_token": "[MASK]"
+        },
+        "mask_token": "[MASK]",
+        "mask_token_id": 103,
+        "word_ids_supported": true,
+        "model_config_type": "bert",
+        "model_vocab_size": 30522,
+        "mlm_head_compatible": true,
+        "wwm_compatible": true,
+        "wwm_compatibility_status": "FULLY_COMPATIBLE"
+      }
     },
     {
       "model": "anferico/bert-for-patents",
@@ -209,7 +412,24 @@
       "selection_reason": "Tokenizer failed to instantiate from pretrained repository in current environment (e.g. missing SentencePiece library or fast tokenizer backend).",
       "ordering_score": 1,
       "represented_by": null,
-      "similarity_score": null
+      "similarity_score": null,
+      "wwm_profile": {
+        "model_id": "anferico/bert-for-patents",
+        "tokenizer_class": "Unknown",
+        "is_fast": false,
+        "tokenizer_family": "Unknown",
+        "vocab_size": null,
+        "special_tokens": {},
+        "mask_token": null,
+        "mask_token_id": null,
+        "word_ids_supported": false,
+        "model_config_type": "Unknown",
+        "model_vocab_size": null,
+        "mlm_head_compatible": false,
+        "wwm_compatible": false,
+        "wwm_compatibility_status": "INCOMPATIBLE_LOAD_FAILURE",
+        "error": "Couldn't instantiate the backend tokenizer from one of: \n(1) a `tokenizers` library serialization file, \n(2) a slow tokenizer instance to convert or \n(3) an equivalent slow tokenizer class to instantiate and convert. \nYou need to have sentencepiece or tiktoken installed to convert a slow tokenizer to a fast one."
+      }
     },
     {
       "model": "google/electra-base-discriminator",
@@ -219,7 +439,29 @@
       "selection_reason": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits).",
       "ordering_score": 1,
       "represented_by": "bert-base-uncased",
-      "similarity_score": 1.0
+      "similarity_score": 1.0,
+      "wwm_profile": {
+        "model_id": "google/electra-base-discriminator",
+        "tokenizer_class": "BertTokenizer",
+        "is_fast": true,
+        "tokenizer_family": "WordPiece",
+        "vocab_size": 30522,
+        "special_tokens": {
+          "unk_token": "[UNK]",
+          "sep_token": "[SEP]",
+          "pad_token": "[PAD]",
+          "cls_token": "[CLS]",
+          "mask_token": "[MASK]"
+        },
+        "mask_token": "[MASK]",
+        "mask_token_id": 103,
+        "word_ids_supported": true,
+        "model_config_type": "electra",
+        "model_vocab_size": 30522,
+        "mlm_head_compatible": true,
+        "wwm_compatible": true,
+        "wwm_compatibility_status": "FULLY_COMPATIBLE"
+      }
     },
     {
       "model": "distilbert-base-uncased",
@@ -229,10 +471,190 @@
       "selection_reason": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits).",
       "ordering_score": 1,
       "represented_by": "bert-base-uncased",
-      "similarity_score": 1.0
+      "similarity_score": 1.0,
+      "wwm_profile": {
+        "model_id": "distilbert-base-uncased",
+        "tokenizer_class": "BertTokenizer",
+        "is_fast": true,
+        "tokenizer_family": "WordPiece",
+        "vocab_size": 30522,
+        "special_tokens": {
+          "unk_token": "[UNK]",
+          "sep_token": "[SEP]",
+          "pad_token": "[PAD]",
+          "cls_token": "[CLS]",
+          "mask_token": "[MASK]"
+        },
+        "mask_token": "[MASK]",
+        "mask_token_id": 103,
+        "word_ids_supported": true,
+        "model_config_type": "distilbert",
+        "model_vocab_size": 30522,
+        "mlm_head_compatible": true,
+        "wwm_compatible": true,
+        "wwm_compatibility_status": "FULLY_COMPATIBLE"
+      }
     }
   ],
-  "selection_timestamp": "2026-10-07 13:48:55",
+  "wwm_compatibility_profiles": {
+    "bert-base-uncased": {
+      "model_id": "bert-base-uncased",
+      "tokenizer_class": "BertTokenizer",
+      "is_fast": true,
+      "tokenizer_family": "WordPiece",
+      "vocab_size": 30522,
+      "special_tokens": {
+        "unk_token": "[UNK]",
+        "sep_token": "[SEP]",
+        "pad_token": "[PAD]",
+        "cls_token": "[CLS]",
+        "mask_token": "[MASK]"
+      },
+      "mask_token": "[MASK]",
+      "mask_token_id": 103,
+      "word_ids_supported": true,
+      "model_config_type": "bert",
+      "model_vocab_size": 30522,
+      "mlm_head_compatible": true,
+      "wwm_compatible": true,
+      "wwm_compatibility_status": "FULLY_COMPATIBLE"
+    },
+    "roberta-base": {
+      "model_id": "roberta-base",
+      "tokenizer_class": "RobertaTokenizer",
+      "is_fast": true,
+      "tokenizer_family": "BPE",
+      "vocab_size": 50265,
+      "special_tokens": {
+        "bos_token": "<s>",
+        "eos_token": "</s>",
+        "unk_token": "<unk>",
+        "sep_token": "</s>",
+        "pad_token": "<pad>",
+        "cls_token": "<s>",
+        "mask_token": "<mask>"
+      },
+      "mask_token": "<mask>",
+      "mask_token_id": 50264,
+      "word_ids_supported": true,
+      "model_config_type": "roberta",
+      "model_vocab_size": 50265,
+      "mlm_head_compatible": true,
+      "wwm_compatible": true,
+      "wwm_compatibility_status": "FULLY_COMPATIBLE"
+    },
+    "answerdotai/ModernBERT-base": {
+      "model_id": "answerdotai/ModernBERT-base",
+      "tokenizer_class": "TokenizersBackend",
+      "is_fast": true,
+      "tokenizer_family": "BPE",
+      "vocab_size": 50280,
+      "special_tokens": {
+        "unk_token": "[UNK]",
+        "sep_token": "[SEP]",
+        "pad_token": "[PAD]",
+        "cls_token": "[CLS]",
+        "mask_token": "[MASK]"
+      },
+      "mask_token": "[MASK]",
+      "mask_token_id": 50284,
+      "word_ids_supported": true,
+      "model_config_type": "modernbert",
+      "model_vocab_size": 50368,
+      "mlm_head_compatible": true,
+      "wwm_compatible": true,
+      "wwm_compatibility_status": "FULLY_COMPATIBLE"
+    },
+    "allenai/scibert_scivocab_uncased": {
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "tokenizer_class": "BertTokenizer",
+      "is_fast": true,
+      "tokenizer_family": "WordPiece",
+      "vocab_size": 31090,
+      "special_tokens": {
+        "unk_token": "[UNK]",
+        "sep_token": "[SEP]",
+        "pad_token": "[PAD]",
+        "cls_token": "[CLS]",
+        "mask_token": "[MASK]"
+      },
+      "mask_token": "[MASK]",
+      "mask_token_id": 104,
+      "word_ids_supported": true,
+      "model_config_type": "bert",
+      "model_vocab_size": 31090,
+      "mlm_head_compatible": true,
+      "wwm_compatible": true,
+      "wwm_compatibility_status": "FULLY_COMPATIBLE"
+    },
+    "dmis-lab/biobert-base-cased-v1.2": {
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "tokenizer_class": "BertTokenizer",
+      "is_fast": true,
+      "tokenizer_family": "WordPiece",
+      "vocab_size": 28996,
+      "special_tokens": {
+        "unk_token": "[UNK]",
+        "sep_token": "[SEP]",
+        "pad_token": "[PAD]",
+        "cls_token": "[CLS]",
+        "mask_token": "[MASK]"
+      },
+      "mask_token": "[MASK]",
+      "mask_token_id": 103,
+      "word_ids_supported": true,
+      "model_config_type": "bert",
+      "model_vocab_size": 28996,
+      "mlm_head_compatible": true,
+      "wwm_compatible": true,
+      "wwm_compatibility_status": "FULLY_COMPATIBLE"
+    },
+    "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": {
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "tokenizer_class": "BertTokenizer",
+      "is_fast": true,
+      "tokenizer_family": "WordPiece",
+      "vocab_size": 30522,
+      "special_tokens": {
+        "unk_token": "[UNK]",
+        "sep_token": "[SEP]",
+        "pad_token": "[PAD]",
+        "cls_token": "[CLS]",
+        "mask_token": "[MASK]"
+      },
+      "mask_token": "[MASK]",
+      "mask_token_id": 4,
+      "word_ids_supported": true,
+      "model_config_type": "bert",
+      "model_vocab_size": 30522,
+      "mlm_head_compatible": true,
+      "wwm_compatible": true,
+      "wwm_compatibility_status": "FULLY_COMPATIBLE"
+    },
+    "nlpaueb/legal-bert-base-uncased": {
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "tokenizer_class": "BertTokenizer",
+      "is_fast": true,
+      "tokenizer_family": "WordPiece",
+      "vocab_size": 30522,
+      "special_tokens": {
+        "unk_token": "[UNK]",
+        "sep_token": "[SEP]",
+        "pad_token": "[PAD]",
+        "cls_token": "[CLS]",
+        "mask_token": "[MASK]"
+      },
+      "mask_token": "[MASK]",
+      "mask_token_id": 103,
+      "word_ids_supported": true,
+      "model_config_type": "bert",
+      "model_vocab_size": 30522,
+      "mlm_head_compatible": true,
+      "wwm_compatible": true,
+      "wwm_compatibility_status": "FULLY_COMPATIBLE"
+    }
+  },
+  "selection_timestamp": "2026-10-07 20:27:14",
   "selection_rationale": "Subword Term-Piece Diagnostic Redundancy Clustering & Canonical Archetype Selection (v2.1 Reconciled)",
   "target_stage": "Stage 14 (14_mlm_evaluation.py)"
 }

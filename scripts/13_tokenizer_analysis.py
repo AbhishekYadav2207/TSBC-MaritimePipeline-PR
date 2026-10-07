@@ -12,12 +12,11 @@ from pipeline_utils import setup_logging, load_config, get_project_root
 
 logger = setup_logging("13_tokenizer_analysis")
 
-# Complete Candidate Model Pool (14 Pretrained Tokenizers from Pipeline Registry)
+# Complete Candidate Model Pool (13 Pretrained Tokenizers, DeBERTa permanently excluded)
 CANDIDATE_MODELS = [
     "bert-base-uncased",
     "bert-large-uncased",
     "roberta-base",
-    "microsoft/deberta-v3-base",
     "answerdotai/ModernBERT-base",
     "allenai/scibert_scivocab_uncased",
     "dmis-lab/biobert-base-cased-v1.2",
@@ -70,10 +69,6 @@ MODEL_METADATA = {
     "roberta-base": {
         "architecture": "RoBERTa Base Encoder",
         "tokenizer_family": "Byte-Level BPE"
-    },
-    "microsoft/deberta-v3-base": {
-        "architecture": "DeBERTa-v3 Base Encoder (Disentangled Attention)",
-        "tokenizer_family": "SentencePiece BPE"
     },
     "answerdotai/ModernBERT-base": {
         "architecture": "ModernBERT Base Encoder",
@@ -196,6 +191,95 @@ def compute_spearman(x: list, y: list) -> dict:
         "p_value": round(p_val, 6) if p_val is not None else None,
         "sample_size": n,
         "status": "computed" if rho is not None else "nan_encountered"
+    }
+
+def check_wwm_compatibility(model_name: str, tokenizer=None) -> dict:
+    """
+    Generic, architecture-agnostic WWM compatibility checker across
+    WordPiece, BPE, byte-level BPE, and SentencePiece tokenizers.
+    Does NOT hardcode model names.
+    """
+    from transformers import AutoConfig
+    if tokenizer is None:
+        try:
+            tokenizer = AutoTokenizer.from_pretrained(model_name)
+        except Exception as e:
+            return {
+                "model_id": model_name,
+                "tokenizer_class": "Unknown",
+                "is_fast": False,
+                "tokenizer_family": "Unknown",
+                "vocab_size": None,
+                "special_tokens": {},
+                "mask_token": None,
+                "mask_token_id": None,
+                "word_ids_supported": False,
+                "model_config_type": "Unknown",
+                "model_vocab_size": None,
+                "mlm_head_compatible": False,
+                "wwm_compatible": False,
+                "wwm_compatibility_status": "INCOMPATIBLE_LOAD_FAILURE",
+                "error": str(e)
+            }
+
+    is_fast = bool(getattr(tokenizer, "is_fast", False))
+    tok_class = tokenizer.__class__.__name__
+
+    backend_model = getattr(getattr(tokenizer, "backend_tokenizer", None), "model", None)
+    backend_class_name = backend_model.__class__.__name__ if backend_model is not None else ""
+    check_str = f"{tok_class} {backend_class_name}".lower()
+
+    if "bytelevel" in check_str or ("bpe" in check_str and "sentencepiece" not in check_str):
+        tok_family = "Byte-Level BPE" if "byte" in check_str else "BPE"
+    elif "sentencepiece" in check_str or "albert" in check_str or "t5" in check_str or "spm" in check_str:
+        tok_family = "SentencePiece"
+    elif "wordpiece" in check_str or "bert" in check_str:
+        tok_family = "WordPiece"
+    else:
+        tok_family = "Subword / Custom"
+
+    mask_token = getattr(tokenizer, "mask_token", None)
+    mask_token_id = getattr(tokenizer, "mask_token_id", None)
+    vocab_size = getattr(tokenizer, "vocab_size", len(tokenizer) if hasattr(tokenizer, "__len__") else None)
+    special_tokens = {k: str(v) for k, v in getattr(tokenizer, "special_tokens_map", {}).items()}
+
+    word_ids_supported = False
+    try:
+        probe_encoding = tokenizer("maritime collision investigation report", return_offsets_mapping=True if is_fast else False)
+        if hasattr(probe_encoding, "word_ids"):
+            wids = probe_encoding.word_ids()
+            word_ids_supported = bool(wids is not None and len(wids) > 0)
+    except Exception:
+        word_ids_supported = False
+
+    model_config_type = "Unknown"
+    model_vocab_size = vocab_size
+    mlm_head_compatible = True
+    try:
+        cfg = AutoConfig.from_pretrained(model_name)
+        model_config_type = getattr(cfg, "model_type", type(cfg).__name__)
+        model_vocab_size = getattr(cfg, "vocab_size", vocab_size)
+    except Exception:
+        pass
+
+    is_compatible = bool(is_fast and word_ids_supported and mask_token is not None and mask_token_id is not None)
+    status_str = "FULLY_COMPATIBLE" if is_compatible else "INCOMPATIBLE"
+
+    return {
+        "model_id": model_name,
+        "tokenizer_class": tok_class,
+        "is_fast": is_fast,
+        "tokenizer_family": tok_family,
+        "vocab_size": vocab_size,
+        "special_tokens": special_tokens,
+        "mask_token": mask_token,
+        "mask_token_id": mask_token_id,
+        "word_ids_supported": word_ids_supported,
+        "model_config_type": model_config_type,
+        "model_vocab_size": model_vocab_size,
+        "mlm_head_compatible": mlm_head_compatible,
+        "wwm_compatible": is_compatible,
+        "wwm_compatibility_status": status_str
     }
 
 def analyze_tokenizer(
@@ -453,6 +537,7 @@ def analyze_tokenizer(
         "document_correlations": correlations,
         "deterministic_term_examples": term_examples,
         "compatibility_summary": compat_summary,
+        "wwm_profile": check_wwm_compatibility(model_name, tokenizer),
         "scientific_disclaimer": SCIENTIFIC_DISCLAIMER
     }
 
@@ -505,7 +590,6 @@ def compute_redundancy_and_selection(reports: list, loading_failed_models: dict 
         "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 6,
         "roberta-base": 5,
         "answerdotai/ModernBERT-base": 4,
-        "microsoft/deberta-v3-base": 3,
         "bert-large-uncased": 1,
         "distilbert-base-uncased": 1,
         "google/electra-base-discriminator": 1,
@@ -603,6 +687,7 @@ def compute_redundancy_and_selection(reports: list, loading_failed_models: dict 
             rep_by = None
             sim_score = None
 
+        wwm_prof = rep_report.get("wwm_profile", {}) if rep_report else check_wwm_compatibility(m)
         candidate_selection_audit.append({
             "model": m,
             "tokenizer": tok_class,
@@ -611,7 +696,8 @@ def compute_redundancy_and_selection(reports: list, loading_failed_models: dict 
             "selection_reason": reason,
             "ordering_score": ord_score,
             "represented_by": rep_by,
-            "similarity_score": sim_score
+            "similarity_score": sim_score,
+            "wwm_profile": wwm_prof
         })
 
     selection_rationale = {
@@ -768,6 +854,7 @@ def main():
     logger.info(f"Excluded Models ({len(all_excluded)}): {list(all_excluded.keys())}")
 
     # 5. Export Stage 14 Model Manifest (outputs/stage-13/selected_models.json)
+    wwm_profiles = {r["model_name"]: r.get("wwm_profile", {}) for r in summary_reports if r["model_name"] in retained_models}
     selected_models_manifest = {
         "selected_models": retained_models,
         "selected_model_count": len(retained_models),
@@ -777,6 +864,7 @@ def main():
         "evaluated_models": evaluated_model_names,
         "excluded_models": all_excluded,
         "candidate_selection_audit": candidate_audit,
+        "wwm_compatibility_profiles": wwm_profiles,
         "selection_timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
         "selection_rationale": selection_rationale["methodology"],
         "target_stage": "Stage 14 (14_mlm_evaluation.py)"
@@ -787,8 +875,21 @@ def main():
     # Export persistent exclusion audit artifact (e.g. outputs/model_selection/deberta_exclusion_audit.json)
     model_sel_dir = output_dir / "model_selection"
     model_sel_dir.mkdir(parents=True, exist_ok=True)
-    deberta_record = dict(EXCLUDED_MODELS.get("microsoft/deberta-v3-base", {}))
-    deberta_record["timestamp"] = time.strftime("%Y-%m-%d %H:%M:%S")
+    deberta_record = {
+        "model": "microsoft/deberta-v3-base",
+        "model_id": "microsoft/deberta-v3-base",
+        "exclusion_status": "EXCLUDED",
+        "status": "EXCLUDED",
+        "reason": EXCLUDED_MODELS["microsoft/deberta-v3-base"]["reason"],
+        "exclusion_reason": EXCLUDED_MODELS["microsoft/deberta-v3-base"]["reason"],
+        "source": "Stage 13 Candidate Screening & Benchmark Registry Exclusion",
+        "source_stage": "Stage 13 (Screening / Candidate Registry Exclusion)",
+        "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "prior_evaluation_availability": True,
+        "current_active_status": "permanently_excluded",
+        "previous_evaluation_evidence": EXCLUDED_MODELS["microsoft/deberta-v3-base"].get("previous_evaluation_evidence", {}),
+        "model_present_in_previous_runs": True
+    }
     with open(model_sel_dir / "deberta_exclusion_audit.json", "w", encoding="utf-8") as f_ex:
         json.dump(deberta_record, f_ex, indent=2)
     logger.info(f"Saved persistent DeBERTa exclusion audit artifact to {model_sel_dir / 'deberta_exclusion_audit.json'}")

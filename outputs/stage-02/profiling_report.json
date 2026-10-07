@@ -1,190 +1,4 @@
 {
-  "MDOTW_VW_OCCURRENCE_VESSEL_LSA_EQUIPMENT_PUBLIC": {
-    "file_name": "MARSISdb_MDOTW_VW_OCCURRENCE_VESSEL_LSA_EQUIPMENT_PUBLIC.csv",
-    "row_count": 75257,
-    "col_count": 14,
-    "columns": {
-      "OccNo": {
-        "null_count": 70723,
-        "nunique": 1875,
-        "cardinality_ratio": 0.024914625881977757,
-        "data_type": "object"
-      },
-      "OccID": {
-        "null_count": 70723,
-        "nunique": 1875,
-        "cardinality_ratio": 0.024914625881977757,
-        "data_type": "float64"
-      },
-      "VesselID": {
-        "null_count": 70723,
-        "nunique": 1840,
-        "cardinality_ratio": 0.02444955286551417,
-        "data_type": "float64"
-      },
-      "VesselName": {
-        "null_count": 70723,
-        "nunique": 1834,
-        "cardinality_ratio": 0.024369826062691842,
-        "data_type": "object"
-      },
-      "XrfOccVesselLsApplianceID": {
-        "null_count": 70723,
-        "nunique": 2523,
-        "cardinality_ratio": 0.03352512058678927,
-        "data_type": "float64"
-      },
-      "LsApplianceID": {
-        "null_count": 70723,
-        "nunique": 18,
-        "cardinality_ratio": 0.00023918040846698647,
-        "data_type": "float64"
-      },
-      "LsApplianceDisplayEng": {
-        "null_count": 70723,
-        "nunique": 18,
-        "cardinality_ratio": 0.00023918040846698647,
-        "data_type": "object"
-      },
-      "LsApplianceDisplayFre": {
-        "null_count": 70723,
-        "nunique": 18,
-        "cardinality_ratio": 0.00023918040846698647,
-        "data_type": "object"
-      },
-      "UsedEnum": {
-        "null_count": 71400,
-        "nunique": 3,
-        "cardinality_ratio": 3.986340141116441e-05,
-        "data_type": "float64"
-      },
-      "UsedEnumDisplayEng": {
-        "null_count": 71400,
-        "nunique": 3,
-        "cardinality_ratio": 3.986340141116441e-05,
-        "data_type": "object"
-      },
-      "UsedEnumDisplayFre": {
-        "null_count": 71400,
-        "nunique": 3,
-        "cardinality_ratio": 3.986340141116441e-05,
-        "data_type": "object"
-      },
-      "ApprovedEnum": {
-        "null_count": 75044,
-        "nunique": 3,
-        "cardinality_ratio": 3.986340141116441e-05,
-        "data_type": "float64"
-      },
-      "ApprovedEnumDisplayEng": {
-        "null_count": 75044,
-        "nunique": 3,
-        "cardinality_ratio": 3.986340141116441e-05,
-        "data_type": "object"
-      },
-      "ApprovedEnumDisplayFre": {
-        "null_count": 75044,
-        "nunique": 3,
-        "cardinality_ratio": 3.986340141116441e-05,
-        "data_type": "object"
-      }
-    },
-    "possible_pks": [],
-    "inferred_fks": []
-  },
-  "MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC": {
-    "file_name": "MARSISdb_MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC.csv",
-    "row_count": 314447,
-    "col_count": 14,
-    "columns": {
-      "OccNo": {
-        "null_count": 38035,
-        "nunique": 21715,
-        "cardinality_ratio": 0.06905774264025416,
-        "data_type": "object"
-      },
-      "OccID": {
-        "null_count": 38035,
-        "nunique": 21725,
-        "cardinality_ratio": 0.06908954450193515,
-        "data_type": "float64"
-      },
-      "VesselID": {
-        "null_count": 38035,
-        "nunique": 12677,
-        "cardinality_ratio": 0.0403152200529819,
-        "data_type": "float64"
-      },
-      "VesselName": {
-        "null_count": 38035,
-        "nunique": 12606,
-        "cardinality_ratio": 0.040089426835046925,
-        "data_type": "object"
-      },
-      "XrfOccVesselNavAidID": {
-        "null_count": 38035,
-        "nunique": 171880,
-        "cardinality_ratio": 0.5466103985727324,
-        "data_type": "float64"
-      },
-      "NavigationAidTypeID": {
-        "null_count": 38035,
-        "nunique": 43,
-        "cardinality_ratio": 0.00013674800522822607,
-        "data_type": "float64"
-      },
-      "NavigationAidTypeDisplayEng": {
-        "null_count": 38035,
-        "nunique": 42,
-        "cardinality_ratio": 0.0001335678190601278,
-        "data_type": "object"
-      },
-      "NavigationAidTypeDisplayFre": {
-        "null_count": 39703,
-        "nunique": 41,
-        "cardinality_ratio": 0.0001303876328920295,
-        "data_type": "object"
-      },
-      "NavigationAidSubTypeID": {
-        "null_count": 312077,
-        "nunique": 7,
-        "cardinality_ratio": 2.2261303176687964e-05,
-        "data_type": "float64"
-      },
-      "NavigationAidSubTypeDisplayEng": {
-        "null_count": 312077,
-        "nunique": 7,
-        "cardinality_ratio": 2.2261303176687964e-05,
-        "data_type": "object"
-      },
-      "NavigationAidSubTypeDisplayFre": {
-        "null_count": 312077,
-        "nunique": 7,
-        "cardinality_ratio": 2.2261303176687964e-05,
-        "data_type": "object"
-      },
-      "OnOffEnum": {
-        "null_count": 62514,
-        "nunique": 3,
-        "cardinality_ratio": 9.540558504294841e-06,
-        "data_type": "float64"
-      },
-      "OnOffEnumDisplayEng": {
-        "null_count": 62514,
-        "nunique": 3,
-        "cardinality_ratio": 9.540558504294841e-06,
-        "data_type": "object"
-      },
-      "OnOffEnumDisplayFre": {
-        "null_count": 62514,
-        "nunique": 3,
-        "cardinality_ratio": 9.540558504294841e-06,
-        "data_type": "object"
-      }
-    },
-    "possible_pks": [],
-    "inferred_fks": []
-  },
   "MDOTW_VW_INJURIES_PUBLIC": {
     "file_name": "MARSISdb_MDOTW_VW_INJURIES_PUBLIC.csv",
     "row_count": 23004,
@@ -194,7 +8,7 @@
         "null_count": 0,
         "nunique": 15817,
         "cardinality_ratio": 0.6875760737263085,
-        "data_type": "object"
+        "data_type": "str"
       },
       "OccID": {
         "null_count": 0,
@@ -212,7 +26,7 @@
         "null_count": 1,
         "nunique": 10126,
         "cardinality_ratio": 0.44018431577117023,
-        "data_type": "object"
+        "data_type": "str"
       },
       "XrfOccVesselVictimCountID": {
         "null_count": 0,
@@ -278,13 +92,13 @@
         "null_count": 22905,
         "nunique": 4,
         "cardinality_ratio": 0.0001738828029907842,
-        "data_type": "object"
+        "data_type": "str"
       },
       "PeopleInWaterLseTypeDisplayFre": {
         "null_count": 22905,
         "nunique": 4,
         "cardinality_ratio": 0.0001738828029907842,
-        "data_type": "object"
+        "data_type": "str"
       },
       "PeopleInWaterNoLSE": {
         "null_count": 0,
@@ -319,7 +133,7 @@
         "null_count": 0,
         "nunique": 48581,
         "cardinality_ratio": 0.5535665451230629,
-        "data_type": "object"
+        "data_type": "str"
       },
       "OccClassID": {
         "null_count": 0,
@@ -331,25 +145,25 @@
         "null_count": 0,
         "nunique": 16,
         "cardinality_ratio": 0.00018231540565177758,
-        "data_type": "object"
+        "data_type": "str"
       },
       "OccClassDisplayFre": {
         "null_count": 0,
         "nunique": 16,
         "cardinality_ratio": 0.00018231540565177758,
-        "data_type": "object"
+        "data_type": "str"
       },
       "OccDate": {
         "null_count": 0,
         "nunique": 16302,
         "cardinality_ratio": 0.1857566089334549,
-        "data_type": "object"
+        "data_type": "str"
       },
       "OccTime": {
         "null_count": 4797,
         "nunique": 1470,
         "cardinality_ratio": 0.016750227894257064,
-        "data_type": "object"
+        "data_type": "str"
       },
       "TimeZoneID": {
         "null_count": 0,
@@ -361,13 +175,13 @@
         "null_count": 0,
         "nunique": 14,
         "cardinality_ratio": 0.0001595259799453054,
-        "data_type": "object"
+        "data_type": "str"
       },
       "TimeZoneDisplayFre": {
         "null_count": 0,
         "nunique": 14,
         "cardinality_ratio": 0.0001595259799453054,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ProvinceID": {
         "null_count": 60729,
@@ -379,13 +193,13 @@
         "null_count": 60729,
         "nunique": 14,
         "cardinality_ratio": 0.0001595259799453054,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ProvinceDisplayFre": {
         "null_count": 60729,
         "nunique": 14,
         "cardinality_ratio": 0.0001595259799453054,
-        "data_type": "object"
+        "data_type": "str"
       },
       "OccurrenceTypeID": {
         "null_count": 0,
@@ -397,13 +211,13 @@
         "null_count": 0,
         "nunique": 2,
         "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "OccTypeDisplayFre": {
         "null_count": 0,
         "nunique": 2,
         "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "AccIncTypeID": {
         "null_count": 0,
@@ -415,13 +229,13 @@
         "null_count": 0,
         "nunique": 33,
         "cardinality_ratio": 0.00037602552415679126,
-        "data_type": "object"
+        "data_type": "str"
       },
       "AccIncTypeDisplayFre": {
         "null_count": 0,
         "nunique": 33,
         "cardinality_ratio": 0.00037602552415679126,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ImoClassLevelID": {
         "null_count": 70712,
@@ -433,19 +247,19 @@
         "null_count": 70712,
         "nunique": 4,
         "cardinality_ratio": 4.5578851412944395e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ImoClassLevelDisplayFre": {
         "null_count": 70712,
         "nunique": 4,
         "cardinality_ratio": 4.5578851412944395e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "Summary": {
         "null_count": 0,
         "nunique": 48316,
         "cardinality_ratio": 0.5505469462169553,
-        "data_type": "object"
+        "data_type": "str"
       },
       "InjuriesIND": {
         "null_count": 59746,
@@ -457,13 +271,13 @@
         "null_count": 59746,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "InjuriesIND_DisplayFre": {
         "null_count": 59746,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SearchAndRescueIND": {
         "null_count": 3572,
@@ -475,13 +289,13 @@
         "null_count": 3572,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SearchAndRescueIND_DisplayFre": {
         "null_count": 3572,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DamageIND": {
         "null_count": 9379,
@@ -493,13 +307,13 @@
         "null_count": 9379,
         "nunique": 4,
         "cardinality_ratio": 4.5578851412944395e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DamageIND_DisplayFre": {
         "null_count": 9379,
         "nunique": 4,
         "cardinality_ratio": 4.5578851412944395e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SafetyCommIssuedIND": {
         "null_count": 77833,
@@ -511,13 +325,13 @@
         "null_count": 77833,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SafetyCommIssuedIND_DisplayFre": {
         "null_count": 77833,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "PollutionIND": {
         "null_count": 1985,
@@ -529,13 +343,13 @@
         "null_count": 1985,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "PollutionIND_DisplayFre": {
         "null_count": 1985,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DeployedIND": {
         "null_count": 72954,
@@ -547,13 +361,13 @@
         "null_count": 72954,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DeployedIND_DisplayFre": {
         "null_count": 72954,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "AreaTypeID": {
         "null_count": 5,
@@ -565,13 +379,13 @@
         "null_count": 5,
         "nunique": 13,
         "cardinality_ratio": 0.00014813126709206927,
-        "data_type": "object"
+        "data_type": "str"
       },
       "AreaTypeDisplayFre": {
         "null_count": 5,
         "nunique": 13,
         "cardinality_ratio": 0.00014813126709206927,
-        "data_type": "object"
+        "data_type": "str"
       },
       "RoutingID": {
         "null_count": 76302,
@@ -583,13 +397,13 @@
         "null_count": 76302,
         "nunique": 14,
         "cardinality_ratio": 0.0001595259799453054,
-        "data_type": "object"
+        "data_type": "str"
       },
       "RoutingDisplayFre": {
         "null_count": 83550,
         "nunique": 13,
         "cardinality_ratio": 0.00014813126709206927,
-        "data_type": "object"
+        "data_type": "str"
       },
       "WithInPilotBoardingAreaEnum": {
         "null_count": 76194,
@@ -601,13 +415,13 @@
         "null_count": 76194,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "WithInPilotBoardingAreaEnum_DisplayFre": {
         "null_count": 76194,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "Latitude": {
         "null_count": 27,
@@ -625,13 +439,13 @@
         "null_count": 24,
         "nunique": 2,
         "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "LatEnum_Bearing_DisplayFre": {
         "null_count": 24,
         "nunique": 2,
         "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "Longitude": {
         "null_count": 27,
@@ -649,13 +463,13 @@
         "null_count": 24,
         "nunique": 2,
         "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "LongEnum_Bearing_DisplayFre": {
         "null_count": 24,
         "nunique": 2,
         "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "PositionEstimatedIND": {
         "null_count": 70750,
@@ -667,13 +481,13 @@
         "null_count": 70750,
         "nunique": 2,
         "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "PositionEstimatedIND_DisplayFre": {
         "null_count": 70750,
         "nunique": 2,
         "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "NearestLocationDistance_Nm": {
         "null_count": 75617,
@@ -685,7 +499,7 @@
         "null_count": 9,
         "nunique": 35037,
         "cardinality_ratio": 0.3992365542388332,
-        "data_type": "object"
+        "data_type": "str"
       },
       "BearingID": {
         "null_count": 76174,
@@ -697,7 +511,7 @@
         "null_count": 76174,
         "nunique": 16,
         "cardinality_ratio": 0.00018231540565177758,
-        "data_type": "object"
+        "data_type": "str"
       },
       "FatigueInvestEnum": {
         "null_count": 79344,
@@ -709,13 +523,13 @@
         "null_count": 79344,
         "nunique": 2,
         "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "FatigueInvestEnum_DisplayFre": {
         "null_count": 79344,
         "nunique": 2,
         "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "FatigueContFactorEnum": {
         "null_count": 79871,
@@ -727,13 +541,13 @@
         "null_count": 79871,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "FatigueContFactorEnum_DisplayFre": {
         "null_count": 79871,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "WeatherFactorEnum": {
         "null_count": 78450,
@@ -745,25 +559,25 @@
         "null_count": 78450,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "WeatherFactorEnum_DisplayFre": {
         "null_count": 78450,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ReleasedDate": {
         "null_count": 15,
         "nunique": 25758,
         "cardinality_ratio": 0.29350501367365545,
-        "data_type": "object"
+        "data_type": "str"
       },
       "OccClosedDate": {
         "null_count": 67,
         "nunique": 19675,
         "cardinality_ratio": 0.22419097538742025,
-        "data_type": "object"
+        "data_type": "str"
       },
       "RegionResponsibilityID": {
         "null_count": 0,
@@ -775,13 +589,13 @@
         "null_count": 0,
         "nunique": 9,
         "cardinality_ratio": 0.00010255241567912489,
-        "data_type": "object"
+        "data_type": "str"
       },
       "RegionResponsibilityDisplayFre": {
         "null_count": 0,
         "nunique": 9,
         "cardinality_ratio": 0.00010255241567912489,
-        "data_type": "object"
+        "data_type": "str"
       },
       "RegionOfOccurrenceID": {
         "null_count": 0,
@@ -793,13 +607,13 @@
         "null_count": 0,
         "nunique": 9,
         "cardinality_ratio": 0.00010255241567912489,
-        "data_type": "object"
+        "data_type": "str"
       },
       "RegionOfOccurrenceDisplayFre": {
         "null_count": 0,
         "nunique": 9,
         "cardinality_ratio": 0.00010255241567912489,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ReportSourceID": {
         "null_count": 87760,
@@ -829,13 +643,13 @@
         "null_count": 70750,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "PositionTypeDisplayFre": {
         "null_count": 70750,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "Position": {
         "null_count": 87760,
@@ -853,7 +667,7 @@
         "null_count": 0,
         "nunique": 13653,
         "cardinality_ratio": 0.15557201458523245,
-        "data_type": "object"
+        "data_type": "str"
       },
       "MajorChangesIncludedInDaily": {
         "null_count": 12220,
@@ -871,13 +685,13 @@
         "null_count": 15,
         "nunique": 1,
         "cardinality_ratio": 1.1394712853236099e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "IncludedInDailyEnumDisplayFre": {
         "null_count": 15,
         "nunique": 1,
         "cardinality_ratio": 1.1394712853236099e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "EnvironmentalConditionID": {
         "null_count": 11,
@@ -901,13 +715,13 @@
         "null_count": 51265,
         "nunique": 4,
         "cardinality_ratio": 4.5578851412944395e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "LightConditionDisplayFre": {
         "null_count": 51265,
         "nunique": 4,
         "cardinality_ratio": 4.5578851412944395e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "WeatherConditionID": {
         "null_count": 15222,
@@ -919,13 +733,13 @@
         "null_count": 15222,
         "nunique": 13,
         "cardinality_ratio": 0.00014813126709206927,
-        "data_type": "object"
+        "data_type": "str"
       },
       "WeatherConditionDisplayFre": {
         "null_count": 15222,
         "nunique": 13,
         "cardinality_ratio": 0.00014813126709206927,
-        "data_type": "object"
+        "data_type": "str"
       },
       "WindDirectionID": {
         "null_count": 37590,
@@ -937,7 +751,7 @@
         "null_count": 37590,
         "nunique": 16,
         "cardinality_ratio": 0.00018231540565177758,
-        "data_type": "object"
+        "data_type": "str"
       },
       "WindSpeedTypeID": {
         "null_count": 32857,
@@ -949,13 +763,13 @@
         "null_count": 32857,
         "nunique": 2,
         "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "WindSpeedTypeDisplayFre": {
         "null_count": 32857,
         "nunique": 2,
         "cardinality_ratio": 2.2789425706472198e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "BeaufortScaleID": {
         "null_count": 84219,
@@ -967,13 +781,13 @@
         "null_count": 84219,
         "nunique": 12,
         "cardinality_ratio": 0.00013673655423883317,
-        "data_type": "object"
+        "data_type": "str"
       },
       "BeaufortScaleDisplayFre": {
         "null_count": 84219,
         "nunique": 12,
         "cardinality_ratio": 0.00013673655423883317,
-        "data_type": "object"
+        "data_type": "str"
       },
       "WindSpeed_Knots": {
         "null_count": 36414,
@@ -991,13 +805,13 @@
         "null_count": 8095,
         "nunique": 17,
         "cardinality_ratio": 0.00019371011850501368,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SeaStateDisplayFre": {
         "null_count": 8095,
         "nunique": 17,
         "cardinality_ratio": 0.00019371011850501368,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SwellDirectionID": {
         "null_count": 85711,
@@ -1009,7 +823,7 @@
         "null_count": 85711,
         "nunique": 16,
         "cardinality_ratio": 0.00018231540565177758,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SwellHeight_Meters": {
         "null_count": 84940,
@@ -1045,13 +859,13 @@
         "null_count": 86946,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "IcebergEnumDisplayFre": {
         "null_count": 86946,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "BergyBitsEnum": {
         "null_count": 86948,
@@ -1063,13 +877,13 @@
         "null_count": 86948,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "BergyBitsEnumDisplayFre": {
         "null_count": 86948,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "GrowlersEnum": {
         "null_count": 86952,
@@ -1081,13 +895,13 @@
         "null_count": 86952,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "GrowlersEnumDisplayFre": {
         "null_count": 86952,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "UnderIceRegimeEnum": {
         "null_count": 85126,
@@ -1099,13 +913,13 @@
         "null_count": 85126,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "UnderIceRegimeEnumDisplayFre": {
         "null_count": 85126,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ObservedByID": {
         "null_count": 86923,
@@ -1117,13 +931,13 @@
         "null_count": 86923,
         "nunique": 4,
         "cardinality_ratio": 4.5578851412944395e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ObservedByDisplayFre": {
         "null_count": 86931,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselIcingPresentEnum": {
         "null_count": 86888,
@@ -1135,13 +949,13 @@
         "null_count": 86888,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselIcingPresentEnumDisplayFre": {
         "null_count": 86888,
         "nunique": 3,
         "cardinality_ratio": 3.418413855970829e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselIcingQualificationID": {
         "null_count": 87725,
@@ -1153,13 +967,13 @@
         "null_count": 87725,
         "nunique": 4,
         "cardinality_ratio": 4.5578851412944395e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselIcingQualificationDisplayFre": {
         "null_count": 87725,
         "nunique": 4,
         "cardinality_ratio": 4.5578851412944395e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "NotificationDetailID": {
         "null_count": 14,
@@ -1171,7 +985,7 @@
         "null_count": 14,
         "nunique": 22002,
         "cardinality_ratio": 0.2507064721969006,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ReportedByID": {
         "null_count": 15,
@@ -1183,13 +997,13 @@
         "null_count": 15,
         "nunique": 54,
         "cardinality_ratio": 0.0006153144940747493,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ReportedByDisplayFre": {
         "null_count": 15,
         "nunique": 54,
         "cardinality_ratio": 0.0006153144940747493,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SubstantiallyInsterestedStateIND": {
         "null_count": 87572,
@@ -1207,13 +1021,13 @@
         "null_count": 87708,
         "nunique": 13,
         "cardinality_ratio": 0.00014813126709206927,
-        "data_type": "object"
+        "data_type": "str"
       },
       "OtherStateInvestigatingDisplayFre": {
         "null_count": 87708,
         "nunique": 13,
         "cardinality_ratio": 0.00014813126709206927,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SubstantiallyInterestedStateID": {
         "null_count": 87624,
@@ -1225,13 +1039,13 @@
         "null_count": 87624,
         "nunique": 29,
         "cardinality_ratio": 0.0003304466727438469,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SubstantiallyInterestedStateDisplayFre": {
         "null_count": 87624,
         "nunique": 29,
         "cardinality_ratio": 0.0003304466727438469,
-        "data_type": "object"
+        "data_type": "str"
       },
       "TotalDeaths": {
         "null_count": 0,
@@ -1267,6 +1081,192 @@
     "possible_pks": [],
     "inferred_fks": []
   },
+  "MDOTW_VW_OCCURRENCE_VESSEL_LSA_EQUIPMENT_PUBLIC": {
+    "file_name": "MARSISdb_MDOTW_VW_OCCURRENCE_VESSEL_LSA_EQUIPMENT_PUBLIC.csv",
+    "row_count": 75257,
+    "col_count": 14,
+    "columns": {
+      "OccNo": {
+        "null_count": 70723,
+        "nunique": 1875,
+        "cardinality_ratio": 0.024914625881977757,
+        "data_type": "str"
+      },
+      "OccID": {
+        "null_count": 70723,
+        "nunique": 1875,
+        "cardinality_ratio": 0.024914625881977757,
+        "data_type": "float64"
+      },
+      "VesselID": {
+        "null_count": 70723,
+        "nunique": 1840,
+        "cardinality_ratio": 0.02444955286551417,
+        "data_type": "float64"
+      },
+      "VesselName": {
+        "null_count": 70723,
+        "nunique": 1834,
+        "cardinality_ratio": 0.024369826062691842,
+        "data_type": "str"
+      },
+      "XrfOccVesselLsApplianceID": {
+        "null_count": 70723,
+        "nunique": 2523,
+        "cardinality_ratio": 0.03352512058678927,
+        "data_type": "float64"
+      },
+      "LsApplianceID": {
+        "null_count": 70723,
+        "nunique": 18,
+        "cardinality_ratio": 0.00023918040846698647,
+        "data_type": "float64"
+      },
+      "LsApplianceDisplayEng": {
+        "null_count": 70723,
+        "nunique": 18,
+        "cardinality_ratio": 0.00023918040846698647,
+        "data_type": "str"
+      },
+      "LsApplianceDisplayFre": {
+        "null_count": 70723,
+        "nunique": 18,
+        "cardinality_ratio": 0.00023918040846698647,
+        "data_type": "str"
+      },
+      "UsedEnum": {
+        "null_count": 71400,
+        "nunique": 3,
+        "cardinality_ratio": 3.986340141116441e-05,
+        "data_type": "float64"
+      },
+      "UsedEnumDisplayEng": {
+        "null_count": 71400,
+        "nunique": 3,
+        "cardinality_ratio": 3.986340141116441e-05,
+        "data_type": "str"
+      },
+      "UsedEnumDisplayFre": {
+        "null_count": 71400,
+        "nunique": 3,
+        "cardinality_ratio": 3.986340141116441e-05,
+        "data_type": "str"
+      },
+      "ApprovedEnum": {
+        "null_count": 75044,
+        "nunique": 3,
+        "cardinality_ratio": 3.986340141116441e-05,
+        "data_type": "float64"
+      },
+      "ApprovedEnumDisplayEng": {
+        "null_count": 75044,
+        "nunique": 3,
+        "cardinality_ratio": 3.986340141116441e-05,
+        "data_type": "str"
+      },
+      "ApprovedEnumDisplayFre": {
+        "null_count": 75044,
+        "nunique": 3,
+        "cardinality_ratio": 3.986340141116441e-05,
+        "data_type": "str"
+      }
+    },
+    "possible_pks": [],
+    "inferred_fks": []
+  },
+  "MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC": {
+    "file_name": "MARSISdb_MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC.csv",
+    "row_count": 314447,
+    "col_count": 14,
+    "columns": {
+      "OccNo": {
+        "null_count": 38035,
+        "nunique": 21715,
+        "cardinality_ratio": 0.06905774264025416,
+        "data_type": "str"
+      },
+      "OccID": {
+        "null_count": 38035,
+        "nunique": 21725,
+        "cardinality_ratio": 0.06908954450193515,
+        "data_type": "float64"
+      },
+      "VesselID": {
+        "null_count": 38035,
+        "nunique": 12677,
+        "cardinality_ratio": 0.0403152200529819,
+        "data_type": "float64"
+      },
+      "VesselName": {
+        "null_count": 38035,
+        "nunique": 12606,
+        "cardinality_ratio": 0.040089426835046925,
+        "data_type": "str"
+      },
+      "XrfOccVesselNavAidID": {
+        "null_count": 38035,
+        "nunique": 171880,
+        "cardinality_ratio": 0.5466103985727324,
+        "data_type": "float64"
+      },
+      "NavigationAidTypeID": {
+        "null_count": 38035,
+        "nunique": 43,
+        "cardinality_ratio": 0.00013674800522822607,
+        "data_type": "float64"
+      },
+      "NavigationAidTypeDisplayEng": {
+        "null_count": 38035,
+        "nunique": 42,
+        "cardinality_ratio": 0.0001335678190601278,
+        "data_type": "str"
+      },
+      "NavigationAidTypeDisplayFre": {
+        "null_count": 39703,
+        "nunique": 41,
+        "cardinality_ratio": 0.0001303876328920295,
+        "data_type": "str"
+      },
+      "NavigationAidSubTypeID": {
+        "null_count": 312077,
+        "nunique": 7,
+        "cardinality_ratio": 2.2261303176687964e-05,
+        "data_type": "float64"
+      },
+      "NavigationAidSubTypeDisplayEng": {
+        "null_count": 312077,
+        "nunique": 7,
+        "cardinality_ratio": 2.2261303176687964e-05,
+        "data_type": "str"
+      },
+      "NavigationAidSubTypeDisplayFre": {
+        "null_count": 312077,
+        "nunique": 7,
+        "cardinality_ratio": 2.2261303176687964e-05,
+        "data_type": "str"
+      },
+      "OnOffEnum": {
+        "null_count": 62514,
+        "nunique": 3,
+        "cardinality_ratio": 9.540558504294841e-06,
+        "data_type": "float64"
+      },
+      "OnOffEnumDisplayEng": {
+        "null_count": 62514,
+        "nunique": 3,
+        "cardinality_ratio": 9.540558504294841e-06,
+        "data_type": "str"
+      },
+      "OnOffEnumDisplayFre": {
+        "null_count": 62514,
+        "nunique": 3,
+        "cardinality_ratio": 9.540558504294841e-06,
+        "data_type": "str"
+      }
+    },
+    "possible_pks": [],
+    "inferred_fks": []
+  },
   "MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC": {
     "file_name": "MARSISdb_MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC.csv",
     "row_count": 73926,
@@ -1276,7 +1276,7 @@
         "null_count": 0,
         "nunique": 48575,
         "cardinality_ratio": 0.6570759949138327,
-        "data_type": "object"
+        "data_type": "str"
       },
       "OccID": {
         "null_count": 0,
@@ -1294,7 +1294,7 @@
         "null_count": 1,
         "nunique": 27132,
         "cardinality_ratio": 0.3670156643129616,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselVersion": {
         "null_count": 0,
@@ -1312,7 +1312,7 @@
         "null_count": 73865,
         "nunique": 40,
         "cardinality_ratio": 0.0005410816221627032,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ParentVesselVersion": {
         "null_count": 73865,
@@ -1324,25 +1324,25 @@
         "null_count": 56006,
         "nunique": 4594,
         "cardinality_ratio": 0.06214322430538647,
-        "data_type": "object"
+        "data_type": "str"
       },
       "OfficialNo": {
         "null_count": 9882,
         "nunique": 20929,
         "cardinality_ratio": 0.2831074317560804,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VRN": {
         "null_count": 66981,
         "nunique": 3354,
         "cardinality_ratio": 0.04536969401834267,
-        "data_type": "object"
+        "data_type": "str"
       },
       "MMSI": {
         "null_count": 64110,
         "nunique": 3655,
         "cardinality_ratio": 0.04944133322511701,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselTypeID": {
         "null_count": 22,
@@ -1354,13 +1354,13 @@
         "null_count": 22,
         "nunique": 29,
         "cardinality_ratio": 0.00039228417606795987,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselTypeDisplayFre": {
         "null_count": 22,
         "nunique": 29,
         "cardinality_ratio": 0.00039228417606795987,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselSubTypeID": {
         "null_count": 7462,
@@ -1372,19 +1372,19 @@
         "null_count": 7462,
         "nunique": 95,
         "cardinality_ratio": 0.0012850688526364201,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselSubTypeDisplayFre": {
         "null_count": 7462,
         "nunique": 92,
         "cardinality_ratio": 0.0012444877309742174,
-        "data_type": "object"
+        "data_type": "str"
       },
       "CallSign": {
         "null_count": 40573,
         "nunique": 9089,
         "cardinality_ratio": 0.12294727159592024,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselFlagID": {
         "null_count": 1203,
@@ -1396,13 +1396,13 @@
         "null_count": 1203,
         "nunique": 110,
         "cardinality_ratio": 0.0014879744609474338,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselFlagDisplayFre": {
         "null_count": 1203,
         "nunique": 110,
         "cardinality_ratio": 0.0014879744609474338,
-        "data_type": "object"
+        "data_type": "str"
       },
       "PortOfRegistryID": {
         "null_count": 9685,
@@ -1414,13 +1414,13 @@
         "null_count": 9693,
         "nunique": 605,
         "cardinality_ratio": 0.008183859535210886,
-        "data_type": "object"
+        "data_type": "str"
       },
       "PortOfRegistryDisplayFre": {
         "null_count": 10033,
         "nunique": 596,
         "cardinality_ratio": 0.008062116170224278,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ClassSocietyID": {
         "null_count": 64342,
@@ -1432,13 +1432,13 @@
         "null_count": 64342,
         "nunique": 27,
         "cardinality_ratio": 0.0003652300949598247,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ClassSocietyDisplayFre": {
         "null_count": 64342,
         "nunique": 27,
         "cardinality_ratio": 0.0003652300949598247,
-        "data_type": "object"
+        "data_type": "str"
       },
       "Length_Meters": {
         "null_count": 3069,
@@ -1456,13 +1456,13 @@
         "null_count": 4952,
         "nunique": 3,
         "cardinality_ratio": 4.058112166220274e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "LengthTypeDisplayFre": {
         "null_count": 4952,
         "nunique": 3,
         "cardinality_ratio": 4.058112166220274e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "Width_Meters": {
         "null_count": 22436,
@@ -1480,13 +1480,13 @@
         "null_count": 25851,
         "nunique": 3,
         "cardinality_ratio": 4.058112166220274e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "WidthTypeDisplayFre": {
         "null_count": 25851,
         "nunique": 3,
         "cardinality_ratio": 4.058112166220274e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "GrossTonnage": {
         "null_count": 5913,
@@ -1510,13 +1510,13 @@
         "null_count": 10540,
         "nunique": 15,
         "cardinality_ratio": 0.00020290560831101373,
-        "data_type": "object"
+        "data_type": "str"
       },
       "PropulsionTypeDisplayFre": {
         "null_count": 10540,
         "nunique": 15,
         "cardinality_ratio": 0.00020290560831101373,
-        "data_type": "object"
+        "data_type": "str"
       },
       "HullMaterialID": {
         "null_count": 2514,
@@ -1528,13 +1528,13 @@
         "null_count": 2514,
         "nunique": 13,
         "cardinality_ratio": 0.00017585152720287856,
-        "data_type": "object"
+        "data_type": "str"
       },
       "HullMaterialTypeDisplayFre": {
         "null_count": 2514,
         "nunique": 13,
         "cardinality_ratio": 0.00017585152720287856,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SmsOnBoardEnum": {
         "null_count": 67315,
@@ -1546,13 +1546,13 @@
         "null_count": 67315,
         "nunique": 3,
         "cardinality_ratio": 4.058112166220274e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SmsOnBoardDisplayFre": {
         "null_count": 67315,
         "nunique": 3,
         "cardinality_ratio": 4.058112166220274e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SmsTypeEnum": {
         "null_count": 71902,
@@ -1564,13 +1564,13 @@
         "null_count": 71902,
         "nunique": 2,
         "cardinality_ratio": 2.705408110813516e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SmsTypeDisplayFre": {
         "null_count": 71902,
         "nunique": 2,
         "cardinality_ratio": 2.705408110813516e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "YearBuilt": {
         "null_count": 9630,
@@ -1594,31 +1594,31 @@
         "null_count": 49288,
         "nunique": 4268,
         "cardinality_ratio": 0.057733409084760434,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselBuilderAddressLine1": {
         "null_count": 60883,
         "nunique": 1589,
         "cardinality_ratio": 0.021494467440413386,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselBuilderAddressLine2": {
         "null_count": 72759,
         "nunique": 185,
         "cardinality_ratio": 0.0025025025025025025,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselBuilderCity": {
         "null_count": 60001,
         "nunique": 1066,
         "cardinality_ratio": 0.014419825230636042,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselBuilderProvince": {
         "null_count": 55545,
         "nunique": 248,
         "cardinality_ratio": 0.0033547060574087603,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselBuilderCountryID": {
         "null_count": 49938,
@@ -1630,31 +1630,31 @@
         "null_count": 49938,
         "nunique": 51,
         "cardinality_ratio": 0.0006898790682574466,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselBuilderCountryDisplayFre": {
         "null_count": 49938,
         "nunique": 51,
         "cardinality_ratio": 0.0006898790682574466,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselBuilderPostalZipCode": {
         "null_count": 62064,
         "nunique": 271,
         "cardinality_ratio": 0.0036658279901523143,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselBuilderEmailAddress": {
         "null_count": 73738,
         "nunique": 26,
         "cardinality_ratio": 0.0003517030544057571,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselBuilderPhoneNumber": {
         "null_count": 73294,
         "nunique": 51,
         "cardinality_ratio": 0.0006898790682574466,
-        "data_type": "object"
+        "data_type": "str"
       },
       "OccurrencePrimaryAccIncIND": {
         "null_count": 0,
@@ -1672,13 +1672,13 @@
         "null_count": 6,
         "nunique": 37,
         "cardinality_ratio": 0.0005005005005005005,
-        "data_type": "object"
+        "data_type": "str"
       },
       "AccIncTypeDisplayFre": {
         "null_count": 6,
         "nunique": 37,
         "cardinality_ratio": 0.0005005005005005005,
-        "data_type": "object"
+        "data_type": "str"
       },
       "OccTypeID": {
         "null_count": 12550,
@@ -1690,13 +1690,13 @@
         "null_count": 12550,
         "nunique": 2,
         "cardinality_ratio": 2.705408110813516e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "OccTypeDisplayFre": {
         "null_count": 12550,
         "nunique": 2,
         "cardinality_ratio": 2.705408110813516e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SeaPollutionDegreeID": {
         "null_count": 32852,
@@ -1708,13 +1708,13 @@
         "null_count": 32852,
         "nunique": 7,
         "cardinality_ratio": 9.468928387847307e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SeaPollutionDegreeDisplayFre": {
         "null_count": 32852,
         "nunique": 7,
         "cardinality_ratio": 9.468928387847307e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "AirPollutionEnum": {
         "null_count": 73853,
@@ -1726,13 +1726,13 @@
         "null_count": 73853,
         "nunique": 3,
         "cardinality_ratio": 4.058112166220274e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "AirPollutionDisplayFre": {
         "null_count": 73853,
         "nunique": 3,
         "cardinality_ratio": 4.058112166220274e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "NumberOfCrew": {
         "null_count": 0,
@@ -1816,13 +1816,13 @@
         "null_count": 16783,
         "nunique": 4,
         "cardinality_ratio": 5.410816221627032e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DepartureLocationTypeDisplayFre": {
         "null_count": 16783,
         "nunique": 4,
         "cardinality_ratio": 5.410816221627032e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DepartureCountryID": {
         "null_count": 16235,
@@ -1834,13 +1834,13 @@
         "null_count": 16235,
         "nunique": 113,
         "cardinality_ratio": 0.0015285555826096368,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DepartureCountryDisplayFre": {
         "null_count": 16235,
         "nunique": 112,
         "cardinality_ratio": 0.0015150285420555691,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DeparturePortID": {
         "null_count": 30234,
@@ -1852,25 +1852,25 @@
         "null_count": 30248,
         "nunique": 7219,
         "cardinality_ratio": 0.09765170575981387,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DeparturePortDisplayFre": {
         "null_count": 45874,
         "nunique": 1380,
         "cardinality_ratio": 0.01866731596461326,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DepartureDate": {
         "null_count": 59806,
         "nunique": 5640,
         "cardinality_ratio": 0.07629250872494116,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DepartureTime": {
         "null_count": 60973,
         "nunique": 1007,
         "cardinality_ratio": 0.013621729837946054,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DepartureTimeZoneID": {
         "null_count": 70470,
@@ -1882,13 +1882,13 @@
         "null_count": 70470,
         "nunique": 12,
         "cardinality_ratio": 0.00016232448664881097,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DepartureTimeZoneDisplayFre": {
         "null_count": 70470,
         "nunique": 12,
         "cardinality_ratio": 0.00016232448664881097,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DestinationLocationTypeID": {
         "null_count": 15576,
@@ -1900,13 +1900,13 @@
         "null_count": 16783,
         "nunique": 4,
         "cardinality_ratio": 5.410816221627032e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DestinationLocationTypeDisplayFre": {
         "null_count": 16783,
         "nunique": 4,
         "cardinality_ratio": 5.410816221627032e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DestinationCountryID": {
         "null_count": 23458,
@@ -1918,13 +1918,13 @@
         "null_count": 16235,
         "nunique": 113,
         "cardinality_ratio": 0.0015285555826096368,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DestinationCountryDisplayFre": {
         "null_count": 16235,
         "nunique": 112,
         "cardinality_ratio": 0.0015150285420555691,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DestinationPortID": {
         "null_count": 28403,
@@ -1936,25 +1936,25 @@
         "null_count": 30248,
         "nunique": 7219,
         "cardinality_ratio": 0.09765170575981387,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DestinationPortDisplayFre": {
         "null_count": 45874,
         "nunique": 1380,
         "cardinality_ratio": 0.01866731596461326,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DestinationDate": {
         "null_count": 71791,
         "nunique": 1029,
         "cardinality_ratio": 0.01391932473013554,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DestinationTime": {
         "null_count": 72344,
         "nunique": 697,
         "cardinality_ratio": 0.009428347266185104,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DestinationTimeZoneID": {
         "null_count": 71807,
@@ -1966,13 +1966,13 @@
         "null_count": 70470,
         "nunique": 12,
         "cardinality_ratio": 0.00016232448664881097,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DestinationTimeZoneDisplayFre": {
         "null_count": 70470,
         "nunique": 12,
         "cardinality_ratio": 0.00016232448664881097,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselPhaseID": {
         "null_count": 119,
@@ -1984,13 +1984,13 @@
         "null_count": 119,
         "nunique": 19,
         "cardinality_ratio": 0.00025701377052728407,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselPhaseDisplayFre": {
         "null_count": 119,
         "nunique": 19,
         "cardinality_ratio": 0.00025701377052728407,
-        "data_type": "object"
+        "data_type": "str"
       },
       "Speed_Knots": {
         "null_count": 70226,
@@ -2014,13 +2014,13 @@
         "null_count": 38149,
         "nunique": 8,
         "cardinality_ratio": 0.00010821632443254064,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ActivityCategoryDisplayFre": {
         "null_count": 38149,
         "nunique": 8,
         "cardinality_ratio": 0.00010821632443254064,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ActivityTypeID": {
         "null_count": 51992,
@@ -2032,13 +2032,13 @@
         "null_count": 51992,
         "nunique": 26,
         "cardinality_ratio": 0.0003517030544057571,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ActivityTypeDisplayFre": {
         "null_count": 51992,
         "nunique": 26,
         "cardinality_ratio": 0.0003517030544057571,
-        "data_type": "object"
+        "data_type": "str"
       },
       "Course_Degrees": {
         "null_count": 71399,
@@ -2068,13 +2068,13 @@
         "null_count": 63460,
         "nunique": 29,
         "cardinality_ratio": 0.00039228417606795987,
-        "data_type": "object"
+        "data_type": "str"
       },
       "FisheryTypeDisplayFre": {
         "null_count": 63460,
         "nunique": 28,
         "cardinality_ratio": 0.0003787571355138923,
-        "data_type": "object"
+        "data_type": "str"
       },
       "GearTypeID": {
         "null_count": 65503,
@@ -2086,13 +2086,13 @@
         "null_count": 65503,
         "nunique": 12,
         "cardinality_ratio": 0.00016232448664881097,
-        "data_type": "object"
+        "data_type": "str"
       },
       "GearTypeDisplayFre": {
         "null_count": 65503,
         "nunique": 12,
         "cardinality_ratio": 0.00016232448664881097,
-        "data_type": "object"
+        "data_type": "str"
       },
       "MultipleFishingOpsEnum": {
         "null_count": 12002,
@@ -2104,13 +2104,13 @@
         "null_count": 12002,
         "nunique": 3,
         "cardinality_ratio": 4.058112166220274e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "MultipleFishingOpsDisplayFre": {
         "null_count": 12002,
         "nunique": 3,
         "cardinality_ratio": 4.058112166220274e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "TowingPushingInd": {
         "null_count": 71915,
@@ -2152,19 +2152,19 @@
         "null_count": 71915,
         "nunique": 19,
         "cardinality_ratio": 0.00025701377052728407,
-        "data_type": "object"
+        "data_type": "str"
       },
       "TowedVesselTypeDisplayFre": {
         "null_count": 71915,
         "nunique": 19,
         "cardinality_ratio": 0.00025701377052728407,
-        "data_type": "object"
+        "data_type": "str"
       },
       "TowedVesselName": {
         "null_count": 71915,
         "nunique": 1139,
         "cardinality_ratio": 0.015407299191082975,
-        "data_type": "object"
+        "data_type": "str"
       },
       "TowlineLength_Meters": {
         "null_count": 73717,
@@ -2194,13 +2194,13 @@
         "null_count": 45366,
         "nunique": 7,
         "cardinality_ratio": 9.468928387847307e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "CargoCategoryDisplayFre": {
         "null_count": 45366,
         "nunique": 7,
         "cardinality_ratio": 9.468928387847307e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "CargoProductTypeID": {
         "null_count": 53089,
@@ -2212,13 +2212,13 @@
         "null_count": 53089,
         "nunique": 15,
         "cardinality_ratio": 0.00020290560831101373,
-        "data_type": "object"
+        "data_type": "str"
       },
       "CargoProductTypeDisplayFre": {
         "null_count": 53089,
         "nunique": 15,
         "cardinality_ratio": 0.00020290560831101373,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ProductDetailID": {
         "null_count": 59998,
@@ -2230,13 +2230,13 @@
         "null_count": 59998,
         "nunique": 219,
         "cardinality_ratio": 0.0029624218813408,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ProductDetailDisplayFre": {
         "null_count": 59998,
         "nunique": 220,
         "cardinality_ratio": 0.0029759489218948677,
-        "data_type": "object"
+        "data_type": "str"
       },
       "QuantityOnBoard": {
         "null_count": 56113,
@@ -2254,13 +2254,13 @@
         "null_count": 56137,
         "nunique": 11,
         "cardinality_ratio": 0.00014879744609474338,
-        "data_type": "object"
+        "data_type": "str"
       },
       "QuantityOnBoardUnitsDisplayFre": {
         "null_count": 56137,
         "nunique": 11,
         "cardinality_ratio": 0.00014879744609474338,
-        "data_type": "object"
+        "data_type": "str"
       },
       "StowedOnDeckEnum": {
         "null_count": 69269,
@@ -2272,13 +2272,13 @@
         "null_count": 69269,
         "nunique": 3,
         "cardinality_ratio": 4.058112166220274e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "StowedOnDeckEnumDisplayFre": {
         "null_count": 69269,
         "nunique": 3,
         "cardinality_ratio": 4.058112166220274e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ProdReleaseEnum": {
         "null_count": 68256,
@@ -2290,13 +2290,13 @@
         "null_count": 68256,
         "nunique": 3,
         "cardinality_ratio": 4.058112166220274e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ProdReleaseEnumEnumDisplayFre": {
         "null_count": 68256,
         "nunique": 3,
         "cardinality_ratio": 4.058112166220274e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ProdReleaseLocEnum": {
         "null_count": 73420,
@@ -2308,13 +2308,13 @@
         "null_count": 73420,
         "nunique": 2,
         "cardinality_ratio": 2.705408110813516e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ProdReleaseLocEnumDisplayFre": {
         "null_count": 73420,
         "nunique": 2,
         "cardinality_ratio": 2.705408110813516e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "QuantityReleased": {
         "null_count": 73258,
@@ -2332,13 +2332,13 @@
         "null_count": 73261,
         "nunique": 11,
         "cardinality_ratio": 0.00014879744609474338,
-        "data_type": "object"
+        "data_type": "str"
       },
       "QuantReleasedUnitsDisplayFre": {
         "null_count": 73261,
         "nunique": 11,
         "cardinality_ratio": 0.00014879744609474338,
-        "data_type": "object"
+        "data_type": "str"
       },
       "UnNumber": {
         "null_count": 73657,
@@ -2368,13 +2368,13 @@
         "null_count": 23128,
         "nunique": 53,
         "cardinality_ratio": 0.0007169331493655818,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselDamageLocationCategoryDisplayFre": {
         "null_count": 23128,
         "nunique": 53,
         "cardinality_ratio": 0.0007169331493655818,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselDamageLocationSubCategoryID": {
         "null_count": 47375,
@@ -2386,13 +2386,13 @@
         "null_count": 47375,
         "nunique": 52,
         "cardinality_ratio": 0.0007034061088115142,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselDamageLocationSubCategoryDisplayFre": {
         "null_count": 47375,
         "nunique": 52,
         "cardinality_ratio": 0.0007034061088115142,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselDamageLocationID": {
         "null_count": 49233,
@@ -2404,13 +2404,13 @@
         "null_count": 49233,
         "nunique": 156,
         "cardinality_ratio": 0.0021102183264345427,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselDamageLocationDisplayFre": {
         "null_count": 49233,
         "nunique": 156,
         "cardinality_ratio": 0.0021102183264345427,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselDamageDegreeID": {
         "null_count": 23239,
@@ -2422,13 +2422,13 @@
         "null_count": 23239,
         "nunique": 8,
         "cardinality_ratio": 0.00010821632443254064,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselDamageDegreeDisplayFre": {
         "null_count": 23239,
         "nunique": 8,
         "cardinality_ratio": 0.00010821632443254064,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselIceRelatedDamageIND": {
         "null_count": 23082,
@@ -2452,13 +2452,13 @@
         "null_count": 56987,
         "nunique": 9,
         "cardinality_ratio": 0.00012174336498660823,
-        "data_type": "object"
+        "data_type": "str"
       },
       "OtherObjectTypeDisplayFre": {
         "null_count": 56987,
         "nunique": 9,
         "cardinality_ratio": 0.00012174336498660823,
-        "data_type": "object"
+        "data_type": "str"
       },
       "OtherObjectID": {
         "null_count": 56987,
@@ -2470,13 +2470,13 @@
         "null_count": 56987,
         "nunique": 59,
         "cardinality_ratio": 0.0007980953926899873,
-        "data_type": "object"
+        "data_type": "str"
       },
       "OtherObjectDisplayFre": {
         "null_count": 56987,
         "nunique": 59,
         "cardinality_ratio": 0.0007980953926899873,
-        "data_type": "object"
+        "data_type": "str"
       },
       "OtherObjectDamageDegreeID": {
         "null_count": 67546,
@@ -2488,13 +2488,13 @@
         "null_count": 67546,
         "nunique": 8,
         "cardinality_ratio": 0.00010821632443254064,
-        "data_type": "object"
+        "data_type": "str"
       },
       "OtherObjectDamageDegreeDisplayFre": {
         "null_count": 67546,
         "nunique": 8,
         "cardinality_ratio": 0.00010821632443254064,
-        "data_type": "object"
+        "data_type": "str"
       },
       "OtherObjectIceRelatedDamageIND": {
         "null_count": 56987,
@@ -2515,7 +2515,7 @@
         "null_count": 70397,
         "nunique": 1552,
         "cardinality_ratio": 0.019796170869526397,
-        "data_type": "object"
+        "data_type": "str"
       },
       "OccID": {
         "null_count": 70397,
@@ -2533,7 +2533,7 @@
         "null_count": 70397,
         "nunique": 1018,
         "cardinality_ratio": 0.012984859500758937,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VesselSoftwareAudioID": {
         "null_count": 70397,
@@ -2551,13 +2551,13 @@
         "null_count": 70397,
         "nunique": 5,
         "cardinality_ratio": 6.377632367759793e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "RecordingEquipDisplayFre": {
         "null_count": 70397,
         "nunique": 5,
         "cardinality_ratio": 6.377632367759793e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SoftwareAudioMakeID": {
         "null_count": 77180,
@@ -2569,13 +2569,13 @@
         "null_count": 77180,
         "nunique": 24,
         "cardinality_ratio": 0.00030612635365247004,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SoftwareAudioMakeDisplayFre": {
         "null_count": 77180,
         "nunique": 23,
         "cardinality_ratio": 0.00029337108891695047,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SoftwareAudioModelID": {
         "null_count": 77180,
@@ -2587,25 +2587,25 @@
         "null_count": 77180,
         "nunique": 54,
         "cardinality_ratio": 0.0006887842957180576,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SoftwareAudioModelDisplayFre": {
         "null_count": 77180,
         "nunique": 54,
         "cardinality_ratio": 0.0006887842957180576,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SoftwareVersion": {
         "null_count": 78329,
         "nunique": 27,
         "cardinality_ratio": 0.0003443921478590288,
-        "data_type": "object"
+        "data_type": "str"
       },
       "SerialNumber": {
         "null_count": 78297,
         "nunique": 33,
         "cardinality_ratio": 0.00042092373627214635,
-        "data_type": "object"
+        "data_type": "str"
       },
       "VdrDetailID": {
         "null_count": 76877,
@@ -2629,13 +2629,13 @@
         "null_count": 77873,
         "nunique": 3,
         "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "RecAudioFilesDelEnumDisplayFre": {
         "null_count": 77873,
         "nunique": 3,
         "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "RecAudioFilesSegregatedEnum": {
         "null_count": 77874,
@@ -2647,13 +2647,13 @@
         "null_count": 77874,
         "nunique": 3,
         "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "RecAudioFilesSegregatedEnumDisplayFre": {
         "null_count": 77874,
         "nunique": 3,
         "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "CapsuleRecCapacity_NumberOfDays": {
         "null_count": 78376,
@@ -2671,13 +2671,13 @@
         "null_count": 77879,
         "nunique": 3,
         "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "CapsuleAudioFilesDelEnumDisplayFre": {
         "null_count": 77879,
         "nunique": 3,
         "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "CapsuleAudioFilesSegregatedEnum": {
         "null_count": 77882,
@@ -2689,13 +2689,13 @@
         "null_count": 77882,
         "nunique": 3,
         "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "CapsuleAudioFilesSegregatedEnumDisplayFre": {
         "null_count": 77882,
         "nunique": 3,
         "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DataExtractedEnum": {
         "null_count": 76883,
@@ -2707,13 +2707,13 @@
         "null_count": 76883,
         "nunique": 3,
         "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "DataExtractedEnumDisplayFre": {
         "null_count": 76883,
         "nunique": 3,
         "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ReasonNotExtractedID": {
         "null_count": 77635,
@@ -2725,13 +2725,13 @@
         "null_count": 77635,
         "nunique": 3,
         "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "ReasonNotExtractedDisplayFre": {
         "null_count": 77635,
         "nunique": 3,
         "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "EquipSeizedEnum": {
         "null_count": 76883,
@@ -2743,13 +2743,13 @@
         "null_count": 76883,
         "nunique": 3,
         "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "EquipSeizedEnumDisplayFre": {
         "null_count": 76883,
         "nunique": 3,
         "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "InstructionsPostedEnum": {
         "null_count": 77864,
@@ -2761,13 +2761,13 @@
         "null_count": 77864,
         "nunique": 3,
         "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "InstructionsPostedEnumDisplayFre": {
         "null_count": 77864,
         "nunique": 3,
         "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "InstructionAvailableEnum": {
         "null_count": 77867,
@@ -2779,13 +2779,13 @@
         "null_count": 77867,
         "nunique": 3,
         "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "object"
+        "data_type": "str"
       },
       "InstructionAvailableEnumDisplayFre": {
         "null_count": 77867,
         "nunique": 3,
         "cardinality_ratio": 3.8265794206558755e-05,
-        "data_type": "object"
+        "data_type": "str"
       }
     },
     "possible_pks": [],

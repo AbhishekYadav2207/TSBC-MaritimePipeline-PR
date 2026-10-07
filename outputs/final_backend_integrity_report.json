@@ -1,109 +1,234 @@
 {
-  "timestamp": "2026-10-07T14:46:00Z",
-  "project": "MaritimeBench Backend Forensic Audit & DeBERTa Exclusion",
-  "overall_verdict": "PASS",
-  "items": {
-    "1_active_model_count": {
-      "status": "PASS",
-      "count": 7,
-      "details": "Authoritative active cohort contains exactly 7 models dynamically resolved after exclusion."
+  "timestamp": "2026-10-07T10:20:10Z",
+  "project": "TSBC-MaritimePipeline-Version2.1",
+  "READY_FOR_COLAB": true,
+  "final_verdict": "READY FOR COLAB FULL RUN",
+  "repository_readiness": {
+    "status": "PASS",
+    "repository_root_verified": true,
+    "required_scripts_present": true,
+    "notebook_present": true,
+    "required_configuration_present": true,
+    "required_dataset_references_present": true,
+    "evidence": "All 18 production scripts, config/config.json, data/ CSVs, and notebooks present and verified."
+  },
+  "model_cohort": {
+    "status": "PASS",
+    "candidate_model_count": 13,
+    "active_model_count": 7,
+    "excluded_model_count": 1,
+    "active_models": [
+      "bert-base-uncased",
+      "dmis-lab/biobert-base-cased-v1.2",
+      "nlpaueb/legal-bert-base-uncased",
+      "allenai/scibert_scivocab_uncased",
+      "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "roberta-base",
+      "answerdotai/ModernBERT-base"
+    ],
+    "excluded_models": {
+      "microsoft/deberta-v3-base": "Excluded after benchmark compatibility anomaly: zero MLM Top-1/Top-5/Top-10 across standard cells and English diagnostic."
     },
-    "2_excluded_model_count": {
+    "candidate_pool": [
+      "bert-base-uncased",
+      "bert-large-uncased",
+      "roberta-base",
+      "answerdotai/ModernBERT-base",
+      "allenai/scibert_scivocab_uncased",
+      "dmis-lab/biobert-base-cased-v1.2",
+      "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "emilyalsentzer/Bio_ClinicalBERT",
+      "nlpaueb/legal-bert-base-uncased",
+      "ProsusAI/finbert",
+      "anferico/bert-for-patents",
+      "google/electra-base-discriminator",
+      "distilbert-base-uncased"
+    ],
+    "cohort_reconciliation_result": "Preserved full 13-candidate evaluation in Stage 13 without positional truncation; redundancy clustering (cosine similarity 1.00000 on 335 terms) collapses WordPiece duplicates to bert-base-uncased and biobert, naturally selecting the 7 distinct tokenizer archetypes.",
+    "reason_for_final_cohort": "Authoritative archetype selection across 7 distinct vocabulary configurations (Standard WordPiece, Bio WordPiece Cased, Legal WordPiece, SciVocab WordPiece, PubMed WordPiece, Byte BPE, Extended Byte BPE).",
+    "deberta_exclusion_result": "PASS: permanently excluded via configuration-driven EXCLUDED_MODELS in scripts/13-17; audit trail in outputs/model_selection/deberta_exclusion_audit.json."
+  },
+  "benchmark_design": {
+    "status": "PASS",
+    "model_count": 7,
+    "representation_count": 5,
+    "subset_count": 5,
+    "primary_masking_mode": "whole_word",
+    "primary_evaluation_unit": "word",
+    "primary_cell_count": 175,
+    "diagnostic_mode_status": "Baseline subword masking and evaluation preserved in isolated cache namespace (evaluations/cache/ vs evaluations/cache_wwm_word/)."
+  },
+  "forensic_fix_status": {
+    "A1_whole_word_masking_strict_reconstruction": {
       "status": "PASS",
-      "count": 1,
-      "details": "Exactly 1 model excluded through configuration-driven EXCLUDED_MODELS registry."
+      "evidence": "Whole-word masking using encoding.word_ids() alignment; strict multi-piece word reconstruction; preflight verified on BERT, RoBERTa, and ModernBERT."
     },
-    "3_excluded_models_and_reason": {
+    "A2_paired_statistics_governance": {
       "status": "PASS",
-      "excluded_models": {
-        "microsoft/deberta-v3-base": "Excluded after benchmark compatibility anomaly: zero MLM Top-1/Top-5/Top-10 across the evaluated standard cells and English diagnostic."
-      },
-      "audit_artifact": "outputs/model_selection/deberta_exclusion_audit.json"
+      "evidence": "Primary pairwise inference uses Wilcoxon signed-rank + Holm correction + Kerby's paired rank-biserial correlation r_prb. Cell accounting verifies wins + ties + losses = 25. Cliff's delta isolated strictly as unpaired descriptive statistic."
     },
-    "4_representation_count": {
+    "A5_representation_provenance": {
       "status": "PASS",
-      "count": 5,
-      "representations": ["json", "key_value", "mixed", "narrative", "template"]
+      "evidence": "Cryptographic SHA-256 locking across frozen Corpus A, clean documents, generation script, and 5 representation JSONL artifacts in outputs/representation_provenance.json and .md."
     },
-    "5_subset_count": {
+    "A8_crossed_statistical_analysis": {
       "status": "PASS",
-      "count": 5,
-      "subsets": ["balanced_knowledge", "high_knowledge", "low_knowledge", "medium_knowledge", "random_baseline"]
+      "evidence": "Balanced 3-way crossed repeated-measures ANOVA (Models x Reps x Subsets = 175 cells) with 1,000 block-respecting permutations; Friedman retained strictly as secondary reference."
     },
-    "6_benchmark_cell_count": {
+    "B4_kendalls_w_concordance": {
       "status": "PASS",
-      "cell_count": 175,
-      "calculation": "7 models x 5 representations x 5 subsets = 175 cells (dynamically derived, no hardcoding)"
+      "evidence": "Multi-ranking concordance evaluated via Kendall's W with tie corrections (W = 0.8714 across representations, W = 0.9886 across subsets)."
     },
-    "7_pairwise_comparison_count": {
+    "B9_mecs_loss_normalization": {
       "status": "PASS",
-      "pairwise_count": 21,
-      "calculation": "7 choose 2 = 21 pairwise comparisons (dynamically derived)"
+      "evidence": "Loss component normalized via fixed monotonic cohort-independent transformation 1.0 / (1.0 + loss); proven cohort-invariant."
     },
-    "8_baseline_subword_mode_status": {
+    "deberta_permanent_exclusion": {
       "status": "PASS",
-      "namespace": "outputs/stage-14/evaluations/cache/",
-      "cache_files_count": 175,
-      "details": "Preserved 175 valid baseline subword evaluations for the 7 active models with zero DeBERTa contamination."
+      "evidence": "Zero active occurrences in Stage 13 candidates, Stage 14-17 pipelines, or active outputs; audit artifact at outputs/model_selection/deberta_exclusion_audit.json."
     },
-    "9_wwm_word_level_mode_status": {
+    "mecs_terminology_rename": {
       "status": "PASS",
-      "namespace": "outputs/stage-14/evaluations/cache_wwm_word/",
-      "details": "Whole-word masking grouping and strict word reconstruction implemented, smoke-tested, and validated with separate cache namespace."
-    },
-    "10_paired_effect_size_status": {
-      "status": "PASS",
-      "primary_paired_effect_size": "Kerby's Paired Rank-Biserial Correlation (paired_rank_biserial)",
-      "unpaired_effect_size": "Cliff's Delta (unpaired_cliffs_delta, descriptive only)",
-      "dominance_metrics": ["wins_a", "ties", "losses_a", "paired_win_rate_a"],
-      "significance_test": "Wilcoxon signed-rank test with Holm-Bonferroni correction"
-    },
-    "11_provenance_hash_status": {
-      "status": "PASS",
-      "artifacts": [
-        "outputs/representation_provenance.json",
-        "outputs/representation_provenance.md"
-      ],
-      "hash_coverage": "Frozen corpus text, metadata JSONL, stage 08 manifest, stage 07 clean documents, generation script, and all 5 representations locked with SHA-256."
-    },
-    "12_crossed_statistical_analysis_status": {
-      "status": "PASS",
-      "primary_analysis": "Crossed 3-Way Repeated-Measures ANOVA (Models x Representations x Subsets) with 1,000 block-respecting permutations",
-      "secondary_analysis": "Friedman omnibus Chi-Square test (secondary reference only)",
-      "artifact": "outputs/stage-16/stage16_crossed_anova.csv"
-    },
-    "13_kendall_w_status": {
-      "status": "PASS",
-      "metric": "Kendall's W (Coefficient of Concordance)",
-      "rep_stability_kendalls_w": 0.8714,
-      "subset_stability_kendalls_w": 0.9886,
-      "details": "Replaced Kendall tau for multi-ranking concordance across formats and subsets; handles ties appropriately."
-    },
-    "14_mecs_cohort_independence_status": {
-      "status": "PASS",
-      "composite_name": "Maritime Encoder Composite Score (MECS)",
-      "loss_normalization": "1.0 / (1.0 + mlm_loss)",
-      "invariance_verified": true,
-      "details": "Permanently renamed MUI to MECS. Bounded monotonic loss normalization proven invariant to cohort additions/deletions."
-    },
-    "15_test_suite_status": {
-      "status": "PASS",
-      "tests_run": 30,
-      "tests_failed": 0,
-      "tests_errored": 0,
-      "details": "100% pass rate across test_forensic_fixes.py, test_notebook_orchestration.py, test_quality_optimizations.py, and verify_pipeline.py."
-    },
-    "16_notebook_status": {
-      "status": "PASS",
-      "notebook": "MaritimeBench_Full_Pipeline.ipynb",
-      "execution_policy": "ALWAYS_RERUN",
-      "architecture": "Pure sequential execution + artifact existence & non-zero size inventory without internal schema duplication."
-    },
-    "17_stale_output_contamination_check": {
-      "status": "PASS",
-      "archive_location": "outputs/archive/pre_deberta_exclusion/",
-      "active_directory_clean": true,
-      "details": "All previous 8-model DeBERTa artifacts and legacy MUI sensitivity files safely isolated in archive; active outputs contain zero stale entries."
+      "evidence": "MUI / Maritime Understanding Index completely retired from active code, outputs, reports, and notebook in favor of Maritime Encoder Composite Score (MECS)."
     }
+  },
+  "colab_readiness": {
+    "root_detection": {
+      "status": "PASS",
+      "evidence": "find_project_root() in notebook dynamically resolves local path, /content/TSBC-MaritimePipeline-*, /content, and Drive mounts."
+    },
+    "dependency_verification": {
+      "status": "PASS",
+      "evidence": "Preflight verifies torch, transformers, pandas, numpy, scipy, matplotlib, seaborn, sklearn, tqdm."
+    },
+    "python_compatibility": {
+      "status": "PASS",
+      "evidence": "Verified compatible on Python 3.10, 3.11, 3.12."
+    },
+    "cuda_detection": {
+      "status": "PASS",
+      "evidence": "Detects CUDA availability, CUDA driver/toolkit version, GPU hardware name, and VRAM."
+    },
+    "gpu_readiness": {
+      "status": "PASS",
+      "evidence": "Stage 14 explicitly gated with 'GPU REQUIRED FOR FULL BENCHMARK'; CPU allowed only for lightweight smoke testing when ALLOW_CPU_SMOKE_TEST=True."
+    },
+    "notebook_stage_ordering": {
+      "status": "PASS",
+      "evidence": "Strict sequential execution Stage 01 through Stage 18 via run_stage()."
+    },
+    "nonzero_exit_code_gating": {
+      "status": "PASS",
+      "evidence": "BenchmarkStageException terminates execution immediately on any non-zero exit code."
+    },
+    "stale_output_protection": {
+      "status": "PASS",
+      "evidence": "EXECUTION_POLICY = 'ALWAYS_RERUN' ensures full reproducible re-execution without consuming stale artifacts."
+    },
+    "stage13_preflight": {
+      "status": "PASS",
+      "evidence": "Evaluates full 13-candidate pool, verifies WWM compatibility across tokenizers, exports selected_models.json and candidate_selection_audit.json."
+    },
+    "stage14_wwm_preflight": {
+      "status": "PASS",
+      "evidence": "Preflight check on bert-base-uncased, roberta-base, answerdotai/ModernBERT-base confirms fast tokenizer, word_ids(), logits shape, and finite loss."
+    },
+    "stage15_gate": {
+      "status": "PASS",
+      "evidence": "Dynamically consumes Stage 14 cache, resolves WWM cache namespace, computes MECS with cohort-independent normalization."
+    },
+    "stage16_gate": {
+      "status": "PASS",
+      "evidence": "Consumes comparison.csv, executes 3-way crossed ANOVA + 1,000 permutations + paired Wilcoxon/Holm + Kerby's r_prb."
+    },
+    "stage17_gate": {
+      "status": "PASS",
+      "evidence": "Executes 8-layer evidence hierarchy, produces benchmark_report.md and decision_summary.json without hardcoded thresholds."
+    }
+  },
+  "test_results": {
+    "status": "PASS",
+    "total_tests": 30,
+    "passed": 30,
+    "failed": 0,
+    "skipped": 0,
+    "verify_pipeline_result": "PASS (All 26 pipeline artifact schemas and counts verified)"
+  },
+  "documentation": {
+    "status": "PASS",
+    "readme_updated": true,
+    "documentation_updated": true,
+    "no_new_doc_files_created": true,
+    "stale_active_terminology_scan": "PASS: 0 occurrences of active MUI, 200 cells, 28 pairwise, or [:7] slicing in production scripts."
+  },
+  "stage14_classification_audit": {
+    "status": "PASS",
+    "root_cause": {
+      "historical_token_id_classification": "English function words (and, the, in, at) leaked into maritime_token_ids via multi-word phrases (e.g. 'search and rescue' -> 'and'), artificially inflating historical scores to ~80-86% on only 344 tokens, while Byte-Level BPE space-prefixed tokens (\u0120cargo, \u0120vessel) failed to match standalone IDs.",
+      "regex_span_matching_regression": "Commit a9c9bfb introduced regex boundary matching across all 335 Stage 10 terms without stopword filtering, causing massive dilution (1,652 tokens matched) and regressing maritime accuracy to general English baseline.",
+      "commit_5680cfe_reversion": "Reverting to legacy token-ID lookup recovered historical scores merely by restoring stopword leakage and BPE space mismatch."
+    },
+    "applied_fix": {
+      "build_vocabulary_token_sets": "EXCLUDED_STOPWORDS strictly filters function words; leading-space variations (\u0120) included for BPE/SentencePiece tokenizers.",
+      "whole_word_consistency": "word_ids() boundaries propagate domain and rare status across all constituent subword pieces of intact words; zero sibling leakage or index mismatch.",
+      "strict_word_evaluation": "Multi-piece words require 100% of constituent subwords to be correctly predicted for top-1 credit."
+    },
+    "three_way_control_results": {
+      "roberta_base": {
+        "control_a_subword_subword": {
+          "overall_top1": 0.4409,
+          "maritime_top1": 0.3953,
+          "general_top1": 0.4598,
+          "mar_count": 129
+        },
+        "control_b_wwm_subword": {
+          "overall_top1": 0.3401,
+          "maritime_top1": 0.1623,
+          "general_top1": 0.4345,
+          "mar_count": 154
+        },
+        "control_c_wwm_word": {
+          "overall_top1": 0.4005,
+          "maritime_top1": 0.2119,
+          "general_top1": 0.4865,
+          "mar_count": 154
+        }
+      },
+      "modernbert_base": {
+        "control_a_subword_subword": {
+          "overall_top1": 0.4079,
+          "maritime_top1": 0.3692,
+          "general_top1": 0.4247,
+          "mar_count": 130
+        },
+        "control_b_wwm_subword": {
+          "overall_top1": 0.3472,
+          "maritime_top1": 0.1533,
+          "general_top1": 0.4504,
+          "mar_count": 150
+        },
+        "control_c_wwm_word": {
+          "overall_top1": 0.4021,
+          "maritime_top1": 0.1949,
+          "general_top1": 0.498,
+          "mar_count": 150
+        }
+      }
+    },
+    "cache_safety": {
+      "primary_cache_namespace": "outputs/stage-14/evaluations/cache_wwm_word/",
+      "required_fields_present": [
+        "masking_mode",
+        "evaluation_unit",
+        "mask_rate",
+        "scoring_method",
+        "tokenizer",
+        "model",
+        "representation",
+        "subset"
+      ],
+      "logging_terminology": "Explicit 'WWM-15 Word Evaluations' terminology enforced."
+    },
+    "SAFE_TO_RERUN_STAGE_14": true
   }
 }

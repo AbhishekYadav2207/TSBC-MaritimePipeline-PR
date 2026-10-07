@@ -5,9 +5,9 @@ This report evaluates the scale, document length, structural diversity, scaffold
 ---
 
 ## 1. Corpus Scale & Information Density
-* **Total Documents**: 96,860
-* **Total Words (Tokens)**: 3,733,990
-* **Total Characters**: 24,353,176
+* **Total Documents**: 96,844
+* **Total Words (Tokens)**: 3,733,492
+* **Total Characters**: 24,349,927
 * **Unique Vocabulary**: 42,780 terms
 * **Maritime Information Density (MID)**: **3.67** concepts / 100 words
 
@@ -17,14 +17,14 @@ This report evaluates the scale, document length, structural diversity, scaffold
 * **Mean Length**: 38.55 words
 * **Median Length**: 37.00 words
 * **Standard Deviation**: 20.17 words
-* **Percentiles**: P10=10, P25=25, P50=37, P75=51, P90=67, P95=73
+* **Percentiles**: P10=10, P25=25, P50=37, P75=50, P90=67, P95=73
 * **Min / Max**: 4 / 513 words
 
 ### Length Buckets
-* `<20 words`: 18,234 (18.8%)
-* `20–50 words`: 53,367 (55.1%)
-* `50–100 words`: 24,965 (25.8%)
-* `100–200 words`: 270 (0.3%)
+* `<20 words`: 18,238 (18.8%)
+* `20–50 words`: 53,352 (55.1%)
+* `50–100 words`: 24,962 (25.8%)
+* `100–200 words`: 268 (0.3%)
 * `200–512 words`: 23 (0.0%)
 * `>512 words`: 1 (0.0%)
 
@@ -33,16 +33,16 @@ This report evaluates the scale, document length, structural diversity, scaffold
 ## 3. Linguistic Diversity
 * **Type-Token Ratio (TTR)**: 0.01146
 * **Shannon Entropy**: 8.3172 bits
-* **Unique Sentences**: 145,668
-* **Unique Paragraphs**: 96,856
+* **Unique Sentences**: 145,674
+* **Unique Paragraphs**: 96,841
 
 ---
 
 ## 4. Duplication & Near-Duplicate Analysis
 * **Sentence Duplicate Ratio**: 9.43%
 * **Paragraph Duplicate Ratio**: 0.00%
-* **Scaffold-Reduced Near-Duplicate Rate (MinHash LSH)**: 17.36%
-* **Template Pattern Concentration**: 41.82% (Top pattern: `raw_tsb_summary`)
+* **Scaffold-Reduced Near-Duplicate Rate (MinHash LSH)**: 17.88%
+* **Template Pattern Concentration**: 41.83% (Top pattern: `raw_tsb_summary`)
 
 ---
 
@@ -54,21 +54,21 @@ This report evaluates the scale, document length, structural diversity, scaffold
 ---
 
 ## 6. Template Influence
-* **Template Scaffolding Token Ratio**: 58.46%
-* **Domain-Derived Token Ratio**: 41.54%
+* **Template Scaffolding Token Ratio**: 58.47%
+* **Domain-Derived Token Ratio**: 41.53%
 
 ---
 
 ## 7. BERT Tokenizer Compatibility
 * **BERT Model**: `bert-base-uncased`
-* **Tokenizer Fertility (Subwords/Word)**: 0.0000
-* **Maritime Fragmentation Rate**: 0.00%
+* **Tokenizer Fertility (Subwords/Word)**: 1.3977
+* **Maritime Fragmentation Rate**: 26.57%
 * **OOV / [UNK] Rate**: 0.0000%
 
 ---
 
 ## 8. BERT MLM Baseline Diagnostic
-* **MLM Evaluation Model**: `N/A`
+* **MLM Evaluation Model**: `bert-base-uncased`
 * **General Tokens Top-1 Accuracy**: 0.00%
 * **Maritime Tokens Top-1 Accuracy**: 0.00%
 * **Performance Gap**: 0.00%

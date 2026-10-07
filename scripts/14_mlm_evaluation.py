@@ -58,6 +58,18 @@ RARE_MARITIME_TERMS = [
     "bilge", "fairlead", "windward", "leeward", "davit", "bitts", "bollard"
 ]
 
+EXCLUDED_STOPWORDS = {
+    "a", "an", "the", "and", "or", "but", "in", "on", "at", "to", "for", "of", "with",
+    "by", "from", "up", "about", "into", "over", "after", "is", "are", "was", "were",
+    "be", "been", "being", "have", "has", "had", "do", "does", "did", "will", "would",
+    "shall", "should", "may", "might", "must", "can", "could", "that", "which", "who",
+    "what", "when", "where", "why", "how", "all", "any", "both", "each", "few", "more",
+    "most", "other", "some", "such", "no", "nor", "not", "only", "own", "same", "so",
+    "than", "too", "very", "s", "t", "just", "don", "should", "now",
+    "it", "its", "they", "them", "their", "we", "us", "our", "you", "your", "he", "him",
+    "his", "she", "her"
+}
+
 
 def compute_cache_key(model_name: str, rep: str, sub: str, masking_mode: str = "subword", evaluation_unit: str = "subword") -> str:
     """
@@ -157,22 +169,48 @@ def build_vocabulary_token_sets(tokenizer, vocab_terms: list):
     """
     Constructs token ID sets for maritime vocabulary, rare terms, and categories.
     Used for evaluation metrics tracking and fallback token matching.
+    Includes leading-space variations for BPE/SentencePiece tokenizers and
+    strictly filters English function words/stopwords from leaking into domain sets.
     """
     maritime_token_ids = set()
     category_token_ids = {cat: set() for cat in CATEGORIES}
     rare_token_ids = set()
 
     for term in vocab_terms:
-        sub_ids = tokenizer.convert_tokens_to_ids(tokenizer.tokenize(term))
-        maritime_token_ids.update(sub_ids)
-        cat = get_term_category(term)
-        category_token_ids[cat].update(sub_ids)
+        term_clean = term.strip()
+        if not term_clean:
+            continue
+        words = term_clean.split()
+        cat = get_term_category(term_clean)
+        for w in words:
+            w_lower = w.lower()
+            if w_lower in EXCLUDED_STOPWORDS or len(w_lower) <= 1:
+                continue
+            sub_ids = tokenizer.convert_tokens_to_ids(tokenizer.tokenize(w))
+            sub_ids_spaced = tokenizer.convert_tokens_to_ids(tokenizer.tokenize(" " + w))
+            for sid in set(sub_ids + sub_ids_spaced):
+                dec = tokenizer.decode([sid]).strip().lower()
+                if dec in EXCLUDED_STOPWORDS or len(dec) <= 1:
+                    continue
+                maritime_token_ids.add(sid)
+                category_token_ids[cat].add(sid)
 
     for r_term in RARE_MARITIME_TERMS:
-        r_ids = tokenizer.convert_tokens_to_ids(tokenizer.tokenize(r_term))
-        rare_token_ids.update(r_ids)
-        maritime_token_ids.update(r_ids)
-        category_token_ids["navigation"].update(r_ids)
+        r_clean = r_term.strip()
+        words = r_clean.split()
+        for w in words:
+            w_lower = w.lower()
+            if w_lower in EXCLUDED_STOPWORDS or len(w_lower) <= 1:
+                continue
+            r_ids = tokenizer.convert_tokens_to_ids(tokenizer.tokenize(w))
+            r_ids_spaced = tokenizer.convert_tokens_to_ids(tokenizer.tokenize(" " + w))
+            for sid in set(r_ids + r_ids_spaced):
+                dec = tokenizer.decode([sid]).strip().lower()
+                if dec in EXCLUDED_STOPWORDS or len(dec) <= 1:
+                    continue
+                rare_token_ids.add(sid)
+                maritime_token_ids.add(sid)
+                category_token_ids["navigation"].add(sid)
 
     return maritime_token_ids, rare_token_ids, category_token_ids
 
@@ -541,6 +579,22 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
 
                     word_to_positions, position_to_word = extract_word_groups(wids, eligible_positions)
                     batch_word_to_positions.append(word_to_positions)
+
+                    # Propagate word-level domain classification across all subword pieces of intact words
+                    for wid, positions in word_to_positions.items():
+                        is_rare = any(p in rare_pos for p in positions)
+                        is_mar = is_rare or any(p in mar_pos for p in positions)
+                        if is_rare:
+                            rare_pos.update(positions)
+                            mar_pos.update(positions)
+                            cat_pos["navigation"].update(positions)
+                        elif is_mar:
+                            mar_pos.update(positions)
+                            w_cats = [c for c, c_set in cat_pos.items() if any(p in c_set for p in positions)]
+                            for c in w_cats:
+                                cat_pos[c].update(positions)
+
+                    gen_pos = [p for p in eligible_positions if p not in mar_pos]
 
                     if masking_strategy == "domain_aware_15":
                         selected, sel_words = create_whole_word_domain_aware_mask(
@@ -1247,19 +1301,97 @@ def run_smoke_test(stage13_path: Path, output_dir: Path):
     assert len(ranked) == len(reps) * len(subs), f"Expected {len(reps) * len(subs)} ranked cells, got {len(ranked)}"
     logger.info(f"[OK] Selection logic passed: selected {len(selected)} diverse configurations from {len(ranked)} cells.")
 
-    logger.info("=== [SUCCESS] All Stage 14 Smoke Tests (Modes 1, 2, 3 + WWM + PLL) Completed Successfully! ===")
+
+def run_preflight_checks(target_models: list, device: torch.device, sample_doc: str = "the vessel collided with the pier damaging the hull and fairlead.") -> bool:
+    """
+    Section 4E / 11I: Comprehensive preflight safety gate across candidate models.
+    Verifies tokenizer, model, MLM head, logits shape [B, L, V], label validity,
+    finite cross-entropy loss, and fast tokenizer word_ids() alignment.
+    Stops execution on failure before expensive benchmark execution.
+    """
+    logger.info("=" * 70)
+    logger.info("STAGE 14 PRE-FLIGHT VERIFICATION: Vocabulary, MLM Head & Alignment Safety")
+    logger.info("=" * 70)
+
+    for m in target_models:
+        logger.info(f"Preflight testing model: {m}...")
+        try:
+            tokenizer = AutoTokenizer.from_pretrained(m)
+        except Exception as e:
+            raise RuntimeError(f"PREFLIGHT FAILURE: Failed to load tokenizer for {m}: {e}")
+
+        mask_tok = getattr(tokenizer, "mask_token", None)
+        mask_id = getattr(tokenizer, "mask_token_id", None)
+        if mask_tok is None or mask_id is None:
+            raise ValueError(f"PREFLIGHT FAILURE: Model {m} does not define a valid mask token (mask_token={mask_tok}, mask_token_id={mask_id}).")
+
+        tok_vocab_size = getattr(tokenizer, "vocab_size", len(tokenizer) if hasattr(tokenizer, "__len__") else 0)
+
+        if not getattr(tokenizer, "is_fast", False):
+            raise ValueError(f"PREFLIGHT FAILURE: Model {m} does not have a fast tokenizer backend required for word_ids() alignment.")
+
+        enc = tokenizer(sample_doc, return_offsets_mapping=True, return_tensors="pt")
+        if not hasattr(enc, "word_ids"):
+            raise ValueError(f"PREFLIGHT FAILURE: Model {m} tokenizer encoding does not provide word_ids().")
+
+        wids = enc.word_ids(batch_index=0)
+        if wids is None or len(wids) == 0:
+            raise ValueError(f"PREFLIGHT FAILURE: Model {m} word_ids() returned None or empty.")
+
+        try:
+            model = AutoModelForMaskedLM.from_pretrained(m)
+            model.to(device)
+            model.eval()
+        except Exception as e:
+            raise RuntimeError(f"PREFLIGHT FAILURE: Failed to instantiate AutoModelForMaskedLM for {m}: {e}")
+
+        cfg_vocab_size = getattr(model.config, "vocab_size", tok_vocab_size)
+
+        inp_ids = enc["input_ids"].to(device)
+        attn_mask = enc.get("attention_mask", torch.ones_like(inp_ids)).to(device)
+
+        masked_ids = inp_ids.clone()
+        pos_to_mask = min(2, masked_ids.size(1) - 1)
+        orig_token_id = masked_ids[0, pos_to_mask].item()
+        masked_ids[0, pos_to_mask] = mask_id
+
+        labels = torch.full_like(masked_ids, -100)
+        labels[0, pos_to_mask] = orig_token_id
+
+        with torch.no_grad():
+            outputs = model(input_ids=masked_ids, attention_mask=attn_mask, labels=labels)
+            logits = outputs.logits
+            loss = outputs.loss
+
+        if logits.dim() != 3 or logits.size(0) != 1 or logits.size(1) != masked_ids.size(1):
+            raise ValueError(f"PREFLIGHT FAILURE: Model {m} logits shape {logits.shape} does not match expected dimensions.")
+
+        loss_val = float(loss.item()) if loss is not None else float("nan")
+        if not np.isfinite(loss_val):
+            raise ValueError(f"PREFLIGHT FAILURE: Model {m} computed non-finite MLM loss ({loss_val}).")
+
+        pred_id = int(torch.argmax(logits[0, pos_to_mask]).item())
+        if pred_id < 0 or pred_id >= logits.size(-1):
+            raise ValueError(f"PREFLIGHT FAILURE: Model {m} prediction ID {pred_id} is out of vocabulary bounds [0, {logits.size(-1)}).")
+
+        logger.info(f"  [OK] {m}: Fast=True | word_ids=OK | Vocab={tok_vocab_size} | Logits={list(logits.shape)} | Loss={loss_val:.4f}")
+
+    logger.info("=" * 70)
+    logger.info("[SUCCESS] ALL PRE-FLIGHT VOCABULARY & MLM SAFETY CHECKS PASSED!")
+    logger.info("=" * 70)
     return True
 
 def main():
     parser = argparse.ArgumentParser(description="Stage 14: Masked Language Model Benchmarking & Analysis")
     parser.add_argument("--fresh", action="store_true", help="Force fresh recomputation of all evaluations, ignoring old cache.")
     parser.add_argument("--smoke-test", action="store_true", help="Run lightweight smoke test on a minimal sample without executing full benchmark.")
+    parser.add_argument("--preflight", action="store_true", help="Run vocabulary, MLM head, and word alignment pre-flight checks and exit.")
     parser.add_argument("--masking_mode", "--masking-mode", dest="masking_mode", type=str,
-                        choices=["subword", "whole_word", "wwm_subword", "wwm_word"], default="subword",
-                        help="MLM masking strategy: 'subword' (Mode 1 baseline) or 'whole_word' (Modes 2 & 3 WWM). Default: 'subword'.")
+                        choices=["subword", "whole_word", "wwm_subword", "wwm_word"], default="whole_word",
+                        help="MLM masking strategy: 'whole_word' (PRIMARY WWM) or 'subword' (baseline/diagnostic). Default: 'whole_word'.")
     parser.add_argument("--evaluation_unit", "--evaluation-unit", dest="evaluation_unit", type=str,
                         choices=["subword", "word"], default=None,
-                        help="Evaluation scoring unit: 'subword' (subword token accuracy) or 'word' (strict whole-word reconstruction). Default: 'subword'.")
+                        help="Evaluation scoring unit: 'word' (strict whole-word reconstruction) or 'subword' (subword token accuracy). Default: 'word' for whole_word.")
     parser.add_argument("--device", type=str, choices=["auto", "cpu", "cuda"], default="auto",
                         help="Compute device: 'auto' (use CUDA if available), 'cuda' (require CUDA), 'cpu' (force CPU). Default: 'auto'.")
     parser.add_argument("--models", nargs="+", default=None, help="Optional subset of models to evaluate instead of full cohort.")
@@ -1275,7 +1407,7 @@ def main():
         resolved_evaluation_unit = "subword"
     elif args.masking_mode == "whole_word":
         resolved_masking_mode = "whole_word"
-        resolved_evaluation_unit = args.evaluation_unit if args.evaluation_unit else "subword"
+        resolved_evaluation_unit = args.evaluation_unit if args.evaluation_unit else "word"
     else:  # subword
         resolved_masking_mode = "subword"
         resolved_evaluation_unit = "subword"
@@ -1356,13 +1488,22 @@ def main():
         f"| Evaluation unit: {resolved_evaluation_unit} | Internal mode: {internal_mode}"
     )
 
+    if args.preflight:
+        run_preflight_checks(target_models, device)
+        return
+
+    # Pre-flight safety check on target models before factorial evaluation
+    if not args.smoke_test and (args.fresh or not list(cache_random_dir.glob("*.json"))):
+        run_preflight_checks(target_models, device)
+
+    eval_name = "WWM-15 Word Evaluations" if internal_mode == "wwm_word" else ("WWM-15 Subword Evaluations" if internal_mode == "wwm_subword" else "Random-15 Subword Evaluations")
     total_random_runs = len(target_models) * len(representations) * len(subsets)
-    logger.info(f"Broad Random-15 evaluations: {total_random_runs} runs ({len(target_models)} models x {len(representations)} reps x {len(subsets)} subsets)")
+    logger.info(f"Broad {eval_name}: {total_random_runs} runs ({len(target_models)} models x {len(representations)} reps x {len(subsets)} subsets)")
 
     if args.fresh:
-        logger.info("Executing fresh benchmark: existing Random-15 cache will be recomputed.")
+        logger.info(f"Executing fresh benchmark: existing {eval_name} cache will be recomputed.")
     else:
-        logger.info(f"Preserving existing Random-15 cache entries in {cache_random_dir} where available.")
+        logger.info(f"Preserving existing cache entries in {cache_random_dir} where available.")
 
     # =========================================================================
     # PHASE 1: Broad Random-15 Evaluation (factorial runs)
@@ -1453,6 +1594,12 @@ def main():
                 domain_shift_gap = float(gen_eng_top1 - maritime_top1)
 
                 eval_record = {
+                    "masking_mode": resolved_masking_mode,
+                    "evaluation_unit": resolved_evaluation_unit,
+                    "mask_rate": 0.15,
+                    "scoring_method": "strict_word_reconstruction" if resolved_evaluation_unit == "word" else "subword_mlm_accuracy",
+                    "tokenizer": getattr(tokenizer, "name_or_path", str(tokenizer.__class__.__name__)),
+                    "model": model_name,
                     "model_name": model_name,
                     "clean_model_name": clean_model,
                     "representation": rep,
@@ -1461,7 +1608,7 @@ def main():
                     "general_english_baseline_top1": float(gen_eng_top1),
                     "domain_shift_gap": domain_shift_gap,
                     "experiment_metadata": {
-                        "masking_strategy": "random_15",
+                        "masking_strategy": "wwm_15" if is_wwm else "random_15",
                         "masking_mode": resolved_masking_mode,
                         "evaluation_unit": resolved_evaluation_unit,
                         "internal_mode": internal_mode,
@@ -1514,7 +1661,7 @@ def main():
         with open(bert_cache[0], "r", encoding="utf-8") as f_in, open(stage_dir / "bert_mlm_evaluation.json", "w", encoding="utf-8") as f_out:
             json.dump(json.load(f_in), f_out, indent=2)
 
-    logger.info(f"Phase 1 complete: {len(random_15_records)} Random-15 evaluations available.")
+    logger.info(f"Phase 1 complete: {len(random_15_records)} {eval_name} available.")
 
     # =========================================================================
     # PHASE 2: Screen Cells & Select Diverse Configurations
@@ -1753,7 +1900,7 @@ def main():
 
     logger.info("=========================================================================")
     logger.info("Stage 14 MLM Evaluation & Analysis Completed Successfully.")
-    logger.info(f"  * Broad Random-15 evaluations: {len(random_15_records)}")
+    logger.info(f"  * Broad {eval_name}: {len(random_15_records)}")
     logger.info(f"  * Screened Configurations Selected: {len(selected_cells)}")
     logger.info(f"  * Focused Domain-Aware-15 evaluations: {len(focused_domain_results)}")
     logger.info(f"  * Focused Sampled-PLL evaluations: {len(pll_results)}")

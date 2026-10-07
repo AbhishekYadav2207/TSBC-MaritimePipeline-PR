@@ -45,7 +45,14 @@ outputs_/
 outputs.zip
 scratch/
 
+dapt/
+
 paper-version-5/
 Misc/
+# Colab & Runtime caches
 notebook_execution_orchestration_simplification_20261007_120300/
-notebooks/
+.ipynb_checkpoints/
+outputs/runs/
+.pytest_cache/
+hf_cache/
+*.safetensors

@@ -4,9 +4,9 @@
   "tokenizer_class": "BertTokenizer",
   "vocab_size": 28996,
   "sampled_documents": 1500,
-  "total_raw_words_analyzed": 60784,
-  "total_subword_tokens_analyzed": 89853,
-  "average_subwords_per_word": 1.478234403790471,
+  "total_raw_words_analyzed": 60626,
+  "total_subword_tokens_analyzed": 89730,
+  "average_subwords_per_word": 1.4800580608979645,
   "maritime_fragmentation_rate": 0.3552,
   "single_token_vocabulary_coverage": 0.6448,
   "single_token_count": 216,
@@ -17,7 +17,7 @@
   "max_pieces_per_term": 5,
   "oov_rate": 0.0,
   "oov_status": "measured",
-  "tokenizer_speed_tokens_per_sec": 72038.53056618186,
+  "tokenizer_speed_tokens_per_sec": 34540.13738600228,
   "sequence_length_distribution": {
     "under_128": 1499,
     "under_256": 1,
@@ -1044,17 +1044,17 @@
   "informativeness_stratification": {
     "Medium Knowledge": {
       "tier": "Medium Knowledge",
-      "document_count": 679,
-      "total_raw_words": 25721,
-      "total_subword_tokens": 37511,
-      "mean_fertility": 1.4584,
-      "mean_sequence_length": 55.24,
-      "mean_document_fragmentation": 0.2715,
-      "mean_document_coverage": 0.7285,
+      "document_count": 689,
+      "total_raw_words": 26346,
+      "total_subword_tokens": 38572,
+      "mean_fertility": 1.4641,
+      "mean_sequence_length": 55.98,
+      "mean_document_fragmentation": 0.2741,
+      "mean_document_coverage": 0.7259,
       "oov_rate": 0.0,
       "oov_status": "measured",
       "sequence_length_distribution": {
-        "under_128": 679,
+        "under_128": 689,
         "under_256": 0,
         "under_512": 0,
         "over_512": 0
@@ -1062,17 +1062,17 @@
     },
     "High Knowledge": {
       "tier": "High Knowledge",
-      "document_count": 423,
-      "total_raw_words": 25913,
-      "total_subword_tokens": 39044,
-      "mean_fertility": 1.5067,
-      "mean_sequence_length": 92.3,
-      "mean_document_fragmentation": 0.283,
-      "mean_document_coverage": 0.717,
+      "document_count": 411,
+      "total_raw_words": 25106,
+      "total_subword_tokens": 37802,
+      "mean_fertility": 1.5057,
+      "mean_sequence_length": 91.98,
+      "mean_document_fragmentation": 0.2832,
+      "mean_document_coverage": 0.7168,
       "oov_rate": 0.0,
       "oov_status": "measured",
       "sequence_length_distribution": {
-        "under_128": 422,
+        "under_128": 410,
         "under_256": 1,
         "under_512": 0,
         "over_512": 0
@@ -1080,17 +1080,17 @@
     },
     "Low Knowledge": {
       "tier": "Low Knowledge",
-      "document_count": 198,
-      "total_raw_words": 2823,
-      "total_subword_tokens": 4087,
-      "mean_fertility": 1.4478,
-      "mean_sequence_length": 20.64,
-      "mean_document_fragmentation": 0.2592,
-      "mean_document_coverage": 0.7408,
+      "document_count": 197,
+      "total_raw_words": 2686,
+      "total_subword_tokens": 3905,
+      "mean_fertility": 1.4538,
+      "mean_sequence_length": 19.82,
+      "mean_document_fragmentation": 0.258,
+      "mean_document_coverage": 0.742,
       "oov_rate": 0.0,
       "oov_status": "measured",
       "sequence_length_distribution": {
-        "under_128": 198,
+        "under_128": 197,
         "under_256": 0,
         "under_512": 0,
         "over_512": 0
@@ -1098,17 +1098,17 @@
     },
     "Redundant": {
       "tier": "Redundant",
-      "document_count": 200,
-      "total_raw_words": 6327,
-      "total_subword_tokens": 9211,
-      "mean_fertility": 1.4558,
-      "mean_sequence_length": 46.05,
-      "mean_document_fragmentation": 0.273,
-      "mean_document_coverage": 0.727,
+      "document_count": 203,
+      "total_raw_words": 6488,
+      "total_subword_tokens": 9451,
+      "mean_fertility": 1.4567,
+      "mean_sequence_length": 46.56,
+      "mean_document_fragmentation": 0.2729,
+      "mean_document_coverage": 0.7271,
       "oov_rate": 0.0,
       "oov_status": "measured",
       "sequence_length_distribution": {
-        "under_128": 200,
+        "under_128": 203,
         "under_256": 0,
         "under_512": 0,
         "over_512": 0
@@ -1117,20 +1117,20 @@
   },
   "document_correlations": {
     "informativeness_vs_fertility": {
-      "rho": 0.1936,
+      "rho": 0.1869,
       "p_value": 0.0,
       "sample_size": 1500,
       "status": "computed"
     },
     "informativeness_vs_fragmentation": {
-      "rho": 0.1102,
-      "p_value": 1.9e-05,
+      "rho": 0.1241,
+      "p_value": 1e-06,
       "sample_size": 1500,
       "status": "computed"
     },
     "informativeness_vs_coverage": {
-      "rho": -0.1102,
-      "p_value": 1.9e-05,
+      "rho": -0.1241,
+      "p_value": 1e-06,
       "sample_size": 1500,
       "status": "computed"
     },
@@ -1500,45 +1500,67 @@
     "vocab_size": 28996,
     "domain_token_coverage": 0.6448,
     "domain_fragmentation": 0.3552,
-    "domain_fertility": 1.4782,
+    "domain_fertility": 1.4801,
     "domain_unknown_rate": 0.0,
     "oov_status": "measured",
-    "mean_sequence_length": 59.9,
-    "tokenization_speed": 72038.53,
-    "mean_document_fragmentation": 0.2733,
-    "mean_document_coverage": 0.7267,
+    "mean_sequence_length": 59.82,
+    "tokenization_speed": 34540.14,
+    "mean_document_fragmentation": 0.2743,
+    "mean_document_coverage": 0.7257,
     "general_vocab_coverage": 0.9468,
     "rare_maritime_coverage": 0.0,
     "stratified_by_informativeness_tier": {
       "Medium Knowledge": {
-        "document_count": 679,
-        "mean_fertility": 1.4584,
-        "mean_sequence_length": 55.24,
-        "mean_document_fragmentation": 0.2715,
-        "mean_document_coverage": 0.7285
+        "document_count": 689,
+        "mean_fertility": 1.4641,
+        "mean_sequence_length": 55.98,
+        "mean_document_fragmentation": 0.2741,
+        "mean_document_coverage": 0.7259
       },
       "High Knowledge": {
-        "document_count": 423,
-        "mean_fertility": 1.5067,
-        "mean_sequence_length": 92.3,
-        "mean_document_fragmentation": 0.283,
-        "mean_document_coverage": 0.717
+        "document_count": 411,
+        "mean_fertility": 1.5057,
+        "mean_sequence_length": 91.98,
+        "mean_document_fragmentation": 0.2832,
+        "mean_document_coverage": 0.7168
       },
       "Low Knowledge": {
-        "document_count": 198,
-        "mean_fertility": 1.4478,
-        "mean_sequence_length": 20.64,
-        "mean_document_fragmentation": 0.2592,
-        "mean_document_coverage": 0.7408
+        "document_count": 197,
+        "mean_fertility": 1.4538,
+        "mean_sequence_length": 19.82,
+        "mean_document_fragmentation": 0.258,
+        "mean_document_coverage": 0.742
       },
       "Redundant": {
-        "document_count": 200,
-        "mean_fertility": 1.4558,
-        "mean_sequence_length": 46.05,
-        "mean_document_fragmentation": 0.273,
-        "mean_document_coverage": 0.727
+        "document_count": 203,
+        "mean_fertility": 1.4567,
+        "mean_sequence_length": 46.56,
+        "mean_document_fragmentation": 0.2729,
+        "mean_document_coverage": 0.7271
       }
     }
+  },
+  "wwm_profile": {
+    "model_id": "dmis-lab/biobert-base-cased-v1.2",
+    "tokenizer_class": "BertTokenizer",
+    "is_fast": true,
+    "tokenizer_family": "WordPiece",
+    "vocab_size": 28996,
+    "special_tokens": {
+      "unk_token": "[UNK]",
+      "sep_token": "[SEP]",
+      "pad_token": "[PAD]",
+      "cls_token": "[CLS]",
+      "mask_token": "[MASK]"
+    },
+    "mask_token": "[MASK]",
+    "mask_token_id": 103,
+    "word_ids_supported": true,
+    "model_config_type": "bert",
+    "model_vocab_size": 28996,
+    "mlm_head_compatible": true,
+    "wwm_compatible": true,
+    "wwm_compatibility_status": "FULLY_COMPATIBLE"
   },
   "scientific_disclaimer": "Scientific Note: This analysis measures empirical tokenizer properties and statistical associations (Spearman rank correlation) between document informativeness scores and subword tokenizer behaviors. Correlation does not imply causation; domain informativeness does not cause tokenizer behavior or downstream masked language modeling performance. Domain informativeness scores reflect algorithmic outputs from Stage 12 heuristic/hybrid scoring, not externally validated ground truth. Pairwise similarity identifies redundancy in the tokenizer diagnostic space only, and does not claim that the underlying pretrained language models are universally redundant."
 }

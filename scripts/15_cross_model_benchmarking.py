@@ -177,6 +177,11 @@ def discover_stage14_results(cache_dir: Path, pll_path: Path = None):
             "machinery_acc": cat_rec.get("machinery_propulsion", np.nan),
             "vessel_acc": cat_rec.get("vessel_terminology", np.nan),
             "casualty_acc": cat_rec.get("casualty_incident", np.nan),
+            "word_reconstruction_top1": metrics.get("word_reconstruction_summary", {}).get("word_reconstruction_top1_accuracy", np.nan),
+            "word_reconstruction_top5": metrics.get("word_reconstruction_summary", {}).get("word_reconstruction_top5_accuracy", np.nan),
+            "word_reconstruction_top10": metrics.get("word_reconstruction_summary", {}).get("word_reconstruction_top10_accuracy", np.nan),
+            "masking_mode": item.get("experiment_metadata", {}).get("masking_mode", "whole_word"),
+            "evaluation_unit": item.get("experiment_metadata", {}).get("evaluation_unit", "word"),
             "eval_time_sec": metrics.get("evaluation_time_sec", np.nan),
             "evaluated_doc_count": float(doc_count)
         })
@@ -1093,8 +1098,8 @@ def main():
     parser = argparse.ArgumentParser(description="Stage 15: Cross-Model Benchmarking & Selection")
     parser.add_argument("--cache-dir", type=str, default=None, help="Stage 14 evaluations cache directory")
     parser.add_argument("--output-dir", type=str, default=None, help="Stage 15 output directory")
-    parser.add_argument("--masking-mode", type=str, default="subword", choices=["subword", "whole_word"], help="Evaluation masking mode")
-    parser.add_argument("--evaluation-unit", type=str, default="subword", choices=["subword", "word"], help="Evaluation unit")
+    parser.add_argument("--masking-mode", type=str, default="whole_word", choices=["subword", "whole_word"], help="Evaluation masking mode")
+    parser.add_argument("--evaluation-unit", type=str, default="word", choices=["subword", "word"], help="Evaluation unit")
     args = parser.parse_args()
 
     root = get_project_root()
@@ -1105,7 +1110,14 @@ def main():
     stage_dir.mkdir(parents=True, exist_ok=True)
 
     tok_dir = default_out / "stage-13" / "tokenizer_analysis"
-    cache_dir = Path(args.cache_dir) if args.cache_dir else default_out / "stage-14" / "evaluations" / "cache"
+    if args.cache_dir:
+        cache_dir = Path(args.cache_dir)
+    else:
+        wwm_cache = default_out / "stage-14" / "evaluations" / "cache_wwm_word"
+        if wwm_cache.exists() and any(wwm_cache.glob("*.json")):
+            cache_dir = wwm_cache
+        else:
+            cache_dir = default_out / "stage-14" / "evaluations" / "cache"
     pll_path = default_out / "stage-14" / "pll_results.json"
 
     logger.info(f"Step 1: Dynamically discovering and validating Stage 14 results from {cache_dir}...")

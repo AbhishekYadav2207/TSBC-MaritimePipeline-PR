@@ -1,9 +1,15 @@
 {
+  "model": "microsoft/deberta-v3-base",
   "model_id": "microsoft/deberta-v3-base",
   "exclusion_status": "EXCLUDED",
+  "status": "EXCLUDED",
   "reason": "Excluded after benchmark compatibility anomaly: zero MLM Top-1/Top-5/Top-10 across the evaluated standard cells and English diagnostic.",
   "exclusion_reason": "Excluded after benchmark compatibility anomaly: zero MLM Top-1/Top-5/Top-10 across the evaluated standard cells and English diagnostic.",
+  "source": "Stage 13 Candidate Screening & Benchmark Registry Exclusion",
   "source_stage": "Stage 13 (Screening / Candidate Registry Exclusion)",
+  "timestamp": "2026-10-07 20:27:14",
+  "prior_evaluation_availability": true,
+  "current_active_status": "permanently_excluded",
   "previous_evaluation_evidence": {
     "mlm_top1": 0.0,
     "mlm_top5": 0.0,
@@ -12,6 +18,5 @@
     "pairwise_record": "0W-7L across evaluated candidate cells",
     "diagnosis": "Evaluation behavior was anomalous under the implemented MLM evaluation protocol, preventing a directly comparable benchmark result."
   },
-  "model_present_in_previous_runs": true,
-  "timestamp": "2026-10-07 13:48:55"
+  "model_present_in_previous_runs": true
 }
