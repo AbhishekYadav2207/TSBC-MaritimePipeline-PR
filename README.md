@@ -10,6 +10,9 @@ A production-grade, publication-ready research and data engineering pipeline des
 - **Corpus Generation**: Produces **96,714 cleaned natural language documents** (807 MB) and **5 multi-format representations** (Narrative, Key-Value, Template, JSON, Mixed).
 - **Semantic Scoring Engine**: Evaluates documents using a **9-feature weighted scoring formula** and exports 6 quantile-classified knowledge subsets (`high`, `medium`, `low`, `balanced`, `random`, `general_english`).
 - **Benchmarking Matrix**: Executes a **175-run Masked Language Model (MLM) evaluation grid** (7 representative model families $\times$ 5 representations $\times$ 5 knowledge subsets).
+- **Cohort Exclusion & Dynamic Dimensions**: `microsoft/deberta-v3-base` is permanently excluded from the active benchmark cohort via configuration after an observed benchmark compatibility anomaly (zero MLM Top-1/Top-5/Top-10 across evaluated standard cells and English diagnostic). Dimensions dynamically resolve to $N=7$ models, 175 standard cells, and 21 pairwise comparisons.
+- **Composite Scoring (MECS)**: Model characteristics are summarized via the **Maritime Encoder Composite Score (MECS)** using cohort-independent monotonic loss normalization ($1 / (1 + \text{loss})$). MECS is an operational composite index, not a direct measure of language or maritime understanding.
+- **Statistical Rigor**: Primary global analysis utilizes a crossed 3-way repeated-measures ANOVA with block-respecting condition permutations (Friedman as secondary reference); pairwise tests employ Holm-adjusted Wilcoxon signed-rank testing with Kerby's paired rank-biserial correlation ($r_{\text{prb}}$) as the primary paired effect size (Cliff's $\delta$ labeled strictly as unpaired). Multi-ranking concordance is quantified by Kendall's $W$.
 - **Core Decision**: The objective multi-criteria evidence hierarchy prescribes **Strategy A: Pretrained Encoder Initialization (answerdotai/ModernBERT-base) + Domain-Adaptive Pretraining (DAPT)** with **High Confidence** (100% bootstrap rank-1 frequency across 2,000 resamples, 0 pairwise defeats, non-dominated Pareto status), maintaining **bert-base-uncased** as the resource-constrained deployment alternative (2.6x faster latency, 26.6% fragmentation).
 
 ---
@@ -88,7 +91,7 @@ pipeline/
 │   ├── 12_semantic_importance.py    # Domain informativeness scoring engine
 │   ├── 13_tokenizer_analysis.py     # Tokenizer fertility, coverage, and speed benchmarking
 │   ├── 14_mlm_evaluation.py         # 175-run MLM evaluation matrix grid
-│   ├── 15_cross_model_benchmarking.py # MUI composite scoring, sensitivity, Pareto & leaderboard
+│   ├── 15_cross_model_benchmarking.py # MECS composite scoring, sensitivity, Pareto & leaderboard
 │   ├── 16_statistical_analysis.py   # Bootstrap CIs, paired t-tests, Wilcoxon, Cohen's d, feature ablation
 │   ├── 17_decision_engine.py        # Multi-criteria evidence decision engine & research report
 │   └── 18_lint_corpus.py            # Corpus regex quality linting engine
@@ -127,7 +130,7 @@ python run_pipeline.py
 
 ### Run an Individual Stage
 ```bash
-# Calculate MUI score, sensitivity, Pareto frontier and leaderboard
+# Calculate MECS score, sensitivity, Pareto frontier and leaderboard
 python run_pipeline.py --stage 15
 
 # Execute statistical significance tests and component ablation
@@ -144,7 +147,7 @@ python run_pipeline.py --stage 18
 
 ## MaritimeBench Interactive Notebook Orchestrator
 
-The canonical interactive notebook [`notebooks/MaritimeBench_Full_Pipeline.ipynb`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/notebooks/MaritimeBench_Full_Pipeline.ipynb) provides a pure sequential execution and artifact-inventory orchestrator for both local and Google Colab environments:
+The canonical interactive notebook [`MaritimeBench_Full_Pipeline.ipynb`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/MaritimeBench_Full_Pipeline.ipynb) provides a pure sequential execution and artifact-inventory orchestrator for both local and Google Colab environments:
 
 - **Orchestration Layer**: The notebook is an orchestration and artifact-inventory layer.
 - **Production Scripts Authoritative**: Canonical production scripts (`scripts/01_*` through `scripts/18_*`) are heavily tested and remain solely responsible for their own data models, scientific logic, and internal schemas.
@@ -171,7 +174,7 @@ For exhaustive, in-depth technical documentation on specific components, refer t
 7. **[06_phase6_semantic_importance_analysis.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/06_phase6_semantic_importance_analysis.md)**: Stages 11–12: 5 multi-format representations, 4-signal domain informativeness formula, 6 knowledge subsets.
 8. **[07_phase7_tokenizer_analysis.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/07_phase7_tokenizer_analysis.md)**: Stage 13: 14-tokenizer evaluation, subword fertility, fragmentation rate, redundancy clustering.
 9. **[08_phase8_mlm_evaluation.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/08_phase8_mlm_evaluation.md)**: Stage 14: 175-run Cartesian MLM evaluation matrix grid, random vs domain-aware masking, PLL pseudo-perplexity.
-10. **[09_phase9_benchmarking_decision_engine_and_final_reports.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/09_phase9_benchmarking_decision_engine_and_final_reports.md)**: Stages 15–18: Cross-model benchmarking, MUI sensitivity, Pareto dominance, statistical significance, objective decision engine, and corpus linting.
+10. **[09_phase9_benchmarking_decision_engine_and_final_reports.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/09_phase9_benchmarking_decision_engine_and_final_reports.md)**: Stages 15–18: Cross-model benchmarking, MECS sensitivity, Pareto dominance, statistical significance, objective decision engine, and corpus linting.
 11. **[10_appendix_a_corpus_results_stages_1_to_10.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/10_appendix_a_corpus_results_stages_1_to_10.md)**: Appendix A: Complete empirical schema metrics, merge reconciliation stats, and corpus distributions.
 12. **[11_appendix_b_model_evaluation_results_stages_11_to_18.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/11_appendix_b_model_evaluation_results_stages_11_to_18.md)**: Appendix B: Complete empirical benchmarks, 175-cell matrix tables, statistical tests, decision profiles, and lint gate results.
 13. **[12_glossary.md](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/documentation/12_glossary.md)**: Authoritative definitions of all maritime, NLP, and statistical domain concepts.

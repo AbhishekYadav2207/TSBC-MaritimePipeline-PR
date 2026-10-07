@@ -6,7 +6,7 @@
   "strategy": "Strategy A: Pretrained Encoder Initialization (answerdotai/ModernBERT-base) + Domain-Adaptive Pretraining (DAPT)",
   "rationale": "Empirical evidence synthesis selects answerdotai/ModernBERT-base based on leading primary Top-1 accuracy (72.82%), lowest MLM loss (1.4740), 100% bootstrap rank-1 frequency, confirmed non-dominated Pareto status, and statistically significant Holm-adjusted pairwise superiority over all evaluated competitors.",
   "decision_confidence": "High",
-  "confidence_explanation": "High confidence assigned based on converging multi-source empirical evidence: bootstrap rank-1 frequency is 100.0% with mean rank 1.00; statistically significant Holm-adjusted pairwise superiority over all 7 evaluated competitors with zero pairwise defeats; confirmed non-dominated Pareto status across intrinsic and operational criteria. This label reflects structural evidence consensus across resampling and conditions, not a mathematical probability.",
+  "confidence_explanation": "High confidence assigned based on converging multi-source empirical evidence: bootstrap rank-1 frequency is 100.0% with mean rank 1.00; statistically significant Holm-adjusted pairwise superiority over all 6 evaluated competitors with zero pairwise defeats; confirmed non-dominated Pareto status across intrinsic and operational criteria. This label reflects structural evidence consensus across resampling and conditions, not a mathematical probability.",
   "eval_metrics": {
     "top1_accuracy": 72.82,
     "mlm_loss": 1.474,

@@ -6,10 +6,9 @@
     "allenai/scibert_scivocab_uncased",
     "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
     "roberta-base",
-    "answerdotai/ModernBERT-base",
-    "microsoft/deberta-v3-base"
+    "answerdotai/ModernBERT-base"
   ],
-  "selected_model_count": 8,
+  "selected_model_count": 7,
   "candidate_model_count": 14,
   "evaluated_model_count": 13,
   "candidate_models": [
@@ -72,6 +71,13 @@
       "similarity_score": 1.0,
       "explanation": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits)."
     },
+    "microsoft/deberta-v3-base": {
+      "reason": "benchmark_compatibility_anomaly",
+      "candidate_status": "EXCLUDED_BENCHMARK_ANOMALY",
+      "represented_by": null,
+      "similarity_score": null,
+      "explanation": "Excluded after benchmark compatibility anomaly: zero MLM Top-1/Top-5/Top-10 across the evaluated standard cells and English diagnostic."
+    },
     "emilyalsentzer/Bio_ClinicalBERT": {
       "reason": "tokenizer_diagnostic_redundancy",
       "candidate_status": "EXCLUDED_TOKENIZER_DUPLICATE",
@@ -119,8 +125,8 @@
       "model": "microsoft/deberta-v3-base",
       "tokenizer": "DebertaV2Tokenizer",
       "architecture": "DeBERTa-v3 Base Encoder (Disentangled Attention)",
-      "candidate_status": "RETAINED",
-      "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
+      "candidate_status": "EXCLUDED_BENCHMARK_ANOMALY",
+      "selection_reason": "Excluded after benchmark compatibility anomaly: zero MLM Top-1/Top-5/Top-10 across the evaluated standard cells and English diagnostic.",
       "ordering_score": 3,
       "represented_by": null,
       "similarity_score": null
@@ -226,7 +232,7 @@
       "similarity_score": 1.0
     }
   ],
-  "selection_timestamp": "2026-10-07 06:46:39",
+  "selection_timestamp": "2026-10-07 13:48:55",
   "selection_rationale": "Subword Term-Piece Diagnostic Redundancy Clustering & Canonical Archetype Selection (v2.1 Reconciled)",
   "target_stage": "Stage 14 (14_mlm_evaluation.py)"
 }

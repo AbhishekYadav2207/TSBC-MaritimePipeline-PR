@@ -68,8 +68,10 @@ def test_pipeline_outputs():
     try:
         with open(output_dir / "stage-08" / "manifest.json", "r", encoding="utf-8") as f:
             manifest = json.load(f)
-        required_manifest_keys = {"version", "created", "documents", "source", "language", "pipeline_version", "git_commit"}
+        required_manifest_keys = {"version", "created", "source", "language", "pipeline_version", "git_commit"}
         assert required_manifest_keys.issubset(manifest.keys()), "Manifest keys missing"
+        doc_count = manifest.get("documents", manifest.get("exported_documents"))
+        assert doc_count is not None, "Manifest documents count missing"
         print("[OK] manifest.json schema is valid.")
     except Exception as e:
         print(f"[FAIL] manifest.json validation failed: {e}")
@@ -85,7 +87,7 @@ def test_pipeline_outputs():
                 assert "occurrence_id" in record
                 assert "document" in record
                 assert "structured" in record
-        assert clean_count == manifest["documents"], f"Documents count mismatch: JSONL has {clean_count}, manifest has {manifest['documents']}"
+        assert clean_count == doc_count, f"Documents count mismatch: JSONL has {clean_count}, manifest has {doc_count}"
         print(f"[OK] clean_documents.jsonl count matches manifest: {clean_count} documents.")
     except Exception as e:
         print(f"[FAIL] clean_documents.jsonl validation failed: {e}")

@@ -36,6 +36,13 @@ FALLBACK_TARGET_MODELS = [
     "answerdotai/ModernBERT-base"                                   # Modern Extended BPE (50,280)
 ]
 
+# Explicit, configuration-driven permanent benchmark model exclusions
+EXCLUDED_MODELS = {
+    "microsoft/deberta-v3-base": {
+        "reason": "Excluded after benchmark compatibility anomaly: zero MLM Top-1/Top-5/Top-10 across the evaluated standard cells and English diagnostic."
+    }
+}
+
 CATEGORIES = {
     "vessel_terminology": ["vess", "ship", "boat", "barge", "tug", "tanker", "trawler", "carrier", "hull", "deck", "keel", "tonnage", "transom", "freeboard", "gunwale", "bilge"],
     "navigation": ["navig", "gps", "ais", "vhf", "radar", "sonar", "compass", "gyro", "sounder", "chart", "vdr", "fathometer"],
@@ -71,6 +78,7 @@ def load_selected_models(stage13_path: Path, fallback_models: list = None) -> li
     """
     Dynamically loads authoritative models selected by Stage 13.
     Accepts list or dict manifest, ensuring non-empty cohort.
+    Filters out models in EXCLUDED_MODELS.
     Falls back to documented defaults if Stage 13 artifact is missing or invalid.
     """
     if stage13_path.exists():
@@ -78,14 +86,20 @@ def load_selected_models(stage13_path: Path, fallback_models: list = None) -> li
             with open(stage13_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
             if isinstance(data, list):
-                models = data
+                raw_models = data
             elif isinstance(data, dict):
-                models = data.get("selected_models", [])
+                raw_models = data.get("selected_models", [])
             else:
-                models = []
+                raw_models = []
+
+            # Filter out permanently excluded models
+            models = [m for m in raw_models if m not in EXCLUDED_MODELS]
+            excluded_found = [m for m in raw_models if m in EXCLUDED_MODELS]
+            if excluded_found:
+                logger.warning(f"Filtered out {len(excluded_found)} excluded models from Stage 13 cohort: {excluded_found}")
 
             if isinstance(models, list) and len(models) > 0:
-                logger.info(f"Successfully loaded {len(models)} authoritative models from Stage 13: {stage13_path}")
+                logger.info(f"Successfully loaded {len(models)} authoritative active models from Stage 13: {stage13_path}")
                 return models
             else:
                 found_cnt = len(models) if isinstance(models, list) else "invalid format"
@@ -98,7 +112,7 @@ def load_selected_models(stage13_path: Path, fallback_models: list = None) -> li
     else:
         logger.warning(f"Stage 13 artifact not found at {stage13_path}. Falling back to default {len(fallback_models)} models.")
     
-    return list(fallback_models)
+    return [m for m in fallback_models if m not in EXCLUDED_MODELS]
 
 DEFAULT_REPRESENTATIONS = ["narrative", "key_value", "template", "json", "mixed"]
 DEFAULT_SUBSETS = ["high_knowledge", "medium_knowledge", "low_knowledge", "balanced_knowledge", "random_baseline"]
@@ -424,13 +438,21 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
     # Strict whole-word reconstruction tracking (for Modes 2 & 3)
     word_eval_stats = {
         "total_words": 0,
-        "correct_words": 0,
+        "correct_words_top1": 0,
+        "correct_words_top5": 0,
+        "correct_words_top10": 0,
         "maritime_total_words": 0,
-        "maritime_correct_words": 0,
+        "maritime_correct_words_top1": 0,
+        "maritime_correct_words_top5": 0,
+        "maritime_correct_words_top10": 0,
         "rare_total_words": 0,
-        "rare_correct_words": 0,
+        "rare_correct_words_top1": 0,
+        "rare_correct_words_top5": 0,
+        "rare_correct_words_top10": 0,
         "general_total_words": 0,
-        "general_correct_words": 0
+        "general_correct_words_top1": 0,
+        "general_correct_words_top5": 0,
+        "general_correct_words_top10": 0
     }
 
     # Diagnostics for domain-aware masking audit
@@ -563,8 +585,10 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
                 mar_pos_set = batch_mar_pos[b]
                 cat_pos_dict = batch_cat_pos[b]
 
-                # Store per-position top-1 predictions for word-level reconstruction evaluation
+                # Store per-position top-k predictions for word-level reconstruction evaluation
                 b_pos_pred_top1 = {}
+                b_pos_pred_top5 = {}
+                b_pos_pred_top10 = {}
 
                 for pos_tensor in mask_positions:
                     pos = pos_tensor.item()
@@ -579,6 +603,8 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
                     is_top10 = 1 if target_id in top_k_indices[:10] else 0
 
                     b_pos_pred_top1[pos] = (target_id == top_k_indices[0])
+                    b_pos_pred_top5[pos] = (target_id in top_k_indices[:5])
+                    b_pos_pred_top10[pos] = (target_id in top_k_indices[:10])
 
                     # Position-level classification avoids subword false-positives
                     is_rare = pos in rare_pos_set
@@ -621,28 +647,46 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
                         if not w_positions:
                             continue
                         # A word is reconstructed correctly iff ALL subword pieces are correctly predicted
-                        word_correct = all(b_pos_pred_top1.get(p, False) for p in w_positions)
+                        word_correct_top1 = all(b_pos_pred_top1.get(p, False) for p in w_positions)
+                        word_correct_top5 = all(b_pos_pred_top5.get(p, False) for p in w_positions)
+                        word_correct_top10 = all(b_pos_pred_top10.get(p, False) for p in w_positions)
 
                         w_is_rare = any(p in rare_pos_set for p in w_positions)
                         w_is_maritime = w_is_rare or any(p in mar_pos_set for p in w_positions)
 
                         word_eval_stats["total_words"] += 1
-                        if word_correct:
-                            word_eval_stats["correct_words"] += 1
+                        if word_correct_top1:
+                            word_eval_stats["correct_words_top1"] += 1
+                        if word_correct_top5:
+                            word_eval_stats["correct_words_top5"] += 1
+                        if word_correct_top10:
+                            word_eval_stats["correct_words_top10"] += 1
 
                         if w_is_rare:
                             word_eval_stats["rare_total_words"] += 1
-                            if word_correct:
-                                word_eval_stats["rare_correct_words"] += 1
+                            if word_correct_top1:
+                                word_eval_stats["rare_correct_words_top1"] += 1
+                            if word_correct_top5:
+                                word_eval_stats["rare_correct_words_top5"] += 1
+                            if word_correct_top10:
+                                word_eval_stats["rare_correct_words_top10"] += 1
 
                         if w_is_maritime:
                             word_eval_stats["maritime_total_words"] += 1
-                            if word_correct:
-                                word_eval_stats["maritime_correct_words"] += 1
+                            if word_correct_top1:
+                                word_eval_stats["maritime_correct_words_top1"] += 1
+                            if word_correct_top5:
+                                word_eval_stats["maritime_correct_words_top5"] += 1
+                            if word_correct_top10:
+                                word_eval_stats["maritime_correct_words_top10"] += 1
                         else:
                             word_eval_stats["general_total_words"] += 1
-                            if word_correct:
-                                word_eval_stats["general_correct_words"] += 1
+                            if word_correct_top1:
+                                word_eval_stats["general_correct_words_top1"] += 1
+                            if word_correct_top5:
+                                word_eval_stats["general_correct_words_top5"] += 1
+                            if word_correct_top10:
+                                word_eval_stats["general_correct_words_top10"] += 1
 
     eval_time = time.time() - t_start
 
@@ -680,30 +724,61 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
     safe_masked = max(diag_masked, 1)
 
     # Word reconstruction accuracy calculations for WWM
-    word_recon_acc = None
-    mar_word_recon_acc = None
-    rare_word_recon_acc = None
-    gen_word_recon_acc = None
+    word_recon_top1 = None
+    word_recon_top5 = None
+    word_recon_top10 = None
+    mar_word_recon_top1 = None
+    mar_word_recon_top5 = None
+    mar_word_recon_top10 = None
+    rare_word_recon_top1 = None
+    rare_word_recon_top5 = None
+    rare_word_recon_top10 = None
+    gen_word_recon_top1 = None
+    gen_word_recon_top5 = None
+    gen_word_recon_top10 = None
 
     if is_wwm and word_eval_stats["total_words"] > 0:
-        word_recon_acc = float(word_eval_stats["correct_words"] / word_eval_stats["total_words"])
-        mar_word_recon_acc = float(word_eval_stats["maritime_correct_words"] / max(word_eval_stats["maritime_total_words"], 1))
-        rare_word_recon_acc = float(word_eval_stats["rare_correct_words"] / max(word_eval_stats["rare_total_words"], 1))
-        gen_word_recon_acc = float(word_eval_stats["general_correct_words"] / max(word_eval_stats["general_total_words"], 1))
+        tot_w = max(word_eval_stats["total_words"], 1)
+        word_recon_top1 = float(word_eval_stats["correct_words_top1"] / tot_w)
+        word_recon_top5 = float(word_eval_stats["correct_words_top5"] / tot_w)
+        word_recon_top10 = float(word_eval_stats["correct_words_top10"] / tot_w)
 
-    # In Mode 3 ('wwm_word'), primary top1 is strict word reconstruction
+        mar_w = max(word_eval_stats["maritime_total_words"], 1)
+        mar_word_recon_top1 = float(word_eval_stats["maritime_correct_words_top1"] / mar_w)
+        mar_word_recon_top5 = float(word_eval_stats["maritime_correct_words_top5"] / mar_w)
+        mar_word_recon_top10 = float(word_eval_stats["maritime_correct_words_top10"] / mar_w)
+
+        rare_w = max(word_eval_stats["rare_total_words"], 1)
+        rare_word_recon_top1 = float(word_eval_stats["rare_correct_words_top1"] / rare_w)
+        rare_word_recon_top5 = float(word_eval_stats["rare_correct_words_top5"] / rare_w)
+        rare_word_recon_top10 = float(word_eval_stats["rare_correct_words_top10"] / rare_w)
+
+        gen_w = max(word_eval_stats["general_total_words"], 1)
+        gen_word_recon_top1 = float(word_eval_stats["general_correct_words_top1"] / gen_w)
+        gen_word_recon_top5 = float(word_eval_stats["general_correct_words_top5"] / gen_w)
+        gen_word_recon_top10 = float(word_eval_stats["general_correct_words_top10"] / gen_w)
+
+    # In Mode 3 ('wwm_word'), primary top1/5/10 is strict word reconstruction
     if masking_mode == "wwm_word":
-        primary_overall_top1 = word_recon_acc if word_recon_acc is not None else overall_subword_top1
-        mar_summary["top1_accuracy"] = mar_word_recon_acc if mar_word_recon_acc is not None else mar_summary["top1_accuracy"]
-        gen_summary["top1_accuracy"] = gen_word_recon_acc if gen_word_recon_acc is not None else gen_summary["top1_accuracy"]
-        rare_summary["top1_accuracy"] = rare_word_recon_acc if rare_word_recon_acc is not None else rare_summary["top1_accuracy"]
+        primary_overall_top1 = word_recon_top1 if word_recon_top1 is not None else overall_subword_top1
+        mar_summary["top1_accuracy"] = mar_word_recon_top1 if mar_word_recon_top1 is not None else mar_summary["top1_accuracy"]
+        mar_summary["top5_accuracy"] = mar_word_recon_top5 if mar_word_recon_top5 is not None else mar_summary["top5_accuracy"]
+        mar_summary["top10_accuracy"] = mar_word_recon_top10 if mar_word_recon_top10 is not None else mar_summary["top10_accuracy"]
+
+        gen_summary["top1_accuracy"] = gen_word_recon_top1 if gen_word_recon_top1 is not None else gen_summary["top1_accuracy"]
+        gen_summary["top5_accuracy"] = gen_word_recon_top5 if gen_word_recon_top5 is not None else gen_summary["top5_accuracy"]
+        gen_summary["top10_accuracy"] = gen_word_recon_top10 if gen_word_recon_top10 is not None else gen_summary["top10_accuracy"]
+
+        rare_summary["top1_accuracy"] = rare_word_recon_top1 if rare_word_recon_top1 is not None else rare_summary["top1_accuracy"]
+        rare_summary["top5_accuracy"] = rare_word_recon_top5 if rare_word_recon_top5 is not None else rare_summary["top5_accuracy"]
+        rare_summary["top10_accuracy"] = rare_word_recon_top10 if rare_word_recon_top10 is not None else rare_summary["top10_accuracy"]
     else:
         primary_overall_top1 = overall_subword_top1
 
     # Attach explicit unambiguous metrics to summaries
-    mar_summary["word_reconstruction_accuracy"] = mar_word_recon_acc
-    gen_summary["word_reconstruction_accuracy"] = gen_word_recon_acc
-    rare_summary["word_reconstruction_accuracy"] = rare_word_recon_acc
+    mar_summary["word_reconstruction_accuracy"] = mar_word_recon_top1
+    gen_summary["word_reconstruction_accuracy"] = gen_word_recon_top1
+    rare_summary["word_reconstruction_accuracy"] = rare_word_recon_top1
 
     result = {
         "evaluated_documents": len(eval_docs),
@@ -713,10 +788,16 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
         "evaluation_unit": eval_unit,
         "overall_summary": {
             "total_masked_tokens": diag_masked,
+            "total_masked_words": word_eval_stats["total_words"] if is_wwm else None,
             "overall_top1_accuracy": float(primary_overall_top1),
             "subword_top1_accuracy": float(overall_subword_top1),
-            "word_reconstruction_accuracy": word_recon_acc,
-            "maritime_word_reconstruction_accuracy": mar_word_recon_acc,
+            "word_reconstruction_accuracy": word_recon_top1,
+            "word_reconstruction_top1_accuracy": word_recon_top1,
+            "word_reconstruction_top5_accuracy": word_recon_top5,
+            "word_reconstruction_top10_accuracy": word_recon_top10,
+            "maritime_word_reconstruction_top1_accuracy": mar_word_recon_top1,
+            "maritime_word_reconstruction_top5_accuracy": mar_word_recon_top5,
+            "maritime_word_reconstruction_top10_accuracy": mar_word_recon_top10,
             "overall_mlm_loss": float(overall_loss)
         },
         "general_tokens_summary": gen_summary,
@@ -730,17 +811,33 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
     if is_wwm:
         result["word_reconstruction_summary"] = {
             "total_masked_words": word_eval_stats["total_words"],
-            "correct_words": word_eval_stats["correct_words"],
-            "word_reconstruction_accuracy": word_recon_acc,
+            "correct_words_top1": word_eval_stats["correct_words_top1"],
+            "correct_words_top5": word_eval_stats["correct_words_top5"],
+            "correct_words_top10": word_eval_stats["correct_words_top10"],
+            "word_reconstruction_top1_accuracy": word_recon_top1,
+            "word_reconstruction_top5_accuracy": word_recon_top5,
+            "word_reconstruction_top10_accuracy": word_recon_top10,
             "maritime_masked_words": word_eval_stats["maritime_total_words"],
-            "maritime_correct_words": word_eval_stats["maritime_correct_words"],
-            "maritime_word_reconstruction_accuracy": mar_word_recon_acc,
+            "maritime_correct_words_top1": word_eval_stats["maritime_correct_words_top1"],
+            "maritime_correct_words_top5": word_eval_stats["maritime_correct_words_top5"],
+            "maritime_correct_words_top10": word_eval_stats["maritime_correct_words_top10"],
+            "maritime_word_reconstruction_top1_accuracy": mar_word_recon_top1,
+            "maritime_word_reconstruction_top5_accuracy": mar_word_recon_top5,
+            "maritime_word_reconstruction_top10_accuracy": mar_word_recon_top10,
             "rare_masked_words": word_eval_stats["rare_total_words"],
-            "rare_correct_words": word_eval_stats["rare_correct_words"],
-            "rare_word_reconstruction_accuracy": rare_word_recon_acc,
+            "rare_correct_words_top1": word_eval_stats["rare_correct_words_top1"],
+            "rare_correct_words_top5": word_eval_stats["rare_correct_words_top5"],
+            "rare_correct_words_top10": word_eval_stats["rare_correct_words_top10"],
+            "rare_word_reconstruction_top1_accuracy": rare_word_recon_top1,
+            "rare_word_reconstruction_top5_accuracy": rare_word_recon_top5,
+            "rare_word_reconstruction_top10_accuracy": rare_word_recon_top10,
             "general_masked_words": word_eval_stats["general_total_words"],
-            "general_correct_words": word_eval_stats["general_correct_words"],
-            "general_word_reconstruction_accuracy": gen_word_recon_acc
+            "general_correct_words_top1": word_eval_stats["general_correct_words_top1"],
+            "general_correct_words_top5": word_eval_stats["general_correct_words_top5"],
+            "general_correct_words_top10": word_eval_stats["general_correct_words_top10"],
+            "general_word_reconstruction_top1_accuracy": gen_word_recon_top1,
+            "general_word_reconstruction_top5_accuracy": gen_word_recon_top5,
+            "general_word_reconstruction_top10_accuracy": gen_word_recon_top10
         }
 
     if masking_strategy == "domain_aware_15":
@@ -1371,7 +1468,15 @@ def main():
                         "mask_rate": 0.15,
                         "max_length": 256,
                         "evaluation_documents": len(target_docs),
-                        "seed": cell_seed
+                        "seed": cell_seed,
+                        "tokenizer_identifier": getattr(tokenizer, "name_or_path", str(tokenizer.__class__.__name__)),
+                        "model_identifier": model_name,
+                        "evaluated_document_count": len(target_docs),
+                        "masked_word_count": eval_res.get("word_reconstruction_summary", {}).get("total_masked_words", 0) if internal_mode in ("wwm_subword", "wwm_word") else 0,
+                        "masked_token_count": eval_res.get("overall_summary", {}).get("total_masked_tokens", 0),
+                        "scoring_method": "strict_word_reconstruction" if resolved_evaluation_unit == "word" else "subword_mlm_accuracy",
+                        "cache_namespace": cache_random_dir.name,
+                        "code_fingerprint": "TSBC-MaritimePipeline-v2.1-A01-WWM"
                     },
                     "evaluation_metrics": eval_res
                 }

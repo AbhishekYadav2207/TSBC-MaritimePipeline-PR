@@ -9,7 +9,9 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 class TestNotebookOrchestration(unittest.TestCase):
     def setUp(self):
-        self.nb_path = PROJECT_ROOT / "notebooks" / "MaritimeBench_Full_Pipeline.ipynb"
+        nb_at_root = PROJECT_ROOT / "MaritimeBench_Full_Pipeline.ipynb"
+        nb_in_dir = PROJECT_ROOT / "notebooks" / "MaritimeBench_Full_Pipeline.ipynb"
+        self.nb_path = nb_at_root if nb_at_root.exists() else nb_in_dir
         with open(self.nb_path, "r", encoding="utf-8") as f:
             self.nb = json.load(f)
 

@@ -1,7 +1,7 @@
 {
   "candidate_count": 14,
-  "retained_count": 8,
-  "excluded_count": 6,
+  "retained_count": 7,
+  "excluded_count": 7,
   "candidates": [
     {
       "model": "bert-base-uncased",
@@ -37,8 +37,8 @@
       "model": "microsoft/deberta-v3-base",
       "tokenizer": "DebertaV2Tokenizer",
       "architecture": "DeBERTa-v3 Base Encoder (Disentangled Attention)",
-      "candidate_status": "RETAINED",
-      "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
+      "candidate_status": "EXCLUDED_BENCHMARK_ANOMALY",
+      "selection_reason": "Excluded after benchmark compatibility anomaly: zero MLM Top-1/Top-5/Top-10 across the evaluated standard cells and English diagnostic.",
       "ordering_score": 3,
       "represented_by": null,
       "similarity_score": null

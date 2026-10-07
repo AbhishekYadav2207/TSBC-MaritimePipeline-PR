@@ -30,6 +30,26 @@ CANDIDATE_MODELS = [
     "distilbert-base-uncased"
 ]
 
+# Explicit, configuration-driven permanent benchmark model exclusions
+EXCLUDED_MODELS = {
+    "microsoft/deberta-v3-base": {
+        "model_id": "microsoft/deberta-v3-base",
+        "exclusion_status": "EXCLUDED",
+        "reason": "Excluded after benchmark compatibility anomaly: zero MLM Top-1/Top-5/Top-10 across the evaluated standard cells and English diagnostic.",
+        "exclusion_reason": "Excluded after benchmark compatibility anomaly: zero MLM Top-1/Top-5/Top-10 across the evaluated standard cells and English diagnostic.",
+        "source_stage": "Stage 13 (Screening / Candidate Registry Exclusion)",
+        "previous_evaluation_evidence": {
+            "mlm_top1": 0.0,
+            "mlm_top5": 0.0,
+            "mlm_top10": 0.0,
+            "loss": 14.4891,
+            "pairwise_record": "0W-7L across evaluated candidate cells",
+            "diagnosis": "Evaluation behavior was anomalous under the implemented MLM evaluation protocol, preventing a directly comparable benchmark result."
+        },
+        "model_present_in_previous_runs": True
+    }
+}
+
 # Canonical Rare Maritime Terminology list (standardized across Stages 12 and 14)
 RARE_MARITIME_TERMS = [
     "bilge", "bitts", "bollard", "bulwark", "coxswain", "davit", "epirb", "fairlead",
@@ -499,9 +519,23 @@ def compute_redundancy_and_selection(reports: list, loading_failed_models: dict 
 
     for cluster in clusters:
         sorted_cluster = sorted(cluster, key=lambda m: canonical_preference.get(m, 0), reverse=True)
-        rep = sorted_cluster[0]
+        # Check for explicitly excluded models in the cluster
+        for m_cand in sorted_cluster:
+            if m_cand in EXCLUDED_MODELS:
+                excluded_models[m_cand] = {
+                    "reason": "benchmark_compatibility_anomaly",
+                    "candidate_status": "EXCLUDED_BENCHMARK_ANOMALY",
+                    "represented_by": None,
+                    "similarity_score": None,
+                    "explanation": EXCLUDED_MODELS[m_cand]["reason"]
+                }
+
+        valid_cluster = [m for m in sorted_cluster if m not in EXCLUDED_MODELS]
+        if not valid_cluster:
+            continue
+        rep = valid_cluster[0]
         selected_models.append(rep)
-        for non_rep in sorted_cluster[1:]:
+        for non_rep in valid_cluster[1:]:
             excluded_models[non_rep] = {
                 "reason": "tokenizer_diagnostic_redundancy",
                 "candidate_status": "EXCLUDED_TOKENIZER_DUPLICATE",
@@ -521,16 +555,15 @@ def compute_redundancy_and_selection(reports: list, loading_failed_models: dict 
         "allenai/scibert_scivocab_uncased",
         "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
         "roberta-base",
-        "answerdotai/ModernBERT-base",
-        "microsoft/deberta-v3-base"
+        "answerdotai/ModernBERT-base"
     ]
-    ordered_selected = [m for m in desired_order if m in selected_models]
+    ordered_selected = [m for m in desired_order if m in selected_models and m not in EXCLUDED_MODELS]
     # Add any other selected if needed
     for m in selected_models:
-        if m not in ordered_selected:
+        if m not in ordered_selected and m not in EXCLUDED_MODELS:
             ordered_selected.append(m)
 
-    # Retain ALL non-redundant candidates that survive screening (eliminates silent [:7] pruning defect)
+    # Retain ALL non-redundant candidates that survive screening and are not explicitly excluded
     retained_models = list(ordered_selected)
 
     # Machine-readable candidate selection audit across all candidate models
@@ -545,6 +578,11 @@ def compute_redundancy_and_selection(reports: list, loading_failed_models: dict 
         if m in retained_models:
             status = "RETAINED"
             reason = "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria."
+            rep_by = None
+            sim_score = None
+        elif m in EXCLUDED_MODELS:
+            status = "EXCLUDED_BENCHMARK_ANOMALY"
+            reason = EXCLUDED_MODELS[m]["reason"]
             rep_by = None
             sim_score = None
         elif m in excluded_models:
@@ -745,6 +783,15 @@ def main():
     }
     with open(stage_dir / "selected_models.json", "w", encoding="utf-8") as fm:
         json.dump(selected_models_manifest, fm, indent=2)
+
+    # Export persistent exclusion audit artifact (e.g. outputs/model_selection/deberta_exclusion_audit.json)
+    model_sel_dir = output_dir / "model_selection"
+    model_sel_dir.mkdir(parents=True, exist_ok=True)
+    deberta_record = dict(EXCLUDED_MODELS.get("microsoft/deberta-v3-base", {}))
+    deberta_record["timestamp"] = time.strftime("%Y-%m-%d %H:%M:%S")
+    with open(model_sel_dir / "deberta_exclusion_audit.json", "w", encoding="utf-8") as f_ex:
+        json.dump(deberta_record, f_ex, indent=2)
+    logger.info(f"Saved persistent DeBERTa exclusion audit artifact to {model_sel_dir / 'deberta_exclusion_audit.json'}")
 
     # Dedicated machine-readable candidate selection audit artifacts (A06 Logging)
     candidate_audit_artifact = {

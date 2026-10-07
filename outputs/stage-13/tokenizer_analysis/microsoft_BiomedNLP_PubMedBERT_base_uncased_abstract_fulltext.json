@@ -17,7 +17,7 @@
   "max_pieces_per_term": 5,
   "oov_rate": 0.0,
   "oov_status": "measured",
-  "tokenizer_speed_tokens_per_sec": 43094.66539051631,
+  "tokenizer_speed_tokens_per_sec": 68594.69253389594,
   "sequence_length_distribution": {
     "under_128": 1500,
     "under_256": 0,
@@ -1514,7 +1514,7 @@
     "domain_unknown_rate": 0.0,
     "oov_status": "measured",
     "mean_sequence_length": 58.89,
-    "tokenization_speed": 43094.67,
+    "tokenization_speed": 68594.69,
     "mean_document_fragmentation": 0.2984,
     "mean_document_coverage": 0.7016,
     "general_vocab_coverage": 0.9362,

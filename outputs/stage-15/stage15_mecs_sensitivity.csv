@@ -1,0 +1,8 @@
+model_name,baseline_score,baseline_rank,performance_heavy_score,performance_heavy_rank,domain_heavy_score,domain_heavy_rank,balanced_score,balanced_rank,total_wins,win_frequency
+answerdotai/ModernBERT-base,68.62,1,85.11,1,74.18,1,49.01,3,3,0.75
+bert-base-uncased,49.8,3,27.63,4,52.77,3,58.87,1,1,0.25
+roberta-base,59.08,2,72.97,2,65.19,2,49.31,2,0,0.0
+allenai/scibert_scivocab_uncased,45.24,4,30.38,3,47.64,4,45.64,4,0,0.0
+dmis-lab/biobert-base-cased-v1.2,35.49,5,13.71,6,32.3,6,38.38,6,0,0.0
+nlpaueb/legal-bert-base-uncased,33.89,6,27.05,5,32.32,5,43.0,5,0,0.0
+microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext,25.93,7,3.68,7,20.93,7,28.47,7,0,0.0

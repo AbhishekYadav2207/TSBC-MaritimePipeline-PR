@@ -1,0 +1,109 @@
+{
+  "timestamp": "2026-10-07T14:46:00Z",
+  "project": "MaritimeBench Backend Forensic Audit & DeBERTa Exclusion",
+  "overall_verdict": "PASS",
+  "items": {
+    "1_active_model_count": {
+      "status": "PASS",
+      "count": 7,
+      "details": "Authoritative active cohort contains exactly 7 models dynamically resolved after exclusion."
+    },
+    "2_excluded_model_count": {
+      "status": "PASS",
+      "count": 1,
+      "details": "Exactly 1 model excluded through configuration-driven EXCLUDED_MODELS registry."
+    },
+    "3_excluded_models_and_reason": {
+      "status": "PASS",
+      "excluded_models": {
+        "microsoft/deberta-v3-base": "Excluded after benchmark compatibility anomaly: zero MLM Top-1/Top-5/Top-10 across the evaluated standard cells and English diagnostic."
+      },
+      "audit_artifact": "outputs/model_selection/deberta_exclusion_audit.json"
+    },
+    "4_representation_count": {
+      "status": "PASS",
+      "count": 5,
+      "representations": ["json", "key_value", "mixed", "narrative", "template"]
+    },
+    "5_subset_count": {
+      "status": "PASS",
+      "count": 5,
+      "subsets": ["balanced_knowledge", "high_knowledge", "low_knowledge", "medium_knowledge", "random_baseline"]
+    },
+    "6_benchmark_cell_count": {
+      "status": "PASS",
+      "cell_count": 175,
+      "calculation": "7 models x 5 representations x 5 subsets = 175 cells (dynamically derived, no hardcoding)"
+    },
+    "7_pairwise_comparison_count": {
+      "status": "PASS",
+      "pairwise_count": 21,
+      "calculation": "7 choose 2 = 21 pairwise comparisons (dynamically derived)"
+    },
+    "8_baseline_subword_mode_status": {
+      "status": "PASS",
+      "namespace": "outputs/stage-14/evaluations/cache/",
+      "cache_files_count": 175,
+      "details": "Preserved 175 valid baseline subword evaluations for the 7 active models with zero DeBERTa contamination."
+    },
+    "9_wwm_word_level_mode_status": {
+      "status": "PASS",
+      "namespace": "outputs/stage-14/evaluations/cache_wwm_word/",
+      "details": "Whole-word masking grouping and strict word reconstruction implemented, smoke-tested, and validated with separate cache namespace."
+    },
+    "10_paired_effect_size_status": {
+      "status": "PASS",
+      "primary_paired_effect_size": "Kerby's Paired Rank-Biserial Correlation (paired_rank_biserial)",
+      "unpaired_effect_size": "Cliff's Delta (unpaired_cliffs_delta, descriptive only)",
+      "dominance_metrics": ["wins_a", "ties", "losses_a", "paired_win_rate_a"],
+      "significance_test": "Wilcoxon signed-rank test with Holm-Bonferroni correction"
+    },
+    "11_provenance_hash_status": {
+      "status": "PASS",
+      "artifacts": [
+        "outputs/representation_provenance.json",
+        "outputs/representation_provenance.md"
+      ],
+      "hash_coverage": "Frozen corpus text, metadata JSONL, stage 08 manifest, stage 07 clean documents, generation script, and all 5 representations locked with SHA-256."
+    },
+    "12_crossed_statistical_analysis_status": {
+      "status": "PASS",
+      "primary_analysis": "Crossed 3-Way Repeated-Measures ANOVA (Models x Representations x Subsets) with 1,000 block-respecting permutations",
+      "secondary_analysis": "Friedman omnibus Chi-Square test (secondary reference only)",
+      "artifact": "outputs/stage-16/stage16_crossed_anova.csv"
+    },
+    "13_kendall_w_status": {
+      "status": "PASS",
+      "metric": "Kendall's W (Coefficient of Concordance)",
+      "rep_stability_kendalls_w": 0.8714,
+      "subset_stability_kendalls_w": 0.9886,
+      "details": "Replaced Kendall tau for multi-ranking concordance across formats and subsets; handles ties appropriately."
+    },
+    "14_mecs_cohort_independence_status": {
+      "status": "PASS",
+      "composite_name": "Maritime Encoder Composite Score (MECS)",
+      "loss_normalization": "1.0 / (1.0 + mlm_loss)",
+      "invariance_verified": true,
+      "details": "Permanently renamed MUI to MECS. Bounded monotonic loss normalization proven invariant to cohort additions/deletions."
+    },
+    "15_test_suite_status": {
+      "status": "PASS",
+      "tests_run": 30,
+      "tests_failed": 0,
+      "tests_errored": 0,
+      "details": "100% pass rate across test_forensic_fixes.py, test_notebook_orchestration.py, test_quality_optimizations.py, and verify_pipeline.py."
+    },
+    "16_notebook_status": {
+      "status": "PASS",
+      "notebook": "MaritimeBench_Full_Pipeline.ipynb",
+      "execution_policy": "ALWAYS_RERUN",
+      "architecture": "Pure sequential execution + artifact existence & non-zero size inventory without internal schema duplication."
+    },
+    "17_stale_output_contamination_check": {
+      "status": "PASS",
+      "archive_location": "outputs/archive/pre_deberta_exclusion/",
+      "active_directory_clean": true,
+      "details": "All previous 8-model DeBERTa artifacts and legacy MUI sensitivity files safely isolated in archive; active outputs contain zero stale entries."
+    }
+  }
+}

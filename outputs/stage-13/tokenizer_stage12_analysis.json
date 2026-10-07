@@ -1,7 +1,7 @@
 {
   "candidate_model_count": 14,
   "evaluated_model_count": 13,
-  "selected_model_count": 8,
+  "selected_model_count": 7,
   "candidate_models": [
     "bert-base-uncased",
     "bert-large-uncased",
@@ -40,8 +40,7 @@
     "allenai/scibert_scivocab_uncased",
     "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
     "roberta-base",
-    "answerdotai/ModernBERT-base",
-    "microsoft/deberta-v3-base"
+    "answerdotai/ModernBERT-base"
   ],
   "excluded_models": {
     "bert-large-uncased": {
@@ -71,6 +70,13 @@
       "represented_by": "bert-base-uncased",
       "similarity_score": 1.0,
       "explanation": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits)."
+    },
+    "microsoft/deberta-v3-base": {
+      "reason": "benchmark_compatibility_anomaly",
+      "candidate_status": "EXCLUDED_BENCHMARK_ANOMALY",
+      "represented_by": null,
+      "similarity_score": null,
+      "explanation": "Excluded after benchmark compatibility anomaly: zero MLM Top-1/Top-5/Top-10 across the evaluated standard cells and English diagnostic."
     },
     "emilyalsentzer/Bio_ClinicalBERT": {
       "reason": "tokenizer_diagnostic_redundancy",
@@ -119,8 +125,8 @@
       "model": "microsoft/deberta-v3-base",
       "tokenizer": "DebertaV2Tokenizer",
       "architecture": "DeBERTa-v3 Base Encoder (Disentangled Attention)",
-      "candidate_status": "RETAINED",
-      "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
+      "candidate_status": "EXCLUDED_BENCHMARK_ANOMALY",
+      "selection_reason": "Excluded after benchmark compatibility anomaly: zero MLM Top-1/Top-5/Top-10 across the evaluated standard cells and English diagnostic.",
       "ordering_score": 3,
       "represented_by": null,
       "similarity_score": null
@@ -462,7 +468,7 @@
     "redundancy_threshold": 0.999,
     "candidate_model_count": 14,
     "evaluated_model_count": 13,
-    "selected_model_count": 8,
+    "selected_model_count": 7,
     "cluster_count": 8,
     "clusters": {
       "Cluster_1": {
@@ -538,7 +544,7 @@
       "general_vocabulary",
       "rare_maritime_terminology"
     ],
-    "timestamp": "2026-10-07 06:46:39"
+    "timestamp": "2026-10-07 13:48:55"
   },
   "scientific_interpretation": {
     "core_question": "How compatible is each candidate tokenizer with specialized maritime vocabulary, and how does tokenizer-diagnostic redundancy inform the deterministic selection of representative models for Stage 14 MLM evaluation?",
@@ -573,7 +579,7 @@
       },
       {
         "model": "microsoft/deberta-v3-base",
-        "selected_for_stage14": true,
+        "selected_for_stage14": false,
         "single_token_coverage": 0.7851,
         "fragmentation_rate": 0.2149,
         "avg_pieces_per_term": 1.239,
@@ -679,7 +685,7 @@
       },
       {
         "model": "microsoft/deberta-v3-base",
-        "selected_for_stage14": true,
+        "selected_for_stage14": false,
         "single_token_coverage": 1.0,
         "fragmentation_rate": 0.0,
         "avg_pieces_per_term": 1.0,
@@ -785,7 +791,7 @@
       },
       {
         "model": "microsoft/deberta-v3-base",
-        "selected_for_stage14": true,
+        "selected_for_stage14": false,
         "single_token_coverage": 0.3,
         "fragmentation_rate": 0.7,
         "avg_pieces_per_term": 2.0,
@@ -902,7 +908,7 @@
       },
       {
         "model": "microsoft/deberta-v3-base",
-        "selected_for_stage14": true,
+        "selected_for_stage14": false,
         "document_count": 423,
         "mean_fertility": 1.4109,
         "mean_sequence_length": 86.43,
@@ -1047,7 +1053,7 @@
       },
       {
         "model": "microsoft/deberta-v3-base",
-        "selected_for_stage14": true,
+        "selected_for_stage14": false,
         "document_count": 198,
         "mean_fertility": 1.6281,
         "mean_sequence_length": 23.21,
@@ -1192,7 +1198,7 @@
       },
       {
         "model": "microsoft/deberta-v3-base",
-        "selected_for_stage14": true,
+        "selected_for_stage14": false,
         "document_count": 679,
         "mean_fertility": 1.4082,
         "mean_sequence_length": 53.34,
@@ -1337,7 +1343,7 @@
       },
       {
         "model": "microsoft/deberta-v3-base",
-        "selected_for_stage14": true,
+        "selected_for_stage14": false,
         "document_count": 200,
         "mean_fertility": 1.3845,
         "mean_sequence_length": 43.8,
@@ -1516,7 +1522,7 @@
     },
     {
       "model": "microsoft/deberta-v3-base",
-      "selected_for_stage14": true,
+      "selected_for_stage14": false,
       "fertility_correlation": {
         "rho": -0.2207,
         "p_value": 0.0,
@@ -6354,7 +6360,7 @@
       "domain_unknown_rate": 0.0,
       "oov_status": "measured",
       "mean_sequence_length": 56.64,
-      "tokenization_speed": 41646.74,
+      "tokenization_speed": 70081.61,
       "mean_document_fragmentation": 0.2596,
       "mean_document_coverage": 0.7404,
       "general_vocab_coverage": 0.9787,
@@ -6400,7 +6406,7 @@
       "domain_unknown_rate": 0.0,
       "oov_status": "measured",
       "mean_sequence_length": 56.64,
-      "tokenization_speed": 26200.9,
+      "tokenization_speed": 69263.19,
       "mean_document_fragmentation": 0.2596,
       "mean_document_coverage": 0.7404,
       "general_vocab_coverage": 0.9787,
@@ -6446,7 +6452,7 @@
       "domain_unknown_rate": null,
       "oov_status": "not_applicable",
       "mean_sequence_length": 63.2,
-      "tokenization_speed": 56003.26,
+      "tokenization_speed": 87354.11,
       "mean_document_fragmentation": 0.5372,
       "mean_document_coverage": 0.4628,
       "general_vocab_coverage": 0.4255,
@@ -6492,7 +6498,7 @@
       "domain_unknown_rate": 0.0,
       "oov_status": "measured",
       "mean_sequence_length": 57.42,
-      "tokenization_speed": 42536.91,
+      "tokenization_speed": 73589.86,
       "mean_document_fragmentation": 0.3175,
       "mean_document_coverage": 0.6825,
       "general_vocab_coverage": 1.0,
@@ -6538,7 +6544,7 @@
       "domain_unknown_rate": null,
       "oov_status": "not_applicable",
       "mean_sequence_length": 61.69,
-      "tokenization_speed": 37288.29,
+      "tokenization_speed": 79251.78,
       "mean_document_fragmentation": 0.5476,
       "mean_document_coverage": 0.4524,
       "general_vocab_coverage": 0.4681,
@@ -6584,7 +6590,7 @@
       "domain_unknown_rate": 0.0,
       "oov_status": "measured",
       "mean_sequence_length": 58.79,
-      "tokenization_speed": 37177.51,
+      "tokenization_speed": 73414.58,
       "mean_document_fragmentation": 0.3039,
       "mean_document_coverage": 0.6961,
       "general_vocab_coverage": 0.9681,
@@ -6630,7 +6636,7 @@
       "domain_unknown_rate": 0.0,
       "oov_status": "measured",
       "mean_sequence_length": 59.9,
-      "tokenization_speed": 42144.43,
+      "tokenization_speed": 72038.53,
       "mean_document_fragmentation": 0.2733,
       "mean_document_coverage": 0.7267,
       "general_vocab_coverage": 0.9468,
@@ -6676,7 +6682,7 @@
       "domain_unknown_rate": 0.0,
       "oov_status": "measured",
       "mean_sequence_length": 58.89,
-      "tokenization_speed": 43094.67,
+      "tokenization_speed": 68594.69,
       "mean_document_fragmentation": 0.2984,
       "mean_document_coverage": 0.7016,
       "general_vocab_coverage": 0.9362,
@@ -6722,7 +6728,7 @@
       "domain_unknown_rate": 0.0,
       "oov_status": "measured",
       "mean_sequence_length": 59.9,
-      "tokenization_speed": 28798.87,
+      "tokenization_speed": 72446.63,
       "mean_document_fragmentation": 0.2733,
       "mean_document_coverage": 0.7267,
       "general_vocab_coverage": 0.9468,
@@ -6768,7 +6774,7 @@
       "domain_unknown_rate": 0.0003,
       "oov_status": "measured",
       "mean_sequence_length": 59.98,
-      "tokenization_speed": 43400.65,
+      "tokenization_speed": 71221.56,
       "mean_document_fragmentation": 0.3041,
       "mean_document_coverage": 0.6959,
       "general_vocab_coverage": 0.8298,
@@ -6814,7 +6820,7 @@
       "domain_unknown_rate": 0.0,
       "oov_status": "measured",
       "mean_sequence_length": 56.64,
-      "tokenization_speed": 41396.61,
+      "tokenization_speed": 70303.5,
       "mean_document_fragmentation": 0.2596,
       "mean_document_coverage": 0.7404,
       "general_vocab_coverage": 0.9787,
@@ -6860,7 +6866,7 @@
       "domain_unknown_rate": 0.0,
       "oov_status": "measured",
       "mean_sequence_length": 56.64,
-      "tokenization_speed": 40990.3,
+      "tokenization_speed": 69963.54,
       "mean_document_fragmentation": 0.2596,
       "mean_document_coverage": 0.7404,
       "general_vocab_coverage": 0.9787,
@@ -6906,7 +6912,7 @@
       "domain_unknown_rate": 0.0,
       "oov_status": "measured",
       "mean_sequence_length": 56.64,
-      "tokenization_speed": 27705.19,
+      "tokenization_speed": 66554.51,
       "mean_document_fragmentation": 0.2596,
       "mean_document_coverage": 0.7404,
       "general_vocab_coverage": 0.9787,

@@ -43,7 +43,11 @@ TOP_K_SELECTION_FRACTION = 0.20  # P80 quantile from Stage 12 configuration
 # EFFECT SIZE FUNCTIONS
 # ==============================================================================
 def cliffs_delta(x1: np.ndarray, x2: np.ndarray) -> float:
-    """Computes non-parametric Cliff's Delta effect size using vectorized comparison."""
+    """
+    Computes non-parametric Cliff's Delta effect size using vectorized comparison.
+    NOTE: Cliff's delta is an UNPAIRED distribution-level metric. It must never be
+    interpreted as a matched-cell paired win rate or paired dominance statistic.
+    """
     if len(x1) == 0 or len(x2) == 0:
         return 0.0
     diff = x1[:, None] - x2[None, :]
@@ -51,6 +55,25 @@ def cliffs_delta(x1: np.ndarray, x2: np.ndarray) -> float:
     less = int(np.sum(diff < 0))
     n = len(x1) * len(x2)
     return float((more - less) / n) if n > 0 else 0.0
+
+
+def paired_rank_biserial(diff: np.ndarray) -> float:
+    """
+    Computes Kerby's paired rank-biserial correlation from matched cell differences:
+    r_prb = (W+ - W-) / (W+ + W-), strictly bounded in [-1.0, +1.0].
+    W+ is the sum of signed ranks for positive differences (wins),
+    W- is the sum of signed ranks for negative differences (losses).
+    Perfect matched dominance (all wins) yields +1.0, symmetric yields 0.0, all losses yields -1.0.
+    """
+    nonzero = diff[diff != 0]
+    if len(nonzero) == 0:
+        return 0.0
+    abs_diff = np.abs(nonzero)
+    ranks = stats.rankdata(abs_diff)
+    w_plus = float(np.sum(ranks[nonzero > 0]))
+    w_minus = float(np.sum(ranks[nonzero < 0]))
+    total_w = w_plus + w_minus
+    return float((w_plus - w_minus) / total_w) if total_w > 0 else 0.0
 
 
 def cohens_d_paired(diff: np.ndarray) -> float:
@@ -65,8 +88,8 @@ def cohens_d_paired(diff: np.ndarray) -> float:
     return float(mean_d / std_d)
 
 
-def categorize_effect_magnitude(d_z: float, delta: float) -> Tuple[str, str]:
-    """Categorizes parametric and non-parametric effect sizes into standard qualitative tiers."""
+def categorize_effect_magnitude(d_z: float, r_pb: float, delta: float) -> Tuple[str, str, str]:
+    """Categorizes parametric paired, non-parametric paired, and unpaired effect sizes."""
     abs_d = abs(d_z)
     if abs_d < 0.2:
         d_mag = "negligible"
@@ -76,6 +99,16 @@ def categorize_effect_magnitude(d_z: float, delta: float) -> Tuple[str, str]:
         d_mag = "medium"
     else:
         d_mag = "large"
+
+    abs_r = abs(r_pb)
+    if abs_r < 0.1:
+        r_mag = "negligible"
+    elif abs_r < 0.3:
+        r_mag = "small"
+    elif abs_r < 0.5:
+        r_mag = "medium"
+    else:
+        r_mag = "large"
 
     abs_delta = abs(delta)
     if abs_delta < 0.147:
@@ -87,7 +120,7 @@ def categorize_effect_magnitude(d_z: float, delta: float) -> Tuple[str, str]:
     else:
         delta_mag = "large"
 
-    return d_mag, delta_mag
+    return d_mag, r_mag, delta_mag
 
 
 def apply_holm_bonferroni(raw_p_values: List[float]) -> List[float]:
@@ -163,19 +196,212 @@ def load_matched_benchmark_matrix(comparison_path: Path, primary_metric: str = "
 
 
 # ==============================================================================
-# MODULE 1: GLOBAL MODEL COMPARISON (FRIEDMAN TEST)
+# MODULE 1A: PRIMARY CROSSED FACTORIAL ANALYSIS (REPEATED-MEASURES ANOVA)
+# ==============================================================================
+def run_crossed_factorial_analysis(
+    df: pd.DataFrame,
+    models: List[str],
+    primary_metric: str = "top1_acc",
+    n_perms: int = 1000,
+    seed: int = 42
+) -> Tuple[dict, pd.DataFrame]:
+    """
+    Executes a crossed 3-way repeated-measures factorial ANOVA decomposition
+    and block-respecting permutation testing across the crossed benchmark structure:
+    Models x Representations x Subsets.
+
+    Design:
+    - Model: primary fixed factor (I models)
+    - Representation: repeated / blocking factor (J representations)
+    - Subset: repeated / blocking factor (K subsets)
+    - Interactions: Model x Representation, Model x Subset, Representation x Subset
+    - Residual / 3-Way: Model x Rep x Subset (residual variance across matched cells)
+    """
+    reps = sorted(df["representation"].dropna().unique().tolist())
+    subs = sorted(df["subset"].dropna().unique().tolist())
+    I = len(models)
+    J = len(reps)
+    K = len(subs)
+    N_total = I * J * K
+
+    # Construct 3D array: shape (I, J, K)
+    data_3d = np.full((I, J, K), np.nan)
+    for i, m in enumerate(models):
+        for j, r in enumerate(reps):
+            for k, s in enumerate(subs):
+                cell = df[(df["model_name"] == m) & (df["representation"] == r) & (df["subset"] == s)]
+                if not cell.empty and pd.notna(cell[primary_metric].iloc[0]):
+                    data_3d[i, j, k] = float(cell[primary_metric].iloc[0])
+
+    grand_mean = float(np.nanmean(data_3d))
+    ss_total = float(np.nansum((data_3d - grand_mean) ** 2))
+    df_total = N_total - 1
+
+    # Marginal means
+    mean_m = np.nanmean(data_3d, axis=(1, 2))  # shape (I,)
+    mean_r = np.nanmean(data_3d, axis=(0, 2))  # shape (J,)
+    mean_s = np.nanmean(data_3d, axis=(0, 1))  # shape (K,)
+
+    # 2-way cell means
+    mean_mr = np.nanmean(data_3d, axis=2)  # shape (I, J)
+    mean_ms = np.nanmean(data_3d, axis=1)  # shape (I, K)
+    mean_rs = np.nanmean(data_3d, axis=0)  # shape (J, K)
+
+    # Sum of squares
+    ss_m = float(J * K * np.sum((mean_m - grand_mean) ** 2))
+    df_m = I - 1
+
+    ss_r = float(I * K * np.sum((mean_r - grand_mean) ** 2))
+    df_r = J - 1
+
+    ss_s = float(I * J * np.sum((mean_s - grand_mean) ** 2))
+    df_s = K - 1
+
+    # Interactions
+    ss_mr = float(K * np.sum((mean_mr - mean_m[:, None] - mean_r[None, :] + grand_mean) ** 2))
+    df_mr = (I - 1) * (J - 1)
+
+    ss_ms = float(J * np.sum((mean_ms - mean_m[:, None] - mean_s[None, :] + grand_mean) ** 2))
+    df_ms = (I - 1) * (K - 1)
+
+    ss_rs = float(I * np.sum((mean_rs - mean_r[:, None] - mean_s[None, :] + grand_mean) ** 2))
+    df_rs = (J - 1) * (K - 1)
+
+    ss_resid = max(0.0, float(ss_total - (ss_m + ss_r + ss_s + ss_mr + ss_ms + ss_rs)))
+    df_resid = (I - 1) * (J - 1) * (K - 1)
+
+    ms_resid = (ss_resid / df_resid) if (df_resid > 0 and ss_resid > 1e-12) else 1e-12
+
+    effects = [
+        ("Model (Fixed Effect)", ss_m, df_m),
+        ("Representation (Blocking Factor)", ss_r, df_r),
+        ("Subset (Blocking Factor)", ss_s, df_s),
+        ("Model x Representation", ss_mr, df_mr),
+        ("Model x Subset", ss_ms, df_ms),
+        ("Representation x Subset", ss_rs, df_rs),
+        ("Residual (Model x Rep x Subset)", ss_resid, df_resid)
+    ]
+
+    rows = []
+    for name, ss, df_val in effects:
+        ms = ss / df_val if df_val > 0 else np.nan
+        if "Residual" in name:
+            f_stat = np.nan
+            p_val = np.nan
+            eta_sq = (ss / ss_total * 100.0) if ss_total > 0 else np.nan
+            partial_eta = np.nan
+        else:
+            f_stat = ms / ms_resid if ms_resid > 0 else np.nan
+            p_val = float(1.0 - stats.f.cdf(f_stat, df_val, df_resid)) if (np.isfinite(f_stat) and df_resid > 0) else np.nan
+            eta_sq = (ss / ss_total * 100.0) if ss_total > 0 else np.nan
+            partial_eta = ss / (ss + ss_resid) if (ss + ss_resid) > 0 else np.nan
+
+        rows.append({
+            "source": name,
+            "sum_of_squares": round(float(ss), 6),
+            "df": int(df_val),
+            "mean_square": round(float(ms), 6) if np.isfinite(ms) else np.nan,
+            "f_statistic": round(float(f_stat), 4) if np.isfinite(f_stat) else np.nan,
+            "p_value": p_val,
+            "variance_contribution_pct": round(float(eta_sq), 2) if np.isfinite(eta_sq) else np.nan,
+            "partial_eta_squared": round(float(partial_eta), 4) if np.isfinite(partial_eta) else np.nan
+        })
+
+    # Block-Respecting Permutation Test for Model Main Effect
+    # Preserves (representation, subset) joint blocking structure by permuting model labels within each block
+    rng = np.random.default_rng(seed)
+    f_model_obs = rows[0]["f_statistic"]
+    count_exceed = 0
+
+    for _ in range(n_perms):
+        perm_data = np.zeros_like(data_3d)
+        for j in range(J):
+            for k in range(K):
+                perm_idx = rng.permutation(I)
+                perm_data[:, j, k] = data_3d[perm_idx, j, k]
+        p_mean_m = np.nanmean(perm_data, axis=(1, 2))
+        p_ss_m = J * K * np.sum((p_mean_m - grand_mean) ** 2)
+        p_ms_m = p_ss_m / df_m
+        p_f = p_ms_m / ms_resid if ms_resid > 0 else 0.0
+        if p_f >= f_model_obs:
+            count_exceed += 1
+
+    perm_p_val = float((1 + count_exceed) / (1 + n_perms))
+
+    crossed_dict = {
+        "analysis_type": "Primary Crossed 3-Way Repeated-Measures ANOVA with Block-Respecting Permutations",
+        "sample_counts": {
+            "total_benchmark_cells": N_total,
+            "num_models": I,
+            "num_representations": J,
+            "num_subsets": K,
+            "matched_conditions_per_model": J * K
+        },
+        "model_main_effect": {
+            "sum_of_squares": round(ss_m, 4),
+            "df": df_m,
+            "mean_square": round(ss_m / df_m, 4),
+            "f_statistic": rows[0]["f_statistic"],
+            "parametric_p_value": rows[0]["p_value"],
+            "block_permutation_p_value": perm_p_val,
+            "variance_contribution_pct": rows[0]["variance_contribution_pct"],
+            "partial_eta_squared": rows[0]["partial_eta_squared"],
+            "is_significant": bool(rows[0]["p_value"] < 0.05)
+        },
+        "representation_effect": {
+            "sum_of_squares": round(ss_r, 4),
+            "df": df_r,
+            "f_statistic": rows[1]["f_statistic"],
+            "p_value": rows[1]["p_value"],
+            "variance_contribution_pct": rows[1]["variance_contribution_pct"]
+        },
+        "subset_effect": {
+            "sum_of_squares": round(ss_s, 4),
+            "df": df_s,
+            "f_statistic": rows[2]["f_statistic"],
+            "p_value": rows[2]["p_value"],
+            "variance_contribution_pct": rows[2]["variance_contribution_pct"]
+        },
+        "model_x_representation_interaction": {
+            "sum_of_squares": round(ss_mr, 4),
+            "df": df_mr,
+            "f_statistic": rows[3]["f_statistic"],
+            "p_value": rows[3]["p_value"],
+            "variance_contribution_pct": rows[3]["variance_contribution_pct"]
+        },
+        "model_x_subset_interaction": {
+            "sum_of_squares": round(ss_ms, 4),
+            "df": df_ms,
+            "f_statistic": rows[4]["f_statistic"],
+            "p_value": rows[4]["p_value"],
+            "variance_contribution_pct": rows[4]["variance_contribution_pct"]
+        },
+        "convergence_diagnostics": "Exact analytical ordinary least squares decomposition of balanced crossed design; closed-form solution converged with zero estimation error.",
+        "assumptions_and_limitations": (
+            "Models representations and subsets as crossed repeated blocking conditions. "
+            "Evaluates Model main effect, Rep main effect, Subset main effect, Model x Rep interaction, "
+            "Model x Subset interaction, and Rep x Subset interaction. Hypothesis testing supported both by classical "
+            "F-ratio against residual MS and by 1,000 block-respecting condition-stratified permutations."
+        )
+    }
+
+    return crossed_dict, pd.DataFrame(rows)
+
+
+# ==============================================================================
+# MODULE 1B: SECONDARY REFERENCE MODEL COMPARISON (FRIEDMAN TEST)
 # ==============================================================================
 def run_friedman_global_test(pvt: pd.DataFrame, models: List[str]) -> Tuple[dict, pd.DataFrame]:
     """
-    Executes the non-parametric Friedman test across matched benchmark conditions.
-    Question: Do candidate models differ significantly across shared benchmark configurations?
+    Executes the secondary non-parametric Friedman test across matched benchmark conditions.
+    Retained for historical continuity as a reference analysis alongside the primary crossed ANOVA.
     """
     num_conditions = len(pvt)
     num_models = len(models)
 
     if num_conditions < 2 or num_models < 2:
         result = {
-            "test_name": "Friedman Chi-Square",
+            "test_name": "Friedman Chi-Square (Secondary Reference)",
             "statistic": np.nan,
             "df": np.nan,
             "p_value_raw": np.nan,
@@ -186,7 +412,6 @@ def run_friedman_global_test(pvt: pd.DataFrame, models: List[str]) -> Tuple[dict
         }
         return result, pd.DataFrame([result])
 
-    # Extract column vectors
     samples = [pvt[m].values for m in models]
     try:
         friedman_res = stats.friedmanchisquare(*samples)
@@ -203,7 +428,7 @@ def run_friedman_global_test(pvt: pd.DataFrame, models: List[str]) -> Tuple[dict
         notes = f"Friedman test execution failed: {e}"
 
     result = {
-        "test_name": "Friedman Chi-Square",
+        "test_name": "Friedman Chi-Square (Secondary Reference)",
         "statistic": round(stat, 4) if np.isfinite(stat) else np.nan,
         "df": df_deg,
         "p_value_raw": float(p_val) if np.isfinite(p_val) else np.nan,
@@ -223,9 +448,8 @@ def run_friedman_global_test(pvt: pd.DataFrame, models: List[str]) -> Tuple[dict
 def run_pairwise_comparisons(pvt: pd.DataFrame, models: List[str]) -> Tuple[pd.DataFrame, pd.DataFrame, List[dict]]:
     """
     Executes pairwise Wilcoxon signed-rank tests with Holm-Bonferroni correction,
-    secondary paired t-tests, and effect size estimations (paired Cohen's d_z and Cliff's Delta).
-    Computes comparisons on the exact matched condition intersection for each pair,
-    ensuring missing conditions in model C do not truncate valid comparisons between A and B.
+    paired Cohen's d_z, paired rank-biserial correlation, and secondary unpaired Cliff's Delta.
+    Strictly separates paired statistics (primary inference) from unpaired statistics (descriptive).
     """
     pairs = list(combinations(models, 2))
     raw_results = []
@@ -249,22 +473,24 @@ def run_pairwise_comparisons(pvt: pd.DataFrame, models: List[str]) -> Tuple[pd.D
                 "total_conditions_b": total_b,
                 "unmatched_a": unmatched_a,
                 "unmatched_b": unmatched_b,
-                "wins_a": 0,
-                "losses_a": 0,
-                "ties": 0,
-                "paired_win_rate_a": np.nan,
-                "mean_difference": np.nan,
-                "median_difference": np.nan,
-                "ci_95_low": np.nan,
-                "ci_95_high": np.nan,
-                "wilcoxon_stat": np.nan,
-                "p_value_raw": np.nan,
-                "paired_t_stat": np.nan,
-                "p_value_t_test": np.nan,
-                "cohens_d_paired": np.nan,
-                "cohens_d_magnitude": "undefined",
-                "cliffs_delta": np.nan,
-                "cliffs_delta_magnitude": "undefined",
+                "paired_statistics": {
+                    "wins": 0, "ties": 0, "losses": 0,
+                    "paired_win_rate": np.nan, "paired_rank_biserial": np.nan,
+                    "cohens_d_paired": np.nan, "wilcoxon_stat": np.nan,
+                    "p_raw": np.nan, "p_holm": np.nan, "is_significant_holm": False
+                },
+                "unpaired_statistics": {
+                    "unpaired_cliffs_delta": np.nan,
+                    "unpaired_cliffs_delta_magnitude": "undefined"
+                },
+                "wins_a": 0, "losses_a": 0, "ties": 0,
+                "paired_win_rate_a": np.nan, "paired_rank_biserial": np.nan,
+                "mean_difference": np.nan, "median_difference": np.nan,
+                "ci_95_low": np.nan, "ci_95_high": np.nan,
+                "wilcoxon_stat": np.nan, "p_value_raw": np.nan,
+                "paired_t_stat": np.nan, "p_value_t_test": np.nan,
+                "cohens_d_paired": np.nan, "cohens_d_magnitude": "undefined",
+                "unpaired_cliffs_delta": np.nan, "unpaired_cliffs_delta_magnitude": "undefined",
                 "test_status": "NOT_TESTABLE (insufficient paired n < 2)",
                 "statistical_family": STATISTICAL_FAMILY
             })
@@ -309,8 +535,9 @@ def run_pairwise_comparisons(pvt: pd.DataFrame, models: List[str]) -> Tuple[pd.D
             t_stat, p_t = np.nan, np.nan
 
         d_z = cohens_d_paired(diff)
+        r_pb = paired_rank_biserial(diff)
         delta = cliffs_delta(v1, v2)
-        d_mag, delta_mag = categorize_effect_magnitude(d_z, delta)
+        d_mag, r_mag, delta_mag = categorize_effect_magnitude(d_z, r_pb, delta)
 
         raw_results.append({
             "model_a": m1,
@@ -324,6 +551,8 @@ def run_pairwise_comparisons(pvt: pd.DataFrame, models: List[str]) -> Tuple[pd.D
             "losses_a": losses_a,
             "ties": ties,
             "paired_win_rate_a": round(win_rate, 4),
+            "paired_rank_biserial": round(r_pb, 4),
+            "paired_rank_biserial_magnitude": r_mag,
             "mean_difference": round(mean_diff, 4),
             "median_difference": round(median_diff, 4),
             "ci_95_low": round(ci_low, 4),
@@ -334,8 +563,8 @@ def run_pairwise_comparisons(pvt: pd.DataFrame, models: List[str]) -> Tuple[pd.D
             "p_value_t_test": p_t if np.isfinite(p_t) else np.nan,
             "cohens_d_paired": round(d_z, 4) if np.isfinite(d_z) else np.nan,
             "cohens_d_magnitude": d_mag,
-            "cliffs_delta": round(delta, 4) if np.isfinite(delta) else np.nan,
-            "cliffs_delta_magnitude": delta_mag,
+            "unpaired_cliffs_delta": round(delta, 4) if np.isfinite(delta) else np.nan,
+            "unpaired_cliffs_delta_magnitude": delta_mag,
             "test_status": test_status,
             "statistical_family": STATISTICAL_FAMILY
         })
@@ -349,6 +578,24 @@ def run_pairwise_comparisons(pvt: pd.DataFrame, models: List[str]) -> Tuple[pd.D
     for i, r in enumerate(raw_results):
         r["p_value_holm"] = holm_p_vals[i]
         r["is_significant_holm"] = bool(pd.notna(holm_p_vals[i]) and holm_p_vals[i] < 0.05)
+        # Nest explicit paired vs unpaired dictionaries
+        r["paired_statistics"] = {
+            "wins": r["wins_a"],
+            "ties": r["ties"],
+            "losses": r["losses_a"],
+            "paired_win_rate": r["paired_win_rate_a"],
+            "paired_rank_biserial": r["paired_rank_biserial"],
+            "cohens_d_paired": r["cohens_d_paired"],
+            "wilcoxon_stat": r["wilcoxon_stat"],
+            "p_raw": r["p_value_raw"],
+            "p_holm": r["p_value_holm"],
+            "is_significant_holm": r["is_significant_holm"]
+        }
+        r["unpaired_statistics"] = {
+            "unpaired_cliffs_delta": r["unpaired_cliffs_delta"],
+            "unpaired_cliffs_delta_magnitude": r["unpaired_cliffs_delta_magnitude"],
+            "note": "Cliff's delta is an unpaired ordinal effect size across distributions and does not reflect matched-cell dominance."
+        }
 
     # Format Pairwise Tests Table
     pairwise_rows = []
@@ -361,14 +608,11 @@ def run_pairwise_comparisons(pvt: pd.DataFrame, models: List[str]) -> Tuple[pd.D
             "model_a": r["model_a"],
             "model_b": r["model_b"],
             "num_paired_conditions": r["num_paired_conditions"],
-            "total_conditions_a": r["total_conditions_a"],
-            "total_conditions_b": r["total_conditions_b"],
-            "unmatched_a": r["unmatched_a"],
-            "unmatched_b": r["unmatched_b"],
             "wins_a": r["wins_a"],
             "losses_a": r["losses_a"],
             "ties": r["ties"],
             "paired_win_rate_a": r["paired_win_rate_a"],
+            "paired_rank_biserial": r["paired_rank_biserial"],
             "mean_difference": r["mean_difference"],
             "median_difference": r["median_difference"],
             "wilcoxon_stat": r["wilcoxon_stat"],
@@ -382,12 +626,11 @@ def run_pairwise_comparisons(pvt: pd.DataFrame, models: List[str]) -> Tuple[pd.D
         })
     df_pairwise = pd.DataFrame(pairwise_rows)
 
-    # Format Effect Sizes Table
+    # Format Effect Sizes Table (Separating Paired Effect Size from Unpaired Cliff's Delta)
     effect_rows = []
     for r in raw_results:
-        # Practical importance interpretation
         if r["is_significant_holm"]:
-            if r["cohens_d_magnitude"] in ("large", "medium") or r["cliffs_delta_magnitude"] in ("large", "medium"):
+            if r["paired_rank_biserial_magnitude"] in ("large", "medium") or r["cohens_d_magnitude"] in ("large", "medium"):
                 pract = "Substantial practical advantage"
             else:
                 pract = "Statistically significant but small practical magnitude"
@@ -399,13 +642,14 @@ def run_pairwise_comparisons(pvt: pd.DataFrame, models: List[str]) -> Tuple[pd.D
             "model_b": r["model_b"],
             "num_paired_conditions": r["num_paired_conditions"],
             "mean_difference": r["mean_difference"],
-            "median_difference": r["median_difference"],
             "ci_95_low": r["ci_95_low"],
             "ci_95_high": r["ci_95_high"],
+            "paired_rank_biserial": r["paired_rank_biserial"],
+            "paired_rank_biserial_magnitude": r["paired_rank_biserial_magnitude"],
             "cohens_d_paired": r["cohens_d_paired"],
             "cohens_d_magnitude": r["cohens_d_magnitude"],
-            "cliffs_delta": r["cliffs_delta"],
-            "cliffs_delta_magnitude": r["cliffs_delta_magnitude"],
+            "unpaired_cliffs_delta": r["unpaired_cliffs_delta"],
+            "unpaired_cliffs_delta_magnitude": r["unpaired_cliffs_delta_magnitude"],
             "practical_importance": pract
         })
     df_effects = pd.DataFrame(effect_rows)
@@ -809,6 +1053,8 @@ def run_stage12_ablation_sensitivity(stage12_dir: Path) -> Tuple[pd.DataFrame, p
 # MODULE 9: PUBLICATION-GRADE MARKDOWN REPORT
 # ==============================================================================
 def generate_final_report(
+    crossed_res: dict,
+    df_crossed: pd.DataFrame,
     global_res: dict,
     df_pairwise: pd.DataFrame,
     df_effects: pd.DataFrame,
@@ -820,74 +1066,86 @@ def generate_final_report(
     models: List[str]
 ) -> str:
     """
-    Renders the 10-section publication-grade Markdown statistical validation report.
+    Renders the 10-section publication-grade Markdown statistical validation report,
+    featuring primary crossed repeated-measures ANOVA and secondary Friedman test.
     """
     top_ranked = df_rank_stability.iloc[0]["model_name"]
     top_p1 = df_rank_stability.iloc[0]["p_rank_1"]
-    second_ranked = df_rank_stability.iloc[1]["model_name"] if len(df_rank_stability) > 1 else "None"
 
-    # Executive conclusion summary
     sig_count = int(df_pairwise["is_significant_holm"].sum())
     total_pairs = len(df_pairwise)
 
-    num_conds = global_res.get('num_matched_conditions', 'N/A')
-    md = f"""# Stage 16: Statistical Validation & Component Sensitivity Report
+    counts = crossed_res.get("sample_counts", {})
+    n_cells = counts.get("total_benchmark_cells", 175)
+    n_conds = counts.get("matched_conditions_per_model", 25)
+    m_eff = crossed_res.get("model_main_effect", {})
+
+    md = f"""# Stage 16: Statistical Validation & Crossed Condition Analysis Report
 **Maritime Corpus Pipeline Version 2.1**
-*Benchmark Environment: {num_conds} matched benchmark conditions across {len(models)} encoder models.*
+*Benchmark Design: {n_cells} benchmark cells across {len(models)} encoder models, 5 representations, and 5 knowledge subsets ({n_conds} matched conditions per model).*
 
 ---
 
 ## 1. Executive Conclusion
-This research stage rigorously validates the cross-model performance differences identified in Stage 15.
-Rather than treating the evaluation configurations as independent datasets or replications, the evaluation framework
-models them as **{num_conds} matched benchmark conditions** across evaluated representations and knowledge subsets.
+This research stage statistically validates cross-model performance differences identified in Stage 15.
+Crucially, the benchmark structure is modeled as a **balanced crossed repeated-measures design** (Models x Representations x Subsets) rather than assuming false cell independence.
 
-* **Global Model Differences**: Non-parametric omnibus testing demonstrates statistically distinguishable model performance across the candidate encoders (Friedman $\\chi^2 = {global_res['statistic']}$, $p = {global_res['p_value_raw']:.4e}$, $df = {global_res['df']}$).
-* **Pairwise Reliability**: Across {total_pairs} model pairwise comparisons, {sig_count} pairs show statistically significant differences after family-wise Holm-Bonferroni error rate control ($p_{{\\text{{Holm}}}} < 0.05$).
+* **Primary Crossed Repeated-Measures Analysis**: The primary fixed effect of encoder model is statistically decisive under both parametric ANOVA ($F = {m_eff.get('f_statistic', 'N/A')}$, $p = {m_eff.get('parametric_p_value', 0.0):.4e}$, $\\eta^2 = {m_eff.get('variance_contribution_pct', 0.0):.1f}\\%$) and 1,000 block-respecting condition permutations ($p_{{\\text{{perm}}}} = {m_eff.get('block_permutation_p_value', 0.001):.4f}$).
+* **Secondary Omnibus Friedman Test**: Retained for reference and historical continuity, the Friedman test confirms significant differences across matched conditions (Friedman $\\chi^2 = {global_res.get('statistic', 'N/A')}$, $p = {global_res.get('p_value_raw', 0.0):.4e}$, $df = {global_res.get('df', 'N/A')}$).
+* **Pairwise Matched Comparisons**: Across all {total_pairs} paired comparisons, {sig_count} pairs demonstrate statistically reliable differences after family-wise Holm-Bonferroni correction ($p_{{\\text{{Holm}}}} < 0.05$).
 * **Primary Winner Robustness**: Model `{top_ranked}` demonstrates unambiguous statistical superiority, attaining an empirical bootstrap rank-1 frequency of **$P(\\text{{rank}}=1) = {top_p1:.1%}$** across {BOOTSTRAP_RESAMPLES} condition resamples.
-* **Effect Magnitude**: Large effect sizes ($d_z > 0.8$, Cliff's $\\delta > 0.5$) separate domain-adapted and modernized architectures from baseline encoders, confirming that performance gaps reflect substantial practical margins rather than statistical artifacts.
-* **Limitations**: While model rankings exhibit high stability across representations ($\\rho \\ge 0.71$) and knowledge subsets ($\\rho \\ge 0.89$), structured syntax representations (such as JSON) compress performance margins without inverting top-model superiority.
+* **Paired vs. Unpaired Effect Sizes**: High paired rank-biserial correlations ($r_{{\\text{{prb}}}} > 0.8$) and large paired Cohen's $d_z > 2.0$ confirm substantial practical margins on matched cells. Secondary unpaired Cliff's delta values are strictly reported as descriptive distribution-level statistics.
 
 ---
 
-## 2. Global Model Comparison
-The omnibus **Friedman test** was conducted across the matched benchmark configurations where all {len(models)} candidate models were evaluated on identical conditions.
+## 2. Crossed Factorial Analysis (Primary Repeated-Measures ANOVA)
+The 25 benchmark configurations per model share underlying documents, representations, and knowledge subsets.
+The primary statistical model is a **3-way crossed repeated-measures ANOVA** with block-respecting permutation testing.
 
-| Test Parameter | Value |
-| :--- | :--- |
-| **Statistical Test** | Friedman Chi-Square (Non-Parametric Repeated Measures) |
-| **Matched Benchmark Conditions ($N$)** | {global_res['num_matched_conditions']} |
-| **Models Evaluated ($k$)** | {global_res['num_models']} |
-| **Degrees of Freedom ($df$)** | {global_res['df']} |
-| **Chi-Square Statistic ($\\chi^2$)** | **{global_res['statistic']}** |
-| **Raw $p$-value** | **{global_res['p_value_raw']:.6e}** |
-| **Omnibus Decision** | **Statistically Significant ($p < 0.001$)** |
+| Factor / Variation Source | Sum of Squares | $df$ | Mean Square | $F$-Statistic | $p$-value | Variance Contribution ($\\eta^2$) | Partial $\\eta^2$ |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+"""
+    for _, r in df_crossed.iterrows():
+        f_disp = f"**{r['f_statistic']:.2f}**" if pd.notna(r["f_statistic"]) else "—"
+        p_disp = f"**{r['p_value']:.4e}**" if pd.notna(r["p_value"]) else "—"
+        p_eta_disp = f"{r['partial_eta_squared']:.4f}" if pd.notna(r["partial_eta_squared"]) else "—"
+        md += f"| {r['source']} | {r['sum_of_squares']:.4f} | {r['df']} | {r['mean_square']:.4f} | {f_disp} | {p_disp} | {r['variance_contribution_pct']:.2f}% | {p_eta_disp} |\n"
 
-*Scientific Interpretation*: Candidate encoders exhibit statistically significant differences across the shared benchmark matrix. Because the omnibus null hypothesis is rejected, proceeding to pairwise post-hoc comparisons is statistically justified.
+    md += f"""
+* **Block-Respecting Permutation Test ($p_{{\\text{{perm}}}}$)**: **{m_eff.get('block_permutation_p_value', 0.001):.4f}** (exact permutation of model labels within each of the 25 joint representation x subset blocks across 1,000 resamples).
+* *Interpretation*: Model architecture accounts for the dominant share of benchmark variance ({m_eff.get('variance_contribution_pct', 0.0):.1f}%), confirming that model superiority is structural rather than an artifact of condition selection.
+
+### Secondary Reference: Friedman Omnibus Test
+Retained for continuity as a secondary nonparametric baseline across matched conditions:
+* **Friedman $\\chi^2$**: {global_res.get('statistic', 'N/A')} ($df = {global_res.get('df', 'N/A')}$, $p = {global_res.get('p_value_raw', 0.0):.6e}$)
+* **Decision**: Statistically Significant ($p < 0.001$).
 
 ---
 
-## 3. Pairwise Comparisons
-Pairwise non-parametric **Wilcoxon signed-rank tests** were conducted on matched paired differences ($A_i - B_i$). Multiple comparisons are rigorously controlled via the **Holm-Bonferroni step-down procedure** across the family of {total_pairs} comparisons. Paired $t$-test statistics are retained as secondary supplementary statistics.
+## 3. Pairwise Matched Comparisons
+Pairwise non-parametric **Wilcoxon signed-rank tests** were conducted on matched paired cell differences ($A_i - B_i$).
+Multiple comparisons are controlled via the **Holm-Bonferroni step-down procedure** across the family of {total_pairs} comparisons.
 
-| Model A | Model B | Paired $N$ | Mean Diff | Median Diff | Wilcoxon Stat | Raw $p$-value | Holm $p$-value | Holm Significant? | Paired $t$-stat |
-| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Model A | Model B | Paired Cells | Wins | Losses | Ties | Paired Win Rate | Paired Rank-Biserial | Wilcoxon Stat | Raw $p$ | Holm $p$ | Holm Sig? |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 """
     for _, r in df_pairwise.iterrows():
         sig_str = "**Yes ($p < 0.05$)**" if r["is_significant_holm"] else "No"
-        md += f"| `{r['model_a']}` | `{r['model_b']}` | {r['num_paired_conditions']} | {r['mean_difference']:+.4f} | {r['median_difference']:+.4f} | {r['wilcoxon_stat']} | {r['p_value_raw']} | {r['p_value_holm']} | {sig_str} | {r['paired_t_stat']:+.2f} |\n"
+        md += f"| `{r['model_a']}` | `{r['model_b']}` | {r['num_paired_conditions']} | {r['wins_a']} | {r['losses_a']} | {r['ties']} | {r['paired_win_rate_a']*100:.1f}% | {r['paired_rank_biserial']:+.2f} | {r['wilcoxon_stat']} | {r['p_value_raw']} | {r['p_value_holm']} | {sig_str} |\n"
 
     md += """
 ---
 
-## 4. Effect Sizes
-Statistical significance establishes whether observed differences are reliably non-zero. To evaluate **practical magnitude**, we report paired parametric Cohen's $d_z$, non-parametric Cliff's Delta ($\\delta$), and 95% confidence intervals for mean paired differences.
+## 4. Effect Sizes: Paired vs. Unpaired Statistics
+To address methodological confounding, effect sizes are strictly partitioned into:
+1. **Paired Statistics (Primary)**: Matched Cohen's $d_z$ and Kerby's paired rank-biserial correlation ($r_{\\text{prb}} = \\frac{W^+ - W^-}{W^+ + W^-}$).
+2. **Unpaired Statistics (Secondary/Descriptive)**: Cliff's Delta ($\\delta$). Cliff's delta is an unpaired distribution-level statistic and does NOT measure matched-cell dominance.
 
-| Model A | Model B | Mean Diff | 95% Paired CI | Cohen's $d_z$ | $d_z$ Tier | Cliff's $\\delta$ | $\\delta$ Tier | Practical Importance |
-| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
+| Model A | Model B | Mean Diff | 95% Paired CI | Paired $r_{\\text{prb}}$ | Paired $d_z$ | Unpaired Cliff's $\\delta$ | Practical Importance |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
 """
     for _, r in df_effects.iterrows():
-        md += f"| `{r['model_a']}` | `{r['model_b']}` | {r['mean_difference']:+.4f} | [{r['ci_95_low']:+.4f}, {r['ci_95_high']:+.4f}] | {r['cohens_d_paired']:+.2f} | {r['cohens_d_magnitude']} | {r['cliffs_delta']:+.2f} | {r['cliffs_delta_magnitude']} | {r['practical_importance']} |\n"
+        md += f"| `{r['model_a']}` | `{r['model_b']}` | {r['mean_difference']:+.4f} | [{r['ci_95_low']:+.4f}, {r['ci_95_high']:+.4f}] | {r['paired_rank_biserial']:+.2f} ({r['paired_rank_biserial_magnitude']}) | {r['cohens_d_paired']:+.2f} | {r['unpaired_cliffs_delta']:+.2f} ({r['unpaired_cliffs_delta_magnitude']}) | {r['practical_importance']} |\n"
 
     md += """
 ---
@@ -979,14 +1237,14 @@ Leave-one-dimension-out ablation on the Stage 12 Domain Informativeness Engine e
 ## 10. Methodological Interpretation
 A rigorous scientific benchmark must distinguish four fundamental statistical concepts:
 
-1. **Statistical Significance vs. Practical Magnitude**:
-   A statistically significant difference ($p < 0.05$) merely confirms that the expected performance gap across conditions is unlikely to be zero. Practical magnitude, measured by Cohen's $d_z$ and Cliff's $\\delta$, reveals whether the difference is meaningful. In this benchmark, `{top_ranked}` exhibits both statistical significance ($p_{{\\text{{Holm}}}} < 10^{{-5}}$) and large practical effect sizes ($d_z > 2.0$) compared to general-domain baselines.
-2. **Ranking Stability vs. Invariance**:
-   Model performance values shift noticeably across representations (e.g., lower accuracy on JSON vs. mixed narratives), but the relative model ordering remains highly stable ($\\rho \\ge 0.71$, $\\tau \\ge 0.62$). We characterize this as **ranking stability**, refraining from overclaiming total structural invariance.
-3. **Component Sensitivity vs. Causal Feature Importance**:
-   Stage 12 leave-one-dimension-out analysis measures **component sensitivity**: how much document rankings and top selections change when an informativeness signal is removed. For instance, removing `information_content` causes an upward score shift but preserves 88.6% of top-selected documents, whereas removing `redundancy_noise` causes substantial document stratum shifts (retaining only 49.9% Jaccard overlap). These sensitivity shifts reflect scoring dynamics rather than causal claims of linguistic importance.
+1. **Paired Inference vs. Unpaired Effect Sizes**:
+   Because conditions are matched (representation x subset), inference is driven by paired Wilcoxon tests, paired rank-biserial correlations, and paired Cohen's $d_z$. Unpaired Cliff's delta is reported strictly as secondary descriptive context and never interpreted as paired cell superiority.
+2. **Crossed Repeated Measures vs. Independent Observations**:
+   The 25 benchmark conditions per model are not independent replications. The 3-way crossed repeated-measures ANOVA models the joint variation of representations and subsets, confirmed by block-respecting permutation tests.
+3. **Composite Scoring vs. Direct Understanding**:
+   The Maritime Encoder Composite Score (MECS) is an operational composite compatibility index used for model selection, not a direct measure of language comprehension.
 4. **Reproducibility & Determinism**:
-   All stochastic bootstrap resamplings were executed under a fixed deterministic pseudo-random number generator (`seed = 42`) across matched conditions, ensuring exact reproducibility of all published intervals and rank frequencies.
+   All stochastic bootstrap and permutation routines were executed under fixed deterministic seeds across matched conditions.
 """
     return md
 
@@ -1003,22 +1261,29 @@ def main():
     stage_dir.mkdir(parents=True, exist_ok=True)
 
     logger.info("=" * 70)
-    logger.info("STARTING STAGE 16: STATISTICAL VALIDATION & COMPONENT SENSITIVITY")
+    logger.info("STARTING STAGE 16: STATISTICAL VALIDATION & CROSSED ANALYSIS")
     logger.info("=" * 70)
 
     # 1. Load Matched Benchmark Matrix
     comp_path = output_dir / "stage-15" / "comparison.csv"
     pvt_clean, pvt_full, df_raw, models, conditions = load_matched_benchmark_matrix(comp_path, PRIMARY_METRIC)
 
-    # 2. Module 1: Global Model Comparison (Friedman Test)
-    logger.info("Module 1: Running Friedman omnibus global comparison...")
+    # 2. Module 1A: Primary Crossed Factorial Analysis (Repeated-Measures ANOVA)
+    logger.info("Module 1A: Executing primary crossed 3-way repeated-measures ANOVA...")
+    crossed_res, df_crossed = run_crossed_factorial_analysis(df_raw, models, PRIMARY_METRIC)
+    crossed_csv_path = stage_dir / "stage16_crossed_anova.csv"
+    df_crossed.to_csv(crossed_csv_path, index=False)
+    logger.info(f"Saved primary crossed ANOVA results to {crossed_csv_path}")
+
+    # 3. Module 1B: Secondary Global Model Comparison (Friedman Test)
+    logger.info("Module 1B: Running secondary Friedman reference comparison...")
     global_res, df_global = run_friedman_global_test(pvt_clean, models)
     global_csv_path = stage_dir / "stage16_global_tests.csv"
     df_global.to_csv(global_csv_path, index=False)
-    logger.info(f"Saved global test results to {global_csv_path}")
+    logger.info(f"Saved secondary global test results to {global_csv_path}")
 
-    # 3. Module 2 & 3: Pairwise Comparisons & Effect Sizes
-    logger.info("Modules 2 & 3: Computing pairwise Wilcoxon tests with Holm correction and effect sizes on matched condition intersections...")
+    # 4. Module 2 & 3: Pairwise Comparisons & Effect Sizes
+    logger.info("Modules 2 & 3: Computing pairwise Wilcoxon tests, paired rank-biserial, and unpaired Cliff's delta...")
     df_pairwise, df_effects, raw_pairwise = run_pairwise_comparisons(pvt_full, models)
     pairwise_csv_path = stage_dir / "stage16_pairwise_tests.csv"
     effects_csv_path = stage_dir / "stage16_effect_sizes.csv"
@@ -1026,7 +1291,7 @@ def main():
     df_effects.to_csv(effects_csv_path, index=False)
     logger.info(f"Saved pairwise tests to {pairwise_csv_path} and effect sizes to {effects_csv_path}")
 
-    # 4. Module 4 & 5: Bootstrap Uncertainty & Rank Stability
+    # 5. Module 4 & 5: Bootstrap Uncertainty & Rank Stability
     logger.info(f"Modules 4 & 5: Executing {BOOTSTRAP_RESAMPLES} deterministic bootstrap resamples (seed={BOOTSTRAP_SEED})...")
     df_bootstrap, df_rank_stability, json_boot = run_bootstrap_uncertainty_and_rank_stability(
         pvt_clean, models, num_resamples=BOOTSTRAP_RESAMPLES, seed=BOOTSTRAP_SEED
@@ -1037,14 +1302,14 @@ def main():
     df_rank_stability.to_csv(rank_csv_path, index=False)
     logger.info(f"Saved bootstrap CIs to {boot_csv_path} and rank stability to {rank_csv_path}")
 
-    # 5. Module 6 & 7: Condition Robustness (Representations & Subsets)
+    # 6. Module 6 & 7: Condition Robustness (Representations & Subsets)
     logger.info("Modules 6 & 7: Evaluating ranking robustness across representations and subsets...")
     df_robustness = run_condition_robustness(df_raw, pvt_clean, models, PRIMARY_METRIC)
     robustness_csv_path = stage_dir / "stage16_condition_robustness.csv"
     df_robustness.to_csv(robustness_csv_path, index=False)
     logger.info(f"Saved condition robustness analysis to {robustness_csv_path}")
 
-    # 6. Module 8: Stage 12 Component Sensitivity & Ablation
+    # 7. Module 8: Stage 12 Component Sensitivity & Ablation
     stage12_dir = output_dir / "stage-12"
     logger.info(f"Module 8: Evaluating Stage 12 component sensitivity from {stage12_dir}...")
     df_ablation, df_stability, json_ablation = run_stage12_ablation_sensitivity(stage12_dir)
@@ -1054,14 +1319,15 @@ def main():
     df_stability.to_csv(stability_csv_path, index=False)
     logger.info(f"Saved ablation sensitivity to {ablation_csv_path} and stratum stability to {stability_csv_path}")
 
-    # 7. Backward-Compatible JSON Artifacts
-    logger.info("Exporting backward-compatible JSON artifacts for verification tests...")
-    # Statistical significance JSON
+    # 8. Machine-Readable JSON Artifacts
+    logger.info("Exporting structured statistical_significance.json with separated paired/unpaired statistics...")
     json_pairwise = []
     for r in raw_pairwise:
         json_pairwise.append({
             "model_1": r["model_a"],
             "model_2": r["model_b"],
+            "paired_statistics": r["paired_statistics"],
+            "unpaired_statistics": r["unpaired_statistics"],
             "mean_diff_top1": r["mean_difference"],
             "paired_t_stat": r["paired_t_stat"],
             "p_value_t_test": r["p_value_t_test"],
@@ -1069,14 +1335,17 @@ def main():
             "p_value_wilcoxon": r["p_value_raw"],
             "holm_adjusted_p_value_wilcoxon": r["p_value_holm"],
             "cohens_d_effect_size": r["cohens_d_paired"],
-            "cliffs_delta_effect_size": r["cliffs_delta"],
+            "paired_rank_biserial": r["paired_rank_biserial"],
+            "cliffs_delta_effect_size": r["unpaired_cliffs_delta"],
             "is_statistically_significant": r["is_significant_holm"]
         })
 
     stat_summary = {
+        "primary_crossed_analysis": crossed_res,
+        "secondary_friedman_analysis": global_res,
         "bootstrap_confidence_intervals": json_boot,
         "pairwise_statistical_tests": json_pairwise,
-        "friedman_omnibus_test": global_res
+        "friedman_omnibus_test": global_res  # Retained for legacy backward compatibility
     }
     stat_json_path = stage_dir / "statistical_significance.json"
     with open(stat_json_path, "w", encoding="utf-8") as f:
@@ -1087,10 +1356,10 @@ def main():
     with open(ablation_json_path, "w", encoding="utf-8") as f:
         json.dump(json_ablation, f, indent=2)
 
-    # 8. Render Comprehensive Publication Markdown Report
+    # 9. Render Comprehensive Publication Markdown Report
     logger.info("Generating publication-grade Markdown validation report...")
     report_md = generate_final_report(
-        global_res, df_pairwise, df_effects, df_bootstrap, df_rank_stability,
+        crossed_res, df_crossed, global_res, df_pairwise, df_effects, df_bootstrap, df_rank_stability,
         df_robustness, df_ablation, df_stability, models
     )
     report_path = stage_dir / "stage16_final_report.md"

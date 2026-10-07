@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-10-07T07:12:23.411621",
+  "timestamp": "2026-10-07T14:04:01.367587",
   "data_coverage": {
-    "expected_cells": 200,
-    "valid_cells": 200,
+    "expected_cells": 175,
+    "valid_cells": 175,
     "missing_cells": 0,
-    "discovered_files": 200
+    "discovered_files": 175
   },
   "criteria_winners": {
     "best_overall_intrinsic_mlm": {
@@ -26,26 +26,25 @@
       "mean_rank": 1.0,
       "rank_std": 0.0
     },
-    "most_robust_mui_winner": {
+    "most_robust_mecs_winner": {
       "model_name": "answerdotai/ModernBERT-base",
       "total_wins": 3,
       "win_frequency": 0.75,
-      "baseline_score": 78.46
+      "baseline_score": 68.62
     }
   },
   "rank_stability": {
-    "representation_kendall_tau": 0.8,
-    "representation_spearman_rho": 0.8929,
-    "subset_kendall_tau": 0.9714,
-    "subset_spearman_rho": 0.9905
+    "representation_kendalls_w": 0.8714,
+    "representation_spearman_rho": 0.8393,
+    "subset_kendalls_w": 0.9886,
+    "subset_spearman_rho": 0.9857
   },
   "pareto_summary": {
-    "pareto_optimal_count": 6,
+    "pareto_optimal_count": 5,
     "pareto_optimal_models": [
       "allenai/scibert_scivocab_uncased",
       "answerdotai/ModernBERT-base",
       "bert-base-uncased",
-      "microsoft/deberta-v3-base",
       "nlpaueb/legal-bert-base-uncased",
       "roberta-base"
     ],
@@ -54,12 +53,12 @@
   "final_selection": {
     "recommended_model": "answerdotai/ModernBERT-base",
     "pareto_status": "Pareto-Optimal",
-    "baseline_mui_score": 78.46,
+    "baseline_mecs_score": 68.62,
     "maritime_top1_acc_pct": 72.82,
     "rare_maritime_acc_pct": 69.61,
     "mlm_loss": 1.474,
     "sensitivity_wins": "3/4 scenarios",
-    "selection_rationale": "answerdotai/ModernBERT-base demonstrated the strongest intrinsic MLM capability (72.82% Top-1 accuracy, 1.4740 MLM loss), high ranking consistency across representations (mean rank 7.0) and subsets (mean rank 1.0), consistent leader across 3/4 MUI sensitivity scenarios, and confirmed non-dominated Pareto status."
+    "selection_rationale": "answerdotai/ModernBERT-base demonstrated the strongest intrinsic MLM capability (72.82% Top-1 accuracy, 1.4740 MLM loss), high ranking consistency across representations (mean rank 7.0) and subsets (mean rank 1.0), consistent leader across 3/4 MECS sensitivity scenarios, and confirmed non-dominated Pareto status."
   },
   "trade_offs": [
     {
@@ -79,14 +78,6 @@
       ]
     },
     {
-      "alternative_model": "microsoft/deberta-v3-base",
-      "advantages_over_selected": [
-        "lower subword fragmentation (21.5% vs 63.3%)",
-        "smaller footprint (86M vs 149M params)",
-        "lower latency (17.5ms vs 34.8ms)"
-      ]
-    },
-    {
       "alternative_model": "nlpaueb/legal-bert-base-uncased",
       "advantages_over_selected": [
         "lower subword fragmentation (37.9% vs 63.3%)",
@@ -102,5 +93,8 @@
       ]
     }
   ],
-  "methodological_note": "MUI is an operational composite compatibility index, not a human-validated ground truth of domain comprehension. Model selection is defensibly justified by multidimensional evidence including intrinsic MLM loss, rare domain token accuracy, representation and subset ranking agreement, sensitivity analysis invariance, and non-dominated Pareto status."
+  "methodological_note": "Maritime Encoder Composite Score (MECS) is an operational composite compatibility score used to summarize multiple encoder evaluation characteristics for model selection. It is not intended as a direct measure of language or maritime understanding. Model selection is defensibly justified by multidimensional evidence including intrinsic MLM loss, rare domain token accuracy, representation and subset ranking agreement, sensitivity analysis invariance, and non-dominated Pareto status.",
+  "masking_mode": "subword",
+  "evaluation_unit": "subword",
+  "mecs_normalization": "cohort_independent: 1 / (1 + mlm_loss)"
 }

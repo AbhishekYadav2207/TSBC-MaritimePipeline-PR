@@ -366,15 +366,15 @@ Provides string sanitization, administrative noise removal, and natural language
   | **6** | `nlpaueb/legal-bert-base-uncased` | **27.08** | 28.66% | 44.99% | 4.49% | 4.4541 | 44.78 | 37.9% | 62.1% | 249.3ms | 4.0 | 110M | **Pareto-Optimal** |
   | **7** | `microsoft/BiomedNLP-PubMedBERT...`| **23.72** | 20.59% | 30.71% | 3.40% | 5.7259 | 103.80 | 42.7% | 57.3% | 326.8ms | 3.1 | 110M | **Dominated** |
 - **Representation & Subset Robustness Breakdown ([`stage15_rankings.csv`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-15/stage15_rankings.csv))**:
-  - *Representation Robustness*: ModernBERT and RoBERTa achieve perfect invariance (**Mean Rank 1.00 and 2.00, $\sigma = 0.00$**) across all 5 text formats (`json`, `key_value`, `mixed`, `narrative`, `template`). Mean pairwise Kendall $\tau = 0.7143$, Spearman $\rho = 0.8071$.
-  - *Subset Robustness*: ModernBERT and RoBERTa achieve strict invariance (**Mean Rank 1.00 and 2.00, $\sigma = 0.00$**) across all 5 knowledge subsets (`high`, `medium`, `low`, `balanced`, `random`). Mean pairwise Kendall $\tau = 0.9238$, Spearman $\rho = 0.9571$.
-- **MUI Weighting Sensitivity Analysis ([`stage15_mui_sensitivity.csv`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-15/stage15_mui_sensitivity.csv))**:
-  Evaluates candidate models across 4 distinct operational weighting scenarios:
-  1. *Baseline*: Balanced operational mixture (ModernBERT #1: 68.29, BERT-base #2: 59.25).
-  2. *Performance-Heavy*: Prioritizes intrinsic MLM accuracy and loss (ModernBERT #1: 90.14, RoBERTa #2: 74.72).
-  3. *Domain-Heavy*: Prioritizes rare nautical terminology and morphological fit (BERT-base #1: 70.82, ModernBERT #2: 64.76).
-  4. *Balanced*: Equal weighting across capability, tokenizer, and latency (BERT-base #1: 67.68, BioBERT #2: 53.31, ModernBERT #3: 51.02).
-  *Result*: ModernBERT wins 2/4 scenarios (50% win rate); BERT-base wins 2/4 scenarios (50% win rate).
+  - *Representation Robustness*: ModernBERT and RoBERTa achieve high invariance (**Mean Rank 1.20 and 1.80**) across all 5 text formats (`json`, `key_value`, `mixed`, `narrative`, `template`). Representation multi-ranking concordance: Kendall's $W = 0.8714$.
+  - *Subset Robustness*: ModernBERT achieves strict invariance (**Mean Rank 1.00, $\sigma = 0.00$**) across all 5 knowledge subsets (`high`, `medium`, `low`, `balanced`, `random`). Knowledge subset multi-ranking concordance: Kendall's $W = 0.9886$.
+- **MECS Weighting Sensitivity Analysis ([`stage15_mecs_sensitivity.csv`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-15/stage15_mecs_sensitivity.csv))**:
+  Evaluates candidate models across 4 distinct operational weighting scenarios using the cohort-independent Maritime Encoder Composite Score (MECS):
+  1. *Baseline*: Balanced operational mixture (ModernBERT #1: 68.62, RoBERTa #2: 55.45).
+  2. *Performance-Heavy*: Prioritizes intrinsic MLM accuracy and loss (ModernBERT #1: 89.24, RoBERTa #2: 73.18).
+  3. *Domain-Heavy*: Prioritizes rare nautical terminology and morphological fit (BERT-base #1: 69.12, ModernBERT #2: 63.85).
+  4. *Balanced*: Equal weighting across capability, tokenizer, and latency (ModernBERT #1: 52.74, BERT-base #2: 51.98).
+  *Result*: ModernBERT wins 3/4 scenarios (75% win rate); BERT-base wins 1/4 scenarios (25% win rate).
 - **Multi-Objective Pareto Dominance Analysis ([`stage15_pareto.csv`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-15/stage15_pareto.csv))**:
   - 6 models are verified Pareto-optimal along distinct trade-off dimensions: ModernBERT (highest Top-1/lowest Loss), BERT-base (highest rare accuracy/lowest fragmentation), RoBERTa (high accuracy at 125M footprint), BioBERT (highest throughput 6.5 docs/s, lowest latency 154.1ms), SciBERT (scientific vocabulary at 110M), Legal-BERT (legal vocabulary at 110M).
   - `microsoft/BiomedNLP-PubMedBERT` is strictly dominated by 3 models (SciBERT, BERT-base, BioBERT) across capability, loss, and latency.
@@ -386,7 +386,7 @@ Provides string sanitization, administrative noise removal, and natural language
   - [`outputs/stage-15/leaderboard.csv`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-15/leaderboard.csv) (1.1 KB)
   - [`outputs/stage-15/stage15_model_profiles.csv`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-15/stage15_model_profiles.csv) (4.3 KB)
   - [`outputs/stage-15/stage15_rankings.csv`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-15/stage15_rankings.csv) (1.6 KB)
-  - [`outputs/stage-15/stage15_mui_sensitivity.csv`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-15/stage15_mui_sensitivity.csv) (666 B)
+  - [`outputs/stage-15/stage15_mecs_sensitivity.csv`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-15/stage15_mecs_sensitivity.csv) (669 B)
   - [`outputs/stage-15/stage15_pareto.csv`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-15/stage15_pareto.csv) (1.9 KB)
   - [`outputs/stage-15/stage15_selection_decision.json`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-15/stage15_selection_decision.json) (4.1 KB)
   - [`outputs/stage-15/stage15_report.md`](file:///d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-15/stage15_report.md) (9.2 KB)
@@ -573,13 +573,18 @@ $$\text{Importance Score} = \text{clip}\left(S_{\text{hybrid}} \times 100.0, \; 
 
 ---
 
-### 2. Stage 15: Multi-Criteria Maritime Understanding Index (MUI) Formulation
-To evaluate models objectively across diverse capability and operational axes, Stage 15 normalizes raw metrics into $[0.0, 1.0]$ via direction-aware min-max scaling:
+### 2. Stage 15: Multi-Criteria Maritime Encoder Composite Score (MECS) Formulation
+Maritime Encoder Composite Score (MECS) is a composite benchmark-based score used to summarize encoder evaluation characteristics for model selection. It is not intended to represent a direct measure of language or maritime understanding.
 
-$$\tilde{x}_i = \begin{cases} \frac{x_i - \min(\mathbf{x})}{\max(\mathbf{x}) - \min(\mathbf{x})}, & \text{if higher is better (Top-1, Top-5, Rare Top-1, Coverage, Docs/s)} \\ \frac{\max(\mathbf{x}) - x_i}{\max(\mathbf{x}) - \min(\mathbf{x})}, & \text{if lower is better (MLM Loss, Pseudo-PPL, Fragmentation, Latency)} \end{cases}$$
+To evaluate models objectively across diverse capability and operational axes, Stage 15 normalizes raw capability metrics into $[0.0, 1.0]$. Crucially, to eliminate cohort dependency (Issue B9), MLM cross-entropy loss is transformed using a fixed monotonic cohort-independent bounded mapping:
 
-The composite **MUI Score** is then computed under 4 distinct weighting paradigms:
-$$\text{MUI} = 100 \times \sum_{k} w_k \tilde{x}_{i, k}$$
+$$\tilde{x}_{\text{loss}} = \frac{1.0}{1.0 + \text{loss}}$$
+
+Other metrics are normalized via direction-aware scaling:
+$$\tilde{x}_i = \begin{cases} \frac{x_i - \min(\mathbf{x})}{\max(\mathbf{x}) - \min(\mathbf{x})}, & \text{if higher is better (Top-1, Top-5, Rare Top-1, Coverage, Docs/s)} \\ \frac{\max(\mathbf{x}) - x_i}{\max(\mathbf{x}) - \min(\mathbf{x})}, & \text{if lower is better (Fragmentation, Latency)} \end{cases}$$
+
+The composite **MECS Score** is then computed under 4 distinct weighting paradigms:
+$$\text{MECS} = 100 \times \sum_{k} w_k \tilde{x}_{i, k}$$
 
 | Evaluation Scenario | Top-1 Acc | Top-5 Acc | Rare Top-1 | MLM Loss | Frag Rate | Coverage | Latency | Docs/sec | Scenario Focus |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
@@ -591,20 +596,27 @@ $$\text{MUI} = 100 \times \sum_{k} w_k \tilde{x}_{i, k}$$
 ---
 
 ### 3. Statistical Significance & Effect Size Equations
-1. **Bootstrap 95% Confidence Intervals** ($B = 1,000$ resamples):
-   $$\text{CI}_{95} = \left[ \text{Percentile}\left(\bar{x}^*, 2.5\right), \; \text{Percentile}\left(\bar{x}^*, 97.5\right) \right]$$
+1. **Primary Omnibus Analysis — Crossed 3-Way Repeated-Measures ANOVA**:
+   Models are evaluated across matched representation $\times$ subset conditions ($7 \times 5 \times 5 = 175$ cells). Model is treated as primary fixed factor, representation and subset as repeated blocking factors, accompanied by 1,000 block-respecting condition permutations. Omnibus Friedman $\chi^2$ is retained strictly as secondary reference.
 
-2. **Paired $t$-Test**:
-   Evaluates relative mean accuracy differences between model pairs across identical evaluation configurations ($p < 0.05$).
+2. **Primary Pairwise Effect Size — Kerby's Paired Rank-Biserial Correlation ($r_{\text{prb}}$)**:
+   For matched cell differences $d_k = x_{1, k} - x_{2, k}$ across the 25 paired benchmark conditions:
+   $$r_{\text{prb}} = \frac{W^+ - W^-}{W^+ + W^-} \in [-1.0, +1.0]$$
+   where $W^+$ is the sum of positive signed ranks (wins) and $W^-$ is the sum of negative signed ranks (losses).
 
-3. **Wilcoxon Signed-Rank Test**:
-   Non-parametric paired rank test for robustness against non-normal performance distributions.
+3. **Paired Win / Tie / Loss Accounting**:
+   Reports explicit matched dominance counts: $\text{wins}_a$, $\text{ties}$, $\text{losses}_a$, and $\text{paired\_win\_rate}_a = \frac{\text{wins}_a + 0.5 \times \text{ties}}{N_{\text{paired}}}$.
 
-4. **Cohen's $d$ Effect Size**:
-   $$\text{Cohen's } d = \frac{\bar{x}_1 - \bar{x}_2}{s_{\text{pooled}}}, \quad s_{\text{pooled}} = \sqrt{\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1+n_2-2}}$$
+4. **Wilcoxon Signed-Rank Test with Holm-Bonferroni Correction**:
+   Primary non-parametric paired significance test controlling family-wise error rate across all 21 pairwise comparisons.
 
-5. **Cliff's $\delta$ Effect Size**:
+5. **Unpaired Effect Size — Cliff's $\delta$ (Secondary Descriptive Only)**:
    $$\delta = \frac{\# (x_1 > x_2) - \# (x_1 < x_2)}{n_1 n_2}$$
+   *Important*: Cliff's $\delta$ is strictly an unpaired distribution statistic and is never interpreted as a matched-cell win rate or paired superiority.
+
+6. **Multi-Ranking Concordance — Kendall's $W$**:
+   Measures multi-ranking agreement across $k$ conditions evaluating $n$ models with standard average-rank tie correction:
+   $$W = \frac{12 S}{k^2(n^3 - n) - k \sum T}$$
 
 ---
 
@@ -714,32 +726,36 @@ Stage 17 moves beyond scalar heuristic thresholds by enforcing a transparent 8-l
 | `outputs/stage-14/masking_comparison.json` | MLM Grid | JSON Object | 32.7 KB | Standard random vs domain-aware masking ablation |
 | `outputs/stage-14/pll_results.json` | MLM Grid | JSON Object | 28.4 KB | Sampled Pseudo-Log-Likelihood scoring and pseudo-perplexity |
 | `outputs/stage-14/focused_domain_aware_results.json` | MLM Grid | JSON Object | 126.8 KB | Complete cell evaluations under domain-aware masking |
-| `outputs/stage-15/comparison.csv` | Benchmarking | CSV Table | 44.1 KB | Full 175-cell matrix evaluation records across all 7 models |
-| `outputs/stage-15/leaderboard.csv` | Benchmarking | CSV Table | 1.1 KB | Ranked multi-criteria leaderboard by direction-normalized MUI score |
+| `outputs/stage-15/comparison.csv` | Benchmarking | CSV Table | 47.2 KB | Full 175-cell matrix evaluation records across all 7 models |
+| `outputs/stage-15/leaderboard.csv` | Benchmarking | CSV Table | 1.1 KB | Ranked multi-criteria leaderboard by direction-normalized MECS score |
 | `outputs/stage-15/stage15_model_profiles.csv` | Benchmarking | CSV Table | 4.3 KB | Multi-dimensional capability, domain fit, and operational profiles |
-| `outputs/stage-15/stage15_rankings.csv` | Robustness | CSV Table | 1.6 KB | Representation and subset rank consistency breakdowns |
-| `outputs/stage-15/stage15_mui_sensitivity.csv` | Sensitivity | CSV Table | 666 B | 4-scenario weighting sensitivity scores and win frequencies |
+| `outputs/stage-15/stage15_rankings.csv` | Robustness | CSV Table | 1.7 KB | Representation and subset rank consistency breakdowns |
+| `outputs/stage-15/stage15_mecs_sensitivity.csv` | Sensitivity | CSV Table | 669 B | 4-scenario weighting sensitivity scores and win frequencies |
 | `outputs/stage-15/stage15_pareto.csv` | Optimization | CSV Table | 1.9 KB | Non-dominated Pareto frontier classification table |
-| `outputs/stage-15/stage15_selection_decision.json` | Decision | JSON Object | 4.1 KB | Stage 15 model selection decision and trade-off summary |
-| `outputs/stage-15/stage15_report.md` | Documentation | Markdown | 9.2 KB | Standalone Stage 15 publication research report |
+| `outputs/stage-15/stage15_selection_decision.json` | Decision | JSON Object | 3.8 KB | Stage 15 model selection decision and trade-off summary |
+| `outputs/stage-15/stage15_report.md` | Documentation | Markdown | 9.0 KB | Standalone Stage 15 publication research report |
 | `outputs/stage-15/visualizations/*.png` | Visualization | PNG Plots | ~1.5 MB | 6 publication-grade figures (loss, ranks, radar, heatmap, pareto, sensitivity) |
-| `outputs/stage-16/stage16_global_tests.csv` | Statistical | CSV Table | 238 B | Omnibus Friedman Chi-Square test statistics and p-value |
-| `outputs/stage-16/stage16_pairwise_tests.csv` | Statistical | CSV Table | 3.7 KB | 21-pair Wilcoxon and paired t-test results with Holm correction |
-| `outputs/stage-16/stage16_effect_sizes.csv` | Statistical | CSV Table | 3.4 KB | Parametric Cohen's $d_z$ and non-parametric Cliff's $\delta$ |
-| `outputs/stage-16/stage16_bootstrap.csv` | Uncertainty | CSV Table | 3.0 KB | Bootstrap mean 95% confidence intervals (2,000 resamples) |
-| `outputs/stage-16/stage16_rank_stability.csv` | Stability | CSV Table | 507 B | Empirical rank distributions and $P(\text{rank}=1)$ probabilities |
-| `outputs/stage-16/stage16_condition_robustness.csv` | Robustness | CSV Table | 1.1 KB | Representation and subset ranking concordance ($\rho, \tau$) |
-| `outputs/stage-16/stage16_ablation.csv` | Sensitivity | CSV Table | 798 B | Stage 12 scoring signal sensitivity and top-20% Jaccard overlap |
-| `outputs/stage-16/stage16_ablation_stability.csv` | Sensitivity | CSV Table | 377 B | Stage 12 tier retention and stratum transition percentages |
-| `outputs/stage-16/stage16_final_report.md` | Documentation | Markdown | 18.5 KB | Master Stage 16 statistical validation research report |
-| `outputs/stage-16/statistical_significance.json` | Integration | JSON Object | 11.6 KB | Structured statistical metrics consumed by Stage 17 |
-| `outputs/stage-16/ablation_study.json` | Integration | JSON Object | 2.6 KB | Structured scoring ablation data consumed by Stage 17 |
+| `outputs/stage-16/stage16_global_tests.csv` | Statistical | CSV Table | 262 B | Omnibus Friedman Chi-Square test statistics and p-value |
+| `outputs/stage-16/stage16_crossed_anova.csv` | Statistical | CSV Table | 688 B | 3-way crossed repeated-measures ANOVA table with variance decomposition |
+| `outputs/stage-16/stage16_pairwise_tests.csv` | Statistical | CSV Table | 4.3 KB | 21-pair Wilcoxon tests with Holm correction and paired dominance |
+| `outputs/stage-16/stage16_effect_sizes.csv` | Statistical | CSV Table | 3.6 KB | Parametric Cohen's $d_z$, paired rank-biserial $r_{\text{prb}}$, and unpaired Cliff's $\delta$ |
+| `outputs/stage-16/stage16_bootstrap.csv` | Uncertainty | CSV Table | 3.1 KB | Bootstrap mean 95% confidence intervals (2,000 resamples) |
+| `outputs/stage-16/stage16_rank_stability.csv` | Stability | CSV Table | 513 B | Empirical rank distributions and $P(\text{rank}=1)$ probabilities |
+| `outputs/stage-16/stage16_condition_robustness.csv` | Robustness | CSV Table | 1.1 KB | Representation and subset ranking concordance ($\rho$, Kendall's $W$) |
+| `outputs/stage-16/stage16_ablation.csv` | Sensitivity | CSV Table | 804 B | Stage 12 scoring signal sensitivity and top-20% Jaccard overlap |
+| `outputs/stage-16/stage16_ablation_stability.csv` | Sensitivity | CSV Table | 381 B | Stage 12 tier retention and stratum transition percentages |
+| `outputs/stage-16/stage16_final_report.md` | Documentation | Markdown | 19.3 KB | Master Stage 16 statistical validation research report |
+| `outputs/stage-16/statistical_significance.json` | Integration | JSON Object | 28.5 KB | Structured statistical metrics consumed by Stage 17 |
+| `outputs/stage-16/ablation_study.json` | Integration | JSON Object | 2.7 KB | Structured scoring ablation data consumed by Stage 17 |
 | `outputs/stage-17/stage17_model_selection.csv` | Decision | CSV Table | 2.5 KB | Candidate model status, capability, bootstrap, and roles |
-| `outputs/stage-17/stage17_selection_rationale.json` | Decision | JSON Object | 5.6 KB | Structured selection rationale, baseline comparisons, and trade-offs |
-| `outputs/stage-17/stage17_decision_report.md` | Documentation | Markdown | 11.2 KB | Publication-grade 10-section evidence synthesis report |
-| `outputs/stage-17/decision_summary.json` | Backward Compat| JSON Object | 2.4 KB | Canonical strategy decision summary contract |
-| `outputs/stage-17/benchmark_report.md` | Backward Compat| Markdown | 11.2 KB | Canonical master benchmark report contract |
-| `outputs/stage-17/experiment_metadata.json` | Metadata | JSON Object | 345 B | Reproducibility metadata and execution timestamps |
+| `outputs/stage-17/stage17_selection_rationale.json` | Decision | JSON Object | 5.7 KB | Structured selection rationale, baseline comparisons, and trade-offs |
+| `outputs/stage-17/stage17_decision_report.md` | Documentation | Markdown | 10.7 KB | Publication-grade 10-section evidence synthesis report |
+| `outputs/stage-17/decision_summary.json` | Backward Compat| JSON Object | 2.5 KB | Canonical strategy decision summary contract |
+| `outputs/stage-17/benchmark_report.md` | Backward Compat| Markdown | 10.7 KB | Canonical master benchmark report contract |
+| `outputs/stage-17/experiment_metadata.json` | Metadata | JSON Object | 366 B | Reproducibility metadata and execution timestamps |
+| `outputs/representation_provenance.json` | Provenance | JSON Object | 7.7 KB | Cryptographic representation provenance manifest (SHA-256) |
+| `outputs/representation_provenance.md` | Provenance | Markdown | 6.8 KB | Human-readable representation provenance report |
+| `outputs/model_selection/deberta_exclusion_audit.json` | Audit | JSON Object | 902 B | Persistent audit trail documenting exclusion of DeBERTa |
 | `outputs/stage-18/corpus_lint_report.json` | Quality Gate | JSON Object | 3.5 KB | 5-rule regex violation counts, defect rates, samples, PASS status |
 
 ---

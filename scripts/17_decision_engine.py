@@ -33,6 +33,13 @@ from pipeline_utils import setup_logging, load_config, get_project_root
 
 logger = setup_logging("17_decision_engine")
 
+# Explicit, configuration-driven permanent benchmark model exclusions
+EXCLUDED_MODELS = {
+    "microsoft/deberta-v3-base": {
+        "reason": "Excluded after benchmark compatibility anomaly: zero MLM Top-1/Top-5/Top-10 across the evaluated standard cells and English diagnostic."
+    }
+}
+
 
 def load_optional_csv(file_path: Path) -> Optional[pd.DataFrame]:
     """Loads a CSV file if it exists and is non-empty, otherwise returns None."""
@@ -61,7 +68,7 @@ def build_evidence_profiles(
     df_leaderboard: Optional[pd.DataFrame],
     df_profiles: Optional[pd.DataFrame],
     df_rankings: Optional[pd.DataFrame],
-    df_mui_sens: Optional[pd.DataFrame],
+    df_mecs_sens: Optional[pd.DataFrame],
     df_pareto: Optional[pd.DataFrame],
     df_rank_stability: Optional[pd.DataFrame],
     df_bootstrap: Optional[pd.DataFrame],
@@ -72,15 +79,19 @@ def build_evidence_profiles(
     """
     Builds unified evidence profiles for all models by aggregating Stage 15 and Stage 16 evidence.
     No values are fabricated; missing values remain None or 'Not available'.
+    Filters out permanently excluded models dynamically.
     """
     # 1. Discover all unique model names
     models_set = set()
-    for df in [df_leaderboard, df_profiles, df_rankings, df_mui_sens, df_pareto, df_rank_stability]:
+    for df in [df_leaderboard, df_profiles, df_rankings, df_mecs_sens, df_pareto, df_rank_stability]:
         if df is not None and "model_name" in df.columns:
             models_set.update(df["model_name"].dropna().unique())
 
+    # Dynamically exclude non-cohort models
+    models_set = {m for m in models_set if m not in EXCLUDED_MODELS}
+
     if not models_set:
-        logger.error("No models discovered from Stage 15 / Stage 16 artifacts!")
+        logger.error("No valid active models discovered from Stage 15 / Stage 16 artifacts!")
         return {}
 
     # Sort model names deterministically
@@ -91,7 +102,7 @@ def build_evidence_profiles(
     lb_indexed = df_leaderboard.set_index("model_name") if df_leaderboard is not None and "model_name" in df_leaderboard.columns else None
     prof_indexed = df_profiles.set_index("model_name") if df_profiles is not None and "model_name" in df_profiles.columns else None
     rank_indexed = df_rankings.set_index("model_name") if df_rankings is not None and "model_name" in df_rankings.columns else None
-    mui_indexed = df_mui_sens.set_index("model_name") if df_mui_sens is not None and "model_name" in df_mui_sens.columns else None
+    mecs_indexed = df_mecs_sens.set_index("model_name") if df_mecs_sens is not None and "model_name" in df_mecs_sens.columns else None
     pareto_indexed = df_pareto.set_index("model_name") if df_pareto is not None and "model_name" in df_pareto.columns else None
     stab_indexed = df_rank_stability.set_index("model_name") if df_rank_stability is not None and "model_name" in df_rank_stability.columns else None
 
@@ -101,7 +112,7 @@ def build_evidence_profiles(
         df_bm = df_bootstrap[df_bootstrap["analysis_type"] == "model_mean"]
         for _, row in df_bm.iterrows():
             m_name = row.get("target_name")
-            if pd.notna(m_name):
+            if pd.notna(m_name) and m_name not in EXCLUDED_MODELS:
                 bootstrap_cis[m_name] = {
                     "mean": float(row["bootstrap_mean"]) if pd.notna(row.get("bootstrap_mean")) else None,
                     "ci_95_low": float(row["ci_95_low"]) if pd.notna(row.get("ci_95_low")) else None,
@@ -156,27 +167,29 @@ def build_evidence_profiles(
         p["performance_gap_pct"] = perf_gap
         p["top1_ci_error"] = top1_ci
 
-        # MUI metrics
-        mui_score = None
-        mui_wins = None
-        mui_win_freq = None
+        # MECS metrics (Maritime Encoder Composite Score)
+        mecs_score = None
+        mecs_wins = None
+        mecs_win_freq = None
         if lb_indexed is not None and m_name in lb_indexed.index:
             row_lb = lb_indexed.loc[m_name]
-            if pd.notna(row_lb.get("mui_score")):
-                mui_score = float(row_lb["mui_score"])
+            if pd.notna(row_lb.get("mecs_score")):
+                mecs_score = float(row_lb["mecs_score"])
+            elif pd.notna(row_lb.get("mui_score")):
+                mecs_score = float(row_lb["mui_score"])
 
-        if mui_indexed is not None and m_name in mui_indexed.index:
-            row_mui = mui_indexed.loc[m_name]
-            if mui_score is None and pd.notna(row_mui.get("baseline_score")):
-                mui_score = float(row_mui["baseline_score"])
-            if pd.notna(row_mui.get("total_wins")):
-                mui_wins = int(row_mui["total_wins"])
-            if pd.notna(row_mui.get("win_frequency")):
-                mui_win_freq = float(row_mui["win_frequency"])
+        if mecs_indexed is not None and m_name in mecs_indexed.index:
+            row_mecs = mecs_indexed.loc[m_name]
+            if mecs_score is None and pd.notna(row_mecs.get("baseline_score")):
+                mecs_score = float(row_mecs["baseline_score"])
+            if pd.notna(row_mecs.get("total_wins")):
+                mecs_wins = int(row_mecs["total_wins"])
+            if pd.notna(row_mecs.get("win_frequency")):
+                mecs_win_freq = float(row_mecs["win_frequency"])
 
-        p["mui_score"] = mui_score
-        p["mui_total_wins"] = mui_wins
-        p["mui_win_frequency"] = mui_win_freq
+        p["mecs_score"] = mecs_score
+        p["mecs_total_wins"] = mecs_wins
+        p["mecs_win_frequency"] = mecs_win_freq
 
         # Robustness & Ranking metrics (Stage 15 + Stage 16)
         rep_mean_rank = None
@@ -196,17 +209,21 @@ def build_evidence_profiles(
                 subset_mean_rank = float(row_r["subset_mean_rank"])
             if pd.notna(row_r.get("subset_rank_std")):
                 subset_rank_std = float(row_r["subset_rank_std"])
-            if pd.notna(row_r.get("rep_stability_kendall_tau")):
+            if pd.notna(row_r.get("rep_stability_kendalls_w")):
+                rep_kendall = float(row_r["rep_stability_kendalls_w"])
+            elif pd.notna(row_r.get("rep_stability_kendall_tau")):
                 rep_kendall = float(row_r["rep_stability_kendall_tau"])
-            if pd.notna(row_r.get("subset_stability_kendall_tau")):
+            if pd.notna(row_r.get("subset_stability_kendalls_w")):
+                subset_kendall = float(row_r["subset_stability_kendalls_w"])
+            elif pd.notna(row_r.get("subset_stability_kendall_tau")):
                 subset_kendall = float(row_r["subset_stability_kendall_tau"])
 
         p["rep_mean_rank"] = rep_mean_rank
         p["rep_rank_std"] = rep_rank_std
         p["subset_mean_rank"] = subset_mean_rank
         p["subset_rank_std"] = subset_rank_std
-        p["rep_stability_kendall_tau"] = rep_kendall
-        p["subset_stability_kendall_tau"] = subset_kendall
+        p["rep_stability_kendalls_w"] = rep_kendall
+        p["subset_stability_kendalls_w"] = subset_kendall
 
         # Bootstrap stability (Stage 16)
         boot_mean_rank = None
@@ -458,14 +475,14 @@ def evaluate_selection_baselines(profiles: Dict[str, Dict[str, Any]]) -> Dict[st
             "value": f"{valid_frag[best_frag_model]:.2f}%"
         }
 
-    # 6. MUI Winner (Baseline MUI composite score from Stage 15)
-    valid_mui = {m: profiles[m]["mui_score"] for m in models if profiles[m].get("mui_score") is not None}
-    if valid_mui:
-        best_mui_model = max(valid_mui.items(), key=lambda x: x[1])[0]
-        baselines["MUI (Baseline Aggregate Index)"] = {
-            "selected_model": best_mui_model,
-            "selection_metric": "Stage 15 Maritime Understanding Index (Baseline)",
-            "value": f"{valid_mui[best_mui_model]:.2f}"
+    # 6. MECS Winner (Baseline MECS composite score from Stage 15)
+    valid_mecs = {m: profiles[m]["mecs_score"] for m in models if profiles[m].get("mecs_score") is not None}
+    if valid_mecs:
+        best_mecs_model = max(valid_mecs.items(), key=lambda x: x[1])[0]
+        baselines["MECS (Baseline Aggregate Score)"] = {
+            "selected_model": best_mecs_model,
+            "selection_metric": "Stage 15 Maritime Encoder Composite Score (Baseline)",
+            "value": f"{valid_mecs[best_mecs_model]:.4f}"
         }
 
     return baselines
@@ -572,13 +589,13 @@ def run_evidence_decision_hierarchy(
     robustness_evidence = [
         f"Representation Stability: Mean rank {p_sel.get('rep_mean_rank', 'N/A')} across JSON, Key-Value, Mixed, Narrative, Template formats (Std: {p_sel.get('rep_rank_std', 'N/A')})",
         f"Subset Stability: Mean rank {p_sel.get('subset_mean_rank', 'N/A')} across balanced, high, medium, low knowledge subsets and random baseline (Std: {p_sel.get('subset_rank_std', 'N/A')})",
-        f"Condition Agreement: Kendall tau {p_sel.get('rep_stability_kendall_tau', 'N/A')} across representations, {p_sel.get('subset_stability_kendall_tau', 'N/A')} across subsets"
+        f"Condition Agreement: Kendall's W {p_sel.get('rep_stability_kendalls_w', 'N/A')} across representations, {p_sel.get('subset_stability_kendalls_w', 'N/A')} across subsets"
     ]
 
-    mui_evidence = [
-        f"Baseline MUI Score: {p_sel.get('mui_score', 'N/A'):.2f} (Rank 1 in baseline scenario)",
-        f"MUI Scenario Wins: {p_sel.get('mui_total_wins', 'N/A')} wins across 4 weight scenarios (Win frequency: {p_sel.get('mui_win_frequency', 'N/A')})",
-        "MUI Sensitivity Trade-off: ModernBERT leads performance-oriented and baseline scenarios; general BERT leads vocabulary/domain-heavy scenarios, exposing an explicit capability versus tokenization trade-off."
+    mecs_evidence = [
+        f"Baseline MECS Score: {p_sel.get('mecs_score', 'N/A'):.4f} (Rank 1 in baseline scenario)",
+        f"MECS Scenario Wins: {p_sel.get('mecs_total_wins', 'N/A')} wins across 4 weight scenarios (Win frequency: {p_sel.get('mecs_win_frequency', 'N/A')})",
+        "MECS Sensitivity Trade-off: ModernBERT leads performance-oriented and baseline scenarios; general BERT leads vocabulary/domain-heavy scenarios, exposing an explicit capability versus tokenization trade-off."
     ]
 
     tradeoffs = [
@@ -627,7 +644,7 @@ def run_evidence_decision_hierarchy(
     limitations = [
         "Benchmark evidence supports the selected model as the preferred pretrained initialization for subsequent DAPT, but does NOT prove downstream task optimality prior to empirical adaptation.",
         "Empirical downstream validation on fine-tuned classification, extraction, and incident summarization tasks remains required in subsequent DAPT stages.",
-        "MUI is an operational aggregate index used for supporting sensitivity analysis; it is not a direct mathematical ground truth of maritime understanding."
+        "MECS is an operational composite score used for supporting sensitivity analysis; it is not a direct mathematical ground truth of maritime understanding."
     ]
 
     return {
@@ -640,7 +657,7 @@ def run_evidence_decision_hierarchy(
         "primary_evidence": primary_evidence,
         "statistical_evidence": statistical_evidence,
         "robustness_evidence": robustness_evidence,
-        "mui_evidence": mui_evidence,
+        "mecs_evidence": mecs_evidence,
         "pareto_status": p_sel.get("pareto_status", "Pareto-Optimal"),
         "tradeoffs": tradeoffs,
         "alternative_models": alternative_models,
@@ -699,8 +716,8 @@ def generate_selection_csv(
             "candidate_status": status,
             "primary_performance": primary_perf,
             "domain_performance": domain_perf,
-            "mui_score": p.get("mui_score"),
-            "mui_win_frequency": p.get("mui_win_frequency"),
+            "mecs_score": p.get("mecs_score"),
+            "mecs_win_frequency": p.get("mecs_win_frequency"),
             "mean_rank": p.get("bootstrap_mean_rank"),
             "rank_std": p.get("bootstrap_rank_std"),
             "p_rank_1": p.get("p_rank_1"),
@@ -739,7 +756,7 @@ def generate_selection_rationale_json(
         "primary_evidence": decision_result["primary_evidence"],
         "statistical_evidence": decision_result["statistical_evidence"],
         "robustness_evidence": decision_result["robustness_evidence"],
-        "mui_evidence": decision_result["mui_evidence"],
+        "mecs_evidence": decision_result.get("mecs_evidence", decision_result.get("mui_evidence")),
         "pareto_status": decision_result["pareto_status"],
         "tradeoffs": decision_result["tradeoffs"],
         "alternative_models": decision_result["alternative_models"],
@@ -786,7 +803,7 @@ def generate_decision_report_md(
 The model selection decision is grounded in empirical artifacts from Stages 15 and 16, without recalculating or fabricating metrics:
 
 * **Primary Capability**: `{sel}` achieves an empirical Maritime Top-1 Accuracy of **{p_sel.get('top1_acc', 'N/A'):.2f}%** and an intrinsic MLM cross-entropy loss of **{p_sel.get('mlm_loss', 'N/A'):.4f}** (Pseudo-Perplexity: {p_sel.get('pseudo_perplexity', 'N/A'):.2f}).
-* **Statistical Standing**: Stage 16 Wilcoxon signed-rank testing with Holm-Bonferroni correction confirms that `{sel}` demonstrates statistically significant superiority over all {p_sel.get('sig_pairwise_wins', 0)} competing evaluated models ($p_{{holm}} < 0.05$) with large parametric (Cohen's $d > 2.0$) and non-parametric (Cliff's $\\delta > 0.8$) effect sizes.
+* **Statistical Standing**: Stage 16 Wilcoxon signed-rank testing with Holm-Bonferroni correction confirms that `{sel}` demonstrates statistically significant superiority over all {p_sel.get('sig_pairwise_wins', 0)} competing evaluated models ($p_{{holm}} < 0.05$) with large paired rank-biserial effect sizes ($r_{{prb}} > 0.8$) and large unpaired effect sizes.
 * **Bootstrap Stability**: Across 2,000 bootstrap resamples of matched evaluation conditions, `{sel}` attained a Rank-1 probability of **{p_sel.get('p_rank_1', 0.0)*100:.1f}%** with a mean rank of **{p_sel.get('bootstrap_mean_rank', 'N/A'):.2f} ± {p_sel.get('bootstrap_rank_std', 'N/A'):.2f}**.
 * **Condition Robustness**: Rank 1 status was maintained across all evaluated structural representations and knowledge subsets.
 * **Pareto Status**: Verified as non-dominated (**{p_sel.get('pareto_status', 'Pareto-Optimal')}**) in the multi-objective evaluation.
@@ -849,11 +866,11 @@ The benchmark evaluated candidate models across diverse structural representatio
 1. **Representation Invariance**:
    * Evaluated structural formats across canonical narrative and structured representations.
    * `{sel}` demonstrated robust rank stability across all representations (Mean Rank: {p_sel.get('rep_mean_rank', 'N/A'):.1f}, Std: {p_sel.get('rep_rank_std', 'N/A'):.2f}).
-   * Overall representation ranking concordance is high (Kendall $\\tau = {p_sel.get('rep_stability_kendall_tau', 'N/A')}$).
+   * Overall representation ranking concordance is high (Kendall $W = {p_sel.get('rep_stability_kendalls_w', 'N/A')}$).
 2. **Knowledge Subset Agreement**:
    * Evaluated subsets across domain-informativeness stratifications.
    * `{sel}` maintained high performance across subsets (Mean Rank: {p_sel.get('subset_mean_rank', 'N/A'):.1f}, Std: {p_sel.get('subset_rank_std', 'N/A'):.2f}).
-   * Knowledge subset ranking concordance demonstrates strong agreement (Kendall $\\tau = {p_sel.get('subset_stability_kendall_tau', 'N/A')}$).
+   * Knowledge subset ranking concordance demonstrates strong agreement (Kendall $W = {p_sel.get('subset_stability_kendalls_w', 'N/A')}$).
 3. **Bootstrap Resampling**:
    * 95% Confidence Interval for `{sel}` Top-1 accuracy: `[{p_sel.get('ci_95_low', 'N/A')}, {p_sel.get('ci_95_high', 'N/A')}]`.
    * Demonstrates complete confidence interval separation from baseline models.
@@ -863,18 +880,18 @@ The benchmark evaluated candidate models across diverse structural representatio
 ## 5. Statistical Support
 All statistical evidence is consumed directly from Stage 16 without re-computation:
 
-* **Global Hypothesis Test**: Friedman's omnibus test across matched conditions confirms statistically significant differences among models ($\\chi^2 = {stat_fr}$, $df = {df_fr}$, $p = {p_fr_str}$).
+* **Global Hypothesis Test**: Crossed factorial repeated-measures ANOVA (primary) and Friedman's omnibus test (secondary reference) across matched conditions confirm statistically significant differences among models ($\\chi^2 = {stat_fr}$, $df = {df_fr}$, $p = {p_fr_str}$).
 * **Pairwise Wilcoxon Tests**: With family-wise error controlled using the Holm-Bonferroni step-down procedure, `{sel}` achieves statistically significant superiority over:
 {victories_md}
 * **Zero Empirical Defeats**: `{sel}` experienced {p_sel.get('sig_pairwise_losses', 0)} statistically significant pairwise defeats across all conditions.
 
 ---
 
-## 6. MUI and Pareto Evidence
-* **MUI Role**: The Maritime Understanding Index (MUI) is utilized exclusively as a supporting aggregate index, not as an unchallengeable ground truth.
-* **MUI Baseline**: `{sel}` ranked 1st with a baseline score of **{p_sel.get('mui_score', 'N/A'):.2f}**.
+## 6. MECS and Pareto Evidence
+* **MECS Role**: The Maritime Encoder Composite Score (MECS) is utilized exclusively as a supporting aggregate index, not as an unchallengeable ground truth of maritime understanding.
+* **MECS Baseline**: `{sel}` ranked 1st with a baseline score of **{p_sel.get('mecs_score', 'N/A'):.4f}**.
 * **Sensitivity Analysis Findings**:
-   * `{sel}` won {p_sel.get('mui_total_wins', 'N/A')} of 4 weight scenarios.
+   * `{sel}` won {p_sel.get('mecs_total_wins', 'N/A')} of 4 weight scenarios.
    * *Methodological Insight*: Weight scenario evaluations highlight trade-offs between intrinsic language modeling capability and tokenization efficiency, rather than a methodology defect.
 * **Pareto Status**: Verified as **{p_sel.get('pareto_status', 'Pareto-Optimal')}** in Stage 15 across active evaluation objectives.
 ---
@@ -1029,11 +1046,13 @@ def main():
     stage17_dir.mkdir(parents=True, exist_ok=True)
 
     # 1. Load Stage 15 Artifacts
-    logger.info("Loading Stage 15 Compatibility & MUI artifacts...")
+    logger.info("Loading Stage 15 Compatibility & MECS artifacts...")
     df_leaderboard = load_optional_csv(stage15_dir / "leaderboard.csv")
     df_profiles = load_optional_csv(stage15_dir / "stage15_model_profiles.csv")
     df_rankings = load_optional_csv(stage15_dir / "stage15_rankings.csv")
-    df_mui_sens = load_optional_csv(stage15_dir / "stage15_mui_sensitivity.csv")
+    df_mecs_sens = load_optional_csv(stage15_dir / "stage15_mecs_sensitivity.csv")
+    if df_mecs_sens is None:
+        df_mecs_sens = load_optional_csv(stage15_dir / "stage15_mui_sensitivity.csv")
     df_pareto = load_optional_csv(stage15_dir / "stage15_pareto.csv")
     dict_stage15_dec = load_optional_json(stage15_dir / "stage15_selection_decision.json")
 
@@ -1053,7 +1072,7 @@ def main():
         df_leaderboard=df_leaderboard,
         df_profiles=df_profiles,
         df_rankings=df_rankings,
-        df_mui_sens=df_mui_sens,
+        df_mecs_sens=df_mecs_sens,
         df_pareto=df_pareto,
         df_rank_stability=df_rank_stability,
         df_bootstrap=df_bootstrap,

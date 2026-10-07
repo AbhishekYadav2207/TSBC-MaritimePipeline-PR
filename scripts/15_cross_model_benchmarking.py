@@ -1,6 +1,8 @@
 import os
+import sys
 import json
 import math
+import argparse
 from datetime import datetime
 from itertools import combinations
 from pathlib import Path
@@ -13,12 +15,18 @@ from pipeline_utils import setup_logging, load_config, get_project_root
 
 logger = setup_logging("15_cross_model_benchmarking")
 
+# Explicit, configuration-driven permanent benchmark model exclusions
+EXCLUDED_MODELS = {
+    "microsoft/deberta-v3-base": {
+        "reason": "Excluded after benchmark compatibility anomaly: zero MLM Top-1/Top-5/Top-10 across the evaluated standard cells and English diagnostic."
+    }
+}
+
 # Model parameter and size registry (approximate parameter counts in millions and disk sizes in MB)
 MODEL_PROFILES = {
     "bert-base-uncased": {"params_m": 110, "size_mb": 440},
     "bert-large-uncased": {"params_m": 340, "size_mb": 1340},
     "roberta-base": {"params_m": 125, "size_mb": 500},
-    "microsoft/deberta-v3-base": {"params_m": 86, "size_mb": 500},
     "answerdotai/ModernBERT-base": {"params_m": 149, "size_mb": 590},
     "allenai/scibert_scivocab_uncased": {"params_m": 110, "size_mb": 440},
     "dmis-lab/biobert-base-cased-v1.2": {"params_m": 110, "size_mb": 440},
@@ -52,7 +60,10 @@ METRIC_DIRECTIONS = {
     "disk_size_mb": "lower_is_better"
 }
 
-MUI_SCENARIOS = {
+# Maritime Encoder Composite Score (MECS) Weighting Scenarios
+# MECS is a composite benchmark-based score used to summarize multiple encoder evaluation
+# characteristics for model selection. It is not intended as a direct measure of language or maritime understanding.
+MECS_SCENARIOS = {
     "baseline": {
         "top1_acc": 0.35,
         "rare_top1_acc": 0.20,
@@ -122,6 +133,10 @@ def discover_stage14_results(cache_dir: Path, pll_path: Path = None):
         if not model_name or not rep or not sub:
             logger.warning(f"File {jf.name} missing required identifying keys (model_name/representation/subset). Skipping.")
             invalid_files.append({"file": jf.name, "reason": "Missing model_name, representation, or subset"})
+            continue
+
+        if model_name in EXCLUDED_MODELS:
+            logger.info(f"Skipping excluded model {model_name} in {jf.name}")
             continue
 
         combo_key = (model_name, rep, sub)
@@ -352,31 +367,97 @@ def build_model_profiles(df_mlm: pd.DataFrame, tok_data: dict, pll_dict: dict, m
     for metric, direction in METRIC_DIRECTIONS.items():
         raw_col = f"raw__{metric}"
         if raw_col in df_raw and df_raw[raw_col].notna().any():
-            df_norm[f"norm__{metric}"] = normalize_metric(df_raw[raw_col], direction)
-            active_directions[metric] = direction
+            if metric == "mlm_loss":
+                # B9: Cohort-independent monotonic bounded loss normalization: 1 / (1 + loss)
+                # Invariant to candidate cohort composition, strictly monotonic (lower loss -> higher score)
+                df_norm["norm__mlm_loss"] = 1.0 / (1.0 + df_raw[raw_col].clip(lower=0.0))
+                active_directions[metric] = "cohort_independent: 1 / (1 + loss)"
+            else:
+                df_norm[f"norm__{metric}"] = normalize_metric(df_raw[raw_col], direction)
+                active_directions[metric] = direction
 
     df_profiles = pd.merge(df_raw, df_norm, on="model_name")
     return df_profiles, df_norm, active_directions
 
 
+def calculate_kendalls_w(rankings_matrix: np.ndarray) -> dict:
+    """
+    Computes Kendall's W (coefficient of concordance) for k rankings (raters/conditions)
+    evaluating n objects (models). Correctly handles ties using standard average-rank correction.
+
+    Parameters:
+        rankings_matrix: array of shape (k, n) where each row is the ranking of n objects.
+
+    Returns:
+        Dictionary containing kendalls_w, chi2_stat, df, p_value, k_rankings, n_objects, tie_corrected.
+    """
+    mat = np.asarray(rankings_matrix, dtype=float)
+    k, n = mat.shape
+    if k < 1 or n < 2:
+        return {
+            "kendalls_w": 1.0 if n == 1 else 0.0,
+            "chi2_stat": 0.0,
+            "df": max(1, n - 1),
+            "p_value": 1.0,
+            "k_rankings": k,
+            "n_objects": n,
+            "tie_corrected": False
+        }
+
+    # Sum of ranks for each object across all k rankings
+    R = np.sum(mat, axis=0)
+    mean_R = k * (n + 1) / 2.0
+    S = np.sum((R - mean_R) ** 2)
+
+    # Tie correction: for each ranking i, sum (t^3 - t) for tied groups of size t
+    T_total = 0.0
+    for row in mat:
+        _, counts = np.unique(row, return_counts=True)
+        ties = counts[counts > 1]
+        if len(ties) > 0:
+            T_total += float(np.sum(ties ** 3 - ties))
+
+    denom = (k ** 2 * (n ** 3 - n) - k * T_total) / 12.0
+    if denom <= 0:
+        W = 1.0
+    else:
+        W = float(S / denom)
+    W = float(np.clip(W, 0.0, 1.0))
+
+    df = n - 1
+    chi2_stat = k * (n - 1) * W
+    p_val = float(1.0 - stats.chi2.cdf(chi2_stat, df))
+
+    return {
+        "kendalls_w": round(W, 4),
+        "chi2_stat": round(chi2_stat, 4),
+        "df": df,
+        "p_value": p_val,
+        "k_rankings": k,
+        "n_objects": n,
+        "tie_corrected": bool(T_total > 0)
+    }
+
+
 def calculate_representation_rankings(df_mlm: pd.DataFrame):
     """
-    Computes per-representation rankings and rank agreement across representations.
-    Dynamically discovers representations from the data.
+    Computes per-representation rankings and multi-ranking concordance (Kendall's W)
+    across representations. Dynamically discovers representations and models.
     """
     if df_mlm.empty:
         return pd.DataFrame(), {}
 
     reps = sorted(df_mlm["representation"].dropna().unique())
+    models = sorted(df_mlm["model_name"].dropna().unique())
     rep_rank_dict = {}
     rep_score_dict = {}
 
     for r in reps:
         grp = df_mlm[df_mlm["representation"] == r]
         means = grp.groupby("model_name")["top1_acc"].mean()
-        ranks = means.rank(ascending=False, method="min")
+        ranks = means.rank(ascending=False, method="average")
         for m, rk in ranks.items():
-            rep_rank_dict.setdefault(m, {})[f"rep_rank__{r}"] = int(rk)
+            rep_rank_dict.setdefault(m, {})[f"rep_rank__{r}"] = float(rk)
             rep_score_dict.setdefault(m, {})[f"rep_top1__{r}"] = round(float(means[m]) * 100.0, 2)
 
     df_rep = pd.DataFrame([
@@ -389,6 +470,14 @@ def calculate_representation_rankings(df_mlm: pd.DataFrame):
         df_rep["rep_mean_rank"] = df_rep[rank_cols].mean(axis=1).round(2)
         df_rep["rep_rank_std"] = df_rep[rank_cols].std(axis=1).fillna(0.0).round(2)
 
+    # Kendall's W multi-ranking concordance across representations
+    rank_matrix = []
+    for r in reps:
+        row = [df_rep.loc[df_rep["model_name"] == m, f"rep_rank__{r}"].iloc[0] for m in models]
+        rank_matrix.append(row)
+    w_res = calculate_kendalls_w(np.array(rank_matrix))
+
+    # Secondary pairwise stats for reference
     tau_list, rho_list = [], []
     for r1, r2 in combinations(reps, 2):
         c1, c2 = f"rep_rank__{r1}", f"rep_rank__{r2}"
@@ -403,10 +492,15 @@ def calculate_representation_rankings(df_mlm: pd.DataFrame):
                     rho_list.append(rho)
 
     stability = {
-        "mean_kendall_tau": round(float(np.mean(tau_list)), 4) if tau_list else 0.0,
+        "rep_stability_kendalls_w": w_res["kendalls_w"],
+        "kendalls_w_chi2": w_res["chi2_stat"],
+        "kendalls_w_df": w_res["df"],
+        "kendalls_w_p_value": w_res["p_value"],
         "mean_spearman_rho": round(float(np.mean(rho_list)), 4) if rho_list else 0.0,
+        "pairwise_mean_kendall_tau": round(float(np.mean(tau_list)), 4) if tau_list else 0.0,
         "evaluated_representations": reps,
-        "pairwise_comparisons": len(tau_list)
+        "number_of_rankings": w_res["k_rankings"],
+        "number_of_objects": w_res["n_objects"]
     }
 
     return df_rep, stability
@@ -414,22 +508,23 @@ def calculate_representation_rankings(df_mlm: pd.DataFrame):
 
 def calculate_subset_rankings(df_mlm: pd.DataFrame):
     """
-    Computes per-subset rankings and rank agreement across knowledge subsets.
-    Dynamically discovers subsets from the data.
+    Computes per-subset rankings and multi-ranking concordance (Kendall's W)
+    across knowledge subsets. Dynamically discovers subsets and models.
     """
     if df_mlm.empty:
         return pd.DataFrame(), {}
 
     subs = sorted(df_mlm["subset"].dropna().unique())
+    models = sorted(df_mlm["model_name"].dropna().unique())
     sub_rank_dict = {}
     sub_score_dict = {}
 
     for s in subs:
         grp = df_mlm[df_mlm["subset"] == s]
         means = grp.groupby("model_name")["top1_acc"].mean()
-        ranks = means.rank(ascending=False, method="min")
+        ranks = means.rank(ascending=False, method="average")
         for m, rk in ranks.items():
-            sub_rank_dict.setdefault(m, {})[f"subset_rank__{s}"] = int(rk)
+            sub_rank_dict.setdefault(m, {})[f"subset_rank__{s}"] = float(rk)
             sub_score_dict.setdefault(m, {})[f"subset_top1__{s}"] = round(float(means[m]) * 100.0, 2)
 
     df_sub = pd.DataFrame([
@@ -442,6 +537,14 @@ def calculate_subset_rankings(df_mlm: pd.DataFrame):
         df_sub["subset_mean_rank"] = df_sub[rank_cols].mean(axis=1).round(2)
         df_sub["subset_rank_std"] = df_sub[rank_cols].std(axis=1).fillna(0.0).round(2)
 
+    # Kendall's W multi-ranking concordance across subsets
+    rank_matrix = []
+    for s in subs:
+        row = [df_sub.loc[df_sub["model_name"] == m, f"subset_rank__{s}"].iloc[0] for m in models]
+        rank_matrix.append(row)
+    w_res = calculate_kendalls_w(np.array(rank_matrix))
+
+    # Secondary pairwise stats for reference
     tau_list, rho_list = [], []
     for s1, s2 in combinations(subs, 2):
         c1, c2 = f"subset_rank__{s1}", f"subset_rank__{s2}"
@@ -456,18 +559,23 @@ def calculate_subset_rankings(df_mlm: pd.DataFrame):
                     rho_list.append(rho)
 
     stability = {
-        "mean_kendall_tau": round(float(np.mean(tau_list)), 4) if tau_list else 0.0,
+        "subset_stability_kendalls_w": w_res["kendalls_w"],
+        "kendalls_w_chi2": w_res["chi2_stat"],
+        "kendalls_w_df": w_res["df"],
+        "kendalls_w_p_value": w_res["p_value"],
         "mean_spearman_rho": round(float(np.mean(rho_list)), 4) if rho_list else 0.0,
+        "pairwise_mean_kendall_tau": round(float(np.mean(tau_list)), 4) if tau_list else 0.0,
         "evaluated_subsets": subs,
-        "pairwise_comparisons": len(tau_list)
+        "number_of_rankings": w_res["k_rankings"],
+        "number_of_objects": w_res["n_objects"]
     }
 
     return df_sub, stability
 
 
-def calculate_mui(df_profiles: pd.DataFrame, scenario_weights: dict):
+def calculate_mecs(df_profiles: pd.DataFrame, scenario_weights: dict):
     """
-    Computes Maritime Understanding Index (MUI) on normalized metrics.
+    Computes Maritime Encoder Composite Score (MECS) on normalized metrics.
     For each model, renormalizes weights over its applicable, non-null metrics.
     Missing/N/A metrics are never encoded as 0.0 and do not penalize or artificially reward any model.
     Returns (scores_series, applicable_metrics_list).
@@ -497,9 +605,9 @@ def calculate_mui(df_profiles: pd.DataFrame, scenario_weights: dict):
     return pd.Series(scores, index=df_profiles.index), applicable_metrics
 
 
-def run_mui_sensitivity(df_profiles: pd.DataFrame):
+def run_mecs_sensitivity(df_profiles: pd.DataFrame):
     """
-    Evaluates model rankings across four distinct weighting scenarios.
+    Evaluates model rankings across four distinct MECS weighting scenarios.
     Dynamically adapts to available metrics and tracks actual metrics used per scenario.
     Reports win frequency and score stability.
     """
@@ -507,8 +615,8 @@ def run_mui_sensitivity(df_profiles: pd.DataFrame):
     scenario_winners = {}
     scenario_metrics_used = {}
 
-    for sc_name, sc_weights in MUI_SCENARIOS.items():
-        scores, used_metrics = calculate_mui(df_profiles, sc_weights)
+    for sc_name, sc_weights in MECS_SCENARIOS.items():
+        scores, used_metrics = calculate_mecs(df_profiles, sc_weights)
         ranks = scores.rank(ascending=False, method="min").astype(int)
 
         df_sens[f"{sc_name}_score"] = scores
@@ -518,9 +626,9 @@ def run_mui_sensitivity(df_profiles: pd.DataFrame):
         scenario_winners[sc_name] = df_profiles.loc[top_idx, "model_name"]
         scenario_metrics_used[sc_name] = used_metrics
 
-    rank_cols = [f"{sc_name}_rank" for sc_name in MUI_SCENARIOS.keys()]
+    rank_cols = [f"{sc_name}_rank" for sc_name in MECS_SCENARIOS.keys()]
     df_sens["total_wins"] = (df_sens[rank_cols] == 1).sum(axis=1)
-    df_sens["win_frequency"] = (df_sens["total_wins"] / float(len(MUI_SCENARIOS))).round(2)
+    df_sens["win_frequency"] = (df_sens["total_wins"] / float(len(MECS_SCENARIOS))).round(2)
 
     df_sens.sort_values(by=["total_wins", "baseline_score"], ascending=[False, False], inplace=True)
     return df_sens, scenario_winners, scenario_metrics_used
@@ -622,9 +730,9 @@ def generate_selection_decision(
     most_stable_sub_row = df_sub.sort_values(by=["subset_rank_std", "subset_mean_rank"]).iloc[0]
     most_stable_sub_model = most_stable_sub_row["model_name"]
 
-    # 4. Most robust MUI sensitivity leader
-    most_robust_mui_row = df_sens.sort_values(by=["total_wins", "baseline_score"], ascending=[False, False]).iloc[0]
-    most_robust_mui_model = most_robust_mui_row["model_name"]
+    # 4. Most robust MECS sensitivity leader
+    most_robust_mecs_row = df_sens.sort_values(by=["total_wins", "baseline_score"], ascending=[False, False]).iloc[0]
+    most_robust_mecs_model = most_robust_mecs_row["model_name"]
 
     # 5. Pareto optimal models
     pareto_optimal_models = df_pareto[df_pareto["pareto_status"] == "Pareto-Optimal"]["model_name"].tolist()
@@ -683,14 +791,14 @@ def generate_selection_decision(
                 })
 
     wins = int(rec_profile["total_wins"])
-    if wins == len(MUI_SCENARIOS):
-        sens_summary = f"unanimous leader across all {len(MUI_SCENARIOS)} MUI sensitivity scenarios"
+    if wins == len(MECS_SCENARIOS):
+        sens_summary = f"unanimous leader across all {len(MECS_SCENARIOS)} MECS sensitivity scenarios"
     elif wins >= 3:
-        sens_summary = f"consistent leader across {wins}/{len(MUI_SCENARIOS)} MUI sensitivity scenarios"
+        sens_summary = f"consistent leader across {wins}/{len(MECS_SCENARIOS)} MECS sensitivity scenarios"
     elif wins == 2:
-        sens_summary = f"leading performance across {wins}/{len(MUI_SCENARIOS)} MUI sensitivity scenarios (baseline and performance-heavy paradigms)"
+        sens_summary = f"leading performance across {wins}/{len(MECS_SCENARIOS)} MECS sensitivity scenarios (baseline and performance-heavy paradigms)"
     else:
-        sens_summary = f"leading rank in {wins}/{len(MUI_SCENARIOS)} MUI sensitivity scenarios"
+        sens_summary = f"leading rank in {wins}/{len(MECS_SCENARIOS)} MECS sensitivity scenarios"
 
     selection_rationale = (
         f"{recommended_model} demonstrated the strongest intrinsic MLM capability "
@@ -728,17 +836,17 @@ def generate_selection_decision(
                 "mean_rank": float(most_stable_sub_row["subset_mean_rank"]),
                 "rank_std": float(most_stable_sub_row["subset_rank_std"])
             },
-            "most_robust_mui_winner": {
-                "model_name": most_robust_mui_model,
-                "total_wins": int(most_robust_mui_row["total_wins"]),
-                "win_frequency": float(most_robust_mui_row["win_frequency"]),
-                "baseline_score": float(most_robust_mui_row["baseline_score"])
+            "most_robust_mecs_winner": {
+                "model_name": most_robust_mecs_model,
+                "total_wins": int(most_robust_mecs_row["total_wins"]),
+                "win_frequency": float(most_robust_mecs_row["win_frequency"]),
+                "baseline_score": float(most_robust_mecs_row["baseline_score"])
             }
         },
         "rank_stability": {
-            "representation_kendall_tau": rep_stability.get("mean_kendall_tau", 0.0),
+            "representation_kendalls_w": rep_stability.get("rep_stability_kendalls_w", 0.0),
             "representation_spearman_rho": rep_stability.get("mean_spearman_rho", 0.0),
-            "subset_kendall_tau": sub_stability.get("mean_kendall_tau", 0.0),
+            "subset_kendalls_w": sub_stability.get("subset_stability_kendalls_w", 0.0),
             "subset_spearman_rho": sub_stability.get("mean_spearman_rho", 0.0)
         },
         "pareto_summary": {
@@ -749,16 +857,17 @@ def generate_selection_decision(
         "final_selection": {
             "recommended_model": recommended_model,
             "pareto_status": rec_profile["pareto_status"],
-            "baseline_mui_score": float(rec_profile["baseline_score"]),
+            "baseline_mecs_score": float(rec_profile["baseline_score"]),
             "maritime_top1_acc_pct": round(float(rec_profile["raw__top1_acc"]) * 100.0, 2),
             "rare_maritime_acc_pct": round(float(rec_profile["raw__rare_top1_acc"]) * 100.0, 2) if pd.notna(rec_profile["raw__rare_top1_acc"]) else "N/A",
             "mlm_loss": round(float(rec_profile["raw__mlm_loss"]), 4),
-            "sensitivity_wins": f"{wins}/{len(MUI_SCENARIOS)} scenarios",
+            "sensitivity_wins": f"{wins}/{len(MECS_SCENARIOS)} scenarios",
             "selection_rationale": selection_rationale
         },
         "trade_offs": trade_offs,
         "methodological_note": (
-            "MUI is an operational composite compatibility index, not a human-validated ground truth of domain comprehension. "
+            "Maritime Encoder Composite Score (MECS) is an operational composite compatibility score used to summarize multiple "
+            "encoder evaluation characteristics for model selection. It is not intended as a direct measure of language or maritime understanding. "
             "Model selection is defensibly justified by multidimensional evidence including intrinsic MLM loss, rare domain token accuracy, "
             "representation and subset ranking agreement, sensitivity analysis invariance, and non-dominated Pareto status."
         )
@@ -788,7 +897,7 @@ def generate_report(
         "",
         f"**Recommended Model:** `{rec_model}`  ",
         f"- **Selection Status:** {sel['pareto_status']}  ",
-        f"- **Baseline Operational MUI:** {sel['baseline_mui_score']:.2f} / 100  ",
+        f"- **Baseline Operational MECS:** {sel['baseline_mecs_score']:.2f} / 100  ",
         f"- **Maritime Top-1 Accuracy:** {sel['maritime_top1_acc_pct']:.2f}%  ",
         f"- **Rare Maritime Token Accuracy:** {sel['rare_maritime_acc_pct']}%  ",
         f"- **MLM Loss:** {sel['mlm_loss']:.4f}  ",
@@ -815,20 +924,20 @@ def generate_report(
         "",
         "### Capability Metrics",
         "",
-        "| Model Name | Maritime Top-1 (%) | Top-5 (%) | Rare Top-1 (%) | MLM Loss | Pseudo-Perplexity | Baseline MUI |",
+        "| Model Name | Maritime Top-1 (%) | Top-5 (%) | Rare Top-1 (%) | MLM Loss | Pseudo-Perplexity | Baseline MECS |",
         "| :--- | :---: | :---: | :---: | :---: | :---: | :---: |"
     ]
 
     for _, r in df_profiles.sort_values(by="raw__top1_acc", ascending=False).iterrows():
         m = r["model_name"]
         sens_row = df_sens[df_sens["model_name"] == m].iloc[0] if not df_sens[df_sens["model_name"] == m].empty else {}
-        mui = sens_row.get("baseline_score", "N/A")
+        mecs = sens_row.get("baseline_score", "N/A")
         t1 = f"{r['raw__top1_acc']*100:.2f}" if pd.notna(r["raw__top1_acc"]) else "N/A"
         t5 = f"{r['raw__top5_acc']*100:.2f}" if pd.notna(r["raw__top5_acc"]) else "N/A"
         rt1 = f"{r['raw__rare_top1_acc']*100:.2f}" if pd.notna(r["raw__rare_top1_acc"]) else "N/A"
         loss = f"{r['raw__mlm_loss']:.4f}" if pd.notna(r["raw__mlm_loss"]) else "N/A"
         ppl = f"{r['raw__pseudo_perplexity']:.2f}" if pd.notna(r["raw__pseudo_perplexity"]) else "N/A"
-        lines.append(f"| `{m}` | {t1} | {t5} | {rt1} | {loss} | {ppl} | {mui} |")
+        lines.append(f"| `{m}` | {t1} | {t5} | {rt1} | {loss} | {ppl} | {mecs} |")
 
     lines.extend([
         "",
@@ -854,7 +963,7 @@ def generate_report(
         "",
         "## 4. Representation Robustness",
         "",
-        f"- **Mean Pairwise Kendall's Tau (Ranking Agreement):** `{decision['rank_stability']['representation_kendall_tau']:.4f}`",
+        f"- **Kendall's W (Multi-Ranking Concordance):** `{decision['rank_stability']['representation_kendalls_w']:.4f}`",
         f"- **Mean Pairwise Spearman's Rho:** `{decision['rank_stability']['representation_spearman_rho']:.4f}`",
         "",
         "Representation breakdown across evaluated formats:",
@@ -880,7 +989,7 @@ def generate_report(
         "",
         "## 5. Subset Robustness",
         "",
-        f"- **Mean Pairwise Kendall's Tau (Ranking Agreement):** `{decision['rank_stability']['subset_kendall_tau']:.4f}`",
+        f"- **Kendall's W (Multi-Ranking Concordance):** `{decision['rank_stability']['subset_kendalls_w']:.4f}`",
         f"- **Mean Pairwise Spearman's Rho:** `{decision['rank_stability']['subset_spearman_rho']:.4f}`",
         "",
         "Subset ranking breakdown across knowledge/informativeness conditions:",
@@ -904,7 +1013,7 @@ def generate_report(
         "",
         "---",
         "",
-        "## 6. MUI Sensitivity Analysis",
+        "## 6. MECS Sensitivity Analysis",
         "",
         "Testing invariance across four distinct weighting hypotheses:",
         "1. **Baseline / Operational:** Balanced operational mixture.",
@@ -969,7 +1078,8 @@ def generate_report(
         "## 9. Methodological Note",
         "",
         "> **Notice on Composite Scoring:**  ",
-        "> The Maritime Understanding Index (MUI) is an operational composite compatibility score rather than a human-validated measure of innate maritime understanding. "
+        "> Maritime Encoder Composite Score (MECS) is an operational composite compatibility score used to summarize encoder evaluation characteristics for model selection. "
+        "It is not intended as a direct measure of language or maritime understanding. "
         "The selection of the final model is founded on a defensible, multi-criteria evidence hierarchy comprising direction-normalized intrinsic MLM accuracy, "
         "rare-token domain generalization, representation consistency, knowledge subset robustness, sensitivity analysis invariance, and non-dominated Pareto status.",
         ""
@@ -980,18 +1090,25 @@ def generate_report(
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Stage 15: Cross-Model Benchmarking & Selection")
+    parser.add_argument("--cache-dir", type=str, default=None, help="Stage 14 evaluations cache directory")
+    parser.add_argument("--output-dir", type=str, default=None, help="Stage 15 output directory")
+    parser.add_argument("--masking-mode", type=str, default="subword", choices=["subword", "whole_word"], help="Evaluation masking mode")
+    parser.add_argument("--evaluation-unit", type=str, default="subword", choices=["subword", "word"], help="Evaluation unit")
+    args = parser.parse_args()
+
     root = get_project_root()
     config = load_config()
-    output_dir = root / config.get("output_dir", "outputs")
+    default_out = root / config.get("output_dir", "outputs")
 
-    stage_dir = output_dir / "stage-15"
+    stage_dir = Path(args.output_dir) if args.output_dir else default_out / "stage-15"
     stage_dir.mkdir(parents=True, exist_ok=True)
 
-    tok_dir = output_dir / "stage-13" / "tokenizer_analysis"
-    cache_dir = output_dir / "stage-14" / "evaluations" / "cache"
-    pll_path = output_dir / "stage-14" / "pll_results.json"
+    tok_dir = default_out / "stage-13" / "tokenizer_analysis"
+    cache_dir = Path(args.cache_dir) if args.cache_dir else default_out / "stage-14" / "evaluations" / "cache"
+    pll_path = default_out / "stage-14" / "pll_results.json"
 
-    logger.info("Step 1: Dynamically discovering and validating Stage 14 results...")
+    logger.info(f"Step 1: Dynamically discovering and validating Stage 14 results from {cache_dir}...")
     df_mlm, coverage_info, pll_dict = discover_stage14_results(cache_dir, pll_path)
 
     if df_mlm.empty:
@@ -1000,7 +1117,7 @@ def main():
 
     logger.info(f"Discovered {coverage_info['valid_cells']} valid records across {len(coverage_info['unique_models'])} models.")
 
-    # Export backward-compatible comparison.csv (required by Stage 16)
+    # Export comparison.csv (required by Stage 16)
     df_mlm.to_csv(stage_dir / "comparison.csv", index=False)
 
     # Step 2: Load Stage 13 Tokenizer Data
@@ -1019,28 +1136,28 @@ def main():
                 logger.warning(f"Could not load tokenizer file {json_file.name}: {e}")
 
     # Step 3: Build Model Profiles (Raw + Direction-Aware Normalized)
-    logger.info("Step 3: Building model profiles with direction-aware normalization...")
+    logger.info("Step 3: Building model profiles with cohort-independent loss normalization...")
     df_profiles, df_norm, active_directions = build_model_profiles(df_mlm, tok_data, pll_dict, MODEL_PROFILES)
     df_profiles.to_csv(stage_dir / "stage15_model_profiles.csv", index=False)
 
-    # Step 4: Representation-wise Rankings & Stability
-    logger.info("Step 4: Computing representation-wise rankings and rank agreement...")
+    # Step 4: Representation-wise Rankings & Stability (Kendall's W)
+    logger.info("Step 4: Computing representation-wise rankings and Kendall's W concordance...")
     df_rep, rep_stability = calculate_representation_rankings(df_mlm)
 
-    # Step 5: Subset-wise Rankings & Stability
-    logger.info("Step 5: Computing subset-wise rankings and rank agreement...")
+    # Step 5: Subset-wise Rankings & Stability (Kendall's W)
+    logger.info("Step 5: Computing subset-wise rankings and Kendall's W concordance...")
     df_sub, sub_stability = calculate_subset_rankings(df_mlm)
 
     # Unified rankings dataframe
     df_rankings = pd.merge(df_rep, df_sub, on="model_name")
-    df_rankings["rep_stability_kendall_tau"] = rep_stability["mean_kendall_tau"]
-    df_rankings["subset_stability_kendall_tau"] = sub_stability["mean_kendall_tau"]
+    df_rankings["rep_stability_kendalls_w"] = rep_stability["rep_stability_kendalls_w"]
+    df_rankings["subset_stability_kendalls_w"] = sub_stability["subset_stability_kendalls_w"]
     df_rankings.to_csv(stage_dir / "stage15_rankings.csv", index=False)
 
-    # Step 6: MUI Sensitivity Analysis (4 Weighting Scenarios)
-    logger.info("Step 6: Executing MUI sensitivity analysis across 4 weighting scenarios...")
-    df_sens, scenario_winners, scenario_metrics_used = run_mui_sensitivity(df_profiles)
-    df_sens.to_csv(stage_dir / "stage15_mui_sensitivity.csv", index=False)
+    # Step 6: MECS Sensitivity Analysis (4 Weighting Scenarios)
+    logger.info("Step 6: Executing MECS sensitivity analysis across 4 weighting scenarios...")
+    df_sens, scenario_winners, scenario_metrics_used = run_mecs_sensitivity(df_profiles)
+    df_sens.to_csv(stage_dir / "stage15_mecs_sensitivity.csv", index=False)
 
     # Step 7: Deterministic Pareto Dominance Analysis
     logger.info("Step 7: Calculating Pareto-optimal frontier...")
@@ -1053,6 +1170,9 @@ def main():
         df_profiles, df_rep, rep_stability, df_sub, sub_stability,
         df_sens, df_pareto, coverage_info, scenario_metrics_used
     )
+    decision["masking_mode"] = args.masking_mode
+    decision["evaluation_unit"] = args.evaluation_unit
+    decision["mecs_normalization"] = "cohort_independent: 1 / (1 + mlm_loss)"
     with open(stage_dir / "stage15_selection_decision.json", "w", encoding="utf-8") as f:
         json.dump(decision, f, indent=2)
 
@@ -1060,14 +1180,14 @@ def main():
     logger.info("Step 9: Generating scientific synthesis report...")
     generate_report(decision, df_profiles, df_rep, df_sub, df_sens, df_pareto, coverage_info, stage_dir / "stage15_report.md")
 
-    # Step 10: Backward-Compatible leaderboard.csv (Required by Stage 17)
+    # Step 10: leaderboard.csv (Required by Stage 17)
     leaderboard_rows = []
     for _, r in df_profiles.iterrows():
         m = r["model_name"]
         sens_row = df_sens[df_sens["model_name"] == m].iloc[0] if not df_sens[df_sens["model_name"] == m].empty else {}
         leaderboard_rows.append({
             "model_name": m,
-            "mui_score": sens_row.get("baseline_score", 50.0),
+            "mecs_score": sens_row.get("baseline_score", 50.0),
             "maritime_top1_acc": round(float(r["raw__top1_acc"]) * 100.0, 2) if pd.notna(r["raw__top1_acc"]) else 0.0,
             "top1_ci_error": round(float(r["raw__top1_ci_error"]), 2) if pd.notna(r["raw__top1_ci_error"]) else 0.0,
             "rare_maritime_acc": round(float(r["raw__rare_top1_acc"]) * 100.0, 2) if pd.notna(r["raw__rare_top1_acc"]) else 0.0,
@@ -1085,7 +1205,7 @@ def main():
         })
 
     df_lb = pd.DataFrame(leaderboard_rows)
-    df_lb.sort_values(by="mui_score", ascending=False, inplace=True)
+    df_lb.sort_values(by="mecs_score", ascending=False, inplace=True)
     df_lb.to_csv(stage_dir / "leaderboard.csv", index=False)
 
     # Step 11: Generate Visualizations

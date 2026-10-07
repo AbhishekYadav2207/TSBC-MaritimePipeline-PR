@@ -1,2 +1,2 @@
 test_name,statistic,df,p_value_raw,is_significant,num_models,num_matched_conditions,notes
-Friedman Chi-Square,158.84,7,5.627203483769507e-31,True,8,25,Statistically significant differences detected across matched benchmark conditions.
+Friedman Chi-Square (Secondary Reference),129.2229,6,1.8734537173616142e-25,True,7,25,Statistically significant differences detected across matched benchmark conditions.

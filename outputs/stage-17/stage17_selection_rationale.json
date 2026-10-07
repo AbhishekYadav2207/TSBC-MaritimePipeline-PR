@@ -3,7 +3,7 @@
   "decision": "Recommended DAPT Candidate",
   "recommended_action": "Proceed with Domain-Adaptive Pretraining (DAPT)",
   "confidence": "High",
-  "confidence_explanation": "High confidence assigned based on converging multi-source empirical evidence: bootstrap rank-1 frequency is 100.0% with mean rank 1.00; statistically significant Holm-adjusted pairwise superiority over all 7 evaluated competitors with zero pairwise defeats; confirmed non-dominated Pareto status across intrinsic and operational criteria. This label reflects structural evidence consensus across resampling and conditions, not a mathematical probability.",
+  "confidence_explanation": "High confidence assigned based on converging multi-source empirical evidence: bootstrap rank-1 frequency is 100.0% with mean rank 1.00; statistically significant Holm-adjusted pairwise superiority over all 6 evaluated competitors with zero pairwise defeats; confirmed non-dominated Pareto status across intrinsic and operational criteria. This label reflects structural evidence consensus across resampling and conditions, not a mathematical probability.",
   "primary_evidence": [
     "Primary Maritime Top-1 Accuracy: 72.82%",
     "Intrinsic MLM Cross-Entropy Loss: 1.4740",
@@ -14,18 +14,18 @@
     "Bootstrap 95% Confidence Interval for Top-1 Mean: [0.6825, 0.7745]",
     "Bootstrap Mean Rank: 1.0 (Std: 0.0) across 2,000 resamples",
     "Bootstrap Rank-1 Frequency: 100.0%",
-    "Holm-Adjusted Wilcoxon Pairwise Comparisons: 7 significant wins, 0 defeats",
+    "Holm-Adjusted Wilcoxon Pairwise Comparisons: 6 significant wins, 0 defeats",
     "Omnibus Friedman test confirms statistically significant model separation across matched benchmark conditions (p < 1e-20)"
   ],
   "robustness_evidence": [
     "Representation Stability: Mean rank 1.2 across JSON, Key-Value, Mixed, Narrative, Template formats (Std: 0.45)",
     "Subset Stability: Mean rank 1.0 across balanced, high, medium, low knowledge subsets and random baseline (Std: 0.0)",
-    "Condition Agreement: Kendall tau 0.8 across representations, 0.9714 across subsets"
+    "Condition Agreement: Kendall's W 0.8714 across representations, 0.9886 across subsets"
   ],
-  "mui_evidence": [
-    "Baseline MUI Score: 78.46 (Rank 1 in baseline scenario)",
-    "MUI Scenario Wins: 3 wins across 4 weight scenarios (Win frequency: 0.75)",
-    "MUI Sensitivity Trade-off: ModernBERT leads performance-oriented and baseline scenarios; general BERT leads vocabulary/domain-heavy scenarios, exposing an explicit capability versus tokenization trade-off."
+  "mecs_evidence": [
+    "Baseline MECS Score: 68.6200 (Rank 1 in baseline scenario)",
+    "MECS Scenario Wins: 3 wins across 4 weight scenarios (Win frequency: 0.75)",
+    "MECS Sensitivity Trade-off: ModernBERT leads performance-oriented and baseline scenarios; general BERT leads vocabulary/domain-heavy scenarios, exposing an explicit capability versus tokenization trade-off."
   ],
   "pareto_status": "Pareto-Optimal",
   "tradeoffs": [
@@ -81,16 +81,6 @@
       ]
     },
     {
-      "model_name": "microsoft/deberta-v3-base",
-      "candidate_status": "Weak Candidate",
-      "role": "Competitive Candidate",
-      "relative_advantages": [
-        "lower subword fragmentation (21.49% vs 63.28%)",
-        "lower inference latency (17.5ms vs 34.8ms)",
-        "smaller model footprint (86.0M vs 149.0M params)"
-      ]
-    },
-    {
       "model_name": "dmis-lab/biobert-base-cased-v1.2",
       "candidate_status": "Weak Candidate",
       "role": "Competitive Candidate",
@@ -114,6 +104,6 @@
   "limitations": [
     "Benchmark evidence supports the selected model as the preferred pretrained initialization for subsequent DAPT, but does NOT prove downstream task optimality prior to empirical adaptation.",
     "Empirical downstream validation on fine-tuned classification, extraction, and incident summarization tasks remains required in subsequent DAPT stages.",
-    "MUI is an operational aggregate index used for supporting sensitivity analysis; it is not a direct mathematical ground truth of maritime understanding."
+    "MECS is an operational composite score used for supporting sensitivity analysis; it is not a direct mathematical ground truth of maritime understanding."
   ]
 }

@@ -1,0 +1,8 @@
+source,sum_of_squares,df,mean_square,f_statistic,p_value,variance_contribution_pct,partial_eta_squared
+Model (Fixed Effect),6.000548,6,1.000091,1520.415,1.1102230246251565e-16,70.29,0.9896
+Representation (Blocking Factor),1.744588,4,0.436147,663.064,1.1102230246251565e-16,20.44,0.9651
+Subset (Blocking Factor),0.056888,4,0.014222,21.6212,9.67781410565749e-13,0.67,0.4739
+Model x Representation,0.607835,24,0.025326,38.5032,1.1102230246251565e-16,7.12,0.9059
+Model x Subset,0.020867,24,0.000869,1.3218,0.17146436166873513,0.24,0.2484
+Representation x Subset,0.042922,16,0.002683,4.0783,6.977391922458054e-06,0.5,0.4047
+Residual (Model x Rep x Subset),0.063146,96,0.000658,,,0.74,
