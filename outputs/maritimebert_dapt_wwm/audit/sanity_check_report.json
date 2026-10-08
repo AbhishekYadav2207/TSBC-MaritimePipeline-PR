@@ -1,0 +1,10 @@
+{
+  "sanity_check_passed": true,
+  "total_cells_evaluated": 50,
+  "modernbert_cells": 25,
+  "maritimebert_cells": 25,
+  "monotonicity_verified": true,
+  "finite_loss_verified": true,
+  "masked_words_positive_verified": true,
+  "violations": []
+}

@@ -1,0 +1,54 @@
+{
+  "experiment_name": "CONTROLLED_MARITIMEBERT_DAPT_IMPROVEMENT_BENCHMARK",
+  "timestamp_iso": "2026-10-08T05:17:49Z",
+  "parent_baseline_model": {
+    "identifier": "answerdotai/ModernBERT-base",
+    "revision": "main",
+    "architecture": "ModernBertForMaskedLM",
+    "parameters": 149655232,
+    "vocab_size": 50368
+  },
+  "maritimebert_model": {
+    "identifier": "MaritimeBERT-v1",
+    "checkpoint_path": "D:\\CAIR\\TSBC-MaritimePipeline-Version2.1\\dapt\\outputs\\experiments\\MaritimeBERT-v1",
+    "architecture": "ModernBertForMaskedLM",
+    "parameters": 149655232,
+    "vocab_size": 50368,
+    "pretraining_corpus": "outputs/maritime_corpus.txt",
+    "pretraining_steps": 984,
+    "pretraining_epochs": 3,
+    "tokens_processed": 16101987,
+    "best_validation_loss": 0.4991
+  },
+  "protocol": {
+    "masking_mode": "whole_word",
+    "evaluation_unit": "word",
+    "mask_rate": 0.15,
+    "scoring_method": "strict_word_reconstruction",
+    "internal_mode": "wwm_word",
+    "masking_strategy": "wwm_15",
+    "max_sequence_length": 256,
+    "documents_per_cell": 200,
+    "total_cells": 50,
+    "paired_conditions": 25
+  },
+  "hashes": {
+    "maritime_corpus_sha256": "FILE_NOT_FOUND",
+    "maritime_vocabulary_sha256": "9616f498d524b6d31c2902670685561a5e2c4c1bd84ffda5ed38384a05697b00",
+    "stage14_evaluation_script_sha256": "bc09fc65765df5d2c55c074d163f0faf0221cfaf21cb5d14bfa64d2b2bc93c50",
+    "benchmark_runner_script_sha256": "22b2a13cff174fb05cdc520c876363e8c4c845859ca46bf84570c3495d723d97"
+  },
+  "system_environment": {
+    "python_version": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "torch_version": "2.8.0+cpu",
+    "transformers_version": "transformers",
+    "scipy_version": "scipy.stats",
+    "device": "cpu",
+    "cuda_available": false,
+    "git_commit": "9bb3d0d05b8d659123574b4892b0a6b8a1029202"
+  },
+  "verification_gate": {
+    "MARITIMEBERT_DAPT_GAIN_BENCHMARK_COMPLETE": true,
+    "SANITY_CHECKS_PASSED": true
+  }
+}

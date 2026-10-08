@@ -1,0 +1,238 @@
+[
+  {
+    "category": "normal_english_multipiece_word",
+    "description": "Normal English multi-piece word ('investigation' -> ['invest', 'igation'])",
+    "source_text": "The preliminary investigation revealed no equipment anomalies during transit.",
+    "target_term": "investigation",
+    "target_positions": [
+      3
+    ],
+    "subword_tokens": [
+      "\u0120investigation"
+    ],
+    "target_token_ids": [
+      5839
+    ],
+    "evaluator_classification": "general",
+    "wwm_intact": true,
+    "sibling_piece_leakage": false,
+    "modernbert_predictions": [
+      {
+        "pos": 3,
+        "token": "\u0120investigation",
+        "true_id": 5839,
+        "pred_id": 15981,
+        "pred_token": "inspection",
+        "correct": false
+      }
+    ],
+    "maritimebert_predictions": [
+      {
+        "pos": 3,
+        "token": "\u0120investigation",
+        "true_id": 5839,
+        "pred_id": 15981,
+        "pred_token": "inspection",
+        "correct": false
+      }
+    ],
+    "modernbert_word_reconstructed": false,
+    "maritimebert_word_reconstructed": false
+  },
+  {
+    "category": "genuine_maritime_word",
+    "description": "Genuine maritime word ('shipbuilding' -> ['ship', 'building'])",
+    "source_text": "The shipyard completed advanced shipbuilding standards for ice-class operations.",
+    "target_term": "shipbuilding",
+    "target_positions": [
+      6,
+      7
+    ],
+    "subword_tokens": [
+      "\u0120ship",
+      "building"
+    ],
+    "target_token_ids": [
+      6215,
+      22157
+    ],
+    "evaluator_classification": "maritime",
+    "wwm_intact": true,
+    "sibling_piece_leakage": false,
+    "modernbert_predictions": [
+      {
+        "pos": 6,
+        "token": "\u0120ship",
+        "true_id": 6215,
+        "pred_id": 6215,
+        "pred_token": "ship",
+        "correct": true
+      },
+      {
+        "pos": 7,
+        "token": "building",
+        "true_id": 22157,
+        "pred_id": 285,
+        "pred_token": "and",
+        "correct": false
+      }
+    ],
+    "maritimebert_predictions": [
+      {
+        "pos": 6,
+        "token": "\u0120ship",
+        "true_id": 6215,
+        "pred_id": 6500,
+        "pred_token": "equipment",
+        "correct": false
+      },
+      {
+        "pos": 7,
+        "token": "building",
+        "true_id": 22157,
+        "pred_id": 273,
+        "pred_token": "of",
+        "correct": false
+      }
+    ],
+    "modernbert_word_reconstructed": false,
+    "maritimebert_word_reconstructed": false
+  },
+  {
+    "category": "rare_maritime_word",
+    "description": "Rare maritime word ('gyrocompass' -> ['gy', 'ro', 'compass'])",
+    "source_text": "The bridge team recalibrated the gyrocompass following severe magnetic disturbance.",
+    "target_term": "gyrocompass",
+    "target_positions": [
+      7,
+      8,
+      9
+    ],
+    "subword_tokens": [
+      "\u0120gy",
+      "ro",
+      "compass"
+    ],
+    "target_token_ids": [
+      19859,
+      287,
+      16452
+    ],
+    "evaluator_classification": "rare_maritime",
+    "wwm_intact": true,
+    "sibling_piece_leakage": false,
+    "modernbert_predictions": [
+      {
+        "pos": 7,
+        "token": "\u0120gy",
+        "true_id": 19859,
+        "pred_id": 5212,
+        "pred_token": "magnetic",
+        "correct": false
+      },
+      {
+        "pos": 8,
+        "token": "ro",
+        "true_id": 287,
+        "pred_id": 273,
+        "pred_token": "of",
+        "correct": false
+      },
+      {
+        "pos": 9,
+        "token": "compass",
+        "true_id": 16452,
+        "pred_id": 985,
+        "pred_token": "system",
+        "correct": false
+      }
+    ],
+    "maritimebert_predictions": [
+      {
+        "pos": 7,
+        "token": "\u0120gy",
+        "true_id": 19859,
+        "pred_id": 9729,
+        "pred_token": "bridge",
+        "correct": false
+      },
+      {
+        "pos": 8,
+        "token": "ro",
+        "true_id": 287,
+        "pred_id": 9729,
+        "pred_token": "bridge",
+        "correct": false
+      },
+      {
+        "pos": 9,
+        "token": "compass",
+        "true_id": 16452,
+        "pred_id": 985,
+        "pred_token": "system",
+        "correct": false
+      }
+    ],
+    "modernbert_word_reconstructed": false,
+    "maritimebert_word_reconstructed": false
+  },
+  {
+    "category": "multiword_maritime_phrase_function_word",
+    "description": "Multiword maritime phrase containing function word ('search and rescue')",
+    "source_text": "The coast guard deployed joint search and rescue units into the heavy swell.",
+    "target_term": "search and rescue",
+    "target_positions": [
+      7,
+      8
+    ],
+    "subword_tokens": [
+      "\u0120and",
+      "\u0120rescue"
+    ],
+    "target_token_ids": [
+      285,
+      14471
+    ],
+    "evaluator_classification": "maritime",
+    "wwm_intact": true,
+    "sibling_piece_leakage": false,
+    "modernbert_predictions": [
+      {
+        "pos": 7,
+        "token": "\u0120and",
+        "true_id": 285,
+        "pred_id": 285,
+        "pred_token": "and",
+        "correct": true
+      },
+      {
+        "pos": 8,
+        "token": "\u0120rescue",
+        "true_id": 14471,
+        "pred_id": 14471,
+        "pred_token": "rescue",
+        "correct": true
+      }
+    ],
+    "maritimebert_predictions": [
+      {
+        "pos": 7,
+        "token": "\u0120and",
+        "true_id": 285,
+        "pred_id": 285,
+        "pred_token": "and",
+        "correct": true
+      },
+      {
+        "pos": 8,
+        "token": "\u0120rescue",
+        "true_id": 14471,
+        "pred_id": 14471,
+        "pred_token": "rescue",
+        "correct": true
+      }
+    ],
+    "modernbert_word_reconstructed": true,
+    "maritimebert_word_reconstructed": true
+  }
+]

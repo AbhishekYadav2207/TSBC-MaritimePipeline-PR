@@ -57,3 +57,8 @@ outputs/runs/
 .pytest_cache/
 hf_cache/
 *.safetensors
+*/cache/
+*/.cache/
+.cache/
+cache/
+cache.*
