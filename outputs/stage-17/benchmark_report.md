@@ -1,6 +1,6 @@
 # Stage 17: Evidence-Synthesis & Pretrained Model Selection Report
 **Project**: TSBC-MaritimePipeline-Version2.1  
-**Generated**: 2026-10-07 19:18:17  
+**Generated**: 2026-10-08 02:07:42  
 **Evaluation Architecture**: Stage 15 Compatibility + Stage 16 Statistical Robustness Synthesis
 
 ---
@@ -10,7 +10,7 @@
 * **Recommended Decision**: **Recommended DAPT Candidate**
 * **Recommended Action**: Proceed with Domain-Adaptive Pretraining (DAPT)
 * **Decision Confidence**: **High**
-* **Methodological Framing**: The empirical benchmark evidence supports `answerdotai/ModernBERT-base` as the preferred pretrained initialization for the subsequent Domain-Adaptive Pretraining (DAPT) experiment. This decision reflects strong intrinsic masked language modeling capability, structural ranking invariance across representations and subsets, and rigorous pairwise statistical support with zero observed defeats.
+* **Methodological Framing**: The empirical benchmark evidence supports `answerdotai/ModernBERT-base` as the preferred pretrained initialization for the subsequent Domain-Adaptive Pretraining (DAPT) experiment. This decision reflects strong intrinsic masked language modeling capability, structural ranking invariance across representations and subsets, and rigorous pairwise statistical support with zero statistically significant defeats (with 2 raw cell-level condition losses to LegalBERT and 2 to RoBERTa across 25 matched conditions).
 
 ---
 
@@ -60,7 +60,7 @@ The benchmark evaluated candidate models across diverse structural representatio
 ## 5. Statistical Support
 All statistical evidence is consumed directly from Stage 16 without re-computation:
 
-* **Global Hypothesis Test**: Crossed factorial repeated-measures ANOVA (primary) and Friedman's omnibus test (secondary reference) across matched conditions confirm statistically significant differences among models ($\chi^2 = N/A$, $df = 6$, $p = N/A$).
+* **Global Hypothesis Test**: Crossed factorial repeated-measures ANOVA (primary: $F = 269.4943$, $p = 1.11e-16$) and Friedman's omnibus test (secondary reference: $\chi^2 = 91.5771$, $df = 6$, $p = 1.42e-17$) across matched conditions confirm statistically significant differences among models.
 * **Pairwise Wilcoxon Tests**: With family-wise error controlled using the Holm-Bonferroni step-down procedure, `answerdotai/ModernBERT-base` achieves statistically significant superiority over:
   * `allenai/scibert_scivocab_uncased` ($p_{holm} = 1.251698e-06$)
   * `bert-base-uncased` ($p_{holm} = 1.251698e-06$)
@@ -74,7 +74,7 @@ All statistical evidence is consumed directly from Stage 16 without re-computati
 
 ## 6. MECS and Pareto Evidence
 * **MECS Role**: The Maritime Encoder Composite Score (MECS) is utilized exclusively as a supporting aggregate index, not as an unchallengeable ground truth of maritime understanding.
-* **MECS Baseline**: `answerdotai/ModernBERT-base` ranked 1st with a baseline score of **51.3500**.
+* **MECS Baseline**: `answerdotai/ModernBERT-base` ranked 1st with a baseline score of **63.3700**.
 * **Sensitivity Analysis Findings**:
    * `answerdotai/ModernBERT-base` won 2 of 4 weight scenarios.
    * *Methodological Insight*: Weight scenario evaluations highlight trade-offs between intrinsic language modeling capability and tokenization efficiency, rather than a methodology defect.
@@ -96,7 +96,7 @@ Operational dimensions are documented transparently and kept distinct from capab
 
 ### Operational Trade-off Analysis:
 * **Selected Candidate (`answerdotai/ModernBERT-base`)**: Demonstrates leading language modeling representation capability, but incurs a higher latency (31.4ms) and higher subword fragmentation (62.99%) than older BERT architectures.
-* **Resource-Constrained Alternative (`bert-base-uncased`)**: Offers 2.6x lower inference latency (174.9ms vs 458.6ms), lower parameter footprint (110M vs 149M), and substantially lower subword fragmentation (26.57% vs 63.28%), making it the preferred candidate under constrained deployment budgets.
+* **Resource-Constrained Alternative (`bert-base-uncased`)**: Offers ~1.5x lower inference latency (21.0ms vs 31.5ms per document), lower parameter footprint (110M vs 149M), and substantially lower subword fragmentation (26.57% vs 62.99%), making it the preferred candidate under constrained deployment budgets.
 
 ---
 
@@ -110,7 +110,7 @@ To assess the impact of the multi-criteria evidence framework, we record the can
 | **Lowest MLM Loss** | Intrinsic Masked Language Modeling Cross-Entropy Loss | `answerdotai/ModernBERT-base` | 4.1942 |
 | **Highest Rare-Domain Accuracy** | Domain Specialized Vocabulary Top-1 Accuracy | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 17.23% |
 | **Best Tokenizer Fit** | Lowest Subword Tokenizer Fragmentation Rate | `bert-base-uncased` | 26.57% |
-| **MECS (Baseline Aggregate Score)** | Stage 15 Maritime Encoder Composite Score (Baseline) | `answerdotai/ModernBERT-base` | 51.3500 |
+| **MECS (Baseline Aggregate Score)** | Stage 15 Maritime Encoder Composite Score (Baseline) | `answerdotai/ModernBERT-base` | 63.3700 |
 | **Evidence-Based Selection (Stage 17)** | Multi-Dimensional Evidence Priority Hierarchy | `answerdotai/ModernBERT-base` | Convergent Consensus |
 
 * **Key Finding**: Simple single-criterion strategies yield divergent choices: pure accuracy and loss metrics select `answerdotai/ModernBERT-base`, whereas pure vocabulary fit selects `bert-base-uncased`. The Stage 17 multi-criteria hierarchy transparently synthesizes these trade-offs rather than arbitrarily collapsing them into a single opaque score.

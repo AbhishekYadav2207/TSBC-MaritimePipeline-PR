@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-07T19:18:02.052047",
+  "timestamp": "2026-10-08T02:02:38.449050",
   "data_coverage": {
     "expected_cells": 175,
     "valid_cells": 175,
@@ -30,7 +30,7 @@
       "model_name": "answerdotai/ModernBERT-base",
       "total_wins": 2,
       "win_frequency": 0.5,
-      "baseline_score": 51.35
+      "baseline_score": 63.37
     }
   },
   "rank_stability": {
@@ -55,7 +55,7 @@
   "final_selection": {
     "recommended_model": "answerdotai/ModernBERT-base",
     "pareto_status": "Pareto-Optimal",
-    "baseline_mecs_score": 51.35,
+    "baseline_mecs_score": 63.37,
     "maritime_top1_acc_pct": 28.59,
     "rare_maritime_acc_pct": 7.11,
     "mlm_loss": 4.1942,
@@ -118,5 +118,5 @@
   "methodological_note": "Maritime Encoder Composite Score (MECS) is an operational composite compatibility score used to summarize multiple encoder evaluation characteristics for model selection. It is not intended as a direct measure of language or maritime understanding. Model selection is defensibly justified by multidimensional evidence including intrinsic MLM loss, rare domain token accuracy, representation and subset ranking agreement, sensitivity analysis invariance, and non-dominated Pareto status.",
   "masking_mode": "whole_word",
   "evaluation_unit": "word",
-  "mecs_normalization": "cohort_independent: 1 / (1 + mlm_loss)"
+  "mecs_normalization": "cohort_independent: fixed_bounded_reference_scales"
 }

@@ -1,0 +1,17 @@
+{
+  "description": "Multi-Dimensional Evidence Decision Rules Manifest",
+  "decision_hierarchy": [
+    "Level 1: Pareto Dominance Gate (Candidate must be non-dominated across primary objectives)",
+    "Level 2: Primary Intrinsic Capability (Minimum MLM Loss, Maximum Word Reconstruction Top-1)",
+    "Level 3: Statistical Superiority (Holm-adjusted pairwise Wilcoxon tests with zero significant defeats)",
+    "Level 4: Bootstrap Rank Stability (Empirical rank-1 frequency >= 80%, mean rank <= 1.5)",
+    "Level 5: Representation & Subset Invariance (Rank agreement Kendall W > 0.60)",
+    "Level 6: MECS Multi-Scenario Invariance (Wins in baseline and performance-heavy paradigms)"
+  ],
+  "confidence_thresholds": {
+    "high": "mean_rank <= 1.5 AND p_rank_1 >= 0.80 AND sig_losses == 0 AND is_pareto",
+    "moderate": "mean_rank <= 3.0 AND sig_losses <= 1 AND is_pareto",
+    "low": "Fails moderate criteria (high rank volatility or pairwise defeats)"
+  },
+  "operational_tradeoff_policy": "Tokenizer fragmentation and inference latency are recorded as operational trade-offs rather than hard rejection gates when language modeling capability is decisive."
+}

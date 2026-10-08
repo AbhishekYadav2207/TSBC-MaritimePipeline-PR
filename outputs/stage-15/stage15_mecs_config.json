@@ -1,0 +1,97 @@
+{
+  "description": "Maritime Encoder Composite Score (MECS) Configuration & Justification Manifest",
+  "methodological_principle": "MECS is an operational composite compatibility score for candidate ranking, not an intrinsic measure of domain understanding. All transforms are explicit design choices with documented justifications.",
+  "scenarios": {
+    "baseline": {
+      "top1_acc": 0.4,
+      "rare_top1_acc": 0.15,
+      "mlm_loss": 0.25,
+      "fragmentation_rate_pct": 0.2
+    },
+    "performance_heavy": {
+      "top1_acc": 0.45,
+      "rare_top1_acc": 0.2,
+      "mlm_loss": 0.35
+    },
+    "domain_heavy": {
+      "rare_top1_acc": 0.4,
+      "top1_acc": 0.2,
+      "mlm_loss": 0.15,
+      "fragmentation_rate_pct": 0.25
+    },
+    "balanced": {
+      "top1_acc": 0.25,
+      "rare_top1_acc": 0.2,
+      "mlm_loss": 0.2,
+      "fragmentation_rate_pct": 0.15,
+      "throughput_docs_sec": 0.2
+    }
+  },
+  "transforms": {
+    "top1_acc": {
+      "type": "linear_clip",
+      "ceiling": 0.35,
+      "direction": "higher_is_better",
+      "category": "intrinsic_encoder_capability",
+      "justification": "Target benchmark ceiling of 35.0% strict word reconstruction accuracy for pre-trained zero-shot encoders on technical domain terminology without task-specific adaptation."
+    },
+    "rare_top1_acc": {
+      "type": "linear_clip",
+      "ceiling": 0.25,
+      "direction": "higher_is_better",
+      "category": "intrinsic_encoder_capability",
+      "justification": "Target benchmark ceiling of 25.0% for low-frequency maritime domain words (corpus frequency <= 10) representing high-difficulty tail tokens."
+    },
+    "top5_acc": {
+      "type": "linear_clip",
+      "ceiling": 0.6,
+      "direction": "higher_is_better",
+      "category": "intrinsic_encoder_capability",
+      "justification": "Target benchmark ceiling of 60.0% for top-5 word candidate recall under zero-shot cloze evaluation."
+    },
+    "mlm_loss": {
+      "type": "bounded_linear",
+      "min_bound": 3.0,
+      "max_bound": 8.0,
+      "direction": "lower_is_better",
+      "category": "intrinsic_encoder_capability",
+      "justification": "Fixed reference interval [3.0, 8.0] where 3.0 represents near-perfect domain MLM convergence (perplexity ~20) and 8.0 represents unadapted random guessing (perplexity ~2980 for 30k-50k vocabulary). Preserves linear cross-entropy sensitivity without cohort dependence."
+    },
+    "fragmentation_rate_pct": {
+      "type": "percentage_inverted",
+      "max_bound": 100.0,
+      "direction": "lower_is_better",
+      "category": "domain_morphological_fit",
+      "justification": "Natural percentage domain [0.0%, 100.0%]; lower fragmentation indicates superior morphological token preservation for maritime compounds."
+    },
+    "oov_rate_pct": {
+      "type": "bounded_inverted",
+      "ceiling": 10.0,
+      "direction": "lower_is_better",
+      "category": "domain_morphological_fit",
+      "justification": "10.0% ceiling for out-of-vocabulary rate in WordPiece tokenizers. Byte-level BPE tokenizers have no measured OOV and are treated as NA (non-penalizing re-weighting)."
+    },
+    "category_balance": {
+      "type": "linear_clip",
+      "ceiling": 1.0,
+      "direction": "higher_is_better",
+      "category": "domain_morphological_fit",
+      "justification": "Calculated as 1.0 - std(category accuracies) in [0.0, 1.0]; higher values denote uniform representation capability across subdomains."
+    },
+    "inference_latency_ms": {
+      "type": "operational_rational",
+      "scale_ms": 50.0,
+      "direction": "lower_is_better",
+      "category": "environment_specific_operational",
+      "justification": "Operational reference constant of 50.0 ms represents a standard interactive SLA ceiling for single-document real-time triage. Labelled as environment-specific operational metric dependent on benchmark hardware."
+    },
+    "throughput_docs_sec": {
+      "type": "operational_rational",
+      "scale_docs_sec": 50.0,
+      "direction": "higher_is_better",
+      "category": "environment_specific_operational",
+      "justification": "Operational reference constant of 50.0 docs/sec reflects baseline batch ingestion throughput. Labelled as environment-specific operational metric dependent on benchmark hardware."
+    }
+  },
+  "operational_metrics_note": "Inference latency and throughput depend on benchmark execution hardware (NVIDIA GPU / PyTorch) and are explicitly classified as environment-specific operational metrics."
+}

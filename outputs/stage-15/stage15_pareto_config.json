@@ -1,0 +1,41 @@
+{
+  "description": "Pareto Dominance Frontier Configuration Manifest",
+  "primary_objectives": [
+    {
+      "metric": "top1_acc",
+      "direction": "higher_is_better",
+      "category": "intrinsic_capability"
+    },
+    {
+      "metric": "rare_top1_acc",
+      "direction": "higher_is_better",
+      "category": "domain_tail_capability"
+    },
+    {
+      "metric": "mlm_loss",
+      "direction": "lower_is_better",
+      "category": "intrinsic_loss"
+    },
+    {
+      "metric": "fragmentation_rate_pct",
+      "direction": "lower_is_better",
+      "category": "domain_morphological_fit"
+    },
+    {
+      "metric": "inference_latency_ms",
+      "direction": "lower_is_better",
+      "category": "operational_efficiency"
+    },
+    {
+      "metric": "throughput_docs_sec",
+      "direction": "higher_is_better",
+      "category": "operational_throughput"
+    }
+  ],
+  "excluded_metrics": {
+    "oov_rate_pct": "Inapplicable to byte-level BPE tokenizers (ModernBERT, RoBERTa); not uniformly shared across cohort.",
+    "single_token_coverage_pct": "Collinear with fragmentation rate.",
+    "pseudo_perplexity": "Secondary diagnostic evaluated on limited document sample.",
+    "top5_acc": "Collinear with top1_acc."
+  }
+}

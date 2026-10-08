@@ -59,19 +59,18 @@ This report evaluates the scale, document length, structural diversity, scaffold
 
 ---
 
-## 7. BERT Tokenizer Compatibility
+## 7. BERT Tokenizer Baseline Compatibility
 * **BERT Model**: `bert-base-uncased`
-* **Tokenizer Fertility (Subwords/Word)**: 0.0000
-* **Maritime Fragmentation Rate**: 0.00%
+* **Tokenizer Fertility (Subwords/Word)**: 1.4132
+* **Maritime Fragmentation Rate**: 9.09%
 * **OOV / [UNK] Rate**: 0.0000%
+* *Cross-Stage Note*: Stage 09 computes an independent corpus-level BERT baseline diagnostic. Stage 13 provides the authoritative multi-candidate comparative tokenizer benchmark across the candidate pool.
 
 ---
 
-## 8. BERT MLM Baseline Diagnostic
-* **MLM Evaluation Model**: `N/A`
-* **General Tokens Top-1 Accuracy**: 0.00%
-* **Maritime Tokens Top-1 Accuracy**: 0.00%
-* **Performance Gap**: 0.00%
+## 8. Cross-Model MLM Evaluation Reference
+* **Status**: Evaluated in Stage 14
+* *Cross-Stage Note*: Systematic Masked Language Modeling (MLM) benchmarking across candidate models, whole-word masking, and structural representations is conducted authoritatively in Stage 14 (14_mlm_evaluation.py). Stage 09 remains strictly confined to corpus-level statistics.
 
 ---
 

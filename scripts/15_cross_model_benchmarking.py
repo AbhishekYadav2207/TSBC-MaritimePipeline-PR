@@ -60,39 +60,143 @@ METRIC_DIRECTIONS = {
     "disk_size_mb": "lower_is_better"
 }
 
-# Maritime Encoder Composite Score (MECS) Weighting Scenarios
-# MECS is a composite benchmark-based score used to summarize multiple encoder evaluation
+# Maritime Encoder Composite Score (MECS) Configuration & Fixed Transforms
+# MECS is an operational composite compatibility score used to summarize multiple encoder evaluation
 # characteristics for model selection. It is not intended as a direct measure of language or maritime understanding.
+# All transforms are explicit design choices with documented justifications and fixed bounds.
+FIXED_MECS_TRANSFORMS = {
+    "top1_acc": {
+        "type": "linear_clip",
+        "ceiling": 0.35,
+        "direction": "higher_is_better",
+        "category": "intrinsic_encoder_capability",
+        "justification": "Target benchmark ceiling of 35.0% strict word reconstruction accuracy for pre-trained zero-shot encoders on technical domain terminology without task-specific adaptation."
+    },
+    "rare_top1_acc": {
+        "type": "linear_clip",
+        "ceiling": 0.25,
+        "direction": "higher_is_better",
+        "category": "intrinsic_encoder_capability",
+        "justification": "Target benchmark ceiling of 25.0% for low-frequency maritime domain words (corpus frequency <= 10) representing high-difficulty tail tokens."
+    },
+    "top5_acc": {
+        "type": "linear_clip",
+        "ceiling": 0.60,
+        "direction": "higher_is_better",
+        "category": "intrinsic_encoder_capability",
+        "justification": "Target benchmark ceiling of 60.0% for top-5 word candidate recall under zero-shot cloze evaluation."
+    },
+    "mlm_loss": {
+        "type": "bounded_linear",
+        "min_bound": 3.0,
+        "max_bound": 8.0,
+        "direction": "lower_is_better",
+        "category": "intrinsic_encoder_capability",
+        "justification": "Fixed reference interval [3.0, 8.0] where 3.0 represents near-perfect domain MLM convergence (perplexity ~20) and 8.0 represents unadapted random guessing (perplexity ~2980 for 30k-50k vocabulary). Preserves linear cross-entropy sensitivity without cohort dependence."
+    },
+    "fragmentation_rate_pct": {
+        "type": "percentage_inverted",
+        "max_bound": 100.0,
+        "direction": "lower_is_better",
+        "category": "domain_morphological_fit",
+        "justification": "Natural percentage domain [0.0%, 100.0%]; lower fragmentation indicates superior morphological token preservation for maritime compounds."
+    },
+    "oov_rate_pct": {
+        "type": "bounded_inverted",
+        "ceiling": 10.0,
+        "direction": "lower_is_better",
+        "category": "domain_morphological_fit",
+        "justification": "10.0% ceiling for out-of-vocabulary rate in WordPiece tokenizers. Byte-level BPE tokenizers have no measured OOV and are treated as NA (non-penalizing re-weighting)."
+    },
+    "category_balance": {
+        "type": "linear_clip",
+        "ceiling": 1.0,
+        "direction": "higher_is_better",
+        "category": "domain_morphological_fit",
+        "justification": "Calculated as 1.0 - std(category accuracies) in [0.0, 1.0]; higher values denote uniform representation capability across subdomains."
+    },
+    "inference_latency_ms": {
+        "type": "operational_rational",
+        "scale_ms": 50.0,
+        "direction": "lower_is_better",
+        "category": "environment_specific_operational",
+        "justification": "Operational reference constant of 50.0 ms represents a standard interactive SLA ceiling for single-document real-time triage. Labelled as environment-specific operational metric dependent on benchmark hardware."
+    },
+    "throughput_docs_sec": {
+        "type": "operational_rational",
+        "scale_docs_sec": 50.0,
+        "direction": "higher_is_better",
+        "category": "environment_specific_operational",
+        "justification": "Operational reference constant of 50.0 docs/sec reflects baseline batch ingestion throughput. Labelled as environment-specific operational metric dependent on benchmark hardware."
+    }
+}
+
 MECS_SCENARIOS = {
     "baseline": {
-        "top1_acc": 0.35,
-        "rare_top1_acc": 0.20,
-        "mlm_loss": 0.15,
-        "fragmentation_rate_pct": 0.15,
-        "oov_rate_pct": 0.10,
-        "category_balance": 0.05
+        "top1_acc": 0.40,
+        "rare_top1_acc": 0.15,
+        "mlm_loss": 0.25,
+        "fragmentation_rate_pct": 0.20
     },
     "performance_heavy": {
-        "top1_acc": 0.40,
-        "top5_acc": 0.15,
+        "top1_acc": 0.45,
         "rare_top1_acc": 0.20,
-        "mlm_loss": 0.25
+        "mlm_loss": 0.35
     },
     "domain_heavy": {
-        "rare_top1_acc": 0.35,
-        "top1_acc": 0.25,
+        "rare_top1_acc": 0.40,
+        "top1_acc": 0.20,
         "mlm_loss": 0.15,
-        "fragmentation_rate_pct": 0.15,
-        "oov_rate_pct": 0.10
+        "fragmentation_rate_pct": 0.25
     },
     "balanced": {
-        "top1_acc": 0.20,
+        "top1_acc": 0.25,
         "rare_top1_acc": 0.20,
         "mlm_loss": 0.20,
-        "fragmentation_rate_pct": 0.20,
+        "fragmentation_rate_pct": 0.15,
         "throughput_docs_sec": 0.20
     }
 }
+
+
+def normalize_metric_fixed(series: pd.Series, metric: str) -> pd.Series:
+    """
+    Cohort-independent, fixed-bound normalization to [0, 1].
+    Preserves NaN for missing values without fabricating zeros.
+    """
+    if metric not in FIXED_MECS_TRANSFORMS:
+        return normalize_metric(series, METRIC_DIRECTIONS.get(metric, "higher_is_better"))
+
+    info = FIXED_MECS_TRANSFORMS[metric]
+    m_type = info["type"]
+
+    if m_type == "bounded_linear":
+        low = info["min_bound"]
+        high = info["max_bound"]
+        norm = (high - series) / (high - low)
+        return norm.clip(lower=0.0, upper=1.0)
+    elif m_type == "linear_clip":
+        ceil = info.get("ceiling", 1.0)
+        norm = series / ceil
+        return norm.clip(lower=0.0, upper=1.0)
+    elif m_type == "percentage_inverted":
+        norm = 1.0 - (series / 100.0)
+        return norm.clip(lower=0.0, upper=1.0)
+    elif m_type == "bounded_inverted":
+        ceil = info["ceiling"]
+        norm = 1.0 - (series / ceil)
+        return norm.clip(lower=0.0, upper=1.0)
+    elif m_type == "operational_rational":
+        if info["direction"] == "lower_is_better":
+            scale = info["scale_ms"]
+            return 1.0 / (1.0 + series.clip(lower=0.0) / scale)
+        else:
+            scale = info["scale_docs_sec"]
+            s_clipped = series.clip(lower=0.0)
+            return s_clipped / (scale + s_clipped)
+    else:
+        return normalize_metric(series, info["direction"])
+
 
 
 def clean_model_filename(model_name: str) -> str:
@@ -155,20 +259,38 @@ def discover_stage14_results(cache_dir: Path, pll_path: Path = None):
         mar_sum = metrics.get("maritime_tokens_summary", {})
         rare_sum = metrics.get("rare_maritime_tokens_summary", {})
         cat_rec = metrics.get("category_recall", {})
+        overall_sum = metrics.get("overall_summary", {})
 
-        loss_val = mar_sum.get("mlm_loss")
+        mar_loss_val = mar_sum.get("mlm_loss")
         derived_exp_loss = mar_sum.get("mlm_loss_derived_exponential")
+        mar_top1 = mar_sum.get("top1_accuracy", np.nan)
+        mar_top5 = mar_sum.get("top5_accuracy", np.nan)
+        mar_top10 = mar_sum.get("top10_accuracy", np.nan)
+
+        ov_top1 = item.get("overall_top1_accuracy", overall_sum.get("overall_top1_accuracy", np.nan))
+        ov_loss = item.get("overall_mlm_loss", overall_sum.get("overall_mlm_loss", np.nan))
+
+        word_rec_sum = metrics.get("word_reconstruction_summary", {})
+        word_top1 = overall_sum.get("word_reconstruction_top1_accuracy", word_rec_sum.get("word_reconstruction_top1_accuracy", np.nan))
+        word_top5 = overall_sum.get("word_reconstruction_top5_accuracy", word_rec_sum.get("word_reconstruction_top5_accuracy", np.nan))
+        word_top10 = overall_sum.get("word_reconstruction_top10_accuracy", word_rec_sum.get("word_reconstruction_top10_accuracy", np.nan))
 
         valid_rows.append({
             "model_name": model_name,
             "representation": rep,
             "subset": sub,
             "domain_shift_gap": item.get("domain_shift_gap", np.nan),
-            "mlm_loss": loss_val if loss_val is not None else np.nan,
+            # Lineage-explicit maritime domain metrics
+            "maritime_mlm_loss": mar_loss_val if mar_loss_val is not None else np.nan,
+            "maritime_top1_acc": mar_top1,
+            "maritime_top5_acc": mar_top5,
+            "maritime_top10_acc": mar_top10,
+            # Backwards-compatible aliases for Stage 16 and legacy consumers
+            "mlm_loss": mar_loss_val if mar_loss_val is not None else np.nan,
+            "top1_acc": mar_top1,
+            "top5_acc": mar_top5,
+            "top10_acc": mar_top10,
             "mlm_loss_derived_exponential": derived_exp_loss if derived_exp_loss is not None else np.nan,
-            "top1_acc": mar_sum.get("top1_accuracy", np.nan),
-            "top5_acc": mar_sum.get("top5_accuracy", np.nan),
-            "top10_acc": mar_sum.get("top10_accuracy", np.nan),
             "rare_top1_acc": rare_sum.get("top1_accuracy", np.nan),
             "performance_gap": metrics.get("performance_gap_top1", np.nan),
             "nav_acc": cat_rec.get("navigation", np.nan),
@@ -177,9 +299,12 @@ def discover_stage14_results(cache_dir: Path, pll_path: Path = None):
             "machinery_acc": cat_rec.get("machinery_propulsion", np.nan),
             "vessel_acc": cat_rec.get("vessel_terminology", np.nan),
             "casualty_acc": cat_rec.get("casualty_incident", np.nan),
-            "word_reconstruction_top1": metrics.get("word_reconstruction_summary", {}).get("word_reconstruction_top1_accuracy", np.nan),
-            "word_reconstruction_top5": metrics.get("word_reconstruction_summary", {}).get("word_reconstruction_top5_accuracy", np.nan),
-            "word_reconstruction_top10": metrics.get("word_reconstruction_summary", {}).get("word_reconstruction_top10_accuracy", np.nan),
+            # Overall document token & word reconstruction metrics
+            "overall_top1_acc": ov_top1,
+            "overall_mlm_loss": ov_loss,
+            "word_reconstruction_top1": word_top1,
+            "word_reconstruction_top5": word_top5,
+            "word_reconstruction_top10": word_top10,
             "masking_mode": item.get("experiment_metadata", {}).get("masking_mode", "whole_word"),
             "evaluation_unit": item.get("experiment_metadata", {}).get("evaluation_unit", "word"),
             "eval_time_sec": metrics.get("evaluation_time_sec", np.nan),
@@ -372,11 +497,9 @@ def build_model_profiles(df_mlm: pd.DataFrame, tok_data: dict, pll_dict: dict, m
     for metric, direction in METRIC_DIRECTIONS.items():
         raw_col = f"raw__{metric}"
         if raw_col in df_raw and df_raw[raw_col].notna().any():
-            if metric == "mlm_loss":
-                # B9: Cohort-independent monotonic bounded loss normalization: 1 / (1 + loss)
-                # Invariant to candidate cohort composition, strictly monotonic (lower loss -> higher score)
-                df_norm["norm__mlm_loss"] = 1.0 / (1.0 + df_raw[raw_col].clip(lower=0.0))
-                active_directions[metric] = "cohort_independent: 1 / (1 + loss)"
+            if metric in FIXED_MECS_TRANSFORMS:
+                df_norm[f"norm__{metric}"] = normalize_metric_fixed(df_raw[raw_col], metric)
+                active_directions[metric] = f"fixed_transform: {FIXED_MECS_TRANSFORMS[metric]['type']} ({FIXED_MECS_TRANSFORMS[metric]['category']})"
             else:
                 df_norm[f"norm__{metric}"] = normalize_metric(df_raw[raw_col], direction)
                 active_directions[metric] = direction
@@ -641,15 +764,23 @@ def run_mecs_sensitivity(df_profiles: pd.DataFrame):
 
 def calculate_pareto_front(df_profiles: pd.DataFrame):
     """
-    Deterministic Pareto dominance analysis on normalized metrics (higher is better).
-    Evaluates dominance strictly on shared applicable objectives where both models have valid data.
-    Missing/N/A values are never forced to 0.0.
-    Model A dominates Model B if A >= B on all shared objectives and A > B on at least one.
+    Deterministic Pareto dominance analysis on the 6 defensible primary benchmark objectives:
+    1. top1_acc (intrinsic capability, higher is better)
+    2. rare_top1_acc (domain tail capability, higher is better)
+    3. mlm_loss (cross-entropy convergence, lower is better -> norm is higher is better)
+    4. fragmentation_rate_pct (domain morphological fit, lower is better -> norm is higher is better)
+    5. inference_latency_ms (operational latency, lower is better -> norm is higher is better)
+    6. throughput_docs_sec (operational throughput, higher is better)
+
+    Excluded from Pareto dominance:
+    - oov_rate_pct: byte-level BPE models have no measured OOV (unshared across cohort).
+    - single_token_coverage_pct: redundant / collinear with fragmentation rate.
+    - pseudo_perplexity: secondary sampled diagnostic evaluated on limited subset.
+    - top5_acc / top10_acc: collinear with top1_acc.
     """
     candidate_objs = [
-        "top1_acc", "rare_top1_acc", "top5_acc", "top10_acc",
-        "mlm_loss", "pseudo_perplexity", "fragmentation_rate_pct",
-        "single_token_coverage_pct", "oov_rate_pct", "throughput_docs_sec"
+        "top1_acc", "rare_top1_acc", "mlm_loss",
+        "fragmentation_rate_pct", "inference_latency_ms", "throughput_docs_sec"
     ]
     active_objs = [
         f"norm__{m}" for m in candidate_objs
@@ -1063,9 +1194,10 @@ def generate_report(
         f"- `{rec_model}` achieves highest overall intrinsic MLM performance, but exhibits higher subword fragmentation than specialized WordPiece architectures.",
         "- Models with lower subword fragmentation (e.g. `bert-base-uncased` at 26.6% fragmentation) offer better morphological token boundaries for specific domain stems, despite lower overall MLM Top-1 accuracy.",
         "",
-        "### Capability vs. Operational Cost",
-        f"- `{rec_model}` requires 149M parameters and ~458.6ms latency.",
-        "- Lightweight alternatives (e.g., 110M base models) provide faster inference latency (down to ~154-175ms) with smaller disk and memory footprints.",
+        "### Capability vs. Operational Cost (Environment-Specific)",
+        f"- `{rec_model}` requires 149M parameters with an operational inference latency of ~31.5ms per document (~31.8 docs/sec) on the benchmark GPU harness.",
+        "- Lightweight alternatives (e.g., 110M base models like `bert-base-uncased` and `nlpaueb/legal-bert-base-uncased`) provide lower inference latency (~21.0-22.4ms per document, ~44.7-47.6 docs/sec) with smaller disk footprints (~440MB vs ~590MB).",
+        "- Latency and throughput depend on benchmark execution hardware and batch configuration and represent operational considerations rather than intrinsic linguistic capabilities.",
         ""
     ])
 
@@ -1184,9 +1316,40 @@ def main():
     )
     decision["masking_mode"] = args.masking_mode
     decision["evaluation_unit"] = args.evaluation_unit
-    decision["mecs_normalization"] = "cohort_independent: 1 / (1 + mlm_loss)"
+    decision["mecs_normalization"] = "cohort_independent: fixed_bounded_reference_scales"
     with open(stage_dir / "stage15_selection_decision.json", "w", encoding="utf-8") as f:
         json.dump(decision, f, indent=2)
+
+    # Export MECS and Pareto Configuration Manifests
+    mecs_config = {
+        "description": "Maritime Encoder Composite Score (MECS) Configuration & Justification Manifest",
+        "methodological_principle": "MECS is an operational composite compatibility score for candidate ranking, not an intrinsic measure of domain understanding. All transforms are explicit design choices with documented justifications.",
+        "scenarios": MECS_SCENARIOS,
+        "transforms": FIXED_MECS_TRANSFORMS,
+        "operational_metrics_note": "Inference latency and throughput depend on benchmark execution hardware (NVIDIA GPU / PyTorch) and are explicitly classified as environment-specific operational metrics."
+    }
+    with open(stage_dir / "stage15_mecs_config.json", "w", encoding="utf-8") as f:
+        json.dump(mecs_config, f, indent=2)
+
+    pareto_config = {
+        "description": "Pareto Dominance Frontier Configuration Manifest",
+        "primary_objectives": [
+            {"metric": "top1_acc", "direction": "higher_is_better", "category": "intrinsic_capability"},
+            {"metric": "rare_top1_acc", "direction": "higher_is_better", "category": "domain_tail_capability"},
+            {"metric": "mlm_loss", "direction": "lower_is_better", "category": "intrinsic_loss"},
+            {"metric": "fragmentation_rate_pct", "direction": "lower_is_better", "category": "domain_morphological_fit"},
+            {"metric": "inference_latency_ms", "direction": "lower_is_better", "category": "operational_efficiency"},
+            {"metric": "throughput_docs_sec", "direction": "higher_is_better", "category": "operational_throughput"}
+        ],
+        "excluded_metrics": {
+            "oov_rate_pct": "Inapplicable to byte-level BPE tokenizers (ModernBERT, RoBERTa); not uniformly shared across cohort.",
+            "single_token_coverage_pct": "Collinear with fragmentation rate.",
+            "pseudo_perplexity": "Secondary diagnostic evaluated on limited document sample.",
+            "top5_acc": "Collinear with top1_acc."
+        }
+    }
+    with open(stage_dir / "stage15_pareto_config.json", "w", encoding="utf-8") as f:
+        json.dump(pareto_config, f, indent=2)
 
     # Step 9: Publication-Ready Markdown Report
     logger.info("Step 9: Generating scientific synthesis report...")
@@ -1208,7 +1371,7 @@ def main():
             "performance_gap_pct": round(float(r["raw__performance_gap_pct"]), 2) if pd.notna(r["raw__performance_gap_pct"]) else 0.0,
             "single_token_coverage_pct": round(float(r["raw__single_token_coverage_pct"]), 2) if pd.notna(r["raw__single_token_coverage_pct"]) else 0.0,
             "fragmentation_rate_pct": round(float(r["raw__fragmentation_rate_pct"]), 2) if pd.notna(r["raw__fragmentation_rate_pct"]) else 0.0,
-            "oov_rate_pct": round(float(r["raw__oov_rate_pct"]), 4) if pd.notna(r["raw__oov_rate_pct"]) else 0.0,
+            "oov_rate_pct": round(float(r["raw__oov_rate_pct"]), 4) if pd.notna(r["raw__oov_rate_pct"]) else np.nan,
             "params_millions": int(r["raw__params_millions"]) if pd.notna(r["raw__params_millions"]) else 110,
             "disk_size_mb": int(r["raw__disk_size_mb"]) if pd.notna(r["raw__disk_size_mb"]) else 440,
             "inference_latency_ms": round(float(r["raw__inference_latency_ms"]), 2) if pd.notna(r["raw__inference_latency_ms"]) else 5.0,

@@ -204,5 +204,11 @@
       "seas and day light",
       3786
     ]
-  ]
+  ],
+  "bert_baseline_tokenizer_diagnostics": {
+    "mean_fertility": 1.4132,
+    "domain_fragmentation_rate_pct": 9.09,
+    "oov_rate_pct": 0.0,
+    "methodology": "independent_sampled_documents"
+  }
 }

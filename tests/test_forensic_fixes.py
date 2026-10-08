@@ -368,5 +368,129 @@ class TestNoLegacyMUITerminology(unittest.TestCase):
             self.assertNotIn('"mui_score"', text, f"Legacy mui_score key found in {p.name}")
 
 
+class TestStage09Decoupling(unittest.TestCase):
+    def test_stage09_independent_diagnostics(self):
+        """Verify Stage 09 outputs contain independent BERT tokenizer diagnostics without Stage 13 dependency."""
+        s09_path = PROJECT_ROOT / "outputs" / "stage-09" / "statistics.json"
+        self.assertTrue(s09_path.exists(), f"Missing Stage 09 statistics: {s09_path}")
+        with open(s09_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        diag = data.get("bert_baseline_tokenizer_diagnostics", {})
+        self.assertIn("mean_fertility", diag)
+        self.assertIn("domain_fragmentation_rate_pct", diag)
+        self.assertEqual(diag.get("methodology"), "independent_sampled_documents")
+        # Ensure values are independent (mean_fertility ~ 1.4132, fragmentation ~ 9.09%)
+        self.assertAlmostEqual(diag["mean_fertility"], 1.4132, places=3)
+        self.assertAlmostEqual(diag["domain_fragmentation_rate_pct"], 9.09, places=1)
+
+
+class TestStage14OutputIntegrity(unittest.TestCase):
+    def test_175_cache_cells_and_provenance(self):
+        """Verify all 175 cache records exist and have valid provenance and wwm_15 masking strategy."""
+        cache_dir = PROJECT_ROOT / "outputs" / "stage-14" / "evaluations" / "cache_wwm_word"
+        self.assertTrue(cache_dir.exists())
+        json_files = list(cache_dir.glob("*.json"))
+        self.assertEqual(len(json_files), 175)
+
+        sample = json_files[0]
+        with open(sample, "r", encoding="utf-8") as f:
+            record = json.load(f)
+        meta = record.get("experiment_metadata", {})
+        self.assertEqual(meta.get("masking_strategy"), "wwm_15")
+        self.assertIn("provenance", meta)
+        prov = meta["provenance"]
+        self.assertIn("protocol_hash", prov)
+        self.assertIn("implementation_hash", prov)
+        self.assertIn("git_commit", prov)
+
+    def test_model_summary_aggregates(self):
+        """Verify the 7 model summaries in stage-14/evaluations/ are true macro-averages over 25 cells."""
+        eval_dir = PROJECT_ROOT / "outputs" / "stage-14" / "evaluations"
+        summary_files = [f for f in eval_dir.glob("*.json") if not f.is_dir() and f.name != "pll_results.json"]
+        self.assertEqual(len(summary_files), 7)
+
+        with open(summary_files[0], "r", encoding="utf-8") as f:
+            summary = json.load(f)
+        self.assertEqual(summary.get("summary_type"), "authoritative_model_level_macro_aggregate")
+        self.assertEqual(summary.get("evaluation_scope", {}).get("total_matched_conditions"), 25)
+        self.assertIn("macro_averages", summary)
+
+
+class TestStage15FixedTransformsAndMECS(unittest.TestCase):
+    def test_configs_exist(self):
+        """Verify Stage 15 MECS and Pareto configs exist with explicit justifications."""
+        mecs_cfg = PROJECT_ROOT / "outputs" / "stage-15" / "stage15_mecs_config.json"
+        pareto_cfg = PROJECT_ROOT / "outputs" / "stage-15" / "stage15_pareto_config.json"
+        self.assertTrue(mecs_cfg.exists())
+        self.assertTrue(pareto_cfg.exists())
+
+        with open(mecs_cfg, "r", encoding="utf-8") as f:
+            mc = json.load(f)
+        self.assertIn("transforms", mc)
+        self.assertIn("mlm_loss", mc["transforms"])
+        self.assertEqual(mc["transforms"]["mlm_loss"]["type"], "bounded_linear")
+
+        with open(pareto_cfg, "r", encoding="utf-8") as f:
+            pc = json.load(f)
+        self.assertEqual(len(pc.get("primary_objectives", [])), 6)
+
+    def test_leaderboard_oov_preservation(self):
+        """Verify leaderboard.csv preserves missingness for BPE OOV rather than fabricating 0.0%."""
+        lb_path = PROJECT_ROOT / "outputs" / "stage-15" / "leaderboard.csv"
+        df = pd.read_csv(lb_path)
+        modern = df[df["model_name"] == "answerdotai/ModernBERT-base"].iloc[0]
+        self.assertTrue(pd.isna(modern["oov_rate_pct"]))
+        legal = df[df["model_name"] == "nlpaueb/legal-bert-base-uncased"].iloc[0]
+        self.assertFalse(pd.isna(legal["oov_rate_pct"]))
+
+    def test_pareto_all_optimal(self):
+        """Verify all 7 active models are Pareto-optimal on the 6 primary objectives."""
+        par_path = PROJECT_ROOT / "outputs" / "stage-15" / "stage15_pareto.csv"
+        df = pd.read_csv(par_path)
+        self.assertEqual(len(df), 7)
+        self.assertTrue(all(df["pareto_status"] == "Pareto-Optimal"))
+
+    def test_modernbert_sensitivity_leader(self):
+        """Verify ModernBERT wins baseline and performance-heavy MECS scenarios."""
+        sens_path = PROJECT_ROOT / "outputs" / "stage-15" / "stage15_mecs_sensitivity.csv"
+        df = pd.read_csv(sens_path)
+        mb = df[df["model_name"] == "answerdotai/ModernBERT-base"].iloc[0]
+        self.assertEqual(mb["baseline_rank"], 1)
+        self.assertEqual(mb["performance_heavy_rank"], 1)
+        self.assertEqual(mb["total_wins"], 2)
+
+
+class TestStage16And17Consistency(unittest.TestCase):
+    def test_stage16_anova_variance_ranking(self):
+        """Verify Stage 16 ANOVA variance correctly attributes Representation > Model > Interaction."""
+        sig_path = PROJECT_ROOT / "outputs" / "stage-16" / "statistical_significance.json"
+        with open(sig_path, "r", encoding="utf-8") as f:
+            sig = json.load(f)
+        pca = sig["primary_crossed_analysis"]
+        rep_var = pca["representation_effect"]["variance_contribution_pct"]
+        mod_var = pca["model_main_effect"]["variance_contribution_pct"]
+        int_var = pca["model_x_representation_interaction"]["variance_contribution_pct"]
+
+        self.assertGreater(rep_var, mod_var)
+        self.assertGreater(mod_var, int_var)
+        self.assertAlmostEqual(rep_var, 55.83, delta=0.5)
+        self.assertAlmostEqual(mod_var, 24.14, delta=0.5)
+        self.assertAlmostEqual(int_var, 10.28, delta=0.5)
+
+    def test_stage17_decision_rules_and_status(self):
+        """Verify Stage 17 rules exist and report contains valid statistical extractions."""
+        rules_path = PROJECT_ROOT / "outputs" / "stage-17" / "stage17_decision_rules.json"
+        self.assertTrue(rules_path.exists())
+
+        report_path = PROJECT_ROOT / "outputs" / "stage-17" / "stage17_decision_report.md"
+        report_text = report_path.read_text(encoding="utf-8")
+        self.assertNotIn("chi^2 = N/A", report_text)
+        self.assertNotIn("F = N/A", report_text)
+        self.assertIn("chi^2 = 91.5771", report_text)
+        self.assertNotIn("Baseline Reference / Dominated", report_text)
+        self.assertNotIn("458.6ms", report_text)
+
+
 if __name__ == "__main__":
     unittest.main()
+

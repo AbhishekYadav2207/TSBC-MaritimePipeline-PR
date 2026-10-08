@@ -23,7 +23,7 @@
     "Condition Agreement: Kendall's W 0.6514 across representations, 0.9229 across subsets"
   ],
   "mecs_evidence": [
-    "Baseline MECS Score: 51.3500 (Rank 1 in baseline scenario)",
+    "Baseline MECS Score: 63.3700 (Rank 1 in baseline scenario)",
     "MECS Scenario Wins: 2 wins across 4 weight scenarios (Win frequency: 0.5)",
     "MECS Sensitivity Trade-off: ModernBERT leads performance-oriented and baseline scenarios; general BERT leads vocabulary/domain-heavy scenarios, exposing an explicit capability versus tokenization trade-off."
   ],

@@ -8,11 +8,11 @@
 This research stage statistically validates cross-model performance differences identified in Stage 15.
 Crucially, the benchmark structure is modeled as a **balanced crossed repeated-measures design** (Models x Representations x Subsets) rather than assuming false cell independence.
 
-* **Primary Crossed Repeated-Measures Analysis**: The primary fixed effect of encoder model is statistically decisive under both parametric ANOVA ($F = 269.4943$, $p = 1.1102e-16$, $\eta^2 = 24.1\%$) and 1,000 block-respecting condition permutations ($p_{\text{perm}} = 0.0010$).
+* **Primary Crossed Repeated-Measures Analysis**: The primary fixed effect of encoder model is statistically decisive under both parametric ANOVA ($F = 269.4943$, $p = 1.1102e-16$, $\eta^2 = 24.1\%$, partial $\eta^2 = 0.944$) and 1,000 block-respecting condition permutations ($p_{\text{perm}} = 0.0010$). Structural representation format accounts for the largest overall share of variance (55.8%, $F = 935.1$), reflecting serialization difficulty shifts, while model architecture accounts for 24.1% with a significant Model $\times$ Representation interaction (10.3%).
 * **Secondary Omnibus Friedman Test**: Retained for reference and historical continuity, the Friedman test confirms significant differences across matched conditions (Friedman $\chi^2 = 91.5771$, $p = 1.4247e-17$, $df = 6$).
 * **Pairwise Matched Comparisons**: Across all 21 paired comparisons, 14 pairs demonstrate statistically reliable differences after family-wise Holm-Bonferroni correction ($p_{\text{Holm}} < 0.05$).
 * **Primary Winner Robustness**: Model `answerdotai/ModernBERT-base` demonstrates unambiguous statistical superiority, attaining an empirical bootstrap rank-1 frequency of **$P(\text{rank}=1) = 100.0%$** across 2000 condition resamples.
-* **Paired vs. Unpaired Effect Sizes**: High paired rank-biserial correlations ($r_{\text{prb}} > 0.8$) and large paired Cohen's $d_z > 2.0$ confirm substantial practical margins on matched cells. Secondary unpaired Cliff's delta values are strictly reported as descriptive distribution-level statistics.
+* **Paired vs. Unpaired Effect Sizes**: High paired rank-biserial correlations ($r_{\text{prb}} > 0.8$) and large paired Cohen's $d_z \in [1.20, 3.21]$ confirm substantial practical margins on matched cells. Secondary unpaired Cliff's delta values ($\delta \in [0.33, 0.47]$, medium) are strictly reported as descriptive distribution-level statistics.
 
 ---
 
@@ -31,7 +31,7 @@ The primary statistical model is a **3-way crossed repeated-measures ANOVA** wit
 | Residual (Model x Rep x Subset) | 0.0261 | 96 | 0.0003 | — | — | 1.43% | — |
 
 * **Block-Respecting Permutation Test ($p_{\text{perm}}$)**: **0.0010** (exact permutation of model labels within each of the 25 joint representation x subset blocks across 1,000 resamples).
-* *Interpretation*: Model architecture accounts for the dominant share of benchmark variance (24.1%), confirming that model superiority is structural rather than an artifact of condition selection.
+* *Variance Decomposition Interpretation*: Document representation format accounts for the largest share of benchmark variance (55.8%, $F = 935.1$), reflecting substantial baseline difficulty shifts across serialization formats (e.g., Markdown table vs. JSON vs. prose). Crucially, the model architecture main effect remains highly significant and substantial, accounting for 24.1% of benchmark variance ($F = 269.49, p < 10^{-15}$, partial $\eta^2 = 0.944$), with a statistically significant Model $\times$ Representation interaction (10.3%, $F = 28.68$) indicating differential representation adaptation.
 
 ### Secondary Reference: Friedman Omnibus Test
 Retained for continuity as a secondary nonparametric baseline across matched conditions:
@@ -167,10 +167,10 @@ Leave-one-dimension-out ablation on the Stage 12 Domain Informativeness Engine e
 ### Component Score & Ranking Sensitivity
 | Ablated Component | Mean $\Delta_{{\text{{score}}}}$ | Median $\Delta$ | SD $\Delta$ | Spearman $\rho$ | Kendall $\tau$ | Top-20% Jaccard Overlap | Selection Impact |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| `domain_relevance` | -0.0586 | -0.0616 | 0.0244 | 0.9623 | 0.8379 | **0.6692** | Moderate selection impact: component alters borderline selections |
+| `domain_relevance` | -0.0586 | -0.0616 | 0.0244 | 0.9623 | 0.8379 | **0.6691** | Moderate selection impact: component alters borderline selections |
 | `information_content` | +0.1942 | +0.1989 | 0.0329 | 0.9375 | 0.8468 | **0.8868** | Low selection impact: score shifts have limited effect on top document selection |
-| `tfidf_representativeness` | -0.0031 | +0.0031 | 0.0422 | 0.8607 | 0.7209 | **0.6119** | Moderate selection impact: component alters borderline selections |
-| `redundancy_noise` | -0.1488 | -0.1487 | 0.0558 | 0.8590 | 0.6712 | **0.5027** | High selection impact: component strongly influences document selection |
+| `tfidf_representativeness` | -0.0031 | +0.0031 | 0.0422 | 0.8607 | 0.7209 | **0.6117** | Moderate selection impact: component alters borderline selections |
+| `redundancy_noise` | -0.1488 | -0.1487 | 0.0558 | 0.8590 | 0.6712 | **0.5029** | High selection impact: component strongly influences document selection |
 
 ### Stratum / Tier Transition Stability
 | Ablated Component | Same Tier (%) | High Tier Retention (%) | Medium Tier Retention (%) | Low Tier Retention (%) | Documents Shifted |

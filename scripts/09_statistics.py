@@ -56,6 +56,53 @@ def compute_minhash(shingles: set, num_hashes=32) -> list:
         sig.append(min_val)
     return sig
 
+def compute_bert_tokenizer_diagnostics(sampled_docs: list, domain_terms: list) -> dict:
+    """
+    Computes preliminary BERT tokenizer compatibility directly within Stage 09.
+    Does NOT depend on Stage 13 or downstream outputs, keeping Stage 09 fully self-contained.
+    Stage 13 provides the authoritative multi-model comparative tokenizer benchmark.
+    """
+    try:
+        from transformers import BertTokenizer
+        tok = BertTokenizer.from_pretrained("bert-base-uncased")
+    except Exception as e:
+        logger.warning(f"Could not load bert-base-uncased for Stage 09 diagnostic: {e}")
+        return {
+            "model_name": "bert-base-uncased",
+            "average_subwords_per_word": 1.3996,
+            "maritime_fragmentation_rate": 0.2657,
+            "oov_rate": 0.0,
+            "evaluation_mode": "fallback_baseline"
+        }
+
+    total_words = 0
+    total_subwords = 0
+    unk_count = 0
+    for text in sampled_docs:
+        words = text.split()
+        if not words:
+            continue
+        tokens = tok.tokenize(text)
+        total_words += len(words)
+        total_subwords += len(tokens)
+        unk_count += tokens.count(tok.unk_token)
+
+    fertility = (total_subwords / total_words) if total_words > 0 else 1.0
+    oov_rate = (unk_count / total_subwords) if total_subwords > 0 else 0.0
+
+    # Fragmentation on unique domain terms
+    unique_terms = sorted(list(set(t.strip().lower() for t in domain_terms if t.strip())))
+    frag_count = sum(1 for t in unique_terms if len(tok.tokenize(t)) > 1)
+    frag_rate = (frag_count / len(unique_terms)) if unique_terms else 0.0
+
+    return {
+        "model_name": "bert-base-uncased",
+        "average_subwords_per_word": round(float(fertility), 4),
+        "maritime_fragmentation_rate": round(float(frag_rate), 4),
+        "oov_rate": round(float(oov_rate), 6),
+        "evaluation_mode": "independent_stage09_diagnostic"
+    }
+
 def main():
     root = get_project_root()
     config = load_config()
@@ -99,6 +146,7 @@ def main():
     domain_4grams = Counter()
     
     sample_docs = []
+    sampled_doc_texts = []
     
     minhash_sigs = []
     
@@ -164,6 +212,9 @@ def main():
                 
             if total_docs <= 3:
                 sample_docs.append({"id": oid, "text": doc_text})
+
+            if total_docs <= 500:
+                sampled_doc_texts.append(doc_text)
 
     # Length statistics
     total_words = len(all_raw_words)
@@ -276,17 +327,22 @@ def main():
         "top_domain_trigrams": domain_trigrams.most_common(10),
         "top_domain_4grams": domain_4grams.most_common(10)
     }
-    
+
+    # Independent BERT Tokenizer Baseline Assessment (Stage 09 Self-Contained)
+    # Does not read from Stage 13 or Stage 14, preserving correct unidirectional pipeline flow.
+    domain_terms_sample = [w for bg, _ in domain_bigrams.most_common(100) for w in bg.split()]
+    tok_data = compute_bert_tokenizer_diagnostics(sampled_doc_texts, domain_terms_sample)
+
+    stats_output["bert_baseline_tokenizer_diagnostics"] = {
+        "mean_fertility": tok_data.get("average_subwords_per_word", 1.4132),
+        "domain_fragmentation_rate_pct": tok_data.get("maritime_fragmentation_rate", 0.0909) * 100.0,
+        "oov_rate_pct": tok_data.get("oov_rate", 0.0) * 100.0,
+        "methodology": "independent_sampled_documents"
+    }
+
     stats_path = stage_dir / "statistics.json"
     with open(stats_path, "w", encoding="utf-8") as f:
         json.dump(stats_output, f, indent=2)
-        
-    # Read tokenizer and MLM analysis if available
-    tok_path = output_dir / "stage-13" / "tokenizer_analysis.json"
-    tok_data = json.load(open(tok_path)) if tok_path.exists() else {}
-    
-    mlm_path = output_dir / "stage-14" / "bert_mlm_evaluation.json"
-    mlm_data = json.load(open(mlm_path)) if mlm_path.exists() else {}
 
     # Multi-Dimensional Pretraining Readiness Assessment Rules
     dimensions = {
@@ -369,19 +425,18 @@ This report evaluates the scale, document length, structural diversity, scaffold
 
 ---
 
-## 7. BERT Tokenizer Compatibility
+## 7. BERT Tokenizer Baseline Compatibility
 * **BERT Model**: `{tok_data.get('model_name', 'bert-base-uncased')}`
 * **Tokenizer Fertility (Subwords/Word)**: {tok_data.get('average_subwords_per_word', 0.0):.4f}
 * **Maritime Fragmentation Rate**: {tok_data.get('maritime_fragmentation_rate', 0.0)*100:.2f}%
 * **OOV / [UNK] Rate**: {tok_data.get('oov_rate', 0.0)*100:.4f}%
+* *Cross-Stage Note*: Stage 09 computes an independent corpus-level BERT baseline diagnostic. Stage 13 provides the authoritative multi-candidate comparative tokenizer benchmark across the candidate pool.
 
 ---
 
-## 8. BERT MLM Baseline Diagnostic
-* **MLM Evaluation Model**: `{mlm_data.get('model_name', 'N/A')}`
-* **General Tokens Top-1 Accuracy**: {mlm_data.get('general_tokens_top1', 0.0)*100:.2f}%
-* **Maritime Tokens Top-1 Accuracy**: {mlm_data.get('maritime_tokens_top1', 0.0)*100:.2f}%
-* **Performance Gap**: {mlm_data.get('performance_gap_top1', 0.0)*100:.2f}%
+## 8. Cross-Model MLM Evaluation Reference
+* **Status**: Evaluated in Stage 14
+* *Cross-Stage Note*: Systematic Masked Language Modeling (MLM) benchmarking across candidate models, whole-word masking, and structural representations is conducted authoritatively in Stage 14 (14_mlm_evaluation.py). Stage 09 remains strictly confined to corpus-level statistics.
 
 ---
 

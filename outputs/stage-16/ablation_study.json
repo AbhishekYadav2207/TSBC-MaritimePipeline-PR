@@ -3,7 +3,7 @@
     "ablated_feature_removed": "domain_relevance",
     "relevance_score": 30.74,
     "performance_drop_pct": 5.86,
-    "jaccard_overlap_p80": 0.6692,
+    "jaccard_overlap_p80": 0.6691,
     "spearman_rho": 0.9623,
     "justification": "Leave-one-out removal of domain_relevance yields 0.67 Jaccard selection retention and 0.96 rank correlation."
   },
@@ -19,7 +19,7 @@
     "ablated_feature_removed": "tfidf_representativeness",
     "relevance_score": 25.18,
     "performance_drop_pct": 0.31,
-    "jaccard_overlap_p80": 0.6119,
+    "jaccard_overlap_p80": 0.6117,
     "spearman_rho": 0.8607,
     "justification": "Leave-one-out removal of tfidf_representativeness yields 0.61 Jaccard selection retention and 0.86 rank correlation."
   },
@@ -27,7 +27,7 @@
     "ablated_feature_removed": "redundancy_noise",
     "relevance_score": 39.76,
     "performance_drop_pct": 14.88,
-    "jaccard_overlap_p80": 0.5027,
+    "jaccard_overlap_p80": 0.5029,
     "spearman_rho": 0.859,
     "justification": "Leave-one-out removal of redundancy_noise yields 0.50 Jaccard selection retention and 0.86 rank correlation."
   },

@@ -694,7 +694,7 @@ def generate_selection_csv(
         elif status == "Competitive Candidate":
             decision_role = "Secondary Benchmark Alternative"
         else:
-            decision_role = "Baseline Reference / Dominated"
+            decision_role = "Lower-tier benchmark/reference"
 
         # Format evidence summaries
         primary_perf = f"Top-1: {p['top1_acc']:.2f}%, Loss: {p['mlm_loss']:.4f}" if p.get('top1_acc') is not None and p.get('mlm_loss') is not None else "N/A"
@@ -795,7 +795,7 @@ def generate_decision_report_md(
 * **Recommended Decision**: **{decision_result['decision']}**
 * **Recommended Action**: {decision_result['action']}
 * **Decision Confidence**: **{decision_result['confidence']}**
-* **Methodological Framing**: The empirical benchmark evidence supports `{sel}` as the preferred pretrained initialization for the subsequent Domain-Adaptive Pretraining (DAPT) experiment. This decision reflects strong intrinsic masked language modeling capability, structural ranking invariance across representations and subsets, and rigorous pairwise statistical support with zero observed defeats.
+* **Methodological Framing**: The empirical benchmark evidence supports `{sel}` as the preferred pretrained initialization for the subsequent Domain-Adaptive Pretraining (DAPT) experiment. This decision reflects strong intrinsic masked language modeling capability, structural ranking invariance across representations and subsets, and rigorous pairwise statistical support with zero statistically significant defeats (with 2 raw cell-level condition losses to LegalBERT and 2 to RoBERTa across 25 matched conditions).
 
 ---
 
@@ -851,11 +851,20 @@ Models are categorized based on relative empirical evidence into three transpare
     else:
         victories_md = f"  * Competitors evaluated in Stage 16 pairwise matrix ({p_sel.get('sig_pairwise_wins', 0)} statistically significant victories)"
 
-    # Global omnibus test stats
-    stat_fr = global_tests_dict.get("statistic", "N/A") if global_tests_dict else "N/A"
-    df_fr = global_tests_dict.get("df", len(profiles) - 1) if global_tests_dict else (len(profiles) - 1)
-    p_fr = global_tests_dict.get("p_value_raw", "N/A") if global_tests_dict else "N/A"
+    # Global omnibus test stats (Friedman secondary reference and Primary Crossed ANOVA)
+    fr_info = global_tests_dict.get("secondary_friedman_analysis", {}) if global_tests_dict else {}
+    if not fr_info and global_tests_dict and "statistic" in global_tests_dict:
+        fr_info = global_tests_dict
+    stat_fr = fr_info.get("statistic", "N/A")
+    df_fr = fr_info.get("df", len(profiles) - 1)
+    p_fr = fr_info.get("p_value_raw", "N/A")
     p_fr_str = f"{p_fr:.2e}" if isinstance(p_fr, float) else str(p_fr)
+
+    primary_anova = global_tests_dict.get("primary_crossed_analysis", {}) if global_tests_dict else {}
+    model_main = primary_anova.get("model_main_effect", {})
+    anova_f = model_main.get("f_statistic", "N/A")
+    anova_p = model_main.get("parametric_p_value", "N/A")
+    anova_p_str = f"{anova_p:.2e}" if isinstance(anova_p, float) else str(anova_p)
 
     md += f"""
 ---
@@ -880,7 +889,7 @@ The benchmark evaluated candidate models across diverse structural representatio
 ## 5. Statistical Support
 All statistical evidence is consumed directly from Stage 16 without re-computation:
 
-* **Global Hypothesis Test**: Crossed factorial repeated-measures ANOVA (primary) and Friedman's omnibus test (secondary reference) across matched conditions confirm statistically significant differences among models ($\\chi^2 = {stat_fr}$, $df = {df_fr}$, $p = {p_fr_str}$).
+* **Global Hypothesis Test**: Crossed factorial repeated-measures ANOVA (primary: $F = {anova_f}$, $p = {anova_p_str}$) and Friedman's omnibus test (secondary reference: $\\chi^2 = {stat_fr}$, $df = {df_fr}$, $p = {p_fr_str}$) across matched conditions confirm statistically significant differences among models.
 * **Pairwise Wilcoxon Tests**: With family-wise error controlled using the Holm-Bonferroni step-down procedure, `{sel}` achieves statistically significant superiority over:
 {victories_md}
 * **Zero Empirical Defeats**: `{sel}` experienced {p_sel.get('sig_pairwise_losses', 0)} statistically significant pairwise defeats across all conditions.
@@ -917,7 +926,7 @@ Operational dimensions are documented transparently and kept distinct from capab
     md += f"""
 ### Operational Trade-off Analysis:
 * **Selected Candidate (`{sel}`)**: Demonstrates leading language modeling representation capability, but incurs a higher latency ({lat_sel_str}) and higher subword fragmentation ({fr_sel_str}) than older BERT architectures.
-* **Resource-Constrained Alternative (`bert-base-uncased`)**: Offers 2.6x lower inference latency (174.9ms vs 458.6ms), lower parameter footprint (110M vs 149M), and substantially lower subword fragmentation (26.57% vs 63.28%), making it the preferred candidate under constrained deployment budgets.
+* **Resource-Constrained Alternative (`bert-base-uncased`)**: Offers ~1.5x lower inference latency (21.0ms vs 31.5ms per document), lower parameter footprint (110M vs 149M), and substantially lower subword fragmentation (26.57% vs 62.99%), making it the preferred candidate under constrained deployment budgets.
 
 ---
 
@@ -1113,6 +1122,28 @@ def main():
     json_path = stage17_dir / "stage17_selection_rationale.json"
     generate_selection_rationale_json(decision_result, json_path)
     logger.info(f"Saved selection rationale JSON to {json_path}")
+
+    rules_path = stage17_dir / "stage17_decision_rules.json"
+    decision_rules = {
+        "description": "Multi-Dimensional Evidence Decision Rules Manifest",
+        "decision_hierarchy": [
+            "Level 1: Pareto Dominance Gate (Candidate must be non-dominated across primary objectives)",
+            "Level 2: Primary Intrinsic Capability (Minimum MLM Loss, Maximum Word Reconstruction Top-1)",
+            "Level 3: Statistical Superiority (Holm-adjusted pairwise Wilcoxon tests with zero significant defeats)",
+            "Level 4: Bootstrap Rank Stability (Empirical rank-1 frequency >= 80%, mean rank <= 1.5)",
+            "Level 5: Representation & Subset Invariance (Rank agreement Kendall W > 0.60)",
+            "Level 6: MECS Multi-Scenario Invariance (Wins in baseline and performance-heavy paradigms)"
+        ],
+        "confidence_thresholds": {
+            "high": "mean_rank <= 1.5 AND p_rank_1 >= 0.80 AND sig_losses == 0 AND is_pareto",
+            "moderate": "mean_rank <= 3.0 AND sig_losses <= 1 AND is_pareto",
+            "low": "Fails moderate criteria (high rank volatility or pairwise defeats)"
+        },
+        "operational_tradeoff_policy": "Tokenizer fragmentation and inference latency are recorded as operational trade-offs rather than hard rejection gates when language modeling capability is decisive."
+    }
+    with open(rules_path, "w", encoding="utf-8") as f:
+        json.dump(decision_rules, f, indent=2)
+    logger.info(f"Saved decision rules manifest to {rules_path}")
 
     report_path = stage17_dir / "stage17_decision_report.md"
     generate_decision_report_md(

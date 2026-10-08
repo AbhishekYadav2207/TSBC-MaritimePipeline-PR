@@ -50,7 +50,7 @@ def map_display_columns(df_dict) -> dict:
                 
                 # Custom exceptions discovered during profiling
                 if col == "LatEnum_Bearing_DisplayEng":
-                    candidates.append("latinum")
+                    candidates.extend(["latenum", "latinum"])
                 if col == "LongEnum_Bearing_DisplayEng":
                     candidates.append("longenum")
                     

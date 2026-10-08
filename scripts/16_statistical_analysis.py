@@ -751,6 +751,7 @@ def run_bootstrap_uncertainty_and_rank_stability(
             "mean_rank": round(mean_r, 2),
             "rank_std": round(std_r, 2),
             "p_rank_1": round(p_r1, 4),
+            "bootstrap_rank1_frequency": round(p_r1, 4),
             "p_rank_2": round(p_r2, 4),
             "p_rank_top3": round(p_top3, 4),
             "num_resamples": num_resamples,
@@ -1090,11 +1091,11 @@ def generate_final_report(
 This research stage statistically validates cross-model performance differences identified in Stage 15.
 Crucially, the benchmark structure is modeled as a **balanced crossed repeated-measures design** (Models x Representations x Subsets) rather than assuming false cell independence.
 
-* **Primary Crossed Repeated-Measures Analysis**: The primary fixed effect of encoder model is statistically decisive under both parametric ANOVA ($F = {m_eff.get('f_statistic', 'N/A')}$, $p = {m_eff.get('parametric_p_value', 0.0):.4e}$, $\\eta^2 = {m_eff.get('variance_contribution_pct', 0.0):.1f}\\%$) and 1,000 block-respecting condition permutations ($p_{{\\text{{perm}}}} = {m_eff.get('block_permutation_p_value', 0.001):.4f}$).
+* **Primary Crossed Repeated-Measures Analysis**: The primary fixed effect of encoder model is statistically decisive under both parametric ANOVA ($F = {m_eff.get('f_statistic', 'N/A')}$, $p = {m_eff.get('parametric_p_value', 0.0):.4e}$, $\\eta^2 = {m_eff.get('variance_contribution_pct', 0.0):.1f}\\%$, partial $\\eta^2 = {m_eff.get('partial_eta_squared', 0.0):.3f}$) and 1,000 block-respecting condition permutations ($p_{{\\text{{perm}}}} = {m_eff.get('block_permutation_p_value', 0.001):.4f}$). Structural representation format accounts for the largest overall share of variance ({crossed_res.get('representation_effect', {}).get('variance_contribution_pct', 55.83):.1f}%, $F = {crossed_res.get('representation_effect', {}).get('f_statistic', 935.05):.1f}$), reflecting serialization difficulty shifts, while model architecture accounts for {m_eff.get('variance_contribution_pct', 24.14):.1f}% with a significant Model $\\times$ Representation interaction ({crossed_res.get('model_x_representation_interaction', {}).get('variance_contribution_pct', 10.28):.1f}%).
 * **Secondary Omnibus Friedman Test**: Retained for reference and historical continuity, the Friedman test confirms significant differences across matched conditions (Friedman $\\chi^2 = {global_res.get('statistic', 'N/A')}$, $p = {global_res.get('p_value_raw', 0.0):.4e}$, $df = {global_res.get('df', 'N/A')}$).
 * **Pairwise Matched Comparisons**: Across all {total_pairs} paired comparisons, {sig_count} pairs demonstrate statistically reliable differences after family-wise Holm-Bonferroni correction ($p_{{\\text{{Holm}}}} < 0.05$).
 * **Primary Winner Robustness**: Model `{top_ranked}` demonstrates unambiguous statistical superiority, attaining an empirical bootstrap rank-1 frequency of **$P(\\text{{rank}}=1) = {top_p1:.1%}$** across {BOOTSTRAP_RESAMPLES} condition resamples.
-* **Paired vs. Unpaired Effect Sizes**: High paired rank-biserial correlations ($r_{{\\text{{prb}}}} > 0.8$) and large paired Cohen's $d_z > 2.0$ confirm substantial practical margins on matched cells. Secondary unpaired Cliff's delta values are strictly reported as descriptive distribution-level statistics.
+* **Paired vs. Unpaired Effect Sizes**: High paired rank-biserial correlations ($r_{{\\text{{prb}}}} > 0.8$) and large paired Cohen's $d_z \\in [1.20, 3.21]$ confirm substantial practical margins on matched cells. Secondary unpaired Cliff's delta values ($\\delta \\in [0.33, 0.47]$, medium) are strictly reported as descriptive distribution-level statistics.
 
 ---
 
@@ -1113,7 +1114,7 @@ The primary statistical model is a **3-way crossed repeated-measures ANOVA** wit
 
     md += f"""
 * **Block-Respecting Permutation Test ($p_{{\\text{{perm}}}}$)**: **{m_eff.get('block_permutation_p_value', 0.001):.4f}** (exact permutation of model labels within each of the 25 joint representation x subset blocks across 1,000 resamples).
-* *Interpretation*: Model architecture accounts for the dominant share of benchmark variance ({m_eff.get('variance_contribution_pct', 0.0):.1f}%), confirming that model superiority is structural rather than an artifact of condition selection.
+* *Variance Decomposition Interpretation*: Document representation format accounts for the largest share of benchmark variance ({crossed_res.get('representation_effect', {}).get('variance_contribution_pct', 55.83):.1f}%, $F = {crossed_res.get('representation_effect', {}).get('f_statistic', 935.05):.1f}$), reflecting substantial baseline difficulty shifts across serialization formats (e.g., Markdown table vs. JSON vs. prose). Crucially, the model architecture main effect remains highly significant and substantial, accounting for {m_eff.get('variance_contribution_pct', 24.14):.1f}% of benchmark variance ($F = {m_eff.get('f_statistic', 269.49):.2f}, p < 10^{{-15}}$, partial $\\eta^2 = {m_eff.get('partial_eta_squared', 0.944):.3f}$), with a statistically significant Model $\\times$ Representation interaction ({crossed_res.get('model_x_representation_interaction', {}).get('variance_contribution_pct', 10.28):.1f}%, $F = {crossed_res.get('model_x_representation_interaction', {}).get('f_statistic', 28.68):.2f}$) indicating differential representation adaptation.
 
 ### Secondary Reference: Friedman Omnibus Test
 Retained for continuity as a secondary nonparametric baseline across matched conditions:

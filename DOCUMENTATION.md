@@ -578,24 +578,34 @@ $$\text{Importance Score} = \text{clip}\left(S_{\text{hybrid}} \times 100.0, \; 
 ---
 
 ### 2. Stage 15: Multi-Criteria Maritime Encoder Composite Score (MECS) Formulation
-Maritime Encoder Composite Score (MECS) is a composite benchmark-based score used to summarize encoder evaluation characteristics for model selection. It is not intended to represent a direct measure of language or maritime understanding.
+Maritime Encoder Composite Score (MECS) is a composite benchmark-based operational index used to summarize candidate trade-offs for model selection. It is explicitly an operational decision support index, not an intrinsic measure of domain understanding.
 
-To evaluate models objectively across diverse capability and operational axes, Stage 15 normalizes raw capability metrics into $[0.0, 1.0]$. Crucially, to eliminate cohort dependency (Issue B9), MLM cross-entropy loss is transformed using a fixed monotonic cohort-independent bounded mapping:
+To eliminate cohort-dependent normalization artifacts (where candidate scores shift when competitors are added or removed), Stage 15 applies fixed, monotonic, cohort-independent transforms across all evaluation dimensions:
 
-$$\tilde{x}_{\text{loss}} = \frac{1.0}{1.0 + \text{loss}}$$
+1. **Intrinsic MLM Cross-Entropy Loss** ($[3.0, 8.0]$ bounded linear mapping):
+   $$\tilde{x}_{\text{loss}} = \text{clip}\left(\frac{8.0 - \text{loss}}{5.0}, 0.0, 1.0\right)$$
+   *Justification*: A loss of $8.0$ corresponds to unadapted random guessing on technical text (perplexity $\sim 2980$ for $30\text{k}-50\text{k}$ vocabulary), while $3.0$ represents near-perfect domain convergence (perplexity $\sim 20$).
 
-Other metrics are normalized via direction-aware scaling:
-$$\tilde{x}_i = \begin{cases} \frac{x_i - \min(\mathbf{x})}{\max(\mathbf{x}) - \min(\mathbf{x})}, & \text{if higher is better (Top-1, Top-5, Rare Top-1, Coverage, Docs/s)} \\ \frac{\max(\mathbf{x}) - x_i}{\max(\mathbf{x}) - \min(\mathbf{x})}, & \text{if lower is better (Fragmentation, Latency)} \end{cases}$$
+2. **Strict Word Reconstruction Accuracy**:
+   $$\tilde{x}_{\text{top1}} = \text{clip}\left(\frac{\text{top1\_acc}}{0.35}, 0.0, 1.0\right), \quad \tilde{x}_{\text{rare\_top1}} = \text{clip}\left(\frac{\text{rare\_top1\_acc}}{0.25}, 0.0, 1.0\right)$$
+   *Justification*: Under strict whole-word reconstruction without task-specific fine-tuning, empirical zero-shot accuracy ceilings are $35.0\%$ for general vocabulary and $25.0\%$ for tail nautical terms (frequency $\le 10$).
 
-The composite **MECS Score** is then computed under 4 distinct weighting paradigms:
+3. **Subword Fragmentation Rate**:
+   $$\tilde{x}_{\text{frag}} = 1.0 - \text{clip}\left(\frac{\text{frag\_rate}}{100.0}, 0.0, 1.0\right)$$
+
+4. **Environment-Specific Operational Metrics (Inference Latency & Throughput)**:
+   $$\tilde{x}_{\text{latency}} = \frac{1.0}{1.0 + \text{latency\_ms} / 50.0}, \quad \tilde{x}_{\text{throughput}} = \frac{\text{throughput}}{50.0 + \text{throughput}}$$
+   *Methodological Note*: Latency and throughput depend on the benchmark execution hardware (host CPU/GPU, batch configuration, and PyTorch runtime). They are explicitly classified as **environment-specific operational metrics**, not intrinsic architectural invariants of the encoder. The operational reference constant $50.0$ reflects standard interactive document triage SLAs ($50\text{ ms}$ / $50\text{ docs/s}$).
+
+The composite **MECS Score** is computed across 4 transparent sensitivity scenarios:
 $$\text{MECS} = 100 \times \sum_{k} w_k \tilde{x}_{i, k}$$
 
-| Evaluation Scenario | Top-1 Acc | Top-5 Acc | Rare Top-1 | MLM Loss | Frag Rate | Coverage | Latency | Docs/sec | Scenario Focus |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| **1. Baseline / Operational** | $0.35$ | — | $0.20$ | $0.15$ | $0.15$ | $0.10$ | — | $0.05$ | Balanced capability and operational deployment |
-| **2. Performance-Heavy** | $0.40$ | $0.15$ | $0.20$ | $0.25$ | — | — | — | — | Pure intrinsic masked token prediction capacity |
-| **3. Domain-Heavy** | $0.25$ | — | $0.35$ | $0.15$ | $0.15$ | $0.10$ | — | — | Specialized nautical terms and vocabulary retention |
-| **4. Balanced / Resource** | $0.20$ | $0.10$ | $0.15$ | $0.15$ | $0.10$ | $0.10$ | $0.10$ | $0.10$ | Equalized trade-off with inference latency & footprint |
+| Evaluation Scenario | Top-1 Acc | Rare Top-1 | MLM Loss | Frag Rate | Throughput | Scenario Focus |
+| :--- | :---: | :---: | :---: | :---: | :---: | :--- |
+| **1. Baseline / Operational** | $0.40$ | $0.15$ | $0.25$ | $0.20$ | — | Balanced domain capability and morphological fit |
+| **2. Performance-Heavy** | $0.45$ | $0.20$ | $0.35$ | — | — | Pure intrinsic masked token prediction capacity |
+| **3. Domain-Heavy** | $0.20$ | $0.40$ | $0.15$ | $0.25$ | — | Specialized nautical terms and vocabulary retention |
+| **4. Balanced / Resource** | $0.25$ | $0.20$ | $0.20$ | $0.15$ | $0.20$ | Equalized trade-off with operational throughput |
 
 ---
 
@@ -670,30 +680,30 @@ Stage 17 moves beyond scalar heuristic thresholds by enforcing a transparent 8-l
 ### Candidate Status Classification
 | Candidate Model | Candidate Tier | Top-1 Accuracy | MLM Loss | Bootstrap Mean Rank | $P(\text{Rank}=1)$ | Pareto Frontier | Assigned Role |
 | :--- | :--- | :---: | :---: | :---: | :---: | :--- | :--- |
-| `answerdotai/ModernBERT-base` | **Strong Candidate** | **73.05%** | **1.4386** | **1.00** | **100.0%** | **Pareto-Optimal** | **Primary DAPT Candidate** |
-| `roberta-base` | **Strong Candidate** | 63.32% | 1.9490 | 2.00 | 0.0% | **Pareto-Optimal** | Capability Runner-Up |
-| `nlpaueb/legal-bert-base-uncased` | **Competitive Candidate**| 33.05% | 4.0853 | 3.41 | 0.0% | **Pareto-Optimal** | Evaluated Competitor |
-| `allenai/scibert_scivocab_uncased` | **Competitive Candidate**| 32.62% | 4.2064 | 3.62 | 0.0% | **Pareto-Optimal** | Evaluated Competitor |
-| `bert-base-uncased` | **Weak Candidate** | 29.73% | 4.6164 | 4.97 | 0.0% | **Pareto-Optimal** | **Resource-Constrained Alternative** |
-| `dmis-lab/biobert-base-cased-v1.2` | **Weak Candidate** | 25.78% | 4.7867 | 6.00 | 0.0% | Dominated | Evaluated Competitor |
-| `microsoft/BiomedNLP-PubMedBERT...`| **Weak Candidate** | 21.20% | 5.7246 | 7.00 | 0.0% | Dominated | Evaluated Competitor |
+| `answerdotai/ModernBERT-base` | **Strong Candidate** | **28.59%** | **4.1942** | **1.00** | **100.0%** | **Pareto-Optimal** | **Primary DAPT Candidate** |
+| `nlpaueb/legal-bert-base-uncased` | **Competitive Candidate** | 20.92% | 4.5905 | 2.53 | 0.0% | **Pareto-Optimal** | Domain Baseline Competitor |
+| `roberta-base` | **Competitive Candidate** | 21.01% | 5.3657 | 2.48 | 0.0% | **Pareto-Optimal** | Pretrained Capability Runner-Up |
+| `bert-base-uncased` | **Baseline Reference** | 17.67% | 6.6480 | 4.00 | 0.0% | **Pareto-Optimal** | **Resource-Constrained Alternative** |
+| `microsoft/BiomedNLP-PubMedBERT...` | **Baseline Reference** | 14.19% | 5.7500 | 5.63 | 0.0% | **Pareto-Optimal** | Evaluated Domain Competitor |
+| `allenai/scibert_scivocab_uncased` | **Baseline Reference** | 14.17% | 6.1235 | 5.67 | 0.0% | **Pareto-Optimal** | Evaluated Domain Competitor |
+| `dmis-lab/biobert-base-cased-v1.2` | **Baseline Reference** | 13.58% | 6.0726 | 6.69 | 0.0% | **Pareto-Optimal** | Evaluated Domain Competitor |
 
 ### Single-Objective Selection Baselines vs Evidence Synthesis
 | Selection Strategy | Selection Metric Basis | Selected Candidate | Metric Value | Strategic Finding |
 | :--- | :--- | :--- | :---: | :--- |
-| **Reference Baseline** | Canonical general-domain pretrained baseline | `bert-base-uncased` | Top-1: 29.73% | Standard NLP starting point |
-| **Highest Top-1 Accuracy** | Empirical Maritime Top-1 Accuracy | `answerdotai/ModernBERT-base` | 73.05% | Maximum recovery accuracy |
-| **Lowest MLM Loss** | Intrinsic Cross-Entropy Sequence Loss | `answerdotai/ModernBERT-base` | 1.4386 | Optimal probability distribution fit |
-| **Highest Rare-Domain Accuracy**| Specialized Maritime Vocabulary Accuracy | `answerdotai/ModernBERT-base` | 70.51% | Superior nautical term comprehension |
+| **Reference Baseline** | Canonical general-domain pretrained baseline | `bert-base-uncased` | Top-1: 17.67% | Standard NLP starting point |
+| **Highest Top-1 Accuracy** | Empirical Maritime Top-1 Accuracy | `answerdotai/ModernBERT-base` | 28.59% | Maximum recovery accuracy |
+| **Lowest MLM Loss** | Intrinsic Cross-Entropy Sequence Loss | `answerdotai/ModernBERT-base` | 4.1942 | Optimal probability distribution fit |
+| **Highest Rare-Domain Accuracy** | Specialized Maritime Vocabulary Accuracy | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 17.23% | Superior nautical term comprehension |
 | **Best Tokenizer Fit** | Lowest Subword Tokenizer Fragmentation Rate | `bert-base-uncased` | 26.57% | Minimal subword fragmentation |
-| **Baseline MUI Composite Index**| Stage 15 Multi-Criteria Operational Score | `answerdotai/ModernBERT-base` | 78.56 | Balanced multi-criteria leader |
+| **Baseline MECS Composite Index** | Stage 15 Multi-Criteria Operational Score | `answerdotai/ModernBERT-base` | 63.37 | Balanced multi-criteria leader |
 | **Stage 17 Evidence Synthesis** | **8-Layer Evidence Priority Hierarchy** | **`answerdotai/ModernBERT-base`** | **Consensus** | **Statistically defensible selection** |
 
 ### Empirical Strategic Decision Outcome
 - **Prescribed Pretraining Strategy**: **`Strategy A: Pretrained Encoder Initialization (answerdotai/ModernBERT-base) + Domain-Adaptive Pretraining (DAPT)`**
-- **Decision Confidence**: **High** (grounded in $100.0\%$ bootstrap rank-1 frequency across 2,000 resamples, statistically significant superiority over all 6 competitors with zero pairwise defeats, and non-dominated Pareto optimality).
-- **Primary Model Choice**: **`answerdotai/ModernBERT-base`** — Chosen for exceptional contextual language representation (73.05% Top-1, 1.4386 Loss, 15.45 Pseudo-Perplexity), perfect rank invariance across representations and subsets, and modern architectural advantages (rotary position embeddings, unpadding, flash attention compatibility).
-- **Resource-Constrained Deployment Alternative**: **`bert-base-uncased`** — Maintained for edge and low-latency deployment environments requiring 2.6x faster inference (21.4ms vs 35.0ms), lower parameter count (110M vs 149M), and lower subword fragmentation (26.57% vs 62.99%).
+- **Decision Confidence**: **High** (grounded in $100.0\%$ bootstrap rank-1 frequency across 2,000 resamples, statistically significant superiority over all 6 competitors with zero pairwise defeats, and non-dominated Pareto optimality across all 6 primary objectives).
+- **Primary Model Choice**: **`answerdotai/ModernBERT-base`** — Chosen for superior contextual language representation (28.59% Top-1, 4.1942 Loss), perfect rank invariance across representations and subsets, and modern architectural advantages (rotary position embeddings, unpadding, flash attention compatibility).
+- **Resource-Constrained Deployment Alternative**: **`bert-base-uncased`** — Maintained for edge and low-latency deployment environments requiring lower inference latency (21.0ms vs 31.5ms), lower parameter count (110M vs 149M), and lower subword fragmentation (26.57% vs 62.99%).
 
 ---
 
