@@ -412,7 +412,7 @@
         "data_type": "int",
         "category": "other",
         "is_boolean": false,
-        "id_to_display_map": null,
+        "id_to_display_map": "LatEnum_Bearing_DisplayEng",
         "display_to_id_map": null
       },
       "LatEnum_Bearing_DisplayEng": {
@@ -422,7 +422,7 @@
         "category": "spatial",
         "is_boolean": true,
         "id_to_display_map": null,
-        "display_to_id_map": null
+        "display_to_id_map": "LatEnum"
       },
       "LatEnum_Bearing_DisplayFre": {
         "full_name": "Latitude bearing (French)",
@@ -4136,6 +4136,7 @@
       "ImoClassLevelID": "ImoClasslevelDisplayEng",
       "IncludedInDailyEnum": "IncludedInDailyEnumDisplayEng",
       "InjuriesIND": "InjuriesIND_DisplayEng",
+      "LatEnum": "LatEnum_Bearing_DisplayEng",
       "LightConditionID": "LightConditionDisplayEng",
       "LongEnum": "LongEnum_Bearing_DisplayEng",
       "ObservedByID": "ObservedByDisplayEng",
@@ -4256,6 +4257,7 @@
       "ImoClasslevelDisplayEng": "ImoClassLevelID",
       "IncludedInDailyEnumDisplayEng": "IncludedInDailyEnum",
       "InjuriesIND_DisplayEng": "InjuriesIND",
+      "LatEnum_Bearing_DisplayEng": "LatEnum",
       "LightConditionDisplayEng": "LightConditionID",
       "LongEnum_Bearing_DisplayEng": "LongEnum",
       "ObservedByDisplayEng": "ObservedByID",

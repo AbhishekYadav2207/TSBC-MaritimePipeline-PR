@@ -1,0 +1,85 @@
+{
+  "title": "Historical Stage-14 Primary Cache Forensic Audit",
+  "cache_directory": "outputs/stage-14/evaluations/cache",
+  "total_records_found": 175,
+  "expected_records": 175,
+  "models_count": 7,
+  "representations_count": 5,
+  "subsets_count": 5,
+  "models": [
+    "allenai_scibert_scivocab_uncased",
+    "answerdotai_ModernBERT_base",
+    "bert_base_uncased",
+    "dmis_lab_biobert_base_cased_v1.2",
+    "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext",
+    "nlpaueb_legal_bert_base_uncased",
+    "roberta_base"
+  ],
+  "representations": [
+    "json",
+    "key_value",
+    "mixed",
+    "narrative",
+    "template"
+  ],
+  "subsets": [
+    "balanced_knowledge",
+    "high_knowledge",
+    "low_knowledge",
+    "medium_knowledge",
+    "random_baseline"
+  ],
+  "protocol_verified": {
+    "masking_strategy": "random_15",
+    "masking_mode": "subword",
+    "evaluation_unit": "subword",
+    "mask_rate": 0.15,
+    "documents_per_cell": 200
+  },
+  "anomalies_detected": [],
+  "status": "VALID",
+  "model_summary": {
+    "allenai_scibert_scivocab_uncased": {
+      "cell_count": 25,
+      "mean_overall_top1": 0.4653,
+      "mean_maritime_top1": 0.3212,
+      "mean_overall_loss": 3.3996
+    },
+    "answerdotai_ModernBERT_base": {
+      "cell_count": 25,
+      "mean_overall_top1": 0.5715,
+      "mean_maritime_top1": 0.7282,
+      "mean_overall_loss": 2.3874
+    },
+    "bert_base_uncased": {
+      "cell_count": 25,
+      "mean_overall_top1": 0.4507,
+      "mean_maritime_top1": 0.2918,
+      "mean_overall_loss": 3.5389
+    },
+    "dmis_lab_biobert_base_cased_v1.2": {
+      "cell_count": 25,
+      "mean_overall_top1": 0.3858,
+      "mean_maritime_top1": 0.2516,
+      "mean_overall_loss": 3.959
+    },
+    "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext": {
+      "cell_count": 25,
+      "mean_overall_top1": 0.4105,
+      "mean_maritime_top1": 0.2014,
+      "mean_overall_loss": 4.1091
+    },
+    "nlpaueb_legal_bert_base_uncased": {
+      "cell_count": 25,
+      "mean_overall_top1": 0.4284,
+      "mean_maritime_top1": 0.3302,
+      "mean_overall_loss": 3.6305
+    },
+    "roberta_base": {
+      "cell_count": 25,
+      "mean_overall_top1": 0.5046,
+      "mean_maritime_top1": 0.6203,
+      "mean_overall_loss": 3.1253
+    }
+  }
+}

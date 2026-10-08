@@ -4,13 +4,13 @@
 
 **Recommended Model:** `answerdotai/ModernBERT-base`  
 - **Selection Status:** Pareto-Optimal  
-- **Baseline Operational MECS:** 63.37 / 100  
-- **Maritime Top-1 Accuracy:** 28.59%  
-- **Rare Maritime Token Accuracy:** 7.11%  
-- **MLM Loss:** 4.1942  
-- **Weighting Sensitivity Stability:** Won 2/4 scenarios  
+- **Baseline Operational MECS:** 87.40 / 100  
+- **Maritime Top-1 Accuracy:** 57.99%  
+- **Rare Maritime Token Accuracy:** 77.34%  
+- **MLM Loss:** 2.1937  
+- **Weighting Sensitivity Stability:** Won 3/4 scenarios  
 
-**Rationale:** answerdotai/ModernBERT-base demonstrated the strongest intrinsic MLM capability (28.59% Top-1 accuracy, 4.1942 MLM loss), high ranking consistency across representations (mean rank 1.2) and subsets (mean rank 1.0), leading performance across 2/4 MECS sensitivity scenarios (baseline and performance-heavy paradigms), and confirmed non-dominated Pareto status.
+**Rationale:** answerdotai/ModernBERT-base demonstrated the strongest intrinsic MLM capability (57.99% Top-1 accuracy, 2.1937 MLM loss), high ranking consistency across representations (mean rank 1.2) and subsets (mean rank 1.0), consistent leader across 3/4 MECS sensitivity scenarios, and confirmed non-dominated Pareto status.
 
 ---
 
@@ -33,63 +33,63 @@
 
 | Model Name | Maritime Top-1 (%) | Top-5 (%) | Rare Top-1 (%) | MLM Loss | Pseudo-Perplexity | Baseline MECS |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| `answerdotai/ModernBERT-base` | 28.59 | 45.74 | 7.11 | 4.1942 | 14.07 | 63.37 |
-| `roberta-base` | 21.01 | 36.61 | 3.55 | 5.3657 | 17.31 | 46.36 |
-| `nlpaueb/legal-bert-base-uncased` | 20.92 | 34.41 | 15.13 | 4.5905 | 39.42 | 62.5 |
-| `bert-base-uncased` | 17.67 | 31.43 | 0.88 | 6.6480 | 28.15 | 42.16 |
-| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 14.19 | 22.42 | 17.23 | 5.7500 | 79.62 | 49.32 |
-| `allenai/scibert_scivocab_uncased` | 14.17 | 24.87 | 13.34 | 6.1235 | 35.42 | 45.23 |
-| `dmis-lab/biobert-base-cased-v1.2` | 13.58 | 22.43 | 11.76 | 6.0726 | 81.32 | 45.11 |
+| `answerdotai/ModernBERT-base` | 57.99 | 73.65 | 77.34 | 2.1937 | 13.72 | 87.4 |
+| `roberta-base` | 46.12 | 69.53 | 80.70 | 2.8720 | 16.02 | 87.04 |
+| `allenai/scibert_scivocab_uncased` | 32.39 | 48.46 | 52.02 | 4.2804 | 36.58 | 82.19 |
+| `bert-base-uncased` | 28.08 | 45.71 | 46.48 | 4.7544 | 25.50 | 78.0 |
+| `nlpaueb/legal-bert-base-uncased` | 27.96 | 43.21 | 38.48 | 4.4779 | 42.10 | 77.05 |
+| `dmis-lab/biobert-base-cased-v1.2` | 23.55 | 35.01 | 28.06 | 5.1486 | 91.85 | 69.01 |
+| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 20.29 | 29.73 | 22.52 | 5.8753 | 91.56 | 58.78 |
 
 ### Domain / Tokenizer Fit & Operational Metrics
 
 | Model Name | Frag Rate (%) | OOV Rate (%) | Single Token Cov (%) | Latency (ms) | Throughput (docs/s) | Parameters (M) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| `answerdotai/ModernBERT-base` | 63.0 | N/A | 37.0 | 31.5 | 31.8 | 149 |
-| `roberta-base` | 64.8 | N/A | 35.2 | 25.1 | 39.8 | 125 |
-| `nlpaueb/legal-bert-base-uncased` | 37.6 | 0.03 | 62.4 | 22.3 | 44.8 | 110 |
-| `bert-base-uncased` | 26.6 | 0.00 | 73.4 | 21.0 | 47.6 | 110 |
-| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 42.4 | 0.00 | 57.6 | 21.9 | 45.6 | 110 |
-| `allenai/scibert_scivocab_uncased` | 41.8 | 0.00 | 58.2 | 22.1 | 45.3 | 110 |
-| `dmis-lab/biobert-base-cased-v1.2` | 35.5 | 0.00 | 64.5 | 22.4 | 44.6 | 110 |
+| `answerdotai/ModernBERT-base` | 63.0 | N/A | 37.0 | 28.7 | 34.8 | 149 |
+| `roberta-base` | 64.8 | N/A | 35.2 | 23.4 | 42.8 | 125 |
+| `allenai/scibert_scivocab_uncased` | 42.1 | 0.00 | 57.9 | 20.4 | 49.0 | 110 |
+| `bert-base-uncased` | 26.6 | 0.00 | 73.4 | 19.5 | 51.2 | 110 |
+| `nlpaueb/legal-bert-base-uncased` | 37.6 | 0.03 | 62.4 | 20.8 | 48.2 | 110 |
+| `dmis-lab/biobert-base-cased-v1.2` | 35.8 | 0.00 | 64.2 | 20.8 | 48.2 | 110 |
+| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 42.7 | 0.00 | 57.3 | 20.6 | 48.6 | 110 |
 
 ---
 
 ## 4. Representation Robustness
 
-- **Kendall's W (Multi-Ranking Concordance):** `0.6514`
-- **Mean Pairwise Spearman's Rho:** `0.5643`
+- **Kendall's W (Multi-Ranking Concordance):** `0.7943`
+- **Mean Pairwise Spearman's Rho:** `0.7429`
 
 Representation breakdown across evaluated formats:
 
 | Model | json | key_value | mixed | narrative | template | Mean Rank | Rank Std |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| `answerdotai/ModernBERT-base` | 1.0 | 1.0 | 2.0 | 1.0 | 1.0 | 1.2 | 0.45 |
-| `nlpaueb/legal-bert-base-uncased` | 2.0 | 3.0 | 1.0 | 3.0 | 4.0 | 2.6 | 1.14 |
-| `roberta-base` | 5.0 | 2.0 | 5.0 | 2.0 | 2.0 | 3.2 | 1.64 |
-| `bert-base-uncased` | 3.0 | 4.0 | 7.0 | 4.0 | 3.0 | 4.2 | 1.64 |
-| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 6.0 | 5.0 | 3.0 | 6.0 | 7.0 | 5.4 | 1.52 |
-| `allenai/scibert_scivocab_uncased` | 7.0 | 6.0 | 4.0 | 5.0 | 6.0 | 5.6 | 1.14 |
-| `dmis-lab/biobert-base-cased-v1.2` | 4.0 | 7.0 | 6.0 | 7.0 | 5.0 | 5.8 | 1.3 |
+| `answerdotai/ModernBERT-base` | 1.0 | 1.0 | 1.0 | 2.0 | 1.0 | 1.2 | 0.45 |
+| `roberta-base` | 3.0 | 2.0 | 2.0 | 1.0 | 2.0 | 2.0 | 0.71 |
+| `allenai/scibert_scivocab_uncased` | 4.0 | 3.0 | 3.0 | 4.0 | 3.0 | 3.4 | 0.55 |
+| `bert-base-uncased` | 5.0 | 4.0 | 7.0 | 3.0 | 4.0 | 4.6 | 1.52 |
+| `nlpaueb/legal-bert-base-uncased` | 2.0 | 5.0 | 4.0 | 5.0 | 7.0 | 4.6 | 1.82 |
+| `dmis-lab/biobert-base-cased-v1.2` | 6.0 | 6.0 | 5.0 | 6.0 | 5.0 | 5.6 | 0.55 |
+| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 7.0 | 7.0 | 6.0 | 7.0 | 6.0 | 6.6 | 0.55 |
 
 ---
 
 ## 5. Subset Robustness
 
-- **Kendall's W (Multi-Ranking Concordance):** `0.9229`
-- **Mean Pairwise Spearman's Rho:** `0.9036`
+- **Kendall's W (Multi-Ranking Concordance):** `0.9829`
+- **Mean Pairwise Spearman's Rho:** `0.9786`
 
 Subset ranking breakdown across knowledge/informativeness conditions:
 
 | Model | balanced_knowledge | high_knowledge | low_knowledge | medium_knowledge | random_baseline | Mean Rank | Rank Std |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | `answerdotai/ModernBERT-base` | 1.0 | 1.0 | 1.0 | 1.0 | 1.0 | 1.0 | 0.0 |
-| `roberta-base` | 2.0 | 3.0 | 2.0 | 3.0 | 2.0 | 2.4 | 0.55 |
-| `nlpaueb/legal-bert-base-uncased` | 3.0 | 2.0 | 3.0 | 2.0 | 3.0 | 2.6 | 0.55 |
-| `bert-base-uncased` | 4.0 | 4.0 | 4.0 | 4.0 | 4.0 | 4.0 | 0.0 |
-| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 6.0 | 6.0 | 6.0 | 5.0 | 5.0 | 5.6 | 0.55 |
-| `allenai/scibert_scivocab_uncased` | 5.0 | 7.0 | 5.0 | 7.0 | 6.0 | 6.0 | 1.0 |
-| `dmis-lab/biobert-base-cased-v1.2` | 7.0 | 5.0 | 7.0 | 6.0 | 7.0 | 6.4 | 0.89 |
+| `roberta-base` | 2.0 | 2.0 | 2.0 | 2.0 | 2.0 | 2.0 | 0.0 |
+| `allenai/scibert_scivocab_uncased` | 3.0 | 3.0 | 3.0 | 3.0 | 3.0 | 3.0 | 0.0 |
+| `nlpaueb/legal-bert-base-uncased` | 5.0 | 5.0 | 4.0 | 4.0 | 4.0 | 4.4 | 0.55 |
+| `bert-base-uncased` | 4.0 | 4.0 | 5.0 | 5.0 | 5.0 | 4.6 | 0.55 |
+| `dmis-lab/biobert-base-cased-v1.2` | 6.0 | 6.0 | 6.0 | 6.0 | 6.0 | 6.0 | 0.0 |
+| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 7.0 | 7.0 | 7.0 | 7.0 | 7.0 | 7.0 | 0.0 |
 
 ---
 
@@ -103,13 +103,13 @@ Testing invariance across four distinct weighting hypotheses:
 
 | Model Name | Baseline Score (Rank) | Perf-Heavy Score (Rank) | Domain-Heavy Score (Rank) | Balanced Score (Rank) | Total Wins | Win Frequency |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| `answerdotai/ModernBERT-base` | 63.4 (#1) | 69.1 (#1) | 48.4 (#5) | 54.7 (#2) | 2 | 50% |
-| `nlpaueb/legal-bert-base-uncased` | 62.5 (#2) | 62.9 (#2) | 62.0 (#1) | 59.5 (#1) | 2 | 50% |
-| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 49.3 (#3) | 47.8 (#4) | 56.8 (#2) | 51.1 (#3) | 0 | 0% |
-| `roberta-base` | 46.4 (#4) | 48.3 (#3) | 34.4 (#6) | 42.5 (#6) | 0 | 0% |
-| `allenai/scibert_scivocab_uncased` | 45.2 (#5) | 42.0 (#5) | 49.6 (#3) | 46.5 (#4) | 0 | 0% |
-| `dmis-lab/biobert-base-cased-v1.2` | 45.1 (#6) | 40.4 (#6) | 48.5 (#4) | 45.9 (#5) | 0 | 0% |
-| `bert-base-uncased` | 42.2 (#7) | 32.9 (#7) | 33.9 (#7) | 39.5 (#7) | 0 | 0% |
+| `answerdotai/ModernBERT-base` | 87.4 (#1) | 100.0 (#1) | 84.2 (#1) | 78.8 (#2) | 3 | 75% |
+| `roberta-base` | 87.0 (#2) | 100.0 (#1) | 83.8 (#4) | 79.5 (#1) | 2 | 50% |
+| `allenai/scibert_scivocab_uncased` | 82.2 (#3) | 87.7 (#3) | 84.1 (#2) | 76.6 (#3) | 0 | 0% |
+| `bert-base-uncased` | 78.0 (#4) | 78.8 (#5) | 84.1 (#2) | 74.2 (#4) | 0 | 0% |
+| `nlpaueb/legal-bert-base-uncased` | 77.0 (#5) | 80.6 (#4) | 82.1 (#5) | 73.2 (#5) | 0 | 0% |
+| `dmis-lab/biobert-base-cased-v1.2` | 69.0 (#6) | 70.2 (#6) | 78.1 (#6) | 67.7 (#6) | 0 | 0% |
+| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 58.8 (#7) | 59.0 (#7) | 68.3 (#7) | 59.5 (#7) | 0 | 0% |
 
 ---
 
@@ -117,13 +117,13 @@ Testing invariance across four distinct weighting hypotheses:
 
 | Model Name | Pareto Status | Dominates Count | Dominated By Count | Dominating Models |
 | :--- | :---: | :---: | :---: | :--- |
-| `allenai/scibert_scivocab_uncased` | **Pareto-Optimal** | 0 | 0 | None |
+| `allenai/scibert_scivocab_uncased` | **Pareto-Optimal** | 1 | 0 | None |
 | `answerdotai/ModernBERT-base` | **Pareto-Optimal** | 0 | 0 | None |
-| `bert-base-uncased` | **Pareto-Optimal** | 0 | 0 | None |
-| `dmis-lab/biobert-base-cased-v1.2` | **Pareto-Optimal** | 0 | 0 | None |
-| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | **Pareto-Optimal** | 0 | 0 | None |
+| `bert-base-uncased` | **Pareto-Optimal** | 2 | 0 | None |
 | `nlpaueb/legal-bert-base-uncased` | **Pareto-Optimal** | 0 | 0 | None |
 | `roberta-base` | **Pareto-Optimal** | 0 | 0 | None |
+| `dmis-lab/biobert-base-cased-v1.2` | **Dominated** | 0 | 1 | bert-base-uncased |
+| `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | **Dominated** | 0 | 2 | allenai/scibert_scivocab_uncased, bert-base-uncased |
 
 ---
 
@@ -139,12 +139,10 @@ Testing invariance across four distinct weighting hypotheses:
 - Latency and throughput depend on benchmark execution hardware and batch configuration and represent operational considerations rather than intrinsic linguistic capabilities.
 
 ### Alternative Trade-off Details
-- **Alternative `allenai/scibert_scivocab_uncased`:** Offers lower subword fragmentation (41.8% vs 63.0%); higher rare maritime token accuracy (13.3% vs 7.1%); smaller footprint (110M vs 149M params); lower latency (22.1ms vs 31.5ms).
-- **Alternative `bert-base-uncased`:** Offers lower subword fragmentation (26.6% vs 63.0%); smaller footprint (110M vs 149M params); lower latency (21.0ms vs 31.5ms).
-- **Alternative `dmis-lab/biobert-base-cased-v1.2`:** Offers lower subword fragmentation (35.5% vs 63.0%); higher rare maritime token accuracy (11.8% vs 7.1%); smaller footprint (110M vs 149M params); lower latency (22.4ms vs 31.5ms).
-- **Alternative `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext`:** Offers lower subword fragmentation (42.4% vs 63.0%); higher rare maritime token accuracy (17.2% vs 7.1%); smaller footprint (110M vs 149M params); lower latency (21.9ms vs 31.5ms).
-- **Alternative `nlpaueb/legal-bert-base-uncased`:** Offers lower subword fragmentation (37.6% vs 63.0%); higher rare maritime token accuracy (15.1% vs 7.1%); smaller footprint (110M vs 149M params); lower latency (22.3ms vs 31.5ms).
-- **Alternative `roberta-base`:** Offers smaller footprint (125M vs 149M params); lower latency (25.1ms vs 31.5ms).
+- **Alternative `allenai/scibert_scivocab_uncased`:** Offers lower subword fragmentation (42.1% vs 63.0%); smaller footprint (110M vs 149M params); lower latency (20.4ms vs 28.7ms).
+- **Alternative `bert-base-uncased`:** Offers lower subword fragmentation (26.6% vs 63.0%); smaller footprint (110M vs 149M params); lower latency (19.5ms vs 28.7ms).
+- **Alternative `nlpaueb/legal-bert-base-uncased`:** Offers lower subword fragmentation (37.6% vs 63.0%); smaller footprint (110M vs 149M params); lower latency (20.8ms vs 28.7ms).
+- **Alternative `roberta-base`:** Offers higher rare maritime token accuracy (80.7% vs 77.3%); smaller footprint (125M vs 149M params); lower latency (23.4ms vs 28.7ms).
 
 ---
 

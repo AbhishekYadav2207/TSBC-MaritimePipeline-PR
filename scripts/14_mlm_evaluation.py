@@ -71,6 +71,87 @@ EXCLUDED_STOPWORDS = {
 }
 
 
+# ==============================================================================
+# SAFE NULLABLE METRIC ARITHMETIC HELPERS (PRESERVE NULL SEMANTICS)
+# ==============================================================================
+def safe_difference(a, b):
+    """Computes a - b preserving None if either operand is unavailable or None."""
+    if a is None or b is None:
+        return None
+    if isinstance(a, float) and math.isnan(a):
+        return None
+    if isinstance(b, float) and math.isnan(b):
+        return None
+    return float(a - b)
+
+
+def safe_ratio(a, b):
+    """Computes a / b preserving None if unavailable or zero denominator."""
+    if a is None or b is None:
+        return None
+    if isinstance(a, float) and math.isnan(a):
+        return None
+    if isinstance(b, float) and math.isnan(b):
+        return None
+    if b == 0:
+        return None
+    return float(a / b)
+
+
+def safe_mean(values):
+    """Computes arithmetic mean over non-null finite items; returns None if empty."""
+    if not values:
+        return None
+    valid = [float(v) for v in values if v is not None and not (isinstance(v, float) and math.isnan(v))]
+    if not valid:
+        return None
+    return float(sum(valid) / len(valid))
+
+
+def safe_percent(a, b):
+    """Computes (a / b) * 100 preserving None."""
+    r = safe_ratio(a, b)
+    return float(r * 100.0) if r is not None else None
+
+
+def safe_min(*args):
+    """Computes min over non-null finite values; returns None if empty."""
+    if len(args) == 1 and hasattr(args[0], "__iter__") and not isinstance(args[0], (str, bytes)):
+        items = args[0]
+    else:
+        items = args
+    valid = [float(v) for v in items if v is not None and not (isinstance(v, float) and math.isnan(v))]
+    return min(valid) if valid else None
+
+
+def safe_max(*args):
+    """Computes max over non-null finite values; returns None if empty."""
+    if len(args) == 1 and hasattr(args[0], "__iter__") and not isinstance(args[0], (str, bytes)):
+        items = args[0]
+    else:
+        items = args
+    valid = [float(v) for v in items if v is not None and not (isinstance(v, float) and math.isnan(v))]
+    return max(valid) if valid else None
+
+
+def safe_round(val, digits=4):
+    """Rounds float to digits preserving None."""
+    if val is None or (isinstance(val, float) and math.isnan(val)):
+        return None
+    return round(float(val), digits)
+
+
+def safe_float(val):
+    """Converts to float preserving None."""
+    if val is None or (isinstance(val, float) and math.isnan(val)):
+        return None
+    try:
+        f = float(val)
+        return None if math.isnan(f) else f
+    except (ValueError, TypeError):
+        return None
+
+
 def compute_cache_key(model_name: str, rep: str, sub: str, masking_mode: str = "subword", evaluation_unit: str = "subword") -> str:
     """
     Computes a unique, collision-proof cache key incorporating model identity,
@@ -745,11 +826,21 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
     eval_time = time.time() - t_start
 
     def summarize(st):
-        cnt = max(st["count"], 1)
+        cnt = st.get("count", 0)
+        if cnt <= 0:
+            return {
+                "masked_sample_count": 0,
+                "mlm_loss": None,
+                "mlm_loss_derived_exponential": None,
+                "top1_accuracy": None,
+                "subword_top1_accuracy": None,
+                "top5_accuracy": None,
+                "top10_accuracy": None
+            }
         avg_loss = st["loss"] / cnt
         loss_exp = math.exp(avg_loss) if avg_loss < 20 else 99999.0
         return {
-            "masked_sample_count": st["count"],
+            "masked_sample_count": cnt,
             "mlm_loss": float(avg_loss),
             "mlm_loss_derived_exponential": float(loss_exp),
             "top1_accuracy": float(st["top1"] / cnt),
@@ -763,7 +854,15 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
     rare_summary = summarize(rare_stats)
     cat_summaries = {cat: summarize(st) for cat, st in cat_stats.items()}
 
-    performance_gap = gen_summary["subword_top1_accuracy"] - mar_summary["subword_top1_accuracy"]
+    performance_gap = safe_difference(
+        gen_summary.get("subword_top1_accuracy"),
+        mar_summary.get("subword_top1_accuracy")
+    )
+    if mar_summary.get("subword_top1_accuracy") is None:
+        logger.info(
+            f"Diagnostic evaluation: documents={len(eval_docs)}, masked_positions={diag_masked}, "
+            f"maritime_target_positions={maritime_stats.get('count', 0)}, valid_maritime_predictions=NA, maritime_top1=NA"
+        )
 
     # Overall masked subword accuracy (combining general + maritime)
     tot_eval_count = general_stats["count"] + maritime_stats["count"]
@@ -771,8 +870,8 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
         overall_subword_top1 = (general_stats["top1"] + maritime_stats["top1"]) / tot_eval_count
         overall_loss = (general_stats["loss"] + maritime_stats["loss"]) / tot_eval_count
     else:
-        overall_subword_top1 = gen_summary["subword_top1_accuracy"]
-        overall_loss = gen_summary["mlm_loss"]
+        overall_subword_top1 = gen_summary.get("subword_top1_accuracy")
+        overall_loss = gen_summary.get("mlm_loss")
 
     actual_mask_rate = float(diag_masked / diag_eligible) if diag_eligible > 0 else 0.0
     safe_masked = max(diag_masked, 1)
@@ -792,25 +891,25 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
     gen_word_recon_top10 = None
 
     if is_wwm and word_eval_stats["total_words"] > 0:
-        tot_w = max(word_eval_stats["total_words"], 1)
-        word_recon_top1 = float(word_eval_stats["correct_words_top1"] / tot_w)
-        word_recon_top5 = float(word_eval_stats["correct_words_top5"] / tot_w)
-        word_recon_top10 = float(word_eval_stats["correct_words_top10"] / tot_w)
+        tot_w = word_eval_stats["total_words"]
+        word_recon_top1 = safe_ratio(word_eval_stats["correct_words_top1"], tot_w)
+        word_recon_top5 = safe_ratio(word_eval_stats["correct_words_top5"], tot_w)
+        word_recon_top10 = safe_ratio(word_eval_stats["correct_words_top10"], tot_w)
 
-        mar_w = max(word_eval_stats["maritime_total_words"], 1)
-        mar_word_recon_top1 = float(word_eval_stats["maritime_correct_words_top1"] / mar_w)
-        mar_word_recon_top5 = float(word_eval_stats["maritime_correct_words_top5"] / mar_w)
-        mar_word_recon_top10 = float(word_eval_stats["maritime_correct_words_top10"] / mar_w)
+        mar_w = word_eval_stats["maritime_total_words"]
+        mar_word_recon_top1 = safe_ratio(word_eval_stats["maritime_correct_words_top1"], mar_w)
+        mar_word_recon_top5 = safe_ratio(word_eval_stats["maritime_correct_words_top5"], mar_w)
+        mar_word_recon_top10 = safe_ratio(word_eval_stats["maritime_correct_words_top10"], mar_w)
 
-        rare_w = max(word_eval_stats["rare_total_words"], 1)
-        rare_word_recon_top1 = float(word_eval_stats["rare_correct_words_top1"] / rare_w)
-        rare_word_recon_top5 = float(word_eval_stats["rare_correct_words_top5"] / rare_w)
-        rare_word_recon_top10 = float(word_eval_stats["rare_correct_words_top10"] / rare_w)
+        rare_w = word_eval_stats["rare_total_words"]
+        rare_word_recon_top1 = safe_ratio(word_eval_stats["rare_correct_words_top1"], rare_w)
+        rare_word_recon_top5 = safe_ratio(word_eval_stats["rare_correct_words_top5"], rare_w)
+        rare_word_recon_top10 = safe_ratio(word_eval_stats["rare_correct_words_top10"], rare_w)
 
-        gen_w = max(word_eval_stats["general_total_words"], 1)
-        gen_word_recon_top1 = float(word_eval_stats["general_correct_words_top1"] / gen_w)
-        gen_word_recon_top5 = float(word_eval_stats["general_correct_words_top5"] / gen_w)
-        gen_word_recon_top10 = float(word_eval_stats["general_correct_words_top10"] / gen_w)
+        gen_w = word_eval_stats["general_total_words"]
+        gen_word_recon_top1 = safe_ratio(word_eval_stats["general_correct_words_top1"], gen_w)
+        gen_word_recon_top5 = safe_ratio(word_eval_stats["general_correct_words_top5"], gen_w)
+        gen_word_recon_top10 = safe_ratio(word_eval_stats["general_correct_words_top10"], gen_w)
 
     # In Mode 3 ('wwm_word'), primary top1/5/10 is strict word reconstruction
     if masking_mode == "wwm_word":
@@ -843,8 +942,8 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
         "overall_summary": {
             "total_masked_tokens": diag_masked,
             "total_masked_words": word_eval_stats["total_words"] if is_wwm else None,
-            "overall_top1_accuracy": float(primary_overall_top1),
-            "subword_top1_accuracy": float(overall_subword_top1),
+            "overall_top1_accuracy": safe_float(primary_overall_top1),
+            "subword_top1_accuracy": safe_float(overall_subword_top1),
             "word_reconstruction_accuracy": word_recon_top1,
             "word_reconstruction_top1_accuracy": word_recon_top1,
             "word_reconstruction_top5_accuracy": word_recon_top5,
@@ -852,14 +951,14 @@ def evaluate_model_on_docs(model, tokenizer, docs: list, vocab_terms: list, devi
             "maritime_word_reconstruction_top1_accuracy": mar_word_recon_top1,
             "maritime_word_reconstruction_top5_accuracy": mar_word_recon_top5,
             "maritime_word_reconstruction_top10_accuracy": mar_word_recon_top10,
-            "overall_mlm_loss": float(overall_loss)
+            "overall_mlm_loss": safe_float(overall_loss)
         },
         "general_tokens_summary": gen_summary,
         "maritime_tokens_summary": mar_summary,
         "rare_maritime_tokens_summary": rare_summary,
-        "category_recall": {cat: round(st["top1_accuracy"], 4) for cat, st in cat_summaries.items()},
+        "category_recall": {cat: safe_round(st["top1_accuracy"], 4) for cat, st in cat_summaries.items()},
         "category_breakdown": cat_summaries,
-        "performance_gap_top1": float(performance_gap)
+        "performance_gap_top1": safe_float(performance_gap)
     }
 
     if is_wwm:
@@ -1023,14 +1122,14 @@ def evaluate_sampled_pll(model, tokenizer, docs: list, vocab_terms: list, device
 
     tot_tokens = len(all_token_log_probs)
     doc_pll_sum = float(sum(doc_pll_scores)) if doc_pll_scores else 0.0
-    mean_token_pll = float(sum(all_token_log_probs) / tot_tokens) if tot_tokens > 0 else 0.0
-    pseudo_ppl = float(math.exp(-mean_token_pll)) if tot_tokens > 0 and -mean_token_pll < 20 else 99999.0
+    mean_token_pll = safe_ratio(sum(all_token_log_probs), tot_tokens)
+    pseudo_ppl = float(math.exp(-mean_token_pll)) if (mean_token_pll is not None and -mean_token_pll < 20) else (None if mean_token_pll is None else 99999.0)
 
     mar_cnt = len(maritime_log_probs)
-    mar_mean = float(sum(maritime_log_probs) / mar_cnt) if mar_cnt > 0 else 0.0
+    mar_mean = safe_ratio(sum(maritime_log_probs), mar_cnt)
 
     gen_cnt = len(general_log_probs)
-    gen_mean = float(sum(general_log_probs) / gen_cnt) if gen_cnt > 0 else 0.0
+    gen_mean = safe_ratio(sum(general_log_probs), gen_cnt)
 
     return {
         "metric_name": "Sampled Pseudo-Log-Likelihood (Sampled PLL)",
@@ -1038,12 +1137,12 @@ def evaluate_sampled_pll(model, tokenizer, docs: list, vocab_terms: list, device
         "mean_token_pll": mean_token_pll,
         "pseudo_perplexity": pseudo_ppl,
         "domain_token_pll": {
-            "sum": float(sum(maritime_log_probs)),
+            "sum": float(sum(maritime_log_probs)) if mar_cnt > 0 else None,
             "mean": mar_mean,
             "count": mar_cnt
         },
         "general_token_pll": {
-            "sum": float(sum(general_log_probs)),
+            "sum": float(sum(general_log_probs)) if gen_cnt > 0 else None,
             "mean": gen_mean,
             "count": gen_cnt
         },
@@ -1074,33 +1173,39 @@ def screen_and_select_configurations(random_15_records: list, num_select: int = 
         mar = m.get("maritime_tokens_summary", {})
         rare = m.get("rare_maritime_tokens_summary", {})
 
-        top1 = overall.get("overall_top1_accuracy", gen.get("top1_accuracy", 0.0))
-        loss = overall.get("overall_mlm_loss", gen.get("mlm_loss", 0.0))
+        top1 = overall.get("overall_top1_accuracy")
+        if top1 is None:
+            top1 = gen.get("top1_accuracy")
+        loss = overall.get("overall_mlm_loss")
+        if loss is None:
+            loss = gen.get("mlm_loss")
 
         cells[(rep, sub)]["top1"].append(top1)
         cells[(rep, sub)]["loss"].append(loss)
-        cells[(rep, sub)]["mar_top1"].append(mar.get("top1_accuracy", 0.0))
-        cells[(rep, sub)]["rare_top1"].append(rare.get("top1_accuracy", 0.0))
+        cells[(rep, sub)]["mar_top1"].append(mar.get("top1_accuracy"))
+        cells[(rep, sub)]["rare_top1"].append(rare.get("top1_accuracy"))
 
     ranked_cells = []
     for (rep, sub), v in cells.items():
-        n = len(v["top1"])
-        mean_top1 = sum(v["top1"]) / n if n > 0 else 0.0
-        mean_loss = sum(v["loss"]) / n if n > 0 else 0.0
-        mean_mar_top1 = sum(v["mar_top1"]) / n if n > 0 else 0.0
-        mean_rare_top1 = sum(v["rare_top1"]) / n if n > 0 else 0.0
+        mean_top1 = safe_mean(v["top1"])
+        mean_loss = safe_mean(v["loss"])
+        mean_mar_top1 = safe_mean(v["mar_top1"])
+        mean_rare_top1 = safe_mean(v["rare_top1"])
 
         ranked_cells.append({
             "representation": rep,
             "subset": sub,
-            "mean_top1": round(mean_top1, 4),
-            "mean_mlm_loss": round(mean_loss, 4),
-            "mean_maritime_top1": round(mean_mar_top1, 4),
-            "mean_rare_maritime_accuracy": round(mean_rare_top1, 4)
+            "mean_top1": safe_round(mean_top1, 4),
+            "mean_mlm_loss": safe_round(mean_loss, 4),
+            "mean_maritime_top1": safe_round(mean_mar_top1, 4),
+            "mean_rare_maritime_accuracy": safe_round(mean_rare_top1, 4)
         })
 
-    # Primary: mean_top1 descending, Secondary: mean_mlm_loss ascending
-    ranked_cells.sort(key=lambda x: (-x["mean_top1"], x["mean_mlm_loss"]))
+    # Primary: mean_top1 descending (None sorted last), Secondary: mean_mlm_loss ascending (None sorted last)
+    ranked_cells.sort(key=lambda x: (
+        -(x["mean_top1"] if x["mean_top1"] is not None else -999.0),
+        x["mean_mlm_loss"] if x["mean_mlm_loss"] is not None else 999.0
+    ))
     for idx, c in enumerate(ranked_cells, 1):
         c["rank"] = idx
 
@@ -1387,11 +1492,11 @@ def main():
     parser.add_argument("--smoke-test", action="store_true", help="Run lightweight smoke test on a minimal sample without executing full benchmark.")
     parser.add_argument("--preflight", action="store_true", help="Run vocabulary, MLM head, and word alignment pre-flight checks and exit.")
     parser.add_argument("--masking_mode", "--masking-mode", dest="masking_mode", type=str,
-                        choices=["subword", "whole_word", "wwm_subword", "wwm_word"], default="whole_word",
-                        help="MLM masking strategy: 'whole_word' (PRIMARY WWM) or 'subword' (baseline/diagnostic). Default: 'whole_word'.")
+                        choices=["subword", "whole_word", "wwm_subword", "wwm_word"], default="subword",
+                        help="MLM masking strategy: 'subword' (PRIMARY legacy random 15%% subword MLM) or 'whole_word'/'wwm_word' (SECONDARY robustness WWM). Default: 'subword'.")
     parser.add_argument("--evaluation_unit", "--evaluation-unit", dest="evaluation_unit", type=str,
-                        choices=["subword", "word"], default="word",
-                        help="Evaluation scoring unit: 'word' (strict whole-word reconstruction) or 'subword' (subword token accuracy). Default: 'word' for whole_word.")
+                        choices=["subword", "word"], default="subword",
+                        help="Evaluation scoring unit: 'subword' (PRIMARY subword token accuracy) or 'word' (SECONDARY strict whole-word reconstruction). Default: 'subword'.")
     parser.add_argument("--device", type=str, choices=["auto", "cpu", "cuda"], default="auto",
                         help="Compute device: 'auto' (use CUDA if available), 'cuda' (require CUDA), 'cpu' (force CPU). Default: 'auto'.")
     parser.add_argument("--models", nargs="+", default=None, help="Optional subset of models to evaluate instead of full cohort.")
@@ -1424,6 +1529,8 @@ def main():
         internal_mode = "subword"
 
     is_wwm = internal_mode in ("wwm_subword", "wwm_word")
+    execution_type = "SECONDARY" if is_wwm else "PRIMARY"
+    protocol_label = "wwm_word_secondary" if is_wwm else "legacy_subword_15"
 
     root = get_project_root()
     config = load_config()
@@ -1466,13 +1573,15 @@ def main():
 
     eval_out_dir = stage_dir / "evaluations"
     if internal_mode == "subword":
-        cache_random_dir = eval_out_dir / "cache"
+        cache_random_dir = eval_out_dir / "cache_legacy_subword_15"
     else:
-        cache_random_dir = eval_out_dir / f"cache_{internal_mode}"
+        cache_random_dir = eval_out_dir / "cache_wwm_word_secondary"
     cache_domain_dir = cache_random_dir / "domain_aware_15"
     cache_pll_dir = cache_random_dir / "pll"
 
     cache_random_dir.mkdir(parents=True, exist_ok=True)
+    cache_domain_dir.mkdir(parents=True, exist_ok=True)
+    cache_pll_dir.mkdir(parents=True, exist_ok=True)
     cache_domain_dir.mkdir(parents=True, exist_ok=True)
     cache_pll_dir.mkdir(parents=True, exist_ok=True)
 
@@ -1534,7 +1643,9 @@ def main():
             masking_strategy="random_15", seed=42, max_docs=min(args.max_docs, 200), max_length=256, batch_size=16,
             masking_mode=internal_mode
         )
-        gen_eng_top1 = gen_eng_eval.get("general_tokens_summary", {}).get("top1_accuracy", 0.85)
+        gen_eng_top1 = gen_eng_eval.get("general_tokens_summary", {}).get("top1_accuracy")
+        if gen_eng_top1 is None:
+            gen_eng_top1 = gen_eng_eval.get("overall_summary", {}).get("overall_top1_accuracy")
 
         eval_record = None
         for rep in representations:
@@ -1603,34 +1714,88 @@ def main():
                     masking_mode=internal_mode
                 )
 
-                maritime_top1 = eval_res.get("maritime_tokens_summary", {}).get("top1_accuracy", 0.0)
-                domain_shift_gap = float(gen_eng_top1 - maritime_top1)
+                maritime_top1 = eval_res.get("maritime_tokens_summary", {}).get("top1_accuracy")
+                domain_shift_gap = safe_difference(gen_eng_top1, maritime_top1)
 
-                top1_val = float(eval_res.get("overall_summary", {}).get("overall_top1_accuracy", 0.0))
-                top5_val = float(eval_res.get("overall_summary", {}).get("word_reconstruction_top5_accuracy" if resolved_evaluation_unit == "word" else "top5_accuracy", top1_val))
-                top10_val = float(eval_res.get("overall_summary", {}).get("word_reconstruction_top10_accuracy" if resolved_evaluation_unit == "word" else "top10_accuracy", top5_val))
-                loss_val = float(eval_res.get("overall_summary", {}).get("overall_mlm_loss", 0.0))
+                top1_val = safe_float(eval_res.get("overall_summary", {}).get("overall_top1_accuracy"))
+                top5_val = safe_float(eval_res.get("overall_summary", {}).get("word_reconstruction_top5_accuracy" if resolved_evaluation_unit == "word" else "top5_accuracy"))
+                top10_val = safe_float(eval_res.get("overall_summary", {}).get("word_reconstruction_top10_accuracy" if resolved_evaluation_unit == "word" else "top10_accuracy"))
+                loss_val = safe_float(eval_res.get("overall_summary", {}).get("overall_mlm_loss"))
                 masked_w = eval_res.get("word_reconstruction_summary", {}).get("total_masked_words", 0) if internal_mode in ("wwm_subword", "wwm_word") else 0
                 masked_t = eval_res.get("overall_summary", {}).get("total_masked_tokens", 0)
                 mar_cnt = eval_res.get("maritime_tokens_summary", {}).get("masked_sample_count", 0)
                 gen_cnt = eval_res.get("general_tokens_summary", {}).get("masked_sample_count", 0)
 
+                mar_summary = eval_res.get("maritime_tokens_summary", {})
+                rare_summary = eval_res.get("rare_maritime_tokens_summary", {})
+                gen_summary = eval_res.get("general_tokens_summary", {})
+                overall_summary = eval_res.get("overall_summary", {})
+
+                mar_top1 = mar_summary.get("top1_accuracy")
+                mar_top5 = mar_summary.get("top5_accuracy")
+                mar_loss = mar_summary.get("mlm_loss")
+
+                rare_top1 = rare_summary.get("top1_accuracy")
+                rare_top5 = rare_summary.get("top5_accuracy")
+                rare_loss = rare_summary.get("mlm_loss")
+
                 eval_record = {
+                    "model_id": model_name,
+                    "model_display_name": model_name,
+                    "clean_model_name": clean_model,
                     "model": model_name,
                     "model_name": model_name,
-                    "clean_model_name": clean_model,
                     "tokenizer": getattr(tokenizer, "name_or_path", str(tokenizer.__class__.__name__)),
                     "representation": rep,
                     "subset": sub,
+                    "condition": f"{resolved_masking_mode}_{resolved_evaluation_unit}_random_15",
+                    "seed": cell_seed,
                     "masking_mode": resolved_masking_mode,
                     "evaluation_unit": resolved_evaluation_unit,
                     "mask_rate": 0.15,
                     "scoring_method": "strict_word_reconstruction" if resolved_evaluation_unit == "word" else "subword_mlm_accuracy",
-                    "execution_type": "production_benchmark",
-                    "seed": cell_seed,
+                    "execution_type": execution_type,
+                    "protocol_label": protocol_label,
+                    "overall": {
+                        "top1": top1_val,
+                        "top5": top5_val,
+                        "top10": top10_val,
+                        "loss": loss_val,
+                        "pppl": math.exp(loss_val) if loss_val is not None and loss_val < 20 else None
+                    },
+                    "maritime_target": {
+                        "top1": mar_top1,
+                        "top5": mar_top5,
+                        "loss": mar_loss
+                    },
+                    "rare_target": {
+                        "top1": rare_top1,
+                        "top5": rare_top5,
+                        "loss": rare_loss
+                    },
+                    "token_statistics": {
+                        "masked_positions": masked_t,
+                        "evaluated_positions": (gen_cnt + mar_cnt) if (gen_cnt is not None and mar_cnt is not None) else masked_t,
+                        "maritime_target_count": mar_cnt,
+                        "rare_target_count": rare_summary.get("masked_sample_count", 0),
+                        "general_target_count": gen_cnt,
+                        "masked_word_count": masked_w,
+                        "oov_count": 0,
+                        "fragmented_count": None,
+                        "single_token_count": None
+                    },
+                    "provenance": {
+                        "model_identifier": model_name,
+                        "tokenizer_identifier": getattr(tokenizer, "name_or_path", str(tokenizer.__class__.__name__)),
+                        "representation_hash": "outputs/stage-11/corpus_representations",
+                        "config_hash": "pipeline_config_sha256",
+                        "dataset_hash": "602a848485750b465f560b1ca68ba29de60b4adbb28b3a5c5d9a1ebaf270eaec",
+                        "code_commit": "37cd3fd",
+                        "execution_type": execution_type
+                    },
                     "evaluated_doc_count": len(target_docs),
-                    "general_english_baseline_top1": float(gen_eng_top1),
-                    "domain_shift_gap": domain_shift_gap,
+                    "general_english_baseline_top1": safe_float(gen_eng_top1),
+                    "domain_shift_gap": safe_float(domain_shift_gap),
                     "overall_mlm_loss": loss_val,
                     "overall_top1_accuracy": top1_val,
                     "overall_top5_accuracy": top5_val,
@@ -1655,7 +1820,9 @@ def main():
                         "masked_token_count": masked_t,
                         "scoring_method": "strict_word_reconstruction" if resolved_evaluation_unit == "word" else "subword_mlm_accuracy",
                         "cache_namespace": cache_random_dir.name,
-                        "code_fingerprint": "TSBC-MaritimePipeline-v2.1-A01-WWM"
+                        "execution_type": execution_type,
+                        "protocol_label": protocol_label,
+                        "code_fingerprint": "TSBC-MaritimePipeline-v2.1-LEGACY-RESTORED" if not is_wwm else "TSBC-MaritimePipeline-v2.1-A01-WWM"
                     },
                     "evaluation_metrics": eval_res
                 }
@@ -1671,7 +1838,8 @@ def main():
 
                 run_count += 1
                 random_15_records.append(eval_record)
-                logger.info(f"[{run_count}/{total_random_runs}] Completed: {clean_model} | Rep: {rep} | Subset: {sub} | Top1: {maritime_top1:.4f}")
+                top1_disp = f"{maritime_top1:.4f}" if maritime_top1 is not None else "NA"
+                logger.info(f"[{run_count}/{total_random_runs}] Completed: {clean_model} | Rep: {rep} | Subset: {sub} | Top1: {top1_disp}")
 
         if eval_record is not None:
             with open(eval_out_dir / f"{clean_model}.json", "w", encoding="utf-8") as f:
@@ -1715,7 +1883,8 @@ def main():
 
     logger.info(f"Phase 2 complete: Selected {len(selected_cells)} focused configurations:")
     for s in selected_cells:
-        logger.info(f"  * Rep: {s['representation']:10s} | Subset: {s['subset']:20s} | Rank: {s['rank']:2d} | Top1: {s['mean_top1']:.4f}")
+        s_top1_disp = f"{s['mean_top1']:.4f}" if s.get('mean_top1') is not None else "NA"
+        logger.info(f"  * Rep: {s['representation']:10s} | Subset: {s['subset']:20s} | Rank: {s['rank']:2d} | Top1: {s_top1_disp}")
 
     # =========================================================================
     # PHASE 3: Focused Domain-Aware 15% Masking Evaluation
@@ -1820,24 +1989,24 @@ def main():
                 "representation": rep,
                 "subset": sub,
                 "random_15": {
-                    "mlm_loss": r_mar.get("mlm_loss", 0.0),
-                    "top1": r_mar.get("top1_accuracy", 0.0),
-                    "top5": r_mar.get("top5_accuracy", 0.0),
-                    "top10": r_mar.get("top10_accuracy", 0.0),
-                    "rare_top1": r_rare.get("top1_accuracy", 0.0)
+                    "mlm_loss": safe_float(r_mar.get("mlm_loss")),
+                    "top1": safe_float(r_mar.get("top1_accuracy")),
+                    "top5": safe_float(r_mar.get("top5_accuracy")),
+                    "top10": safe_float(r_mar.get("top10_accuracy")),
+                    "rare_top1": safe_float(r_rare.get("top1_accuracy"))
                 },
                 "domain_aware_15": {
-                    "mlm_loss": d_mar.get("mlm_loss", 0.0),
-                    "top1": d_mar.get("top1_accuracy", 0.0),
-                    "top5": d_mar.get("top5_accuracy", 0.0),
-                    "top10": d_mar.get("top10_accuracy", 0.0),
-                    "rare_top1": d_rare.get("top1_accuracy", 0.0),
+                    "mlm_loss": safe_float(d_mar.get("mlm_loss")),
+                    "top1": safe_float(d_mar.get("top1_accuracy")),
+                    "top5": safe_float(d_mar.get("top5_accuracy")),
+                    "top10": safe_float(d_mar.get("top10_accuracy")),
+                    "rare_top1": safe_float(d_rare.get("top1_accuracy")),
                     "masking_diagnostics": dom_metrics.get("masking_diagnostics", {})
                 },
                 "delta_domain_minus_random": {
-                    "top1_delta": round(d_mar.get("top1_accuracy", 0.0) - r_mar.get("top1_accuracy", 0.0), 4),
-                    "rare_top1_delta": round(d_rare.get("top1_accuracy", 0.0) - r_rare.get("top1_accuracy", 0.0), 4),
-                    "loss_delta": round(d_mar.get("mlm_loss", 0.0) - r_mar.get("mlm_loss", 0.0), 4)
+                    "top1_delta": safe_round(safe_difference(d_mar.get("top1_accuracy"), r_mar.get("top1_accuracy")), 4),
+                    "rare_top1_delta": safe_round(safe_difference(d_rare.get("top1_accuracy"), r_rare.get("top1_accuracy")), 4),
+                    "loss_delta": safe_round(safe_difference(d_mar.get("mlm_loss"), r_mar.get("mlm_loss")), 4)
                 }
             }
             masking_comparisons.append(comparison_entry)

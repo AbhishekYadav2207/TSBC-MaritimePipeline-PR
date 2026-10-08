@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-08T02:02:38.449050",
+  "timestamp": "2026-10-08T07:36:56.778742",
   "data_coverage": {
     "expected_cells": 175,
     "valid_cells": 175,
@@ -9,12 +9,12 @@
   "criteria_winners": {
     "best_overall_intrinsic_mlm": {
       "model_name": "answerdotai/ModernBERT-base",
-      "top1_acc_pct": 28.59,
-      "mlm_loss": 4.1942
+      "top1_acc_pct": 57.99,
+      "mlm_loss": 2.1937
     },
     "strongest_domain_model": {
-      "model_name": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
-      "rare_top1_acc_pct": 17.23
+      "model_name": "roberta-base",
+      "rare_top1_acc_pct": 80.7
     },
     "most_stable_representation_model": {
       "model_name": "answerdotai/ModernBERT-base",
@@ -28,25 +28,23 @@
     },
     "most_robust_mecs_winner": {
       "model_name": "answerdotai/ModernBERT-base",
-      "total_wins": 2,
-      "win_frequency": 0.5,
-      "baseline_score": 63.37
+      "total_wins": 3,
+      "win_frequency": 0.75,
+      "baseline_score": 87.4
     }
   },
   "rank_stability": {
-    "representation_kendalls_w": 0.6514,
-    "representation_spearman_rho": 0.5643,
-    "subset_kendalls_w": 0.9229,
-    "subset_spearman_rho": 0.9036
+    "representation_kendalls_w": 0.7943,
+    "representation_spearman_rho": 0.7429,
+    "subset_kendalls_w": 0.9829,
+    "subset_spearman_rho": 0.9786
   },
   "pareto_summary": {
-    "pareto_optimal_count": 7,
+    "pareto_optimal_count": 5,
     "pareto_optimal_models": [
       "allenai/scibert_scivocab_uncased",
       "answerdotai/ModernBERT-base",
       "bert-base-uncased",
-      "dmis-lab/biobert-base-cased-v1.2",
-      "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
       "nlpaueb/legal-bert-base-uncased",
       "roberta-base"
     ],
@@ -55,21 +53,20 @@
   "final_selection": {
     "recommended_model": "answerdotai/ModernBERT-base",
     "pareto_status": "Pareto-Optimal",
-    "baseline_mecs_score": 63.37,
-    "maritime_top1_acc_pct": 28.59,
-    "rare_maritime_acc_pct": 7.11,
-    "mlm_loss": 4.1942,
-    "sensitivity_wins": "2/4 scenarios",
-    "selection_rationale": "answerdotai/ModernBERT-base demonstrated the strongest intrinsic MLM capability (28.59% Top-1 accuracy, 4.1942 MLM loss), high ranking consistency across representations (mean rank 1.2) and subsets (mean rank 1.0), leading performance across 2/4 MECS sensitivity scenarios (baseline and performance-heavy paradigms), and confirmed non-dominated Pareto status."
+    "baseline_mecs_score": 87.4,
+    "maritime_top1_acc_pct": 57.99,
+    "rare_maritime_acc_pct": 77.34,
+    "mlm_loss": 2.1937,
+    "sensitivity_wins": "3/4 scenarios",
+    "selection_rationale": "answerdotai/ModernBERT-base demonstrated the strongest intrinsic MLM capability (57.99% Top-1 accuracy, 2.1937 MLM loss), high ranking consistency across representations (mean rank 1.2) and subsets (mean rank 1.0), consistent leader across 3/4 MECS sensitivity scenarios, and confirmed non-dominated Pareto status."
   },
   "trade_offs": [
     {
       "alternative_model": "allenai/scibert_scivocab_uncased",
       "advantages_over_selected": [
-        "lower subword fragmentation (41.8% vs 63.0%)",
-        "higher rare maritime token accuracy (13.3% vs 7.1%)",
+        "lower subword fragmentation (42.1% vs 63.0%)",
         "smaller footprint (110M vs 149M params)",
-        "lower latency (22.1ms vs 31.5ms)"
+        "lower latency (20.4ms vs 28.7ms)"
       ]
     },
     {
@@ -77,46 +74,28 @@
       "advantages_over_selected": [
         "lower subword fragmentation (26.6% vs 63.0%)",
         "smaller footprint (110M vs 149M params)",
-        "lower latency (21.0ms vs 31.5ms)"
-      ]
-    },
-    {
-      "alternative_model": "dmis-lab/biobert-base-cased-v1.2",
-      "advantages_over_selected": [
-        "lower subword fragmentation (35.5% vs 63.0%)",
-        "higher rare maritime token accuracy (11.8% vs 7.1%)",
-        "smaller footprint (110M vs 149M params)",
-        "lower latency (22.4ms vs 31.5ms)"
-      ]
-    },
-    {
-      "alternative_model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
-      "advantages_over_selected": [
-        "lower subword fragmentation (42.4% vs 63.0%)",
-        "higher rare maritime token accuracy (17.2% vs 7.1%)",
-        "smaller footprint (110M vs 149M params)",
-        "lower latency (21.9ms vs 31.5ms)"
+        "lower latency (19.5ms vs 28.7ms)"
       ]
     },
     {
       "alternative_model": "nlpaueb/legal-bert-base-uncased",
       "advantages_over_selected": [
         "lower subword fragmentation (37.6% vs 63.0%)",
-        "higher rare maritime token accuracy (15.1% vs 7.1%)",
         "smaller footprint (110M vs 149M params)",
-        "lower latency (22.3ms vs 31.5ms)"
+        "lower latency (20.8ms vs 28.7ms)"
       ]
     },
     {
       "alternative_model": "roberta-base",
       "advantages_over_selected": [
+        "higher rare maritime token accuracy (80.7% vs 77.3%)",
         "smaller footprint (125M vs 149M params)",
-        "lower latency (25.1ms vs 31.5ms)"
+        "lower latency (23.4ms vs 28.7ms)"
       ]
     }
   ],
   "methodological_note": "Maritime Encoder Composite Score (MECS) is an operational composite compatibility score used to summarize multiple encoder evaluation characteristics for model selection. It is not intended as a direct measure of language or maritime understanding. Model selection is defensibly justified by multidimensional evidence including intrinsic MLM loss, rare domain token accuracy, representation and subset ranking agreement, sensitivity analysis invariance, and non-dominated Pareto status.",
-  "masking_mode": "whole_word",
-  "evaluation_unit": "word",
+  "masking_mode": "subword",
+  "evaluation_unit": "subword",
   "mecs_normalization": "cohort_independent: fixed_bounded_reference_scales"
 }

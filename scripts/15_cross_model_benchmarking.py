@@ -1245,19 +1245,42 @@ def main():
     if args.cache_dir:
         cache_dir = Path(args.cache_dir)
     else:
-        wwm_cache = default_out / "stage-14" / "evaluations" / "cache_wwm_word"
-        if wwm_cache.exists() and any(wwm_cache.glob("*.json")):
+        primary_cache = default_out / "stage-14" / "evaluations" / "cache_legacy_subword_15"
+        wwm_cache = default_out / "stage-14" / "evaluations" / "cache_wwm_word_secondary"
+        if args.masking_mode in ("whole_word", "wwm_word"):
             cache_dir = wwm_cache
         else:
-            cache_dir = default_out / "stage-14" / "evaluations" / "cache"
+            cache_dir = primary_cache
     pll_path = default_out / "stage-14" / "pll_results.json"
+
+    # Strict Validation Gate: Refuse to execute if primary cache is missing, incomplete, or unvalidated
+    if not cache_dir.exists() or len(list(cache_dir.glob("*.json"))) < 175:
+        logger.error(
+            f"STAGE 15 VALIDATION GATE REFUSAL: Target Stage-14 cache directory '{cache_dir}' "
+            f"does not exist or contains fewer than 175 cells ({len(list(cache_dir.glob('*.json'))) if cache_dir.exists() else 0}/175). "
+            f"Execution is halted to prevent downstream contamination. Please download verified Stage-14 results before proceeding."
+        )
+        return
 
     logger.info(f"Step 1: Dynamically discovering and validating Stage 14 results from {cache_dir}...")
     df_mlm, coverage_info, pll_dict = discover_stage14_results(cache_dir, pll_path)
 
-    if df_mlm.empty:
-        logger.error("No valid Stage 14 evaluation records found! Exiting Stage 15.")
+    if df_mlm.empty or coverage_info.get("valid_cells", 0) < 175:
+        logger.error(
+            f"STAGE 15 REJECTION: Stage 14 dataset has {coverage_info.get('valid_cells', 0)} valid cells (expected 175). "
+            f"Exiting Stage 15 without modifying downstream artifacts."
+        )
         return
+
+    # Check for unauthorized WWM contamination in primary benchmark mode
+    if args.masking_mode == "subword" and "masking_mode" in df_mlm.columns:
+        wwm_records = (df_mlm["masking_mode"] == "whole_word").sum()
+        if wwm_records > 0:
+            logger.error(
+                f"STAGE 15 CONTAMINATION ALERT: Detected {wwm_records} whole_word masking records in primary subword pipeline. "
+                f"Aborting Stage 15 execution."
+            )
+            return
 
     logger.info(f"Discovered {coverage_info['valid_cells']} valid records across {len(coverage_info['unique_models'])} models.")
 

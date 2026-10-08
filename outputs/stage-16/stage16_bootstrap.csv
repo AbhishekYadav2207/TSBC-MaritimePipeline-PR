@@ -1,29 +1,29 @@
 analysis_type,target_name,bootstrap_mean,ci_95_low,ci_95_high,num_resamples,seed,num_matched_conditions
-model_mean,allenai/scibert_scivocab_uncased,0.1416,0.1085,0.1751,2000,42,25
-model_mean,answerdotai/ModernBERT-base,0.2858,0.2509,0.3186,2000,42,25
-model_mean,bert-base-uncased,0.1767,0.145,0.2072,2000,42,25
-model_mean,dmis-lab/biobert-base-cased-v1.2,0.1357,0.105,0.1662,2000,42,25
-model_mean,microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext,0.1417,0.1064,0.1791,2000,42,25
-model_mean,nlpaueb/legal-bert-base-uncased,0.2093,0.1713,0.2498,2000,42,25
-model_mean,roberta-base,0.2102,0.1697,0.2489,2000,42,25
-paired_difference,allenai/scibert_scivocab_uncased - answerdotai/ModernBERT-base,-0.1442,-0.1614,-0.1266,2000,42,25
-paired_difference,allenai/scibert_scivocab_uncased - bert-base-uncased,-0.0351,-0.0569,-0.0117,2000,42,25
-paired_difference,allenai/scibert_scivocab_uncased - dmis-lab/biobert-base-cased-v1.2,0.0059,-0.006,0.017,2000,42,25
-paired_difference,allenai/scibert_scivocab_uncased - microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext,-0.0001,-0.0068,0.007,2000,42,25
-paired_difference,allenai/scibert_scivocab_uncased - nlpaueb/legal-bert-base-uncased,-0.0677,-0.0804,-0.0548,2000,42,25
-paired_difference,allenai/scibert_scivocab_uncased - roberta-base,-0.0686,-0.0955,-0.0409,2000,42,25
-paired_difference,answerdotai/ModernBERT-base - bert-base-uncased,0.1091,0.092,0.1269,2000,42,25
-paired_difference,answerdotai/ModernBERT-base - dmis-lab/biobert-base-cased-v1.2,0.1501,0.1298,0.17,2000,42,25
-paired_difference,answerdotai/ModernBERT-base - microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext,0.1441,0.1218,0.1646,2000,42,25
-paired_difference,answerdotai/ModernBERT-base - nlpaueb/legal-bert-base-uncased,0.0765,0.0507,0.1005,2000,42,25
-paired_difference,answerdotai/ModernBERT-base - roberta-base,0.0757,0.0583,0.0933,2000,42,25
-paired_difference,bert-base-uncased - dmis-lab/biobert-base-cased-v1.2,0.041,0.0184,0.065,2000,42,25
-paired_difference,bert-base-uncased - microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext,0.035,0.0071,0.0613,2000,42,25
-paired_difference,bert-base-uncased - nlpaueb/legal-bert-base-uncased,-0.0326,-0.0602,-0.0067,2000,42,25
-paired_difference,bert-base-uncased - roberta-base,-0.0335,-0.0468,-0.0203,2000,42,25
-paired_difference,dmis-lab/biobert-base-cased-v1.2 - microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext,-0.006,-0.0176,0.0055,2000,42,25
-paired_difference,dmis-lab/biobert-base-cased-v1.2 - nlpaueb/legal-bert-base-uncased,-0.0736,-0.0938,-0.0544,2000,42,25
-paired_difference,dmis-lab/biobert-base-cased-v1.2 - roberta-base,-0.0745,-0.104,-0.046,2000,42,25
-paired_difference,microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext - nlpaueb/legal-bert-base-uncased,-0.0676,-0.0822,-0.0542,2000,42,25
-paired_difference,microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext - roberta-base,-0.0685,-0.0996,-0.0365,2000,42,25
-paired_difference,nlpaueb/legal-bert-base-uncased - roberta-base,-0.0008,-0.0317,0.0299,2000,42,25
+model_mean,allenai/scibert_scivocab_uncased,0.3235,0.2767,0.3677,2000,42,25
+model_mean,answerdotai/ModernBERT-base,0.5798,0.5281,0.6342,2000,42,25
+model_mean,bert-base-uncased,0.2808,0.2377,0.3194,2000,42,25
+model_mean,dmis-lab/biobert-base-cased-v1.2,0.2352,0.1953,0.2741,2000,42,25
+model_mean,microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext,0.2024,0.1558,0.2486,2000,42,25
+model_mean,nlpaueb/legal-bert-base-uncased,0.2794,0.2515,0.3115,2000,42,25
+model_mean,roberta-base,0.461,0.4092,0.5101,2000,42,25
+paired_difference,allenai/scibert_scivocab_uncased - answerdotai/ModernBERT-base,-0.2563,-0.3192,-0.196,2000,42,25
+paired_difference,allenai/scibert_scivocab_uncased - bert-base-uncased,0.0426,0.0169,0.0662,2000,42,25
+paired_difference,allenai/scibert_scivocab_uncased - dmis-lab/biobert-base-cased-v1.2,0.0882,0.0765,0.0995,2000,42,25
+paired_difference,allenai/scibert_scivocab_uncased - microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext,0.1211,0.1101,0.1325,2000,42,25
+paired_difference,allenai/scibert_scivocab_uncased - nlpaueb/legal-bert-base-uncased,0.0441,0.0054,0.0788,2000,42,25
+paired_difference,allenai/scibert_scivocab_uncased - roberta-base,-0.1375,-0.1697,-0.1058,2000,42,25
+paired_difference,answerdotai/ModernBERT-base - bert-base-uncased,0.2989,0.2333,0.3678,2000,42,25
+paired_difference,answerdotai/ModernBERT-base - dmis-lab/biobert-base-cased-v1.2,0.3445,0.2869,0.4065,2000,42,25
+paired_difference,answerdotai/ModernBERT-base - microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext,0.3774,0.3172,0.4386,2000,42,25
+paired_difference,answerdotai/ModernBERT-base - nlpaueb/legal-bert-base-uncased,0.3004,0.2573,0.3488,2000,42,25
+paired_difference,answerdotai/ModernBERT-base - roberta-base,0.1188,0.071,0.1741,2000,42,25
+paired_difference,bert-base-uncased - dmis-lab/biobert-base-cased-v1.2,0.0456,0.0261,0.0676,2000,42,25
+paired_difference,bert-base-uncased - microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext,0.0785,0.0497,0.1092,2000,42,25
+paired_difference,bert-base-uncased - nlpaueb/legal-bert-base-uncased,0.0015,-0.041,0.0411,2000,42,25
+paired_difference,bert-base-uncased - roberta-base,-0.1801,-0.2183,-0.1468,2000,42,25
+paired_difference,dmis-lab/biobert-base-cased-v1.2 - microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext,0.0329,0.0208,0.0453,2000,42,25
+paired_difference,dmis-lab/biobert-base-cased-v1.2 - nlpaueb/legal-bert-base-uncased,-0.0441,-0.0765,-0.0162,2000,42,25
+paired_difference,dmis-lab/biobert-base-cased-v1.2 - roberta-base,-0.2257,-0.2613,-0.1931,2000,42,25
+paired_difference,microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext - nlpaueb/legal-bert-base-uncased,-0.077,-0.1111,-0.0462,2000,42,25
+paired_difference,microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext - roberta-base,-0.2586,-0.2962,-0.2212,2000,42,25
+paired_difference,nlpaueb/legal-bert-base-uncased - roberta-base,-0.1816,-0.2296,-0.1312,2000,42,25

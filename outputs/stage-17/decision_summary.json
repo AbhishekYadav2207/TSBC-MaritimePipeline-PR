@@ -4,14 +4,14 @@
   "decision": "Proceed with Domain-Adaptive Pretraining (DAPT)",
   "recommended_dapt_candidate": "answerdotai/ModernBERT-base",
   "strategy": "Strategy A: Pretrained Encoder Initialization (answerdotai/ModernBERT-base) + Domain-Adaptive Pretraining (DAPT)",
-  "rationale": "Empirical evidence synthesis selects answerdotai/ModernBERT-base based on leading primary Top-1 accuracy (28.59%), lowest MLM loss (4.1942), 100% bootstrap rank-1 frequency, confirmed non-dominated Pareto status, and statistically significant Holm-adjusted pairwise superiority over all evaluated competitors.",
+  "rationale": "Empirical evidence synthesis selects answerdotai/ModernBERT-base based on leading primary Top-1 accuracy (57.99%), lowest MLM loss (2.1937), 100% bootstrap rank-1 frequency, confirmed non-dominated Pareto status, and statistically significant Holm-adjusted pairwise superiority over all evaluated competitors.",
   "decision_confidence": "High",
   "confidence_explanation": "High confidence assigned based on converging multi-source empirical evidence: bootstrap rank-1 frequency is 100.0% with mean rank 1.00; statistically significant Holm-adjusted pairwise superiority over all 6 evaluated competitors with zero pairwise defeats; confirmed non-dominated Pareto status across intrinsic and operational criteria. This label reflects structural evidence consensus across resampling and conditions, not a mathematical probability.",
   "eval_metrics": {
-    "top1_accuracy": 28.59,
-    "mlm_loss": 4.1942,
+    "top1_accuracy": 57.99,
+    "mlm_loss": 2.1937,
     "fragmentation_rate": 62.99,
-    "performance_gap": 9.44
+    "performance_gap": -0.69
   },
   "trade_offs_identified": [
     {
@@ -21,7 +21,7 @@
     },
     {
       "dimension": "Computational Footprint & Latency",
-      "observation": "Parameter count of 149.0M and latency of 31.45ms, compared to 110M parameter architectures (e.g. BERT-base at 21.02ms).",
+      "observation": "Parameter count of 149.0M and latency of 28.74ms, compared to 110M parameter architectures (e.g. BERT-base at 19.51ms).",
       "implication": "Incurs higher inference and training overhead; acceptable given substantial intrinsic language modeling superiority."
     }
   ],

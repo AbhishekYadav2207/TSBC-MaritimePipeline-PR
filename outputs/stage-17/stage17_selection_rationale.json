@@ -5,13 +5,13 @@
   "confidence": "High",
   "confidence_explanation": "High confidence assigned based on converging multi-source empirical evidence: bootstrap rank-1 frequency is 100.0% with mean rank 1.00; statistically significant Holm-adjusted pairwise superiority over all 6 evaluated competitors with zero pairwise defeats; confirmed non-dominated Pareto status across intrinsic and operational criteria. This label reflects structural evidence consensus across resampling and conditions, not a mathematical probability.",
   "primary_evidence": [
-    "Primary Maritime Top-1 Accuracy: 28.59%",
-    "Intrinsic MLM Cross-Entropy Loss: 4.1942",
-    "Pseudo-Perplexity (PLL): 14.07",
-    "General-to-Maritime Performance Gap: 9.44%"
+    "Primary Maritime Top-1 Accuracy: 57.99%",
+    "Intrinsic MLM Cross-Entropy Loss: 2.1937",
+    "Pseudo-Perplexity (PLL): 13.72",
+    "General-to-Maritime Performance Gap: -0.69%"
   ],
   "statistical_evidence": [
-    "Bootstrap 95% Confidence Interval for Top-1 Mean: [0.2509, 0.3186]",
+    "Bootstrap 95% Confidence Interval for Top-1 Mean: [0.5281, 0.6342]",
     "Bootstrap Mean Rank: 1.0 (Std: 0.0) across 2,000 resamples",
     "Bootstrap Rank-1 Frequency: 100.0%",
     "Holm-Adjusted Wilcoxon Pairwise Comparisons: 6 significant wins, 0 defeats",
@@ -20,11 +20,11 @@
   "robustness_evidence": [
     "Representation Stability: Mean rank 1.2 across JSON, Key-Value, Mixed, Narrative, Template formats (Std: 0.45)",
     "Subset Stability: Mean rank 1.0 across balanced, high, medium, low knowledge subsets and random baseline (Std: 0.0)",
-    "Condition Agreement: Kendall's W 0.6514 across representations, 0.9229 across subsets"
+    "Condition Agreement: Kendall's W 0.7943 across representations, 0.9829 across subsets"
   ],
   "mecs_evidence": [
-    "Baseline MECS Score: 63.3700 (Rank 1 in baseline scenario)",
-    "MECS Scenario Wins: 2 wins across 4 weight scenarios (Win frequency: 0.5)",
+    "Baseline MECS Score: 87.4000 (Rank 1 in baseline scenario)",
+    "MECS Scenario Wins: 3 wins across 4 weight scenarios (Win frequency: 0.75)",
     "MECS Sensitivity Trade-off: ModernBERT leads performance-oriented and baseline scenarios; general BERT leads vocabulary/domain-heavy scenarios, exposing an explicit capability versus tokenization trade-off."
   ],
   "pareto_status": "Pareto-Optimal",
@@ -36,7 +36,7 @@
     },
     {
       "dimension": "Computational Footprint & Latency",
-      "observation": "Parameter count of 149.0M and latency of 31.45ms, compared to 110M parameter architectures (e.g. BERT-base at 21.02ms).",
+      "observation": "Parameter count of 149.0M and latency of 28.74ms, compared to 110M parameter architectures (e.g. BERT-base at 19.51ms).",
       "implication": "Incurs higher inference and training overhead; acceptable given substantial intrinsic language modeling superiority."
     }
   ],
@@ -46,18 +46,18 @@
       "candidate_status": "Strong Candidate",
       "role": "Runner-Up General Encoder",
       "relative_advantages": [
-        "lower inference latency (25.1ms vs 31.4ms)",
+        "higher rare maritime token accuracy (80.70% vs 77.34%)",
+        "lower inference latency (23.4ms vs 28.7ms)",
         "smaller model footprint (125.0M vs 149.0M params)"
       ]
     },
     {
-      "model_name": "nlpaueb/legal-bert-base-uncased",
+      "model_name": "allenai/scibert_scivocab_uncased",
       "candidate_status": "Strong Candidate",
-      "role": "Competitive Candidate",
+      "role": "Scientific Domain Competitor",
       "relative_advantages": [
-        "higher rare maritime token accuracy (15.13% vs 7.11%)",
-        "lower subword fragmentation (37.61% vs 62.99%)",
-        "lower inference latency (22.4ms vs 31.4ms)",
+        "lower subword fragmentation (42.09% vs 62.99%)",
+        "lower inference latency (20.4ms vs 28.7ms)",
         "smaller model footprint (110.0M vs 149.0M params)"
       ]
     },
@@ -67,29 +67,17 @@
       "role": "Resource-Constrained & Vocabulary-Adapted Alternative",
       "relative_advantages": [
         "lower subword fragmentation (26.57% vs 62.99%)",
-        "lower inference latency (21.0ms vs 31.4ms)",
+        "lower inference latency (19.5ms vs 28.7ms)",
         "smaller model footprint (110.0M vs 149.0M params)"
       ]
     },
     {
-      "model_name": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "model_name": "nlpaueb/legal-bert-base-uncased",
       "candidate_status": "Competitive Candidate",
       "role": "Competitive Candidate",
       "relative_advantages": [
-        "higher rare maritime token accuracy (17.23% vs 7.11%)",
-        "lower subword fragmentation (42.39% vs 62.99%)",
-        "lower inference latency (21.9ms vs 31.4ms)",
-        "smaller model footprint (110.0M vs 149.0M params)"
-      ]
-    },
-    {
-      "model_name": "allenai/scibert_scivocab_uncased",
-      "candidate_status": "Weak Candidate",
-      "role": "Scientific Domain Competitor",
-      "relative_advantages": [
-        "higher rare maritime token accuracy (13.34% vs 7.11%)",
-        "lower subword fragmentation (41.79% vs 62.99%)",
-        "lower inference latency (22.1ms vs 31.4ms)",
+        "lower subword fragmentation (37.61% vs 62.99%)",
+        "lower inference latency (20.8ms vs 28.7ms)",
         "smaller model footprint (110.0M vs 149.0M params)"
       ]
     },
@@ -98,9 +86,18 @@
       "candidate_status": "Weak Candidate",
       "role": "Competitive Candidate",
       "relative_advantages": [
-        "higher rare maritime token accuracy (11.76% vs 7.11%)",
-        "lower subword fragmentation (35.52% vs 62.99%)",
-        "lower inference latency (22.4ms vs 31.4ms)",
+        "lower subword fragmentation (35.82% vs 62.99%)",
+        "lower inference latency (20.8ms vs 28.7ms)",
+        "smaller model footprint (110.0M vs 149.0M params)"
+      ]
+    },
+    {
+      "model_name": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "candidate_status": "Weak Candidate",
+      "role": "Competitive Candidate",
+      "relative_advantages": [
+        "lower subword fragmentation (42.69% vs 62.99%)",
+        "lower inference latency (20.6ms vs 28.7ms)",
         "smaller model footprint (110.0M vs 149.0M params)"
       ]
     }

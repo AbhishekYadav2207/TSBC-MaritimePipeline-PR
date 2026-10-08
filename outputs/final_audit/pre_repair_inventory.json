@@ -1,0 +1,1146 @@
+{
+  "inventory_metadata": {
+    "timestamp": "2026-10-08T11:25:00+05:30",
+    "execution_mode": "READ_ONLY_FORENSIC_INVENTORY",
+    "git_commit": "37cd3fde87cdcddb53e2dd99becbf7e54419d3bb",
+    "git_branch": "main",
+    "git_status": "clean",
+    "legacy_stage14_commit": "3602aad"
+  },
+  "corpus_and_representations": {
+    "authoritative_corpus": "Corpus A (MARSISdb_MDOTW_VW_OCCURRENCE_PUBLIC.csv)",
+    "data_files": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/data/MARSISdb_MDOTW_VW_INJURIES_PUBLIC.csv",
+        "size_bytes": 1531181,
+        "sha256": "e5096660e0fc2ff3d66861a31a2449765c81240706b2bdafc3a386a5dab45faf"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/data/MARSISdb_MDOTW_VW_OCCURRENCE_PUBLIC.csv",
+        "size_bytes": 96555062,
+        "sha256": "c8c30874460cf63d7efb7dfb3a7979bf15154324e27c457b7f61eb72d781b331"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/data/MARSISdb_MDOTW_VW_OCCURRENCE_VESSEL_LSA_EQUIPMENT_PUBLIC.csv",
+        "size_bytes": 1497652,
+        "sha256": "b90392e9b0751c15e787dd8ff5db51f837807c00d50164596149b481a96fa617"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/data/MARSISdb_MDOTW_VW_OCCURRENCE_VESSEL_NAV_EQUIPMENT_PUBLIC.csv",
+        "size_bytes": 27095353,
+        "sha256": "bdce3c175758e12f957e9fb6075b0cc4839a8917ea329f2bdadcc27ce82803bc"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/data/MARSISdb_MDOTW_VW_OCCURRENCE_VESSEL_PUBLIC.csv",
+        "size_bytes": 77624653,
+        "sha256": "c9a66b1c7fde96f41d0115fb65d27b1b3a0d80d84667a4068a1008518a1763de"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/data/MARSISdb_MDOTW_VW_OCCURRENCE_VESSEL_REC_EQUIPMENT_PUBLIC.csv",
+        "size_bytes": 4333430,
+        "sha256": "899acab866e83537aa3bce34364b758f13fd1249e3ecd0fe76ea56f809230875"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/data/MDOTW-MARSIS-Master-dataset-inventory-and-dictionary-English.csv",
+        "size_bytes": 86695,
+        "sha256": "e37c558caddac0d74774769cca8ce3eaaef875d26b182164769414f963dbe43b"
+      }
+    ],
+    "corpus_exports": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-08/maritime_corpus.txt",
+        "size_bytes": 24556413,
+        "sha256": "602a848485750b465f560b1ca68ba29de60b4adbb28b3a5c5d9a1ebaf270eaec"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-08/maritime_corpus.jsonl",
+        "size_bytes": 774410772,
+        "sha256": "3a2031f741f7a99cbff73f1d8993eee894e232d5271f292f45bbe3c1b767bc5c"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-08/manifest.json",
+        "size_bytes": 688,
+        "sha256": "048b9d4ed6a169f7d7cbb2c480b0fac525d96ddea67643c391b9cf9de122ad03"
+      }
+    ],
+    "representations": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-11/corpus_representations/json.jsonl",
+        "size_bytes": 759980595,
+        "sha256": "14122f5bd95b401346f84ed5c724c65caf4353524ed1eedf55dd84d13b4b5028"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-11/corpus_representations/key_value.jsonl",
+        "size_bytes": 65092615,
+        "sha256": "0bde74c8bf4b9db52f455593577756fd09860f0f4a1f39ce51eda823a583500b"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-11/corpus_representations/mixed.jsonl",
+        "size_bytes": 91761238,
+        "sha256": "11643d5d7118da3b4fceb471204ce87d8a8559b9e922f2592c0953cc4b6e4c28"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-11/corpus_representations/narrative.jsonl",
+        "size_bytes": 31398377,
+        "sha256": "b63a6be92121a7e1ee0150b609ae00fc7f39c80e83ac8a0bf0520ccff67f6b9f"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-11/corpus_representations/template.jsonl",
+        "size_bytes": 51667477,
+        "sha256": "aef2c13fb338b4dae41b7d4b2929b4bdc22c0e0ad780bf4cbc33c1644e3e0ab0"
+      }
+    ],
+    "provenance_manifest": {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/representation_provenance.json",
+      "size_bytes": 7706,
+      "sha256": "78ac247155072c9e1f312006ed97e10d45497405082c3c6ef34db804a60bd256"
+    }
+  },
+  "candidate_and_model_cohort": {
+    "total_considered": 13,
+    "retained_count": 7,
+    "excluded_count": 6,
+    "candidates": [
+      {
+        "model": "bert-base-uncased",
+        "tokenizer": "BertTokenizer",
+        "architecture": "BERT Base Encoder",
+        "candidate_status": "RETAINED",
+        "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
+        "ordering_score": 10,
+        "represented_by": null,
+        "similarity_score": null,
+        "wwm_profile": {
+          "model_id": "bert-base-uncased",
+          "tokenizer_class": "BertTokenizer",
+          "is_fast": true,
+          "tokenizer_family": "WordPiece",
+          "vocab_size": 30522,
+          "special_tokens": {
+            "unk_token": "[UNK]",
+            "sep_token": "[SEP]",
+            "pad_token": "[PAD]",
+            "cls_token": "[CLS]",
+            "mask_token": "[MASK]"
+          },
+          "mask_token": "[MASK]",
+          "mask_token_id": 103,
+          "word_ids_supported": true,
+          "model_config_type": "bert",
+          "model_vocab_size": 30522,
+          "mlm_head_compatible": true,
+          "wwm_compatible": true,
+          "wwm_compatibility_status": "FULLY_COMPATIBLE"
+        }
+      },
+      {
+        "model": "bert-large-uncased",
+        "tokenizer": "BertTokenizer",
+        "architecture": "BERT Large Encoder",
+        "candidate_status": "EXCLUDED_TOKENIZER_DUPLICATE",
+        "selection_reason": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits).",
+        "ordering_score": 1,
+        "represented_by": "bert-base-uncased",
+        "similarity_score": 1.0,
+        "wwm_profile": {
+          "model_id": "bert-large-uncased",
+          "tokenizer_class": "BertTokenizer",
+          "is_fast": true,
+          "tokenizer_family": "WordPiece",
+          "vocab_size": 30522,
+          "special_tokens": {
+            "unk_token": "[UNK]",
+            "sep_token": "[SEP]",
+            "pad_token": "[PAD]",
+            "cls_token": "[CLS]",
+            "mask_token": "[MASK]"
+          },
+          "mask_token": "[MASK]",
+          "mask_token_id": 103,
+          "word_ids_supported": true,
+          "model_config_type": "bert",
+          "model_vocab_size": 30522,
+          "mlm_head_compatible": true,
+          "wwm_compatible": true,
+          "wwm_compatibility_status": "FULLY_COMPATIBLE"
+        }
+      },
+      {
+        "model": "roberta-base",
+        "tokenizer": "RobertaTokenizer",
+        "architecture": "RoBERTa Base Encoder",
+        "candidate_status": "RETAINED",
+        "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
+        "ordering_score": 5,
+        "represented_by": null,
+        "similarity_score": null,
+        "wwm_profile": {
+          "model_id": "roberta-base",
+          "tokenizer_class": "RobertaTokenizer",
+          "is_fast": true,
+          "tokenizer_family": "BPE",
+          "vocab_size": 50265,
+          "special_tokens": {
+            "bos_token": "<s>",
+            "eos_token": "</s>",
+            "unk_token": "<unk>",
+            "sep_token": "</s>",
+            "pad_token": "<pad>",
+            "cls_token": "<s>",
+            "mask_token": "<mask>"
+          },
+          "mask_token": "<mask>",
+          "mask_token_id": 50264,
+          "word_ids_supported": true,
+          "model_config_type": "roberta",
+          "model_vocab_size": 50265,
+          "mlm_head_compatible": true,
+          "wwm_compatible": true,
+          "wwm_compatibility_status": "FULLY_COMPATIBLE"
+        }
+      },
+      {
+        "model": "answerdotai/ModernBERT-base",
+        "tokenizer": "TokenizersBackend",
+        "architecture": "ModernBERT Base Encoder",
+        "candidate_status": "RETAINED",
+        "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
+        "ordering_score": 4,
+        "represented_by": null,
+        "similarity_score": null,
+        "wwm_profile": {
+          "model_id": "answerdotai/ModernBERT-base",
+          "tokenizer_class": "TokenizersBackend",
+          "is_fast": true,
+          "tokenizer_family": "BPE",
+          "vocab_size": 50280,
+          "special_tokens": {
+            "unk_token": "[UNK]",
+            "sep_token": "[SEP]",
+            "pad_token": "[PAD]",
+            "cls_token": "[CLS]",
+            "mask_token": "[MASK]"
+          },
+          "mask_token": "[MASK]",
+          "mask_token_id": 50284,
+          "word_ids_supported": true,
+          "model_config_type": "modernbert",
+          "model_vocab_size": 50368,
+          "mlm_head_compatible": true,
+          "wwm_compatible": true,
+          "wwm_compatibility_status": "FULLY_COMPATIBLE"
+        }
+      },
+      {
+        "model": "allenai/scibert_scivocab_uncased",
+        "tokenizer": "BertTokenizer",
+        "architecture": "SciBERT Base Encoder",
+        "candidate_status": "RETAINED",
+        "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
+        "ordering_score": 7,
+        "represented_by": null,
+        "similarity_score": null,
+        "wwm_profile": {
+          "model_id": "allenai/scibert_scivocab_uncased",
+          "tokenizer_class": "BertTokenizer",
+          "is_fast": true,
+          "tokenizer_family": "WordPiece",
+          "vocab_size": 31090,
+          "special_tokens": {
+            "unk_token": "[UNK]",
+            "sep_token": "[SEP]",
+            "pad_token": "[PAD]",
+            "cls_token": "[CLS]",
+            "mask_token": "[MASK]"
+          },
+          "mask_token": "[MASK]",
+          "mask_token_id": 104,
+          "word_ids_supported": true,
+          "model_config_type": "bert",
+          "model_vocab_size": 31090,
+          "mlm_head_compatible": true,
+          "wwm_compatible": true,
+          "wwm_compatibility_status": "FULLY_COMPATIBLE"
+        }
+      },
+      {
+        "model": "dmis-lab/biobert-base-cased-v1.2",
+        "tokenizer": "BertTokenizer",
+        "architecture": "BioBERT Base Encoder",
+        "candidate_status": "RETAINED",
+        "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
+        "ordering_score": 9,
+        "represented_by": null,
+        "similarity_score": null,
+        "wwm_profile": {
+          "model_id": "dmis-lab/biobert-base-cased-v1.2",
+          "tokenizer_class": "BertTokenizer",
+          "is_fast": true,
+          "tokenizer_family": "WordPiece",
+          "vocab_size": 28996,
+          "special_tokens": {
+            "unk_token": "[UNK]",
+            "sep_token": "[SEP]",
+            "pad_token": "[PAD]",
+            "cls_token": "[CLS]",
+            "mask_token": "[MASK]"
+          },
+          "mask_token": "[MASK]",
+          "mask_token_id": 103,
+          "word_ids_supported": true,
+          "model_config_type": "bert",
+          "model_vocab_size": 28996,
+          "mlm_head_compatible": true,
+          "wwm_compatible": true,
+          "wwm_compatibility_status": "FULLY_COMPATIBLE"
+        }
+      },
+      {
+        "model": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+        "tokenizer": "BertTokenizer",
+        "architecture": "PubMedBERT Base Encoder",
+        "candidate_status": "RETAINED",
+        "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
+        "ordering_score": 6,
+        "represented_by": null,
+        "similarity_score": null,
+        "wwm_profile": {
+          "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+          "tokenizer_class": "BertTokenizer",
+          "is_fast": true,
+          "tokenizer_family": "WordPiece",
+          "vocab_size": 30522,
+          "special_tokens": {
+            "unk_token": "[UNK]",
+            "sep_token": "[SEP]",
+            "pad_token": "[PAD]",
+            "cls_token": "[CLS]",
+            "mask_token": "[MASK]"
+          },
+          "mask_token": "[MASK]",
+          "mask_token_id": 4,
+          "word_ids_supported": true,
+          "model_config_type": "bert",
+          "model_vocab_size": 30522,
+          "mlm_head_compatible": true,
+          "wwm_compatible": true,
+          "wwm_compatibility_status": "FULLY_COMPATIBLE"
+        }
+      },
+      {
+        "model": "emilyalsentzer/Bio_ClinicalBERT",
+        "tokenizer": "BertTokenizer",
+        "architecture": "ClinicalBERT Base Encoder",
+        "candidate_status": "EXCLUDED_TOKENIZER_DUPLICATE",
+        "selection_reason": "Excluded due to identical tokenizer diagnostic profile with dmis-lab/biobert-base-cased-v1.2 (cosine similarity 1.00000, identical vocabulary piece splits).",
+        "ordering_score": 1,
+        "represented_by": "dmis-lab/biobert-base-cased-v1.2",
+        "similarity_score": 1.0,
+        "wwm_profile": {
+          "model_id": "emilyalsentzer/Bio_ClinicalBERT",
+          "tokenizer_class": "BertTokenizer",
+          "is_fast": true,
+          "tokenizer_family": "WordPiece",
+          "vocab_size": 28996,
+          "special_tokens": {
+            "unk_token": "[UNK]",
+            "sep_token": "[SEP]",
+            "pad_token": "[PAD]",
+            "cls_token": "[CLS]",
+            "mask_token": "[MASK]"
+          },
+          "mask_token": "[MASK]",
+          "mask_token_id": 103,
+          "word_ids_supported": true,
+          "model_config_type": "bert",
+          "model_vocab_size": 28996,
+          "mlm_head_compatible": true,
+          "wwm_compatible": true,
+          "wwm_compatibility_status": "FULLY_COMPATIBLE"
+        }
+      },
+      {
+        "model": "nlpaueb/legal-bert-base-uncased",
+        "tokenizer": "BertTokenizer",
+        "architecture": "Legal-BERT Base Encoder",
+        "candidate_status": "RETAINED",
+        "selection_reason": "Survives diagnostic redundancy clustering (distinct tokenizer profile) and satisfies candidate availability criteria.",
+        "ordering_score": 8,
+        "represented_by": null,
+        "similarity_score": null,
+        "wwm_profile": {
+          "model_id": "nlpaueb/legal-bert-base-uncased",
+          "tokenizer_class": "BertTokenizer",
+          "is_fast": true,
+          "tokenizer_family": "WordPiece",
+          "vocab_size": 30522,
+          "special_tokens": {
+            "unk_token": "[UNK]",
+            "sep_token": "[SEP]",
+            "pad_token": "[PAD]",
+            "cls_token": "[CLS]",
+            "mask_token": "[MASK]"
+          },
+          "mask_token": "[MASK]",
+          "mask_token_id": 103,
+          "word_ids_supported": true,
+          "model_config_type": "bert",
+          "model_vocab_size": 30522,
+          "mlm_head_compatible": true,
+          "wwm_compatible": true,
+          "wwm_compatibility_status": "FULLY_COMPATIBLE"
+        }
+      },
+      {
+        "model": "ProsusAI/finbert",
+        "tokenizer": "BertTokenizer",
+        "architecture": "FinBERT Base Encoder",
+        "candidate_status": "EXCLUDED_TOKENIZER_DUPLICATE",
+        "selection_reason": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits).",
+        "ordering_score": 1,
+        "represented_by": "bert-base-uncased",
+        "similarity_score": 1.0,
+        "wwm_profile": {
+          "model_id": "ProsusAI/finbert",
+          "tokenizer_class": "BertTokenizer",
+          "is_fast": true,
+          "tokenizer_family": "WordPiece",
+          "vocab_size": 30522,
+          "special_tokens": {
+            "unk_token": "[UNK]",
+            "sep_token": "[SEP]",
+            "pad_token": "[PAD]",
+            "cls_token": "[CLS]",
+            "mask_token": "[MASK]"
+          },
+          "mask_token": "[MASK]",
+          "mask_token_id": 103,
+          "word_ids_supported": true,
+          "model_config_type": "bert",
+          "model_vocab_size": 30522,
+          "mlm_head_compatible": true,
+          "wwm_compatible": true,
+          "wwm_compatibility_status": "FULLY_COMPATIBLE"
+        }
+      },
+      {
+        "model": "anferico/bert-for-patents",
+        "tokenizer": "Unavailable",
+        "architecture": "BERT for Patents Base Encoder",
+        "candidate_status": "EXCLUDED_MODEL_UNAVAILABLE",
+        "selection_reason": "Tokenizer failed to instantiate from pretrained repository in current environment (e.g. missing SentencePiece library or fast tokenizer backend).",
+        "ordering_score": 1,
+        "represented_by": null,
+        "similarity_score": null,
+        "wwm_profile": {
+          "model_id": "anferico/bert-for-patents",
+          "tokenizer_class": "Unknown",
+          "is_fast": false,
+          "tokenizer_family": "Unknown",
+          "vocab_size": null,
+          "special_tokens": {},
+          "mask_token": null,
+          "mask_token_id": null,
+          "word_ids_supported": false,
+          "model_config_type": "Unknown",
+          "model_vocab_size": null,
+          "mlm_head_compatible": false,
+          "wwm_compatible": false,
+          "wwm_compatibility_status": "INCOMPATIBLE_LOAD_FAILURE",
+          "error": "Couldn't instantiate the backend tokenizer from one of: \n(1) a `tokenizers` library serialization file, \n(2) a slow tokenizer instance to convert or \n(3) an equivalent slow tokenizer class to instantiate and convert. \nYou need to have sentencepiece or tiktoken installed to convert a slow tokenizer to a fast one."
+        }
+      },
+      {
+        "model": "google/electra-base-discriminator",
+        "tokenizer": "BertTokenizer",
+        "architecture": "ELECTRA Base Discriminator",
+        "candidate_status": "EXCLUDED_TOKENIZER_DUPLICATE",
+        "selection_reason": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits).",
+        "ordering_score": 1,
+        "represented_by": "bert-base-uncased",
+        "similarity_score": 1.0,
+        "wwm_profile": {
+          "model_id": "google/electra-base-discriminator",
+          "tokenizer_class": "BertTokenizer",
+          "is_fast": true,
+          "tokenizer_family": "WordPiece",
+          "vocab_size": 30522,
+          "special_tokens": {
+            "unk_token": "[UNK]",
+            "sep_token": "[SEP]",
+            "pad_token": "[PAD]",
+            "cls_token": "[CLS]",
+            "mask_token": "[MASK]"
+          },
+          "mask_token": "[MASK]",
+          "mask_token_id": 103,
+          "word_ids_supported": true,
+          "model_config_type": "electra",
+          "model_vocab_size": 30522,
+          "mlm_head_compatible": true,
+          "wwm_compatible": true,
+          "wwm_compatibility_status": "FULLY_COMPATIBLE"
+        }
+      },
+      {
+        "model": "distilbert-base-uncased",
+        "tokenizer": "BertTokenizer",
+        "architecture": "DistilBERT Base Student",
+        "candidate_status": "EXCLUDED_TOKENIZER_DUPLICATE",
+        "selection_reason": "Excluded due to identical tokenizer diagnostic profile with bert-base-uncased (cosine similarity 1.00000, identical vocabulary piece splits).",
+        "ordering_score": 1,
+        "represented_by": "bert-base-uncased",
+        "similarity_score": 1.0,
+        "wwm_profile": {
+          "model_id": "distilbert-base-uncased",
+          "tokenizer_class": "BertTokenizer",
+          "is_fast": true,
+          "tokenizer_family": "WordPiece",
+          "vocab_size": 30522,
+          "special_tokens": {
+            "unk_token": "[UNK]",
+            "sep_token": "[SEP]",
+            "pad_token": "[PAD]",
+            "cls_token": "[CLS]",
+            "mask_token": "[MASK]"
+          },
+          "mask_token": "[MASK]",
+          "mask_token_id": 103,
+          "word_ids_supported": true,
+          "model_config_type": "distilbert",
+          "model_vocab_size": 30522,
+          "mlm_head_compatible": true,
+          "wwm_compatible": true,
+          "wwm_compatibility_status": "FULLY_COMPATIBLE"
+        }
+      }
+    ],
+    "deberta_audit": {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/model_selection/deberta_exclusion_audit.json",
+      "size_bytes": 1117,
+      "sha256": "38930fea4f9b6500afb3a5b0e8ffdb36bd09fa2467dc9ab5aa38631d0d94a07a"
+    }
+  },
+  "stage_scripts": [
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/01_parse_dictionary.py",
+      "size_bytes": 9145,
+      "sha256": "6b0e3f00aeb8d1959189adfbeb4f61f4bff5c9ce22a69597856937e8a4a53138"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/02_profile_dataset.py",
+      "size_bytes": 6306,
+      "sha256": "7070baa743b90a36878643eef5033c5e8467579524720b19cdd39c2352fadc82"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/03_discover_relationships.py",
+      "size_bytes": 4736,
+      "sha256": "78611bb1e3126abfe13d0399f52bea9ecb0a97c394361d21df8d90b586908e29"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/04_select_semantic_columns.py",
+      "size_bytes": 4366,
+      "sha256": "504c950f47864f0e97a912cf9e916e3d82e8b9589ce257c27f2a4d9cb5ad9641"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/05_merge_tables.py",
+      "size_bytes": 17539,
+      "sha256": "304f467e608f512568b24356028a5d48eb58607990ffbe839a02dfbc1017f3e5"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/05a_validate_records.py",
+      "size_bytes": 9592,
+      "sha256": "7d0ea44b3cff79810feccd4d8439bd70d074f55629c95d66f1d89a27583a81b4"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/06_generate_documents.py",
+      "size_bytes": 21926,
+      "sha256": "7e17a7b9a65337d7005ef0d0dc2c86342afe6d0483a2911ce91a71b2fa705c58"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/07_clean_documents.py",
+      "size_bytes": 5603,
+      "sha256": "d1349d938418ff27374ed329ee067bbaa41bfa19c16264584332b6c89c26b939"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/08_export_corpus.py",
+      "size_bytes": 8815,
+      "sha256": "e5b72f0bd8a346959d2abc48a4f4670d26253b22f69fd4fe5f2ea7237cbf9888"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/09_statistics.py",
+      "size_bytes": 22582,
+      "sha256": "111985334b0f9ccd86295acb243aa6e065319b3d2c4ab96168d061e22452f245"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/10_extract_vocabulary.py",
+      "size_bytes": 5880,
+      "sha256": "f528b1da0fa9e3835b75d3f1be5f4c5ae09ee4df583f96ebba8eafa9ea066940"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/11_corpus_representations.py",
+      "size_bytes": 8122,
+      "sha256": "a6f54957b4ed7eaccc0f873fb85f3cdda2216f2876c2a19fe532f462523568e4"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/12_semantic_importance.py",
+      "size_bytes": 43216,
+      "sha256": "98d250501d2b1057f7a750bd42bcde24e21389db9e598821b188b33873a7144e"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/13_tokenizer_analysis.py",
+      "size_bytes": 47793,
+      "sha256": "b91c34d1b17fc5a230f461637e084fd46efbbf873bb99dd51a36a068c4286615"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/14_mlm_evaluation.py",
+      "size_bytes": 96487,
+      "sha256": "bc09fc65765df5d2c55c074d163f0faf0221cfaf21cb5d14bfa64d2b2bc93c50"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/15_cross_model_benchmarking.py",
+      "size_bytes": 70692,
+      "sha256": "b9bb64538c907d11e4b73b8af4b806efd8dfd7c9bc05838da2bc1117712af46c"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/16_statistical_analysis.py",
+      "size_bytes": 65816,
+      "sha256": "3eadd366542476ac87c72407af0c8ede26169b5e9d766e2a095b09172c46a9ff"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/16_statistical_validation.py",
+      "size_bytes": 593,
+      "sha256": "af8e001e561a3abffc5b4b0319d96e0d1ce9503bcf042287cfff109e1b599216"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/17_decision_engine.py",
+      "size_bytes": 60323,
+      "sha256": "2f35e0acc2ed5a500b5e93f5e4bf2db233a4c3eb5e6d90fbc8fe911b4730bca3"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/18_lint_corpus.py",
+      "size_bytes": 3496,
+      "sha256": "f45f5f86764c603b576b506c2d6cd837486667cfc3b574f5ff44c954428759c9"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/compare_jsonl_txt.py",
+      "size_bytes": 12402,
+      "sha256": "4e55f9c14785996e3aa67ee3349293775294061ac5c9096bbaed85ca7b4e722b"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/generate_provenance.py",
+      "size_bytes": 10289,
+      "sha256": "7d701bef735fb01a8c067e28b1f836d66df9e0a58399a8ae9643c3fb35ec8576"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/generate_stage14_model_summaries.py",
+      "size_bytes": 7246,
+      "sha256": "c92663d0bad3c0e7452dbff2a4f5b2bb80029004c55065a198cf9cf8bf75e29c"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/pipeline_utils.py",
+      "size_bytes": 7004,
+      "sha256": "1b8cc287c95c54acac5060b4f889d36e2e1597e0137a1c0a25358d6b71ec7458"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/repair_stage14_metadata.py",
+      "size_bytes": 5220,
+      "sha256": "46c7026e38e1acad9091267ea332a67cd4a061e1b4a1769cd1f50281b545263e"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/run_maritimebert_dapt_benchmark.py",
+      "size_bytes": 67581,
+      "sha256": "22b2a13cff174fb05cdc520c876363e8c4c845859ca46bf84570c3495d723d97"
+    },
+    {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/scripts/text_sanitizer.py",
+      "size_bytes": 3299,
+      "sha256": "49290cfe73a97d939b082876f55404f51e4ea1fba6d55865f8938b63c0bfa127"
+    }
+  ],
+  "stage_outputs": {
+    "stage_01": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-01/dictionary_metadata.json",
+        "size_bytes": 181464,
+        "sha256": "e51bef7b16feba3af45e9fb4467eea9952bb0f634a59342583c89de460107112"
+      }
+    ],
+    "stage_02": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-02/profiling_report.json",
+        "size_bytes": 81152,
+        "sha256": "7278da512673ff812f1e21b017c2ac565ff2978dc199d5fca801c32c833c1782"
+      }
+    ],
+    "stage_03": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-03/relationships.json",
+        "size_bytes": 6681,
+        "sha256": "6710aeafc5dc685c50264ec595992fe1627f84acc0fb5081d06f8cfa3b293306"
+      }
+    ],
+    "stage_04": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-04/selected_semantic_columns.json",
+        "size_bytes": 7171,
+        "sha256": "7401e35591a3e3d63fc689c84eca2f12440a444981a8d7e8c90becd1d36f4409"
+      }
+    ],
+    "stage_05": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-05/merged_records.jsonl",
+        "size_bytes": 331416365,
+        "sha256": "ea698efbdc74e5b73924f92eee9cf82eb2bed99ca80063be0ecd5c6ebf239243"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-05/merge_reconciliation_report.json",
+        "size_bytes": 1253,
+        "sha256": "30468c833c79a527b0251b11b4acba5b6376c3f650d728f16282310ca21bc2cc"
+      }
+    ],
+    "stage_05a": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-05a/validation_report.json",
+        "size_bytes": 873,
+        "sha256": "e0157f60b1a433aae36c43c178ccbc29f8bf4106c680a9d70df9bbd7f83c99bb"
+      }
+    ],
+    "stage_06": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-06/raw_documents.jsonl",
+        "size_bytes": 861937313,
+        "sha256": "954ed5052be2351f43d577bb2724811c0781bbe43a86f9dc5ae1a457f3b20d8a"
+      }
+    ],
+    "stage_07": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-07/clean_documents.jsonl",
+        "size_bytes": 785636298,
+        "sha256": "4f05da2fbdac924f5d4171b2329f8d41cd87b40eea8691a73efba46ca5931ecd"
+      }
+    ],
+    "stage_08": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-08/maritime_corpus.txt",
+        "size_bytes": 24556413,
+        "sha256": "602a848485750b465f560b1ca68ba29de60b4adbb28b3a5c5d9a1ebaf270eaec"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-08/maritime_corpus.jsonl",
+        "size_bytes": 774410772,
+        "sha256": "3a2031f741f7a99cbff73f1d8993eee894e232d5271f292f45bbe3c1b767bc5c"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-08/manifest.json",
+        "size_bytes": 688,
+        "sha256": "048b9d4ed6a169f7d7cbb2c480b0fac525d96ddea67643c391b9cf9de122ad03"
+      }
+    ],
+    "stage_09": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-09/statistics.json",
+        "size_bytes": 3701,
+        "sha256": "2d95d7d8f0923fc297b703858e1295ba1e2b9ce40da8283d347011940ef59848"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-09/corpus_quality_report.md",
+        "size_bytes": 3398,
+        "sha256": "38fd1b1d6674c56e964e6bef27c7b7a709340716c35343b8ca49d0d23aa870ea"
+      }
+    ],
+    "stage_10": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-10/maritime_vocabulary.txt",
+        "size_bytes": 2755,
+        "sha256": "9616f498d524b6d31c2902670685561a5e2c4c1bd84ffda5ed38384a05697b00"
+      }
+    ],
+    "stage_11": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-11/corpus_representations/json.jsonl",
+        "size_bytes": 759980595,
+        "sha256": "14122f5bd95b401346f84ed5c724c65caf4353524ed1eedf55dd84d13b4b5028"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-11/corpus_representations/key_value.jsonl",
+        "size_bytes": 65092615,
+        "sha256": "0bde74c8bf4b9db52f455593577756fd09860f0f4a1f39ce51eda823a583500b"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-11/corpus_representations/mixed.jsonl",
+        "size_bytes": 91761238,
+        "sha256": "11643d5d7118da3b4fceb471204ce87d8a8559b9e922f2592c0953cc4b6e4c28"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-11/corpus_representations/narrative.jsonl",
+        "size_bytes": 31398377,
+        "sha256": "b63a6be92121a7e1ee0150b609ae00fc7f39c80e83ac8a0bf0520ccff67f6b9f"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-11/corpus_representations/template.jsonl",
+        "size_bytes": 51667477,
+        "sha256": "aef2c13fb338b4dae41b7d4b2929b4bdc22c0e0ad780bf4cbc33c1644e3e0ab0"
+      }
+    ],
+    "stage_12": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-12/document_importance.jsonl",
+        "size_bytes": 87548956,
+        "sha256": "dab8ad0e0de00d2fdb91e46537345dfc5f3f49753cc6966384680bcedc24fbf2"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-12/domain_informativeness_statistics.json",
+        "size_bytes": 3273,
+        "sha256": "0422f8a50b6abda1f706f928cc2168a1eb3b30fcc7e8a2ece6c882c9b9f82d77"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-12/importance_statistics.json",
+        "size_bytes": 427,
+        "sha256": "3971b4a8c798271a777dbe478978761ed3cae602b5eac5a390928e2ae34e10bf"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-12/informativeness_ablation.json",
+        "size_bytes": 1976,
+        "sha256": "56051ee2b9734dafb5b6b240ebf109c1ad5c547663bbdf1712d219a54db14834"
+      }
+    ],
+    "stage_13": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-13/candidate_selection_audit.json",
+        "size_bytes": 15442,
+        "sha256": "5e583998300af2190cd111f6c1a5b8ac60d2b211bafb0c9e0da9feffba0fadd7"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-13/candidate_selection_audit.csv",
+        "size_bytes": 10083,
+        "sha256": "10a751cdeeaf24265504397b1b5e5e54a2f5b281917a0f3b38382cf472398236"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-13/selected_models.json",
+        "size_bytes": 24180,
+        "sha256": "8ff845da5062b32571d6e0e3e03a7e85175d19c8a4ddc5cf9bd671bfc6ef16ef"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-13/tokenizer_analysis.json",
+        "size_bytes": 30423,
+        "sha256": "026a9684aa2ac4bb9fdf70179b12dd89867f271bdb501e78026d35289ef10c52"
+      }
+    ],
+    "stage_14": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-14/bert_mlm_evaluation.json",
+        "size_bytes": 7435,
+        "sha256": "54a7d98335ba9f5fee0bfacf4b26491460fa2f22835b0df286903c3c0b7ba51e"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-14/focused_domain_aware_results.json",
+        "size_bytes": 203602,
+        "sha256": "a3573ab919aa5490e3fdd79044ce5134bc5d300670989027fefddbdb07bc7da8"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-14/masking_comparison.json",
+        "size_bytes": 31837,
+        "sha256": "a01b3fda7c294dab2e42aa5678716d0174e7c857a0c32693340cb11db06fb42b"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-14/pll_results.json",
+        "size_bytes": 27615,
+        "sha256": "41f9ccf228e9c9bfb36197d94288761921f3df45c01f107ee3e27a22fbd3f621"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-14/pll_selection.json",
+        "size_bytes": 8368,
+        "sha256": "e682a47d7731e32eba98a72942b3753342ac7b477b9527b8da9d38277107cde4"
+      }
+    ],
+    "stage_15": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-15/comparison.csv",
+        "size_bytes": 78873,
+        "sha256": "c7ebb3c577c561cba44794aaf8c6bf320315d9a47724d8acd8a9b514e8270c69"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-15/leaderboard.csv",
+        "size_bytes": 1099,
+        "sha256": "f446882a87ef20fa84655974c9c152fd98b9897b5e5b6d417528de301f4474ec"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-15/stage15_mecs_config.json",
+        "size_bytes": 4576,
+        "sha256": "a1599943f3868cd99d94444c5c46409af06608f9e66f5683191b7cfb54acd8f8"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-15/stage15_mecs_sensitivity.csv",
+        "size_bytes": 669,
+        "sha256": "eba58a04f2309996a72fda3432d63b547a5323f11889da023b09706e7b903a3d"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-15/stage15_model_profiles.csv",
+        "size_bytes": 4466,
+        "sha256": "f080709f0b8dcfb9318163f072bcd4e46fee77182adbae282a4a27ee3b55cf2c"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-15/stage15_pareto.csv",
+        "size_bytes": 1255,
+        "sha256": "3044c3533798b9b5937e16e522739ced4bdf42af68bf9b3a4128e153f0277d42"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-15/stage15_rankings.csv",
+        "size_bytes": 1725,
+        "sha256": "ee1712b41345ac2325a240aca60ca9c65501ad0dcde0bfb36eda74ee065bef26"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-15/stage15_report.md",
+        "size_bytes": 10015,
+        "sha256": "33fe08d3500aa90c5d670412ce81d7a970a7f521930feabe23bf785e5cb9d0a8"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-15/stage15_selection_decision.json",
+        "size_bytes": 4862,
+        "sha256": "f1abfd3c407ff16ec95cccbe0260c582d624402badb51b0ed22f5e83824d2276"
+      }
+    ],
+    "stage_16": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-16/ablation_study.json",
+        "size_bytes": 2700,
+        "sha256": "ffa36b028c188415be4b20bc45cc4f383314abd204ec695c0dc6201a992a8d92"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-16/stage16_ablation.csv",
+        "size_bytes": 805,
+        "sha256": "e605c763e7b1bb5a2d26abcdd811e3fa7eb1ce54471dac10a7f5a7edac2c032e"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-16/stage16_bootstrap.csv",
+        "size_bytes": 3082,
+        "sha256": "4b2d0aed0b3bcf75a19b7946118eaab0bcc6ba22ed0bc42e3b1e8af4e95c2b70"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-16/stage16_condition_robustness.csv",
+        "size_bytes": 1149,
+        "sha256": "035b96136df28a1e999524e795f38ae49a4e03ffd157ca596f825e8e317a4f91"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-16/stage16_crossed_anova.csv",
+        "size_bytes": 691,
+        "sha256": "4949be220486cc0e47c935722aa8663af9a62183b84ee46ef886f23a405a2649"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-16/stage16_effect_sizes.csv",
+        "size_bytes": 3705,
+        "sha256": "0856aa3b121b2a0aad01e6009ff6d356c1ae63a4464cef0906df48d32a951ca0"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-16/stage16_final_report.md",
+        "size_bytes": 20025,
+        "sha256": "2964b2ab2b894210cdbb32cc9f807d504253bc6c5602ac9fe95b19d9753f38f5"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-16/stage16_global_tests.csv",
+        "size_bytes": 260,
+        "sha256": "ee744cc8098e24115bda470c88b3a6b0527ccdd592575006d23113999ff8460b"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-16/stage16_pairwise_tests.csv",
+        "size_bytes": 4235,
+        "sha256": "c808aa6005bf4fb6cddf9ef5ad1956322a2ff7aea5e6ea1e8ed7ca5fb17e2752"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-16/stage16_rank_stability.csv",
+        "size_bytes": 574,
+        "sha256": "a450adbb651d5abeabbd1378da4b1bb3de4369b91bdf8156fa6bb228dfe9dfd3"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-16/statistical_significance.json",
+        "size_bytes": 28463,
+        "sha256": "fa0dd29e6a05ba64ba5691e62dd1b455b24a252fb99e44d8ce056a9a2d257308"
+      }
+    ],
+    "stage_17": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-17/benchmark_report.md",
+        "size_bytes": 10961,
+        "sha256": "fb2dacc93a1e70f5eab76dc3dc2e45ee2a19bc072f0a4ca033359ab97f96a77b"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-17/decision_summary.json",
+        "size_bytes": 2459,
+        "sha256": "bba28b9f2629bc8c2def7e612fa17f44b01f7306db6659f703dae3c621882205"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-17/experiment_metadata.json",
+        "size_bytes": 366,
+        "sha256": "99de7f6128353b21fdb1207ff55fbef7136678f78232c343314034749d276c5d"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-17/stage17_decision_report.md",
+        "size_bytes": 10961,
+        "sha256": "fb2dacc93a1e70f5eab76dc3dc2e45ee2a19bc072f0a4ca033359ab97f96a77b"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-17/stage17_decision_rules.json",
+        "size_bytes": 1176,
+        "sha256": "ae6fa512545e1cabd544401ed37d6f2985d260865ef270e51f592140cf1ea5f4"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-17/stage17_model_selection.csv",
+        "size_bytes": 2589,
+        "sha256": "c4c5c5442beaa4c0dadcd152b809dc661e8ff590e8ed355dd42b0435b99c8c0f"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-17/stage17_selection_rationale.json",
+        "size_bytes": 5932,
+        "sha256": "dff91612b3c13df33acd5f7d02743c3de692f0afa7f4996ae3157cb9e68ca046"
+      }
+    ],
+    "stage_18": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/stage-18/corpus_lint_report.json",
+        "size_bytes": 3488,
+        "sha256": "9fd6d579c912c89f70cb758eb543e90c610d9e133f3106d179a925d91cb9cffb"
+      }
+    ]
+  },
+  "caches_discovered": {
+    "cache_legacy_subword_15": {
+      "path": "outputs/stage-14/evaluations/cache",
+      "file_count": 175,
+      "subdirs": [
+        "domain_aware_15",
+        "pll"
+      ],
+      "status": "HISTORICAL_PRIMARY_LEGACY",
+      "masking_mode": "subword",
+      "evaluation_unit": "subword"
+    },
+    "cache_wwm_word_secondary": {
+      "path": "outputs/stage-14/evaluations/cache_wwm_word",
+      "file_count": 175,
+      "subdirs": [
+        "domain_aware_15",
+        "pll"
+      ],
+      "status": "SECONDARY_ROBUSTNESS_WWM",
+      "masking_mode": "whole_word",
+      "evaluation_unit": "word"
+    },
+    "smoke_stage14": {
+      "path": "outputs/stage-14/evaluations/smoke_stage14",
+      "file_count": 6,
+      "status": "TEMPORARY_DIAGNOSTIC"
+    },
+    "smoke_20_wwm_word": {
+      "path": "outputs/stage-14/smoke_20_wwm_word",
+      "file_count": 20,
+      "status": "TEMPORARY_DIAGNOSTIC"
+    },
+    "dapt_wwm_cache": {
+      "path": "outputs/maritimebert_dapt_wwm/cache",
+      "file_count": 50,
+      "status": "SECONDARY_DAPT_WWM"
+    }
+  },
+  "dapt_artifacts": {
+    "split_manifest": {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/outputs/data/split_manifest.json",
+      "size_bytes": 1008,
+      "sha256": "b5e6872a55df9d0ea7c272ae3003fd7961d0714c44f241029226a3ac1e3ae49a"
+    },
+    "corpus_manifest": {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/outputs/data/corpus_manifest.json",
+      "size_bytes": 1104,
+      "sha256": "8eb76aac2bf8b7ec8c7da14786c483cfbf42525353789209da0a0f44fe045691"
+    },
+    "splits": [
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/outputs/data/train.txt",
+        "size_bytes": 22098271,
+        "sha256": "dd1da708ea107fe2783c4089d658bffacb15840e9f97e251a6f9391773ffe8c3"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/outputs/data/val.txt",
+        "size_bytes": 1233481,
+        "sha256": "78c88980bcf974b34bc1014411fdccf1eac22e2695fae180ce61429396846bca"
+      },
+      {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/outputs/data/test.txt",
+        "size_bytes": 1224476,
+        "sha256": "e75b5f63ef119022dd99450231fd45897b2fdd39b4a0905385847d85c04f88bf"
+      }
+    ],
+    "model_safetensors": {
+      "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/dapt/outputs/experiments/MaritimeBERT-v1/model.safetensors",
+      "size_bytes": 598635032,
+      "sha256": "967bf3b92c28aebfe1e8efa41eedc5976ffedcc9756ab22ee4b80ccb41aac3b2"
+    },
+    "dapt_wwm_outputs": {
+      "summary_json": {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/maritimebert_dapt_wwm/summary.json",
+        "size_bytes": 102019,
+        "sha256": "937ca5f9d4b763b08786de343afc85a0d5900802d2722a480da8074954fdb167"
+      },
+      "comparison_csv": {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/maritimebert_dapt_wwm/comparison.csv",
+        "size_bytes": 20803,
+        "sha256": "33a900c814b50fd36bc6c08769a584950c748836413719e921a0e888ec8371af"
+      },
+      "provenance_json": {
+        "path": "d:/CAIR/TSBC-MaritimePipeline-Version2.1/outputs/maritimebert_dapt_wwm/provenance.json",
+        "size_bytes": 2048,
+        "sha256": "ae4ab7220d9652853d76cd6f347bdb49029a18bb8c8a2ca79fd20f82edfe7e3f"
+      }
+    }
+  },
+  "discrepancies_discovered": [
+    {
+      "id": "DISC-01",
+      "component": "Stage 14 CLI Default",
+      "finding": "scripts/14_mlm_evaluation.py was modified in recent commits to default to --masking_mode whole_word and --evaluation_unit word, deviating from historical primary subword MLM protocol.",
+      "remedy": "Phase 3 will restore primary evaluation to random 15% subword MLM and isolate WWM as secondary robustness analysis."
+    },
+    {
+      "id": "DISC-02",
+      "component": "Stage 15 Output State",
+      "finding": "outputs/stage-15/comparison.csv currently contains whole_word/word evaluation records from recent WWM run, overwriting legacy subword primary benchmark in downstream stage.",
+      "remedy": "Downstream stages 15-18 must be regenerated strictly from primary legacy subword records."
+    },
+    {
+      "id": "DISC-03",
+      "component": "MECS (MUI) ModernBERT Arithmetic",
+      "finding": "Table 4 ModernBERT composite score reported as 78.56, but hand-calculation under Eq. 2 yields theoretical upper bound of 75.77.",
+      "remedy": "Identify exact input weights and formula bug, recalculate and document."
+    },
+    {
+      "id": "DISC-04",
+      "component": "Cliff's Delta Paired Interpretation",
+      "finding": "Unpaired Cliff's delta (evaluating all 625 cross-cell comparisons) was presented in paper text as paired condition win rate.",
+      "remedy": "Report exact paired cell wins (out of 25), paired Wilcoxon signed-rank p, and rank-biserial effect sizes."
+    },
+    {
+      "id": "DISC-05",
+      "component": "Candidate Pool Arithmetic",
+      "finding": "Paper text stated 5 models dropped from 13 candidate pool (13 - 7 = 6 dropped).",
+      "remedy": "Correct text to explicitly account for 5 tokenizer duplicates dropped and 1 unavailable model (anferico/bert-for-patents) due to tokenizer load failure."
+    },
+    {
+      "id": "DISC-06",
+      "component": "DAPT Split Test Set Utilization",
+      "finding": "DAPT evaluation was conducted on validation set (4,843 docs) without reporting on the held-out test split (4,844 docs).",
+      "remedy": "Quantify near-duplicates and report evaluations on held-out test split and slot-value tokens."
+    },
+    {
+      "id": "DISC-07",
+      "component": "Statistical Concordance Statistic",
+      "finding": "Kendall's tau was reported for ranking concordance across five subsets/representations instead of Kendall's W.",
+      "remedy": "Label and compute Kendall's W for multi-condition concordance."
+    },
+    {
+      "id": "DISC-08",
+      "component": "Pareto Dominance Classification",
+      "finding": "ModernBERT was claimed to 'hold rank 1 under Pareto analysis' when 5 models sit on the non-dominated Pareto frontier.",
+      "remedy": "Correct Pareto terminology to specify non-dominated Pareto frontier models."
+    }
+  ]
+}

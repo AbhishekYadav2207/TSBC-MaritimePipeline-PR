@@ -1,0 +1,56 @@
+{
+  "audit_name": "DAPT Split Leakage & Token Type Analysis",
+  "reference_issue": "Review Issue A9 (DAPT evaluation leakage & slot-value evaluation)",
+  "corpus_composition": {
+    "total_documents": 96874,
+    "train_documents": 87174,
+    "val_documents": 4843,
+    "test_documents": 4844,
+    "template_scaffolding_ratio": 0.5848,
+    "scaffold_reduced_near_duplicate_rate": 0.1676
+  },
+  "leakage_findings": {
+    "exact_duplicate_overlap": {
+      "train_val_overlap": 0,
+      "train_test_overlap": 0,
+      "val_test_overlap": 0
+    },
+    "exact_duplicate_status": "PASS: Zero exact duplicates across splits.",
+    "near_duplicate_shingle_overlap": {
+      "sample_evaluated": 2000,
+      "val_high_shingle_overlap_count": 1135,
+      "val_high_shingle_overlap_rate": 0.5675,
+      "test_high_shingle_overlap_count": 1132,
+      "test_high_shingle_overlap_rate": 0.566
+    },
+    "near_duplicate_mechanism": "High n-gram shingle overlap (56-57%) between validation/test splits and training set is primarily driven by shared relational template boilerplate (58.48% scaffold ratio) rather than identical incident facts. Standard deduplication removed exact string duplicates but preserved distinct accident records with identical sentence scaffolding.",
+    "packing_boundary_effect": "Sequence packing without document-boundary masking allows cross-document attention across [SEP] boundaries, increasing contextual continuity across concatenated accident reports.",
+    "test_split_status": {
+      "test_documents_available": 4844,
+      "file_location": "dapt/outputs/data/test.txt",
+      "recommendation": "Held-out benchmark evaluation must report on test.txt alongside val.txt to prevent step-50 monitoring bias."
+    }
+  },
+  "slot_value_masking_specification": {
+    "concept": "Separate template scaffolding learning from domain content learning by masking only slot values.",
+    "template_markers": [
+      "Incident ID:",
+      "Date:",
+      "Time:",
+      "Vessel:",
+      "IMO Number:",
+      "Flag State:",
+      "Gross Tonnage:",
+      "Vessel Type:",
+      "Location:",
+      "Latitude:",
+      "Longitude:",
+      "Occurrence Type:",
+      "Severity:",
+      "Summary:",
+      "Narrative:",
+      "Contributing Factors:"
+    ],
+    "evaluation_policy": "To evaluate true domain generalization without template memorization artifacts, loss and accuracy should be computed separately on: (1) Slot-value tokens (dynamic entities, narratives, numerical measurements); (2) Template scaffold tokens (fixed syntactic headers and field prefixes); (3) All tokens (standard sequence MLM)."
+  }
+}

@@ -6,101 +6,101 @@
   "iterations": [
     {
       "resample_iteration": 1,
-      "spearman_rho_hybrid_vs_h_inf": 0.734,
-      "kendall_tau_hybrid_vs_h_inf": 0.5449,
-      "jaccard_top_k_hybrid_vs_h_inf": 0.5123,
-      "spearman_rho_hybrid_vs_tfidf_relevance": 0.5187,
-      "kendall_tau_hybrid_vs_tfidf_relevance": 0.3641,
-      "jaccard_top_k_hybrid_vs_tfidf_relevance": 0.3008,
-      "spearman_rho_hybrid_vs_tfidf_representativeness": 0.7004,
-      "kendall_tau_hybrid_vs_tfidf_representativeness": 0.5016,
-      "jaccard_top_k_hybrid_vs_tfidf_representativeness": 0.4085
+      "spearman_rho_hybrid_vs_h_inf": 0.7285,
+      "kendall_tau_hybrid_vs_h_inf": 0.5383,
+      "jaccard_top_k_hybrid_vs_h_inf": 0.4414,
+      "spearman_rho_hybrid_vs_tfidf_relevance": 0.5179,
+      "kendall_tau_hybrid_vs_tfidf_relevance": 0.3617,
+      "jaccard_top_k_hybrid_vs_tfidf_relevance": 0.2658,
+      "spearman_rho_hybrid_vs_tfidf_representativeness": 0.6974,
+      "kendall_tau_hybrid_vs_tfidf_representativeness": 0.4992,
+      "jaccard_top_k_hybrid_vs_tfidf_representativeness": 0.3986
     },
     {
       "resample_iteration": 2,
-      "spearman_rho_hybrid_vs_h_inf": 0.759,
-      "kendall_tau_hybrid_vs_h_inf": 0.5684,
-      "jaccard_top_k_hybrid_vs_h_inf": 0.4953,
-      "spearman_rho_hybrid_vs_tfidf_relevance": 0.5243,
-      "kendall_tau_hybrid_vs_tfidf_relevance": 0.3696,
-      "jaccard_top_k_hybrid_vs_tfidf_relevance": 0.278,
-      "spearman_rho_hybrid_vs_tfidf_representativeness": 0.7123,
-      "kendall_tau_hybrid_vs_tfidf_representativeness": 0.5114,
-      "jaccard_top_k_hybrid_vs_tfidf_representativeness": 0.4184
+      "spearman_rho_hybrid_vs_h_inf": 0.7474,
+      "kendall_tau_hybrid_vs_h_inf": 0.552,
+      "jaccard_top_k_hybrid_vs_h_inf": 0.476,
+      "spearman_rho_hybrid_vs_tfidf_relevance": 0.5096,
+      "kendall_tau_hybrid_vs_tfidf_relevance": 0.3543,
+      "jaccard_top_k_hybrid_vs_tfidf_relevance": 0.2739,
+      "spearman_rho_hybrid_vs_tfidf_representativeness": 0.7053,
+      "kendall_tau_hybrid_vs_tfidf_representativeness": 0.5041,
+      "jaccard_top_k_hybrid_vs_tfidf_representativeness": 0.3889
     },
     {
       "resample_iteration": 3,
-      "spearman_rho_hybrid_vs_h_inf": 0.7563,
-      "kendall_tau_hybrid_vs_h_inf": 0.5646,
-      "jaccard_top_k_hybrid_vs_h_inf": 0.4787,
-      "spearman_rho_hybrid_vs_tfidf_relevance": 0.5262,
-      "kendall_tau_hybrid_vs_tfidf_relevance": 0.3701,
-      "jaccard_top_k_hybrid_vs_tfidf_relevance": 0.2882,
-      "spearman_rho_hybrid_vs_tfidf_representativeness": 0.7054,
-      "kendall_tau_hybrid_vs_tfidf_representativeness": 0.5042,
-      "jaccard_top_k_hybrid_vs_tfidf_representativeness": 0.4011
+      "spearman_rho_hybrid_vs_h_inf": 0.7412,
+      "kendall_tau_hybrid_vs_h_inf": 0.5465,
+      "jaccard_top_k_hybrid_vs_h_inf": 0.4925,
+      "spearman_rho_hybrid_vs_tfidf_relevance": 0.4737,
+      "kendall_tau_hybrid_vs_tfidf_relevance": 0.3281,
+      "jaccard_top_k_hybrid_vs_tfidf_relevance": 0.2638,
+      "spearman_rho_hybrid_vs_tfidf_representativeness": 0.697,
+      "kendall_tau_hybrid_vs_tfidf_representativeness": 0.4991,
+      "jaccard_top_k_hybrid_vs_tfidf_representativeness": 0.3986
     },
     {
       "resample_iteration": 4,
-      "spearman_rho_hybrid_vs_h_inf": 0.7393,
-      "kendall_tau_hybrid_vs_h_inf": 0.5478,
-      "jaccard_top_k_hybrid_vs_h_inf": 0.5123,
-      "spearman_rho_hybrid_vs_tfidf_relevance": 0.5033,
-      "kendall_tau_hybrid_vs_tfidf_relevance": 0.3493,
-      "jaccard_top_k_hybrid_vs_tfidf_relevance": 0.2678,
-      "spearman_rho_hybrid_vs_tfidf_representativeness": 0.6933,
-      "kendall_tau_hybrid_vs_tfidf_representativeness": 0.4967,
-      "jaccard_top_k_hybrid_vs_tfidf_representativeness": 0.4337
+      "spearman_rho_hybrid_vs_h_inf": 0.7235,
+      "kendall_tau_hybrid_vs_h_inf": 0.5345,
+      "jaccard_top_k_hybrid_vs_h_inf": 0.518,
+      "spearman_rho_hybrid_vs_tfidf_relevance": 0.4705,
+      "kendall_tau_hybrid_vs_tfidf_relevance": 0.3276,
+      "jaccard_top_k_hybrid_vs_tfidf_relevance": 0.2739,
+      "spearman_rho_hybrid_vs_tfidf_representativeness": 0.6946,
+      "kendall_tau_hybrid_vs_tfidf_representativeness": 0.4955,
+      "jaccard_top_k_hybrid_vs_tfidf_representativeness": 0.406
     },
     {
       "resample_iteration": 5,
-      "spearman_rho_hybrid_vs_h_inf": 0.7377,
-      "kendall_tau_hybrid_vs_h_inf": 0.547,
+      "spearman_rho_hybrid_vs_h_inf": 0.7324,
+      "kendall_tau_hybrid_vs_h_inf": 0.542,
       "jaccard_top_k_hybrid_vs_h_inf": 0.4981,
-      "spearman_rho_hybrid_vs_tfidf_relevance": 0.4942,
-      "kendall_tau_hybrid_vs_tfidf_relevance": 0.3469,
-      "jaccard_top_k_hybrid_vs_tfidf_relevance": 0.3051,
-      "spearman_rho_hybrid_vs_tfidf_representativeness": 0.7157,
-      "kendall_tau_hybrid_vs_tfidf_representativeness": 0.5126,
-      "jaccard_top_k_hybrid_vs_tfidf_representativeness": 0.4159
+      "spearman_rho_hybrid_vs_tfidf_relevance": 0.4689,
+      "kendall_tau_hybrid_vs_tfidf_relevance": 0.3273,
+      "jaccard_top_k_hybrid_vs_tfidf_relevance": 0.2539,
+      "spearman_rho_hybrid_vs_tfidf_representativeness": 0.7041,
+      "kendall_tau_hybrid_vs_tfidf_representativeness": 0.5042,
+      "jaccard_top_k_hybrid_vs_tfidf_representativeness": 0.4134
     }
   ],
   "aggregate_stability": {
     "spearman_rho_hybrid_vs_h_inf": {
-      "mean": 0.7453,
-      "std": 0.0103
+      "mean": 0.7346,
+      "std": 0.0086
     },
     "kendall_tau_hybrid_vs_h_inf": {
-      "mean": 0.5545,
-      "std": 0.0099
+      "mean": 0.5427,
+      "std": 0.0061
     },
     "jaccard_top_k_hybrid_vs_h_inf": {
-      "mean": 0.4993,
-      "std": 0.0125
+      "mean": 0.4852,
+      "std": 0.0257
     },
     "spearman_rho_hybrid_vs_tfidf_relevance": {
-      "mean": 0.5133,
-      "std": 0.0125
+      "mean": 0.4881,
+      "std": 0.0211
     },
     "kendall_tau_hybrid_vs_tfidf_relevance": {
-      "mean": 0.36,
-      "std": 0.01
+      "mean": 0.3398,
+      "std": 0.015
     },
     "jaccard_top_k_hybrid_vs_tfidf_relevance": {
-      "mean": 0.288,
-      "std": 0.0139
+      "mean": 0.2663,
+      "std": 0.0074
     },
     "spearman_rho_hybrid_vs_tfidf_representativeness": {
-      "mean": 0.7054,
-      "std": 0.0081
+      "mean": 0.6997,
+      "std": 0.0042
     },
     "kendall_tau_hybrid_vs_tfidf_representativeness": {
-      "mean": 0.5053,
-      "std": 0.006
+      "mean": 0.5004,
+      "std": 0.0033
     },
     "jaccard_top_k_hybrid_vs_tfidf_representativeness": {
-      "mean": 0.4155,
-      "std": 0.0109
+      "mean": 0.4011,
+      "std": 0.0082
     }
   }
 }

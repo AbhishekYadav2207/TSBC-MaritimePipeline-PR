@@ -7,7 +7,7 @@
   "exclusion_reason": "Excluded after benchmark compatibility anomaly: zero MLM Top-1/Top-5/Top-10 across the evaluated standard cells and English diagnostic.",
   "source": "Stage 13 Candidate Screening & Benchmark Registry Exclusion",
   "source_stage": "Stage 13 (Screening / Candidate Registry Exclusion)",
-  "timestamp": "2026-10-07 18:55:23",
+  "timestamp": "2026-10-08 06:49:35",
   "prior_evaluation_availability": true,
   "current_active_status": "permanently_excluded",
   "previous_evaluation_evidence": {

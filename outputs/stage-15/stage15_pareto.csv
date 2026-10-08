@@ -1,8 +1,8 @@
 model_name,pareto_status,dominated_by_count,dominated_by,dominates_count,dominates,evaluated_objectives
-allenai/scibert_scivocab_uncased,Pareto-Optimal,0,None,0,None,"top1_acc, rare_top1_acc, mlm_loss, fragmentation_rate_pct, inference_latency_ms, throughput_docs_sec"
+allenai/scibert_scivocab_uncased,Pareto-Optimal,0,None,1,microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext,"top1_acc, rare_top1_acc, mlm_loss, fragmentation_rate_pct, inference_latency_ms, throughput_docs_sec"
 answerdotai/ModernBERT-base,Pareto-Optimal,0,None,0,None,"top1_acc, rare_top1_acc, mlm_loss, fragmentation_rate_pct, inference_latency_ms, throughput_docs_sec"
-bert-base-uncased,Pareto-Optimal,0,None,0,None,"top1_acc, rare_top1_acc, mlm_loss, fragmentation_rate_pct, inference_latency_ms, throughput_docs_sec"
-dmis-lab/biobert-base-cased-v1.2,Pareto-Optimal,0,None,0,None,"top1_acc, rare_top1_acc, mlm_loss, fragmentation_rate_pct, inference_latency_ms, throughput_docs_sec"
-microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext,Pareto-Optimal,0,None,0,None,"top1_acc, rare_top1_acc, mlm_loss, fragmentation_rate_pct, inference_latency_ms, throughput_docs_sec"
+bert-base-uncased,Pareto-Optimal,0,None,2,"dmis-lab/biobert-base-cased-v1.2, microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext","top1_acc, rare_top1_acc, mlm_loss, fragmentation_rate_pct, inference_latency_ms, throughput_docs_sec"
 nlpaueb/legal-bert-base-uncased,Pareto-Optimal,0,None,0,None,"top1_acc, rare_top1_acc, mlm_loss, fragmentation_rate_pct, inference_latency_ms, throughput_docs_sec"
 roberta-base,Pareto-Optimal,0,None,0,None,"top1_acc, rare_top1_acc, mlm_loss, fragmentation_rate_pct, inference_latency_ms, throughput_docs_sec"
+dmis-lab/biobert-base-cased-v1.2,Dominated,1,bert-base-uncased,0,None,"top1_acc, rare_top1_acc, mlm_loss, fragmentation_rate_pct, inference_latency_ms, throughput_docs_sec"
+microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext,Dominated,2,"allenai/scibert_scivocab_uncased, bert-base-uncased",0,None,"top1_acc, rare_top1_acc, mlm_loss, fragmentation_rate_pct, inference_latency_ms, throughput_docs_sec"

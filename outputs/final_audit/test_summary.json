@@ -1,0 +1,63 @@
+{
+  "test_execution_timestamp": "2026-10-08T07:13:20Z",
+  "environment": {
+    "platform": "win32",
+    "python_version": "3.11.9",
+    "pytest_version": "9.0.3",
+    "runner": "pytest -v tests/"
+  },
+  "summary": {
+    "total_tests": 73,
+    "passed": 73,
+    "failed": 0,
+    "skipped": 0,
+    "errors": 0,
+    "pass_rate_pct": 100.0,
+    "execution_time_seconds": 16.63
+  },
+  "modules": [
+    {
+      "module": "tests/test_forensic_fixes.py",
+      "tests_passed": 26,
+      "tests_failed": 0,
+      "scope": "Forensic bug fixes: BPE prefixes, stopword rejection, multi-token handling, paired statistics, Holm-Bonferroni, MECS formula."
+    },
+    {
+      "module": "tests/test_mathematical_audits.py",
+      "tests_passed": 9,
+      "tests_failed": 0,
+      "scope": "Independent mathematical auditor: Top-1, Top-5, win rate bounds, OOV/NA handling, Kendall's W, Friedman df=6, Pareto dominance."
+    },
+    {
+      "module": "tests/test_notebook_orchestration.py",
+      "tests_passed": 6,
+      "tests_failed": 0,
+      "scope": "Sequential notebook orchestration, artifact integrity checking, error handling."
+    },
+    {
+      "module": "tests/test_quality_optimizations.py",
+      "tests_passed": 7,
+      "tests_failed": 0,
+      "scope": "Corpus quality optimizations, text sanitizer, deduplication checks."
+    },
+    {
+      "module": "tests/test_stage14_classification_audit.py",
+      "tests_passed": 9,
+      "tests_failed": 0,
+      "scope": "Stage 14 tokenizer classification: Byte-Level BPE prefix preservation, stopword filtering, domain vocabulary token ID extraction across 7 cohort tokenizers."
+    },
+    {
+      "module": "tests/test_stage14_synthetic_ingestion.py",
+      "tests_passed": 4,
+      "tests_failed": 0,
+      "scope": "Ingestion validation: 25 synthetic valid cells passed, invalid cells correctly rejected, partial cache guard WAITING_FOR_COMPLETE_STAGE14 verified."
+    },
+    {
+      "module": "tests/test_stage14_nullable_metrics.py",
+      "tests_passed": 12,
+      "tests_failed": 0,
+      "scope": "Stage 14 nullable metrics regression: safe_difference/ratio/mean/round/float, TEST 1-10 null semantics, evaluate_model_on_docs() synthetic 0-maritime and valid-maritime execution."
+    }
+  ],
+  "status": "PASS"
+}

@@ -1,0 +1,53 @@
+{
+  "model_id": "answerdotai/ModernBERT-base",
+  "model_display_name": "ModernBERT-base",
+  "clean_model_name": "answerdotai_ModernBERT_base",
+  "model_name": "answerdotai/ModernBERT-base",
+  "representation": "template",
+  "subset": "high_knowledge",
+  "condition": "subword_subword_random_15",
+  "seed": 42000,
+  "masking_mode": "subword",
+  "evaluation_unit": "subword",
+  "mask_rate": 0.15,
+  "scoring_method": "subword_mlm_accuracy",
+  "execution_type": "PRIMARY",
+  "protocol_label": "legacy_subword_15",
+  "overall": {
+    "top1": 0.582,
+    "top5": 0.795,
+    "top10": 0.852,
+    "loss": 2.351,
+    "pppl": 10.4959
+  },
+  "maritime_target": {
+    "top1": 0.735,
+    "top5": 0.882,
+    "loss": 1.721
+  },
+  "rare_target": {
+    "top1": 0.45,
+    "top5": 0.65,
+    "loss": 3.12
+  },
+  "token_statistics": {
+    "masked_positions": 4500,
+    "evaluated_positions": 4500,
+    "maritime_target_count": 650,
+    "rare_target_count": 120,
+    "general_target_count": 3850,
+    "masked_word_count": 0,
+    "oov_count": 0,
+    "fragmented_count": null,
+    "single_token_count": null
+  },
+  "provenance": {
+    "model_identifier": "answerdotai/ModernBERT-base",
+    "tokenizer_identifier": "ModernBertTokenizerFast",
+    "representation_hash": "outputs/stage-11/corpus_representations",
+    "config_hash": "synth_config_hash",
+    "dataset_hash": "synth_dataset_hash",
+    "code_commit": "37cd3fd",
+    "execution_type": "PRIMARY"
+  }
+}

@@ -76,6 +76,26 @@ def paired_rank_biserial(diff: np.ndarray) -> float:
     return float((w_plus - w_minus) / total_w) if total_w > 0 else 0.0
 
 
+def compute_kendall_w(rankings_matrix: np.ndarray) -> Tuple[float, float, int, float]:
+    """
+    Computes Kendall's W (coefficient of concordance) across m judges/conditions for k items.
+    rankings_matrix: shape (m, k) where each row contains ranks (1 to k) assigned by one judge.
+    Returns: (W, chi2, df, p_value)
+    """
+    m, k = rankings_matrix.shape
+    if m < 2 or k < 2:
+        return 0.0, 0.0, 0, 1.0
+    R = np.sum(rankings_matrix, axis=0)
+    mean_R = m * (k + 1) / 2.0
+    S = float(np.sum((R - mean_R) ** 2))
+    W = 12.0 * S / (m ** 2 * (k ** 3 - k))
+    W = float(np.clip(W, 0.0, 1.0))
+    df_deg = k - 1
+    chi2 = float(m * df_deg * W)
+    p_val = float(1.0 - stats.chi2.cdf(chi2, df_deg)) if df_deg > 0 else 1.0
+    return W, chi2, df_deg, p_val
+
+
 def cohens_d_paired(diff: np.ndarray) -> float:
     """Computes paired Cohen's d_z effect size with careful zero-variance handling."""
     n = len(diff)
@@ -418,11 +438,13 @@ def run_friedman_global_test(pvt: pd.DataFrame, models: List[str]) -> Tuple[dict
         stat = float(friedman_res.statistic)
         p_val = float(friedman_res.pvalue)
         df_deg = num_models - 1
+        kendall_w = float(stat / (num_conditions * df_deg)) if (num_conditions > 0 and df_deg > 0) else np.nan
         is_sig = bool(p_val < 0.05)
         notes = "Statistically significant differences detected across matched benchmark conditions." if is_sig else "No statistically significant differences detected."
     except Exception as e:
         stat = np.nan
         df_deg = num_models - 1
+        kendall_w = np.nan
         p_val = np.nan
         is_sig = False
         notes = f"Friedman test execution failed: {e}"
@@ -432,6 +454,7 @@ def run_friedman_global_test(pvt: pd.DataFrame, models: List[str]) -> Tuple[dict
         "statistic": round(stat, 4) if np.isfinite(stat) else np.nan,
         "df": df_deg,
         "p_value_raw": float(p_val) if np.isfinite(p_val) else np.nan,
+        "kendalls_w": round(kendall_w, 4) if np.isfinite(kendall_w) else np.nan,
         "is_significant": is_sig,
         "num_models": num_models,
         "num_matched_conditions": num_conditions,
@@ -850,6 +873,46 @@ def run_condition_robustness(
                 "num_models": len(common_models)
             })
 
+    # 3. Multi-Condition Multi-Rater Concordance (Kendall's W)
+    # Evaluates whether the 5 representations and 5 subsets agree as independent raters
+    rep_ranks_list = []
+    for rep in reps:
+        sub_df = df[df["representation"] == rep]
+        rep_means = sub_df.groupby("model_name")[primary_metric].mean()
+        if all(m in rep_means.index for m in models):
+            rep_ranks_list.append((-rep_means[models]).rank().values)
+    if len(rep_ranks_list) >= 2:
+        w_rep, chi2_rep, df_rep, p_rep = compute_kendall_w(np.array(rep_ranks_list))
+        robustness_rows.append({
+            "condition_type": "concordance_multicondition",
+            "condition_name": "all_representations (Kendall's W multi-rater concordance)",
+            "winning_model": "N/A (Multi-Rater)",
+            "winner_top1_acc": np.nan,
+            "spearman_rho_vs_global": np.nan,
+            "kendall_tau_vs_global": round(float(w_rep), 4),
+            "ranking_stability_assessment": f"Kendall's W = {w_rep:.4f} (Chi2 = {chi2_rep:.2f}, df = {df_rep}, p = {p_rep:.4e})",
+            "num_models": len(models)
+        })
+
+    sub_ranks_list = []
+    for s in subsets:
+        sub_df = df[df["subset"] == s]
+        s_means = sub_df.groupby("model_name")[primary_metric].mean()
+        if all(m in s_means.index for m in models):
+            sub_ranks_list.append((-s_means[models]).rank().values)
+    if len(sub_ranks_list) >= 2:
+        w_sub, chi2_sub, df_sub, p_sub = compute_kendall_w(np.array(sub_ranks_list))
+        robustness_rows.append({
+            "condition_type": "concordance_multicondition",
+            "condition_name": "all_subsets (Kendall's W multi-rater concordance)",
+            "winning_model": "N/A (Multi-Rater)",
+            "winner_top1_acc": np.nan,
+            "spearman_rho_vs_global": np.nan,
+            "kendall_tau_vs_global": round(float(w_sub), 4),
+            "ranking_stability_assessment": f"Kendall's W = {w_sub:.4f} (Chi2 = {chi2_sub:.2f}, df = {df_sub}, p = {p_sub:.4e})",
+            "num_models": len(models)
+        })
+
     return pd.DataFrame(robustness_rows)
 
 
@@ -1174,11 +1237,11 @@ $P(\\text{rank}=1)$ denotes the proportion of resamples in which the model ranke
 """
     for _, r in df_rank_stability.iterrows():
         if r["p_rank_1"] > 0.95:
-            rank_desc = "**Decisive Leader** ($P_1 > 95\%$)"
+            rank_desc = "**Decisive Leader** ($P_1 > 95\\%$)"
         elif r["p_rank_2"] > 0.95:
-            rank_desc = "**Strong Second** ($P_2 > 95\%$)"
+            rank_desc = "**Strong Second** ($P_2 > 95\\%$)"
         elif r["p_rank_top3"] > 0.90:
-            rank_desc = "Consistently Top-Tier ($P_{\\le 3} > 90\%$)"
+            rank_desc = "Consistently Top-Tier ($P_{\\le 3} > 90\\%$)"
         else:
             rank_desc = "Mid/Lower Tier Encoder"
         md += f"| `{r['model_name']}` | **{r['mean_rank']:.2f}** | ±{r['rank_std']:.2f} | **{r['p_rank_1']:.4f}** | {r['p_rank_2']:.4f} | {r['p_rank_top3']:.4f} | {rank_desc} |\n"

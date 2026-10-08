@@ -62,3 +62,6 @@ hf_cache/
 .cache/
 cache/
 cache.*
+
+docs/
+schemas/
