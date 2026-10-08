@@ -1,120 +1,103 @@
-# Comprehensive Forensic Audit & Legacy Restoration Final Report
-**MaritimeBench / MaritimeBERT Pipeline Version 2.1**
-**Date**: October 8, 2026
-**Authoritative Heritage Reference**: Git commit `3602aad`
-**Current Status**: `LOCAL_CODE_FINALIZED_WAITING_FOR_COLAB`
+# Final Forensic Audit Report: Post-Colab Validation & End-to-End Pipeline Verification
+**MaritimeBench / MaritimeBERT Pipeline Version 2.1**  
+**Date**: October 8, 2026  
+**Final Verdict**: `POST_COLAB_FORENSICALLY_VERIFIED`
 
 ---
 
-## 1. Executive Summary
-This report documents the forensic repair, legacy protocol restoration, and mathematical audit of the MaritimeBench benchmarking pipeline.
-The primary objectives were:
-1. **Restore the legacy Stage 14 subword MLM benchmark** as the authoritative primary protocol (commit `3602aad`).
-2. **Retain all validated bug fixes** (Byte-Level BPE prefix handling, stopword filtering, multi-word term parsing, deterministic seeding, and strict `null` handling for zero-count categories) without altering the intended scientific protocol.
-3. **Isolate primary and secondary namespaces** to prevent cache pollution and preserve historical data.
-4. **Implement an independent mathematical auditor** to verify metric formulas within $\epsilon < 10^{-6}$.
-5. **Overhaul the statistical inference framework** to address crossed-design dependencies, multi-rater concordance (Kendall's $W$), and paired dominance interpretation.
-6. **Formally track and resolve all 30 pre-submission review issues** (A1–A10, B1–B9, C1–C11).
-7. **Freeze local code and prepare Google Colab handoff** per explicit user constraints.
+## 1. Executive Summary & Forensic Determination
+Following execution of the primary Stage 14 Masked Language Modeling benchmark in Google Colab (GPU environment), all primary results, auxiliary benchmarks, and evaluation logs were downloaded into the repository. 
+
+A comprehensive, 25-phase forensic audit was conducted locally **without re-running Stage 14**. Every calculation, formula, metric transformation, aggregate ranking, and statistical test was audited independently from raw primary cell files. All downstream stages (Stage 15, Stage 16, Stage 17, Stage 18) were regenerated locally exclusively from the validated primary Stage 14 cache.
+
+### Core Findings & Audit Summary:
+1. **Primary Cache Integrity**: Exactly 175 primary JSON cell records ($7 \text{ models} \times 5 \text{ representations} \times 5 \text{ subsets}$) validated in `outputs/stage-14/evaluations/cache_legacy_subword_15/`. Zero schema violations, zero duplicates, zero missing cells.
+2. **Protocol Adherence**: 100% of cells adhere to the primary protocol (`random_15`, `subword` masking, `subword` reconstruction, mask rate $0.15$, seed $42 + \text{cell\_index}$). WWM records are completely isolated in `cache_wwm_word_secondary/` with zero cross-contamination.
+3. **Independent Calculation Match**: Independent reimplementation of all aggregations confirmed exact integer matches on token counts and floating-point differences $\le 10^{-7}$ (well within the $10^{-6}$ audit requirement).
+4. **Statistical Rigor**: 3-way crossed repeated-measures ANOVA correctly accounts for repeated conditions (Model accounts for 55.66% variance, Representation 25.47%, Interaction 15.34%). Friedman omnibus test yields $\chi^2 = 121.17, df = 6, p = 9.27 \times 10^{-24}$.
+5. **Pairwise Dominance**: Wilcoxon signed-rank tests with Holm-Bonferroni correction confirm `answerdotai/ModernBERT-base` significantly outperforms all 6 competitors across 25 matched conditions ($p_{\text{holm}} \le 0.000229$, paired rank-biserial $r_{\text{prb}} \ge 0.81$, matched wins: 20/25 vs RoBERTa = 80.0%, 23/25 vs LegalBERT = 92.0%, 25/25 vs others = 100%).
+6. **MECS & Pareto Verification**: Baseline MECS independently reproduced (`ModernBERT`: 87.40, `RoBERTa`: 75.38, `SciBERT`: 62.06, `BERT`: 58.74, `LegalBERT`: 57.65, `BioBERT`: 48.06, `PubMedBERT`: 42.15). Multi-objective Pareto frontier verified (5 models non-dominated, 2 dominated).
+7. **DAPT Parent-Child Comparison & Leakage**: Controlled comparison of `MaritimeBERT-v1` vs parent `ModernBERT-base` shows domain adaptation gains on maritime vocabulary (20/25 wins = 80.0%). Data split audit reveals 0 exact string duplicates, 16.76% scaffold-reduced near-duplicates, and 58.48% template scaffolding.
+8. **Test Suite**: 73 of 73 tests passed (100% pass rate).
 
 ---
 
-## 2. Historical Baseline Preservation & Audit
-Prior to any modifications, the historical benchmark cache was inspected and hashed:
-* **Location**: `outputs/stage-14/evaluations/cache/`
-* **Cell Count**: Exactly 175 JSON cell records ($7 \text{ models} \times 5 \text{ representations} \times 5 \text{ subsets}$).
-* **Documents per Cell**: Exactly 200 documents/cell (35,000 document evaluations).
-* **Protocol Confirmed**:
-  - `masking_strategy`: `random_15`
-  - `masking_mode`: `subword`
-  - `evaluation_unit`: `subword`
-  - `mask_rate`: 0.15
-* **Manifest Created**: `outputs/final_audit/stage14_historical_cache_manifest.json` recording SHA-256 hashes for all 175 files.
-* **Integrity Guarantee**: The historical cache was kept completely untouched and serves as an immutable baseline.
+## 2. Observed Benchmark Results (Section A)
+
+### Primary Cross-Model Benchmark Leaderboard (Stage 15 Macro-Averages over 25 Matched Conditions)
+| Rank | Model Name | Maritime Top-1 (%) | Overall Top-1 (%) | MLM Loss | PPPL | MECS (Baseline) | Latency (ms) | Fragmentation (%) | Pareto Status |
+| :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **1** | `answerdotai/ModernBERT-base` | **57.99%** | **67.42%** | **2.1937** | **13.72** | **87.40** | 28.7 | 62.99% | Pareto-Optimal |
+| **2** | `roberta-base` | 46.12% | 59.88% | 2.8720 | 25.99 | 75.38 | 23.4 | 64.78% | Pareto-Optimal |
+| **3** | `allenai/scibert_scivocab_uncased` | 32.39% | 46.22% | 4.2804 | 100.86 | 62.06 | 20.4 | 42.09% | Pareto-Optimal |
+| **4** | `bert-base-uncased` | 28.08% | 42.15% | 4.7544 | 158.81 | 58.74 | **19.5** | **26.57%** | Pareto-Optimal |
+| **5** | `nlpaueb/legal-bert-base-uncased` | 27.96% | 41.80% | 4.4779 | 119.58 | 57.65 | 20.8 | 37.61% | Pareto-Optimal |
+| **6** | `dmis-lab/biobert-base-cased-v1.2` | 23.55% | 37.45% | 5.1486 | 237.94 | 48.06 | 20.8 | 35.82% | Dominated |
+| **7** | `microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext` | 20.29% | 33.10% | 5.8753 | 480.95 | 42.15 | 20.6 | 42.69% | Dominated |
+
+### Multi-Condition Concordance (Kendall's $W$)
+- **Representation Concordance**: $W_{\text{rep}} = 0.7943$ ($\chi^2 = 23.83, df = 6, p = 0.00056$).
+- **Subset Concordance**: $W_{\text{sub}} = 0.9829$ ($\chi^2 = 29.49, df = 6, p = 0.000049$).
 
 ---
 
-## 3. Protocol Restoration & Cache Isolation
-* **Primary Protocol (`legacy_subword_15`)**:
-  - Script: `scripts/14_mlm_evaluation.py`
-  - Defaults: `--masking_mode subword --evaluation_unit subword --masking_strategy random_15`
-  - Target Cache: `outputs/stage-14/evaluations/cache_legacy_subword_15/`
-  - Tag: `"execution_type": "PRIMARY"`
-* **Secondary Robustness (`wwm_word_secondary`)**:
-  - Opt-in CLI flags: `--masking_mode wwm_word --evaluation_unit word`
-  - Target Cache: `outputs/stage-14/evaluations/cache_wwm_word_secondary/`
-  - Tag: `"execution_type": "SECONDARY"`
-* **Strict Refusal Gate**:
-  - `scripts/15_cross_model_benchmarking.py` contains a pre-execution validation gate. It will refuse execution unless `cache_legacy_subword_15/` contains all 175 valid subword cell records.
+## 3. Independently Verified Results (Section B)
+
+Every primary metric was recalculated independently in `scripts/audit_independent_calculations.py` without importing production pipeline aggregation logic:
+- **Macro-Averaging**: Floating-point difference $|\text{production} - \text{independent}| \le 7.1 \times 10^{-8}$.
+- **PPPL Lineage**: Independently confirmed that PPPL is evaluated as $\exp(\text{mean NLL})$, not $\text{mean}(\exp(\text{NLL}))$.
+- **MECS Formula (Eq. 2)**: Independently reproduced using fixed cohort-independent loss normalization $[3.0, 8.0]$.
+- **Friedman Omnibus Test**: Independently reproduced $\chi^2 = 121.1657, df = 6, p = 9.27 \times 10^{-24}$.
+- **Paired Wilcoxon & Holm Step-Down**: 21 pairwise tests independently computed; confirmed ModernBERT experiences 0 statistically significant pairwise defeats.
+- **Null Metric Audit**: 217 legitimate null values across 175 cells (175 overall Top-5 in subword mode, 14 rare target slices with 0 tokens). Zero instances of `null -> 0.0` conversion found.
 
 ---
 
-## 4. Retained Bug Fixes & Schema Enforcement
-1. **Zero-Count Category Fix**:
-   When evaluated positions for maritime or rare targets equal zero, metrics are emitted as `null` (`None`). Under no circumstances is `0.0` or `NaN` emitted.
-2. **Byte-Level BPE Handling**:
-   Leading space markers (`Ġcargo`, `cargo`, `Ġvessel`, `Ġbollards`) are handled seamlessly without raw regex string-matching artifacts.
-3. **Stopword Exclusion**:
-   Non-domain function words (`and`, `the`, `of`, `in`, `is`, `for`) are strictly excluded from the maritime vocabulary bucket.
-4. **Output Schema Specification**:
-   `schemas/stage14_cell_schema.json` enforces exact output partitioning across `overall`, `maritime_target`, `rare_target`, `token_statistics`, and `provenance`.
+## 4. Methodological Limitations (Section C)
+As formally documented in `docs/LIMITATIONS.md`:
+1. **Intrinsic vs Extrinsic Transfer**: Superior intrinsic MLM performance on maritime text does not guarantee downstream fine-tuning superiority on specialized classification or NER tasks.
+2. **Tokenizer Fragmentation & Sibling Leakage**: BPE tokenizers fragment maritime terms into 2–3 subwords (63–65% fragmentation). Subword masking may allow sibling context leakage. The secondary Whole-Word Masking benchmark (`cache_wwm_word_secondary`) provides a complementary evaluation.
+3. **Architectural & Pretraining Confounders**: ModernBERT's performance advantage reflects larger pretraining corpus (2T+ tokens), rotary embeddings, and architectural recency in addition to domain expressiveness.
+4. **Template Scaffolding & Leakage**: 58.48% template scaffolding in accident reports inflates n-gram overlap between train and test splits (56.7% shingle overlap), though exact string duplicates are 0%.
+5. **DAPT Selection Regret**: Computational budget permitted DAPT on ModernBERT only; alternative adaptations on RoBERTa or BERT-base remain untested.
 
 ---
 
-## 5. Independent Mathematical Auditor
-* **Script**: `scripts/audit_independent_calculations.py`
-* **Independence**: Does not import production aggregation functions; parses raw cell JSON records and calculates metrics directly using closed-form analytical formulas.
-* **Audit Scope**:
-  - Cell counts and token totals.
-  - Top-1 and Top-5 accuracy.
-  - Mean loss and pseudo-perplexity.
-  - Maritime and rare target accuracies.
-  - Model marginal means across representations and subsets.
-  - Pairwise differences, Wilcoxon signed ranks, and Kendall's $W$ concordance.
-* **Validation Outcome**: Verified on all 175 historical cell records with numerical difference $\epsilon = 0.0 < 10^{-6}$.
+## 5. Unresolved Issues & Disposition (Section D)
+All 30 pre-submission review issues (A1–A10, B1–B9, C1–C11) have been dispositioned in `docs/REVIEW_30_ISSUES_RESOLUTION.md`:
+- **RESOLVED**: 24 issues.
+- **DOCUMENTED_LIMITATION**: 6 issues (A1: WWM primary vs secondary; A9: template scaffolding leakage; A10: single DAPT initialization / selection regret; B9: fixed bounded normalization limits; C1: single annotator vocabulary; C6: sequence packing across documents).
+- **PARTIALLY_RESOLVED**: 0 issues.
+- **UNRESOLVED**: 0 issues.
 
 ---
 
-## 6. Statistical Validation Framework (Stage 16)
-1. **Crossed Repeated-Measures ANOVA**:
-   Replaces naive cell independence with a 3-way crossed ANOVA (Models $\times$ Representations $\times$ Subsets) with 1,000 block-respecting condition permutations.
-2. **Paired vs. Unpaired Effect Sizes**:
-   - Matched cell win rate reported as wins out of 25 matched cells.
-   - Paired rank-biserial correlation ($r_{\text{prb}} \in [-1, 1]$) and paired Cohen's $d_z$ reported as primary effect sizes.
-   - Unpaired Cliff's delta ($\delta$) explicitly labeled as descriptive distribution context.
-3. **Kendall's W Multi-Rater Concordance**:
-   Computed across the 5 representations ($W_{\text{rep}}$) and 5 subsets ($W_{\text{sub}}$) to measure true multi-condition ranking agreement.
+## 6. Acceptance Checklist
+- [x] 175/175 primary Stage14 cells validated
+- [x] All 7 models present
+- [x] All 5 representations present
+- [x] All 5 subsets present
+- [x] Primary protocol correct (`random_15`, `subword`, `0.15`)
+- [x] WWM isolated in secondary namespace (`cache_wwm_word_secondary/`)
+- [x] Stage14 provenance verified
+- [x] Independent calculations match ($\le 10^{-7}$)
+- [x] Stage15 independently audited
+- [x] MECS independently reproduced
+- [x] PPPL audited
+- [x] Kendall's $W$ audited
+- [x] Friedman $df=6$ verified
+- [x] Paired and unpaired statistics separated
+- [x] Holm-Bonferroni correction verified
+- [x] Pareto directions verified
+- [x] Stage17 decision independently reproduced
+- [x] DAPT parent-child comparison controlled
+- [x] DAPT win/loss/tie arithmetic verified (20/25 = 80.0%, never 100%)
+- [x] Current split leakage audit completed
+- [x] Paper data lineage generated (`outputs/final_audit/paper_data_lineage.csv`)
+- [x] All 30 review issues dispositioned
+- [x] No unexplained report contradictions
+- [x] 73/73 test suite tests pass
+- [x] Historical cache preserved (`outputs/stage-14/evaluations/cache/`)
+- [x] Primary and secondary caches isolated
 
----
-
-## 7. Review Issues Matrix & Resolutions
-All 30 issues from `MaritimeBench_Review.docx` have been mapped and addressed:
-- **A1**: Primary subword protocol restored; WWM isolated as secondary robustness.
-- **A2**: Cliff's delta interpretation corrected; paired win rates and rank-biserial reported.
-- **A3**: Joint context deprivation mechanism clarified for domain-aware masking.
-- **A4**: Empirical PLL log-likelihoods corrected in narrative (RoBERTa $-1.64$ vs ModernBERT $-1.95$).
-- **A5**: Representation file derivation and SHA-256 hashes recorded.
-- **A6**: Candidate pool progression audited (13 considered, 12 evaluated, 1 load error, 5 duplicates dropped = 6 dropped, 7 retained).
-- **A7**: Pretraining scale and architectural confounds acknowledged in formal limitations.
-- **A8**: Crossed repeated-measures ANOVA implemented with interaction terms.
-- **A9**: DAPT near-duplicates quantified (16.76%), 4,844 test split verified, slot-value masking specified.
-- **A10**: Selection regret documented in formal limitations.
-- **B1**: MECS (Eq. 2) arithmetic audited; ModernBERT reproduced with cohort bounds.
-- **B2**: Packed vs unpacked evaluation context differences documented.
-- **B3**: PPPL Jensen's inequality effect stated.
-- **B4**: Eq. 1 parentheses corrected: `0.25 * (S_rel + S_info + S_rep - P_red)`.
-- **B5**: Kendall's $W$ implemented for multi-subset concordance.
-- **B6**: Standardized on Holm-corrected Wilcoxon tests; bootstrap CIs labeled unadjusted.
-- **B7**: Claim scope clarified (BERT ranks 5th in Top-1, 3rd in MECS).
-- **B8**: Pareto non-dominated frontier terminology corrected.
-- **B9**: Decision rule metric dependencies acknowledged; circular bounds replaced.
-- **C1–C11**: Nomenclature standardized (MUI $\to$ MECS), typography cleaned, citations verified, paper data lineage mapped.
-
----
-
-## 8. Final Status & Handover
-Local code, test suites, schemas, auditors, and downstream continuation gates are finalized.
-The pipeline is waiting for the user to execute Stage 14 in Google Colab:
-- **Colab Run Guide**: `outputs/final_audit/COLAB_STAGE14_RUN_INSTRUCTIONS.md`
-- **Continuation Script**: `scripts/continue_after_stage14.py --continue`
-- **Current Pipeline State**: `LOCAL_CODE_FINALIZED_WAITING_FOR_COLAB`
+**FINAL FORENSIC STATUS: VERIFIED**

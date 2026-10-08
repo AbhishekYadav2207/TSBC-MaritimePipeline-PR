@@ -21,7 +21,7 @@ The key findings are:
 | **Train** | 87,174 | 3,446,848 | — | — |
 | **Validation** | 4,843 | 192,475 | **0** | 56.75% |
 | **Test** | 4,844 | 191,027 | **0** | 56.60% |
-| **Total Corpus** | 96,874 | 3,830,350 | **0** | 16.76% (scaffold-reduced) |
+| **Total Corpus** | 96,850 | 3,830,350 | **0** | 16.76% (scaffold-reduced) |
 
 ---
 

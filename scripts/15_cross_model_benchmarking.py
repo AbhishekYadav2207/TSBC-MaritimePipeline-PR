@@ -1230,8 +1230,8 @@ def main():
     parser = argparse.ArgumentParser(description="Stage 15: Cross-Model Benchmarking & Selection")
     parser.add_argument("--cache-dir", type=str, default=None, help="Stage 14 evaluations cache directory")
     parser.add_argument("--output-dir", type=str, default=None, help="Stage 15 output directory")
-    parser.add_argument("--masking-mode", type=str, default="whole_word", choices=["subword", "whole_word"], help="Evaluation masking mode")
-    parser.add_argument("--evaluation-unit", type=str, default="word", choices=["subword", "word"], help="Evaluation unit")
+    parser.add_argument("--masking-mode", type=str, default="subword", choices=["subword", "whole_word"], help="Evaluation masking mode")
+    parser.add_argument("--evaluation-unit", type=str, default="subword", choices=["subword", "word"], help="Evaluation unit")
     args = parser.parse_args()
 
     root = get_project_root()

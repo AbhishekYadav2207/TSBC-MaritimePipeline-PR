@@ -2,7 +2,7 @@
   "audit_name": "DAPT Split Leakage & Token Type Analysis",
   "reference_issue": "Review Issue A9 (DAPT evaluation leakage & slot-value evaluation)",
   "corpus_composition": {
-    "total_documents": 96874,
+    "total_documents": 96850,
     "train_documents": 87174,
     "val_documents": 4843,
     "test_documents": 4844,

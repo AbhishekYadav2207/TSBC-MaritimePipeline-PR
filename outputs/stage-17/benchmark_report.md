@@ -1,6 +1,6 @@
 # Stage 17: Evidence-Synthesis & Pretrained Model Selection Report
 **Project**: TSBC-MaritimePipeline-Version2.1  
-**Generated**: 2026-10-08 07:38:42  
+**Generated**: 2026-10-08 13:40:15  
 **Evaluation Architecture**: Stage 15 Compatibility + Stage 16 Statistical Robustness Synthesis
 
 ---

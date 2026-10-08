@@ -1,0 +1,205 @@
+{
+  "audit_timestamp": "2026-10-08T07:55:08.084444Z",
+  "total_cells_audited": 175,
+  "rankings": {
+    "maritime_top1_descending": [
+      "answerdotai/ModernBERT-base",
+      "roberta-base",
+      "allenai/scibert_scivocab_uncased",
+      "bert-base-uncased",
+      "nlpaueb/legal-bert-base-uncased",
+      "dmis-lab/biobert-base-cased-v1.2",
+      "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext"
+    ],
+    "overall_top1_descending": [
+      "answerdotai/ModernBERT-base",
+      "roberta-base",
+      "allenai/scibert_scivocab_uncased",
+      "bert-base-uncased",
+      "nlpaueb/legal-bert-base-uncased",
+      "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "dmis-lab/biobert-base-cased-v1.2"
+    ],
+    "overall_loss_ascending": [
+      "answerdotai/ModernBERT-base",
+      "roberta-base",
+      "allenai/scibert_scivocab_uncased",
+      "bert-base-uncased",
+      "nlpaueb/legal-bert-base-uncased",
+      "dmis-lab/biobert-base-cased-v1.2",
+      "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext"
+    ]
+  },
+  "model_aggregates": {
+    "allenai/scibert_scivocab_uncased": {
+      "cells": 25,
+      "mean_overall_top1": 0.4708606935699672,
+      "mean_overall_loss": 3.394922733012658,
+      "mean_pppl": 37.94193179821287,
+      "mean_maritime_top1": 0.3238525022945566,
+      "mean_maritime_top5": 0.4845522506482617,
+      "mean_maritime_loss": 4.280385245959072,
+      "mean_rare_top1": 0.52017562268918,
+      "mean_rare_top5": 0.7205474871545618,
+      "mean_rare_loss": 2.733429980685027,
+      "total_masked_positions": 110309,
+      "total_maritime_targets": 23865,
+      "total_rare_targets": 2406
+    },
+    "answerdotai/ModernBERT-base": {
+      "cells": 25,
+      "mean_overall_top1": 0.5729809727001147,
+      "mean_overall_loss": 2.3847821210220146,
+      "mean_pppl": 12.906053917712525,
+      "mean_maritime_top1": 0.5798724496146245,
+      "mean_maritime_top5": 0.7365346638795174,
+      "mean_maritime_loss": 2.1936641498860525,
+      "mean_rare_top1": 0.7734161075074084,
+      "mean_rare_top5": 0.8793945233153855,
+      "mean_rare_loss": 1.2613376842982904,
+      "total_masked_positions": 124673,
+      "total_maritime_targets": 10410,
+      "total_rare_targets": 551
+    },
+    "bert-base-uncased": {
+      "cells": 25,
+      "mean_overall_top1": 0.4542569846140856,
+      "mean_overall_loss": 3.497099446770546,
+      "mean_pppl": 38.01709909518564,
+      "mean_maritime_top1": 0.2807533502687783,
+      "mean_maritime_top5": 0.45705255593548477,
+      "mean_maritime_loss": 4.754410782243079,
+      "mean_rare_top1": 0.4648440390751787,
+      "mean_rare_top5": 0.5795490786307556,
+      "mean_rare_loss": 3.5316532360181014,
+      "total_masked_positions": 108016,
+      "total_maritime_targets": 20597,
+      "total_rare_targets": 1884
+    },
+    "dmis-lab/biobert-base-cased-v1.2": {
+      "cells": 25,
+      "mean_overall_top1": 0.3885340310845107,
+      "mean_overall_loss": 3.926055488208984,
+      "mean_pppl": 65.47378623214003,
+      "mean_maritime_top1": 0.2355226410807239,
+      "mean_maritime_top5": 0.35007105873089805,
+      "mean_maritime_loss": 5.148601352057689,
+      "mean_rare_top1": 0.28056327740179693,
+      "mean_rare_top5": 0.37541311294609514,
+      "mean_rare_loss": 4.3253641081896355,
+      "total_masked_positions": 112756,
+      "total_maritime_targets": 23480,
+      "total_rare_targets": 3631
+    },
+    "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": {
+      "cells": 25,
+      "mean_overall_top1": 0.4132533690600069,
+      "mean_overall_loss": 4.103673255030224,
+      "mean_pppl": 82.50786678691064,
+      "mean_maritime_top1": 0.20286339187947966,
+      "mean_maritime_top5": 0.2972825661698479,
+      "mean_maritime_loss": 5.875326339836717,
+      "mean_rare_top1": 0.22524389073039733,
+      "mean_rare_top5": 0.2830535945429141,
+      "mean_rare_loss": 6.596196045159495,
+      "total_masked_positions": 110175,
+      "total_maritime_targets": 23615,
+      "total_rare_targets": 2087
+    },
+    "nlpaueb/legal-bert-base-uncased": {
+      "cells": 25,
+      "mean_overall_top1": 0.4288248010771118,
+      "mean_overall_loss": 3.6279562035561908,
+      "mean_pppl": 50.796798093653315,
+      "mean_maritime_top1": 0.27962150030542593,
+      "mean_maritime_top5": 0.4320818544911856,
+      "mean_maritime_loss": 4.477900855952216,
+      "mean_rare_top1": 0.38482088521175023,
+      "mean_rare_top5": 0.5371117484436978,
+      "mean_rare_loss": 3.774068455252851,
+      "total_masked_positions": 111117,
+      "total_maritime_targets": 26466,
+      "total_rare_targets": 4676
+    },
+    "roberta-base": {
+      "cells": 25,
+      "mean_overall_top1": 0.5058330758097912,
+      "mean_overall_loss": 3.1271547013842342,
+      "mean_pppl": 25.114290126319585,
+      "mean_maritime_top1": 0.4611688551287618,
+      "mean_maritime_top5": 0.6952992907699301,
+      "mean_maritime_loss": 2.8719682005575913,
+      "mean_rare_top1": 0.8070029014265074,
+      "mean_rare_top5": 0.8480578644957241,
+      "mean_rare_loss": 1.2877040958567576,
+      "total_masked_positions": 124839,
+      "total_maritime_targets": 9912,
+      "total_rare_targets": 389
+    }
+  },
+  "representation_aggregates": {
+    "json": {
+      "cells": 35,
+      "mean_overall_top1": 0.6570225563909774,
+      "mean_maritime_top1": 0.2204181277763497,
+      "mean_overall_loss": 2.2806738555016066
+    },
+    "key_value": {
+      "cells": 35,
+      "mean_overall_top1": 0.41433109430727316,
+      "mean_maritime_top1": 0.3838968546717696,
+      "mean_overall_loss": 3.79008957776362
+    },
+    "mixed": {
+      "cells": 35,
+      "mean_overall_top1": 0.523279548474769,
+      "mean_maritime_top1": 0.4713440554669914,
+      "mean_overall_loss": 3.0640459120669488
+    },
+    "narrative": {
+      "cells": 35,
+      "mean_overall_top1": 0.3619917749392067,
+      "mean_maritime_top1": 0.3033241031560972,
+      "mean_overall_loss": 3.951039151427259
+    },
+    "template": {
+      "cells": 35,
+      "mean_overall_top1": 0.3537635458274798,
+      "mean_maritime_top1": 0.3093416379090424,
+      "mean_overall_loss": 4.101040038229745
+    }
+  },
+  "subset_aggregates": {
+    "balanced_knowledge": {
+      "cells": 35,
+      "mean_overall_top1": 0.454643737957077,
+      "mean_maritime_top1": 0.32797000374677454,
+      "mean_overall_loss": 3.4950475376982326
+    },
+    "high_knowledge": {
+      "cells": 35,
+      "mean_overall_top1": 0.4752703798304042,
+      "mean_maritime_top1": 0.3552876970581089,
+      "mean_overall_loss": 3.344121889544571
+    },
+    "low_knowledge": {
+      "cells": 35,
+      "mean_overall_top1": 0.43981896391213965,
+      "mean_maritime_top1": 0.31547450232583324,
+      "mean_overall_loss": 3.6014082451809037
+    },
+    "medium_knowledge": {
+      "cells": 35,
+      "mean_overall_top1": 0.4712538213716767,
+      "mean_maritime_top1": 0.3436478004009051,
+      "mean_overall_loss": 3.366386143486296
+    },
+    "random_baseline": {
+      "cells": 35,
+      "mean_overall_top1": 0.4694016168684086,
+      "mean_maritime_top1": 0.3459447754486286,
+      "mean_overall_loss": 3.379924719079176
+    }
+  },
+  "status": "PASS"
+}

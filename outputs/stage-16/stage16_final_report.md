@@ -167,10 +167,10 @@ Leave-one-dimension-out ablation on the Stage 12 Domain Informativeness Engine e
 ### Component Score & Ranking Sensitivity
 | Ablated Component | Mean $\Delta_{{\text{{score}}}}$ | Median $\Delta$ | SD $\Delta$ | Spearman $\rho$ | Kendall $\tau$ | Top-20% Jaccard Overlap | Selection Impact |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| `domain_relevance` | -0.0587 | -0.0617 | 0.0244 | 0.9643 | 0.8442 | **0.6684** | Moderate selection impact: component alters borderline selections |
-| `information_content` | +0.1943 | +0.1990 | 0.0329 | 0.9358 | 0.8457 | **0.8880** | Low selection impact: score shifts have limited effect on top document selection |
+| `domain_relevance` | -0.0587 | -0.0617 | 0.0244 | 0.9643 | 0.8442 | **0.6685** | Moderate selection impact: component alters borderline selections |
+| `information_content` | +0.1943 | +0.1990 | 0.0329 | 0.9358 | 0.8457 | **0.8885** | Low selection impact: score shifts have limited effect on top document selection |
 | `tfidf_representativeness` | -0.0032 | +0.0030 | 0.0422 | 0.8606 | 0.7234 | **0.6097** | Moderate selection impact: component alters borderline selections |
-| `redundancy_noise` | -0.1487 | -0.1484 | 0.0557 | 0.8606 | 0.6737 | **0.5010** | High selection impact: component strongly influences document selection |
+| `redundancy_noise` | -0.1487 | -0.1484 | 0.0557 | 0.8606 | 0.6737 | **0.5009** | High selection impact: component strongly influences document selection |
 
 ### Stratum / Tier Transition Stability
 | Ablated Component | Same Tier (%) | High Tier Retention (%) | Medium Tier Retention (%) | Low Tier Retention (%) | Documents Shifted |

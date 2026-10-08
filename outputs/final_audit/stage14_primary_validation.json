@@ -1,0 +1,1617 @@
+{
+  "validation_timestamp": "2026-10-08T07:49:24.925275Z",
+  "status": "PASS",
+  "summary": {
+    "total_cells_evaluated": 175,
+    "expected_cells": 175,
+    "valid_cells": 175,
+    "invalid_cells": 0,
+    "protocol": {
+      "masking_strategy": "random_15",
+      "masking_mode": "subword",
+      "evaluation_unit": "subword",
+      "mask_rate": 0.15
+    },
+    "per_model_cell_counts": {
+      "allenai/scibert_scivocab_uncased": 25,
+      "answerdotai/ModernBERT-base": 25,
+      "bert-base-uncased": 25,
+      "dmis-lab/biobert-base-cased-v1.2": 25,
+      "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext": 25,
+      "nlpaueb/legal-bert-base-uncased": 25,
+      "roberta-base": 25
+    },
+    "per_representation_cell_counts": {
+      "json": 35,
+      "key_value": 35,
+      "mixed": 35,
+      "narrative": 35,
+      "template": 35
+    },
+    "per_subset_cell_counts": {
+      "balanced_knowledge": 35,
+      "high_knowledge": 35,
+      "low_knowledge": 35,
+      "medium_knowledge": 35,
+      "random_baseline": 35
+    },
+    "violations": []
+  },
+  "cell_validations": [
+    {
+      "filename": "allenai_scibert_scivocab_uncased__json__balanced_knowledge.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "json",
+      "subset": "balanced_knowledge",
+      "seed": 589140,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__json__high_knowledge.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "json",
+      "subset": "high_knowledge",
+      "seed": 616795,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__json__low_knowledge.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "json",
+      "subset": "low_knowledge",
+      "seed": 450137,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__json__medium_knowledge.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "seed": 434464,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__json__random_baseline.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "json",
+      "subset": "random_baseline",
+      "seed": 619654,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__key_value__balanced_knowledge.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "key_value",
+      "subset": "balanced_knowledge",
+      "seed": 783535,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__key_value__high_knowledge.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "key_value",
+      "subset": "high_knowledge",
+      "seed": 687380,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__key_value__low_knowledge.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "key_value",
+      "subset": "low_knowledge",
+      "seed": 240248,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__key_value__medium_knowledge.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "key_value",
+      "subset": "medium_knowledge",
+      "seed": 170189,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__key_value__random_baseline.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "seed": 210958,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__mixed__balanced_knowledge.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "mixed",
+      "subset": "balanced_knowledge",
+      "seed": 515191,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__mixed__high_knowledge.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "seed": 237186,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__mixed__low_knowledge.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "mixed",
+      "subset": "low_knowledge",
+      "seed": 74287,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__mixed__medium_knowledge.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "mixed",
+      "subset": "medium_knowledge",
+      "seed": 673566,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__mixed__random_baseline.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "mixed",
+      "subset": "random_baseline",
+      "seed": 577595,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__narrative__balanced_knowledge.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "seed": 675080,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__narrative__high_knowledge.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "narrative",
+      "subset": "high_knowledge",
+      "seed": 394956,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__narrative__low_knowledge.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "narrative",
+      "subset": "low_knowledge",
+      "seed": 565477,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__narrative__medium_knowledge.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "narrative",
+      "subset": "medium_knowledge",
+      "seed": 639324,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__narrative__random_baseline.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "narrative",
+      "subset": "random_baseline",
+      "seed": 473602,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__template__balanced_knowledge.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "template",
+      "subset": "balanced_knowledge",
+      "seed": 877957,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__template__high_knowledge.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "template",
+      "subset": "high_knowledge",
+      "seed": 151272,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__template__low_knowledge.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "template",
+      "subset": "low_knowledge",
+      "seed": 983448,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__template__medium_knowledge.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "template",
+      "subset": "medium_knowledge",
+      "seed": 488414,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "allenai_scibert_scivocab_uncased__template__random_baseline.json",
+      "model_id": "allenai/scibert_scivocab_uncased",
+      "representation": "template",
+      "subset": "random_baseline",
+      "seed": 976517,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__json__balanced_knowledge.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "json",
+      "subset": "balanced_knowledge",
+      "seed": 61623,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__json__high_knowledge.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "json",
+      "subset": "high_knowledge",
+      "seed": 931099,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__json__low_knowledge.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "json",
+      "subset": "low_knowledge",
+      "seed": 860873,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__json__medium_knowledge.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "seed": 216289,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__json__random_baseline.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "json",
+      "subset": "random_baseline",
+      "seed": 207943,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__key_value__balanced_knowledge.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "key_value",
+      "subset": "balanced_knowledge",
+      "seed": 389323,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__key_value__high_knowledge.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "key_value",
+      "subset": "high_knowledge",
+      "seed": 493205,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__key_value__low_knowledge.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "key_value",
+      "subset": "low_knowledge",
+      "seed": 382265,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__key_value__medium_knowledge.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "key_value",
+      "subset": "medium_knowledge",
+      "seed": 595483,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__key_value__random_baseline.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "seed": 598149,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__mixed__balanced_knowledge.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "mixed",
+      "subset": "balanced_knowledge",
+      "seed": 165303,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__mixed__high_knowledge.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "seed": 930472,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__mixed__low_knowledge.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "mixed",
+      "subset": "low_knowledge",
+      "seed": 874689,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__mixed__medium_knowledge.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "mixed",
+      "subset": "medium_knowledge",
+      "seed": 670163,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__mixed__random_baseline.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "mixed",
+      "subset": "random_baseline",
+      "seed": 620900,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__narrative__balanced_knowledge.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "seed": 347897,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__narrative__high_knowledge.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "narrative",
+      "subset": "high_knowledge",
+      "seed": 402791,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__narrative__low_knowledge.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "narrative",
+      "subset": "low_knowledge",
+      "seed": 777632,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__narrative__medium_knowledge.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "narrative",
+      "subset": "medium_knowledge",
+      "seed": 817467,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__narrative__random_baseline.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "narrative",
+      "subset": "random_baseline",
+      "seed": 220212,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__template__balanced_knowledge.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "template",
+      "subset": "balanced_knowledge",
+      "seed": 189231,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__template__high_knowledge.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "template",
+      "subset": "high_knowledge",
+      "seed": 403581,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__template__low_knowledge.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "template",
+      "subset": "low_knowledge",
+      "seed": 468025,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__template__medium_knowledge.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "template",
+      "subset": "medium_knowledge",
+      "seed": 579316,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "answerdotai_ModernBERT_base__template__random_baseline.json",
+      "model_id": "answerdotai/ModernBERT-base",
+      "representation": "template",
+      "subset": "random_baseline",
+      "seed": 311949,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__json__balanced_knowledge.json",
+      "model_id": "bert-base-uncased",
+      "representation": "json",
+      "subset": "balanced_knowledge",
+      "seed": 327,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__json__high_knowledge.json",
+      "model_id": "bert-base-uncased",
+      "representation": "json",
+      "subset": "high_knowledge",
+      "seed": 121377,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__json__low_knowledge.json",
+      "model_id": "bert-base-uncased",
+      "representation": "json",
+      "subset": "low_knowledge",
+      "seed": 237185,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__json__medium_knowledge.json",
+      "model_id": "bert-base-uncased",
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "seed": 395116,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__json__random_baseline.json",
+      "model_id": "bert-base-uncased",
+      "representation": "json",
+      "subset": "random_baseline",
+      "seed": 837071,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__key_value__balanced_knowledge.json",
+      "model_id": "bert-base-uncased",
+      "representation": "key_value",
+      "subset": "balanced_knowledge",
+      "seed": 161745,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__key_value__high_knowledge.json",
+      "model_id": "bert-base-uncased",
+      "representation": "key_value",
+      "subset": "high_knowledge",
+      "seed": 542126,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__key_value__low_knowledge.json",
+      "model_id": "bert-base-uncased",
+      "representation": "key_value",
+      "subset": "low_knowledge",
+      "seed": 427861,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__key_value__medium_knowledge.json",
+      "model_id": "bert-base-uncased",
+      "representation": "key_value",
+      "subset": "medium_knowledge",
+      "seed": 990148,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__key_value__random_baseline.json",
+      "model_id": "bert-base-uncased",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "seed": 587542,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__mixed__balanced_knowledge.json",
+      "model_id": "bert-base-uncased",
+      "representation": "mixed",
+      "subset": "balanced_knowledge",
+      "seed": 85965,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__mixed__high_knowledge.json",
+      "model_id": "bert-base-uncased",
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "seed": 157983,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__mixed__low_knowledge.json",
+      "model_id": "bert-base-uncased",
+      "representation": "mixed",
+      "subset": "low_knowledge",
+      "seed": 923178,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__mixed__medium_knowledge.json",
+      "model_id": "bert-base-uncased",
+      "representation": "mixed",
+      "subset": "medium_knowledge",
+      "seed": 767779,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__mixed__random_baseline.json",
+      "model_id": "bert-base-uncased",
+      "representation": "mixed",
+      "subset": "random_baseline",
+      "seed": 993828,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__narrative__balanced_knowledge.json",
+      "model_id": "bert-base-uncased",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "seed": 518611,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__narrative__high_knowledge.json",
+      "model_id": "bert-base-uncased",
+      "representation": "narrative",
+      "subset": "high_knowledge",
+      "seed": 257930,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__narrative__low_knowledge.json",
+      "model_id": "bert-base-uncased",
+      "representation": "narrative",
+      "subset": "low_knowledge",
+      "seed": 706800,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__narrative__medium_knowledge.json",
+      "model_id": "bert-base-uncased",
+      "representation": "narrative",
+      "subset": "medium_knowledge",
+      "seed": 571204,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__narrative__random_baseline.json",
+      "model_id": "bert-base-uncased",
+      "representation": "narrative",
+      "subset": "random_baseline",
+      "seed": 537755,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__template__balanced_knowledge.json",
+      "model_id": "bert-base-uncased",
+      "representation": "template",
+      "subset": "balanced_knowledge",
+      "seed": 393253,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__template__high_knowledge.json",
+      "model_id": "bert-base-uncased",
+      "representation": "template",
+      "subset": "high_knowledge",
+      "seed": 852085,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__template__low_knowledge.json",
+      "model_id": "bert-base-uncased",
+      "representation": "template",
+      "subset": "low_knowledge",
+      "seed": 107294,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__template__medium_knowledge.json",
+      "model_id": "bert-base-uncased",
+      "representation": "template",
+      "subset": "medium_knowledge",
+      "seed": 849886,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "bert_base_uncased__template__random_baseline.json",
+      "model_id": "bert-base-uncased",
+      "representation": "template",
+      "subset": "random_baseline",
+      "seed": 869654,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__json__balanced_knowledge.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "json",
+      "subset": "balanced_knowledge",
+      "seed": 705935,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__json__high_knowledge.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "json",
+      "subset": "high_knowledge",
+      "seed": 475679,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__json__low_knowledge.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "json",
+      "subset": "low_knowledge",
+      "seed": 326314,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__json__medium_knowledge.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "seed": 342789,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__json__random_baseline.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "json",
+      "subset": "random_baseline",
+      "seed": 755925,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__key_value__balanced_knowledge.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "key_value",
+      "subset": "balanced_knowledge",
+      "seed": 380069,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__key_value__high_knowledge.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "key_value",
+      "subset": "high_knowledge",
+      "seed": 547602,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__key_value__low_knowledge.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "key_value",
+      "subset": "low_knowledge",
+      "seed": 217266,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__key_value__medium_knowledge.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "key_value",
+      "subset": "medium_knowledge",
+      "seed": 859204,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__key_value__random_baseline.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "seed": 85541,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__mixed__balanced_knowledge.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "mixed",
+      "subset": "balanced_knowledge",
+      "seed": 408040,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__mixed__high_knowledge.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "seed": 844132,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__mixed__low_knowledge.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "mixed",
+      "subset": "low_knowledge",
+      "seed": 239694,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__mixed__medium_knowledge.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "mixed",
+      "subset": "medium_knowledge",
+      "seed": 761131,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__mixed__random_baseline.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "mixed",
+      "subset": "random_baseline",
+      "seed": 534822,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__narrative__balanced_knowledge.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "seed": 766396,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__narrative__high_knowledge.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "narrative",
+      "subset": "high_knowledge",
+      "seed": 949558,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__narrative__low_knowledge.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "narrative",
+      "subset": "low_knowledge",
+      "seed": 835551,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__narrative__medium_knowledge.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "narrative",
+      "subset": "medium_knowledge",
+      "seed": 188228,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__narrative__random_baseline.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "narrative",
+      "subset": "random_baseline",
+      "seed": 724218,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__template__balanced_knowledge.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "template",
+      "subset": "balanced_knowledge",
+      "seed": 215164,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__template__high_knowledge.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "template",
+      "subset": "high_knowledge",
+      "seed": 952026,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__template__low_knowledge.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "template",
+      "subset": "low_knowledge",
+      "seed": 254347,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__template__medium_knowledge.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "template",
+      "subset": "medium_knowledge",
+      "seed": 809750,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "dmis_lab_biobert_base_cased_v1.2__template__random_baseline.json",
+      "model_id": "dmis-lab/biobert-base-cased-v1.2",
+      "representation": "template",
+      "subset": "random_baseline",
+      "seed": 345536,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__json__balanced_knowledge.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "json",
+      "subset": "balanced_knowledge",
+      "seed": 514296,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__json__high_knowledge.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "json",
+      "subset": "high_knowledge",
+      "seed": 451700,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__json__low_knowledge.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "json",
+      "subset": "low_knowledge",
+      "seed": 322824,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__json__medium_knowledge.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "seed": 160574,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__json__random_baseline.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "json",
+      "subset": "random_baseline",
+      "seed": 447643,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__key_value__balanced_knowledge.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "key_value",
+      "subset": "balanced_knowledge",
+      "seed": 699799,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__key_value__high_knowledge.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "key_value",
+      "subset": "high_knowledge",
+      "seed": 657381,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__key_value__low_knowledge.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "key_value",
+      "subset": "low_knowledge",
+      "seed": 822692,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__key_value__medium_knowledge.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "key_value",
+      "subset": "medium_knowledge",
+      "seed": 695927,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__key_value__random_baseline.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "seed": 894551,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__mixed__balanced_knowledge.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "mixed",
+      "subset": "balanced_knowledge",
+      "seed": 246620,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__mixed__high_knowledge.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "seed": 129221,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__mixed__low_knowledge.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "mixed",
+      "subset": "low_knowledge",
+      "seed": 880674,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__mixed__medium_knowledge.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "mixed",
+      "subset": "medium_knowledge",
+      "seed": 951896,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__mixed__random_baseline.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "mixed",
+      "subset": "random_baseline",
+      "seed": 876501,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__narrative__balanced_knowledge.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "seed": 413487,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__narrative__high_knowledge.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "narrative",
+      "subset": "high_knowledge",
+      "seed": 48584,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__narrative__low_knowledge.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "narrative",
+      "subset": "low_knowledge",
+      "seed": 546885,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__narrative__medium_knowledge.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "narrative",
+      "subset": "medium_knowledge",
+      "seed": 116042,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__narrative__random_baseline.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "narrative",
+      "subset": "random_baseline",
+      "seed": 943757,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__template__balanced_knowledge.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "template",
+      "subset": "balanced_knowledge",
+      "seed": 60049,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__template__high_knowledge.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "template",
+      "subset": "high_knowledge",
+      "seed": 539758,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__template__low_knowledge.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "template",
+      "subset": "low_knowledge",
+      "seed": 14543,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__template__medium_knowledge.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "template",
+      "subset": "medium_knowledge",
+      "seed": 118807,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "microsoft_BiomedNLP_PubMedBERT_base_uncased_abstract_fulltext__template__random_baseline.json",
+      "model_id": "microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract-fulltext",
+      "representation": "template",
+      "subset": "random_baseline",
+      "seed": 666612,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__json__balanced_knowledge.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "json",
+      "subset": "balanced_knowledge",
+      "seed": 639901,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__json__high_knowledge.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "json",
+      "subset": "high_knowledge",
+      "seed": 254194,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__json__low_knowledge.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "json",
+      "subset": "low_knowledge",
+      "seed": 181996,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__json__medium_knowledge.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "seed": 136622,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__json__random_baseline.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "json",
+      "subset": "random_baseline",
+      "seed": 317338,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__key_value__balanced_knowledge.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "key_value",
+      "subset": "balanced_knowledge",
+      "seed": 868697,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__key_value__high_knowledge.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "key_value",
+      "subset": "high_knowledge",
+      "seed": 847981,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__key_value__low_knowledge.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "key_value",
+      "subset": "low_knowledge",
+      "seed": 632314,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__key_value__medium_knowledge.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "key_value",
+      "subset": "medium_knowledge",
+      "seed": 346608,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__key_value__random_baseline.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "seed": 342495,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__mixed__balanced_knowledge.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "mixed",
+      "subset": "balanced_knowledge",
+      "seed": 683527,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__mixed__high_knowledge.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "seed": 880303,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__mixed__low_knowledge.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "mixed",
+      "subset": "low_knowledge",
+      "seed": 427004,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__mixed__medium_knowledge.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "mixed",
+      "subset": "medium_knowledge",
+      "seed": 472046,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__mixed__random_baseline.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "mixed",
+      "subset": "random_baseline",
+      "seed": 161487,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__narrative__balanced_knowledge.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "seed": 739667,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__narrative__high_knowledge.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "narrative",
+      "subset": "high_knowledge",
+      "seed": 397563,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__narrative__low_knowledge.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "narrative",
+      "subset": "low_knowledge",
+      "seed": 288353,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__narrative__medium_knowledge.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "narrative",
+      "subset": "medium_knowledge",
+      "seed": 471561,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__narrative__random_baseline.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "narrative",
+      "subset": "random_baseline",
+      "seed": 921827,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__template__balanced_knowledge.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "template",
+      "subset": "balanced_knowledge",
+      "seed": 583563,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__template__high_knowledge.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "template",
+      "subset": "high_knowledge",
+      "seed": 436230,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__template__low_knowledge.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "template",
+      "subset": "low_knowledge",
+      "seed": 755105,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__template__medium_knowledge.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "template",
+      "subset": "medium_knowledge",
+      "seed": 598034,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "nlpaueb_legal_bert_base_uncased__template__random_baseline.json",
+      "model_id": "nlpaueb/legal-bert-base-uncased",
+      "representation": "template",
+      "subset": "random_baseline",
+      "seed": 745624,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__json__balanced_knowledge.json",
+      "model_id": "roberta-base",
+      "representation": "json",
+      "subset": "balanced_knowledge",
+      "seed": 949321,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__json__high_knowledge.json",
+      "model_id": "roberta-base",
+      "representation": "json",
+      "subset": "high_knowledge",
+      "seed": 452446,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__json__low_knowledge.json",
+      "model_id": "roberta-base",
+      "representation": "json",
+      "subset": "low_knowledge",
+      "seed": 146859,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__json__medium_knowledge.json",
+      "model_id": "roberta-base",
+      "representation": "json",
+      "subset": "medium_knowledge",
+      "seed": 638084,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__json__random_baseline.json",
+      "model_id": "roberta-base",
+      "representation": "json",
+      "subset": "random_baseline",
+      "seed": 268014,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__key_value__balanced_knowledge.json",
+      "model_id": "roberta-base",
+      "representation": "key_value",
+      "subset": "balanced_knowledge",
+      "seed": 724488,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__key_value__high_knowledge.json",
+      "model_id": "roberta-base",
+      "representation": "key_value",
+      "subset": "high_knowledge",
+      "seed": 223587,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__key_value__low_knowledge.json",
+      "model_id": "roberta-base",
+      "representation": "key_value",
+      "subset": "low_knowledge",
+      "seed": 342470,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__key_value__medium_knowledge.json",
+      "model_id": "roberta-base",
+      "representation": "key_value",
+      "subset": "medium_knowledge",
+      "seed": 370519,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__key_value__random_baseline.json",
+      "model_id": "roberta-base",
+      "representation": "key_value",
+      "subset": "random_baseline",
+      "seed": 472808,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__mixed__balanced_knowledge.json",
+      "model_id": "roberta-base",
+      "representation": "mixed",
+      "subset": "balanced_knowledge",
+      "seed": 929914,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__mixed__high_knowledge.json",
+      "model_id": "roberta-base",
+      "representation": "mixed",
+      "subset": "high_knowledge",
+      "seed": 676178,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__mixed__low_knowledge.json",
+      "model_id": "roberta-base",
+      "representation": "mixed",
+      "subset": "low_knowledge",
+      "seed": 513307,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__mixed__medium_knowledge.json",
+      "model_id": "roberta-base",
+      "representation": "mixed",
+      "subset": "medium_knowledge",
+      "seed": 991600,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__mixed__random_baseline.json",
+      "model_id": "roberta-base",
+      "representation": "mixed",
+      "subset": "random_baseline",
+      "seed": 5187,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__narrative__balanced_knowledge.json",
+      "model_id": "roberta-base",
+      "representation": "narrative",
+      "subset": "balanced_knowledge",
+      "seed": 265303,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__narrative__high_knowledge.json",
+      "model_id": "roberta-base",
+      "representation": "narrative",
+      "subset": "high_knowledge",
+      "seed": 677473,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__narrative__low_knowledge.json",
+      "model_id": "roberta-base",
+      "representation": "narrative",
+      "subset": "low_knowledge",
+      "seed": 780039,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__narrative__medium_knowledge.json",
+      "model_id": "roberta-base",
+      "representation": "narrative",
+      "subset": "medium_knowledge",
+      "seed": 961999,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__narrative__random_baseline.json",
+      "model_id": "roberta-base",
+      "representation": "narrative",
+      "subset": "random_baseline",
+      "seed": 848868,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__template__balanced_knowledge.json",
+      "model_id": "roberta-base",
+      "representation": "template",
+      "subset": "balanced_knowledge",
+      "seed": 223949,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__template__high_knowledge.json",
+      "model_id": "roberta-base",
+      "representation": "template",
+      "subset": "high_knowledge",
+      "seed": 865370,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__template__low_knowledge.json",
+      "model_id": "roberta-base",
+      "representation": "template",
+      "subset": "low_knowledge",
+      "seed": 360904,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__template__medium_knowledge.json",
+      "model_id": "roberta-base",
+      "representation": "template",
+      "subset": "medium_knowledge",
+      "seed": 598051,
+      "valid": true,
+      "errors": []
+    },
+    {
+      "filename": "roberta_base__template__random_baseline.json",
+      "model_id": "roberta-base",
+      "representation": "template",
+      "subset": "random_baseline",
+      "seed": 106622,
+      "valid": true,
+      "errors": []
+    }
+  ]
+}
