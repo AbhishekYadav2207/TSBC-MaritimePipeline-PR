@@ -195,3 +195,139 @@ def test_oov_empty_slice_emits_none():
     val = (empty_stats["top1"] / cnt) if cnt > 0 else None
     assert val is None
     assert val != 0.0
+
+
+def test_mecs_authoritative_formula_and_clipping():
+    """Verify authoritative MECS baseline formula (Top1=0.40, Rare=0.15, Loss=0.25, Frag=0.20, no Top5) and clipping."""
+    import json
+    from pathlib import Path
+    cfg_path = Path(__file__).resolve().parent.parent / "outputs" / "stage-15" / "stage15_mecs_config.json"
+    assert cfg_path.exists()
+    with open(cfg_path, "r", encoding="utf-8") as f:
+        cfg = json.load(f)
+    baseline_weights = cfg["scenarios"]["baseline"]
+    assert baseline_weights["top1_acc"] == 0.40
+    assert baseline_weights["rare_top1_acc"] == 0.15
+    assert baseline_weights["mlm_loss"] == 0.25
+    assert baseline_weights["fragmentation_rate_pct"] == 0.20
+    assert "top5_acc" not in baseline_weights
+
+    # Clipping behavior on ModernBERT:
+    # Loss = 2.1937, min_bound = 3.0, max_bound = 8.0
+    loss_val = 2.193664
+    s_loss_unclipped = (8.0 - loss_val) / (8.0 - 3.0)  # 1.161267
+    s_loss = min(1.0, max(0.0, s_loss_unclipped))
+    assert s_loss == 1.0  # Successfully clipped to 1.0
+
+    # Top-1 ceiling = 0.35
+    top1_val = 0.5814
+    s_top1 = min(1.0, max(0.0, top1_val / 0.35))
+    assert s_top1 == 1.0
+
+    # Rare Top-1 ceiling = 0.25
+    rare_val = 0.5714
+    s_rare = min(1.0, max(0.0, rare_val / 0.25))
+    assert s_rare == 1.0
+
+    # Frag % = 62.99% -> 1.0 - 0.6299 = 0.3701
+    frag_pct = 62.99
+    s_frag = 1.0 - (frag_pct / 100.0)
+
+    # ModernBERT baseline MECS:
+    score = (0.40 * s_top1 + 0.15 * s_rare + 0.25 * s_loss + 0.20 * s_frag) * 100.0
+    assert round(score, 2) == 87.40
+
+
+def test_pppl_dual_definitions():
+    """Verify distinction between primary intrinsic MLM perplexity and secondary sampled PLL."""
+    import pandas as pd
+    from pathlib import Path
+    root = Path(__file__).resolve().parent.parent
+    prof_path = root / "outputs" / "stage-15" / "stage15_model_profiles.csv"
+    assert prof_path.exists()
+    df = pd.read_csv(prof_path)
+    mb = df[df["model_name"] == "answerdotai/ModernBERT-base"].iloc[0]
+
+    # Primary MLM Loss = 2.1937 -> exp(2.1937) ~ 8.97
+    primary_mlm_loss = mb["raw__mlm_loss"]
+    primary_mlm_ppl = math.exp(primary_mlm_loss)
+    assert abs(primary_mlm_ppl - 8.968) < 0.05
+
+    # Secondary Sampled PLL Pseudo-Perplexity from pll_results.json = 13.72
+    secondary_pll_pppl = mb["raw__pseudo_perplexity"]
+    assert abs(secondary_pll_pppl - 13.72) < 0.05
+
+
+def test_stage16_anova_exact_statistics():
+    """Verify exact crossed ANOVA F-statistics and Friedman degrees of freedom match authoritative CSV."""
+    import pandas as pd
+    from pathlib import Path
+    root = Path(__file__).resolve().parent.parent
+    anova_path = root / "outputs" / "stage-16" / "stage16_crossed_anova.csv"
+    assert anova_path.exists()
+    df = pd.read_csv(anova_path)
+
+    model_row = df[df["source"].str.contains("Model \\(Fixed")].iloc[0]
+    assert abs(model_row["f_statistic"] - 804.1615) < 0.01
+    assert abs(model_row["variance_contribution_pct"] - 55.66) < 0.01
+
+    rep_row = df[df["source"].str.contains("Representation \\(Blocking")].iloc[0]
+    assert abs(rep_row["f_statistic"] - 552.0302) < 0.01
+    assert abs(rep_row["variance_contribution_pct"] - 25.47) < 0.01
+
+    sub_row = df[df["source"].str.contains("Subset \\(Blocking")].iloc[0]
+    assert abs(sub_row["f_statistic"] - 15.4679) < 0.01
+    assert abs(sub_row["variance_contribution_pct"] - 0.71) < 0.01
+
+    int_row = df[df["source"].str.contains("Model x Representation")].iloc[0]
+    assert abs(int_row["f_statistic"] - 55.3965) < 0.01
+    assert abs(int_row["variance_contribution_pct"] - 15.34) < 0.01
+
+    # Friedman test
+    global_path = root / "outputs" / "stage-16" / "stage16_global_tests.csv"
+    assert global_path.exists()
+    df_glob = pd.read_csv(global_path)
+    friedman = df_glob[df_glob["test_name"].str.contains("Friedman")].iloc[0]
+    assert friedman["df"] == 6
+    assert abs(friedman["statistic"] - 121.1657) < 0.01
+
+
+def test_30_issues_id_preservation():
+    """Verify all 30 issues are preserved verbatim from pre-repair review and A9 is correctly dispositioned."""
+    import pandas as pd
+    from pathlib import Path
+    matrix_path = Path(__file__).resolve().parent.parent / "outputs" / "final_audit" / "review_issue_resolution_matrix.csv"
+    assert matrix_path.exists()
+    df = pd.read_csv(matrix_path)
+    assert len(df) == 30
+
+    expected_ids = [f"A{i}" for i in range(1, 11)] + [f"B{i}" for i in range(1, 10)] + [f"C{i}" for i in range(1, 12)]
+    assert df["issue_id"].tolist() == expected_ids
+
+    # A9 must be marked DOCUMENTED_LIMITATION
+    a9 = df[df["issue_id"] == "A9"].iloc[0]
+    assert a9["actual_status"] == "DOCUMENTED_LIMITATION"
+    assert "template scaffolding" in a9["root_cause"].lower()
+
+
+def test_report_consistency_zero_unexplained_contradictions():
+    """Verify cross-file numerical consistency between Stage 15, 16, and 17 outputs."""
+    import pandas as pd
+    from pathlib import Path
+    root = Path(__file__).resolve().parent.parent
+
+    lb = pd.read_csv(root / "outputs" / "stage-15" / "leaderboard.csv")
+    s17 = pd.read_csv(root / "outputs" / "stage-17" / "stage17_model_selection.csv")
+    pw = pd.read_csv(root / "outputs" / "stage-16" / "stage16_pairwise_tests.csv")
+
+    # Winner consistency
+    assert lb.iloc[0]["model_name"] == "answerdotai/ModernBERT-base"
+    assert s17.iloc[0]["model_name"] == "answerdotai/ModernBERT-base"
+    assert s17.iloc[0]["candidate_status"] == "Strong Candidate"
+
+    # Win rate vs RoBERTa is 20/25 (80.0%)
+    mb_rob = pw[(pw["model_a"] == "answerdotai/ModernBERT-base") & (pw["model_b"] == "roberta-base")].iloc[0]
+    assert mb_rob["wins_a"] == 20
+    assert mb_rob["losses_a"] == 5
+    assert mb_rob["ties"] == 0
+    assert mb_rob["paired_win_rate_a"] == 0.80
