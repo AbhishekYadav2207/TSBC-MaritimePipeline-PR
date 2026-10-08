@@ -219,13 +219,13 @@ def test_mecs_authoritative_formula_and_clipping():
     s_loss = min(1.0, max(0.0, s_loss_unclipped))
     assert s_loss == 1.0  # Successfully clipped to 1.0
 
-    # Top-1 ceiling = 0.35
-    top1_val = 0.5814
+    # Top-1 ceiling = 0.35 (ModernBERT macro-average Top-1 = 0.579872 / 57.99%)
+    top1_val = 0.579872
     s_top1 = min(1.0, max(0.0, top1_val / 0.35))
     assert s_top1 == 1.0
 
-    # Rare Top-1 ceiling = 0.25
-    rare_val = 0.5714
+    # Rare Top-1 ceiling = 0.25 (ModernBERT macro-average Rare Top-1 = 0.773416 / 77.34%)
+    rare_val = 0.773416
     s_rare = min(1.0, max(0.0, rare_val / 0.25))
     assert s_rare == 1.0
 

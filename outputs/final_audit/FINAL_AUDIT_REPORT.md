@@ -75,6 +75,10 @@ Re-implemented all calculations from raw JSON files in `scripts/audit_independen
   * Fixed bounds: $[3.0, 8.0]$.
   * Transform formula: $S_{\text{loss}} = \text{clip}\left(\frac{8.0 - \text{Loss}}{8.0 - 3.0}, 0.0, 1.0\right)$.
   * ModernBERT Loss = 2.1937 $\implies \frac{8.0 - 2.1937}{5.0} = 1.1613 \implies \text{clip}(1.1613, 0.0, 1.0) = \mathbf{1.0}$.
+* **ModernBERT Top-1 Metric Lineage**:
+  * Authoritative model-level macro-average: **0.5799 (57.99%)** (unweighted macro-average across all 25 primary cells in `leaderboard.csv` / `stage15_model_profiles.csv`).
+  * Disambiguation of 0.5814: $0.5814$ ($0.581448$) is the Top-1 accuracy of a **single individual condition cell** (cell row 0 in `comparison.csv`: `representation = json, subset = balanced_knowledge`), NOT a model-level aggregate.
+  * Both values clip to $1.0$ under the $0.35$ ceiling ($S_{\text{top1}} = 1.0$), ensuring the MECS baseline score ($87.40$) is mathematically invariant.
 * **Manual Verification of ModernBERT Baseline MECS**:
   $$ \text{MECS} = 100 \times [0.40(1.0) + 0.15(1.0) + 0.25(1.0) + 0.20(0.3701)] = 100 \times [0.40 + 0.15 + 0.25 + 0.07402] = \mathbf{87.40} $$
 
@@ -141,7 +145,7 @@ All 30 issues from the authoritative pre-repair review (`review_issue_matrix_pre
 - [x] Original 30 issue IDs preserved verbatim from pre-repair review
 - [x] A9 correctly dispositioned as `DOCUMENTED_LIMITATION`
 - [x] Report consistency verified = ZERO unexplained contradictions
-- [x] All downstream tests pass (77 / 77 tests)
+- [x] All downstream tests pass (78 / 78 tests, 100% pass rate)
 - [x] Stage 14 remains untouched
 
 **FINAL FORENSIC STATUS: VERIFIED**

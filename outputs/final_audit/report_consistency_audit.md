@@ -59,9 +59,10 @@ Where fixed transforms are defined as:
 * $S_{\text{frag}} = \text{clip}\left(1.0 - \frac{\text{Fragmentation\%}}{100.0}, 0.0, 1.0\right)$
 
 ### ModernBERT Calculation Step-by-Step
-1. $\text{Top1} = 0.5814 \implies S_{\text{top1}} = \min(1.0, 0.5814 / 0.35) = \mathbf{1.0}$
-2. $\text{Rare Top1} = 0.5714 \implies S_{\text{rare}} = \min(1.0, 0.5714 / 0.25) = \mathbf{1.0}$
-3. $\text{Loss} = 2.1937 \implies S_{\text{loss}} = \text{clip}\left(\frac{8.0 - 2.1937}{5.0}, 0.0, 1.0\right) = \text{clip}(1.1613, 0.0, 1.0) = \mathbf{1.0}$
+Using authoritative model-level macro-averages over all 25 conditions (`stage15_model_profiles.csv` / `leaderboard.csv`):
+1. $\text{Top1} = 0.5799 \text{ (57.99%)} \implies S_{\text{top1}} = \min(1.0, 0.579872 / 0.35) = \mathbf{1.0}$ *(Note: single-cell row 0 in comparison.csv exhibits 0.5814, but model-level macro-average is strictly 0.5799)*
+2. $\text{Rare Top1} = 0.7734 \text{ (77.34%)} \implies S_{\text{rare}} = \min(1.0, 0.773416 / 0.25) = \mathbf{1.0}$
+3. $\text{Loss} = 2.1937 \implies S_{\text{loss}} = \text{clip}\left(\frac{8.0 - 2.193664}{5.0}, 0.0, 1.0\right) = \text{clip}(1.1613, 0.0, 1.0) = \mathbf{1.0}$
 4. $\text{Frag\%} = 62.99\% \implies S_{\text{frag}} = 1.0 - 0.6299 = \mathbf{0.3701}$
 
 $$\text{MECS} = 100 \times [0.40(1.0) + 0.15(1.0) + 0.25(1.0) + 0.20(0.3701)] = 100 \times [0.40 + 0.15 + 0.25 + 0.07402] = \mathbf{87.40}$$
