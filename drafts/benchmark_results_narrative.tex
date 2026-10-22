@@ -1,0 +1,78 @@
+\section{Benchmark Results}
+\label{sec:results}
+
+The benchmark examines three related questions: whether the form in which a maritime record is presented changes measured performance, which pretrained encoder provides the strongest starting point for maritime domain adaptation, and whether the observed ranking persists across different subsets and diagnostic settings. The primary evaluation comprises seven encoders, five representations of the same underlying records, and five informativeness subsets. This design yields 175 matched configurations; each model is evaluated under the same representation--subset conditions, making comparisons less sensitive to differences in evaluation coverage.
+
+\subsection{Representation Effects: The Same Record, Different Prediction Difficulty}
+\label{sec:repr}
+\input{tables/table3_marginals}
+
+The first finding is that text representation is not a neutral preprocessing choice. Each representation preserves the underlying record while changing how its information is exposed to the encoder. Narrative text expresses facts in continuous prose; key--value text makes attribute labels explicit; templates standardize phrasing; JSON retains a machine-oriented structure; and mixed text combines structured fields with narrative content. These formats contain related information, but they do not present identical prediction contexts to a masked language model.
+
+Across the evaluated configurations, the mean Top-1 accuracy differs by 25.09 percentage points between representations. By comparison, the difference between the highest- and lowest-performing informativeness subsets is 3.98 points. Thus, in this benchmark, how a record is serialized changes measured token-recovery performance substantially more than which informativeness stratum it belongs to. Narrative and mixed representations generally provide more favorable prediction contexts than the more rigid JSON and key--value forms (Table~\ref{tab:marginals}; Figure~\ref{fig:repr_tok}a).
+
+This result matters for evaluation practice. A model tested on narrative records should not be compared uncritically with a score obtained from the same records serialized as JSON. Such a comparison would combine model behaviour with a change in input representation. We therefore interpret model differences primarily through matched conditions and report the representation-specific results alongside the aggregate leaderboard.
+
+\subsection{Encoder Ranking: A Clear Leader, with Meaningful Alternatives}
+\label{sec:ranking}
+\input{tables/table4_leaderboard}
+
+ModernBERT is the strongest encoder under the primary benchmark protocol, with a mean maritime-term Top-1 accuracy of 57.99\% across its 25 matched conditions. Here, Top-1 accuracy measures how often the correct masked token is the model's highest-ranked prediction. ModernBERT's lead is not confined to one particularly favorable representation or subset: it ranks ahead of RoBERTa in 20 of the 25 matched conditions and remains the overall leader in the aggregate analysis. RoBERTa is the closest general-purpose competitor, with a mean maritime Top-1 accuracy of 46.12\% (Table~\ref{tab:leaderboard}).
+
+The difference between these two models is meaningful in practical terms. ModernBERT's advantage over RoBERTa is 11.87 percentage points in the reported maritime Top-1 measure. The paired comparison also supports a reliable difference after multiple-comparison correction. However, the five conditions in which RoBERTa does not lose are important: the result supports a strong overall preference for ModernBERT, not a claim that it wins every possible input configuration.
+
+The remaining models illustrate why model selection should not be reduced to a single leaderboard position. SciBERT and Legal-BERT remain non-dominated under the multi-objective analysis, while BERT-base offers a smaller parameter footprint and more efficient tokenization. In particular, BERT-base has 110M parameters and a measured latency of 19.51\,ms in the operational profile used for this comparison, making it a plausible alternative when inference cost is a primary constraint. Its stronger single-token vocabulary coverage does not, however, translate into the best contextual token-recovery performance.
+
+Pareto analysis formalizes these trade-offs: a model is non-dominated when no competing model is at least as good on every selected objective and strictly better on at least one. Five models remain on this frontier, so the evidence does not imply that one encoder is optimal for every deployment requirement. BioBERT and PubMedBERT are dominated within the particular objectives and cohort evaluated here. Their lower scores should not be generalized to all biomedical tasks or taken as a causal demonstration that domain-specific pretraining is ineffective. These are observational comparisons among checkpoints that differ in training data, scale, tokenizer, architecture, and training history.
+
+\subsection{Tokenizer Coverage: Why Vocabulary Fit Is Not Enough}
+\label{sec:tokenizer}
+
+Tokenizer statistics help explain why vocabulary coverage and contextual performance do not lead to the same ranking. Single-token coverage records the proportion of evaluated terms represented by one token rather than several subword pieces. BERT-base has the highest measured single-token coverage (73.43\%), whereas ModernBERT's coverage is lower and its fragmentation rate is higher (Figure~\ref{fig:repr_tok}b). On coverage alone, BERT-base would appear preferable.
+
+The masked-token results show why that conclusion would be incomplete. A tokenizer can represent a technical term compactly without its encoder assigning the correct token a high probability in context. Conversely, a model may split a term into multiple pieces yet use the surrounding sentence to predict those pieces effectively. Top-1 accuracy therefore reflects both tokenization and the encoder's contextual predictions; it is not a direct, tokenizer-independent measure of maritime knowledge.
+
+The practical implication is to assess vocabulary coverage, fragmentation, and masked-token recovery together. Under the evaluated random 15\% subword-masking protocol, ModernBERT provides the strongest aggregate recovery performance despite less favorable single-token coverage. This conclusion is restricted to the evaluated cohort and protocol: alternative tokenization, masking, or task-level evaluations may produce different trade-offs.
+
+\begin{figure}[!htbp]
+\centering
+\vspace{2pt}
+\includegraphics[width=\linewidth]{figures/fig2_representation_tokenizer_compact.pdf}
+\vspace{4pt}
+\caption{(a) Mean Top-1 accuracy across encoders for each representation. (b) Single-token vocabulary coverage versus mean Top-1 accuracy. The panels show why representation choice and tokenizer fit should be interpreted alongside contextual prediction performance.}
+\label{fig:repr_tok}
+\end{figure}
+
+\subsection{Statistical Validation: Separating Model and Formatting Effects}
+\label{sec:stats}
+
+The statistical analysis tests whether the observed differences are consistent across the matched evaluation conditions rather than being driven by a single favorable cell. The crossed analysis identifies both a strong model effect and a substantial representation effect. It also detects a model--representation interaction, indicating that changes in formatting do not affect all encoders equally. In other words, the effect of serialization depends partly on which encoder is being evaluated; a model's aggregate score alone does not describe every format-specific behaviour.
+
+The informativeness subset has a smaller contribution to overall variation than either model identity or representation, although subset effects and some interactions remain detectable. This distinction is useful: statistical detectability indicates that a factor is associated with measurable differences, whereas its variance contribution describes its relative influence in this design. The analysis therefore supports reporting the subset results, but it does not justify treating informativeness level as the dominant driver of benchmark performance.
+
+The omnibus comparison confirms that the seven encoders do not perform equivalently across the matched conditions. Pairwise tests then locate the main separation: ModernBERT's advantage over RoBERTa remains significant after Holm correction, while SciBERT and Legal-BERT, and BERT-base and Legal-BERT, are not distinguishable under the corresponding adjusted comparisons. These non-significant pairwise results should be interpreted as insufficient evidence of a difference under this sample and protocol, not as proof that the models are equivalent.
+
+For readability, the full factorial test statistics, corrected pairwise probabilities, confidence intervals, and effect sizes are retained in Tables~\ref{tab:pairwise} and the accompanying statistical outputs rather than repeated in the narrative. The inferential scope is the benchmark's matched model--representation--subset design. The tests do not establish performance on every maritime document population, downstream task, or deployment setting.
+
+\input{tables/table5_pairwise}
+
+\subsection{Masking Sensitivity and Pseudo-Log-Likelihood Diagnostics}
+\label{sec:masking}
+\input{tables/table6_masking}
+
+The primary benchmark uses random masking of 15\% of subword positions. A separate domain-aware masking experiment changes which positions are selected: technical terms receive priority within the same masking budget. This diagnostic asks whether the apparent ranking is sensitive to the evaluation target, not whether the primary ranking should be replaced by a second universal leaderboard.
+
+Under domain-aware masking, Top-1 accuracy falls for all evaluated models, and the effect is especially pronounced in the rare-term condition. In the DA-Rare setting, RoBERTa (53.23\%) and SciBERT (38.71\%) outperform ModernBERT (8.01\%). This reversal is informative because it exposes a limitation hidden by aggregate random masking: performance on ordinary masked subwords does not guarantee equally strong recovery of the selected rare technical terms. It also illustrates why a diagnostic designed to emphasize rare terms should be interpreted as a stress test with a different target distribution, rather than merged with the primary results.
+
+Sampled pseudo-log-likelihood provides a complementary diagnostic. Unlike Top-1 accuracy, which asks whether the correct token is the highest-ranked prediction at a masked position, pseudo-log-likelihood aggregates token-level conditional likelihoods over sampled text. Lower pseudo-perplexity indicates that the sampled sequences receive better conditional likelihood under that procedure. ModernBERT records a sampled pseudo-perplexity of 13.72 and RoBERTa 16.02, consistent with the primary benchmark's broad ordering. These values are auxiliary evidence, not interchangeable with the primary masked-language-model loss or a direct estimate of downstream maritime task performance.
+
+Taken together, the diagnostics qualify rather than overturn the main result. ModernBERT is the strongest general initialization under the primary protocol, while RoBERTa and other candidates may behave differently when evaluation concentrates on rare terminology. For a domain-adaptive model intended to handle specialized maritime language, both broad contextual recovery and technical-term behaviour should therefore be monitored during adaptation.
+
+\subsection{Initialization Decision for Maritime Domain Adaptation}
+\label{sec:decision}
+
+We select ModernBERT-base as the primary initialization for domain-adaptive pretraining (DAPT). The decision is based on converging evidence rather than on one score alone: ModernBERT leads the primary aggregate benchmark, retains its top rank across the evaluated representation and subset conditions, and remains non-dominated in the multi-objective comparison. Its paired advantage over RoBERTa is statistically supported, even though it does not win every matched condition.
+
+BERT-base remains a credible resource-constrained alternative. Its smaller parameter count, lower measured latency, and stronger single-token coverage may be advantageous where memory, throughput, or serving cost outweigh the value of maximizing the primary benchmark score. RoBERTa is the principal performance alternative, while the specialized encoders provide useful contrasts in vocabulary and domain-pretraining behaviour. The diagnostic rare-term results further motivate evaluating technical terminology explicitly during DAPT and subsequent validation.
+
+This recommendation is deliberately scoped to initialization selection under the present intrinsic benchmark. Masked-token recovery and pseudo-log-likelihood assess how well an encoder predicts held-out text; they do not by themselves demonstrate improved maritime named-entity recognition, accident classification, retrieval, or operational decision support. The selected initialization must therefore be validated after DAPT on held-out maritime text and downstream tasks before claims about practical task improvement are made.
